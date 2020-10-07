@@ -1,3 +1,10 @@
 <div class="container">
   <h1>Hello Ruby App</h1>
+  <% @designers.each do |designer| %>
+    <%= designer.first_name %>
+    <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
+    <% packs.each do |pack| %>
+      <%= pack.title %>
+    <% end %>
+  <% end %>
 </div>

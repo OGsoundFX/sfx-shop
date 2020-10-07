@@ -1,0 +1,2 @@
+module SoundDesignersHelper
+end

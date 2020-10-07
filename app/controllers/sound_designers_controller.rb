@@ -1,0 +1,2 @@
+class SoundDesignersController < ApplicationController
+end
