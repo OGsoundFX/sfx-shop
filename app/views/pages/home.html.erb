@@ -4,7 +4,7 @@
     <%= designer.first_name %>
     <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
     <% packs.each do |pack| %>
-      <%= pack.title %>
+      <%= link_to pack.title, sfx_pack_path(pack) %>
     <% end %>
   <% end %>
 </div>
