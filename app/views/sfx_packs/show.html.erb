@@ -1,2 +1,5 @@
 <h1><%= @pack.title %></h1>
 <p>Sound Designer: <%= link_to @designer_name, root_path %> </p>
+<% @pack.photos.each do |photo| %>
+  <%= image_tag photo, height: 300, width: 400, crop: :fill %>
+<% end %>
