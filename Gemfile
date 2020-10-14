@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gems added by myself:
 gem 'simple_form'
 gem 'devise'
+gem 'money-rails', '~>1.12'
