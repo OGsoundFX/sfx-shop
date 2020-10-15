@@ -4,3 +4,8 @@
   <%= image_tag photo, height: 300, width: 400, crop: :fill %>
 <% end %>
 <h2>Price: <%= humanized_money_with_symbol(@pack.price) %></h2>
+
+<%= form_tag orders_path do %>
+  <%= hidden_field_tag 'pack_id', @pack.id %>
+  <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+<% end %>

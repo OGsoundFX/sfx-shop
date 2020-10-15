@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_link: MyString
+  sku: MyString
+  status: MyString
+  amount: 
+  checkout_session_id: MyString
+  user: one
+  sfx_pack: one
+  discount: one
+
+two:
+  product_link: MyString
+  sku: MyString
+  status: MyString
+  amount: 
+  checkout_session_id: MyString
+  user: two
+  sfx_pack: two
+  discount: two
