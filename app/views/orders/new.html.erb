@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row py-4">
+    <div class="col-md-3"><%= image_tag @photo, width: '100%' %></div>
+    <div class="col">
+      <h1>Order #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.status %></span></small></h1>
+      <ul class="list-unstyled">
+        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
+        <li><strong>TEDDY</strong> <%= @order.sfx_packs.name %> [<%= # @order.teddy_sku %>]</li>
+        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        </li>
+      </ul>
+      <p>Estimated delivery in <strong>2 business days</strong></p>
+    </div>
+  </div>
+</div>

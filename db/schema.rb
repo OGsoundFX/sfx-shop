@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_181757) do
+ActiveRecord::Schema.define(version: 2020_10_15_103157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,10 +57,6 @@ ActiveRecord::Schema.define(version: 2020_10_14_181757) do
     t.bigint "discount_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "kind"
-    t.date "start_date"
-    t.date "end_date"
-    t.string "coupon_code"
     t.index ["discount_id"], name: "index_orders_on_discount_id"
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
