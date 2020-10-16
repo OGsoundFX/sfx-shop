@@ -60,3 +60,5 @@ gem 'simple_form'
 gem 'devise'
 gem 'money-rails', '~>1.12'
 gem 'stripe'
+gem 'bootstrap', '~> 4.5.2'
+gem "font-awesome-sass", "~> 5.7"
