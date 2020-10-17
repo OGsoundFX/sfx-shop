@@ -1,10 +1,21 @@
-<h1>Welcome to your dashboard</h1>
-<%= current_user.id %>
-<%= current_user.orders.count %>
-<% current_user.orders.each do |order| %>
-  <p> <%= order.sfx_pack.title %> </p>
-  <%= image_tag order.sfx_pack.photos[0], width: "200px" %>
-  <p> <%= order.amount %> </p>
-  <p> <%= order.created_at %> </p>
-  <p> <%= order.status %> </p>
-<% end %>
+<div class="container">
+  <h1>Hello
+    <% if current_user.username %>
+      <%= " #{current_user.username}, welcome to your dashboard" %>
+    <% else %>
+      <%= "stranger, welcome to your dashboard" %>
+    <% end %>
+  </h1>
+
+  <h4><%= link_to "Edit your Profile", edit_user_registration_path(current_user) %></h4>
+
+  <%= current_user.id %>
+  <%= current_user.orders.count %>
+  <% current_user.orders.each do |order| %>
+    <p> <%= order.sfx_pack.title %> </p>
+    <%= image_tag order.sfx_pack.photos[0], width: "200px" %>
+    <p> <%= order.amount %> </p>
+    <p> <%= order.created_at %> </p>
+    <p> <%= order.status %> </p>
+  <% end %>
+</div>
