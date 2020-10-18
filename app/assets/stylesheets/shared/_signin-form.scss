@@ -1,0 +1,26 @@
+$breakpoint-tablet: 768px;
+@media (min-width: $breakpoint-tablet) {
+  .submit-form {
+    margin-top: 20px;
+    width: 30%;
+  }
+}
+
+
+@media (max-width: $breakpoint-tablet) {
+  .submit-form {
+    margin-top: 20px;
+    width: 100% !important;
+  }
+}
+
+// @media screen and (min-width: 768px) {
+//   .submit-form {
+//     margin-top: 20px;
+//     width: 30%;
+//   }
+// }
+
+.devise-shared-links {
+  margin-top: 20px;
+}
