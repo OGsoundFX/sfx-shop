@@ -21,6 +21,7 @@ test_pack = SfxPack.create(sku: "OGFS001", title:'Test Pack', description: 'the 
 
 monster_pack.photos.attach(io: URI.open('https://www.ogsoundfx.com/NeWsfXsHoP/Monsters-pack_New-2020.jpg'), filename: 'image')
 guns_explosions.photos.attach(io: URI.open('https://www.ogsoundfx.com/NeWsfXsHoP/Guns-Explosions-Cover_New-1.jpg'), filename: 'image')
+guns_explosions.photos.attach(io: URI.open('https://res.cloudinary.com/dk9a86uhu/image/upload/v1603104054/sfx_shop/monster_zzsdcm.jpg'), filename: 'image')
 test_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "images", "monster.jpg")), filename: 'image.jpg')
 
 monster_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "images", "test.jpg")), filename: 'image.jpg')

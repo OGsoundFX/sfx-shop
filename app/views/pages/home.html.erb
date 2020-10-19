@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Hello Ruby App</h1>
+  <%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1603104054/sfx_shop/monster_zzsdcm.jpg", height: 300, width: 400, crop: :fill %>
   <% @designers.each do |designer| %>
     <%= designer.first_name %>
     <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
