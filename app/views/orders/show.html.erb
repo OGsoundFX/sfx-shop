@@ -2,4 +2,3 @@
 <p> <%= @order.sfx_pack.title %> </p>
 <p> $<%= @order.amount %> </p>
 <p> <%=  link_to "Download Pack", @order.product_link, oncontextmenu: "return false;" %> </p>
-<p> <%=  link_to "Download Pack (local)", @order.file %> </p>

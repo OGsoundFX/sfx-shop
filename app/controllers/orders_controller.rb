@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
     if current_user
       # check about all the fields of the Order
       order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', discount: default_discount, user: current_user)
-      order.file.attach(io: File.open(Rails.root.join("app", "assets", "packs", "Dragon_Tail_1.zip")), filename: 'Dragon_Tail_1.zip')
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
