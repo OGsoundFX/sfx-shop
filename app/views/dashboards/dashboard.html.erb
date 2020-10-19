@@ -17,5 +17,9 @@
     <p> <%= order.amount %> </p>
     <p> <%= order.created_at %> </p>
     <p> <%= order.status %> </p>
+    <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+    <% if order.file.attached? %>
+      <p> <%=  link_to "Download Pack (local)", order.file %> </p>
+    <% end %>
   <% end %>
 </div>
