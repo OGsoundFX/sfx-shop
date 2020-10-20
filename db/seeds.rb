@@ -14,6 +14,8 @@ SfxPack.destroy_all
 Order.destroy_all
 Cart.destroy_all
 
+Discount.create()
+
 designer = SoundDesigner.create(first_name: 'Olivier', last_name: 'Girardot', email: 'olive_girardot@hotmail.com', password: '123456', address: 'SonnenburegerStrasse 76, 10437 Berlin, Germany', location: 'Berlin')
 
 monster_pack = SfxPack.create(sku: "OGPACK013", title:'Monster Pack', description: 'the best sounds ever', category: 'monster', tags: 'scary, monster, fantasy', size_mb: 1076, duration: '90mn', number_of_tracks: 1018, price_cents: 2000, sound_designer_id: designer.id)
