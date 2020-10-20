@@ -6,13 +6,13 @@ class OrdersController < ApplicationController
     # if statment to create an account or login to purchase
     if current_user
       # check about all the fields of the Order
-      if Cart.where(user_id: current_user.id).count == 1
-        cart = Cart.where(user_id: current_user.id).first
-        cart.items << sfx_pack.id.to_i
-        cart.save
-      else
-        create_cart(sfx_pack)
-      end
+      # if Cart.where(user_id: current_user.id).count == 1
+      #   cart = Cart.where(user_id: current_user.id).first
+      #   cart.items << sfx_pack.id.to_i
+      #   cart.save
+      # else
+      #   create_cart(sfx_pack)
+      # end
 
       order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, discount_id: 1, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
         }],
         allow_promotion_codes: true,
         success_url: dashboard_url,
-        cancel_url: cart_url
+        cancel_url: destroy_order_url
       )
 
       order.update(checkout_session_id: session.id)
@@ -60,8 +60,8 @@ class OrdersController < ApplicationController
         payment_method_types: ['card'],
         line_items: line_items,
         allow_promotion_codes: true,
-        success_url: dashboard_url,
-        cancel_url: cart_url
+        success_url: destroy_cart_url,
+        cancel_url: destroy_order_url
       )
 
       order.update(checkout_session_id: session.id)
@@ -73,6 +73,11 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_user.orders.find(params[:id])
+  end
+
+  def destroy
+    Order.where(user_id: current_user.id).last.destroy
+    redirect_to cart_path
   end
 
   private
