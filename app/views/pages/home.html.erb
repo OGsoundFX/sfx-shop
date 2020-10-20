@@ -1,11 +1,17 @@
 <div class="container">
   <h1>Hello Ruby App</h1>
   <%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1603104054/sfx_shop/monster_zzsdcm.jpg", height: 300, width: 400, crop: :fill %>
-  <% @designers.each do |designer| %>
-    <%= designer.first_name %>
-    <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
-    <% packs.each do |pack| %>
-      <%= link_to pack.title, sfx_pack_path(pack) %>
-    <% end %>
+  <ul>
+    <% @designers.each do |designer| %>
+      <li>
+        <%= designer.first_name %>
+        <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
+        <ul>
+          <% packs.each do |pack| %>
+            <li><%= link_to pack.title, sfx_pack_path(pack) %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
   <% end %>
 </div>

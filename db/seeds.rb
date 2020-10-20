@@ -12,6 +12,7 @@ puts "destroying DB"
 SoundDesigner.destroy_all
 SfxPack.destroy_all
 Order.destroy_all
+Cart.destroy_all
 
 designer = SoundDesigner.create(first_name: 'Olivier', last_name: 'Girardot', email: 'olive_girardot@hotmail.com', password: '123456', address: 'SonnenburegerStrasse 76, 10437 Berlin, Germany', location: 'Berlin')
 
