@@ -5,6 +5,11 @@
     <% @items.items.each do |pack| %>
       <li>
         <%= SfxPack.find(pack).title %>
+        <%= form_tag remove_item_path do %>
+          <%= hidden_field_tag 'pack_id', pack %>
+          <%= submit_tag 'Remove', class: 'btn btn-primary' %>
+        <% end %>
+
       </li>
     <% end %>
     <%= form_tag checkout_path do %>
