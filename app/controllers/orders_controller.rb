@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   def create
-    current_user.orders.destroy_all
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(params[:pack_id])
     if current_user
@@ -27,7 +26,6 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    current_user.orders.destroy_all
     cart = Cart.where(user_id: current_user.id).first
     line_items = []
     total_amount = 0
@@ -64,6 +62,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_user.orders.find(params[:id])
+    redirect_to new_order_payment_path(@order)
   end
 
   def destroy
