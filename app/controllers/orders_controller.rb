@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   def create
+    current_user.orders.destroy_all
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(params[:pack_id])
-    @photo = sfx_pack.photos[0]
     if current_user
       order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
@@ -27,8 +27,10 @@ class OrdersController < ApplicationController
   end
 
   def checkout
+    current_user.orders.destroy_all
     cart = Cart.where(user_id: current_user.id).first
     line_items = []
+    total_amount = 0
     cart.items.each do |item|
       pack = SfxPack.find(item)
       line_item = {}
@@ -38,13 +40,13 @@ class OrdersController < ApplicationController
       line_item[:currency] = 'usd'
       line_item[:quantity] = 1
       line_items << line_item
+      total_amount += pack.price
     end
-
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(cart.items.first)
 
     if current_user
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
+      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: cart.items)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
