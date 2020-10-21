@@ -3,18 +3,8 @@ class OrdersController < ApplicationController
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(params[:pack_id])
     @photo = sfx_pack.photos[0]
-    # if statment to create an account or login to purchase
     if current_user
-      # check about all the fields of the Order
-      # if Cart.where(user_id: current_user.id).count == 1
-      #   cart = Cart.where(user_id: current_user.id).first
-      #   cart.items << sfx_pack.id.to_i
-      #   cart.save
-      # else
-      #   create_cart(sfx_pack)
-      # end
-
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, discount_id: 1, status: 'pending', user: current_user)
+      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
@@ -52,10 +42,9 @@ class OrdersController < ApplicationController
 
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(cart.items.first)
-    # if statment to create an account or login to purchase
-    if current_user
 
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, discount_id: 1, status: 'pending', user: current_user)
+    if current_user
+      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
@@ -77,7 +66,7 @@ class OrdersController < ApplicationController
 
   def destroy
     Order.where(user_id: current_user.id).last.destroy
-    redirect_to cart_path
+    redirect_to root_path
   end
 
   private

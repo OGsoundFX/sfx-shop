@@ -24,11 +24,11 @@ class CartsController < ApplicationController
     @cart = Cart.where(user_id: current_user.id).first
     @cart.items.delete(params[:pack_id].to_i)
     @cart.save
-    redirect_to cart
+    redirect_to cart_path
   end
 
   def destroy_cart
     cart.destroy
-    redirect_to dashboard
+    redirect_to dashboard_path
   end
 end
