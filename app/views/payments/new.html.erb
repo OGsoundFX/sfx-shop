@@ -17,6 +17,7 @@
             });
           });
         </script>
+        <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
       </div>
     </div>
   <% else %>
@@ -43,5 +44,6 @@
         });
       });
     </script>
+    <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
   <% end %>
 </div>
