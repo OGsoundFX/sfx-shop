@@ -44,16 +44,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_151955) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "discounts", force: :cascade do |t|
-    t.decimal "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "coupon_code"
-    t.date "start_date"
-    t.date "end_date"
-    t.string "kind"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.string "product_link"
     t.string "sku"
@@ -62,10 +52,8 @@ ActiveRecord::Schema.define(version: 2020_10_19_151955) do
     t.string "checkout_session_id"
     t.bigint "user_id", null: false
     t.bigint "sfx_pack_id", null: false
-    t.bigint "discount_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["discount_id"], name: "index_orders_on_discount_id"
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -105,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_151955) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
     t.string "location"
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -114,7 +101,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_151955) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carts", "users"
-  add_foreign_key "orders", "discounts"
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
   add_foreign_key "sfx_packs", "sound_designers"

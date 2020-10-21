@@ -8,7 +8,6 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :checkout_session_id
       t.references :user, null: false, foreign_key: true
       t.references :sfx_pack, null: false, foreign_key: true
-      t.references :discount, null: false, foreign_key: true
 
       t.timestamps
     end
