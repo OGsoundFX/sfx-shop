@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_094010) do
+ActiveRecord::Schema.define(version: 2020_10_22_132723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 2020_10_21_094010) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "multiple", default: false
     t.integer "packs", default: [], array: true
+    t.string "coupon"
+    t.integer "amount_paid_cents", default: 0, null: false
+    t.string "amount_paid_currency", default: "USD", null: false
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

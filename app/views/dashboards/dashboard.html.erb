@@ -17,6 +17,8 @@
     <p> <%= order.amount %> </p>
     <p> <%= order.created_at %> </p>
     <p> <%= order.status %> </p>
+    <p> <%= order.coupon %> </p>
+    <p> <%= humanized_money_with_symbol order.amount_paid_cents / 100 %> </p>
     <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
   <% end %>
 </div>
