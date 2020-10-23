@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "remove_item", to: "carts#delete_item"
   post "checkout", to: "orders#checkout"
   get "destroy_order", to: "orders#destroy"
+  get "destroy_order_dashboard", to: "orders#destroy_from_dashboard"
   get "destroy_cart", to: "carts#destroy_cart"
   resources :sfx_packs, only: :show
   resources :orders, only: [:show, :create] do

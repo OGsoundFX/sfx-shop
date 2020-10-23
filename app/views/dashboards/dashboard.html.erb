@@ -6,19 +6,13 @@
       <%= " #{current_user.username}, welcome to your dashboard" %>
     <% end %>
   </h1>
-
+  <% if current_user.location %>
+    <h4>How is the weather today in <%= current_user.location %>?</h4>
+  <% end %>
   <h4><%= link_to "Edit your Profile", edit_user_registration_path(current_user) %></h4>
 
-  <%= current_user.id %>
-  <%= current_user.orders.count %>
-  <% current_user.orders.each do |order| %>
-    <p> <%= order.sfx_pack.title %> </p>
-    <%= image_tag order.sfx_pack.photos[0], width: "200px" %>
-    <p> <%= order.amount %> </p>
-    <p> <%= order.created_at %> </p>
-    <p> <%= order.status %> </p>
-    <p> <%= order.coupon %> </p>
-    <p> <%= humanized_money_with_symbol order.amount_paid_cents / 100 %> </p>
-    <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
-  <% end %>
+  <%= render 'shared/pending_card' %>
+
+  <%= render 'shared/order_card' %>
+
 </div>
