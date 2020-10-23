@@ -70,6 +70,11 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy_from_dashboard
+    Order.where(user_id: current_user.id).last.destroy
+    redirect_to dashboard_path
+  end
+
   private
 
   def create_cart(item)

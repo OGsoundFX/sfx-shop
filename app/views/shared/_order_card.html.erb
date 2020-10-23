@@ -1,0 +1,64 @@
+<% @orders.each do |order| %>
+  <% if order.multiple %>
+    <div class="order_card">
+      <h3>Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
+      <% order.packs.each do |pack_id| %>
+        <% pack = SfxPack.where(id: pack_id)[0] %>
+        <p> <%= pack.title %> </p>
+        <div class="d-flex">
+          <div>
+            <%= image_tag pack.photos[0], width: "100px" %>
+          </div>
+          <div>
+            <p> <%= humanized_money_with_symbol pack.price %> </p>
+            <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+          </div>
+        </div>
+      <% end %>
+      <p>Status: <strong><%= order.status %></strong>, on <%= order.created_at.strftime("%Y-%m-%d") %> </p>
+      <p>Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
+      <% if order.coupon %>
+        <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
+        <% coupon_array = order.coupon.split(',') %>
+        <% if coupon_array[1].strip == "Percentage" %>
+          <% coupon_value = "#{coupon_array[2].to_i}%" %>
+        <% else %>
+          <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
+        <% end %>
+        <p>Coupon code used: <%= coupon_array[0] %>
+          / Coupon Type: <%= coupon_array[1]  %>
+          / Coupon Value: <%= coupon_value %>
+        </p>
+      <% end %>
+    </div>
+
+  <% else %>
+    <div class="order_card">
+      <p> <%= order.sfx_pack.title %> </p>
+      <div class="d-flex">
+        <div>
+          <%= image_tag order.sfx_pack.photos[0], width: "200px" %>
+        </div>
+        <div>
+          <p> <%= humanized_money_with_symbol order.amount %> </p>
+          <p> <%= order.created_at.strftime("%Y-%m-%d") %> </p>
+          <p> <%= order.status %> </p>
+          <% if order.coupon %>
+            <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents / 100 %></strong> </p>
+            <% coupon_array = order.coupon.split(',') %>
+            <% if coupon_array[1].strip == "Percentage" %>
+              <% coupon_value = "#{coupon_array[2].to_i}%" %>
+            <% else %>
+              <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
+            <% end %>
+            <p>Coupon code used: <%= coupon_array[0] %>
+              / Coupon Type: <%= coupon_array[1]  %>
+              / Coupon Value: <%= coupon_value %>
+            </p>
+          <% end %>
+          <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
