@@ -1,0 +1,9 @@
+<h1>Hey Olivier</h1>
+
+<p>
+  There have been <%= Order.count %> orders
+</p>
+
+<p>
+  Made by <%= Order.group(:user_id).count  %>
+</p>
