@@ -18,15 +18,6 @@ class CartsController < ApplicationController
 
   def cart
     @items = Cart.where(user_id: current_user.id).first
-
-    # listing all packs to sort them by price to display them and apply discount to 2nd and other packs
-    if @items
-      @pack_list = []
-      @items.items.each do |item|
-        @pack_list << SfxPack.find(item)
-      end
-      @pack_list.sort_by!(&:price_cents).reverse!
-    end
   end
 
   def delete_item
@@ -37,7 +28,7 @@ class CartsController < ApplicationController
   end
 
   def destroy_cart
-    Cart.where(user_id: current_user.id).first.destroy
+    cart.destroy
     redirect_to dashboard_path
   end
 end

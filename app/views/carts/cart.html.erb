@@ -1,23 +1,32 @@
 <h1>Welcome to your cart <%= current_user.username %></h1>
 
-<% if @items %>
+<% if @pack_list %>
+  <% sum = 0 %>
   <ul>
-    <% @items.items.each do |pack| %>
+    <% @pack_list.each_with_index do |pack, index| %>
       <li>
-        <%= SfxPack.find(pack).title %>
-        <%= form_tag remove_item_path do %>
-          <%= hidden_field_tag 'pack_id', pack %>
-          <%= submit_tag 'Remove', class: 'btn btn-primary' %>
+        <%= pack.title %>
+
+        <% if index == 0 %>
+          <%= humanized_money_with_symbol pack.price_cents.to_f / 100 %>
+          <% sum += (pack.price_cents.to_f / 100) %>
+        <% else %>
+          <p> <%= humanized_money_with_symbol pack.price_cents.to_f / 100 %> reduced to <%= humanized_money_with_symbol (pack.price_cents.to_f / 100) * 0.8 %> </p>
+          <% sum += ((pack.price_cents.to_f / 100) * 0.8) %>
         <% end %>
 
+        <%= form_tag remove_item_path do %>
+            <%= hidden_field_tag 'pack_id', pack %>
+            <%= submit_tag 'Remove', class: 'btn btn-primary' %>
+        <% end %>
       </li>
     <% end %>
+    <p>Total Amount: <%= humanized_money_with_symbol sum %> </p>
     <%= form_tag checkout_path do %>
       <%= hidden_field_tag 'cart_id', @items.id %>
       <%= submit_tag 'Checkout', class: 'btn btn-primary' %>
     <% end %>
   </ul>
-
 <% else %>
   <h3>Your cart is empty</h3>
 <% end %>
