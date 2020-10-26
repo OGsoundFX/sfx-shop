@@ -27,18 +27,32 @@ class OrdersController < ApplicationController
 
   def checkout
     cart = Cart.where(user_id: current_user.id).first
+
+    ordered_list = []
+    cart.items.each do |item|
+      ordered_list << SfxPack.find(item)
+    end
+    ordered_list.sort_by!(&:price_cents).reverse!
+    ordered_list.map! do |item|
+      item.id
+    end
+
     line_items = []
     total_amount = 0
-    cart.items.each do |item|
+    ordered_list.each_with_index do |item, index|
       pack = SfxPack.find(item)
       line_item = {}
       line_item[:name] = pack.title
       line_item[:images] = [pack.photos[0]]
-      line_item[:amount] = pack.price_cents
+      if index.positive?
+        line_item[:amount] = (pack.price_cents * 0.8).to_i
+      else
+        line_item[:amount] = pack.price_cents
+      end
       line_item[:currency] = 'usd'
       line_item[:quantity] = 1
       line_items << line_item
-      total_amount += pack.price
+      total_amount += line_item[:amount] / 100.to_f
     end
     product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(cart.items.first)
