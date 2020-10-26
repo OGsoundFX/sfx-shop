@@ -16,7 +16,7 @@
         <% end %>
 
         <%= form_tag remove_item_path do %>
-            <%= hidden_field_tag 'pack_id', pack %>
+            <%= hidden_field_tag 'pack_id', pack.id %>
             <%= submit_tag 'Remove', class: 'btn btn-primary' %>
         <% end %>
       </li>
