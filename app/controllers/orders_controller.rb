@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
     sfx_pack = SfxPack.find(cart.items.first)
 
     if current_user
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: cart.items)
+      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: ordered_list)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
