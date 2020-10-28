@@ -31,5 +31,5 @@
 # monster_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "images", "monster.jpg")), filename: 'image.jpg')
 
 monster_pack = SfxPack.where(title: "Monster Pack")[0]
-monster_pack.link = "https://youtu.be/ymMho53LEVg"
+monster_pack.link = "https://www.youtube.com/embed/ymMho53LEVg"
 monster_pack.save
