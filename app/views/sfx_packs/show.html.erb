@@ -5,6 +5,10 @@
     <%= image_tag photo, height: 300, width: 400, crop: :fill %>
   <% end %>
   <h2>Price: <%= humanized_money_with_symbol(@pack.price) %></h2>
+  <p><%= link_to "link", @pack.link %></p>
+  <iframe width="640" height="360" src="<%= @pack.link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
   <%= form_tag orders_path do %>
     <%= hidden_field_tag 'pack_id', @pack.id %>
