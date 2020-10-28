@@ -33,6 +33,6 @@ require "open-uri"
 # puts "created #{SfxPack.count} sound effect packs"
 
 
-monster_pack = SfxPack.find(4)
+monster_pack = SfxPack.where(title: "Monster Pack")[0]
 monster_pack.photos.attach(io: URI.open('https://www.ogsoundfx.com/NeWsfXsHoP/Monsters-pack_New-2020.jpg'), filename: 'image')
 monster_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "images", "monster.jpg")), filename: 'image.jpg')
