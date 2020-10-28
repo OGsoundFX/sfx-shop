@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require "open-uri"
 
 puts "destroying DB"
@@ -31,3 +24,8 @@ monster_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "image
 
 puts "created #{SoundDesigner.count} sound designers"
 puts "created #{SfxPack.count} sound effect packs"
+
+# monster_pack = SfxPack.where(title: "Monster Pack")[0]
+# monster_pack.photos.attach(io: URI.open('https://www.ogsoundfx.com/NeWsfXsHoP/Monsters-pack_New-2020.jpg'), filename: 'image')
+# monster_pack.photos.attach(io: URI.open('https://res.cloudinary.com/dk9a86uhu/image/upload/v1603886106/sumqq9z2xodfcebgx160x7pll08u.jpg'), filename: 'image', content_type: "image/jpg")
+# monster_pack.photos.attach(io: File.open(Rails.root.join("app", "assets", "images", "monster.jpg")), filename: 'image.jpg')
