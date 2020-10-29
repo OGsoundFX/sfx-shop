@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Schoolbell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+// font-family: 'Permanent Marker', cursive;
 
 // $body-font: "Roboto", "Helvetica", "sans-serif";
 $body-font: 'Rubik', sans-serif;
+$orange-main: #ffa500;
+$blue-light: #7db6d6;
 
 h1 {
   font-family: $body-font;

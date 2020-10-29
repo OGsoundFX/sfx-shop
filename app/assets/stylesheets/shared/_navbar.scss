@@ -25,8 +25,14 @@
 }
 
 .navbar-lewagon {
+  z-index: 10;
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  margin-top: 56px;
   justify-content: space-between;
   background: black;
+  opacity: 0.8;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -34,13 +40,15 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
-}
-
-.logo {
-  height: 50px;
+  width: 70px;
 }
 
 .nav-link {
   color: white !important;
+}
+
+#text-logo {
+  padding: 3px 0px 0px 3px;
+  color: orange;
+  font-family: 'Permanent Marker', cursive;
 }
