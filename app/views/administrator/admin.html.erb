@@ -1,9 +1,11 @@
-<h1>Hey Olivier</h1>
+<div class="container padding-navbar">
+  <h1>Hey Olivier</h1>
 
-<p>
-  There have been <%= Order.count %> orders
-</p>
+  <p>
+    There have been <%= Order.count %> orders
+  </p>
 
-<p>
-  Made by <%= Order.group(:user_id).count  %>
+  <p>
+    Made by <%= Order.group(:user_id).count  %>
 </p>
+</div>

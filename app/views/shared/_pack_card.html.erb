@@ -1,0 +1,13 @@
+<ul>
+  <% @designers.each do |designer| %>
+    <li>
+      <%= designer.first_name %>
+      <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
+      <ul>
+        <% packs.each do |pack| %>
+          <li><%= link_to pack.title, sfx_pack_path(pack) %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
