@@ -30,8 +30,11 @@
   width: 100%;
   position: fixed;
   justify-content: space-between;
-  background: black;
-  opacity: 0.8;
+  background-color:rgba(0, 0, 0, 0.5);
+}
+
+.navbar-lewagon-black {
+  background: black !important;
 }
 
 .navbar-lewagon .navbar-collapse {

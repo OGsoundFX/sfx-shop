@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "destroy_order_dashboard", to: "orders#destroy_from_dashboard"
   get "destroy_cart", to: "carts#destroy_cart"
   get "admin", to: "administrator#admin"
+  get "about", to: "pages#about"
   resources :sfx_packs, only: :show
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
