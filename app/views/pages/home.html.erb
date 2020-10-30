@@ -1,18 +1,12 @@
 <%= render 'shared/caroussel' %>
-<div class="container">
-  <h1>Hello Ruby App</h1>
-  <%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1603104054/sfx_shop/monster_zzsdcm.jpg", height: 300, width: 400, crop: :fill %>
-  <ul>
-    <% @designers.each do |designer| %>
-      <li>
-        <%= designer.first_name %>
-        <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
-        <ul>
-          <% packs.each do |pack| %>
-            <li><%= link_to pack.title, sfx_pack_path(pack) %></li>
-          <% end %>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
+<div class="container-xl">
+  <h1 id="front-title">Browse through our high quality SFX Packs</h1>
+  <div class="d-flex flex-row justify-content-center">
+    <div><%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1604053462/sfx_shop/MonsterPack_Transp_small_jhfded.png", width: 400, crop: :fill %></div>
+    <div><%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1604052938/sfx_shop/Guns_Explosions_transp_small_rywioe.png", width: 400, crop: :fill %></div>
+    <div><%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1604054508/sfx_shop/OutdoorAtmospheres_transp_small_akcvcd.png", width: 400, crop: :fill %></div>
+  </div>
+
+<%= render 'shared/pack_card' %>
+
 </div>

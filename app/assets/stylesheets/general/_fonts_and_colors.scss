@@ -4,10 +4,15 @@
 // font-family: 'Permanent Marker', cursive;
 
 // $body-font: "Roboto", "Helvetica", "sans-serif";
-$body-font: 'Rubik', sans-serif;
+$body-font: 'Roboto', sans-serif;
 $orange-main: #ffa500;
 $blue-light: #7db6d6;
+$font-grey: #585858;
 
-h1 {
+body {
   font-family: $body-font;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: $font-grey;
 }
