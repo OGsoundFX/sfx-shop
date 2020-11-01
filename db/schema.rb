@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_184200) do
+ActiveRecord::Schema.define(version: 2020_11_01_130553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_184200) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "price_cents", default: 0, null: false
     t.string "sku"
-    t.integer "version"
+    t.float "version"
     t.string "link"
     t.string "list"
     t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id"
@@ -85,12 +85,13 @@ ActiveRecord::Schema.define(version: 2020_10_28_184200) do
   create_table "sound_designers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
-    t.string "password"
     t.string "address"
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "bio"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_sound_designers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_184200) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
     t.string "username"
+    t.boolean "designer", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -112,4 +114,5 @@ ActiveRecord::Schema.define(version: 2020_10_28_184200) do
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
   add_foreign_key "sfx_packs", "sound_designers"
+  add_foreign_key "sound_designers", "users"
 end
