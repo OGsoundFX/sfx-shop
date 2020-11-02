@@ -106,3 +106,23 @@
   from {opacity: .4}
   to {opacity: 1}
 }
+
+
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+  #film-title {
+    font-size: 25vw;
+  }
+
+  #atmos-title {
+    font-size: 14vw;
+  }
+
+  #adventure-title {
+    font-size: 16vw;
+  }
+
+  .text {
+    font-size: 20vw;
+  }
+}
