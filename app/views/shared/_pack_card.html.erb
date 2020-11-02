@@ -1,13 +1,37 @@
-<ul>
-  <% @designers.each do |designer| %>
-    <li>
-      <%= designer.first_name %>
-      <% packs = @sfx_packs.where(sound_designer_id: designer.id) %>
-      <ul>
-        <% packs.each do |pack| %>
-          <li><%= link_to pack.title, sfx_pack_path(pack) %></li>
-        <% end %>
-      </ul>
-    </li>
+<div class="row">
+  <% @sfx_packs.each do |pack| %>
+    <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="container pack_specifics">
+        <div id="wrapper">
+          <%= link_to sfx_pack_path(pack) do %>
+            <div><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
+            <div class="pop-up">See Pack Details</div>
+          <% end %>
+        </div>
+        <div class="info-box">
+          <h3><%= pack.title %></h3>
+          <div class="d-flex">
+            <div id="circle"></div>
+            <div><p><%= pack.sound_designer.first_name %> <%= pack.sound_designer.last_name %></p></div>
+          </div>
+          <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+          <div class="d-flex justify-content-between sfx-card-buttons">
+            <div>
+              <%= form_tag sfx_pack_path(pack) do %>
+                <%= submit_tag 'Details', id: 'btn-show' %>
+              <%  end %>
+            </div>
+            <div>
+              <%= form_tag cart_order_path do %>
+                <%= hidden_field_tag 'pack_id', pack.id %>
+                <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
+              <%  end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
+
+
