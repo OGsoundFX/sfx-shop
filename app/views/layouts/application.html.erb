@@ -2,10 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="BAM Sound Effects" content="Welcome to Bam SFX where you will find professional high quality Sound Effects for all your projects!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound FX shop | Find the perfect sound effects for your project!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= favicon_link_tag asset_path('logo/logo_BAM_3.png') %>
@@ -15,9 +17,7 @@
 
   <body>
     <%= yield %>
-    <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
+    <%= render 'shared/flashes' %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

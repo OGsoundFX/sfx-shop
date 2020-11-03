@@ -59,3 +59,24 @@
 .padding-navbar {
   padding-top: 56px;
 }
+
+
+$breakpoint-tablet: 768px;
+
+@media (max-width: $breakpoint-tablet) {
+  #navbarSupportedContent {
+    background-color: black;
+    opacity: 0.8;
+    border: solid 1px white;
+    border-radius: 3px;
+  }
+
+  .nav-item {
+    border: solid 1px white;
+    text-align: center;
+  }
+  .avatar {
+    width: 35px;
+    margin: 5px;
+  }
+}
