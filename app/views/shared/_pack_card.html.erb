@@ -1,6 +1,6 @@
 <div class="row">
   <% @sfx_packs.each do |pack| %>
-    <div class="col-sm-12 col-md-6 col-lg-3">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
       <div class="container pack_specifics">
         <div id="wrapper">
           <%= link_to sfx_pack_path(pack) do %>
@@ -9,7 +9,7 @@
           <% end %>
         </div>
         <div class="info-box">
-          <h3><%= pack.title %></h3>
+          <h3 id="card-title"><%= pack.title %></h3>
           <div class="d-flex">
             <div id="circle"></div>
             <div><p><%= pack.sound_designer.first_name %> <%= pack.sound_designer.last_name %></p></div>
