@@ -44,10 +44,12 @@
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
 }
 
-.info-box, h3 {
-  font-weight: 700;
-  font-size: 140%;
-}
+
+// See bottom of the page for breakpoints
+// .info-box, h3 {
+//   font-weight: 700;
+//   font-size: 140%;
+// }
 
 .info-box, p {
   font-weight: 400;
@@ -98,4 +100,105 @@
 
 #btn-show:hover, #btn-cart:hover {
   font-weight: 700;
+}
+
+$breakpoint-extra-small: 430px;
+$breakpoint-mobile: 575.98px;
+$breakpoint-tablet: 767.98px;
+$breakpoint-laptop: 991.98px;
+$breakpoint-large: 1199.98px;
+$breakpoint-super-large: 1399.98px;
+$breakpoint-extra-large: 1599.98px;
+
+@media (min-width: $breakpoint-extra-large) {
+  #card-title {
+    font-weight: 700;
+    font-size: 140%;
+  }
+}
+
+@media (max-width: $breakpoint-extra-large) {
+  #card-title {
+    font-weight: 700;
+    font-size: 1.5vw;
+  }
+
+  #btn-show, #btn-cart {
+    width: 110px;
+  }
+
+  #btn-cart {
+    font-size: 100%;
+    height: 36px;
+  }
+}
+
+@media (max-width: $breakpoint-super-large) {
+  #card-title {
+    font-weight: 700;
+    font-size: 1.4vw;
+  }
+
+  #btn-show, #btn-cart {
+    width: 95px;
+  }
+
+  #btn-cart {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width: $breakpoint-large) {
+  #card-title {
+    font-weight: 700;
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: $breakpoint-laptop) {
+  #card-title {
+    font-weight: 700;
+    font-size: 3vw;
+  }
+
+  #btn-show, #btn-cart {
+    width: 130px;
+    font-weight: 700;
+    font-size: 140%;
+  }
+
+  #btn-cart {
+    height: initial;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  #card-title {
+    font-weight: 700;
+    font-size: 180%;
+  }
+
+  #btn-show, #btn-cart {
+    width: 150px;
+    height: 70px;
+    font-weight: 700;
+    font-size: 140%;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  #card-title {
+    font-weight: 700;
+    font-size: 6vw;
+  }
+}
+
+@media (max-width: $breakpoint-extra-small) {
+  #btn-show, #btn-cart {
+    width: 30vw;
+    height: 17vw;
+    font-weight: 700;
+    font-size: 5vw;
+  }
 }
