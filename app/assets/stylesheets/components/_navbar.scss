@@ -56,14 +56,23 @@
   font-family: 'Permanent Marker', cursive;
 }
 
+// #text-logo-small {
+//   display: none;
+// }
+
 .padding-navbar {
   padding-top: 56px;
 }
 
+$breakpoint-mobile: 575px;
+$breakpoint-mobile-up: 576px;
 
-$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-mobile) {
+  .navbar-toggler {
+    margin-top: -5px;
+    background-color:$orange-main;
+  }
 
-@media (max-width: $breakpoint-tablet) {
   #navbarSupportedContent {
     background-color: black;
     opacity: 0.8;
@@ -78,5 +87,21 @@ $breakpoint-tablet: 768px;
   .avatar {
     width: 35px;
     margin: 5px;
+  }
+
+  #text-logo-small {
+    padding: 3px 0px 0px 3px;
+    color: $orange-main;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  #text-logo {
+    display: none;
+  }
+}
+
+@media (min-width: $breakpoint-mobile-up) {
+    #text-logo-small {
+    display: none;
   }
 }
