@@ -1,7 +1,30 @@
-body {
-  font-family: $body-font;
-}
-
 h1, h2, h3, h4, h5, h6, p {
     color: $font-grey;
 }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: $body-font;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+// Appart from font-family, all the components applied to the html, body and
+// content, are to fix the footer at the bottom of the pages. The class "content"
+// has to be applied on every page that displays the footer.
+// 1- fixing the height of the pages (without footer) at 100%. If content exceeds
+// 100% of the vh, the footer will be pushed down, otherwise the footer will be
+// sticking to the bottom of the page
+// 2- Applying a VERTICAL flex property to the body, so the contents will be alligned
+// vertically. Here the content are the "content" and the "footer"
+// 3- Apllying the flex properties to the content:
+//    - flex-growth: 1 (grows to fill in empty space)
+//    - flex-shrink: 0 (does not shrink to its minimum size to fit the container)
+//    - flex-basis: auto (no predefined size, depends on size of content)
