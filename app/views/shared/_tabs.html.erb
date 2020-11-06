@@ -1,0 +1,75 @@
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'preview')" id="defaultOpen">Preview</button>
+  <button class="tablinks" onclick="openTab(event, 'description')">Description</button>
+  <button class="tablinks" onclick="openTab(event, 'reviews')">Reviews</button>
+  <button class="tablinks" onclick="openTab(event, 'list')">List of Sounds</button>
+</div>
+
+<div id="preview" class="tabcontent">
+  <div class="d-flex">
+    <div id="preview-display">
+      <% if @pack.link.include? "soundcloud" %>
+        <% embed_link = "https://w.soundcloud.com/player/?url=#{@pack.link}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" %>
+        <iframe width="640" height="360" scrolling="no" frameborder="no" allow="autoplay" src="<%= embed_link %>"></iframe>
+      <% else %>
+        <% cut_link = @pack.link.split('/').last %>
+        <% embed_link = "https://www.youtube.com/embed/#{cut_link}" %>
+        <iframe width="640" height="360" src="<%= embed_link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <% end %>
+    </div>
+    <div id="preview-text">
+      <p>You can listen to the preview and find more information on the content of this pack in the different tabs.</p>
+      <p>You can also find these Sound effect packs on platforms such as <a href="https://assetstore.unity.com/publishers/39771">Unity Asset Store</a> or the <a href="https://www.unrealengine.com/marketplace/en-US/profile/OlivierGirardot">Unreal Market Place</a>.</p>
+      <p>Contact me at <a href="mailto:olivier@ogsoundfx.com">olivier@ogsoundfx.com</a></p>
+      <div id="preview-footer">
+        <div class="footer-links d-flex justify-content-center">
+          <a href="https://assetstore.unity.com/publishers/39771" target="_blank"><%= image_tag asset_path('logo/unity_rev.png'), id: "unity-icon-size" %></a>
+          <a href="https://www.unrealengine.com/marketplace/en-US/profile/OlivierGirardot" target="_blank"><%= image_tag asset_path('logo/unreal_rev.png'), id: "unreal-icon-size" %></a>
+          <a href="https://www.youtube.com/ogsoundfx" target="_blank"><%= image_tag asset_path('logo/youtube.png'), id: "youtube-preview" %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="description" class="tabcontent">
+  <% if File.exist?(File.join(Rails.root,"app/views/pack_descriptions/_#{@pack.sku}.html.erb")) %>
+    <%= render "pack_descriptions/#{@pack.sku}" %>
+  <% else %>
+    <%= render 'pack_descriptions/default' %>
+  <% end %>
+</div>
+
+<div id="reviews" class="tabcontent">
+  <h4 id="review-tab-title">Reviews are not yet implemented, coming soon!</h4>
+</div>
+
+<div id="list" class="tabcontent">
+  <embed src="<%= @pack.list %>" type="application/pdf" width="100%" height="600px" />
+</div>
+
+<script>
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>
