@@ -1,0 +1,15 @@
+#full-description {
+  padding: 20px;
+  text-align: justify;
+  ul { padding: 0; }
+  li {
+    list-style-type: none;
+    font-size: 100%;
+  }
+}
+
+pre {
+  font-family: $body-font;
+  font-size: 100%;
+}
+

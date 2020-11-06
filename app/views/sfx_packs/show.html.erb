@@ -1,6 +1,13 @@
 <%= render 'shared/navbar_general' %>
 <div class="container padding-navbar content">
-
+  <div class="d-flex justify-content-between top-links">
+    <div>
+      <%= link_to '< Back', url_for(:back) %>
+    </div>
+    <div>
+      <%= link_to 'Cart >', cart_path(current_user) %>
+    </div>
+  </div>
   <div class="d-flex mb-5 pack-box">
     <div class="pic-price">
       <% @pack.photos.each do |photo| %>
@@ -33,7 +40,7 @@
         <div>
         <%= form_tag orders_path do %>
           <%= hidden_field_tag 'pack_id', @pack.id %>
-          <%= submit_tag 'Purchase', id: 'purchase-btn' %>
+          <%= submit_tag 'Buy now', id: 'purchase-btn' %>
         <% end %>
         </div>
         <div>
@@ -45,10 +52,5 @@
       </div>
     </div>
   </div>
-
-  <% cut_link = @pack.link.split('/').last %>
-  <% embed_link = "https://www.youtube.com/embed/#{cut_link}" %>
-  <iframe width="640" height="360" src="<%= embed_link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <%= render 'shared/tabs' %>
 </div>
-
-<%= render 'pack_descriptions/monster_pack' %>
