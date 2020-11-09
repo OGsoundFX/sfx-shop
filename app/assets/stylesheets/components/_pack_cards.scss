@@ -78,7 +78,7 @@
   padding: 0 12px;
 }
 
-#btn-show, #btn-cart {
+#btn-show, #btn-cart, #btn-remove {
   width: 120px;
   font-size: 120%;
   padding: 2px 10px;
@@ -98,8 +98,20 @@
  border: solid 2px $darker-blue;
 }
 
-#btn-show:hover, #btn-cart:hover {
+#btn-remove {
+  // background-color: $orange-light;
+  // border: solid 2px $orange-main;
+  border: solid 2px $light-grey;
+  color: $font-grey;
+}
+
+#btn-show:hover, #btn-cart:hover, #btn-remove:hover {
   font-weight: 700;
+}
+
+#item-in-cart {
+  color: green;
+  margin-top: 7.5%;
 }
 
 $breakpoint-extra-small: 430px;
@@ -139,7 +151,7 @@ $breakpoint-extra-large: 1599.98px;
     font-size: 1.4vw;
   }
 
-  #btn-show, #btn-cart {
+  #btn-show, #btn-cart, #btn-remove {
     width: 95px;
   }
 
@@ -162,7 +174,7 @@ $breakpoint-extra-large: 1599.98px;
     font-size: 3vw;
   }
 
-  #btn-show, #btn-cart {
+  #btn-show, #btn-cart, #btn-remove {
     width: 130px;
     font-weight: 700;
     font-size: 140%;
@@ -179,7 +191,7 @@ $breakpoint-extra-large: 1599.98px;
     font-size: 180%;
   }
 
-  #btn-show, #btn-cart {
+  #btn-show, #btn-cart, #btn-remove {
     width: 150px;
     height: 60px;
     font-weight: 700;
@@ -195,10 +207,14 @@ $breakpoint-extra-large: 1599.98px;
 }
 
 @media (max-width: $breakpoint-extra-small) {
-  #btn-show, #btn-cart {
+  #btn-show, #btn-cart, #btn-remove {
     width: 30vw;
     height: 15vw;
     font-weight: 700;
     font-size: 5vw;
+  }
+
+  #item-in-cart {
+    font-size: 15px;
   }
 }
