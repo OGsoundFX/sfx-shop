@@ -83,3 +83,36 @@ li {
   color: white;
   border: solid 2px $darker-blue;
 }
+
+
+$breakpoint-laptop: 992px;
+
+@media (max-width: $breakpoint-laptop) {
+  .pic-price {
+    margin-left: 10px;
+    margin-top: 30px;
+
+    img {
+      height: 350px;
+    }
+  }
+
+  .pack-title{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  #pack-description {
+    display: none;
+  }
+
+  #purchase-btn {
+    margin-left: 20px;
+  }
+
+  #preview-text {
+    display: none;
+  }
+}
+
