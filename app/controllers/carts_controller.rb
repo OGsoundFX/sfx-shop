@@ -33,7 +33,11 @@ class CartsController < ApplicationController
     @cart = Cart.where(user_id: current_user.id).first
     @cart.items.delete(params[:pack_id].to_i)
     @cart.save
-    redirect_to cart_path
+    if params[:remain] == "true"
+      redirect_to root_path
+    else
+      redirect_to cart_path
+    end
   end
 
   def destroy_cart

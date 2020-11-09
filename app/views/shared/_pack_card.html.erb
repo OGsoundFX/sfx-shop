@@ -14,18 +14,35 @@
             <div id="circle"></div>
             <div><p><%= pack.sound_designer.first_name %> <%= pack.sound_designer.last_name %></p></div>
           </div>
-          <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+          <div class="d-flex justify-content-between">
+            <div>
+              <% if current_user && current_user.cart.items.include?(pack.id) %>
+                <div id="item-in-cart">already in your cart <i class="far fa-check-circle"></i></div>
+              <% end %>
+            </div>
+            <div>
+              <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+            </div>
+          </div>
           <div class="d-flex justify-content-between sfx-card-buttons">
             <div>
-              <%= form_tag sfx_pack_path(pack) do %>
+              <%= form_tag sfx_pack_path(pack), method: "get" do %>
                 <%= submit_tag 'Details', id: 'btn-show' %>
               <%  end %>
             </div>
             <div>
-              <%= form_tag cart_order_path do %>
-                <%= hidden_field_tag 'pack_id', pack.id %>
-                <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
-              <%  end %>
+              <% if current_user && current_user.cart.items.include?(pack.id) %>
+                <%= form_tag remove_item_path do %>
+                  <%= hidden_field_tag 'remain', true %>
+                  <%= hidden_field_tag 'pack_id', pack.id %>
+                  <%= submit_tag 'Remove', id: 'btn-remove' %>
+                <% end %>
+              <% else %>
+                <%= form_tag cart_order_path do %>
+                  <%= hidden_field_tag 'pack_id', pack.id %>
+                  <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
