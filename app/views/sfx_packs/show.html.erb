@@ -36,20 +36,28 @@
         <li>Version: <%= @pack.version %></li>
         <li id='pack-description'>Description: <%= @pack.description %></li>
       </ul>
-      <div class="d-flex">
+      <% if @pack.sku.include?("FS") %>
         <div>
-        <%= form_tag orders_path do %>
-          <%= hidden_field_tag 'pack_id', @pack.id %>
-          <%= submit_tag 'Buy now', id: 'purchase-btn' %>
-        <% end %>
-        </div>
-        <div>
-          <%= form_tag cart_order_path do %>
-            <%= hidden_field_tag 'pack_id', @pack.id %>
-            <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
+          <%= form_tag 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip' do %>
+            <%= submit_tag 'Download', id: 'btn-cart-show', class: 'ml-4' %>
           <%  end %>
         </div>
-      </div>
+      <% else %>
+        <div class="d-flex">
+          <div>
+          <%= form_tag orders_path do %>
+            <%= hidden_field_tag 'pack_id', @pack.id %>
+            <%= submit_tag 'Buy now', id: 'purchase-btn' %>
+          <% end %>
+          </div>
+          <div>
+            <%= form_tag cart_order_path do %>
+              <%= hidden_field_tag 'pack_id', @pack.id %>
+              <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
+            <%  end %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <%= render 'shared/tabs' %>

@@ -16,7 +16,7 @@
           </div>
           <div class="d-flex justify-content-between">
             <div>
-              <% if current_user && current_user.cart.items.include?(pack.id) %>
+              <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
                 <div id="item-in-cart">already in your cart <i class="far fa-check-circle"></i></div>
               <% end %>
             </div>
@@ -31,7 +31,7 @@
               <%  end %>
             </div>
             <div>
-              <% if current_user && current_user.cart.items.include?(pack.id) %>
+              <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
                 <%= form_tag remove_item_path do %>
                   <%= hidden_field_tag 'remain', true %>
                   <%= hidden_field_tag 'pack_id', pack.id %>

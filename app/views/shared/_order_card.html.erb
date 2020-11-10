@@ -16,7 +16,15 @@
             <% else %>
               <p>Price: <%= humanized_money_with_symbol pack.price %> </p>
             <% end %>
-            <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+
+            <% if pack.product_link.split(',').count > 1 %>
+              <% pack_links = pack.product_link.split(',') %>
+              <% pack_links.each_with_index do |link, index| %>
+                <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;" %> </p>
+              <% end %>
+            <% else %>
+              <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+            <% end %>
           </div>
         </div>
 
@@ -63,7 +71,15 @@
               / Coupon Value: <%= coupon_value %>
             </p>
           <% end %>
-          <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+
+          <% if order.product_link.split(',').count > 1 %>
+            <% pack_links = order.product_link.split(',') %>
+            <% pack_links.each_with_index do |link, index| %>
+              <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;" %> </p>
+            <% end %>
+          <% else %>
+            <p> <%=  link_to "Download Pack", order.product_link, oncontextmenu: "return false;" %> </p>
+          <% end %>
         </div>
       </div>
     </div>
