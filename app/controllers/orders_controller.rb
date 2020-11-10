@@ -1,7 +1,13 @@
 class OrdersController < ApplicationController
   def create
-    product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(params[:pack_id])
+
+    if sfx_pack.product_link == ''
+      product_link = 'https://www.ogsoundfx.com/NeWsfXsHoPbAmSfx/Free_SFX_Pack.zip'
+    else
+      product_link = sfx_pack.product_link
+    end
+
     if current_user
       order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
@@ -54,11 +60,10 @@ class OrdersController < ApplicationController
       line_items << line_item
       total_amount += line_item[:amount] / 100.to_f
     end
-    product_link = 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip'
     sfx_pack = SfxPack.find(cart.items.first)
 
     if current_user
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: ordered_list)
+      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: ordered_list)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,

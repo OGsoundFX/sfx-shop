@@ -45,7 +45,11 @@
 </div>
 
 <div id="list" class="tabcontent">
-  <embed src="<%= @pack.list %>" type="application/pdf" width="100%" height="600px" />
+  <% if @pack.list != "" %>
+    <embed src="<%= @pack.list %>" type="application/pdf" width="100%" height="600px" />
+  <% else %>
+    <h4 id="review-tab-title">The list of sounds for this pack is not yet available.</h4>
+  <% end %>
 </div>
 
 <script>
