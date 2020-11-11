@@ -84,8 +84,21 @@ li {
   border: solid 2px $darker-blue;
 }
 
+.tablet {
+  display: none;
+}
+
+#tablet-file-caracteristics {
+  display: none;
+}
 
 $breakpoint-laptop: 992px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 576px;
+$breakpoint-small: 490px;
+$breakpoint-extra-small: 440px;
+$breakpoint-super-duper-small: 375px;
+$breakpoint-evenmore-super-duper-small: 316px;
 
 @media (max-width: $breakpoint-laptop) {
   .pic-price {
@@ -116,3 +129,137 @@ $breakpoint-laptop: 992px;
   }
 }
 
+@media (max-width: $breakpoint-tablet) {
+  .desktop  {
+    display: none;
+  }
+
+  .tablet {
+    display: initial;
+  }
+
+  .top-links {
+    display: none !important;
+  }
+
+  .pack-box {
+    margin-top: 20px;
+  }
+
+  .tablet-pack-title {
+    padding: 10px 20px 0px 20px;
+  }
+
+  #sound-designer {
+    padding-left: 20px;
+  }
+
+  .pic-price {
+    margin-top: 10px;
+  }
+
+  .description-box {
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  #purchase-btn, #btn-cart-show {
+    margin: 0px 30px 20px 30px;
+  }
+
+  #preview-display {
+    position: relative;
+    width: 100%;
+    height: 240px;
+  }
+
+  iframe {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  #tablet-file-caracteristics {
+    display: unset;
+  }
+
+  #desktop-file-caracteristics {
+    display: none;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .pic-price {
+    img {
+      height: 250px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .description-box {
+    margin-top: 30px;
+  }
+
+}
+
+@media (max-width: $breakpoint-small) {
+  #tablink-list {
+    display: none;
+  }
+}
+
+@media (max-width: $breakpoint-extra-small) {
+  .pack-title {
+    font-size: 1.5rem;
+  }
+
+  #purchase-btn, #btn-cart-show {
+    margin: 0px 20px 20px 20px;
+    width: 130px;
+    font-size: 110%;
+    padding: 5px 7px;
+  }
+
+  .description-box {
+    margin-top: 15px;
+  }
+
+  #tablet-file-caracteristics {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: $breakpoint-super-duper-small) {
+  .pic-price {
+    display: none;
+  }
+
+  #tablet-file-caracteristics {
+    font-size: 1.3rem;
+  }
+
+  #purchase-btn, #btn-cart-show {
+    height: 50px;
+    width: 95px;
+    font-size: 90%;
+    padding: 2px 5px;
+  }
+
+  #purchase-btn {
+    margin-right: 0px;
+  }
+
+  #btn-cart-show {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: $breakpoint-evenmore-super-duper-small) {
+  .pack-title {
+    font-size: 1.2rem;
+  }
+}
