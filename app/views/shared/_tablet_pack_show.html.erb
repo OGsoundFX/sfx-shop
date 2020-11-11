@@ -1,0 +1,54 @@
+<div class="mb-5 pack-box">
+  <div class="d-flex justify-content-between tablet-pack-title">
+    <h1 class="pack-title"><%= @pack.title %></h1>
+    <h1 class="pack-title"><%= humanized_money_with_symbol(@pack.price) %></h1>
+  </div>
+  <p id="sound-designer">Sound Designer: <%= link_to @designer_name, about_path %> </p>
+  <div class="d-flex">
+    <div class="pic-price">
+      <% @pack.photos.each do |photo| %>
+        <%= image_tag photo %>
+      <% end %>
+    </div>
+    <div class="description-box">
+      <ul>
+        <li>
+          <% if @pack.size_mb >= 1000  %>
+            <%= @pack.size_mb / 1000.to_f %> GB
+          <% else %>
+            <%= @pack.size_mb %> MB
+          <% end %>
+        </li>
+        <li><%= @pack.duration %> minutes</li>
+        <li><%= number_with_delimiter @pack.number_of_tracks %> tracks</li>
+        <li id="desktop-file-caracteristics">48 kHz / 24bit / Stereo WAV files</li>
+        <li><div id="tablet-file-caracteristics">48 kHz / 24bit / WAV</div></li>
+        <li><%= link_to "List of Sounds", @pack.list, target: :_blank %></li>
+        <li>Version: <%= @pack.version %></li>
+        <li id='pack-description'>Description: <%= @pack.description %></li>
+      </ul>
+    </div>
+  </div>
+  <% if @pack.sku.include?("FS") %>
+    <div>
+      <%= form_tag 'https://www.ogsoundfx.com/sound-fx-files/27_Free_SFX_by_OG_Sound_FX.zip' do %>
+        <%= submit_tag 'Download', id: 'btn-cart-show', class: 'ml-4' %>
+      <%  end %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-between">
+      <div>
+      <%= form_tag orders_path do %>
+        <%= hidden_field_tag 'pack_id', @pack.id %>
+        <%= submit_tag 'Buy now', id: 'purchase-btn' %>
+      <% end %>
+      </div>
+      <div>
+        <%= form_tag cart_order_path do %>
+          <%= hidden_field_tag 'pack_id', @pack.id %>
+          <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
+        <%  end %>
+      </div>
+    </div>
+  <% end %>
+</div>
