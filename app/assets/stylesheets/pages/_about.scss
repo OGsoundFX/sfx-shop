@@ -1,0 +1,65 @@
+.title-about-mobile {
+  display: none;
+}
+
+.title-about {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
+#welcome-about {
+  padding: 10px 5px 0px 0px;
+  font-weight: 700;
+}
+
+#logo-about {
+  height: 60px;
+}
+
+#text-logo-about  {
+  padding: 10px 0px 0px 5px;
+  color: $orange-main;
+  font-family: 'Permanent Marker', cursive;
+}
+
+#text-logo-small-about {
+  display: none;
+}
+
+.about-content {
+  text-align: justify;
+  font-size: 18px;
+  color: $font-grey;
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-small: 490px;
+
+@media (max-width: $breakpoint-tablet) {
+  #text-logo-small-about {
+    display: revert;
+    padding: 10px 0px 0px 5px;
+    color: $orange-main;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  #text-logo-about {
+      display: none;
+  }
+}
+
+@media (max-width: $breakpoint-small) {
+  .title-about {
+    display: none;
+  }
+
+  #welcome-about {
+    text-align: center;
+    margin-bottom: -15px;
+  }
+
+  .title-about-mobile {
+    display: revert;
+  }
+}
