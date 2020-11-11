@@ -24,27 +24,35 @@
               <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
             </div>
           </div>
-          <div class="d-flex justify-content-between sfx-card-buttons">
-            <div>
-              <%= form_tag sfx_pack_path(pack), method: "get" do %>
-                <%= submit_tag 'Details', id: 'btn-show' %>
+          <% if pack.sku.include?("FS") %>
+            <div class='d-flex flex-row-reverse'>
+              <%= form_tag pack.product_link do %>
+                <%= submit_tag 'Download', id: 'btn-cart' %>
               <%  end %>
             </div>
-            <div>
-              <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
-                <%= form_tag remove_item_path do %>
-                  <%= hidden_field_tag 'remain', true %>
-                  <%= hidden_field_tag 'pack_id', pack.id %>
-                  <%= submit_tag 'Remove', id: 'btn-remove' %>
+          <% else %>
+            <div class="d-flex justify-content-between sfx-card-buttons">
+              <div>
+                <%= form_tag sfx_pack_path(pack), method: "get" do %>
+                  <%= submit_tag 'Details', id: 'btn-show' %>
+                <%  end %>
+              </div>
+              <div>
+                <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
+                  <%= form_tag remove_item_path do %>
+                    <%= hidden_field_tag 'remain', true %>
+                    <%= hidden_field_tag 'pack_id', pack.id %>
+                    <%= submit_tag 'Remove', id: 'btn-remove' %>
+                  <% end %>
+                <% else %>
+                  <%= form_tag cart_order_path do %>
+                    <%= hidden_field_tag 'pack_id', pack.id %>
+                    <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= form_tag cart_order_path do %>
-                  <%= hidden_field_tag 'pack_id', pack.id %>
-                  <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
-                <% end %>
-              <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
