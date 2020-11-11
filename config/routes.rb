@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "destroy_cart", to: "carts#destroy_cart"
   get "admin", to: "administrator#admin"
   get "about", to: "pages#about"
+  get "eula", to: "pages#eula"
   resources :sfx_packs, only: :show
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
