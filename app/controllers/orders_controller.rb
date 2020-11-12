@@ -86,7 +86,7 @@ class OrdersController < ApplicationController
 
   def destroy
     Order.where(user_id: current_user.id).last.destroy
-    redirect_to root_path
+    redirect_to cart_path
   end
 
   def destroy_from_dashboard
