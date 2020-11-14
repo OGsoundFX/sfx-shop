@@ -25,10 +25,17 @@
             </div>
           </div>
           <% if pack.sku.include?("FS") %>
-            <div class='d-flex flex-row-reverse'>
-              <%= form_tag pack.product_link do %>
-                <%= submit_tag 'Download', id: 'btn-cart' %>
-              <%  end %>
+            <div class='d-flex justify-content-between'>
+              <div>
+                <%= form_tag sfx_pack_path(pack), method: "get" do %>
+                  <%= submit_tag 'Details', id: 'btn-show' %>
+                <%  end %>
+              </div>
+              <div>
+                <%= form_tag pack.product_link do %>
+                  <%= submit_tag 'Download', id: 'btn-cart' %>
+                <%  end %>
+              </div>
             </div>
           <% else %>
             <div class="d-flex justify-content-between sfx-card-buttons">
