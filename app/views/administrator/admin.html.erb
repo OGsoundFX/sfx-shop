@@ -15,6 +15,6 @@
   </p>
 
   <p>
-    Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) %>
+    Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
   </p>
 </div>
