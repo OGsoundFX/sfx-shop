@@ -1,5 +1,5 @@
-<%= render 'shared/navbar_general content' %>
-<div class="container padding-navbar">
+<%= render 'shared/navbar_general' %>
+<div class="container padding-navbar content">
   <h1>Hey Olivier</h1>
 
   <p>
@@ -8,5 +8,13 @@
 
   <p>
     Made by <%= Order.group(:user_id).count  %>
-</p>
+  </p>
+
+  <p>
+    Number of users: <%= User.count %>
+  </p>
+
+  <p>
+    Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) %>
+  </p>
 </div>
