@@ -29,7 +29,7 @@
       <% if @pack.sku.include?("FS") %>
         <div>
           <%= form_tag @pack.product_link do %>
-            <%= submit_tag 'Download', id: 'btn-cart-show', class: 'ml-4' %>
+            <%= submit_tag 'Download', id: 'btn-download', class: 'ml-4' %>
           <%  end %>
         </div>
       <% else %>
