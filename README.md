@@ -4,7 +4,7 @@ Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
 Here are the different stages that I am aiming:
 
-1/ Stage 1: COMPLETED (almost)
+1/ Stage 1: **COMPLETED** (almost)
 Creating a Sound Effects online shop with only my Own sound effects packs.
 I am first releasing a Demo version for friends and coleagues, with free access to all sound effect packs. Official release will come soon after.
 What still need to be done:
