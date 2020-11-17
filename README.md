@@ -3,9 +3,13 @@
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
 Here are the different stages that I am aiming:
-1/ Stage 1: COMPLETED
+1/ Stage 1: COMPLETED (almost)
 Creating a Sound Effects online shop with only my Own sound effects packs.
 I am first releasing a Demo version for friends and coleagues, with free access to all sound effect packs. Official release will come soon after.
+What still need to be done:
+- devise confirmation email when creating an account
+- problem with password reset
+- some frontend details
 
 2/ Stage 2: Early 2021
 Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
