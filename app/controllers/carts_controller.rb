@@ -26,6 +26,12 @@ class CartsController < ApplicationController
         @pack_list << SfxPack.find(item)
       end
       @pack_list.sort_by!(&:price_cents).reverse!
+      @total_value = 0
+      @sum = 0
+      @pack_list.each_with_index do |pack, index|
+        @total_value += (pack.price_cents / 100)
+        index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
+      end
     end
   end
 
