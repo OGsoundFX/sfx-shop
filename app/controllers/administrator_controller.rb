@@ -1,9 +1,5 @@
 class AdministratorController < ApplicationController
   def admin
-    if current_user && current_user.email == 'olivier@ogsoundfx.com'
-      redirect to admin_path
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.nil? || current_user.email != 'olivier@ogsoundfx.com'
   end
 end
