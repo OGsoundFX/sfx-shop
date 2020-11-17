@@ -1,17 +1,23 @@
 <%= render 'shared/navbar_general' %>
-<div class="container padding-navbar content">
-  <h1>Welcome to your cart <%= current_user.username %></h1>
+<div class="container padding-navbar content margins">
+  <h2 id="cart-title">Welcome to your cart <%= current_user.username %></h2>
 
   <% if @pack_list %>
     <% sum = 0 %>
+    <% total_value = 0 %>
       <% @pack_list.each_with_index do |pack, index| %>
-
+        <% total_value += pack.price_cents / 100 %>
         <% if index.positive? %>
           <div class="row item-attributes">
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-              <%= image_tag pack.photos[0], width: "150px" %>
+            <div class="col-6 col-sm-4 col-lg-2">
+              <div id="wrapper">
+                <%= link_to sfx_pack_path(pack) do %>
+                  <div><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
+                  <div class="pop-up-cart">See Details</div>
+                <% end %>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-8 cart-pack-display">
+            <div class="col-6 col-sm-8 col-lg-8 cart-pack-display">
               <div><h3><%= pack.title %></h3></div>
               <div>
                 <h5><strong><%= humanized_money_with_symbol pack.price * 0.8 %></strong> instead of <strong><%= humanized_money_with_symbol pack.price %></strong></h5>
@@ -25,10 +31,15 @@
           </div>
         <% else %>
           <div class="row item-attributes">
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-              <%= image_tag pack.photos[0], width: "150px" %>
+            <div class="col-6 col-sm-4 col-lg-2">
+              <div id="wrapper">
+                <%= link_to sfx_pack_path(pack) do %>
+                  <div><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
+                  <div class="pop-up-cart">See Details</div>
+                <% end %>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-8 cart-pack-display">
+            <div class="col-6 col-sm-8 col-lg-8 cart-pack-display">
               <div><h3><%= pack.title %></h3></div>
               <div><h5><strong><%= humanized_money_with_symbol pack.price %></strong></h5></div>
               <% sum += (pack.price_cents.to_f / 100) %>
@@ -41,13 +52,22 @@
         <% end %>
 
       <% end %>
-
-      <h3>Total Amount: <strong><%= humanized_money_with_symbol sum %></strong> </h3>
-      <%= form_tag checkout_path do %>
-        <%= hidden_field_tag 'cart_id', @items.id %>
-        <%= submit_tag 'Checkout', id: 'btn-cart' %>
-      <% end %>
-
+      <div class="total">
+        <h3>Total Amount: <strong><%= humanized_money_with_symbol sum %></strong> </h3>
+        <i>(number of items: <%= @pack_list.count %>)</i>
+        <p> <i>You spare <strong><%= humanized_money_with_symbol (total_value - sum) %></strong></i></p>
+        <div class="d-flex justify-content-center">
+          <div>
+          <%= form_tag checkout_path do %>
+            <%= hidden_field_tag 'cart_id', @items.id %>
+            <%= submit_tag 'Checkout', id: 'btn-cart' %>
+          <% end %>
+          </div>
+          <div id="continue-shopping">
+            <%= link_to "Continue shopping", root_path %>
+          </div>
+        </div>
+      </div>
   <% else %>
     <h3>Your cart is empty</h3>
   <% end %>

@@ -25,7 +25,7 @@
             </div>
           </div>
           <% if pack.sku.include?("FS") %>
-            <div class='d-flex justify-content-between'>
+            <div class='d-flex justify-content-between sfx-card-buttons'>
               <div>
                 <%= form_tag sfx_pack_path(pack), method: "get" do %>
                   <%= submit_tag 'Details', id: 'btn-show' %>
@@ -33,7 +33,7 @@
               </div>
               <div>
                 <%= form_tag pack.product_link do %>
-                  <%= submit_tag 'Download', id: 'btn-download' %>
+                  <%= submit_tag 'Download', id: 'btn-download-front' %>
                 <%  end %>
               </div>
             </div>
