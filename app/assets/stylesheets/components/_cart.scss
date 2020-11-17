@@ -1,3 +1,31 @@
+.margins {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+#cart-title {
+  text-align: center;
+  color: $darker-blue;
+  padding: 5px 15px 10px 15px;
+  background-color: $whitesmoke;
+  border-radius: 3px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+}
+
 .item-attributes {
   margin: 25px 0px;
+}
+
+#continue-shopping {
+  margin: 8px 10px;
+}
+
+.total {
+  text-align: center;
+  padding: 5px 15px 10px 15px;
+  color: $font-grey !important;
+  background-color: $whitesmoke;
+  border-radius: 3px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
 }
