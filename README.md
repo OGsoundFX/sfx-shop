@@ -11,6 +11,7 @@ What still need to be done:
 - devise confirmation email when creating an account
 - problem with password reset
 - some frontend details
+- add reviews
 
 2/ Stage 2: Early 2021
 Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
