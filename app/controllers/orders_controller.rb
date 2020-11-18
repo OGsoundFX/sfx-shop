@@ -34,6 +34,8 @@ class OrdersController < ApplicationController
   def checkout
     cart = Cart.where(user_id: current_user.id).first
 
+    cart.items.count == 1 ? multiple = false : multiple = true
+
     ordered_list = []
     cart.items.each do |item|
       ordered_list << SfxPack.find(item)
@@ -63,7 +65,7 @@ class OrdersController < ApplicationController
     sfx_pack = SfxPack.find(cart.items.first)
 
     if current_user
-      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: true, packs: ordered_list)
+      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
@@ -90,8 +92,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy_from_dashboard
-    Order.where(user_id: current_user.id).last.destroy
-    redirect_to dashboard_path
+    # no use at this point
   end
 
   private

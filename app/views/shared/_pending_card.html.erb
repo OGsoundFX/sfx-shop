@@ -1,44 +1,20 @@
 <% @pending.each do |order| %>
-  <% if order.multiple %>
-    <div class="pending_card">
-      <h3>Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
-      <% order.packs.each do |pack_id| %>
+  <div class="pending_card">
+    <h3><span id="pending-text">Pending</span> order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
+    <h5><i>Please <%= link_to "refresh", dashboard_path %> the page, come back later, or contact us <a href="mailto:olivier@ogsoundfx.com"> here!</a></i></h5>
+    <br>
+    <table>
+      <tbody>
+        <% order.packs.each do |pack_id| %>
         <% pack = SfxPack.where(id: pack_id)[0] %>
-        <p> <%= pack.title %> </p>
-        <div class="d-flex">
-          <div>
-            <%= image_tag pack.photos[0], width: "100px" %>
-          </div>
-          <div>
-            <p> <%= humanized_money_with_symbol pack.price %> </p>
-            <p> <%= order.status %> </p>
-          </div>
-        </div>
-      <% end %>
-      <%= form_tag order_path(order), :method => :get do %>
-        <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
-      <% end %>
-      <%= link_to "cancel", destroy_order_dashboard_path, class: "btn btn-primary" %>
-    </div>
-
-  <% else %>
-    <div class="pending_card">
-      <p> <%= order.sfx_pack.title %> </p>
-      <div class="d-flex">
-        <div>
-          <%= image_tag order.sfx_pack.photos[0], width: "200px" %>
-        </div>
-        <div>
-          <p> <%= humanized_money_with_symbol order.amount %> </p>
-          <p> <%= order.created_at.strftime("%Y-%m-%d") %> </p>
-          <p> <%= order.status %> </p>
-          <%= form_tag order_path(order), :method => :get do %>
-            <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
-          <% end %>
-          <%= link_to "cancel", destroy_order_dashboard_path, class: "btn btn-primary" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+          <tr class="pack-info-dashboard">
+            <td><%= image_tag pack.photos[0], width: "100px" %></td>
+            <td><%= pack.title %></td>
+            <td>(<i><%= humanized_money_with_symbol(pack.price) %>)</i></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
