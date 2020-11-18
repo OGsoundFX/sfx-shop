@@ -13,16 +13,16 @@
 }
 
 #space-around-edit-button {
-  margin-bottom: 40px;
+  margin: 10px 15px 40px 15px;
+
 }
 
 #edit-profile {
   padding: 5px 20px;
   border: solid 2px $darker-blue;
   &:hover {
-    border: solid 3px $light-grey;
+    border: solid 2px $light-grey;
     color: $light-grey;
-    font-weight: 700;
     }
 }
 
@@ -83,6 +83,18 @@
   margin-top: 50px;
 }
 
+#download-pack-two {
+  margin-top: 35px;
+}
+
+#download-pack-three {
+  margin-top: 15px;
+}
+
+#download-pack-more {
+  margin-top: 0px;
+}
+
 #btn-download-order {
   width: 120px;
   font-size: 120%;
@@ -95,9 +107,13 @@
 }
 
 #btn-download-order:hover {
-  font-weight: 700;
   background-color: $light-grey;
   border: solid 2px $light-grey;
+}
+
+#price-pack-under {
+  display: none;
+  font-size: 15px;
 }
 
 $breakpoint-extra-small: 430px;
@@ -106,7 +122,30 @@ $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 
 @media (max-width: $breakpoint-laptop) {
-  .pack-row {
-    // display: none;
+  .order_card {
+    padding: 25px 50px;
+  }
+
+  #btn-download-order {
+    font-size: 100%;
+    padding: 3px 8px;
+  }
+
+  #title-pack {
+    font-size: 20px;
+  }
+
+  #price-pack {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  #instead-dashboard {
+    display: none;
+  }
+
+  #price-pack-under {
+    display: initial;
   }
 }

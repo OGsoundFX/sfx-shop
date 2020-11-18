@@ -7,10 +7,19 @@
         <%= " #{current_user.username}, welcome to your dashboard" %>
       <% end %>
     </h2>
-    <div class="edit-profile-position">
-      <h4 id="space-around-edit-button"><%= link_to "Edit your Profile", edit_user_registration_path(current_user), id: "edit-profile" %></h4>
+    <div class="d-flex justify-content-center edit-profile-position">
+      <div>
+        <h4 id="space-around-edit-button"><%= link_to "Edit your Profile", edit_user_registration_path(current_user), id: "edit-profile" %></h4>
+      </div>
+      <div>
+        <h4 id="space-around-edit-button"> <%= link_to "Browse shop", root_path, id: "edit-profile" %> </h4>
+      </div>
     </div>
-    <h4 id="list-of-orders">List of orders:</h4>
+    <% if @orders.count > 0 %>
+      <h4 id="list-of-orders">List of orders:</h4>
+    <% else %>
+      <h3>You haven't purchased anything yet</h3>
+    <% end %>
     <%= render 'shared/pending_card' %>
 
     <%= render 'shared/order_card' %>
