@@ -1,17 +1,16 @@
 <%= render 'shared/navbar_general' %>
-<div class="container content">
-    <h1>Hello
+<div class="container padding-navbar content dashboard-center">
+    <h2 id="dashboard-title">Hello
       <% if current_user.username == "" %>
         <%= "stranger, welcome to your dashboard" %>
       <% else %>
         <%= " #{current_user.username}, welcome to your dashboard" %>
       <% end %>
-    </h1>
-    <% if current_user.location %>
-      <h4>How is the weather today in <%= current_user.location %>?</h4>
-    <% end %>
-    <h4><%= link_to "Edit your Profile", edit_user_registration_path(current_user) %></h4>
-
+    </h2>
+    <div class="edit-profile-position">
+      <h4 id="space-around-edit-button"><%= link_to "Edit your Profile", edit_user_registration_path(current_user), id: "edit-profile" %></h4>
+    </div>
+    <h4 id="list-of-orders">List of orders:</h4>
     <%= render 'shared/pending_card' %>
 
     <%= render 'shared/order_card' %>
