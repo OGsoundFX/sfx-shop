@@ -14,16 +14,22 @@
 
 #space-around-edit-button {
   margin: 10px 15px 40px 15px;
-
 }
 
-#edit-profile {
-  padding: 5px 20px;
+#edit-profile, #browse-profile {
   border: solid 2px $darker-blue;
   &:hover {
     border: solid 2px $light-grey;
     color: $light-grey;
     }
+}
+
+#edit-profile {
+  padding: 5px 20px;
+}
+
+#browse-profile {
+  padding: 5px 35px;
 }
 
 .edit-profile-position {
@@ -56,7 +62,7 @@
 }
 
 #pending-text {
-  color: #ff5c55;
+  color: $indian-red;
 }
 
 .pack-info-dashboard {
@@ -95,7 +101,7 @@
   margin-top: 0px;
 }
 
-#btn-download-order {
+#btn-download-order, #btn-download-order-short {
   width: 120px;
   font-size: 120%;
   padding: 5px 12px;
@@ -104,20 +110,33 @@
   background-color: $light-blue;
   color: white;
   border: solid 2px $darker-blue;
+  &:hover {
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+  }
 }
 
-#btn-download-order:hover {
-  background-color: $light-grey;
-  border: solid 2px $light-grey;
+#btn-download-order-short {
+  display: none;
 }
 
-#price-pack-under {
+#instead-dashboard {
+  color: $indian-red;
+}
+
+#instead-under {
   display: none;
   font-size: 15px;
+  color: $indian-red;
+}
+
+#download-buttons-under {
+  display: none;
 }
 
 $breakpoint-extra-small: 430px;
 $breakpoint-mobile: 576px;
+$breakpoint-intermediate: 650px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 
@@ -145,7 +164,36 @@ $breakpoint-laptop: 992px;
     display: none;
   }
 
-  #price-pack-under {
+  #instead-under {
     display: initial;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  #btn-download-order {
+  display: none;
+}
+
+  #btn-download-order-short {
+    display: initial;
+  }
+}
+
+@media (max-width: $breakpoint-intermediate) {
+  .order_card {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  #download-buttons-next {
+    display: none;
+  }
+
+  #download-buttons-under {
+    display: initial;
+    text-align: center;
   }
 }
