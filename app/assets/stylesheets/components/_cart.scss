@@ -18,6 +18,7 @@
 
 #instead {
   margin: 6px 0px 0px 8px;
+  color: $indian-red;
 }
 
 .item-attributes {
@@ -43,7 +44,6 @@
 
 #instead-mobile {
   display: none;
-  margin: 6px 0px 0px 8px;
 }
 
 $breakpoint-tablet: 768px;
@@ -67,6 +67,7 @@ $breakpoint-evenmore-hyper-super-duper-small: 284px;
 
   #instead-mobile {
     display: initial;
+    color: $indian-red;
   }
 
 }
@@ -97,7 +98,6 @@ $breakpoint-evenmore-hyper-super-duper-small: 284px;
   }
 
   #instead-mobile {
-    margin-top: 0.8vh;
     font-size: 4.5vw;
   }
 
