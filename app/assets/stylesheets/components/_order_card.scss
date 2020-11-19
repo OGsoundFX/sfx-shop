@@ -1,3 +1,7 @@
+#order-card-mobile {
+  display: none;
+}
+
 .dashboard-center {
   margin-top: 20px;
   margin-bottom: 25px;
@@ -130,11 +134,10 @@
   color: $indian-red;
 }
 
-#download-buttons-under {
-  display: none;
-}
-
+$breakpoint-evenmore-hyper-super-duper-small: 284px;
+$breakpoint-evenmore-super-duper-small: 316px;
 $breakpoint-extra-small: 430px;
+$breakpoint-mobile-small: 525px;
 $breakpoint-mobile: 576px;
 $breakpoint-intermediate: 650px;
 $breakpoint-tablet: 768px;
@@ -188,12 +191,86 @@ $breakpoint-laptop: 992px;
 }
 
 @media (max-width: $breakpoint-mobile) {
-  #download-buttons-next {
+  #instead-dashboard {
+    display: initial;
+  }
+
+  #instead-under {
     display: none;
   }
 
-  #download-buttons-under {
+  #order-card-desktop {
+    display: none;
+  }
+
+  #order-card-mobile {
     display: initial;
+  }
+
+  #order-space-under-title-mobile {
     text-align: center;
+    margin-bottom: 18px;
+  }
+
+  #download-buttons-under {
+    text-align: center;
+  }
+
+  .order_card {
+    padding: 25px 50px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile-small) {
+  .edit-profile-position {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 23px;
+  }
+
+  #space-around-edit-button {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: $breakpoint-extra-small) {
+  #dashboard-title {
+    font-size: 25px;
+  }
+
+  .order_card {
+    padding: 15px 20px;
+  }
+
+  #order-space-under-title-mobile, #list-of-orders {
+    font-size: 6vw;
+  }
+}
+
+@media (max-width: $breakpoint-evenmore-super-duper-small) {
+  #dashboard-title {
+    font-size: 20px;
+  }
+
+  .pack-row {
+    display: block !important;
+    height: auto;
+  }
+
+  #title-pack, #price-pack {
+    text-align: center;
+  }
+
+  #image-pack {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  #download-pack {
+    margin-top: 15px;
+  }
+
+  #download-pack-two {
+    margin-top: 15px;
   }
 }
