@@ -1,0 +1,71 @@
+<% @orders.each do |order| %>
+  <div class="order_card">
+    <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
+  <hr>
+    <% order.packs.each_with_index do |pack_id, index| %>
+      <% pack = SfxPack.where(id: pack_id)[0] %>
+      <div>
+        <h4 id="title-pack"> <%= pack.title %> </h4>
+        <% if index.positive? %>
+          <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price * 0.8 %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) </i> </span> </h5>
+          <h5 id="instead-under"> <i>(instead of <%= humanized_money_with_symbol pack.price %>)</i> </h5>
+        <% else %>
+          <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-between pack-row">
+        <div id="image-pack">
+          <%= image_tag pack.photos[0], width: "100px" %>
+        </div>
+        <div id="download-buttons-under">
+          <% if pack.product_link.split(',').count == 1 %>
+            <div id="download-pack">
+              <p> <%=  link_to "Download Pack", pack.product_link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
+              <p> <%=  link_to "Download", pack.product_link, oncontextmenu: "return false;", id: "btn-download-order-short" %> </p>
+            </div>
+          <% elsif pack.product_link.split(',').count == 2 %>
+            <div id="download-pack-two">
+              <% pack_links = pack.product_link.split(',') %>
+              <% pack_links.each_with_index do |link, index| %>
+                <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
+                <p> <%=  link_to "Download #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order-short" %> </p>
+              <% end %>
+            </div>
+          <% elsif pack.product_link.split(',').count == 3 %>
+            <div id="download-pack-three">
+              <% pack_links = pack.product_link.split(',') %>
+              <% pack_links.each_with_index do |link, index| %>
+                <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
+                <p> <%=  link_to "Download #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order-short" %> </p>
+              <% end %>
+            </div>
+          <% else %>
+            <div id="download-pack-more">
+              <% pack_links = pack.product_link.split(',') %>
+              <% pack_links.each_with_index do |link, index| %>
+                <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
+                <p> <%=  link_to "Download #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order-short" %> </p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+  <hr>
+    <% end %>
+    <p>Status: <strong><%= order.status %></strong> </p>
+    <p>Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
+    <% if order.coupon %>
+      <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
+      <% coupon_array = order.coupon.split(',') %>
+      <% if coupon_array[1].strip == "Percentage" %>
+        <% coupon_value = "#{coupon_array[2].to_i}%" %>
+      <% else %>
+        <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
+      <% end %>
+      <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
+      </p>
+    <% end %>
+  </div>
+<% end %>
