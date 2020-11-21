@@ -14,8 +14,11 @@
         <% end %>
       </div>
       <div class="d-flex justify-content-between pack-row">
-        <div id="image-pack">
-          <%= image_tag pack.photos[0], width: "100px" %>
+        <div id="wrapper">
+          <%= link_to sfx_pack_path(pack) do %>
+            <div><%= image_tag pack.photos[0], width: "100px", id: "image-pack" %></div>
+            <div class="pop-up-cart">Details</div>
+          <% end %>
         </div>
         <div id="download-buttons-under">
           <% if pack.product_link.split(',').count == 1 %>

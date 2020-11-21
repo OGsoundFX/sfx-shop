@@ -5,8 +5,11 @@
     <% order.packs.each_with_index do |pack_id, index| %>
       <% pack = SfxPack.where(id: pack_id)[0] %>
       <div class="d-flex justify-content-between pack-row">
-        <div id="image-pack">
-          <%= image_tag pack.photos[0], width: "100px" %>
+        <div id="wrapper">
+          <%= link_to sfx_pack_path(pack) do %>
+            <div><%= image_tag pack.photos[0], width: "100px", id: "image-pack" %></div>
+            <div class="pop-up-cart">Details</div>
+          <% end %>
         </div>
         <div>
           <h4 id="title-pack"> <%= pack.title %> </h4>
