@@ -11,7 +11,7 @@
   position: relative;
 }
 
-#wrapper:hover .pack_pic, #wrapper:hover .pack_pic_cart {
+#wrapper:hover .pack_pic, #wrapper:hover .pack_pic_cart, #wrapper:hover #image-pack {
     background-color: $whitesmoke;
     opacity: 0.5;
     transition: 0.5s;
