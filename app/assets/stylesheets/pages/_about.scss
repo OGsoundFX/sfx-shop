@@ -5,7 +5,7 @@
 .title-about {
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 20px 0px 45px 0px;
 }
 
 #welcome-about {
@@ -33,6 +33,13 @@
   color: $font-grey;
 }
 
+#studio-img {
+  max-width: 75%;
+  margin-bottom: 40px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
 $breakpoint-tablet: 768px;
 $breakpoint-small: 490px;
 
@@ -46,6 +53,10 @@ $breakpoint-small: 490px;
 
   #text-logo-about {
       display: none;
+  }
+
+  #studio-img {
+    max-width: 95%;
   }
 }
 
