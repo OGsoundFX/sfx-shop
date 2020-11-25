@@ -13,7 +13,7 @@ class CartsController < ApplicationController
       @items.items << SfxPack.find(params[:pack_id]).id.to_i
     end
     @items.save
-    redirect_to cart_path
+    redirect_to root_path(anchor: "front-title")
   end
 
   def cart
