@@ -111,5 +111,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   # config of password reset
-  config.action_mailer.default_url_options = { :host => "https://www.bamsx.com" }
+  config.action_mailer.default_url_options = { :host => "https://www.bamsfx.com" }
 end
