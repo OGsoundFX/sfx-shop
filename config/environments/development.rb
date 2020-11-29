@@ -63,6 +63,18 @@ Rails.application.configure do
   # lost email
   config.action_mailer.default_url_options = { :host => "http://localhost:3000/" }
 
+  # reset email
+  config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: "example.com",
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: ENV["GMAIL_USERNAME"],
+      password:ENV["GMAIL_PASSWORD"]
+    }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   # ngrok config
   config.hosts << "924aa525efdb.ngrok.io"
 end
