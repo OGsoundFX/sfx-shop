@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-if defined?(ActionMailer)
-  class Devise::Mailer < ApplicationMailer
+
+  class Devise::Mailer < Devise.parent_mailer.constantize
     include Devise::Mailers::Helpers
 
     def confirmation_instructions(record, token, opts = {})
@@ -27,4 +27,3 @@ if defined?(ActionMailer)
       devise_mail(record, :password_change, opts)
     end
   end
-end
