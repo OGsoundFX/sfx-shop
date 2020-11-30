@@ -1,7 +1,7 @@
 <div class="container submit-form padding-navbar content">
   <h2 class="header">Forgot your password?</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :get }) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :patch }) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
