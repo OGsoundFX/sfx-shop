@@ -131,7 +131,12 @@
 }
 
 #btn-show:hover, #btn-cart:hover, #btn-remove:hover, #btn-download-front:hover {
-  font-weight: 700;
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+}
+
+#btn-show:hover, #btn-remove:hover {
+    color: white;
 }
 
 #item-in-cart {
