@@ -3,7 +3,7 @@
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
 
-### THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
+## THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
 
 Here are the different stages that I am aiming:
 
@@ -29,7 +29,7 @@ Make your own pack: The customer can purchase sounds individually or make their 
 
 I will add details about how I build this app and the various tools I used (devise, postgresql, cloudinary, stripe, heroku...) soon! 
 
-### GEMS AND FEATURES
+## GEMS AND FEATURES
 
-##### Devise
-##### Stripe
+### Devise
+### Stripe
