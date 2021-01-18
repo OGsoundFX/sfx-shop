@@ -1,4 +1,4 @@
-# BAMSFX ONLINE SHOP - README
+# BAMSFX ONLINE SHOP - README # _(Work in Progress)_
 
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
