@@ -1,4 +1,4 @@
-# BAMSFX ONLINE SHOP - README # _(Work in Progress)_
+# BAMSFX ONLINE SHOP - README _(Work in Progress)_
 
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
@@ -32,4 +32,9 @@ I will add details about how I build this app and the various tools I used (devi
 ## GEMS AND FEATURES
 
 ### Devise
+
+**Devise** is a pretty straight forward build-in pack that makes **authentification** super easy to implement. I will describe the different steps here: _Coming Soon_
+
 ### Stripe
+
+**Stripe** is an awesome payment tool super easy to implement. I will describe the different steps here: _Coming Soon_
