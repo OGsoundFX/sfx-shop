@@ -1,7 +1,10 @@
-# README
+# README - BAM SOUND EFFECTS ONLINE SHOP
 
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
+
+# THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
+
 Here are the different stages that I am aiming:
 
 1/ Stage 1: **COMPLETED** (almost)
@@ -25,3 +28,9 @@ Make your own pack: The customer can purchase sounds individually or make their 
 - Custom work: for clients to ask for custom designs for their projects. They can ask one of the sound designers from the website, or make open offers.
 
 I will add details about how I build this app and the various tools I used (devise, postgresql, cloudinary, stripe, heroku...) soon! 
+
+# GEMS AND FEATURES
+
+**Devise**
+***Stripe***
+*Stripe*
