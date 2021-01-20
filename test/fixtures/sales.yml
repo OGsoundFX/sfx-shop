@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  percentage: 1
+  start_date: 2021-01-20
+  end_date: 2021-01-20
+  packs: 1
+
+two:
+  title: MyString
+  percentage: 1
+  start_date: 2021-01-20
+  end_date: 2021-01-20
+  packs: 1
