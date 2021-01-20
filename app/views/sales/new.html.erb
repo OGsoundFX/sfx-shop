@@ -1,0 +1,16 @@
+<%= render 'shared/navbar_general' %>
+<div class="container padding-navbar content">
+  <h1>Create a Sale</h1>
+
+  <%= simple_form_for @sale do |f| %>
+    <%= f.input :title, label: 'Title' %>
+    <%= f.input :percentage, label: 'Percentage' %>
+    <%= f.input :start_date, label: 'Start date' %>
+    <%= f.input :end_date, label: 'End date' %>
+    <div id="new-sale-packs">
+      <%= f.input :packs, label: 'Packs' %>
+    </div>
+    <%= f.button :submit %>
+  <% end %>
+
+</div>
