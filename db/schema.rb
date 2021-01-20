@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_103315) do
+ActiveRecord::Schema.define(version: 2021_01_20_163043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2020_11_10_103315) do
     t.string "amount_paid_currency", default: "USD", null: false
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.string "title"
+    t.integer "percentage"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "packs", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sfx_packs", force: :cascade do |t|
