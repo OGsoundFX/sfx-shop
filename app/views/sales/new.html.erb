@@ -7,9 +7,9 @@
     <%= f.input :percentage, label: 'Percentage' %>
     <%= f.input :start_date, label: 'Start date' %>
     <%= f.input :end_date, label: 'End date' %>
-    <div id="new-sale-packs">
-      <%= f.input :packs, label: 'Packs' %>
-    </div>
+
+    <%= f.input :packs, label: 'Packs', collection: @packs, input_html: { multiple: true } %>
+
     <%= f.button :submit %>
   <% end %>
 
