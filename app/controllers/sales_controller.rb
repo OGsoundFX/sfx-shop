@@ -9,7 +9,6 @@ class SalesController < ApplicationController
   end
 
   def create
-    Sale.delete_all if Sale.count > 0
     @sale = Sale.new(sale_params)
 
     if pack_params.include? "All"
