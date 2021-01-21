@@ -5,6 +5,9 @@
         <div id="wrapper">
           <%= link_to sfx_pack_path(pack) do %>
             <div><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
+            <div><%= image_tag asset_path('Promo_orange.png'), id: "sale" %>
+              <p id="sale-percentage">50%<br>OFF</p>
+            </div>
             <div class="pop-up">See Pack Details</div>
           <% end %>
         </div>

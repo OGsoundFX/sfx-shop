@@ -1,0 +1,19 @@
+#sale {
+  position: absolute;
+  top:5vh;
+  right: 9.5vh;
+  height: 100px;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+#sale-percentage {
+  position: absolute;
+  color: white;
+  font-weight: 500 !important;
+  font-size: 28px;
+  font: $body-font;
+  top: 8vh;
+  right: 12vh;
+  line-height: 80%;
+}
