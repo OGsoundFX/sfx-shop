@@ -28,6 +28,11 @@ class SalesController < ApplicationController
     redirect_to admin_path
   end
 
+  def destroy
+    Sale.find(params[:id]).destroy
+    redirect_to admin_path
+  end
+
   private
 
   def sale_params

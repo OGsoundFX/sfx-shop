@@ -29,6 +29,7 @@
     <p> <%= sale.packs %> </p>
     <p> <%= sale.start_date %> </p>
     <p> <%= sale.end_date %> </p>
+    <%= link_to "Delete Sale", sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }  %>
   <% end %>
 
 </div>
