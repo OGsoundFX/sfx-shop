@@ -6,7 +6,7 @@
           <%= link_to sfx_pack_path(pack) do %>
             <div><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
 
-            <% if @current_sales_list %>
+            <% if @current_sales_list != {} %>
               <% if @current_sales_list[pack.id]  %>
                 <div><%= image_tag asset_path('Promo_orange.png'), id: "sale" %>
                   <p id="sale-percentage"><%= @current_sales_list[pack.id] %>%<br>OFF</p>
@@ -30,7 +30,18 @@
               <% end %>
             </div>
             <div>
-              <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+              <% if @current_sales_list[pack.id]%>
+                <div class="d-flex">
+                  <div>
+                    <h4 id="price-barred" > <strike><%= humanized_money_with_symbol(pack.price) %></strike> </h4>
+                  </div>
+                  <div>
+                    <h1 id="price-sale"><%= humanized_money_with_symbol(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f)) %></h1>
+                  </div>
+                </div>
+              <% else %>
+                <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+              <% end %>
             </div>
           </div>
           <% if pack.sku.include?("FS") %>

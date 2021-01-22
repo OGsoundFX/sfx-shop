@@ -93,6 +93,17 @@
   font-weight: 700;
 }
 
+#price-sale {
+  color: $orange-main;
+  padding-right: 12px;
+  text-align: right;
+  font-weight: 700;
+}
+
+#price-barred {
+  padding: 15px 17px 0px 0px;
+}
+
 .sfx-card-buttons {
   padding: 0 12px;
 }

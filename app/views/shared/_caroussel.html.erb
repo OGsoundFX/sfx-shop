@@ -1,5 +1,11 @@
 <div class="slideshow-container">
-  <div><%= image_tag asset_path('Promo20_2.png'), id: "promo20" %></div>
+  <div>
+    <% if @current_sales_list != {} %>
+      <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
+    <% else %>
+      <%= image_tag asset_path('Promo20_2.png'), id: "promo20" %>
+    <% end %>
+  </div>
 
   <section id="scroll-down">
     <a href="#front-title"><span></span></a>
