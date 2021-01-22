@@ -14,7 +14,7 @@ class SalesController < ApplicationController
     if pack_params.include? "All"
       pack_array = []
       SfxPack.all.each do |pack|
-        pack_array << pack.id
+        pack_array << pack.id unless pack.price_cents == 0
       end
     else
       pack_array = []
