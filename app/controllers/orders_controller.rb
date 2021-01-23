@@ -2,20 +2,27 @@ class OrdersController < ApplicationController
   def create
     sfx_pack = SfxPack.find(params[:pack_id])
 
-    if sfx_pack.product_link == ''
-      product_link = 'https://www.ogsoundfx.com/NeWsfXsHoPbAmSfx/Free_SFX_Pack.zip'
-    else
-      product_link = sfx_pack.product_link
-    end
-
     if current_user
-      order = Order.create!(product_link: product_link, sfx_pack: sfx_pack, amount: sfx_pack.price, status: 'pending', user: current_user)
+
+      current_sales = Sale.where("end_date > ?", Date.current)
+      current_sales.each do |sale|
+        sale.packs.each do |pack_id|
+          @discount = sale.percentage if sfx_pack.id == pack_id
+        end
+      end
+
+      if @discount
+        sfx_pack_price = sfx_pack.price * ((100 - @discount) / 100.to_f)
+      else
+        sfx_pack_price = sfx_pack.price
+      end
+      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
           name: sfx_pack.title,
           images: [sfx_pack.photos[0]],
-          amount: sfx_pack.price_cents,
+          amount: (sfx_pack_price.to_i * 100),
           currency: 'usd',
           quantity: 1
         }],
@@ -45,6 +52,14 @@ class OrdersController < ApplicationController
       item.id
     end
 
+    current_sales = Sale.where("end_date > ?", Date.current)
+    current_sales_list = {}
+    current_sales.each do |sale|
+      sale.packs.each do |pack_id|
+        current_sales_list[pack_id] = sale.percentage
+      end
+    end
+
     line_items = []
     total_amount = 0
     ordered_list.each_with_index do |item, index|
@@ -52,10 +67,19 @@ class OrdersController < ApplicationController
       line_item = {}
       line_item[:name] = pack.title
       line_item[:images] = [pack.photos[0]]
-      if index.positive?
-        line_item[:amount] = (pack.price_cents * 0.8).to_i
+
+      if current_sales.count > 0
+        if current_sales_list[pack.id]
+          line_item[:amount] = (pack.price_cents * (100 - current_sales_list[pack.id]) / 100.to_f).to_i
+        else
+          line_item[:amount] = pack.price_cents
+        end
       else
-        line_item[:amount] = pack.price_cents
+        if index.positive?
+          line_item[:amount] = (pack.price_cents * 0.8).to_i
+        else
+          line_item[:amount] = pack.price_cents
+        end
       end
       line_item[:currency] = 'usd'
       line_item[:quantity] = 1
