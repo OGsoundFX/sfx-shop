@@ -4,11 +4,32 @@
         <%= image_tag photo %>
       <% end %>
 
+      <% if @discount %>
+        <div><%= image_tag asset_path('Promo_orange.png'), id: "sale-show" %>
+          <p id="sale-percentage-show"><%= @discount %>%<br>OFF</p>
+        </div>
+      <% end %>
+
     </div>
     <div class="description-box">
       <div class="d-flex justify-content-between">
         <h1 class="pack-title"><%= @pack.title %></h1>
-        <h1 class="pack-title"><%= humanized_money_with_symbol(@pack.price) %></h1>
+
+        <div>
+          <% if @discount %>
+            <div>
+              <div>
+                <h1 id="price-sale"><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h1>
+              </div>
+              <div>
+                <h4 id="price-barred-show" > <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </h4>
+              </div>
+            </div>
+          <% else %>
+            <h1 id="price"><%= humanized_money_with_symbol(@pack.price) %></h1>
+          <% end %>
+        </div>
+
       </div>
       <p>Sound Designer: <%= link_to @designer_name, about_path %> </p>
       <ul>

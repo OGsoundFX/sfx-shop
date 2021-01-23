@@ -25,6 +25,7 @@ a:hover {
 }
 
 .pic-price {
+  position: relative;
   margin-left: 25px;
   margin-top: 25px;
   flex: 1;
@@ -42,7 +43,7 @@ a:hover {
 
 .description-box {
   flex: 2;
-  padding: 30px 75px 30px 30px;
+  padding: 30px 45px 30px 30px;
   color: $font-grey !important;
 }
 
