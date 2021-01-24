@@ -10,6 +10,12 @@ class PagesController < ApplicationController
         @current_sales_list[pack_id] = sale.percentage
       end
     end
+
+    if current_sales.count > 0
+      @sale_title = current_sales.order("percentage desc").first.title
+      @sale_percentage = current_sales.order("percentage desc").first.percentage
+    end
+
   end
 
   def about

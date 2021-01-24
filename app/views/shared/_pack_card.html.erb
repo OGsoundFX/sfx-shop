@@ -31,14 +31,13 @@
             </div>
             <div>
               <% if @current_sales_list[pack.id]%>
-                <div class="d-flex">
-                  <div>
-                    <h4 id="price-barred" > <strike><%= humanized_money_with_symbol(pack.price) %></strike> </h4>
-                  </div>
-                  <div>
+
                     <h1 id="price-sale"><%= humanized_money_with_symbol(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f)) %></h1>
-                  </div>
-                </div>
+
+                    <h4 id="price-barred" > <strike><%= humanized_money_with_symbol(pack.price) %></strike> </h4>
+
+
+
               <% else %>
                 <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
               <% end %>

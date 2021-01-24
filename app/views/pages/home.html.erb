@@ -1,6 +1,14 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/caroussel' %>
-<div class="container-xl">
+
+<% if @current_sales_list == {} %>
   <h1 id="front-title">Browse through our high quality SFX Packs</h1>
-      <%= render 'shared/pack_card' %>
+<% else %>
+  <div id="sale-banner">
+    <h1 id="front-title-sale">Take advantage of our <span style="font-size: 1.2em; text-decoration: underline"><%= @sale_title %></span> and save up to <span style="font-size: 1.2em; text-decoration: underline"> <%= @sale_percentage %>% </span> !!!</h1>
+  </div>
+<% end %>
+
+<div class="container-xl">
+  <%= render 'shared/pack_card' %>
 </div>
