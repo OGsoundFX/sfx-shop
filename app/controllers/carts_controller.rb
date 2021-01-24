@@ -18,6 +18,8 @@ class CartsController < ApplicationController
 
   def cart
     @items = Cart.where(user_id: current_user.id).first
+    current_sales = Sale.where("end_date > ?", Date.current)
+    @current_sales_list = {}
 
     # listing all packs to sort them by price to display them and apply discount to 2nd and other packs
     if @items
@@ -25,12 +27,27 @@ class CartsController < ApplicationController
       @items.items.each do |item|
         @pack_list << SfxPack.find(item)
       end
-      @pack_list.sort_by!(&:price_cents).reverse!
       @total_value = 0
       @sum = 0
-      @pack_list.each_with_index do |pack, index|
-        @total_value += (pack.price_cents / 100)
-        index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
+
+      current_sales.each do |sale|
+        sale.packs.each do |pack_id|
+          @current_sales_list[pack_id] = sale.percentage
+        end
+      end
+
+      if current_sales.count > 0
+        @pack_list.each do |pack|
+          @current_sales_list[pack.id] ? @sum += (pack.price_cents * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += (pack.price_cents / 100)
+          @total_value += (pack.price_cents / 100)
+        end
+
+      else
+        @pack_list.sort_by!(&:price_cents).reverse!
+        @pack_list.each_with_index do |pack, index|
+          @total_value += (pack.price_cents / 100)
+          index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
+        end
       end
     end
   end

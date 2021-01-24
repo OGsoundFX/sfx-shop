@@ -1,8 +1,7 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-lewagon-black">
   <%= link_to root_path, class: "navbar-brand" do %>
     <div class="d-flex">
       <div><%= image_tag asset_path('logo/logo_BAM_5.png') %></div>
-      <br>
       <div id="text-logo">Sound Effects</div>
       <div id="text-logo-small">SFX</div>
     </div>
@@ -14,12 +13,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if current_user.email == "olivier@ogsoundfx.com" %>
-        <li class="nav-item">
-          <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
-        </li>
-      <% end %>
       <li class="nav-item active">
+        <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
+      </li>
+      <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link text-white" %>
       </li>
       <li class="nav-item">
