@@ -1,0 +1,17 @@
+<% @order.packs.each_with_index do |pack, index| %>
+  <% if index.positive? %>
+    <div class="row py-4">
+      <div class="col-md-3"><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
+      <div class="col">
+          <p>Purchase of <strong><%= SfxPack.find(pack).title %></strong> for <strong><%= humanized_money_with_symbol SfxPack.find(pack).price * 0.8 %></strong> instead of <strong><%= humanized_money_with_symbol SfxPack.find(pack).price %></strong></p>
+      </div>
+  </div>
+  <% else %>
+    <div class="row py-4">
+      <div class="col-md-3"><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
+      <div class="col">
+          <p>Purchase of <strong><%= SfxPack.find(pack).title %></strong> for <strong><%= humanized_money_with_symbol SfxPack.find(pack).price %></strong></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
