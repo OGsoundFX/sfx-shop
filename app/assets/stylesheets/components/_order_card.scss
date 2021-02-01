@@ -66,7 +66,7 @@
 }
 
 #pending-text {
-  color: $indian-red;
+  color: $orange-main;
 }
 
 .pack-info-dashboard {
@@ -125,14 +125,14 @@
 }
 
 #instead-dashboard {
-  // color: $indian-red;
   color: $orange-main;
+  font-size: 16px;
 }
 
 #instead-under {
   display: none;
   font-size: 15px;
-  color: $indian-red;
+  color: $orange-main;
 }
 
 $breakpoint-evenmore-hyper-super-duper-small: 284px;

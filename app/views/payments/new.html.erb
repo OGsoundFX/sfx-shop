@@ -6,11 +6,10 @@
         <div class="col-md-3"><%= image_tag @photo, width: '100%' %></div>
         <div class="col">
           <h1>Checkout summary</h1>
-            <% if @current_sales_list != {} %>
-              <p>Purchase of <strong><%= @order.sfx_pack.title %></strong> for <strong><%= humanized_money_with_symbol (@order.amount * (1 - (@current_sales_list[@order.sfx_pack_id] / 100.to_f))) %></strong></p>
-            <% else %>
+
+
               <p>Purchase of <strong><%= @order.sfx_pack.title %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
-            <% end %>
+
           <button id="pay" class="btn btn-primary">Pay</button>
 
           <script src="https://js.stripe.com/v3/"></script>
