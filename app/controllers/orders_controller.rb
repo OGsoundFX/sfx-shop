@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :sale_orders, only: [:create, :checkout]
+
   def create
     sfx_pack = SfxPack.find(params[:pack_id])
 
@@ -16,7 +18,7 @@ class OrdersController < ApplicationController
       else
         sfx_pack_price = sfx_pack.price
       end
-      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user)
+      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user, sales: @sale_orders)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
@@ -89,7 +91,7 @@ class OrdersController < ApplicationController
     sfx_pack = SfxPack.find(cart.items.first)
 
     if current_user
-      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list)
+      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, sales: @sale_orders)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
@@ -120,6 +122,19 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def sale_orders
+    current_sales = Sale.where("end_date > ?", Date.current)
+    @sale_orders = {}
+
+
+    current_sales.each do |sale|
+      sale.packs.each do |pack_id|
+        @sale_orders[pack_id] = {}
+        @sale_orders[pack_id][sale.title] = sale.percentage
+      end
+    end
+  end
 
   def create_cart(item)
     @cart = Cart.create(user_id: current_user.id)
