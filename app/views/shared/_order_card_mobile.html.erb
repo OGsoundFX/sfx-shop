@@ -8,7 +8,7 @@
         <h4 id="title-pack"> <%= pack.title %> </h4>
 
         <% if order.sales != {} %>
-          <% if order.sales[pack.id] %>
+          <% if order.sales[pack.id.to_s] %>
             <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol pack.price * (1 - order.sales[pack_id.to_s][order.sales[pack_id.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack_id.to_s][order.sales[pack_id.to_s].keys.first] %> % OFF </i> </span> </h5>
             <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack_id.to_s][order.sales[pack_id.to_s].keys.first] %> % OFF </i> </h5>
           <% else %>
