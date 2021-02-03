@@ -7,6 +7,7 @@
         <%= " #{current_user.username}, welcome to your dashboard" %>
       <% end %>
     </h2>
+    <h4>Newsletter: <%= @status %> </h4>
     <div class="d-flex justify-content-center edit-profile-position">
       <div>
         <h4 id="space-around-edit-button"><%= link_to "Edit your Profile", edit_user_registration_path(current_user), id: "edit-profile" %></h4>
