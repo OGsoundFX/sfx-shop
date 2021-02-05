@@ -25,12 +25,11 @@
                   required: false,
                   autofocus: true,
                   input_html: { autocomplete: "location" }%>
+      <%= f.input :subscribe, as: :boolean, checked_value: true, unchecked_value: false, input_html: { checked: true }, label: "Subscribe to our Newsletter (and get some free sounds now!)" %>
     </div>
 
     <div class="form-actions">
       <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
     </div>
   <% end %>
-
-  <%= render "devise/shared/links" %>
 </div>

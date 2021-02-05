@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :username, :location) }
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :username, :location, :subscribe) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :username, :location, :current_password) }
   end
 end

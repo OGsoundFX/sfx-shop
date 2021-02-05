@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "pages#home"
   get "dashboard", to: "dashboards#dashboard"
+  get "unsubscribe", to: "dashboards#unsubscribe"
+  get "subscribe", to: "dashboards#subscribe"
   post "cart_order", to: "carts#cart_order"
   get "cart", to: "carts#cart"
   post "remove_item", to: "carts#delete_item"
