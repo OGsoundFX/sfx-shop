@@ -19,10 +19,34 @@ class DashboardsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  # def subscribe
+  #   audience_id = ENV['MAILCHIMP_LIST_ID']
+  #   gibbon = Gibbon::Request.new
+  #   gibbon.lists(audience_id).members(current_user.email).update(body: { status: "subscribed" })
+  #   redirect_to dashboard_path
+  # end
+
   def subscribe
+    gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
+    user = current_user
     audience_id = ENV['MAILCHIMP_LIST_ID']
-    gibbon = Gibbon::Request.new
-    gibbon.lists(audience_id).members(current_user.email).update(body: { status: "subscribed" })
-    redirect_to dashboard_path
+
+    begin
+      Gibbon::Request.lists(audience_id).members(user.email).retrieve.nil?
+      gibbon.lists(audience_id).members(current_user.email).update(body: { status: "subscribed" })
+      redirect_to dashboard_path
+    rescue
+      gibbon.lists(audience_id).members.create(
+        body: {
+          email_address: user.email,
+          status: "subscribed",
+          merge_fields: {
+            FNAME: user.username,
+            # LNAME: @user.last_name
+          }
+        }
+      )
+      redirect_to dashboard_path
+    end
   end
 end
