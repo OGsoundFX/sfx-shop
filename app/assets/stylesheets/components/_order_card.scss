@@ -1,3 +1,15 @@
+#newsletter-info-card {
+  padding: 15px;
+  background-color: #ccedff;
+  border-radius: 3px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+}
+
+#dashboard-newsletter {
+  color: $darker-blue;
+}
+
 #order-card-mobile {
   display: none;
 }

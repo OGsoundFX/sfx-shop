@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :subscribe
   after_create :subscribe_to_newsletter
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,6 +10,6 @@ class User < ApplicationRecord
 
   private
   def subscribe_to_newsletter
-    SubscribeToNewsletterService.new(self).call
+    SubscribeToNewsletterService.new(self).call if subscribe
   end
 end
