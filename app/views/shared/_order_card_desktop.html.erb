@@ -3,6 +3,7 @@
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
 
     <% if order.multiple == false %>
+    <hr>
       <% pack = SfxPack.where(id: order.sfx_pack_id)[0] %>
       <div class="d-flex justify-content-between pack-row">
         <div id="wrapper">
@@ -56,6 +57,7 @@
           <% end %>
         </div>
       </div>
+      <hr>
     <% else %>
   <hr>
       <% order.packs.each_with_index do |pack_id, index| %>
