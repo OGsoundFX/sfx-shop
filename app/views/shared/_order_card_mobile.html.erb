@@ -2,6 +2,9 @@
   <div class="order_card">
     <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
   <hr>
+    <% if order.product_link != "" %>
+      <% order.packs << order.sfx_pack_id %>
+    <% end %>
     <% order.packs.each_with_index do |pack_id, index| %>
       <% pack = SfxPack.where(id: pack_id)[0] %>
       <div>
