@@ -1,7 +1,6 @@
 <%= render 'shared/navbar_general' %>
 <div class="container submit-form padding-navbar content">
   <h2 class="header">Edit your account</h2>
-
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
@@ -36,6 +35,7 @@
       <%= f.button :submit, "Update", class: "btn btn-primary" %>
     </div>
   <% end %>
+  <br>
 
   <h3>Cancel my account</h3>
 
