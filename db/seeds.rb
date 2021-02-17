@@ -81,7 +81,7 @@ outdoor_atmospheres.display_order = 2
 outdoor_atmospheres.price_cents = 2000
 outdoor_atmospheres.save
 
-guns_explosions = SfxPack.where(title: "Guns ans Explosions").first
+guns_explosions = SfxPack.where(title: "Guns and Explosions").first
 guns_explosions.display_order = 3
 guns_explosions.price_cents = 2000
 guns_explosions.save
