@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @designers = SoundDesigner.all
-    @sfx_packs = SfxPack.all
+    @sfx_packs = SfxPack.all.sort_by(&:display_order)
 
     current_sales = Sale.where("end_date > ?", Date.current)
     @current_sales_list = {}
