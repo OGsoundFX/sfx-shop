@@ -1,0 +1,79 @@
+<% if current_user && @status == "Not Subscribed" || @status == "unsubscribed" %>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="d-flex justify-content-between modal-content">
+      <div>
+        <span class="close">&times;</span>
+      </div>
+      <div>
+        <h6 id="newsletter-info-card"> <i class="fas fa-info-circle"></i> Subscribe to our newsletter to get cool news and discounts all year long, AND receive a free pack of sounds right away! <%= link_to "CLICK HERE", subscribe_path %> </h6>
+      </div>
+    </div>
+
+  </div>
+<% # elsif session[:subscribed] == true  %>
+<% else %>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div>
+        <span class="close">&times;</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <%= image_tag asset_path('pixel-dragon-2.gif'), id: "dragon" %>
+        </div>
+        <div>
+          <h3 id="subscribe-title">Subscribe!</h4>
+          <h5 id="subscribe-text">Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span> right away!</h6>
+        </div>
+      </div>
+      <%= simple_form_for :email, url: subscribe_no_user_path do |f| %>
+        <%= hidden_field_tag 'subscribed', true %>
+        <div class="d-flex justify-content-between subscribe-field">
+          <div>
+            <%= f.input :email, label: false, placeholder: "Enter your email here", required: true %>
+          </div>
+          <div>
+            <%= f.button :submit, 'Subscribe', id: 'subscribe', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+// Get the modal
+modal = document.getElementById("myModal");
+
+// Do not open modal if visitor has previousely clicked the close button
+if (typeof clicked != 'undefined') {
+  modal.style.display = "none";
+};
+
+// Get the subscribe button
+subscribe = document.getElementById("subscribe");
+
+// Get the <span> element that closes the modal
+span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = () => {
+  modal.style.display = "none";
+  clicked = true;
+  console.log(clicked);
+}
+
+// When the user subscribes, close the modal
+subscribe.onclick = () => {
+  modal.style.display = "none";
+}
+
+</script>
+

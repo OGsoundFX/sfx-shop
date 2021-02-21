@@ -1,5 +1,6 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/caroussel' %>
+<%= render 'shared/subscribe_modal' %>
 
 <% if @current_sales_list == {} %>
   <h1 id="front-title">Browse through our high quality SFX Packs</h1>
@@ -12,3 +13,4 @@
 <div class="container-xl">
   <%= render 'shared/pack_card' %>
 </div>
+
