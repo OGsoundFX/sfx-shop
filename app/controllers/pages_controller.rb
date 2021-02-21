@@ -16,6 +16,20 @@ class PagesController < ApplicationController
       @sale_percentage = current_sales.order("percentage desc").first.percentage
     end
 
+    if current_user
+      audience_id = ENV['MAILCHIMP_LIST_ID']
+      begin
+        @status = Gibbon::Request.lists(audience_id).members(current_user.email).retrieve.body["status"]
+      rescue
+        @status = "Not Subscribed"
+      end
+    end
+
+  end
+
+  def subscribe
+    SubscribeToNewsletterNoUserService.new(params[:email][:email]).call
+    session[:subscribed] = true
   end
 
   def about

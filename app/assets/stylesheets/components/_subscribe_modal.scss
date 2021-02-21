@@ -1,0 +1,98 @@
+/* The Modal (background) */
+.modal {
+  display: block;
+  width: 450px;
+  position: fixed;
+  z-index: 200;
+  left: 60vw;
+  top: 50%;
+  overflow: auto;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  padding: 10px 20px;
+  border: solid 1px $font-grey;
+}
+
+/* The Close Button */
+.close {
+  color: $font-grey;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#dragon {
+  width: 150px;
+  margin-top: -45px;
+}
+
+#email_email {
+  width: 270px !important;
+}
+
+#subscribe-title {
+  text-align: center;
+  margin-right: 30px;
+  color: $orange-main;
+  font-family: 'Permanent Marker', cursive;
+}
+
+#subscribe-text {
+    text-align: justify;
+    margin-right: 30px;
+}
+
+#free-pack {
+  color: $orange-main;
+}
+
+#subscribe {
+  background-color: $orange-main;
+  border: none;
+  &:hover {
+    background-color: $light-grey;
+  }
+}
+
+.subscribe-field {
+  margin-top: -10px;
+}
+
+
+$breakpoint-extra-small: 430px;
+$breakpoint-mobile: 575.98px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-large: 1200px;
+
+
+@media (max-width: $breakpoint-large) {
+  .modal {
+    left: 50%;
+    top: 50%;
+  }
+}
+
+@media (max-width: $breakpoint-laptop) {
+  .modal {
+    left: 20%;
+    top: 60px;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .modal {
+    display: none;
+  }
+}
+
