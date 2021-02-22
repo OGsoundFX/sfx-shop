@@ -15,6 +15,7 @@
 
   </div>
 <% # elsif session[:subscribed] == true  %>
+<% elsif current_user && @status == "subscribed" %>
 <% else %>
   <!-- The Modal -->
   <div id="myModal" class="modal">

@@ -22,4 +22,21 @@ class SubscribeToNewsletterService
       )
     end
   end
+
+  def customer
+    begin
+      Gibbon::Request.lists(@audience_id).members(@user.email).retrieve.nil?
+    rescue
+      @gibbon.lists(@audience_id).members.create(
+        body: {
+          email_address: @user.email,
+          status: "transactional",
+          merge_fields: {
+            FNAME: @user.username,
+            # LNAME: @user.last_name
+          }
+        }
+      )
+    end
+  end
 end
