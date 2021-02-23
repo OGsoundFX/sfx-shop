@@ -55,20 +55,16 @@ li {
   text-align: justify;
 }
 
-// .show-buttons {
-//   padding: 0px 50px;
-// }
-
 #purchase-btn, #btn-cart-show, #btn-download {
   width: 150px;
   font-size: 135%;
   padding: 5px 10px;
   border-radius: 5px;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
-}
-
-#purchase-btn:hover, #btn-cart-show:hover, #btn-download:hover {
-  font-weight: 700;
+  &:hover {
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+  }
 }
 
 #purchase-btn {

@@ -61,8 +61,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # ngrok config
-  config.hosts << "6a32182127a5.ngrok.io"
+  config.hosts << "afeaf84b5547.ngrok.io"
 
   # the stripe webhook link looks like this:
-  # https://200a36f66550.ngrok.io/stripe-webhooks
+  # https://afeaf84b5547.ngrok.io/stripe-webhooks
 end

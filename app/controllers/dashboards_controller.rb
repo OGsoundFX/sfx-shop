@@ -1,6 +1,8 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
+
   def dashboard
+    addBuyerToList if current_user.orders.where(status: "paid").first != nil
     @pending = current_user.orders.where(status: "pending").order(created_at: :desc)
     @orders = current_user.orders.where(status: "paid").order(created_at: :desc)
 
@@ -18,13 +20,6 @@ class DashboardsController < ApplicationController
     gibbon.lists(audience_id).members(current_user.email).update(body: { status: "unsubscribed" })
     redirect_to dashboard_path
   end
-
-  # def subscribe
-  #   audience_id = ENV['MAILCHIMP_LIST_ID']
-  #   gibbon = Gibbon::Request.new
-  #   gibbon.lists(audience_id).members(current_user.email).update(body: { status: "subscribed" })
-  #   redirect_to dashboard_path
-  # end
 
   def subscribe
     gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
@@ -48,5 +43,11 @@ class DashboardsController < ApplicationController
       )
       redirect_to dashboard_path
     end
+  end
+
+  private
+
+  def addBuyerToList
+    SubscribeToNewsletterService.new(current_user).customer
   end
 end
