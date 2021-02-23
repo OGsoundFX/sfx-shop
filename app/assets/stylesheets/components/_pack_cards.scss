@@ -115,6 +115,10 @@
   padding: 2px 10px;
   border-radius: 5px;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  &:hover {
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+  }
 }
 
 #btn-show {
@@ -136,15 +140,8 @@
 }
 
 #btn-remove {
-  // background-color: $orange-light;
-  // border: solid 2px $orange-main;
   border: solid 2px $light-grey;
   color: $font-grey;
-}
-
-#btn-show:hover, #btn-cart:hover, #btn-remove:hover, #btn-download-front:hover {
-    background-color: $light-grey;
-    border: solid 2px $light-grey;
 }
 
 #btn-show:hover, #btn-remove:hover {

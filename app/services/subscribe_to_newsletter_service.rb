@@ -33,7 +33,7 @@ class SubscribeToNewsletterService
           status: "transactional",
           merge_fields: {
             FNAME: @user.username,
-            # LNAME: @user.last_name
+            LNAME: "buyer"
           }
         }
       )
