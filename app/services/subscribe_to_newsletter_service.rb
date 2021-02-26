@@ -26,6 +26,7 @@ class SubscribeToNewsletterService
   def customer
     begin
       Gibbon::Request.lists(@audience_id).members(@user.email).retrieve.nil?
+      Gibbon::Request.lists(@audience_id).members(@user.email).update(body: { merge_fields: { LNAME: "buyer"} })
     rescue
       @gibbon.lists(@audience_id).members.create(
         body: {
