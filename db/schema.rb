@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2021_02_17_142440) do
     t.integer "amount_paid_cents", default: 0, null: false
     t.string "amount_paid_currency", default: "USD", null: false
     t.json "sales", default: {}
-    t.boolean "sale", default: false
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
