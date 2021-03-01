@@ -5,7 +5,7 @@ class AdministratorController < ApplicationController
     @current_sales = Sale.where("end_date > ?", Date.current)
     @sale = Sale.last
 
-    @packs = {
+    pack_hash = {
       "Monster SFX Pack" => 0,
       "Guns and Explosions"=> 0,
       "Outdoor Atmospheres"=> 0,
@@ -17,11 +17,12 @@ class AdministratorController < ApplicationController
     Order.all.each do |order|
       if order.multiple
         order.packs.each do |pack|
-          @packs[SfxPack.find(pack).title] += 1
+          pack_hash[SfxPack.find(pack).title] += 1
         end
       else
-        @packs[SfxPack.find(order.sfx_pack_id).title] += 1
+        pack_hash[SfxPack.find(order.sfx_pack_id).title] += 1
       end
     end
+    @packs = pack_hash.sort_by {|_key, value| -value}.to_h
   end
 end
