@@ -18,6 +18,8 @@
     Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
   </p>
 
+  <%= @packs.sort_by {|_key, value| -value}.to_h %>
+
   <h3> <%= link_to "Create a Sale", new_sale_path %> </h3>
 
 
