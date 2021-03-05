@@ -2,6 +2,8 @@
   <div class="order_card">
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
 
+    <h6 id="chrome-download"> <i class="fas fa-exclamation-triangle"></i> &nbsp &nbsp If you are experiencing problems downloading your packs with <strong style="color: #ffa500">Chrome</strong>, please try another browser. </h6>
+
     <% if order.multiple == false %>
     <hr>
       <% pack = SfxPack.where(id: order.sfx_pack_id)[0] %>

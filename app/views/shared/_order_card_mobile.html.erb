@@ -1,6 +1,7 @@
 <% @orders.each do |order| %>
   <div class="order_card">
     <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
+    <h6 id="chrome-download"> <i class="fas fa-exclamation-triangle"></i> &nbsp &nbsp If you are experiencing problems downloading your packs with <strong style="color: #ffa500">Chrome</strong>, please try another browser. </h6>
   <hr>
     <% if order.product_link != "" %>
       <% order.packs << order.sfx_pack_id %>
@@ -30,7 +31,7 @@
       <div class="d-flex justify-content-between pack-row">
         <div id="wrapper">
           <%= link_to sfx_pack_path(pack) do %>
-            <div><%= image_tag pack.photos[0], width: "100px", id: "image-pack" %></div>
+            <div class="image-center"><%= image_tag pack.photos[0], width: "100px", id: "image-pack" %></div>
             <div class="pop-up-cart">Details</div>
           <% end %>
         </div>
