@@ -22,12 +22,12 @@
         <h4 id="space-around-edit-button"> <%= link_to "Browse shop", root_path, id: "browse-profile" %> </h4>
       </div>
     </div>
+
     <% if @orders.count > 0 %>
       <h4 id="list-of-orders">List of orders:</h4>
     <% else %>
       <h3>You haven't purchased anything yet</h3>
     <% end %>
-    <%= render 'shared/pending_card' %>
 
     <div id="order-card-desktop">
       <%= render 'shared/order_card_desktop' %>

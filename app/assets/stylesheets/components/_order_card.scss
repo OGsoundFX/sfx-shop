@@ -1,3 +1,11 @@
+#chrome-download {
+  padding: 15px;
+  background-color: $orange-light;
+  border-radius: 3px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+}
+
 #newsletter-info-card {
   padding: 15px;
   background-color: $banner_light_blue;
@@ -274,8 +282,11 @@ $breakpoint-laptop: 992px;
     text-align: center;
   }
 
-  #image-pack {
+  .image-center {
     text-align: center;
+  }
+
+  #image-pack {
     margin-top: 15px;
   }
 
