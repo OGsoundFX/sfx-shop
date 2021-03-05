@@ -14,7 +14,7 @@ class AdministratorController < ApplicationController
       "Ghost & Haunted"=> 0,
       "Weather Effects"=> 0
     }
-    Order.all.each do |order|
+    Order.where(status: "paid").each do |order|
       if order.multiple
         order.packs.each do |pack|
           pack_hash[SfxPack.find(pack).title] += 1
