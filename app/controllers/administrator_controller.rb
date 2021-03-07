@@ -5,6 +5,13 @@ class AdministratorController < ApplicationController
     @current_sales = Sale.where("end_date > ?", Date.current)
     @sale = Sale.last
 
+    paid_orders = Order.where(status: "paid")
+
+    @paid_orders = paid_orders.count
+    @buyers = Order.group(:user_id).count.sort_by{ |key, value| -value }.to_h.count
+    @top_five = Order.group(:user_id).count.sort_by{ |key, value| -value }[0..4].to_h
+    # @top_five_amount = Order.group(:user_id, :amount_cents).count.sort_by{ |key, value| -value }[0..4].to_h
+
     pack_hash = {
       "Monster SFX Pack" => 0,
       "Guns and Explosions"=> 0,
@@ -14,7 +21,7 @@ class AdministratorController < ApplicationController
       "Ghost & Haunted"=> 0,
       "Weather Effects"=> 0
     }
-    Order.where(status: "paid").each do |order|
+    paid_orders.each do |order|
       if order.multiple
         order.packs.each do |pack|
           pack_hash[SfxPack.find(pack).title] += 1

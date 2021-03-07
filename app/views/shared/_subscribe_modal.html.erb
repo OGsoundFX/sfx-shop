@@ -8,9 +8,16 @@
       <div>
         <span class="close">&times;</span>
       </div>
-      <div>
-        <h6 id="newsletter-info-card"> <i class="fas fa-info-circle"></i> Subscribe to our newsletter to get cool news and discounts all year long, AND receive a free pack of sounds right away! <%= link_to "CLICK HERE", subscribe_path %> </h6>
+      <div class="d-flex justify-content-between">
+        <div>
+          <%= image_tag asset_path('pixel-dragon-2.gif'), id: "dragon" %>
+        </div>
+        <div>
+          <h3 id="subscribe-title">Subscribe!</h3>
+          <h5 id="subscribe-text">to Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span>, right away! <%= link_to "CLICK HERE", subscribe_path %> </h5>
+        </div>
       </div>
+
     </div>
 
   </div>
@@ -30,8 +37,8 @@
           <%= image_tag asset_path('pixel-dragon-2.gif'), id: "dragon" %>
         </div>
         <div>
-          <h3 id="subscribe-title">Subscribe!</h4>
-          <h5 id="subscribe-text">Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span> right away!</h6>
+          <h3 id="subscribe-title">Subscribe!</h3>
+          <h5 id="subscribe-text">Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span>, right away!</h6>
         </div>
       </div>
       <%= simple_form_for :email, url: subscribe_no_user_path do |f| %>
