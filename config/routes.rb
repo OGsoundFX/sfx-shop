@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "admin", to: "administrator#admin"
   get "about", to: "pages#about"
   get "eula", to: "pages#eula"
+  get "blog", to: "pages#blog"
   post "subscribe_no_user", to: "pages#subscribe"
   resources :sfx_packs, only: :show
   resources :orders, only: [:show, :create] do

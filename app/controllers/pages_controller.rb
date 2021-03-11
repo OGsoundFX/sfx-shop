@@ -37,4 +37,7 @@ class PagesController < ApplicationController
 
   def eula
   end
+
+  def blog
+  end
 end
