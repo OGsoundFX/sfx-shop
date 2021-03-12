@@ -12,6 +12,9 @@ class AdministratorController < ApplicationController
     @top_five = Order.group(:user_id).count.sort_by{ |key, value| -value }[0..4].to_h
     # @top_five_amount = Order.group(:user_id, :amount_cents).count.sort_by{ |key, value| -value }[0..4].to_h
 
+    @carts = Cart.count
+    @items_in_carts = Cart.all.inject(0) { |sum, cart| sum + cart.items.count }
+
     pack_hash = {
       "Monster SFX Pack" => 0,
       "Guns and Explosions"=> 0,
