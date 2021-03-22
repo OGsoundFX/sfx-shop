@@ -11,6 +11,9 @@
         Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
       </p>
       <p>
+        Total Amount earned today: <%= humanized_money_with_symbol @amount_earned_today / 100 %>
+      </p>
+      <p>
         Number of customers: <%= @buyers %>
       </p>
       <p>

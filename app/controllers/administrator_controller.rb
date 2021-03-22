@@ -7,6 +7,12 @@ class AdministratorController < ApplicationController
 
     paid_orders = Order.where(status: "paid")
 
+    orders = Order.all
+    @amount_earned_today = 0
+    orders.each do |order|
+      @amount_earned_today += order.amount_paid_cents if order.created_at.strftime('%Y-%m-%d') == Date.today.strftime('%Y-%m-%d')
+    end
+
     @paid_orders = paid_orders.count
     @buyers = Order.group(:user_id).count.sort_by{ |key, value| -value }.to_h.count
     @top_five = Order.group(:user_id).count.sort_by{ |key, value| -value }[0..4].to_h
