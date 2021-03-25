@@ -32,7 +32,7 @@ Rails.application.configure do
   config.active_storage.service = :cloudinary
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -59,6 +59,19 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Reset password config
+  config.action_mailer.smtp_settings = {
+    address: "bamsfx.com",
+    port: 465,
+    domain: "bamsfx.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["EMAIL_USERNAME"],
+    password:ENV["EMAIL_PASSWORD"]
+  }
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # ngrok config
   config.hosts << "afeaf84b5547.ngrok.io"
