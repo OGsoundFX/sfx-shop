@@ -62,13 +62,13 @@ Rails.application.configure do
 
   # Reset password config
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "mail.privateemail.com",
     port: 587,
     domain: "bamsfx.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password:ENV["GMAIL_PASSWORD"]
+    user_name: ENV["EMAIL_USERNAME"],
+    password:ENV["EMAIL_PASSWORD"]
   }
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
