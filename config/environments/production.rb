@@ -100,7 +100,7 @@ Rails.application.configure do
     password:ENV["GMAIL_PASSWORD"]
   }
 
-  config.action_mailer.default_url_options = { :host => 'bamsfx.com', protocol: "https" }
+  config.action_mailer.default_url_options = { :host => 'www.bamsfx.com', protocol: "https" }
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
