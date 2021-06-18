@@ -4,8 +4,8 @@
   width: 450px;
   position: fixed;
   z-index: 200;
-  left: 60vw;
-  top: 50%;
+  top: 25%;
+  left: 35%;
   overflow: auto;
 }
 
@@ -70,29 +70,34 @@
 
 
 $breakpoint-extra-small: 430px;
-$breakpoint-mobile: 575.98px;
+$intermediate: 500px;
+$breakpoint-mobile: 576px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-large: 1200px;
 
 
-@media (max-width: $breakpoint-large) {
-  .modal {
-    left: 50%;
-    top: 50%;
-  }
-}
+// @media (max-width: $breakpoint-large) {
+//   .modal {
+//     left: 50%;
+//     top: 50%;
+//   }
+// }
 
 @media (max-width: $breakpoint-laptop) {
   .modal {
-    left: 20%;
+    left: 10%;
     top: 60px;
   }
 }
 
-@media (max-width: $breakpoint-tablet) {
+@media (max-width: $intermediate) {
   .modal {
     display: none;
+  }
+
+  #body {
+    opacity: 1 !important;
   }
 }
 

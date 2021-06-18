@@ -75,13 +75,22 @@ span = document.getElementsByClassName("close")[0];
 span.onclick = () => {
   modal.style.display = "none";
   clicked = true;
+  background.style.opacity = "1";
 }
 
 // When the user subscribes, close the modal
 subscribe.onclick = () => {
   modal.style.display = "none";
   clicked = true;
+  background.style.opacity = "1";
 }
+
+// background opacity
+const background = document.getElementById('body');
+
+if (modal.style.display != "none") {
+  background.style.opacity = "0.4";
+};
 
 </script>
 

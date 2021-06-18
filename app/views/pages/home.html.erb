@@ -1,16 +1,18 @@
-<%= render 'shared/navbar' %>
-<%= render 'shared/caroussel' %>
-<%= render 'shared/subscribe_modal' %>
+<div id="body">
+  <%= render 'shared/navbar' %>
+  <%= render 'shared/caroussel' %>
 
-<% if @current_sales_list == {} %>
-  <h1 id="front-title">Browse through our high quality SFX Packs</h1>
-<% else %>
-  <div id="sale-banner">
-    <h1 id="front-title-sale">It's our <span style="font-size: 1.2em"><%= @sale_title %></span> right now!!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
+  <% if @current_sales_list == {} %>
+    <h1 id="front-title">Browse through our high quality SFX Packs</h1>
+  <% else %>
+    <div id="sale-banner">
+      <h1 id="front-title-sale">It's our <span style="font-size: 1.2em"><%= @sale_title %></span> right now!!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
+    </div>
+  <% end %>
+
+  <div class="container-xl">
+    <%= render 'shared/pack_card' %>
   </div>
-<% end %>
-
-<div class="container-xl">
-  <%= render 'shared/pack_card' %>
 </div>
 
+<%= render 'shared/subscribe_modal' %>
