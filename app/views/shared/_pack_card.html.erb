@@ -4,9 +4,9 @@
       <div class="container pack_specifics">
         <div id="wrapper">
           <%= link_to sfx_pack_path(pack) do %>
-            <% if pack.title == "Underground Atmospheres" %>
+            <% if pack.announcement %>
             <div id="triangle"></div>
-            <div id="announcment">UPGRADE</div>
+            <div id="announcement"> <%= pack.announcement %> </div>
             <% end %>
             <div><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
 
