@@ -4,6 +4,10 @@
       <div class="container pack_specifics">
         <div id="wrapper">
           <%= link_to sfx_pack_path(pack) do %>
+            <% if pack.title == "Underground Atmospheres" %>
+            <div id="triangle"></div>
+            <div id="announcment">UPGRADE</div>
+            <% end %>
             <div><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
 
             <% if @current_sales_list != {} %>

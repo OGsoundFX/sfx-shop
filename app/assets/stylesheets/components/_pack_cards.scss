@@ -11,6 +11,27 @@
   position: relative;
 }
 
+#triangle {
+  z-index: 100;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 100px solid $blue-light;
+  border-right: 100px solid transparent;
+}
+
+#announcment {
+  z-index: 100;
+  transform:rotate(-45deg);
+  top: 54px;
+  left: 4px;
+  font-weight: 700;
+  color: white;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 #wrapper:hover .pack_pic, #wrapper:hover .pack_pic_cart, #wrapper:hover #image-pack {
     background-color: $whitesmoke;
     opacity: 0.5;
