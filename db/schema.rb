@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_130808) do
+ActiveRecord::Schema.define(version: 2021_09_22_175139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,24 @@ ActiveRecord::Schema.define(version: 2021_06_22_130808) do
     t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id"
   end
 
+  create_table "single_tracks", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "category"
+    t.string "tags", default: [], array: true
+    t.integer "size"
+    t.time "duration"
+    t.integer "points"
+    t.string "sku"
+    t.string "link"
+    t.integer "display_order"
+    t.integer "sfx_pack_id"
+    t.bigint "sound_designer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sound_designer_id"], name: "index_single_tracks_on_sound_designer_id"
+  end
+
   create_table "sound_designers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -129,5 +147,6 @@ ActiveRecord::Schema.define(version: 2021_06_22_130808) do
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
   add_foreign_key "sfx_packs", "sound_designers"
+  add_foreign_key "single_tracks", "sound_designers"
   add_foreign_key "sound_designers", "users"
 end
