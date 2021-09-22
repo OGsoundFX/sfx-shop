@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  category: MyString
+  tags: MyString
+  size: 1
+  duration: 2021-09-22 20:30:10
+  points: 1
+  sku: MyString
+  link: MyString
+  display_order: 1
+  sfx_pack_id: 1
+  sound_designer: one
+
+two:
+  title: MyString
+  description: MyText
+  category: MyString
+  tags: MyString
+  size: 1
+  duration: 2021-09-22 20:30:10
+  points: 1
+  sku: MyString
+  link: MyString
+  display_order: 1
+  sfx_pack_id: 1
+  sound_designer: two
