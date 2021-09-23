@@ -7,4 +7,8 @@
     <%= @track.sound_designer.first_name %> <%= @track.sound_designer.last_name %>
   </span>
   <button onclick="const audio = new Audio('<%= @track.link %>'); audio.play()">Play</button>
+  <p style="display: none" id='trackLink'><%= @track.link %></p>
+  <div id="wave"></div>
+  <i class="far fa-play-circle" id="play"></i>
+  <i class="far fa-pause-circle" id="stop" style="display: none"></i>
 </div>
