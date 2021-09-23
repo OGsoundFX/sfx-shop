@@ -1,0 +1,10 @@
+<%= render 'shared/navbar_general' %>
+<div class="container margin-top">
+  <h1>Collection</h1>
+  <%= @track.title %>
+  <%= humanized_money_with_symbol(@track.price) %>
+  <span>
+    <%= @track.sound_designer.first_name %> <%= @track.sound_designer.last_name %>
+  </span>
+  <button onclick="const audio = new Audio('<%= @track.link %>'); audio.play()">Play</button>
+</div>

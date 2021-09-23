@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   end
   resources :sales, only: [:new, :create, :destroy]
 
+  get 'list', to: 'single_tracks#index'
+
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
