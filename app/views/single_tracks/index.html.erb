@@ -22,6 +22,7 @@
       </span>
       <button onclick="const audio = new Audio('<%= track.link %>'); audio.play()">Play</button>
       <div class="wave" id="<%= track.id %>"></div>
+      <p style="display: none" id='trackLink'><%= @track.link %></p>
     </li>
     <% end %>
   </ul>
