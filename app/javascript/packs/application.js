@@ -18,52 +18,53 @@ require("channels")
 
 import WaveSurfer from 'wavesurfer.js';
 
-window.addEventListener('DOMContentLoaded', () => {
-  var wavesurfer = WaveSurfer.create({
-    container: '#wave',
-    barWidth: 2,
-    barHeight: 1,
-    barGap: null,
-    waveColor: '#CCCCCC',
-    progressColor: '#FFA500'
-  });
-
-  // wavesurfer.on('ready', function () {
-  //   wavesurfer.play();
-  // });
-
-  const trackLink = document.getElementById('trackLink').innerText;
-  wavesurfer.load(trackLink);
-
-  const playButton = document.getElementById('play');
-  const stopButton = document.getElementById('stop');
-  playButton.addEventListener('click', () => {
-    playButton.style.display = "none";
-    stopButton.style.display = "";
-    wavesurfer.play();
-  })
-  stopButton.addEventListener('click', () => {
-    stopButton.style.display = "none";
-    playButton.style.display = "";
-    wavesurfer.pause();
-  })
-});
-
 // multiple track display
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.wave').forEach((el) => {
-    var wavesurfer = WaveSurfer.create({
-      container: '.wave',
+  // creates an empty array which will be implemented by every container id (see push() function bellow)
+  let wavesurfers = [];
+  // creating undefined variable to be used in play() function and store the current file playing (if any)
+  let audioPlaying;
+  document.querySelectorAll('.wave').forEach((el, loopId) => {
+    let id = el.id;
+    wavesurfers.push(id);
+    let link = el.dataset.link;
+    wavesurfers[loopId] = WaveSurfer.create({
+      container: `#${id}`,
       barWidth: 2,
       barHeight: 1,
       barGap: null,
       waveColor: '#CCCCCC',
       progressColor: '#FFA500'
     });
-    wavesurfer.load('https://www.ogsoundfx.com/NeWsfXsHoPbAmSfx/testing/Aggressive_Beast_4.mp3');
-    wavesurfer.on('ready', function () {
-      wavesurfer.play();
+    wavesurfers[loopId].load(link);
+
+    // play and pause buttons
+    let playButton = document.getElementById(`play${id}`);
+    let stopButton = document.getElementById(`stop${id}`);
+
+    playButton.addEventListener('click', () => {
+      // this will stop any audio playing when pressing start
+      if (audioPlaying != undefined) {
+        audioPlaying.stop()
+      };
+      playButton.style.display = "none";
+      stopButton.style.display = "";
+      wavesurfers[loopId].play();
+      // this re-assigns the current file playing to the variable audioPlaying (every time you press play)
+      audioPlaying = wavesurfers[loopId];
+    });
+
+    stopButton.addEventListener('click', () => {
+      stopButton.style.display = "none";
+      playButton.style.display = "";
+      wavesurfers[loopId].pause();
+    })
+
+    // swaps icon from play to pause automatically when track reaches the end
+    wavesurfers[loopId].on('pause', function () {
+      stopButton.style.display = "none";
+      playButton.style.display = "";
     });
   })
 });

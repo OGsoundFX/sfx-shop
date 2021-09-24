@@ -1,17 +1,6 @@
 <%= render 'shared/navbar_general' %>
 <div class="container margin-top">
   <h1>Collection</h1>
-  <%= @track.title %>
-  <%= humanized_money_with_symbol(@track.price) %>
-  <span>
-    <%= @track.sound_designer.first_name %> <%= @track.sound_designer.last_name %>
-  </span>
-  <button onclick="const audio = new Audio('<%= @track.link %>'); audio.play()">Play</button>
-  <p style="display: none" id='trackLink'><%= @track.link %></p>
-  <div id="wave"></div>
-  <i class="far fa-play-circle" id="play"></i>
-  <i class="far fa-pause-circle" id="stop" style="display: none"></i>
-
   <ul>
     <% @tracks.each do |track| %>
     <li>
@@ -21,8 +10,9 @@
         <%= track.sound_designer.first_name %> <%= track.sound_designer.last_name %>
       </span>
       <button onclick="const audio = new Audio('<%= track.link %>'); audio.play()">Play</button>
-      <div class="wave" id="<%= track.id %>"></div>
-      <p style="display: none" id='trackLink'><%= @track.link %></p>
+      <div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
+      <i class="far fa-play-circle" id="playid<%= track.id %>"></i>
+      <i class="far fa-pause-circle" id="stopid<%= track.id %>" style="display: none"></i>
     </li>
     <% end %>
   </ul>
