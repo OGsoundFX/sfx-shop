@@ -48,3 +48,22 @@ window.addEventListener('DOMContentLoaded', () => {
     wavesurfer.pause();
   })
 });
+
+// multiple track display
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.wave').forEach((el) => {
+    var wavesurfer = WaveSurfer.create({
+      container: '.wave',
+      barWidth: 2,
+      barHeight: 1,
+      barGap: null,
+      waveColor: '#CCCCCC',
+      progressColor: '#FFA500'
+    });
+    wavesurfer.load('https://www.ogsoundfx.com/NeWsfXsHoPbAmSfx/testing/Aggressive_Beast_4.mp3');
+    wavesurfer.on('ready', function () {
+      wavesurfer.play();
+    });
+  })
+});
