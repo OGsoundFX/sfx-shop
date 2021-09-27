@@ -9,7 +9,7 @@
       <span>
         <%= track.sound_designer.first_name %> <%= track.sound_designer.last_name %>
       </span>
-      <button onclick="const audio = new Audio('<%= track.link %>'); audio.play()">Play</button>
+      <p>duration: <span id="trackDurationid<%= track.id %>"></span></p>
       <div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
       <i class="far fa-play-circle" id="playid<%= track.id %>"></i>
       <i class="far fa-pause-circle" id="stopid<%= track.id %>" style="display: none"></i>
