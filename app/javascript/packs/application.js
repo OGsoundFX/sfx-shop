@@ -5,7 +5,8 @@
 import "bootstrap";
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// removed turbolinks to be able to stop all sounds: see window.addEventlistener('beforeunload', callback());
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
@@ -21,7 +22,7 @@ import WaveSurfer from 'wavesurfer.js';
 // multiple track display
 
 window.addEventListener('DOMContentLoaded', () => {
-  // creates an empty array which will be implemented by every container id (see push() function bellow)
+  // creates an empty array which will be implemented with every container id (see push() function bellow)
   let wavesurfers = [];
   // creating undefined variable to be used in play() function and store the current file playing (if any)
   let audioPlaying;
@@ -66,5 +67,12 @@ window.addEventListener('DOMContentLoaded', () => {
       stopButton.style.display = "none";
       playButton.style.display = "";
     });
+
   })
+  
+  // stop audio playing before leaving page
+  window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    audioPlaying.stop();
+  });
 });
