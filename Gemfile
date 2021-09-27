@@ -66,4 +66,3 @@ gem "font-awesome-sass", "~> 5.7"
 gem 'cloudinary', '~> 1.16.0'
 gem 'ngrok', '~> 1.6', '>= 1.6.1'
 gem 'gibbon'
-# gem 'wavesurfer-rails'
