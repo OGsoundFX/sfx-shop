@@ -82,6 +82,7 @@ Waveform [options](http://wavesurfer-js.org/docs/options.html)<br>
 Waveform [methods](http://wavesurfer-js.org/docs/methods.html)
 
 **6/ my code for multiple tracks**
+
 HTML
 ```
 <div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
