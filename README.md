@@ -41,3 +41,154 @@ I will add details about how I build this app and the various tools I used (devi
 
 ### Wavesurfer
 **[Wavesurfer.js](https://wavesurfer-js.org/)** is a tool to display audio waveforms and offers the possibility to customize them, including style, colors, play functions and so on.
+
+**1/ installation**
+```
+yarn add wavesurfer.js
+``` 
+**2/ import**
+```
+import WaveSurfer from 'wavesurfer.js';
+``` 
+**3/ html container**
+```
+<div id="waveform"></div>
+```
+**4/ javascript implementation**
+
+Create an instance, passing the container selector and options:
+```
+var wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: 'violet',
+    progressColor: 'purple'
+});
+```
+Subscribe to some events:
+```
+wavesurfer.on('ready', function () {
+    wavesurfer.play();
+});
+```
+Load an audio file from a URL:
+```
+wavesurfer.load('example/media/demo.wav');
+```
+**5/ resources**
+
+[original resource](https://github.com/katspaugh/wavesurfer.js)<br>
+[Wavesurfer Website](https://wavesurfer-js.org/api/)<br>
+Waveform [options](http://wavesurfer-js.org/docs/options.html)<br>
+Waveform [methods](http://wavesurfer-js.org/docs/methods.html)
+
+**6/ my code for multiple tracks**
+HTML
+```
+<div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
+<i class="far fa-play-circle" id="playid<%= track.id %>"></i>
+<i class="far fa-pause-circle" id="stopid<%= track.id %>" style="display: none"></i>
+```
+
+javascript
+```
+import WaveSurfer from 'wavesurfer.js';
+
+// multiple track display
+
+window.addEventListener('DOMContentLoaded', () => {
+  // loading watermark
+  let watermark = new Audio('https://single-track-list.s3.eu-central-1.amazonaws.com/watermark/watermark.mp3');
+  // creates an empty array which will be implemented with every container id (see push() function bellow)
+  let wavesurfers = [];
+  // creating undefined variable to be used in play() function and store the current file playing (if any)
+  let audioPlaying;
+  //inserting wavesurferplayer
+  document.querySelectorAll('.wave').forEach((el, loopId) => {
+    let id = el.id;
+    wavesurfers.push(id);
+    let link = el.dataset.link;
+    wavesurfers[loopId] = WaveSurfer.create({
+      container: `#${id}`,
+      barWidth: 2,
+      barHeight: 1,
+      barGap: null,
+      waveColor: '#CCCCCC',
+      progressColor: '#FFA500',
+      height: 50
+    });
+    // loading wavesurfer
+    wavesurfers[loopId].load(link);
+
+    // display track duration in index view
+    wavesurfers[loopId].on('ready', () => {
+      document.getElementById(`trackDuration${id}`).innerText = wavesurfers[loopId].getDuration();
+    })
+
+    // play and pause buttons
+    let playButton = document.getElementById(`play${id}`);
+    let stopButton = document.getElementById(`stop${id}`);
+
+    playButton.addEventListener('click', () => {
+      // stop watermark if any
+      watermark.pause();
+      // this will stop any audio playing when pressing start
+      if (audioPlaying != undefined) {
+        audioPlaying.stop()
+      };
+      playButton.style.display = "none";
+      stopButton.style.display = "";
+      wavesurfers[loopId].play();
+      // this re-assigns the current file playing to the variable audioPlaying (every time you press play)
+      audioPlaying = wavesurfers[loopId];
+      // get duration of audio
+      const duration = audioPlaying.getDuration()
+      
+      // play watermark and stop watermark
+      if (duration < 3) {
+        watermark.play()
+      } else {
+        watermark.play()
+
+        // the reason why I chose this approach is for clearInterval() to be called within 1 second
+        // rather than 8 seconds like before, when I set the interval to 8 seconds and we couls hear
+        // another watermark eventhough the audio had stoped, up to 8 seconds after.
+        let i = 1;
+        let interval = setInterval(() => {
+          i ++;
+          if (i === 8) {
+            watermark.play()
+            i = 1;
+          }
+          if (!wavesurfers[loopId].isPlaying()) {
+            clearInterval(interval);
+          }
+        }, 1000)
+      }
+    });
+
+    // making sure button play stays on play when clicking waveform
+    wavesurfers[loopId].on('play', function () {
+      stopButton.style.display = "";
+      playButton.style.display = "none";
+    });
+
+    stopButton.addEventListener('click', () => {
+      stopButton.style.display = "none";
+      playButton.style.display = "";
+      wavesurfers[loopId].pause();
+    })
+
+    // swaps icon from play to pause automatically when track reaches the end
+    wavesurfers[loopId].on('pause', function () {
+      stopButton.style.display = "none";
+      playButton.style.display = "";
+    });
+  })
+  
+  // stop audio playing before leaving page
+  window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    audioPlaying.stop();
+  });
+});
+```
