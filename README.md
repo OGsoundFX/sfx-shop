@@ -38,3 +38,6 @@ I will add details about how I build this app and the various tools I used (devi
 ### Stripe
 
 **Stripe** is an awesome payment tool super easy to implement. I will describe the different steps here: _Coming Soon_
+
+### Wavesurfer
+**[Wavesurfer.js](https://wavesurfer-js.org/)** is a tool to display audio waveforms and offers the possibility to customize them, including style, colors, play functions and so on.
