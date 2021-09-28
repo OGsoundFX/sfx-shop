@@ -55,12 +55,21 @@ window.addEventListener('DOMContentLoaded', () => {
         watermark.play()
       } else {
         watermark.play()
+
+        // the reason why I chose this approach is for clearInterval() to be called within 1 second
+        // rather than 8 seconds like before, when I set the interval to 8 seconds and we couls hear
+        // another watermark eventhough the audio had stoped, up to 8 seconds after.
+        let i = 1;
         let interval = setInterval(() => {
-          watermark.play()
+          i ++;
+          if (i === 8) {
+            watermark.play()
+            i = 1;
+          }
           if (!wavesurfers[loopId].isPlaying()) {
             clearInterval(interval);
           }
-        }, 8000)
+        }, 1000)
       }
     });
 
