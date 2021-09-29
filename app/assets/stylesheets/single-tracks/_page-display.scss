@@ -1,5 +1,20 @@
-.push-footer {
-  min-height: 92%;
+.forms {
+  margin: 20px 0;
+  text-align: end;
+  .search-field {
+    color: #4E4E4E;
+    padding-left: 10px;
+    border: solid 1px #dee2e6;
+    border-radius: 4px;
+    width: 70%;
+    height: 40px;
+  }
+  .submit-button {
+    margin-left: -40px;
+    background-color: inherit;
+    border: none;
+    color: #a3a3a3;
+  }
 }
 
 .banner {

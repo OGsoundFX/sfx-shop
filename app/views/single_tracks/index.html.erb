@@ -1,5 +1,5 @@
 <%= render 'shared/navbar' %>
-<div class="push-footer">
+<div>
   <div class="banner">
     <h1 class="padding-navbar">Collection</h1>
     <div class="d-flex justify-content-between">
@@ -9,6 +9,12 @@
     </div>
   </div>
   <div class="container-fluid">
+    <div class="forms">
+      <form action="/list">
+        <input type="text" name="search" placeholder="<%= @search %>" class="search-field">
+        <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
     <ul>
       <% @tracks.each do |track| %>
       <li class="border">
