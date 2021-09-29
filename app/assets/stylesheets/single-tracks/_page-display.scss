@@ -1,3 +1,35 @@
+.push-footer {
+  min-height: 92%;
+}
+
+.banner {
+  background-image: url(https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg) ;
+  height: 220px;
+  width: 100%;
+  // font-family: 'Permanent Marker', cursive;
+  color: white;
+  text-align: center;
+  padding-top: 30px;
+  font-size: 150%;
+  h1 {
+    font-size: 50px;
+  }
+  .learn-more {
+    margin: 0 150px;
+    height: 40px;
+    width: 146px;
+    border-radius: 10px;
+    color: #4E4E4E;
+    font-size: 1vw;
+    border: none;
+    background-color: #e9e9e9;
+    &:hover {
+      color: white;
+      background-color: grey;
+    }
+  }
+}
+
 ul {
   list-style-type: none;
   margin: 0;
