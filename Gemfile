@@ -62,6 +62,7 @@ gem 'money-rails', '~>1.12'
 gem 'stripe'
 gem 'stripe_event'
 gem 'bootstrap', '~> 4.5.2'
+gem 'font-awesome-rails'
 gem "font-awesome-sass", "~> 5.7"
 gem 'cloudinary', '~> 1.16.0'
 gem 'ngrok', '~> 1.6', '>= 1.6.1'

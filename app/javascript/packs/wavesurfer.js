@@ -1,5 +1,15 @@
 import WaveSurfer from 'wavesurfer.js';
 
+// time converter function
+
+const timeConverter = (time) => {
+  if (time >= 1) {
+    return new Date(time * 1000).toISOString().substr(14, 5)
+  } else {
+    return new Date(1000).toISOString().substr(14, 5)
+  }
+}
+
 // multiple track display
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -21,14 +31,17 @@ window.addEventListener('DOMContentLoaded', () => {
       barGap: null,
       waveColor: '#CCCCCC',
       progressColor: '#FFA500',
-      height: 50
+      height: 50,
+      cursorColor: '#FFA500'
     });
     // loading wavesurfer
     wavesurfers[loopId].load(link);
 
     // display track duration in index view
     wavesurfers[loopId].on('ready', () => {
-      document.getElementById(`trackDuration${id}`).innerText = wavesurfers[loopId].getDuration();
+      const trackSeconds = wavesurfers[loopId].getDuration();
+      const trackDuration = timeConverter(trackSeconds);
+      document.getElementById(`trackDuration${id}`).innerText = trackDuration;
     })
 
     // play and pause buttons
