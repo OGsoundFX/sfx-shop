@@ -11,7 +11,11 @@ class SingleTracksController < ApplicationController
       "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
       "random": '<i class="fas fa-volume"></i>'
     }
-
-    @tracks = SingleTrack.all
+    if params[:search] == nil || params[:search] == ""
+      @tracks = SingleTrack.all
+    else
+      @tracks = SingleTrack.search_single_tracks(params[:search])
+      @search = params[:search]
+    end
   end
 end
