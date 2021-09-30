@@ -10,10 +10,29 @@
   </div>
   <div class="container-fluid">
     <div class="forms">
-      <form action="/list">
-        <input type="text" name="search" placeholder="<%= @search %>" class="search-field">
-        <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
-      </form>
+      <div class="drop-down">
+        <form action="/list">
+          <div class="d-flex justify-content-start">
+            <div>
+              <select type="text" name="dropdown" placeholder="category">
+                <option value="all">category</option>
+                <% @categories.each do |cat| %>
+                  <option value="<%= cat.to_s %>"><%= cat.to_s %></option>
+                <% end %>
+              </select>
+            </div>
+            <div>
+              <input type="submit" value="GO">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="search-form">
+        <form action="/list">
+          <input type="text" name="search" placeholder="<%= @search %>">
+          <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
     </div>
     <ul>
       <% @tracks.each do |track| %>
