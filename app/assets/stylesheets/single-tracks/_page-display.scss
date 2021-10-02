@@ -131,6 +131,12 @@ ul {
   font-size: 0.6em;
 }
 
+.max-width {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .info-font {
   color: #999999;
   font-size: 0.6em;

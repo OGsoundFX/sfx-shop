@@ -15,20 +15,20 @@ class SingleTracksController < ApplicationController
 
     # search by category
     if params[:dropdown] == nil || params[:dropdown] == ""
-      @tracks = SingleTrack.all
+      @tracks = SingleTrack.page params[:page]
       # search by keyword
       if params[:search] == nil || params[:search] == ""
-        @tracks = SingleTrack.all
+        @tracks = SingleTrack.page params[:page]
         @search = "Search by keyword"
       else
-        @tracks = SingleTrack.search_single_tracks(params[:search])
+        @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
         @search = params[:search]
       end
     elsif params[:dropdown] == "all"
-      @tracks = SingleTrack.all
+      @tracks = SingleTrack.page params[:page]
       @search = "Search by keyword"
     else
-      @tracks = SingleTrack.where(category: params[:dropdown])
+      @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
       @search = "Search by keyword"
     end
 
