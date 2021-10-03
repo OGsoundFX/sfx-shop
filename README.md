@@ -222,5 +222,6 @@ Kaminari.configure do |config|
   # config.params_on_first_page = false
 end
 ```
-<br>
-In your **controller** add ``` User.all.page params[:page] ```
+
+In your **controller** add
+``` User.all.page params[:page] ```
