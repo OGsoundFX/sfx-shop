@@ -1,10 +1,28 @@
-<style>
-.pagination{padding:.3em;margin:.3em; font: 13.34px helvetica,arial,freesans,clean,sans-serif;}
-.pagination a{padding:.1em .3em;margin:.2em;border:1px solid #aad;text-decoration:none;color:#369;}
-.pagination a:hover,.pagination a:active{border:1px solid #369;color:#000;}
-.pagination span.current{padding:.1em .3em;margin:.2em;border:1px solid #369;font-weight:bold;background-color:#369;color:#FFF;}
-.pagination span.disabled{padding:.1em .3em;margin:.2em;border:1px solid #eee;color:#ddd;}
-</style>
-<%= paginator.render do -%>
-<div class="pagination"><%= prev_page_tag -%><%= next_page_tag -%></div>
-<% end -%>
+<%= paginator.render do %>
+  <nav>
+    <ul class="pagination">
+      <!-- <%= first_page_tag unless current_page.first? %> -->
+      <% if current_page.first? %>
+        <span disabled style="color: #cccc"><%= prev_page_tag %></span>
+      <% else %>
+        <%= prev_page_tag %>
+      <% end %>
+        <!-- <% each_page do |page| %>
+        <% if page.left_outer? || page.right_outer? || page.inside_window? %>
+          <%= page_tag page %>
+        <% elsif !page.was_truncated? -%>
+          <%= gap_tag %>
+        <% end %>
+      <% end %> -->
+      <span class="count-customize"><%= per_page.to_i * (current_page.to_i - 1) %></span>
+      <p class="dash">-</p>
+      <span class="count-customize"><%= per_page.to_i * current_page.to_i %></span>
+      <% if current_page.last? %>
+        <span disabled style="color: #cccc"><%= next_page_tag %></span>
+      <% else %>
+        <%= next_page_tag %>
+      <% end %>
+      <!-- <%= last_page_tag unless current_page.last? %> -->
+    </ul>
+  </nav>
+<% end %>
