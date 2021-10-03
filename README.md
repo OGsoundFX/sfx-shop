@@ -204,4 +204,23 @@ run ```bundle install``` in your terminal <br> <br>
 Generate the **kaminari** config file by running ```rails g kaminari:config``` in your terminal <br> <br>
 Generate views: ```rails generate kaminari:views default``` <br> <br>
 -> instead of _default_ here is a list of available themes: bootstrap2, bootstrap3, bootstrap4, bourbon, bulma, foundation, foundation5, github, google, materialize, purecss, semantic_ui. <br> <br>
-Of course you can customize your views by overriding preset styling. In the views under the **kaminari** folder, you can find the different view files, and the styling classes.
+Of course you can customize your views by overriding preset styling. In the views under the **kaminari** folder, you can find the different view files, and the styling classes. <br><br>
+Customize the **kaminari_config.rb** file: <br>
+```
+# frozen_string_literal: true
+
+Kaminari.configure do |config|
+  config.default_per_page = 25 // example of customization
+  # config.max_per_page = nil
+  # config.window = 4
+  # config.outer_window = 0
+  # config.left = 0
+  # config.right = 0
+  # config.page_method_name = :page
+  # config.param_name = :page
+  # config.max_pages = nil
+  # config.params_on_first_page = false
+end
+```
+<br>
+In your **controller** add ``` User.all.page params[:page] ```
