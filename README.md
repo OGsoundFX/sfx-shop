@@ -16,12 +16,12 @@ What still need to be done:
 - some frontend details
 - add reviews
 
-2/ Stage 2: Early 2021
+2/ Stage 2: End of 2021 **IN PROGRESS**
+Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
+
+3/ Stage 3: Early 2021
 Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
 Details need to be established.
-
-3/ Stage3: Later in 2021
-Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
 4/ Additional feature:
 - Player: An option for board game players (like DnD) to have access to ALL sounds available and create their own playlist curated for their sessions. This option will prbably work through subscription (24h - 7day - monthly)
@@ -193,3 +193,15 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 ```
+
+### Kaminari GEM (pagination)
+
+This cool gem is the most popular **pagination** gem at this time (end of 2021), you can find some documentation **[here](https://github.com/kaminari/kaminari)**
+
+_Basic Instructions:_ <br> <br>
+In your Gemfile, add: ```gem 'kaminari'``` <br> <br>
+run ```bundle install``` in your terminal <br> <br>
+Generate the **kaminari** config file by running ```rails g kaminari:config``` in your terminal <br> <br>
+Generate views: ```rails generate kaminari:views default``` <br> <br>
+-> instead of _default_ here is a list of available themes: bootstrap2, bootstrap3, bootstrap4, bourbon, bulma, foundation, foundation5, github, google, materialize, purecss, semantic_ui. <br> <br>
+Of course you can customize your views by overriding preset styling. In the views under the **kaminari** folder, you can find the different view files, and the styling classes.
