@@ -1,4 +1,19 @@
-.pagination .next {
-  background-color: black;
-  color: red;
+.pagination {
+  display: flex;
+  justify-content: end;
+  margin: -8px 0;
+  font-size: 0.8em;
+}
+
+.carrots {
+  margin-bottom: 20px;;
+}
+
+.dash {
+  margin-top: 6px;
+}
+
+.count-customize {
+  margin-top: 6px;
+  padding: 0 4px;
 }

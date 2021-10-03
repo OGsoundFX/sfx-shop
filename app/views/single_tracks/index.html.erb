@@ -34,7 +34,7 @@
         </form>
       </div>
     </div>
-    <%= paginate @tracks %>
+    <%= paginate @tracks, class: "paginator-top" %>
     <ul>
       <% @tracks.each do |track| %>
       <li class="border">
@@ -70,7 +70,7 @@
       </li>
       <% end %>
     </ul>
-    <%= paginate @tracks %>
+    <%= paginate @tracks, class: "paginator-bottom" %>
   </div>
 </div>
 
