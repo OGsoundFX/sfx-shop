@@ -6,4 +6,11 @@
   <% else %>
     <%= render 'shared/cart_no_sale' %>
   <% end %>
+  <% if @tracks %>
+    <% @tracks.each do |track| %>
+      <%= SingleTrack.find(track).title %>
+      <%= humanized_money_with_symbol SingleTrack.find(track).price_cents / 100.to_f %>
+      <%= link_to "delete", remove_track_path(id: track) %>
+    <% end %>
+  <% end %>
 </div>

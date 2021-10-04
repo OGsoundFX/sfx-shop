@@ -158,3 +158,15 @@ ul {
 .purchase-icons {
   margin: 0 10px;
 }
+
+.icon-click-hover {
+  color: #4e4e4e;
+  &:hover {
+    color: #999999;
+  }
+}
+
+.in-cart {
+  // color:#FFA500;
+  opacity: 50%;
+}

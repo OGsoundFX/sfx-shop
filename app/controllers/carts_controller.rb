@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
+
+  # despite the terrible naming choice, cart_order is the action for "adding SfxPacks to the cart"
   def cart_order
     if Cart.where(user_id: current_user.id).count == 1
       @items = Cart.where(user_id: current_user.id).first
@@ -10,10 +12,33 @@ class CartsController < ApplicationController
       # @items = Cart.create(user_id: current_user.id).first
       @items = Cart.create(user_id: current_user.id)
       @items.items = []
+      @items.sinlge_tracks = []
       @items.items << SfxPack.find(params[:pack_id]).id.to_i
     end
     @items.save
     redirect_to root_path(anchor: "front-title")
+  end
+
+  # adding single tracks to Cart
+  def single_tracks
+    if Cart.where(user_id: current_user.id).count == 1 && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil
+      @tracks = Cart.where(user_id: current_user.id).first
+      @tracks.sinlge_tracks << SingleTrack.find(params[:track_id]).id.to_i
+      @tracks.sinlge_tracks.uniq!
+    elsif Cart.where(user_id: current_user.id).count == 1 && Cart.where(user_id: current_user.id).first.sinlge_tracks == nil
+      @tracks = Cart.where(user_id: current_user.id).first
+      @tracks.sinlge_tracks = []
+      @tracks.items = []
+      @tracks.sinlge_tracks << SingleTrack.find(params[:track_id]).id.to_i
+      @tracks.sinlge_tracks.uniq!
+    else
+      @tracks = Cart.create(user_id: current_user.id)
+      @tracks.sinlge_tracks = []
+      @tracks.items = []
+      @tracks.sinlge_tracks << SingleTrack.find(params[:track_id]).id.to_i
+    end
+    @tracks.save
+    redirect_to list_path
   end
 
   def cart
@@ -41,7 +66,6 @@ class CartsController < ApplicationController
           @current_sales_list[pack.id] ? @sum += (pack.price_cents * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += (pack.price_cents / 100)
           @total_value += (pack.price_cents / 100)
         end
-
       else
         @pack_list.sort_by!(&:price_cents).reverse!
         @pack_list.each_with_index do |pack, index|
@@ -49,13 +73,14 @@ class CartsController < ApplicationController
           index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
         end
       end
+      @tracks = @items.sinlge_tracks
     end
   end
 
   def delete_item
     @cart = Cart.where(user_id: current_user.id).first
     @cart.items.delete(params[:pack_id].to_i)
-    if @cart.items == []
+    if @cart.items == [] && @cart.sinlge_tracks == []
       @cart.destroy
     else
       @cart.save
@@ -65,6 +90,28 @@ class CartsController < ApplicationController
     else
       redirect_to cart_path
     end
+  end
+
+  def delete_track
+    cart = Cart.where(user_id: current_user.id).first
+    cart.sinlge_tracks.delete(params[:id].to_i)
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
+    else
+      cart.save
+    end
+    redirect_to cart_path
+  end
+
+  def single_tracks_cart_remove
+    cart = Cart.where(user_id: current_user.id).first
+    cart.sinlge_tracks.delete(params[:track_id].to_i)
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
+    else
+      cart.save
+    end
+    redirect_to list_path
   end
 
   def destroy_cart

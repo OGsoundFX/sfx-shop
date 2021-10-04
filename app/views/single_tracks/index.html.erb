@@ -64,7 +64,16 @@
           <div class="d-flex justify-content-center purchase-section">
             <i class="far fa-layer-plus pad-top purchase-icons"></i>
             <i class="far fa-layer-minus pad-top d-none purchase-icons" style="color: #FFA500"></i>
-            <i class="fas fa-shopping-cart pad-top purchase-icons"></i>
+            
+            <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
+              <%= link_to single_tracks_cart_remove_path(track_id: track.id), method: :post do %>
+                <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
+              <% end %>
+            <% else %>
+              <%= link_to single_tracks_cart_path(track_id: track.id), method: :post do %>
+                  <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </li>
