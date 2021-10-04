@@ -39,6 +39,32 @@ I will add details about how I build this app and the various tools I used (devi
 
 **Stripe** is an awesome payment tool super easy to implement. I will describe the different steps here: _Coming Soon_
 
+**Testing payments**
+Testing stripe locally/in development (assuming you have installed Stripe properly):
+1/ ngrok
+```
+gem ‘ngrok’
+```
+```
+bundle
+```
+2/ In terminal: 
+```
+./ngrok http 3000
+```
+Get STRIPE_WEBHOOK_SECRET_KEY  from webhook on stripe test
+And replace it in the ```.env``` file!
+
+in config/environments/development.rb
+```config.hosts << "04a7-87-123-193-136.ngrok.io"
+
+  # the stripe webhook link looks like this:
+  # https://04a7-87-123-193-136.ngrok.io/stripe-webhooks
+```
+```
+rails s
+```
+
 ### Wavesurfer
 **[Wavesurfer.js](https://wavesurfer-js.org/)** is a tool to display audio waveforms and offers the possibility to customize them, including style, colors, play functions and so on.
 
