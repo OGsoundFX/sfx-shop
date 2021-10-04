@@ -52,11 +52,13 @@ bundle
 ```
 ./ngrok http 3000
 ```
+Get link like this one ```https://04a7-87-123-193-136.ngrok.io``` <br>
 Get STRIPE_WEBHOOK_SECRET_KEY  from webhook on stripe test
 And replace it in the ```.env``` file!
 
 in config/environments/development.rb
-```config.hosts << "04a7-87-123-193-136.ngrok.io"
+```
+config.hosts << "04a7-87-123-193-136.ngrok.io"
 
   # the stripe webhook link looks like this:
   # https://04a7-87-123-193-136.ngrok.io/stripe-webhooks
