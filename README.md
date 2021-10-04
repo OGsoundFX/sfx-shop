@@ -40,7 +40,7 @@ I will add details about how I build this app and the various tools I used (devi
 **Stripe** is an awesome payment tool super easy to implement. I will describe the different steps here: _Coming Soon_
 
 **Testing payments**
-Testing stripe locally/in development (assuming you have installed Stripe properly):
+Testing stripe locally/in development (assuming you have installed Stripe properly): <br>
 1/ ngrok
 ```
 gem ‘ngrok’
@@ -48,21 +48,25 @@ gem ‘ngrok’
 ```
 bundle
 ```
-2/ In terminal: 
+2/ In terminal run: 
 ```
 ./ngrok http 3000
 ```
-Get link like this one ```https://04a7-87-123-193-136.ngrok.io``` <br>
-Get STRIPE_WEBHOOK_SECRET_KEY  from webhook on stripe test
-And replace it in the ```.env``` file!
-
-in config/environments/development.rb
+3/ Get link like this one ```https://04a7-87-123-193-136.ngrok.io``` <br>
+and paste it in config/environments/development.rb like so:
 ```
 config.hosts << "04a7-87-123-193-136.ngrok.io"
-
-  # the stripe webhook link looks like this:
-  # https://04a7-87-123-193-136.ngrok.io/stripe-webhooks
 ```
+4/ Create a webhook on stripe with the rendered link like so:
+```
+https://04a7-87-123-193-136.ngrok.io/stripe-webhooks
+```
+5/ Get STRIPE_WEBHOOK_SECRET_KEY  from webhook on stripe test
+And replace it in the ```.env``` file!
+```
+STRIPE_WEBHOOK_SECRET_KEY=whsec_something
+```
+6/ In terminal run:
 ```
 rails s
 ```
