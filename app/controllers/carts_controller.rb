@@ -41,13 +41,6 @@ class CartsController < ApplicationController
     redirect_to list_path
   end
 
-  def single_tracks_cart_remove
-    cart = Cart.where(user_id: current_user.id).first
-    cart.sinlge_tracks.delete(params[:track_id].to_i)
-    cart.save
-    redirect_to list_path
-  end
-
   def cart
     @items = Cart.where(user_id: current_user.id).first
     current_sales = Sale.where("end_date > ?", Date.current)
@@ -100,18 +93,25 @@ class CartsController < ApplicationController
   end
 
   def delete_track
-    @cart = Cart.where(user_id: current_user.id).first
-    @cart.sinlge_tracks.delete(params[:id].to_i)
-    if @cart.items == [] && @cart.sinlge_tracks == []
-      @cart.destroy
+    cart = Cart.where(user_id: current_user.id).first
+    cart.sinlge_tracks.delete(params[:id].to_i)
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
     else
-      @cart.save
+      cart.save
     end
-    if params[:remain] == "true"
-      redirect_to list_path
+    redirect_to cart_path
+  end
+
+  def single_tracks_cart_remove
+    cart = Cart.where(user_id: current_user.id).first
+    cart.sinlge_tracks.delete(params[:track_id].to_i)
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
     else
-      redirect_to cart_path
+      cart.save
     end
+    redirect_to list_path
   end
 
   def destroy_cart
