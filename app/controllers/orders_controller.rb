@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :sale_orders, only: [:create, :checkout]
 
+  # action to purchase pack directly
   def create
     sfx_pack = SfxPack.find(params[:pack_id])
 
@@ -40,11 +41,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  # checkout from Cart
   def checkout
     cart = Cart.where(user_id: current_user.id).first
 
     cart.items.count == 1 ? multiple = false : multiple = true
 
+    # list SFX packs
     ordered_list = []
     cart.items.each do |item|
       ordered_list << SfxPack.find(item)
@@ -88,10 +91,41 @@ class OrdersController < ApplicationController
       line_items << line_item
       total_amount += line_item[:amount] / 100.to_f
     end
-    sfx_pack = SfxPack.find(cart.items.first)
+
+    if cart.items != []
+      sfx_pack = SfxPack.find(cart.items.first)
+    else
+      sfx_pack = SfxPack.find(100)
+    end
+
+    # List Single Tracks
+    tracks_list = []
+    cart.sinlge_tracks.each do |track|
+      tracks_list << SingleTrack.find(track)
+    end
+
+    # Total amount of Single Tracks
+    tracks_sum = 0
+    tracks_list.each do |track|
+      tracks_sum += (track.price_cents / 100.to_f)
+    end
+
+    # creating line_item for single tracks as one track if any
+    if tracks_list != []
+      single_line_item = {}
+      single_line_item[:name] = 'Individual tracks'
+      # single_line_item[:image]
+      single_line_item[:amount] = (tracks_sum * 100).to_i
+      single_line_item[:currency] = 'usd'
+      single_line_item[:quantity] = 1
+      line_items << single_line_item
+    end
+
+    # Adding sum of SFX packs and single tracks for the order instance
+    total_amount += tracks_sum
 
     if current_user
-      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, sales: @sale_orders)
+      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, tracks: cart.sinlge_tracks, sales: @sale_orders)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
