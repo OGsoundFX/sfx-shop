@@ -52,6 +52,11 @@ class CartsController < ApplicationController
       @items.items.each do |item|
         @pack_list << SfxPack.find(item)
       end
+      # fetching single tracks
+      @single_tracks_list = []
+      @items.sinlge_tracks.each do |item|
+        @single_tracks_list << SingleTrack.find(item)
+      end
       @total_value = 0
       @sum = 0
 
@@ -61,6 +66,7 @@ class CartsController < ApplicationController
         end
       end
 
+      # adding up prices of Packs depending on sales or not and usual 20% discount
       if current_sales.count > 0
         @pack_list.each do |pack|
           @current_sales_list[pack.id] ? @sum += (pack.price_cents * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += (pack.price_cents / 100)
@@ -73,6 +79,13 @@ class CartsController < ApplicationController
           index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
         end
       end
+
+      # adding up prices of single tracks
+      @single_tracks_list.each do |track|
+        @sum += (track.price_cents / 100.to_f)
+        @total_value += (track.price_cents / 100.to_f)
+      end
+      
       @icons = {
         "action": '<i class="fas fa-swords"></i>',
         "medieval": '<i class="fab fa-fort-awesome"></i>',
