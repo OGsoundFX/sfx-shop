@@ -74,8 +74,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # ngrok config
-  config.hosts << "afeaf84b5547.ngrok.io"
-
+  # config.hosts << "afeaf84b5547.ngrok.io"
+  config.hosts << "f3c1-2001-16b8-46dd-c00-bcdf-97fd-3df7-c0b2.ngrok.io"
   # the stripe webhook link looks like this:
   # https://afeaf84b5547.ngrok.io/stripe-webhooks
 end

@@ -38,7 +38,7 @@ class CartsController < ApplicationController
       @tracks.sinlge_tracks << SingleTrack.find(params[:track_id]).id.to_i
     end
     @tracks.save
-    redirect_to list_path
+    redirect_to list_path(page: params[:page])
   end
 
   def cart
@@ -121,7 +121,11 @@ class CartsController < ApplicationController
     else
       cart.save
     end
-    redirect_to list_path
+    if params[:page]
+      redirect_to list_path(page: params[:page])
+    else
+      redirect_to cart_path
+    end
   end
 
   def destroy_cart
