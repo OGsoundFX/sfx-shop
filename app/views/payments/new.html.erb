@@ -6,10 +6,9 @@
         <div class="col-md-3"><%= image_tag @photo, width: '100%' %></div>
         <div class="col">
           <h1>Checkout summary</h1>
-
-
-              <p>Purchase of <strong><%= @order.sfx_pack.title %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
-
+          
+          <p>Purchase of <strong><%= @order.sfx_pack.title %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
+          <%= render 'shared/payment_single_tracks' %>
           <button id="pay" class="btn btn-primary">Pay</button>
 
           <script src="https://js.stripe.com/v3/"></script>
@@ -34,6 +33,8 @@
       <% else %>
         <%= render 'shared/payment_no_sale' %>
       <% end %>
+
+      <%= render 'shared/payment_single_tracks' %>
 
       <h3>For a total amount of <%= humanized_money_with_symbol @order.amount %> </h3>
       <button id="pay" class="btn btn-primary">Pay</button>
