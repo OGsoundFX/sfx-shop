@@ -125,6 +125,7 @@ class CartsController < ApplicationController
       redirect_to list_path(page: params[:page])
     else
       redirect_to cart_path
+      #what is going on?
     end
   end
 
