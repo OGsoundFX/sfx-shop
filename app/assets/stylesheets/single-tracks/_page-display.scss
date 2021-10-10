@@ -92,6 +92,9 @@ ul {
   flex-direction: column;
   justify-content: center;
   margin-bottom: 10px;
+  &:hover {
+    background-color: #f5f3f3b6;
+  }
 }
 
 .wrapper {
@@ -124,6 +127,10 @@ ul {
 
 .pad-top {
   padding-top: 18px;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .title-font {
