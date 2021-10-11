@@ -32,7 +32,8 @@ window.addEventListener('DOMContentLoaded', () => {
       waveColor: '#CCCCCC',
       progressColor: '#FFA500',
       height: 50,
-      cursorColor: '#FFA500'
+      cursorColor: '#FFA500',
+      responsive: true
     });
     // loading wavesurfer
     wavesurfers[loopId].load(link);

@@ -7,11 +7,15 @@
             <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
             <span class="title-font pad-top max-width"><%= track.title %></span>
           </div>
-          <div class="d-flex justify-content-between wave-section elements-position">
-            <div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
+          <div class="d-flex wave-section elements-position">
+            <% if current_page?(controller: 'carts', action: 'cart') %>
+              <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
+            <% else %>
+              <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
+            <% end %>
             <p class="info-font pad-top" id="trackDurationid<%= track.id %>"></p>
-            <i class="far fa-play-circle pad-top cursor" id="playid<%= track.id %>"></i>
-            <i class="far fa-pause-circle pad-top cursor" id="stopid<%= track.id %>" style="display: none"></i>
+            <i class="far fa-play-circle pad-top play-icon-margin cursor" id="playid<%= track.id %>"></i>
+            <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
           </div>
           <div class="d-flex justify-content-between wave-section elements-position">
             <span class="info-font pad-top">

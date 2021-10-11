@@ -102,12 +102,16 @@ ul {
   grid-template-columns: 1.2fr 3fr 1fr 0.5fr;
 }
 
-.wave {
-  width: 500px;
+.wave-index {
+  width: 40vw;
+}
+
+.wave-cart {
+  width: 35vw;
 }
 
 .wave-section {
-  margin-right: 7vw;
+  margin-right: 7vh;
 }
 
 .elements-position {
@@ -127,6 +131,10 @@ ul {
 
 .pad-top {
   padding-top: 18px;
+}
+
+.play-icon-margin {
+  margin-left: 10px;
 }
 
 .cursor {
