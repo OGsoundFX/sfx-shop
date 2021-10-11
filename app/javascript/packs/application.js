@@ -19,3 +19,4 @@ require("channels")
 
 import './wavesurfer';
 import './modals';
+import './responsive';

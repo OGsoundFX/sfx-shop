@@ -1,5 +1,5 @@
 <%= render 'shared/navbar_general' %>
-<div class="container padding-navbar content margins">
+<div class="container padding-navbar content margins" id="cart-container">
   <h2 id="cart-title">Welcome to your cart <%= current_user.username %></h2>
   <% if Sale.where("end_date > ?", Date.current).count > 0 %>
     <%= render 'shared/cart_sale' %>
