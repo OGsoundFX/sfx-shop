@@ -63,7 +63,12 @@
         </div>
     <% end %>
 
-    <%= render 'shared/paginate_tracks' %>
+    <div id="cart-paginate-desktop">
+      <%= render 'shared/paginate_tracks' %>
+    </div>
+    <div id="cart-paginate-mobile" class="screen-display">
+      <%= render 'shared/paginate_tracks_mobile' %>
+    </div>
 
     <div class="total">
       <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>

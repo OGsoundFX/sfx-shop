@@ -34,7 +34,12 @@
         </form>
       </div>
     </div>
-    <%= render 'shared/paginate_tracks' %>
+    <div id="paginate-desktop">
+      <%= render 'shared/paginate_tracks' %>
+    </div>
+    <div id="paginate-mobile" class="screen-display">
+      <%= render 'shared/paginate_tracks_mobile' %>
+    </div>
   </div>
 </div>
 
