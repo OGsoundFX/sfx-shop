@@ -61,9 +61,11 @@
         </div>
       </div>
       <hr>
-      <h3>Single Tracks</h3>
-      <%= render 'shared/order_card_single_tracks_desktop' %>
-      <hr>
+      <% if @tracks != [] %>
+        <h3>Single Tracks</h3>
+        <%= render 'shared/order_card_single_tracks_desktop' %>
+        <hr>
+      <% end %>
     <% else %>
       <hr>
       <% order.packs.each_with_index do |pack_id, index| %>
@@ -130,9 +132,11 @@
         </div>
         <hr>
       <% end %>
-      <h3>Single Tracks</h3>
-      <%= render 'shared/order_card_single_tracks_desktop' %>
-      <hr>
+      <% if @tracks != [] %>
+        <h3>Single Tracks</h3>
+        <%= render 'shared/order_card_single_tracks_desktop' %>
+        <hr>
+      <% end %>
     <% end %>
 
     <p>Status: <strong><%= order.status %></strong> </p>
