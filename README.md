@@ -7,7 +7,7 @@ Here is my online Sound Effects shop that I am building. The first stage is comp
 
 Here are the different stages that I am aiming:
 
-1/ Stage 1: **COMPLETED** (almost)
+### Stage 1: **COMPLETED** (almost)
 Creating a Sound Effects online shop with only my Own sound effects packs.
 I am first releasing a Demo version for friends and coleagues, with free access to all sound effect packs. Official release will come soon after.
 What still need to be done:
@@ -16,14 +16,14 @@ What still need to be done:
 - some frontend details
 - add reviews
 
-2/ Stage 2: End of 2021 **IN PROGRESS**
+### Stage 2: End of 2021 **IN PROGRESS**
 Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
-3/ Stage 3: Early 2021
+### Stage 3: Early 2021
 Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
 Details need to be established.
 
-4/ Additional feature:
+### Additional feature:
 - Player: An option for board game players (like DnD) to have access to ALL sounds available and create their own playlist curated for their sessions. This option will prbably work through subscription (24h - 7day - monthly)
 - Custom work: for clients to ask for custom designs for their projects. They can ask one of the sound designers from the website, or make open offers.
 
@@ -257,3 +257,71 @@ end
 
 In your **controller** add
 ``` User.all.page params[:page] ```
+<br>
+### Download Individual Tracks (hosted on AWS S3) grouped in a Zip file:
+#### Gems:
+````
+gem 'aws-sdk-s3', '~> 1.103'
+gem 'aws-sdk-ec2', '~> 1.0.0.rc3'
+gem 'rubyzip', '~> 1.2'
+`````
+**Don't forget to** ```bundle```
+<br>
+#### add your s3 KEYS to the ```.env``` file:
+You can find your credential keys: **https://console.aws.amazon.com/iam/home#/users/IAM_USER**
+In your ```.env``` file add the keys like so:
+````
+ACCESS_KEY_ID=[YOUR ACCESS KEY ID]
+SECRET_ACCESS_KEY=[YOUR SECRET ACCESS KEY]
+````
+### Don't forget to add those keys to production
+
+Implement the downlaod process in your three files ```routes. rb```, ```view.rb```, ```controller.rb```
+
+### Example (my own implementation)
+#### routes.rb
+````
+get 'create_zip', to: 'single_tracks#create_zip'
+````
+#### dashboard.rb
+```
+<%= link_to "download all", create_zip_path(tracks: @tracks) %>
+```
+#### single_tracks_controller.rb
+````
+def create_zip
+    Aws.config.update({
+      region: 'eu-central-1',
+      access_key_id: ENV['ACCESS_KEY_ID'],
+      secret_access_key: ENV['SECRET_ACCESS_KEY']
+    })
+
+    s3 = Aws::S3::Resource.new
+    bucket = s3.bucket('single-track-list')
+    files = []
+    tracks = params[:tracks]
+    tracks.each do |track|
+      name = SingleTrack.find(track).link.split('/').last
+      files << name
+    end
+    time = Time.now.to_i
+    folder = "#{current_user.username}_#{time}"
+    Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
+    files.each do |file_name|
+      file_obj = bucket.object(file_name)
+      file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name))
+
+    end
+    require 'zip'
+    require 'fileutils'
+    Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
+      files.each do |file_name|
+       # Add the file to the zip
+        zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name)))
+      end
+    end
+    send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
+  end
+````
+
+
