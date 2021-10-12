@@ -69,3 +69,7 @@ gem 'ngrok', '~> 1.6', '>= 1.6.1'
 gem 'gibbon'
 gem 'pg_search', '~> 2.3.0'
 gem 'kaminari'
+
+gem 'aws-sdk-s3', '~> 1.103'
+gem 'aws-sdk-ec2', '~> 1.0.0.rc3'
+gem 'rubyzip', '~> 1.2'
