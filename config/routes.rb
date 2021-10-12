@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get 'list', to: 'single_tracks#index'
   get 'download_single', to: 'single_tracks#download_single'
+  get 'create_zip', to: 'single_tracks#create_zip'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

@@ -40,4 +40,43 @@ class SingleTracksController < ApplicationController
     data = open(url).read
     send_data data, :disposition => 'attachment', :filename=>"#{title}.mp3"
   end
+
+  def create_zip
+    Aws.config.update({
+      region: 'eu-central-1',
+      access_key_id: ENV['ACCESS_KEY_ID'],
+      secret_access_key: ENV['SECRET_ACCESS_KEY']
+    })
+
+    s3 = Aws::S3::Resource.new
+    bucket = s3.bucket('single-track-list')
+    files = []
+    tracks = params[:tracks]
+    tracks.each do |track|
+      name = SingleTrack.find(track).link.split('/').last
+      files << name
+    end
+    time = Time.now.to_i
+    folder = "#{current_user.username}_#{time}"
+    Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
+    files.each do |file_name|
+      file_obj = bucket.object(file_name)
+      file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name))
+
+    end
+    require 'zip'
+    require 'fileutils'
+    Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
+      files.each do |file_name|
+       # Add the file to the zip
+        zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name)))
+      end
+    end
+    send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
+    # require 'timeout'
+    # status = Timeout::timeout(5) {
+    #   FileUtils.rm_r Rails.root.join('app', 'assets', 'uploads', folder)
+    # }
+
+  end
 end
