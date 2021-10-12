@@ -31,6 +31,13 @@ class SingleTracksController < ApplicationController
       @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
       @search = "Search by keyword"
     end
+  end
 
+  def download_single
+    require 'open-uri'
+    url = params[:url]
+    title = params[:title]
+    data = open(url).read
+    send_data data, :disposition => 'attachment', :filename=>"#{title}.mp3"
   end
 end
