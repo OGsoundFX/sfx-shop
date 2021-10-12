@@ -1,4 +1,5 @@
 <% @orders.each do |order| %>
+<% @tracks = order.tracks %>
   <div class="order_card">
     <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
     <h6 id="chrome-download"> <i class="fas fa-exclamation-triangle"></i> &nbsp &nbsp If you are experiencing problems downloading your packs with <strong style="color: #ffa500">Chrome</strong>, please try another browser. </h6>
@@ -68,9 +69,12 @@
           <% end %>
         </div>
       </div>
-
-
-  <hr>
+      <hr>
+      <% if @tracks != [] %>
+        <h3>Single Tracks</h3>
+        <%= render 'shared/order_card_single_tracks_desktop' %>
+        <hr>
+      <% end %>
     <% end %>
     <p>Status: <strong><%= order.status %></strong> </p>
     <p>Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>

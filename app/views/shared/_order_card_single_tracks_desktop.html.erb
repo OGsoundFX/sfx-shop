@@ -1,0 +1,9 @@
+<ul>
+  <% @tracks.each do |track_id| %>
+    <li>
+      <% track = SingleTrack.find(track_id) %>
+      <%= track.title %>
+      <%= link_to "download", download_single_path(url: track.link, title: track.title) %>
+    </li>
+  <% end %>
+</ul>
