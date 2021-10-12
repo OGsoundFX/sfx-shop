@@ -73,10 +73,5 @@ class SingleTracksController < ApplicationController
       end
     end
     send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
-    # require 'timeout'
-    # status = Timeout::timeout(5) {
-    #   FileUtils.rm_r Rails.root.join('app', 'assets', 'uploads', folder)
-    # }
-
   end
 end
