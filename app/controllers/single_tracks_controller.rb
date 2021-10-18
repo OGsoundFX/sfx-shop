@@ -8,7 +8,8 @@ class SingleTracksController < ApplicationController
       "scary":	'<i class="fas fa-ghost"></i>',
       "monsters":	'<i class="fas fa-dragon"></i>',
       "disasters": '<i class="fas fa-volcano"></i>',
-      "weather": '<i class="fas fa-cloud-showers-heavy"></i>'
+      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
+      "default": '<i class="fas fa-volume-up"></i>'
     }
 
     @categories = @icons.keys
