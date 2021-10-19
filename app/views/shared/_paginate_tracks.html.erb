@@ -6,6 +6,7 @@
           <div class="d-flex justify-content-start elements-position">
             <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
             <span class="title-font pad-top max-width"><%= track.title %></span>
+            <span class="info-icon max-width" id="trackInfoBtn"><i class="fas fa-info-circle"></i></span>
           </div>
           <div class="d-flex wave-section elements-position">
             <% if current_page?(controller: 'carts', action: 'cart') %>
@@ -42,6 +43,21 @@
                   <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
               <% end %>
             <% end %>
+          </div>
+          <!-- The Track Info Modal -->
+          <div id="trackInfo" class="track-info-modal">
+            <!-- Modal content -->
+            <div id="trackContentInfo" class="track-info-modal-content">
+              <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
+              <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
+              <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
+              <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
+              <% if !track.sfx_pack_id.nil? %>
+                <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+              <% end %>
+              <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
+              <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+            </div>
           </div>
         </div>
       </li>

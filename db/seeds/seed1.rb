@@ -1,8 +1,8 @@
 # SingleTrack.destroy_all
 
-puts 'destroying tracks with id highre than 13'
-tracks = SingleTrack.where('id > 13')
-tracks.destroy_all
+# puts 'destroying tracks with id highre than 13'
+# tracks = SingleTrack.where('id > 13')
+# tracks.destroy_all
 
 puts 'seed1'
 
