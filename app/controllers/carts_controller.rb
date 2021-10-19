@@ -55,7 +55,7 @@ class CartsController < ApplicationController
       # fetching single tracks
       @single_tracks_list = []
       @items.sinlge_tracks.each do |item|
-        @single_tracks_list << SingleTrack.find(item)
+        SingleTrack.find_by_id(item) ? @single_tracks_list << SingleTrack.find(item) : false
       end
       @total_value = 0
       @sum = 0

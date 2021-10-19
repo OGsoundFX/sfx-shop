@@ -146,6 +146,13 @@ ul {
   font-size: 0.65em;
 }
 
+.info-icon {
+  padding-top: 16px;
+  margin-left: 8px;
+  color: #4e4e4e;
+  font-size: 0.85em;
+}
+
 .max-width {
   max-width: 125px;
   overflow: hidden;
@@ -229,13 +236,21 @@ ul {
 
 
 @media (max-width: 992px) {
-  .title-font {
-    margin-right: 15px;
+  .info-icon {
+    margin-right: 10px;
   }
 }
 
 @media (max-width: 1200px) {
   .wave-cart {
     width: 35vw;
+  }
+
+  .info-icon {
+    margin-left: 5px;
+  }
+
+  .max-width {
+    max-width: 100px;
   }
 }

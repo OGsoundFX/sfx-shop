@@ -15,6 +15,7 @@ const timeConverter = (time) => {
 window.addEventListener('DOMContentLoaded', () => {
   // loading watermark
   let watermark = new Audio('https://single-track-list.s3.eu-central-1.amazonaws.com/watermark/watermark.mp3');
+  watermark.volume = 0.5;
   // creates an empty array which will be implemented with every container id (see push() function bellow)
   let wavesurfers = [];
   // creating undefined variable to be used in play() function and store the current file playing (if any)
@@ -43,6 +44,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const trackSeconds = wavesurfers[loopId].getDuration();
       const trackDuration = timeConverter(trackSeconds);
       document.getElementById(`trackDuration${id}`).innerText = trackDuration;
+      document.getElementById(`trackDurationModal${id}`).innerText = trackDuration;
     })
 
     // play and pause buttons
@@ -67,6 +69,23 @@ window.addEventListener('DOMContentLoaded', () => {
       // play watermark and stop watermark
       if (duration < 3) {
         watermark.play()
+      } else if (duration < 15) {
+        watermark.play()
+
+        // the reason why I chose this approach is for clearInterval() to be called within 1 second
+        // rather than 8 seconds like before, when I set the interval to 8 seconds and we couls hear
+        // another watermark eventhough the audio had stoped, up to 8 seconds after.
+        let i = 1;
+        let interval = setInterval(() => {
+          i ++;
+          if (i === 4) {
+            watermark.play()
+            i = 1;
+          }
+          if (!wavesurfers[loopId].isPlaying()) {
+            clearInterval(interval);
+          }
+        }, 1000)
       } else {
         watermark.play()
 

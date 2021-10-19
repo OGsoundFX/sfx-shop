@@ -1,3 +1,5 @@
+// LEAR MORE MODAL
+
 window.addEventListener('DOMContentLoaded', () => {
   // Get the modal
   const modal = document.getElementById("learnMore");
@@ -24,4 +26,36 @@ window.addEventListener('DOMContentLoaded', () => {
       modal.style.display = "none";
     }
   }
+});
+
+
+// TRACK INFO MODAL
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Get the modal
+  const modal = document.getElementById("trackInfo");
+  // Get the content of the modal
+  const modalContent = document.getElementById("trackContentInfo")
+  // Get the button that opens the modal
+  const btn = document.querySelectorAll("#trackInfoBtn");
+  
+  // Get the <span> element that closes the modal
+  const span = document.getElementsByClassName("track-info-close")[0];
+  
+  // When the user hovers over the info icon, open the modal
+  btn.forEach(icon => {
+    icon.onmouseover = function(event) {
+      modal.style.display = "block";
+      var y = event.clientY;
+      margin = (y - 220)
+      modalContent.style.marginTop = `${margin}px`;
+    }
+  })
+
+  // When the user moves the mouse out
+  btn.forEach(icon => {
+    icon.onmouseout = function() {
+      modal.style.display = "none";
+    }
+  })
 });
