@@ -33,9 +33,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   // Get the modal
-  const modal = document.getElementById("trackInfo");
+  const modals = document.querySelectorAll("#trackInfo");
   // Get the content of the modal
-  const modalContent = document.getElementById("trackContentInfo")
+  const modalsContent = document.querySelectorAll("#trackContentInfo")
   // Get the button that opens the modal
   const btn = document.querySelectorAll("#trackInfoBtn");
   
@@ -45,8 +45,10 @@ window.addEventListener('DOMContentLoaded', () => {
   // When the user hovers over the info icon, open the modal
   btn.forEach(icon => {
     icon.onmouseover = function(event) {
+      const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
       modal.style.display = "block";
       var y = event.clientY;
+      const modalContent = document.querySelector(`[data-modalTrackContentId="${icon.dataset.trackid}"]`)
       margin = (y - 220)
       modalContent.style.marginTop = `${margin}px`;
     }
@@ -55,6 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // When the user moves the mouse out
   btn.forEach(icon => {
     icon.onmouseout = function() {
+      const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
       modal.style.display = "none";
     }
   })
