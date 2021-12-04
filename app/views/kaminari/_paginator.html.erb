@@ -16,7 +16,7 @@
       <% end %> -->
       <span class="count-customize"><%= per_page.to_i * (current_page.to_i - 1) %></span>
       <p class="dash">-</p>
-      <span class="count-customize"><%= per_page.to_i * current_page.to_i %> <em>(<%= total_pages %>)</em></span>
+      <span class="count-customize"><%= per_page.to_i * current_page.to_i %></span>
       <% if current_page.last? %>
         <span disabled style="color: #cccc"><%= next_page_tag %></span>
       <% else %>
