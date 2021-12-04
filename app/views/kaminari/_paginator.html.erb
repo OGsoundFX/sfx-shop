@@ -1,7 +1,7 @@
 <%= paginator.render do %>
   <nav>
     <ul class="pagination">
-      <!-- <%= first_page_tag unless current_page.first? %> -->
+      <%= first_page_tag unless current_page.first? %>
       <% if current_page.first? %>
         <span disabled style="color: #cccc"><%= prev_page_tag %></span>
       <% else %>
@@ -16,13 +16,13 @@
       <% end %> -->
       <span class="count-customize"><%= per_page.to_i * (current_page.to_i - 1) %></span>
       <p class="dash">-</p>
-      <span class="count-customize"><%= per_page.to_i * current_page.to_i %></span>
+      <span class="count-customize"><%= per_page.to_i * current_page.to_i %> <em>(<%= total_pages %>)</em></span>
       <% if current_page.last? %>
         <span disabled style="color: #cccc"><%= next_page_tag %></span>
       <% else %>
         <%= next_page_tag %>
       <% end %>
-      <!-- <%= last_page_tag unless current_page.last? %> -->
+      <span><%= last_page_tag unless current_page.last? %></span>
     </ul>
   </nav>
 <% end %>

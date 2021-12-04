@@ -32,6 +32,8 @@ window.addEventListener('DOMContentLoaded', () => {
 // TRACK INFO MODAL
 
 window.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('turbolinks:load', () => {
+  
   // Get the modal
   const modals = document.querySelectorAll("#trackInfo");
   // Get the content of the modal
