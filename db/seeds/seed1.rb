@@ -4,7 +4,9 @@
 # tracks = SingleTrack.where('id > 13')
 # tracks.destroy_all
 
-puts 'seed1'
+# Monster pack
+
+puts 'seeding Monster Pack'
 
 require 'json'
 filepath = File.join(Rails.root, "db", "seeds", "tracks.json")

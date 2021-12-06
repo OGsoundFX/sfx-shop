@@ -1,3 +1,3 @@
-require_relative './seeds/seed1'
+require_relative './seeds/seed2'
 
 
