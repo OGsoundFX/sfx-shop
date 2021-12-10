@@ -38,7 +38,7 @@ class CartsController < ApplicationController
       @tracks.sinlge_tracks << SingleTrack.find(params[:track_id]).id.to_i
     end
     @tracks.save
-    redirect_to list_path(page: params[:page])
+    redirect_to request.referer
   end
 
   def cart
