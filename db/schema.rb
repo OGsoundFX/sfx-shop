@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_090134) do
+ActiveRecord::Schema.define(version: 2021_12_12_112100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_090134) do
     t.integer "price_cents", default: 0, null: false
     t.integer "bitrate"
     t.integer "sample_rate"
+    t.integer "batch"
     t.index ["sound_designer_id"], name: "index_single_tracks_on_sound_designer_id"
   end
 
