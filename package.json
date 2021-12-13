@@ -9,6 +9,7 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "stimulus": "^3.0.1",
     "turbolinks": "^5.2.0",
     "wavesurfer.js": "^5.2.0"
   },
