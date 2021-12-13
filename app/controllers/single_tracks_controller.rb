@@ -26,8 +26,9 @@ class SingleTracksController < ApplicationController
         @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
         @search = params[:previous_sort]
       end
+      @order = params[:order_by_dropdown]
     else
-
+      @order = params[:order_by_dropdown]
       # search by category
       if params[:dropdown] == nil || params[:dropdown] == ""
         # search by keyword
