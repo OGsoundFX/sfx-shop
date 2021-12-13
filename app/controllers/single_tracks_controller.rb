@@ -1,6 +1,7 @@
 class SingleTracksController < ApplicationController
   def index
     @icons = {
+      "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-swords"></i>',
       "medieval": '<i class="fab fa-fort-awesome"></i>',
       "outdoor":	'<i class="fas fa-trees"></i>',
@@ -14,23 +15,38 @@ class SingleTracksController < ApplicationController
 
     @categories = @icons.keys
 
-    # search by category
-    if params[:dropdown] == nil || params[:dropdown] == ""
-      @tracks = SingleTrack.page params[:page]
-      # search by keyword
-      if params[:search] == nil || params[:search] == ""
+    # order by
+    if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
+      if params[:previous_category] != ""
+        @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
+        @dropdown = params[:previous_category]
+      elsif params[:previous_sort] == "Search by keyword" || params[:previous_sort] == ""
+        @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
+      else
+        @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
+        @search = params[:previous_sort]
+      end
+    else
+
+      # search by category
+      if params[:dropdown] == nil || params[:dropdown] == ""
+        # search by keyword
+        if params[:search] == nil || params[:search] == ""
+          @tracks = SingleTrack.page params[:page]
+          @search = "Search by keyword"
+        else
+          @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
+          @search = params[:search]
+        end
+      elsif params[:dropdown] == "all"
         @tracks = SingleTrack.page params[:page]
         @search = "Search by keyword"
       else
-        @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
-        @search = params[:search]
+        @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
+        @search = "Search by keyword"
+        @dropdown = params[:dropdown]
       end
-    elsif params[:dropdown] == "all"
-      @tracks = SingleTrack.page params[:page]
-      @search = "Search by keyword"
-    else
-      @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
-      @search = "Search by keyword"
+
     end
   end
 
