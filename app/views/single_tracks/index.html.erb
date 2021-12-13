@@ -15,7 +15,7 @@
           <div class="d-flex justify-content-start">
             <div>
               <select type="text" name="dropdown" placeholder="category">
-                <option value="all">category</option>
+                <option value="" selected disabled hidden>Pick a category</option>
                 <% @categories.each do |cat| %>
                   <option value="<%= cat.to_s %>"><%= cat.to_s %></option>
                 <% end %>
@@ -33,6 +33,30 @@
           <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
         </form>
       </div>
+    </div>
+    <div>
+
+    <div class="drop-down">
+      <form action="/list">
+        <input type="hidden" name="previous_sort" value="<%= @search %>">
+        <input type="hidden" name="previous_category" value="<%= @dropdown %>">
+        <div class="d-flex justify-content-start">
+          <div>
+            <select type="text" name="order_by_dropdown" placeholder="Order by">
+              <option value="" selected disabled hidden>Order by</option>
+              <option value="title">Title</option>
+              <option value="size">Duration</option>
+              <option value="price_cents">Price</option>
+              <option value="points">Points</option>
+            </select>
+          </div>
+          <div>
+            <input type="submit" value="GO">
+          </div>
+        </div>
+      </form>
+    </div>
+
     </div>
     <div id="paginate-desktop">
       <%= render 'shared/paginate_tracks' %>
