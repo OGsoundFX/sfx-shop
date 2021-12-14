@@ -20,9 +20,12 @@ window.addEventListener('DOMContentLoaded', () => {
   let wavesurfers = [];
   // creating undefined variable to be used in play() function and store the current file playing (if any)
   let audioPlaying;
+  // creating an empty hash to store the loopId corresponding to the track.id
+  let ids = {};
   //inserting wavesurferplayer
   document.querySelectorAll('.wave').forEach((el, loopId) => {
     let id = el.id;
+    ids[loopId] = id
     wavesurfers.push(id);
     let link = el.dataset.link;
     wavesurfers[loopId] = WaveSurfer.create({
@@ -36,6 +39,23 @@ window.addEventListener('DOMContentLoaded', () => {
       cursorColor: '#FFA500',
       responsive: true
     });
+
+    // display loading time when loading
+    const UpdateLoadingFlag = (Percentage, id) => {
+      if (document.getElementById(`loading_flag${id}`)) {
+        document.getElementById(`loading_flag${id}`).innerText = "Loading " + Percentage + "%";
+        if (Percentage >= 100) {
+          document.getElementById(`loading_flag${id}`).style.display = "none";
+        } else {
+          document.getElementById(`loading_flag${id}`).style.display = "block";
+        }
+      }
+    }
+    // show progress while loading sound
+    wavesurfers[loopId].on('loading', (X, evt) => {
+      UpdateLoadingFlag(X, ids[loopId].substr(2));
+    });
+
     // loading wavesurfer
     wavesurfers[loopId].load(link);
 
@@ -90,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
         watermark.play()
 
         // the reason why I chose this approach is for clearInterval() to be called within 1 second
-        // rather than 8 seconds like before, when I set the interval to 8 seconds and we couls hear
+        // rather than 8 seconds like before, when I set the interval to 8 seconds and we could hear
         // another watermark eventhough the audio had stoped, up to 8 seconds after.
         let i = 1;
         let interval = setInterval(() => {
