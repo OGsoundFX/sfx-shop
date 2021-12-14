@@ -127,10 +127,18 @@ ul {
 
 .wave-index {
   width: 40vw;
+  position: relative;
 }
 
 .wave-cart {
   width: 450px;
+  position: relative;
+}
+
+.loading-countdown {
+  position: absolute;
+  padding-top: 1rem;
+  font-size: 0.8rem;
 }
 
 .wave-section {
