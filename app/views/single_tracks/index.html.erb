@@ -11,13 +11,14 @@
   <div class="container-fluid">
     <div class="forms">
       <div class="drop-down">
-        <form action="/list">
+        <form action="/list" data-controller="category">
+          <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
           <div class="d-flex justify-content-start">
             <div>
               <select type="text" name="dropdown" placeholder="category">
                 <option value="" selected disabled hidden>Pick a category</option>
                 <% @categories.each do |cat| %>
-                  <option value="<%= cat.to_s %>"><%= cat.to_s %></option>
+                  <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s %>"><%= cat.to_s.capitalize %></option>
                 <% end %>
               </select>
             </div>

@@ -87,6 +87,7 @@ class CartsController < ApplicationController
       end
       
       @icons = {
+        "all": '<i class="fas fa-volume-up"></i>',
         "action": '<i class="fas fa-swords"></i>',
         "medieval": '<i class="fab fa-fort-awesome"></i>',
         "outdoor":	'<i class="fas fa-trees"></i>',
@@ -94,7 +95,8 @@ class CartsController < ApplicationController
         "scary":	'<i class="fas fa-ghost"></i>',
         "monsters":	'<i class="fas fa-dragon"></i>',
         "disasters": '<i class="fas fa-volcano"></i>',
-        "weather": '<i class="fas fa-cloud-showers-heavy"></i>'
+        "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
+        "default": '<i class="fas fa-volume-up"></i>'
       }
       @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
     end
