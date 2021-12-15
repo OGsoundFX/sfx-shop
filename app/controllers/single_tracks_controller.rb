@@ -60,12 +60,12 @@ class SingleTracksController < ApplicationController
   end
 
   def create_zip
+    redirect_to root_path
     Aws.config.update({
       region: 'eu-central-1',
       access_key_id: ENV['ACCESS_KEY_ID'],
       secret_access_key: ENV['SECRET_ACCESS_KEY']
     })
-    redirect_to root_path
 
     s3 = Aws::S3::Resource.new
     bucket = s3.bucket('single-track-list')
