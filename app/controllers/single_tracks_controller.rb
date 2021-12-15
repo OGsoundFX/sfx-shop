@@ -76,6 +76,7 @@ class SingleTracksController < ApplicationController
     end
     time = Time.now.to_i
     folder = "#{current_user.username}_#{time}"
+    redirect_to root_path
     Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
     files.each do |file_name|
       file_obj = bucket.object(file_name)
