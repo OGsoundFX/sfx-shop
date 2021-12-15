@@ -13,11 +13,11 @@
       </div>
       <div class="d-flex wave-section elements-position">
         <% if current_page?(controller: 'carts', action: 'cart') %>
-          <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.link %>">
+          <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
             <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
           </div>
         <% else %>
-          <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.link %>">
+          <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
             <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
           </div>
         <% end %>

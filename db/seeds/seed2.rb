@@ -41,6 +41,6 @@ tracks.each do |track|
     price_cents = 800
   end
 
-  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "action", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 1, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'])
+  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "action", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 2, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'])
   puts "new track created"
 end
