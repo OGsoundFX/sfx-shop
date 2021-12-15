@@ -77,20 +77,19 @@ class SingleTracksController < ApplicationController
     time = Time.now.to_i
     folder = "#{current_user.username}_#{time}"
     Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
-    redirect_to root_path
-    # files.each do |file_name|
-    #   file_obj = bucket.object(file_name)
-    #   file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
+    files.each do |file_name|
+      file_obj = bucket.object(file_name)
+      file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
       
-    # end
-    # require 'zip'
-    # require 'fileutils'
-    # Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
-    #   files.each do |file_name|
-    #    # Add the file to the zip
-    #     zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last)))
-    #   end
-    # end
-    # send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
+    end
+    require 'zip'
+    require 'fileutils'
+    Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
+      files.each do |file_name|
+       # Add the file to the zip
+        zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last)))
+      end
+    end
+    send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
   end
 end
