@@ -77,12 +77,12 @@ class SingleTracksController < ApplicationController
     time = Time.now.to_i
     folder = "#{current_user.username}_#{time}"
     Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
-    files.each do |file_name|
-      file_obj = bucket.object(file_name)
-      file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
-      
-    end
     redirect_to root_path
+    # files.each do |file_name|
+    #   file_obj = bucket.object(file_name)
+    #   file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
+      
+    # end
     # require 'zip'
     # require 'fileutils'
     # Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
