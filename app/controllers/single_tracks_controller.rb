@@ -66,15 +66,15 @@ class SingleTracksController < ApplicationController
       access_key_id: ENV['ACCESS_KEY_ID'],
       secret_access_key: ENV['SECRET_ACCESS_KEY']
     })
+    s3 = Aws::S3::Resource.new
+    bucket = s3.bucket('single-track-list')
+    files = []
+    tracks = params[:tracks]
+    tracks.each do |track|
+      name = SingleTrack.find(track).link.split('.com').last[1..-1]
+      files << name
+    end
     redirect_to root_path
-    # s3 = Aws::S3::Resource.new
-    # bucket = s3.bucket('single-track-list')
-    # files = []
-    # tracks = params[:tracks]
-    # tracks.each do |track|
-    #   name = SingleTrack.find(track).link.split('.com').last[1..-1]
-    #   files << name
-    # end
     # time = Time.now.to_i
     # folder = "#{current_user.username}_#{time}"
     # Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
