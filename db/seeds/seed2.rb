@@ -11,6 +11,12 @@ tags = %w(gun explosion action war battle fight epic apocalypse combat strike)
 tracks.each do |track|
   link = "https://single-track-list.s3.eu-central-1.amazonaws.com/guns&explosions/#{track['name']}"
   
+  # ADD THESE 2 LINES FOR NEXT
+  # mp3 = track['name'].split(".wav")[0] + ".mp3"
+  # preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/monsters/previews/#{mp3}"
+
+  # ALSO ADD BATCH !!!
+
   title = track['name'].split('.')[0].split('_').join(' ')
   additional_tags_array = title.split(' ')
 
