@@ -1,15 +1,15 @@
 # Outdoor Atmospheres seed
-puts "destroying previous batch #2 entries" # replace batch number
+puts "destroying previous batch #12 entries" # replace batch number
 
-SingleTrack.where(batch: 2).destroy_all # replace batch number
+SingleTrack.where(batch: 12).destroy_all # replace batch number
 
-puts 'seeding outdoor atmospheres batch #2' # replace batch number
+puts 'seeding outdoor atmospheres batch #12' # replace batch number
 
 require 'json'
-filepath = File.join(Rails.root, "db", "seeds", "tracks2.json") # replace "tracks3.json"
+filepath = File.join(Rails.root, "db", "seeds", "tracks12.json") # replace "tracks3.json"
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
-tags = %w(outdoor atmosphere nature wild wilderness scenery background dungeon game board) + %w(beach summer sand seagull ocean wave) # replace tags
+tags = %w(outdoor atmosphere nature wild wilderness scenery background dungeon game board) + %w(animal bird insect chirp creature fauna) # replace tags
 
 tracks.each do |track|
   link = "https://single-track-list.s3.eu-central-1.amazonaws.com/outdooratmospheres/#{track['name']}"
@@ -49,6 +49,6 @@ tracks.each do |track|
   end
 
   # replace sound_designer_id, category, sfx_pack_id, batch
-  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "outdoor", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 3, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 2, preview_link: preview_link)
+  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "outdoor", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 3, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 12, preview_link: preview_link)
   puts "new track created"
 end

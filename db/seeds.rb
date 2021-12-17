@@ -1,3 +1,3 @@
-require_relative './seeds/seed4'
+require_relative './seeds/seed_outdoor_atmospheres'
 
 
