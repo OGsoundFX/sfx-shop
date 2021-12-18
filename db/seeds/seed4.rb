@@ -6,7 +6,7 @@ SingleTrack.where(batch: 2).destroy_all # replace batch number
 puts 'seeding outdoor atmospheres batch #2' # replace batch number
 
 require 'json'
-filepath = File.join(Rails.root, "db", "seeds", "tracks2.json") # replace "tracks3.json"
+filepath = File.join(Rails.root, "db", "seeds", "tracks.json") # replace "tracks.json" with the JSON file name
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
 tags = %w(outdoor atmosphere nature wild wilderness scenery background dungeon game board) + %w(beach summer sand seagull ocean wave) # replace tags
