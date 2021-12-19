@@ -11,11 +11,11 @@ serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
 tags = %w(outdoor atmosphere nature wild wilderness scenery background dungeon game board) + %w(beach summer sand seagull ocean wave) # replace tags
 
-tracks.each do |track|
+tracks.each do |track| # change the destination folder
   link = "https://single-track-list.s3.eu-central-1.amazonaws.com/outdooratmospheres/#{track['name']}"
   
   # create preview link
-  mp3 = track['name'].split(".wav")[0] + ".mp3"
+  mp3 = track['name'].split(".wav")[0] + ".mp3" # change the destination folder
   preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/outdooratmospheres/previews/#{mp3}"
 
   title = track['name'].split('.')[0].split('_').join(' ')
