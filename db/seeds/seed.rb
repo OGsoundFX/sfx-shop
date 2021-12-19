@@ -31,7 +31,7 @@ tracks.each do |track| # change the destination folder
   when track['durationSecs'] < 3
     points = 1
     price_cents = 150
-  when track['durationSecs'] < 5
+  when track['durationSecs'] < 8
     points = 2
     price_cents = 200
   when track['durationSecs'] < 15
