@@ -1,7 +1,8 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-lewagon-black">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
     <div class="d-flex">
       <div><%= image_tag asset_path('logo/logo_BAM_5.png') %></div>
+      <br>
       <div id="text-logo">Sound Effects</div>
       <div id="text-logo-small">SFX</div>
     </div>
@@ -10,16 +11,22 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
+        <li class="nav-item">
+          <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
+        </li>
+      <% end %>
       <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link text-white" %>
+      </li>
+      <li class="nav-item active">
+        <%= link_to "Track-List", list_path, class: "nav-link text-white" %>
       </li>
       <li class="nav-item">
         <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>
-
       <% if current_user %>
         <li class="nav-item dropdown">
           <%= image_tag asset_path("logo/avatar.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>

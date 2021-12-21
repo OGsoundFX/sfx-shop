@@ -12,6 +12,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <div class="new-single-tracks">
+    <%= link_to "Single Tracks", list_path, class: "single-track-link" %>
+    <%= image_tag asset_path('New_green_transp_small.png'), class: "new_sticker" %>
+  </div>
+
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
@@ -23,10 +29,10 @@
         <%= link_to "Home", root_path, class: "nav-link text-white" %>
       </li>
       <li class="nav-item">
-        <%= link_to "About", about_path, class: "nav-link text-white" %>
+        <%= link_to "Track-List", list_path, class: "nav-link text-white" %>
       </li>
       <li class="nav-item">
-        <%= link_to "Eula", eula_path, class: "nav-link text-white" %>
+        <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>
       <% if current_user %>
         <li class="nav-item dropdown">
