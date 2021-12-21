@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def home
     @designers = SoundDesigner.all
     @sfx_packs = SfxPack.all.sort_by(&:display_order)
+    if Date.today < Annoucement.last.end_date && Date.today >= Annoucement.last.start_date
+      @announcement = Annoucement.last
+    end
 
     current_sales = Sale.where("end_date > ?", Date.current)
     @current_sales_list = {}
