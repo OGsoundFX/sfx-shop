@@ -64,3 +64,41 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 });
+
+
+
+// COMING SOON MODAL
+
+window.addEventListener('DOMContentLoaded', () => {
+  // document.addEventListener('turbolinks:load', () => {
+    
+    // Get the modal
+    const modals = document.querySelectorAll("#comingSoon");
+    // Get the content of the modal
+    const modalsContent = document.querySelectorAll("#comingSoonContent")
+    // Get the button that opens the modal
+    const btn = document.querySelectorAll("#comingSoonBtn");
+    
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("track-info-close")[0];
+    
+    // When the user hovers over the info icon, open the modal
+    btn.forEach(icon => {
+      icon.onmouseover = function(event) {
+        const modal = document.querySelector('#comingSoon')
+        modal.style.display = "block";
+        var y = event.clientY;
+        const modalContent = document.querySelector('#comingSoonContent')
+        margin = (y - 220)
+        modalContent.style.marginTop = `${margin}px`;
+      }
+    })
+  
+    // When the user moves the mouse out
+    btn.forEach(icon => {
+      icon.onmouseout = function() {
+        const modal = document.querySelector('#comingSoon')
+        modal.style.display = "none";
+      }
+    })
+  });
