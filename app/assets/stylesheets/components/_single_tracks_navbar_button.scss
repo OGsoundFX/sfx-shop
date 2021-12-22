@@ -6,54 +6,70 @@
   color: white;
   margin-top: 10px !important;
   padding: 0 20px 0 40px;
+  &:hover, :active {
+    color: white;
+  }
 }
 
 .new-single-tracks {
   height: 40px;
   font-size: 20px;
-  border: none;
-  outline: none;
-  color: #fff;
+  background-color: $orange-main;
+  border-radius: 4px;
   cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  &:hover .single-track-link {
-    background-image: linear-gradient(45deg, rgb(73, 255, 1), red);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-text-fill-color: transparent;
+  transition: 0.5s;
+  &:hover, :active {
+    background-color: transparent;
+    transition: 1s;
   }
 }
 
-.new-single-tracks:before {
-  content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  position: absolute;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 70s linear infinite;
-  opacity: 1;
-  transition: opacity .3s ease-in-out;
-  border-radius: 4px;
-}
+// .new-single-tracks {
+//   height: 40px;
+//   font-size: 20px;
+//   border: none;
+//   outline: none;
+//   color: #fff;
+//   cursor: pointer;
+//   position: relative;
+//   z-index: 0;
+//   border-radius: 10px;
+//   &:hover .single-track-link {
+//     background-image: linear-gradient(45deg, rgb(73, 255, 1), red);
+//     background-size: 100%;
+//     -webkit-background-clip: text;
+//     -moz-background-clip: text;
+//     -webkit-text-fill-color: transparent; 
+//     -moz-text-fill-color: transparent;
+//   }
+// }
 
-.new-single-tracks:after {
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: black;
-  opacity: 0;
-  left: 0;
-  border-radius: 4px;
-}
+// .new-single-tracks:before {
+//   content: '';
+//   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+//   position: absolute;
+//   background-size: 400%;
+//   z-index: -1;
+//   filter: blur(5px);
+//   width: calc(100% + 4px);
+//   height: calc(100% + 4px);
+//   animation: glowing 70s linear infinite;
+//   opacity: 1;
+//   transition: opacity .3s ease-in-out;
+//   border-radius: 4px;
+// }
+
+// .new-single-tracks:after {
+//   z-index: -1;
+//   content: '';
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   background: black;
+//   opacity: 0;
+//   left: 0;
+//   border-radius: 4px;
+// }
 
 @keyframes glowing {
   0% { background-position: 0 0; }
