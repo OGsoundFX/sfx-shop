@@ -33,12 +33,12 @@
           <%= humanized_money_with_symbol(track.price) %>.00
         <% end %>
         </span>
-        <span class="info-font points"><%= track.points%></span>
-        <i class="far fa-heart pad-top"></i>
+        <span class="info-font points" id="comingSoonBtn"><%= track.points%></span>
+        <i class="far fa-heart pad-top" id="comingSoonBtn"></i>
         <i class="fas fa-heart pad-top d-none"></i>
       </div>
       <div class="d-flex justify-content-center purchase-section">
-        <i class="far fa-layer-plus pad-top purchase-icons"></i>
+        <i class="far fa-layer-plus pad-top purchase-icons" id="comingSoonBtn"></i>
         <i class="far fa-layer-minus pad-top d-none purchase-icons" style="color: #FFA500"></i>
         
         <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
@@ -74,3 +74,5 @@
   <em><p class="results-font-size">Total results: <%= @tracks.total_count %></p></em>
   <%= paginate @tracks, class: "paginator-bottom" %>
 </div>
+
+<%= render 'shared/coming_soon_modals' %>
