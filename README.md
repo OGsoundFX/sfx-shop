@@ -19,7 +19,7 @@ What still need to be done:
 ### Stage 2: End of 2021 **IN PROGRESS**
 Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
-### Stage 3: Early 2021
+### Stage 3: 2022
 Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
 Details need to be established.
 
