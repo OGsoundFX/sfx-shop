@@ -8,67 +8,69 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="forms">
-      <div class="drop-down">
-        <form action="/list" data-controller="category">
-          <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
-          <div class="d-flex justify-content-start">
-            <div>
-              <select type="text" name="dropdown" placeholder="category">
-                <option value="" selected disabled hidden>Pick a category</option>
-                <% @categories.each do |cat| %>
-                  <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s %>"><%= cat.to_s.capitalize %></option>
-                <% end %>
-              </select>
-            </div>
-            <div>
-              <input type="submit" value="GO">
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="search-form">
-        <form action="/list">
-          <input type="text" name="search" placeholder="<%= @search %>">
-          <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
-        </form>
-      </div>
-    </div>
-    <div>
-
-    <div class="drop-down-category">
-      <form action="/list" data-controller="select">
-        <input type="hidden" name="previous_sort" value="<%= @search %>">
-        <input type="hidden" name="previous_category" value="<%= @dropdown %>">
-        <input type="hidden" name="order" value="<%= @order %>" data-select-target="order">
-        <div class="d-flex justify-content-start">
-          <div>
-            <select type="text" name="order_by_dropdown" placeholder="Order by">
-              <option selected disabled>Order by</option>
-              <option value="title" data-select-target="title">Title</option>
-              <option value="size" data-select-target="size">Duration</option>
-              <option value="price_cents" data-select-target="price_cents">Price</option>
-              <option value="points" data-select-target="points">Points</option>
-            </select>
-          </div>
-          <div>
-            <input type="submit" value="GO">
-          </div>
-        </div>
-      </form>
-    </div>
-
-    </div>
+    <%# DESKTOP %>
     <div id="paginate-desktop">
+      <div class="forms">
+        <div class="drop-down">
+          <form action="/list" data-controller="category">
+            <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
+            <div class="d-flex justify-content-start">
+              <div>
+                <select type="text" name="dropdown" placeholder="category">
+                  <option value="" selected disabled hidden>Pick a category</option>
+                  <% @categories.each do |cat| %>
+                    <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s %>"><%= cat.to_s.capitalize %></option>
+                  <% end %>
+                </select>
+              </div>
+              <div>
+                <input type="submit" value="GO">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="search-form">
+          <form action="/list">
+            <input type="text" name="search" placeholder="<%= @search %>">
+            <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+      <div>
+        <div class="drop-down-category">
+          <form action="/list" data-controller="select">
+            <input type="hidden" name="previous_sort" value="<%= @search %>">
+            <input type="hidden" name="previous_category" value="<%= @dropdown %>">
+            <input type="hidden" name="order" value="<%= @order %>" data-select-target="order">
+            <div class="d-flex justify-content-start">
+              <div>
+                <select type="text" name="order_by_dropdown" placeholder="Order by">
+                  <option selected disabled>Order by</option>
+                  <option value="title" data-select-target="title">Title</option>
+                  <option value="size" data-select-target="size">Duration</option>
+                  <option value="price_cents" data-select-target="price_cents">Price</option>
+                  <option value="points" data-select-target="points">Points</option>
+                </select>
+              </div>
+              <div>
+                <input type="submit" value="GO">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <%= render 'shared/paginate_tracks' %>
     </div>
+
+     <%# MOBILE %>
     <div id="paginate-mobile" class="screen-display">
       <%= render 'shared/paginate_tracks_mobile' %>
     </div>
+
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Learn More Modal -->
 <div id="learnMore" class="learn-more-modal">
   <!-- Modal content -->
   <div class="learn-more-modal-content">
