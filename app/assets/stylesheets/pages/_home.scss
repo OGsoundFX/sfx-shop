@@ -10,7 +10,9 @@
 }
 
 #front-title-sale {
-  background-color: $banner_light_blue;
+  color: white;
+  // background-color: $banner_light_blue;
+  background-color: $new-green;
   padding: 15px 0px;
   font-size: 2em;
   font-weight: 700;
@@ -19,7 +21,8 @@
 }
 
 #annoucement-content {
-  background-color: $new-pink;
+  color: white;
+  background-color: $new-green;
   padding: 15px 0px;
   font-size: 2em;
   font-weight: 700;
