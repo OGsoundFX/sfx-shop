@@ -40,12 +40,12 @@ tracks.each do |track| # change the destination folder
   when track['durationSecs'] < 60
     points = 4
     price_cents = 400
-  when track['durationSecs'] < 150
+  when track['durationSecs'] < 300
     points = 5
     price_cents = 500
   else 
     points = 5
-    price_cents = 800
+    price_cents = 700
   end
 
   # replace sound_designer_id, category, sfx_pack_id, batch

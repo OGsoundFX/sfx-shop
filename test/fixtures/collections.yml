@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_points: 1
+  price: MyString
+  tracks: 1
+  user: one
+
+two:
+  total_points: 1
+  price: MyString
+  tracks: 1
+  user: two
