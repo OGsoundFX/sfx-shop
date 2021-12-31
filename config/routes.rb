@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'collections/create'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "pages#home"
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
   get 'list', to: 'single_tracks#index'
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
+
+  resources :collections, only: [:create, :update, :destroy]
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
