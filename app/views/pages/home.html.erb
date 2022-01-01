@@ -3,9 +3,9 @@
   <%= render 'shared/caroussel' %>
 
   <% if !@announcement.nil? %>
-  <%# <div class="container-fluid"> %>
+  <%# <div class="container"> %>
     <h1 id="annoucement-content"><%= @announcement.content %></h1>
-  </div>
+  <%# </div> %>
   <% elsif @current_sales_list != {} %>
     <div id="sale-banner">
       <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
