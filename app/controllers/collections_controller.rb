@@ -21,7 +21,4 @@ class CollectionsController < ApplicationController
     collection.save
     redirect_to list_path
   end
-
-  def destroy
-  end
 end

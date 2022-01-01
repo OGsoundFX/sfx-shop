@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
 
-  resources :collections, only: [:create, :update, :destroy]
+  resources :collections, only: [:create, :update]
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
