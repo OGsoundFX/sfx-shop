@@ -15,6 +15,8 @@ class SingleTracksController < ApplicationController
 
     @categories = @icons.keys
 
+    @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
+
     # order by
     if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
       if params[:previous_category] != ""

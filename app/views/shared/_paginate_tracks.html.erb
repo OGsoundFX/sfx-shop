@@ -39,11 +39,16 @@
       </div>
       <div class="d-flex justify-content-center purchase-section">
         <%# <i class="far fa-layer-plus pad-top purchase-icons" id="comingSoonBtn"></i> %>
-        <%= link_to collections_path, method: :post do %>
-          <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover" id=""></i>
+        <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+          <%= link_to collection_path(@collection, track: track), method: :patch do %>
+            <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500" id=""></i>
+          <% end %>
+        <% else %>
+          <%= link_to collections_path(track: track), method: :post do %>
+            <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover" id=""></i>
+          <% end %>
         <% end %>
-        <i class="far fa-layer-minus pad-top d-none purchase-icons" style="color: #FFA500"></i>
-        
+
         <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
           <%= link_to single_tracks_cart_remove_path(track_id: track.id, page: params[:page]), method: :post do %>
             <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
