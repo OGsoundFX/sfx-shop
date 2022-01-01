@@ -17,9 +17,11 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    # this action is to remove tracks from collection or destroy collection when last track is removed
+    # this action is to remove tracks from collection
     collection = Collection.find(params[:id].to_i)
     collection.tracks.delete(params[:track].to_i)
+    collection.total_points = points(collection.tracks)
+    collection.price_cents = collection_categories(collection.total_points)
     collection.save
     redirect_to list_path
   end
@@ -27,21 +29,27 @@ class CollectionsController < ApplicationController
   private
 
   def points(tracks)
-    points = tracks.map do |id|
-      SingleTrack.find(id).points
+    if tracks == []
+      points = 0 
+    else
+      points = tracks.map do |id|
+        SingleTrack.find(id).points
+      end
+      points.reduce {|sum, el| sum += el}
     end
-    points.reduce {|sum, el| sum += el}
   end
 
   def collection_categories(points)
     case
-    when points >= 20 
+    when points == 0
+      0
+    when points > 20 
       1000
-    when points >= 50
+    when points > 50
       2000
-    when points >= 100
+    when points > 100
       4000
-    when points >= 300
+    when points > 300
       # create a new pack / raise error
     else
       500
