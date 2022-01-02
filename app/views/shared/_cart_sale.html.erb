@@ -70,6 +70,8 @@
       <%= render 'shared/paginate_tracks_mobile' %>
     </div>
 
+    <%= render 'shared/collections_display' %>
+
     <div class="total">
       <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>
       <i>(number of items: <%= @pack_list.count + @single_tracks_list.count %>)</i>

@@ -42,6 +42,7 @@ class CartsController < ApplicationController
   end
 
   def cart
+    collections
     @items = Cart.where(user_id: current_user.id).first
     current_sales = Sale.where("end_date > ?", Date.current)
     @current_sales_list = {}
@@ -147,5 +148,12 @@ class CartsController < ApplicationController
   def destroy_cart
     Cart.where(user_id: current_user.id).first.destroy
     redirect_to dashboard_path
+  end
+
+  private
+
+  def collections
+    @past_collections = Collection.where("user_id = #{current_user.id} AND purchased = true")
+    @current_collections = Collection.where("user_id = #{current_user.id} AND purchased = false")
   end
 end
