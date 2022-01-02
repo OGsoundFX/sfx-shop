@@ -13,6 +13,11 @@ body {
   flex: 1 0 auto;
 }
 
+a:hover {
+  text-decoration: none;
+  color: $font-grey;
+}
+
 // Appart from font-family and color, all the components applied to the html, body and
 // content, are to fix the footer at the bottom of the pages. The class "content"
 // has to be applied on every page that displays the footer.
