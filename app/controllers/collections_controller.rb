@@ -13,17 +13,21 @@ class CollectionsController < ApplicationController
     else
       Collection.create(user_id: current_user.id, tracks: [params[:track].to_i], total_points: SingleTrack.find(params[:track].to_i).points, price_cents: 500)
     end
-    redirect_to list_path
+    cart_create_update
+    redirect_to request.referer
   end
 
   def update
     # this action is to remove tracks from collection
+    cart = Cart.where(user_id: current_user.id).last
     collection = Collection.find(params[:id].to_i)
     collection.tracks.delete(params[:track].to_i)
     collection.total_points = points(collection.tracks)
     collection.price_cents = collection_categories(collection.total_points)
     collection.save
-    redirect_to list_path
+    cart_remove_collection(collection, cart) if collection.tracks == []
+    cart.destroy if cart.items == [] && cart.sinlge_tracks == [] && cart.collections == []
+    redirect_to request.referer
   end
 
   private
@@ -43,16 +47,38 @@ class CollectionsController < ApplicationController
     case
     when points == 0
       0
-    when points > 20 
+    when points <= 20
+      500
+    when points <= 50 
       1000
-    when points > 50
+    when points <= 100
       2000
-    when points > 100
+    when points <= 300
       4000
     when points > 300
       # create a new pack / raise error
     else
-      500
+      0
     end
+  end
+
+  def cart_create_update
+    if Cart.where(user_id: current_user.id).last.nil?
+      # user_collections = current_user.collections.map {|coll| coll.id}
+      Cart.create(collections: current_user_collections, user_id: current_user.id)
+    else
+      cart = Cart.where(user_id: current_user.id).last
+      cart.collections = current_user_collections
+      cart.save
+    end
+  end
+
+  def current_user_collections
+    current_user.collections.map {|coll| coll.id}
+  end
+
+  def cart_remove_collection(collection, cart)
+    cart.collections.delete(collection.id)
+    cart.save
   end
 end
