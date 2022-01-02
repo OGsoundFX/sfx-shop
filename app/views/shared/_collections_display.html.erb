@@ -1,0 +1,24 @@
+<h4>Collections in progress</h4>
+<% if !@current_collections.empty? %>
+  <% @current_collections.each_with_index do |collection, index| %>
+    <% if collection.title.nil? %>
+      <p>Your collection n°<%= index + 1 %></p>
+      <ul>
+      <% collection.tracks.each do |track| %>
+        <li>
+          <p><%= SingleTrack.find(track).title %></p>
+        </li>
+      <% end %>
+      </ul>
+    <% else %>
+      <p><%= collection.title %></p>
+      <ul>
+        <% collection.tracks.each do |track| %>
+          <li>
+            <p><%= SingleTrack.find(track).title %></p>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+<% end %>
