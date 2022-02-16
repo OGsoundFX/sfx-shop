@@ -1,9 +1,34 @@
 <%= render 'shared/navbar_general' %>
-<div class="container padding-navbar content margins" id="cart-container">
-  <h2 id="cart-title">Welcome to your cart <%= current_user.username %></h2>
-  <% if Sale.where("end_date > ?", Date.current).count > 0 %>
-    <%= render 'shared/cart_sale' %>
-  <% else %>
-    <%= render 'shared/cart_no_sale' %>
-  <% end %>
+<div class="padding-navbar content margins cart-font" id="cart-container">
+  <div class="pannel-grid">
+    <div class="cart-pannel">
+      <% if Sale.where("end_date > ?", Date.current).count > 0 %>
+        <%= render 'shared/cart_sale' %>
+      <% else %>
+        <%= render 'shared/cart_no_sale' %>
+      <% end %>
+    </div>
+    <div class="checkout-pannel">
+      <div class="total">
+        <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>
+        <i>(number of items: <%= @pack_list.count + @single_tracks_list.count %>)</i>
+        <% if (@total_value - @sum) != 0 %>
+          <p> <i>You spare <strong><%= humanized_money_with_symbol (@total_value - @sum) %></strong></i></p>
+        <% else %>
+          <div style="height: 10px;"></div>
+        <% end %>
+        <div class="d-flex justify-content-center">
+          <div>
+          <%= form_tag checkout_path do %>
+            <%= hidden_field_tag 'cart_id', @items.id %>
+            <%= submit_tag 'Checkout', id: 'btn-cart' %>
+          <% end %>
+          </div>
+          <div id="continue-shopping">
+            <%= link_to "Continue shopping", root_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
