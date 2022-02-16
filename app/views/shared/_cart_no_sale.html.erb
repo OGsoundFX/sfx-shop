@@ -1,4 +1,5 @@
 <% if @pack_list %>
+  <div class="packs-display">
     <% @pack_list.each_with_index do |pack, index| %>
       <% if index.positive? %>
         <div class="row item-attributes">
@@ -95,6 +96,7 @@
         </div>
       <% end %>
     <% end %>
+  </div>
 
     <div id="cart-paginate-desktop">
       <%= render 'shared/paginate_tracks' %>
@@ -105,26 +107,6 @@
 
     <%= render 'shared/collections_display' %>
 
-    <div class="total">
-      <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>
-      <i>(number of items: <%= @pack_list.count + @single_tracks_list.count %>)</i>
-      <% if (@total_value - @sum) != 0 %>
-        <p> <i>You spare <strong><%= humanized_money_with_symbol (@total_value - @sum) %></strong></i></p>
-      <% else %>
-        <div style="height: 10px;"></div>
-      <% end %>
-      <div class="d-flex justify-content-center">
-        <div>
-        <%= form_tag checkout_path do %>
-          <%= hidden_field_tag 'cart_id', @items.id %>
-          <%= submit_tag 'Checkout', id: 'btn-cart' %>
-        <% end %>
-        </div>
-        <div id="continue-shopping">
-          <%= link_to "Continue shopping", root_path %>
-        </div>
-      </div>
-    </div>
 <% else %>
   <h3>Your cart is empty</h3>
   <%= link_to "Go Shopping", root_path %>

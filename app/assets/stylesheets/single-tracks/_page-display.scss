@@ -9,7 +9,7 @@
     background-color: white;
     color: #4E4E4E;
     padding-left: 10px;
-    border: solid 1px #dee2e6;
+    border: solid 1px $border-grey;
     height: 40px;
     width: 25vw;
   }
@@ -20,7 +20,7 @@
   input {
     color: #4E4E4E;
     padding-left: 10px;
-    border: solid 1px #dee2e6;
+    border: solid 1px $border-grey;
     height: 40px;
   }
 }
@@ -32,7 +32,7 @@
     background-color: white;
     color: #4E4E4E;
     padding-left: 10px;
-    border: solid 1px #dee2e6;
+    border: solid 1px $border-grey;
     height: 25px;
     width: 9vw;
   }
@@ -43,7 +43,7 @@
   input {
     color: #4E4E4E;
     padding-left: 10px;
-    border: solid 1px #dee2e6;
+    border: solid 1px $border-grey;
     height: 25px;
   }
 }
@@ -54,7 +54,7 @@
     position: relative;
     color: #4E4E4E;
     padding-left: 10px;
-    border: solid 1px #dee2e6;
+    border: solid 1px $border-grey;
     height: 40px;
     width: 65vw;
     max-width: 980px;
@@ -205,7 +205,7 @@ ul {
 }
 
 .purchase-section {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid $border-grey;
 }
 
 .purchase-icons {
