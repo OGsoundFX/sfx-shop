@@ -43,6 +43,7 @@ class CartsController < ApplicationController
 
   def cart
     collections
+    @number_of_items = @current_collections.count
     @items = Cart.where(user_id: current_user.id).first
     current_sales = Sale.where("end_date > ?", Date.current)
     @current_sales_list = {}
@@ -53,11 +54,13 @@ class CartsController < ApplicationController
       @items.items.each do |item|
         @pack_list << SfxPack.find(item)
       end
+      @number_of_items += @pack_list.count
       # fetching single tracks
       @single_tracks_list = []
       @items.sinlge_tracks.each do |item|
         SingleTrack.find_by_id(item) ? @single_tracks_list << SingleTrack.find(item) : false
       end
+      @number_of_items += @single_tracks_list.count
       @total_value = 0
       @sum = 0
 

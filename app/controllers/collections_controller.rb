@@ -25,7 +25,10 @@ class CollectionsController < ApplicationController
     collection.total_points = points(collection.tracks)
     collection.price_cents = collection_categories(collection.total_points)
     collection.save
-    cart_remove_collection(collection, cart) if collection.tracks == []
+    if collection.tracks == []
+      cart_remove_collection(collection, cart)
+      collection.destroy
+    end
     cart.destroy if cart.items == [] && cart.sinlge_tracks == [] && cart.collections == []
     redirect_to request.referer
   end
@@ -44,6 +47,7 @@ class CollectionsController < ApplicationController
   end
 
   def collection_categories(points)
+
     case
     when points == 0
       0
@@ -51,14 +55,12 @@ class CollectionsController < ApplicationController
       500
     when points <= 50 
       1000
-    when points <= 100
+    when points <= 120
       2000
     when points <= 300
       4000
-    when points > 300
-      # create a new pack / raise error
     else
-      0
+      5000 # unlimited
     end
   end
 
