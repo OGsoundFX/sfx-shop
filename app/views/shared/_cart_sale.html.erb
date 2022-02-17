@@ -1,15 +1,26 @@
 <% if @pack_list %>
+  <div class="packs-display">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <i class="fal fa-box-open cart-icon-adjust"></i>
+        <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
+      </div>
+      <div>
+        <i class="fal fa-angle-down"></i>
+      </div>
+    </div>
     <% @pack_list.each do |pack| %>
-        <div class="row item-attributes">
-          <div class="col-5 col-sm-4 col-lg-2">
+    <hr>
+        <div class="item-attributes">
+          <div class="">
             <div id="wrapper">
               <%= link_to sfx_pack_path(pack) do %>
-                <div><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
+                <div class="cart-pack-img-container"><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
                 <div class="pop-up-cart">See Details</div>
               <% end %>
             </div>
           </div>
-          <div class="col-6 col-sm-8 col-lg-8 cart-pack-display">
+          <div class="cart-pack-display">
             <div><h3><%= pack.title %></h3></div>
             <div>
               <div class="d-flex">
@@ -28,9 +39,13 @@
                 <div id="instead-mobile"><i>(inst. of <%= humanized_money_with_symbol pack.price %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
                 <% end %>
             </div>
-              <%= form_tag remove_item_path do %>
+          </div>
+          <div class="cart-form-remove">
+            <%= form_tag remove_item_path do %>
               <%= hidden_field_tag 'pack_id', pack.id %>
-              <%= submit_tag 'Remove', id: 'btn-remove' %>
+              <%= button_tag(type: "submit", id: "cart-btn-remove") do %>
+                  <i class="fal fa-times"></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -62,37 +77,25 @@
           <hr>
         </div>
     <% end %>
-
-    <div id="cart-paginate-desktop">
-      <%= render 'shared/paginate_tracks' %>
-    </div>
-    <div id="cart-paginate-mobile" class="screen-display">
-      <%= render 'shared/paginate_tracks_mobile' %>
-    </div>
-
-    <%= render 'shared/collections_display' %>
-
-    <div class="total">
-      <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>
-      <i>(number of items: <%= @pack_list.count + @single_tracks_list.count %>)</i>
-      <% if (@total_value - @sum) != 0 %>
-        <p> <i>You spare <strong><%= humanized_money_with_symbol (@total_value - @sum) %></strong></i></p>
-      <% else %>
-        <div style="height: 10px;"></div>
-      <% end %>
-      <div class="d-flex justify-content-center">
-        <div>
-        <%= form_tag checkout_path do %>
-          <%= hidden_field_tag 'cart_id', @items.id %>
-          <%= submit_tag 'Checkout', id: 'btn-cart' %>
-        <% end %>
-        </div>
-        <div id="continue-shopping">
-          <%= link_to "Continue shopping", root_path %>
-        </div>
+    <hr>
+    <div class="d-flex justify-content-end">
+      <div class="d-flex sub-total">
+        <div>SUB-TOTAL</div>
+        <div><%= humanized_money_with_symbol @total_pack_sum %>,00</div>
       </div>
     </div>
-<% else %>
-  <h3>Your cart is empty</h3>
-  <%= link_to "Go Shopping", root_path %>
+  </div>
+<% end %>
+
+<% unless @tracks.nil? || @tracks == [] %>
+  <div id="cart-paginate-desktop">
+    <%= render 'shared/paginate_tracks' %>
+  </div>
+  <div id="cart-paginate-mobile" class="screen-display">
+    <%= render 'shared/paginate_tracks_mobile' %>
+  </div>
+<% end %>
+
+<% unless @current_collections.empty? %>
+  <%= render 'shared/collections_display' %>
 <% end %>
