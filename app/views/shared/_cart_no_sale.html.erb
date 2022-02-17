@@ -1,17 +1,27 @@
 <% if @pack_list %>
   <div class="packs-display">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <i class="fal fa-box-open cart-icon-adjust"></i>
+        <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
+      </div>
+      <div>
+        <i class="fal fa-angle-down"></i>
+      </div>
+    </div>
     <% @pack_list.each_with_index do |pack, index| %>
+    <hr>
       <% if index.positive? %>
-        <div class="row item-attributes">
-          <div class="col-5 col-sm-4 col-lg-2">
+        <div class="item-attributes">
+          <div class="">
             <div id="wrapper">
               <%= link_to sfx_pack_path(pack) do %>
-                <div><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
+                <div class="cart-pack-img-container"><%= image_tag pack.photos[0], class: "pack_pic_cart" %></div>
                 <div class="pop-up-cart">See Details</div>
               <% end %>
             </div>
           </div>
-          <div class="col-6 col-sm-8 col-lg-8 cart-pack-display">
+          <div class="cart-pack-display">
             <div><h3><%= pack.title %></h3></div>
             <div>
               <div class="d-flex">
@@ -24,9 +34,13 @@
               </div>
               <div id="instead-mobile"><i>(inst. of <%= humanized_money_with_symbol pack.price %>)</i></div>
             </div>
+          </div>
+          <div class="cart-form-remove">
             <%= form_tag remove_item_path do %>
               <%= hidden_field_tag 'pack_id', pack.id %>
-              <%= submit_tag 'Remove', id: 'btn-remove' %>
+              <%= button_tag(type: "submit", id: "cart-btn-remove") do %>
+                  <i class="fal fa-times"></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -59,21 +73,25 @@
         </div>
 
       <% else %>
-        <div class="row item-attributes">
-          <div class="col-5 col-sm-4 col-lg-2">
+        <div class="item-attributes">
+          <div class="">
             <div id="wrapper">
               <%= link_to sfx_pack_path(pack) do %>
-                <div><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
+                <div class="cart-pack-img-container"><%= image_tag pack.photos[0], width: "150px", class: "pack_pic_cart" %></div>
                 <div class="pop-up-cart">See Details</div>
               <% end %>
             </div>
           </div>
-          <div class="col-6 col-sm-8 col-lg-8 cart-pack-display">
+          <div class="cart-pack-display">
             <div><h3><%= pack.title %></h3></div>
             <div><h3><strong class="price-color"><%= humanized_money_with_symbol pack.price %></strong></h3></div>
+          </div>
+          <div class="cart-form-remove">
             <%= form_tag remove_item_path do %>
               <%= hidden_field_tag 'pack_id', pack.id %>
-              <%= submit_tag 'Remove', id: 'btn-remove' %>
+              <%= button_tag(type: "submit", id: "cart-btn-remove") do %>
+                  <i class="fal fa-times"></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -96,6 +114,13 @@
         </div>
       <% end %>
     <% end %>
+    <hr>
+    <div class="d-flex justify-content-end">
+      <div class="d-flex sub-total">
+        <div>SUB-TOTAL</div>
+        <div><%= humanized_money_with_symbol @total_pack_sum %>,00</div>
+      </div>
+    </div>
   </div>
 
     <div id="cart-paginate-desktop">

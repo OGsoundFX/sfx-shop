@@ -6,8 +6,8 @@
 .margins {
   margin-top: 20px;
   margin-bottom: 25px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 #cart-title {
@@ -27,10 +27,59 @@
 .packs-display {
   border: solid 1px $border-grey;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+
+  hr {
+    width: 90%;
+  }
+
+  .fa-angle-down {
+    font-size: 40px;
+    font-weight: 500;
+    margin: 24px 40px 0 0;
+  }
+}
+
+.cart-icon-adjust {
+  height: 35px;
+  width: 35px;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: $font-grey;
+  color: white;
+  margin: 24px 20px 0 40px;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.cart-sfx-packs-title {
+  margin-top: 24px;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+.cart-form-remove {
+  text-align: end;
+  margin-right: 44px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.sub-total {
+  background-color: $whitesmoke;
+  margin: 0 32px 16px 16px;
+  padding: 12px;
+  gap: 12px;
+  font-size: 1.2em;
 }
 
 .item-attributes {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
   margin: 25px 0px;
+  margin-left: 24px;
 }
 
 .item-attributes-small {
@@ -44,8 +93,8 @@
 // pannels dispertion
 .pannel-grid {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 20px;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
 }
 
 $breakpoint-tablet: 768px;
