@@ -1,4 +1,4 @@
-<% if @pack_list %>
+<% if @pack_list && @pack_list != [] %>
   <div class="packs-display">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
@@ -122,17 +122,17 @@
       </div>
     </div>
   </div>
+<% end %>
 
-    <div id="cart-paginate-desktop">
-      <%= render 'shared/paginate_tracks' %>
-    </div>
-    <div id="cart-paginate-mobile" class="screen-display">
-      <%= render 'shared/paginate_tracks_mobile' %>
-    </div>
+<% unless @tracks.nil? || @tracks == [] %>
+  <div id="cart-paginate-desktop">
+    <%= render 'shared/paginate_tracks' %>
+  </div>
+  <div id="cart-paginate-mobile" class="screen-display">
+    <%= render 'shared/paginate_tracks_mobile' %>
+  </div>
+<% end %>
 
-    <%= render 'shared/collections_display' %>
-
-<% else %>
-  <h3>Your cart is empty</h3>
-  <%= link_to "Go Shopping", root_path %>
+<% unless @current_collections.empty? %>
+  <%= render 'shared/collections_display' %>
 <% end %>
