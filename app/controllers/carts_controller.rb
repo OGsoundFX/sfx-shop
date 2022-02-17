@@ -111,7 +111,7 @@ class CartsController < ApplicationController
   def delete_item
     @cart = Cart.where(user_id: current_user.id).first
     @cart.items.delete(params[:pack_id].to_i)
-    if @cart.items == [] && @cart.sinlge_tracks == []
+    if @cart.items.empty? && @cart.sinlge_tracks.empty? && @cart.collections.empty?
       @cart.destroy
     else
       @cart.save
@@ -126,7 +126,7 @@ class CartsController < ApplicationController
   def delete_track
     cart = Cart.where(user_id: current_user.id).first
     cart.sinlge_tracks.delete(params[:id].to_i)
-    if cart.items == [] && cart.sinlge_tracks == []
+    if cart.items.empty? && cart.sinlge_tracks.empty? && cart.collections.empty?
       cart.destroy
     else
       cart.save
@@ -137,7 +137,7 @@ class CartsController < ApplicationController
   def single_tracks_cart_remove
     cart = Cart.where(user_id: current_user.id).first
     cart.sinlge_tracks.delete(params[:track_id].to_i)
-    if cart.items == [] && cart.sinlge_tracks == []
+    if cart.items.empty? && cart.sinlge_tracks.empty? && cart.collections.empty?
       cart.destroy
     else
       cart.save
