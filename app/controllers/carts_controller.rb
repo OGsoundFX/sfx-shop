@@ -73,12 +73,14 @@ class CartsController < ApplicationController
           @current_sales_list[pack.id] ? @sum += (pack.price_cents * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += (pack.price_cents / 100)
           @total_value += (pack.price_cents / 100)
         end
+        @total_pack_sum = @sum
       else
         @pack_list.sort_by!(&:price_cents).reverse!
         @pack_list.each_with_index do |pack, index|
           @total_value += (pack.price_cents / 100)
           index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
         end
+        @total_pack_sum = @sum
       end
 
       # adding up prices of single tracks
