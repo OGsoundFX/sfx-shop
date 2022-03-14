@@ -1,12 +1,12 @@
 <% if @pack_list && @pack_list != [] %>
-  <div class="packs-display">
+  <div class="packs-display" data-unwrap-cart-target="packsUnwrapped">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
         <i class="fal fa-box-open cart-icon-adjust"></i>
         <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
       </div>
       <div>
-        <i class="fal fa-angle-down"></i>
+        <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap"></i>
       </div>
     </div>
     <% @pack_list.each_with_index do |pack, index| %>
@@ -119,6 +119,17 @@
       <div class="d-flex sub-total">
         <div>SUB-TOTAL</div>
         <div><%= humanized_money_with_symbol @total_pack_sum %>,00</div>
+      </div>
+    </div>
+  </div>
+  <div class="packs-display packs-display-closed d-none" data-unwrap-cart-target="packsWrapped">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <i class="fal fa-box-open cart-icon-adjust"></i>
+        <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
+      </div>
+      <div>
+        <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap"></i>
       </div>
     </div>
   </div>
