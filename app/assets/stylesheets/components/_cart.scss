@@ -32,11 +32,16 @@
     width: 90%;
   }
 
-  .fa-angle-down {
+  .fa-angle-down, .fa-angle-up {
     font-size: 40px;
     font-weight: 500;
     margin: 24px 40px 0 0;
+    cursor: pointer;
   }
+}
+
+.packs-display-closed {
+  padding-bottom: 16px;
 }
 
 .cart-icon-adjust {

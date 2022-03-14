@@ -6,7 +6,7 @@
   </div>
 <% else %>
   <div class="padding-navbar content margins cart-font" id="cart-container">
-    <div class="pannel-grid">
+    <div class="pannel-grid" data-controller="unwrap-cart">
       <div class="cart-pannel">
         <% if Sale.where("end_date > ?", Date.current).count > 0 %>
           <%= render 'shared/cart_sale' %>
