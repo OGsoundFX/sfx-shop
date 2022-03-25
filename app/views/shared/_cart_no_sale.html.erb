@@ -6,7 +6,7 @@
         <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
       </div>
       <div>
-        <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap"></i>
+        <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
       </div>
     </div>
     <% @pack_list.each_with_index do |pack, index| %>
@@ -26,7 +26,7 @@
             <div>
               <div class="d-flex">
                 <div>
-                  <h3><strong class="price-color"><%= humanized_money_with_symbol pack.price * 0.8 %></strong></h3>
+                  <h3 class="price-color"><%= humanized_money_with_symbol pack.price * 0.8 %></h3>
                 </div>
                 <div>
                  <div id="instead"><i>(instead of <%= humanized_money_with_symbol pack.price %>)</i></div>
@@ -56,7 +56,7 @@
           <div>
             <div class="d-flex justify-content-center">
               <div>
-                <h3><strong class="price-color"><%= humanized_money_with_symbol pack.price * 0.8 %></strong></h3>
+                <h3 class="price-color"><%= humanized_money_with_symbol pack.price * 0.8 %></h3>
               </div>
               <div>
                <div id="instead"><i>(instead of <%= humanized_money_with_symbol pack.price %>)</i></div>
@@ -84,7 +84,7 @@
           </div>
           <div class="cart-pack-display">
             <div><h3><%= pack.title %></h3></div>
-            <div><h3><strong class="price-color"><%= humanized_money_with_symbol pack.price %></strong></h3></div>
+            <div><h3 class="price-color"><%= humanized_money_with_symbol pack.price %></h3></div>
           </div>
           <div class="cart-form-remove">
             <%= form_tag remove_item_path do %>
@@ -104,7 +104,7 @@
             <% end %>
           </div>
           <div><h3><%= pack.title %></h3></div>
-          <div><h3><strong class="price-color"><%= humanized_money_with_symbol pack.price %></strong></h3></div>
+          <div><h3 class="price-color"><%= humanized_money_with_symbol pack.price %></h3></div>
           <%= form_tag remove_item_path do %>
             <%= hidden_field_tag 'pack_id', pack.id %>
             <%= submit_tag 'Remove', id: 'btn-remove' %>
@@ -129,7 +129,7 @@
         <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
       </div>
       <div>
-        <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap"></i>
+        <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
       </div>
     </div>
   </div>
@@ -137,13 +137,13 @@
 
 <% unless @tracks.nil? || @tracks == [] %>
   <div id="cart-paginate-desktop">
-    <%= render 'shared/paginate_tracks' %>
+    <%= render 'shared/cart/paginate_tracks_cart' %>
   </div>
   <div id="cart-paginate-mobile" class="screen-display">
-    <%= render 'shared/paginate_tracks_mobile' %>
+    <%= render 'shared/cart/paginate_tracks_mobile_cart' %>
   </div>
 <% end %>
 
 <% unless @current_collections.empty? %>
-  <%= render 'shared/collections_display' %>
+  <%= render 'shared/cart/collections_display' %>
 <% end %>

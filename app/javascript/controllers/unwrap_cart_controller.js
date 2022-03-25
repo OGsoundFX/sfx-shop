@@ -6,9 +6,12 @@ export default class extends Controller {
   connect() {
   }
 
-  wrap() {
-    this.packsUnwrappedTarget.classList.toggle("d-none")
-    this.packsWrappedTarget.classList.toggle("d-none")
+  wrap(event) {
+    console.log(event.target)
+    if(event.target.id === "pack-arrow") {
+      this.packsUnwrappedTarget.classList.toggle("d-none")
+      this.packsWrappedTarget.classList.toggle("d-none")
+    }
   }
 
 }
