@@ -1,22 +1,22 @@
 <div style="margin-top: 26px"></div>
-<div class="packs-display" data-unwrap-cart-target="packsUnwrapped">
+<div class="packs-display" data-unwrap-cart-target="singleUnwrapped">
 
   <div class="d-flex justify-content-between">
     <div class="d-flex">
-      <i class="fal fa-box-open cart-icon-adjust"></i>
-      <h3 class="cart-sfx-packs-title"> <strong>Single Tracks</strong> </h3>
+      <i class="fas fa-headphones cart-icon-adjust"></i>
+      <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
     </div>
     <div>
-      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap"></i>
+      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
     </div>
   </div>
   <hr>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between container">
     <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></pages></em>)</p>
     <%= paginate @tracks, class: "paginator-top" %>
   </div>
-  <ul>
+  <ul class="container">
     <% @tracks.each do |track| %>
     <li class="border">
       <div class="wrapper">
@@ -100,3 +100,14 @@
   <%= render 'shared/coming_soon_modals' %>
 </div>
 
+<div class="packs-display packs-display-closed d-none" data-unwrap-cart-target="singleWrapped">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-headphones cart-icon-adjust"></i>
+      <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
+    </div>
+    <div>
+      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
+    </div>
+  </div>
+</div>
