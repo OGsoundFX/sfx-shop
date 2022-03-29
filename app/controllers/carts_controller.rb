@@ -87,7 +87,10 @@ class CartsController < ApplicationController
       end
 
       # adding up prices of single tracks
+      @single_tracks_value = 0
+
       @single_tracks_list.each do |track|
+        @single_tracks_value += (track.price_cents / 100.to_f)
         @sum += (track.price_cents / 100.to_f)
         @total_value += (track.price_cents / 100.to_f)
       end

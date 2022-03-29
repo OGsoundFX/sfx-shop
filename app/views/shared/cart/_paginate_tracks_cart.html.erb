@@ -1,5 +1,5 @@
 <div style="margin-top: 26px"></div>
-<div class="packs-display" data-unwrap-cart-target="singleUnwrapped">
+<div class="packs-display d-none" data-unwrap-cart-target="singleUnwrapped">
 
   <div class="d-flex justify-content-between">
     <div class="d-flex">
@@ -7,7 +7,7 @@
       <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
     </div>
     <div>
-      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
+      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
     </div>
   </div>
   <hr>
@@ -96,18 +96,28 @@
     <em><p class="results-font-size">Total results: <%= @tracks.total_count %></p></em>
     <%= paginate @tracks, class: "paginator-bottom" %>
   </div>
+  <hr>
+  <div class="d-flex justify-content-end">
+    <div class="d-flex sub-total">
+      <div>SUB-TOTAL</div>
+      <div><%= humanized_money_with_symbol @single_tracks_value %></div>
+    </div>
+  </div>
 
   <%= render 'shared/coming_soon_modals' %>
 </div>
 
-<div class="packs-display packs-display-closed d-none" data-unwrap-cart-target="singleWrapped">
+<div class="packs-display packs-display-closed" data-unwrap-cart-target="singleWrapped">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-headphones cart-icon-adjust"></i>
-      <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
+      <div class="d-flex flex-column">
+        <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
+        <h5>SUB-TOTAL <%= humanized_money_with_symbol @single_tracks_value %></h5>
+      </div>
     </div>
     <div>
-      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
+      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="single-arrow"></i>
     </div>
   </div>
 </div>

@@ -1,12 +1,12 @@
 <div style="margin-top: 26px"></div>
-<div class="packs-display" data-unwrap-cart-target="collectionUnwrapped">
+<div class="packs-display d-none" data-unwrap-cart-target="collectionUnwrapped">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-compact-disc cart-icon-adjust"></i>
       <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
     </div>
     <div>
-      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
     </div>
   </div>
   <hr>
@@ -35,16 +35,26 @@
       <% end %>
     <% end %>
   <% end %>
+  <hr>
+  <div class="d-flex justify-content-end">
+    <div class="d-flex sub-total">
+      <div>SUB-TOTAL</div>
+      <div><%= humanized_money_with_symbol @current_collections.first.price %>.00</div>
+    </div>
+  </div>
 </div>
 
-<div class="packs-display packs-display-closed d-none" data-unwrap-cart-target="collectionWrapped">
+<div class="packs-display packs-display-closed" data-unwrap-cart-target="collectionWrapped">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-compact-disc cart-icon-adjust"></i>
-      <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+      <div class="d-flex flex-column">
+        <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+        <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+      </div>
     </div>
     <div>
-      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
     </div>
   </div>
 </div>
