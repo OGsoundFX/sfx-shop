@@ -13,6 +13,11 @@ const timeConverter = (time) => {
 // multiple track display
 
 window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById("single-display").classList.add('d-none')
+  }, 200);
+
+
   // loading watermark
   let watermark = new Audio('https://single-track-list.s3.eu-central-1.amazonaws.com/watermark/watermark.mp3');
   watermark.volume = 0.5;
