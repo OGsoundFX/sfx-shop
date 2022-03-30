@@ -1,0 +1,33 @@
+.max-width-cart {
+  width: 8vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.max-width-cart-icon {
+  width: 2vw;
+}
+
+.border-cart {
+  height: 62px;
+  border: solid 1px $border-grey;
+  // border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: -1px;
+  &:hover {
+    background-color: #f5f3f3b6;
+  }
+}
+
+.icon-adjust-cart {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  margin: 7px 20px 0 20px;
+  text-align: center;
+  padding: 2px 0;
+}
