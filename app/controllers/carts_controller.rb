@@ -107,7 +107,8 @@ class CartsController < ApplicationController
         "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
         "default": '<i class="fas fa-volume-up"></i>'
       }
-      @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
+      # @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
+      @tracks = SingleTrack.where(id: [@items.sinlge_tracks])
     end
   end
 

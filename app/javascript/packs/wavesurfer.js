@@ -15,7 +15,8 @@ const timeConverter = (time) => {
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     document.getElementById("single-display").classList.add('d-none')
-  }, 200);
+    document.getElementById("single-display").style.visibility = ""
+  }, 700);
 
 
   // loading watermark
