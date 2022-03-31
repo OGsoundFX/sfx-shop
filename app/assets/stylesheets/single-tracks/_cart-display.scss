@@ -46,7 +46,7 @@
   color: white;
   border: solid 2px $darker-blue;
   border-radius: 4px;
-  padding: 0 2px;
+  padding: 0 4px;
   &:hover {
     background-color: $light-grey;
     border: solid 2px $light-grey;
@@ -55,4 +55,8 @@
 
 .container-cart-single {
   margin: 0 44px;
+}
+
+.margins-vertical {
+  margin: 20px 44px 4px 44px;
 }

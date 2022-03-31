@@ -3,7 +3,10 @@
     <div class="d-flex justify-content-between">
       <div class="d-flex">
         <i class="fal fa-box-open cart-icon-adjust"></i>
-        <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
+        <div class="dflex flex-column">
+          <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
+          <h5>SUB-TOTAL <%= humanized_money_with_symbol @total_pack_sum %>.00</h5>
+        </div>
       </div>
       <div>
         <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>

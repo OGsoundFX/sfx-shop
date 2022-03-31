@@ -3,7 +3,10 @@
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-compact-disc cart-icon-adjust"></i>
-      <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+      <div class="d-flex flex-column">
+        <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+        <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+      </div>
     </div>
     <div>
       <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
@@ -19,7 +22,7 @@
         <ul class="container">
         <% collection.tracks.each do |track| %>
           <li>
-            <p><%= SingleTrack.find(track).title %></p>
+            <p><%= SingleTrack.find(track).title %> / points: <%= SingleTrack.find(track).points %> / <%= SingleTrack.find(track).price %></p>
           </li>
         <% end %>
         </ul>

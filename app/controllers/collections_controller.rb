@@ -33,6 +33,29 @@ class CollectionsController < ApplicationController
     redirect_to request.referer
   end
 
+  def convert
+    # this action is not only to create a collection from scratch but add tracks to collection
+    user_collection = Collection.where("user_id = #{current_user.id} and purchased = false").last
+    if !user_collection.nil?
+      params[:tracks].each do |track|
+        user_collection.tracks << track.to_i
+        user_collection.tracks = user_collection.tracks.uniq
+        user_collection.total_points = points(user_collection.tracks)
+        user_collection.price_cents = collection_categories(user_collection.total_points)
+      end
+      user_collection.save
+    else
+      # track_points = params[:tracks].map { |track| track = SingleTrack.find(track).price}
+      # sum_points = track_points.sum
+      price = CollectionCategory.where("points > #{params[:points]}").first.price * 100
+      Collection.create(user_id: current_user.id, tracks: params[:tracks], total_points: params[:points], price_cents: price)
+    end
+    # Deleting all the single tracks from user
+    current_user.cart.sinlge_tracks = []
+    current_user.cart.save!
+    redirect_to request.referer
+  end
+
   private
 
   def points(tracks)
