@@ -26,12 +26,13 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
   resources :sales, only: [:new, :create, :destroy]
-
+  
   get 'list', to: 'single_tracks#index'
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
-
+  
   resources :collections, only: [:create, :update]
-
+  post "convert", to: "collections#convert"
+  
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
