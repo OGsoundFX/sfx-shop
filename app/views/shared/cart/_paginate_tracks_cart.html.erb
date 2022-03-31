@@ -1,5 +1,5 @@
 <div style="margin-top: 26px"></div>
-<div class="packs-display" id="single-display" data-unwrap-cart-target="singleUnwrapped">
+<div class="packs-display" id="single-display" style="visibility: hidden" data-unwrap-cart-target="singleUnwrapped">
 
   <div class="d-flex justify-content-between">
     <div class="d-flex">
@@ -12,13 +12,15 @@
   </div>
   <hr>
 
-  <div class="d-flex justify-content-between container">
-    <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
-    <p>Get these tracks for <%= humanized_money_with_symbol CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price %> convert into a Collection </p>
-    <p><%= @tracks.sum(:points) %> / <%= CollectionCategory.where("points > #{@tracks.sum(:points)}").first.points  %></p>
-    <%= paginate @tracks, class: "paginator-top" %>
+  <div class="d-flex justify-content-between container-cart-single">
+    <div class="d-flex justify-content-between">
+      <i class="fas fa-exclamation-triangle" style="color: #ffa500" id="warning-collection"></i>
+      <p>Get these tracks for <span style="color: #ffa500"><%= humanized_money_with_symbol CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price %></span> convert into a <button id="btn-cart-collection">Collection</button> Save <span style="color: #ffa500"><%= humanized_money_with_symbol (@single_tracks_value - CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price.to_i) %>!!!</span></p>
+    </div>
+    <p><%= @tracks.count %> tracks / <span style="color: #ffa500"><%= @tracks.sum(:points) %> points</span></p>
   </div>
-  <ul class="container">
+    <p>Points to next category: <%= CollectionCategory.where("points > #{@tracks.sum(:points)}").first.points  %></p>
+  <ul class="container-cart-single">
     <% @tracks.each do |track| %>
     <li class="border-cart">
       <div class="wrapper">
@@ -94,9 +96,8 @@
   </ul>
   <div class="d-flex justify-content-between">
 
-    <%= paginate @tracks, class: "paginator-bottom" %>
   </div>
-  <hr>
+  <br>
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>SUB-TOTAL</div>

@@ -31,3 +31,28 @@
   text-align: center;
   padding: 2px 0;
 }
+
+#cart-total-margin-bottom {
+  margin-bottom: 5px;
+}
+
+#warning-collection {
+  margin: 2px 4px 0 0;
+  font-size: 20px;
+}
+
+#btn-cart-collection {
+  background-color: $light-blue;
+  color: white;
+  border: solid 2px $darker-blue;
+  border-radius: 4px;
+  padding: 0 2px;
+  &:hover {
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+  }
+}
+
+.container-cart-single {
+  margin: 0 44px;
+}
