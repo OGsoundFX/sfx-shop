@@ -16,22 +16,65 @@
       </div>
       <div class="checkout-pannel">
         <div class="total">
-          <h3>Total Amount: <strong class="price-color"><%= humanized_money_with_symbol @sum %></strong> </h3>
-          <i>(number of items: <%= @number_of_items %>)</i>
-          <% if (@total_value - @sum) != 0 %>
-            <p> <i>You spare <strong><%= humanized_money_with_symbol (@total_value - @sum) %></strong></i></p>
-          <% else %>
-            <div style="height: 10px;"></div>
-          <% end %>
-          <div class="d-flex justify-content-center">
-            <div>
-            <%= form_tag checkout_path do %>
-              <%= hidden_field_tag 'cart_id', @items.id %>
-              <%= submit_tag 'Checkout', id: 'btn-cart' %>
-            <% end %>
+          <div class="container-cart-total">
+            <strong><h4 style="text-align: start; margin-top: 8px">TOTAL</h4></strong>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h6>Packs</h6>
+              <span>
+                <% if @sum.class == Float %>
+                  <%= humanized_money_with_symbol @total_pack_sum %>
+                <% else %>
+                  <%= humanized_money_with_symbol @total_pack_sum %>.00
+                <% end %>
+              </span>
             </div>
-            <div id="continue-shopping">
-              <%= link_to "Continue shopping", root_path %>
+            <div class="d-flex justify-content-between">
+              <h6>Collection</h6>
+              <span>
+                <% if @sum.class == Float %>
+                  <%= humanized_money_with_symbol @current_collections.first.price %>
+                <% else %>
+                  <%= humanized_money_with_symbol @current_collections.first.price %>.00
+                <% end %>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6>Single-Tracks</h6>
+              <span>
+                <% if @sum.class == Float %>
+                  <%= humanized_money_with_symbol @single_tracks_value %>
+                <% else %>
+                  <%= humanized_money_with_symbol @single_tracks_value %>.00
+                <% end %>
+              </span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h6>Total</h6>
+              <span>
+                <% if @sum.class == Float %>
+                  <%= humanized_money_with_symbol @sum %>
+                <% else %>
+                  <%= humanized_money_with_symbol @sum %>,00
+                <% end %>
+              </span>
+            </div>
+            <% if (@total_value - @sum) != 0 %>
+              <p style="text-align: end; font-size: 0.8em"> <i>(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</i></p>
+            <% else %>
+              <div style="height: 10px;"></div>
+            <% end %>
+            <div class="d-flex justify-content-center">
+              <div>
+              <%= form_tag checkout_path do %>
+                <%= hidden_field_tag 'cart_id', @items.id %>
+                <%= submit_tag 'Checkout', id: 'btn-cart' %>
+              <% end %>
+              </div>
+              <div id="continue-shopping">
+                <%= link_to "Continue shopping", root_path %>
+              </div>
             </div>
           </div>
         </div>
