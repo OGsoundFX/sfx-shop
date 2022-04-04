@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
 
   # checkout from Cart
   def checkout
+    raise
     cart = Cart.where(user_id: current_user.id).first
 
     cart.items.count == 1 ? multiple = false : multiple = true

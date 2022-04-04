@@ -87,15 +87,15 @@
   </div>
 <% end %>
 
-<% unless @tracks.nil? || @tracks == [] %>
-  <div id="cart-paginate-desktop">
-    <%= render 'shared/paginate_tracks' %>
-  </div>
-  <div id="cart-paginate-mobile" class="screen-display">
-    <%= render 'shared/paginate_tracks_mobile' %>
-  </div>
+<% unless @current_collections.empty? %>
+  <%= render 'shared/cart/collections_display_temp' %>
 <% end %>
 
-<% unless @current_collections.empty? %>
-  <%= render 'shared/collections_display' %>
+<% unless @tracks.nil? || @tracks == [] %>
+  <div id="cart-paginate-desktop">
+    <%= render 'shared/cart/paginate_tracks_cart' %>
+  </div>
+  <div id="cart-paginate-mobile" class="screen-display">
+    <%= render 'shared/cart/paginate_tracks_mobile_cart' %>
+  </div>
 <% end %>
