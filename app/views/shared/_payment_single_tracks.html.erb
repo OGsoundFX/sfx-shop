@@ -1,10 +1,7 @@
-<% if @order.tracks != [] %>
-  <hr>
-  <ul>
-    <% @order.tracks.each do |track| %>
-      <% displayed_track = SingleTrack.find(track) %>
-      <li><%= displayed_track.title %> <%= displayed_track.price_cents / 100.to_f %></li>
-    <% end %>
-  </ul>
-  <hr>
-<% end %>
+<ul>
+  <h3>Individual tracks</h3>
+  <% @order.tracks.each do |track| %>
+    <% displayed_track = SingleTrack.find(track) %>
+    <li class="display-list"><%= displayed_track.title %> <%= humanized_money_with_symbol(displayed_track.price_cents / 100.to_f) %></li>
+  <% end %>
+</ul>

@@ -43,11 +43,11 @@ class OrdersController < ApplicationController
 
   # checkout from Cart
   def checkout
-    raise
-    cart = Cart.where(user_id: current_user.id).first
-
+    # cart = Cart.where(user_id: current_user.id).first
+    cart = Cart.find(params[:cart_id])
+    
     cart.items.count == 1 ? multiple = false : multiple = true
-
+    
     # list SFX packs
     ordered_list = []
     cart.items.each do |item|
@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
     ordered_list.map! do |item|
       item.id
     end
-
+    
     current_sales = Sale.where("end_date > ?", Date.current)
     current_sales_list = {}
     current_sales.each do |sale|
@@ -122,11 +122,26 @@ class OrdersController < ApplicationController
       line_items << single_line_item
     end
 
-    # Adding sum of SFX packs and single tracks for the order instance
-    total_amount += tracks_sum
+    # Adding collection to order
+    collection = []
+    collection << params[:collection_id].to_i
+    collection_sum = (Collection.find(params[:collection_id]).price_cents / 100.to_f)
 
+    # creating line_item for collection
+    if collection != []
+      collection_line_item = {}
+      collection_line_item[:name] = 'Collection'
+      collection_line_item[:amount] = (collection_sum * 100).to_i
+      collection_line_item[:currency] = 'usd'
+      collection_line_item[:quantity] = 1
+      line_items << collection_line_item
+    end
+    
+    # Adding sum of SFX packs, single tracks & collection for the order
+    total_amount += tracks_sum += collection_sum
+    
     if current_user
-      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, tracks: cart.sinlge_tracks, sales: @sale_orders)
+      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, tracks: cart.sinlge_tracks, sales: @sale_orders, collections: collection)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,

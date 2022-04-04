@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   def new
     @order = current_user.orders.where(status: 'pending').find(params[:order_id])
+    @collection = Collection.find(@order.collections.first)
     if @order.multiple == false
       @photo = @order.sfx_pack.photos[0]
       items = []
