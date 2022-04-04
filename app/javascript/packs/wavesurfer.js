@@ -14,8 +14,15 @@ const timeConverter = (time) => {
 
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
+    // for loading the waveforms of single tracks display section in cart
     document.getElementById("single-display").classList.add('d-none')
     document.getElementById("single-display").style.visibility = ""
+    document.getElementById("wrapped-single-display").classList.remove('d-none')
+
+    // for loading the waveforms of collections display section in cart
+    document.getElementById("collection-display").classList.add('d-none')
+    document.getElementById("collection-display").style.visibility = ""
+    document.getElementById("wrapped-collection-display").classList.remove('d-none')
   }, 700);
 
 
