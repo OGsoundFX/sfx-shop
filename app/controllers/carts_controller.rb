@@ -43,6 +43,14 @@ class CartsController < ApplicationController
 
   def cart
     collections
+
+    # adding collection(s) to cart
+    cart = current_user.cart
+    cart.collections << @current_collections.last.id
+    cart.collections.uniq!
+    cart.save
+
+    # Set a few variables
     @number_of_items = @current_collections.count
     @items = Cart.where(user_id: current_user.id).first
     current_sales = Sale.where("end_date > ?", Date.current)
