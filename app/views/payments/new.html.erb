@@ -1,29 +1,31 @@
 <%= render 'shared/navbar_general' %>
 <div class="container padding-navbar content">
-  <div class="checkout">
+  <div class="checkout checkout-font">
     <% if @order.multiple == false %>
-      <div class="row py-4">
+      <div class="col">
+        <h1>Checkout summary</h1>
+        
+        <h3>Total purchase for <span style="color: #ffa500"><%= humanized_money_with_symbol @order.amount %><%= ".00" unless humanized_money_with_symbol(@order.amount).include?(".") %></span></h3>
         <div class="col-md-3"><%= image_tag @photo, width: '100%' %></div>
-        <div class="col">
-          <h1>Checkout summary</h1>
-          
-          <p>Purchase of <strong><%= @order.sfx_pack.title %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
-          <%= render 'shared/payment_single_tracks' %>
-          <button id="pay" class="btn btn-primary">Pay</button>
+        <hr>
+        <%= render 'shared/payment_single_tracks' %>
+        <hr>
+        <%= render 'shared/payment_collection_tracks' %>
+        <hr>
+        <button id="pay" class="btn btn-primary">Pay</button>
 
-          <script src="https://js.stripe.com/v3/"></script>
-          <script>
-            const paymentButton = document.getElementById('pay');
-            paymentButton.addEventListener('click', () => {
-              const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-              stripe.redirectToCheckout({
-                sessionId: '<%= @order.checkout_session_id %>'
-              });
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+          const paymentButton = document.getElementById('pay');
+          paymentButton.addEventListener('click', () => {
+            const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+            stripe.redirectToCheckout({
+              sessionId: '<%= @order.checkout_session_id %>'
             });
-          </script>
-          <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
-          <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p>
-        </div>
+          });
+        </script>
+        <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
+        <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p>
       </div>
     <% else %>
       <h1>Checkout summary</h1>
@@ -34,7 +36,15 @@
         <%= render 'shared/payment_no_sale' %>
       <% end %>
 
-      <%= render 'shared/payment_single_tracks' %>
+      <% if @order.tracks != [] %>
+        <hr>
+        <%= render 'shared/payment_single_tracks' %>
+      <% end %>
+      <% if @order.collections != [] %>
+        <hr>
+        <%= render 'shared/payment_collection_tracks' %>
+      <% end %>
+      <hr>
 
       <h3>For a total amount of <%= humanized_money_with_symbol @order.amount %> </h3>
       <button id="pay" class="btn btn-primary">Pay</button>

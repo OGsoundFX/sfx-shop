@@ -67,8 +67,7 @@
             <% end %>
             <div class="d-flex justify-content-center">
               <div>
-              <%= form_tag checkout_path do %>
-                <%= hidden_field_tag 'cart_id', @items.id %>
+              <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
                 <%= submit_tag 'Checkout', id: 'btn-cart' %>
               <% end %>
               </div>
