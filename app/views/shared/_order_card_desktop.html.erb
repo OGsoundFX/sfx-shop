@@ -1,5 +1,6 @@
 <% @orders.each do |order| %>
-<% @tracks = order.tracks %>
+  <% @collection = Collection.find(order.collections.first) if order.collections != [] %>
+  <% @tracks = order.tracks %>
   <div class="order_card">
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
 
@@ -132,6 +133,13 @@
         </div>
         <hr>
       <% end %>
+
+      <% if order.collections != [] %>
+        <h3>Your collection <%= @collection.title %></h3>
+        <%= render 'shared/order_card_collection_desktop' %>
+        <hr>
+      <% end %>
+
       <% if @tracks != [] %>
         <h3>Single Tracks</h3>
         <%= render 'shared/order_card_single_tracks_desktop' %>

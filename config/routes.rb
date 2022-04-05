@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'list', to: 'single_tracks#index'
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
+  get 'create_zip_collection', to: 'collections#create_zip_collection'
   
   resources :collections, only: [:create, :update]
   post "convert", to: "collections#convert"
