@@ -37,3 +37,8 @@ yarn-debug.log*
 .env*
 # /db/seeds.rb
 # /db/seeds
+
+# ignoring the content of the uploads folder exept .gitkeep file
+app/assets/uploads/*
+app/assets/uploads/*/
+!.gitkeep
