@@ -62,6 +62,12 @@
         </div>
       </div>
       <hr>
+      <% if order.collections != [] %>
+        <h3>Your collection <%= @collection.title %></h3>
+        <%= render 'shared/order_card_collection_desktop' %>
+        <hr>
+      <% end %>
+
       <% if @tracks != [] %>
         <h3>Single Tracks</h3>
         <%= render 'shared/order_card_single_tracks_desktop' %>

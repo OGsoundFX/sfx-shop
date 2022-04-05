@@ -170,7 +170,11 @@ class CartsController < ApplicationController
   end
 
   def destroy_cart
-    Cart.where(user_id: current_user.id).first.destroy
+    cart = Cart.where(user_id: current_user.id).first
+    collection = Collection.find(cart.collections.last)
+    collection.purchased = true
+    collection.save
+    cart.destroy
     redirect_to dashboard_path
   end
 
