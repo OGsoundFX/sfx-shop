@@ -37,3 +37,6 @@ yarn-debug.log*
 .env*
 # /db/seeds.rb
 # /db/seeds
+
+assets/uploads/*
+assets/uploads/*/
