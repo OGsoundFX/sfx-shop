@@ -46,9 +46,11 @@ class CartsController < ApplicationController
 
     # adding collection(s) to cart
     cart = current_user.cart
-    cart.collections << @current_collections.last.id
-    cart.collections.uniq!
-    cart.save
+    if cart && @current_collections.last
+      cart.collections << @current_collections.last.id
+      cart.collections.uniq!
+      cart.save
+    end
 
     # Set a few variables
     @number_of_items = @current_collections.count
@@ -104,11 +106,15 @@ class CartsController < ApplicationController
       end
 
       # adding up price of collection
-      @sum += @current_collections.last.price_cents / 100
+      if @current_collections.last
+        @sum += @current_collections.last.price_cents / 100
+      end
       # this is the You spare part, if we do it with collections vs single tracks
       # @total_value += @current_collections.last.price_cents / 100
       single_tracks_price = 0
-      @current_collections.last.tracks.each { |track| single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) }
+      if @current_collections.last
+        @current_collections.last.tracks.each { |track| single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) }
+      end
       @total_value += single_tracks_price
       @icons = {
         "all": '<i class="fas fa-volume-up"></i>',
