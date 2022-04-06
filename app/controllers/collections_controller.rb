@@ -19,6 +19,9 @@ class CollectionsController < ApplicationController
 
   def update
     # this action is to remove tracks from collection
+    raise
+    # destroy collection if last track of a collection
+    # destroy collection & cart if last track of collection and collection only item in cart
     cart = Cart.where(user_id: current_user.id).last
     collection = Collection.find(params[:id].to_i)
     collection.tracks.delete(params[:track].to_i)
@@ -133,7 +136,7 @@ class CollectionsController < ApplicationController
   end
 
   def current_user_collections
-    current_user.collections.map {|coll| coll.id}
+    current_user.collections.map {|coll| coll.id if coll.purchased == false}.compact
   end
 
   def cart_remove_collection(collection, cart)
