@@ -19,19 +19,20 @@ class CollectionsController < ApplicationController
 
   def update
     # this action is to remove tracks from collection
-    raise
-    # destroy collection if last track of a collection
-    # destroy collection & cart if last track of collection and collection only item in cart
-    cart = Cart.where(user_id: current_user.id).last
     collection = Collection.find(params[:id].to_i)
+    cart = Cart.where(user_id: current_user.id).last
     collection.tracks.delete(params[:track].to_i)
     collection.total_points = points(collection.tracks)
     collection.price_cents = collection_categories(collection.total_points)
     collection.save
+
+    # destroy collection if doesn't contain tracks
     if collection.tracks == []
       cart_remove_collection(collection, cart)
       collection.destroy
     end
+
+    # destroy cart if empty
     cart.destroy if cart.items == [] && cart.sinlge_tracks == [] && cart.collections == []
     redirect_to request.referer
   end
