@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   
   resources :collections, only: [:create, :update]
   post "convert", to: "collections#convert"
+  post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

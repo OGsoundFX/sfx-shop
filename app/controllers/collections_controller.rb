@@ -60,6 +60,13 @@ class CollectionsController < ApplicationController
     redirect_to request.referer
   end
 
+  def remove_collection_from_cart
+    collection = Collection.find(params[:collection])
+    collection.tracks.delete(params[:track].to_i)
+    collection.save
+    redirect_to cart_path
+  end
+
   def create_zip_collection
     
     Aws.config.update({
