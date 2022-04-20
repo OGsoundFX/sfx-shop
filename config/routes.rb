@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'create_zip_collection', to: 'collections#create_zip_collection'
   
   resources :collections, only: [:create, :update]
+  post "name_update", to: "collections#name_update"
   post "convert", to: "collections#convert"
   post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
   

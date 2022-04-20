@@ -1,18 +1,21 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["collectionName", "collectionNoName"]
+  static targets = ["collectionName", "collectionNoName", "choseName", "nameForm", "nameInputField", "newCollectionName"]
 
   connect() {
-    console.log("Hello from collection name controller")
   }
 
   name(event) {
-    console.log(event.target.id)
     if (event.target.id === "collection-no-name") {
-      this.collectionNameTarget.classList.remove("d-none")
-      this.collectionNoNameTarget.classList.add("d-none")
+      this.choseNameTarget.classList.add("d-none")
+      this.nameFormTarget.classList.remove("d-none")
     }
+  }
+
+  nameInput() {
+    this.nameFormTarget.classList.add("d-none")
+    this.newCollectionNameTarget.innerText = this.nameInputFieldTarget.value
   }
 }
 

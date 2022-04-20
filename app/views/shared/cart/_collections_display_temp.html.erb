@@ -19,14 +19,25 @@
         <% if !collection.title.nil? %>
           <p data-collection-name-target="collectionName">Your collection <span style="color: #69aa97; font-style: italic" data-action="click->collection-name#name" id="collection-name"><%= collection.title %></span></p>
         <% else %>
-          <div data-collection-name-target="collectionNoName">
-          <p>Your collection <span style="color: #69aa97; font-style: italic" data-action="click->collection-name#name" id="collection-no-name">chose a name</span></p>
-          <div class="d-flex">
-            <p>Your collection</p>
-            <form action="#">
-              <input type="text" id="collection-name">
+          <div class="d-flex" data-collection-name-target="collectionNoName">
+            <p>Your collection <span style="color: #69aa97; font-style: italic"
+                                    data-action="click->collection-name#name"
+                                    id="collection-no-name"
+                                    data-collection-name-target="choseName">
+                                    chose a name
+                              </span>
+                              <span style="color: #69aa97; font-style: italic"
+                                    data-action="click->collection-name#name"
+                                    id="collection-no-name"
+                                    data-collection-name-target="newCollectionName">
+                              </span>
+            </p>
+            <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <%= hidden_field_tag :collection, collection.id %>
+              <input type="text" placeholder="type in your collection name" name="input-name" data-collection-name-target="nameInputField">
+              <input type="submit" data-action="click->collection-name#nameInput">
             </form>
-          </div>
           </div>
         <% end %>
       </div>
