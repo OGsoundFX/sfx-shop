@@ -67,6 +67,13 @@ class CollectionsController < ApplicationController
     redirect_to cart_path
   end
 
+  def name_update
+    name = name_params["input-name"]
+    collection = Collection.find(params[:collection])
+    collection.title = name
+    collection.save
+  end
+
   def create_zip_collection
     
     Aws.config.update({
@@ -150,5 +157,9 @@ class CollectionsController < ApplicationController
   def cart_remove_collection(collection, cart)
     cart.collections.delete(collection.id)
     cart.save
+  end
+
+  def name_params
+    params.permit("input-name")
   end
 end
