@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["collectionName", "collectionNoName", "choseName", "nameForm", "nameInputField", "newCollectionName"]
+  static targets = ["collectionName", "collectionNoName", "choseName", "nameForm", "nameInputField", "newCollectionName", "replacedCollectionName"]
 
   connect() {
   }
@@ -11,11 +11,14 @@ export default class extends Controller {
       this.choseNameTarget.classList.add("d-none")
       this.nameFormTarget.classList.remove("d-none")
     }
+    else {
+      this.nameFormTarget.classList.remove("d-none")
+    }
   }
 
   nameInput() {
     this.nameFormTarget.classList.add("d-none")
-    this.newCollectionNameTarget.innerText = this.nameInputFieldTarget.value
+    this.replacedCollectionNameTarget.innerText = this.nameInputFieldTarget.value
   }
 }
 
