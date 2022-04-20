@@ -19,6 +19,7 @@ export default class extends Controller {
   nameInput() {
     this.nameFormTarget.classList.add("d-none")
     this.replacedCollectionNameTarget.innerText = this.nameInputFieldTarget.value
+    this.nameInputFieldTarget.value = ""
   }
 }
 

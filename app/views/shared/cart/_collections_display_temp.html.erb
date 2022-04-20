@@ -17,6 +17,8 @@
     <% @current_collections.each do |collection| %>
       <div class="container" data-controller="collection-name">
         <% if !collection.title.nil? %>
+        <%= collection.title.length %>
+
           <div class="d-flex">
             <p data-collection-name-target="collectionName">Your collection
               <span style="color: #69aa97; font-style: italic"
@@ -26,14 +28,17 @@
                   <%= collection.title %>
               </span>
             </p>
-            <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= hidden_field_tag :collection, collection.id %>
-              <input type="text" placeholder="type in your collection name" name="input-name" data-collection-name-target="nameInputField">
-              <input type="submit" data-action="click->collection-name#nameInput">
-            </form>
+            <div class="collection-name-form">
+              <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <%= hidden_field_tag :collection, collection.id %>
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" pattern=".{2,}" required title="2 characters minimum" maxlength="20">
+                <input type="submit" data-action="click->collection-name#nameInput" class="submit-button">
+              </form>
+            </div>
           </div>
-        <% else %>
+        <% elsif collection.title.nil? || collection.title == "" %>
+        <%= collection.title.length %>
           <div class="d-flex" data-collection-name-target="collectionNoName">
             <p>Your collection <span style="color: #69aa97; font-style: italic"
                                     data-action="click->collection-name#name"
@@ -47,12 +52,14 @@
                                     data-collection-name-target="newCollectionName">
                               </span>
             </p>
-            <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= hidden_field_tag :collection, collection.id %>
-              <input type="text" placeholder="type in your collection name" name="input-name" data-collection-name-target="nameInputField">
-              <input type="submit" data-action="click->collection-name#nameInput">
-            </form>
+            <div class="collection-name-form">
+              <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <%= hidden_field_tag :collection, collection.id %>
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" pattern=".{2,}" required title="2 characters minimum" maxlength="20">
+                <input type="submit" data-action="click->collection-name#nameInput" class="submit-button">
+              </form>
+            </div>
           </div>
         <% end %>
       </div>

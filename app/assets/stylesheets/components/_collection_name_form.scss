@@ -1,0 +1,16 @@
+.collection-name-form {
+    margin: -2px 0 0 10px;
+    input {
+      color: #4E4E4E;
+      padding-left: 10px;
+      border: solid 1px $border-grey;
+    }
+    input::placeholder {
+      color: #b8b8b8;
+    }
+    .submit-button {
+      background-color: inherit;
+      border: none;
+      color: #a3a3a3;
+    }
+  }
