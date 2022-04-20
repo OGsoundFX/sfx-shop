@@ -32,7 +32,7 @@
               <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <%= hidden_field_tag :collection, collection.id %>
-                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" pattern=".{2,}" required title="2 characters minimum" maxlength="20">
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField">
                 <input type="submit" data-action="click->collection-name#nameInput" class="submit-button">
               </form>
             </div>
@@ -56,7 +56,7 @@
               <form action="/name_update" method="POST" id="collection-name" data-collection-name-target="nameForm" class="d-none">
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <%= hidden_field_tag :collection, collection.id %>
-                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" pattern=".{2,}" required title="2 characters minimum" maxlength="20">
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField">
                 <input type="submit" data-action="click->collection-name#nameInput" class="submit-button">
               </form>
             </div>
