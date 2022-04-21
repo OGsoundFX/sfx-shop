@@ -11,10 +11,18 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <div class="new-single-tracks">
+    <%= link_to "Single Tracks", list_path, class: "single-track-link" %>
+    <%= image_tag asset_path('New_pale_green_transp.png'), class: "new_sticker" %>
+  </div>
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link text-white" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Track-List", list_path, class: "nav-link text-white" %>
       </li>
       <li class="nav-item">
         <%= link_to "About", about_path, class: "nav-link text-white" %>
@@ -31,7 +39,7 @@
               </div>
               <div>
                 <% if current_user.cart && current_user.cart.items.count %>
-                  <%= link_to "(#{current_user.cart.items.count})", cart_path, class: "dropdown-item", id:"cart-count"%>
+                  <%= link_to "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})", cart_path, class: "dropdown-item", id:"cart-count"%>
                 <% end %>
               </div>
             </div>
