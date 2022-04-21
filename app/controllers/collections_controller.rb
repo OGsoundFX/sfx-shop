@@ -61,9 +61,25 @@ class CollectionsController < ApplicationController
   end
 
   def remove_collection_from_cart
+    # this action does 4 things:
+    # 1- removes a track from collection
+    # 2- removes collection from cart of collection is empty
+    # 3- destroys collection if collection is empty
+    # 4- destroys cart when collection is destroyed if no other items in cart
     collection = Collection.find(params[:collection])
     collection.tracks.delete(params[:track].to_i)
-    collection.save
+    if collection.tracks == []
+      cart = Cart.where(user_id: current_user.id).first
+      cart.collections = []
+      if cart.items == [] && cart.collections = [] && cart.sinlge_tracks == []
+        cart.destroy
+      else
+        cart.save
+      end
+      collection.destroy
+    else
+      collection.save
+    end
     redirect_to cart_path
   end
 
