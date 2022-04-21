@@ -19,7 +19,17 @@ export default class extends Controller {
   nameInput() {
     this.nameFormTarget.classList.add("d-none")
     this.replacedCollectionNameTarget.innerText = this.nameInputFieldTarget.value
-    this.nameInputFieldTarget.value = ""
+
+    if (this.nameInputFieldTarget.value === "") {
+      this.choseNameTarget.classList.remove("d-none")
+    }
+  }
+
+  newNameInput() {
+    console.log(this.element.id)
+    if (this.nameInputFieldTarget.value === "") {
+      this.choseNameTarget.classList.remove("d-none")
+    }
   }
 }
 

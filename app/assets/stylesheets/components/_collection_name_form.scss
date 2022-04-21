@@ -14,3 +14,9 @@
       color: #a3a3a3;
     }
   }
+
+  .hover-effect {
+    &:hover {
+      cursor: pointer;
+    }
+  }
