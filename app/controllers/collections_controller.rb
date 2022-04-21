@@ -83,6 +83,20 @@ class CollectionsController < ApplicationController
     redirect_to cart_path
   end
 
+  def destroy_collection
+    collection = Collection.find(params[:collection])
+    cart = Cart.where(user_id: current_user.id).first
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
+      collection.destroy
+    else
+      cart.collections = []
+      cart.save
+      collection.destroy
+    end
+    redirect_to cart_path
+  end
+
   def name_update
     name = name_params["input-name"]
     collection = Collection.find(params[:collection])
