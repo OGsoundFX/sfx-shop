@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post "name_update", to: "collections#name_update"
   post "convert", to: "collections#convert"
   post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
+  delete "destroy_collection", to: "collections#destroy_collection"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

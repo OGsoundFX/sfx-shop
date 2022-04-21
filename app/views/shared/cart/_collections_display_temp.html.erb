@@ -3,7 +3,10 @@
     <div class="d-flex">
       <i class="fas fa-compact-disc cart-icon-adjust"></i>
       <div class="d-flex flex-column">
-        <h3 class="cart-sfx-packs-title"> <strong>COLLECTION TEMP</strong> </h3>
+        <div class="d-flex">
+          <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+          <em  style="margin-top: 32px; margin-left: 12px" ><%= link_to "Delete Collection", destroy_collection_path(collection: @current_collections.first), method: :delete %></em>
+        </div>
         <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
       </div>
     </div>
@@ -138,7 +141,10 @@
     <div class="d-flex">
       <i class="fas fa-compact-disc cart-icon-adjust"></i>
       <div class="d-flex flex-column">
-        <h3 class="cart-sfx-packs-title"> <strong>COLLECTION TEMP</strong> </h3>
+        <div class="d-flex">
+          <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
+          <em  style="margin-top: 32px; margin-left: 12px" ><%= link_to "Delete Collection", destroy_collection_path(collection: @current_collections.first), method: :delete %></em>
+        </div>
         <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
       </div>
     </div>
