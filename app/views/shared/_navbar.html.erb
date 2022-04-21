@@ -44,8 +44,8 @@
                 <%= link_to "Your Cart", cart_path, class: "dropdown-item"%>
               </div>
               <div>
-                <% if current_user.cart && current_user.cart.items.count %>
-                  <%= link_to "(#{current_user.cart.items.count})", cart_path, class: "dropdown-item", id:"cart-count"%>
+                <% if current_user.cart %>
+                  <%= link_to "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})", cart_path, class: "dropdown-item", id:"cart-count"%>
                 <% end %>
               </div>
             </div>

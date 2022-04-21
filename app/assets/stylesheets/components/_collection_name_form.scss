@@ -18,5 +18,6 @@
   .hover-effect {
     &:hover {
       cursor: pointer;
+      color: $font-grey !important;
     }
   }
