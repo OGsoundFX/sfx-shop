@@ -20,7 +20,7 @@
           <div class="d-flex">
             <p data-collection-name-target="collectionName">Your collection
               <span style="color: #69aa97; font-style: italic"
-                    data-action="click->collection-name#name"
+                    data-action="click->collection-name#nameChange"
                     id="collection-name"
                     class="hover-effect"
                     data-collection-name-target="replacedCollectionName">
@@ -28,7 +28,7 @@
               </span>
             </p>
             <div class="collection-name-form">
-              <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameForm" class="d-none">
+              <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <%= hidden_field_tag :collection, collection.id %>
                 <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
