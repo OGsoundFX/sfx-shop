@@ -19,7 +19,7 @@
       <i class="fas fa-exclamation-triangle" style="color: #ffa500" id="warning-collection"></i>
       <p>Get these tracks for <span style="color: #ffa500"><%= humanized_money_with_symbol CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price %></span><em> (save <span style="color: #ffa500"><%= humanized_money_with_symbol (@single_tracks_value - CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price.to_i) %></span>)</em> convert into a <%= link_to "Collection", convert_path(tracks: @tracks.map { |track| track.id }, points: @tracks.sum(&:points)), method: "post", id: "btn-cart-collection" %></p>
     </div>
-    <p><%= @tracks.count %> tracks / <span style="color: #ffa500"><%= @tracks.sum(:points) %> points</span></p>
+    <p><%= @tracks.count %> <%= "track".pluralize(@tracks.count) %> / <span style="color: #ffa500"><%= @tracks.sum(:points) %> <%= "point".pluralize(@tracks.sum(:points)) %></span></p>
   </div>
     <p class="d-none">Points to next category: <%= CollectionCategory.where("points > #{@tracks.sum(:points)}").first.points  %></p>
   <ul class="container-cart-single">

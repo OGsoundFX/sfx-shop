@@ -23,16 +23,20 @@
 }
 
 .collection-points {
-  // background-color: $blue-light;
   background-color: $orange-main;
   color: white;
   padding: 4px 8px;
   border-radius: 16px;
-  height: 30px;
+  height: 26px;
+  font-size: 0.8rem;
+}
+
+.points-banner-margin-bottom {
+  margin-bottom: 4px;
 }
 
 .points-left-text {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .points-left-display {
@@ -41,3 +45,14 @@
   border-radius: 50%;
   padding: 0.24em 0.38em;
 }
+
+.points-left-margin-top {
+  margin-top: 4px;
+}
+
+#btn-cart-collection {
+  background-color: $light-blue;
+  color: white;
+  border: solid 2px $darker-blue;
+  font-size: 0.8rem;
+ }
