@@ -68,11 +68,12 @@
           <% end %>
         </div>
       </div>
-      <div class="container d-flex justify-content-between">
+      <div class="container d-flex justify-content-between points-banner-margin-bottom">
         <% collection_points = CollectionCategory.where("points > #{collection.total_points}").first.points %>
-        <div>
+        <% next_collection = CollectionCategory.where("points > #{collection.total_points}").second %>
+        <div class="points-left-margin-top">
           <p class="points-left-text"><span class="points-left-display"><%= collection_points - collection.total_points %></span>
-            Points left before next level! <%= link_to "Keep Shoping", list_path, id: "btn-cart"%></p>
+            <%= "Point".pluralize(collection_points - collection.total_points) %> left before next level! (<%= humanized_money_with_symbol(next_collection.price) %>/<%= next_collection.points %>) <%= link_to "Add Tracks", list_path, id: "btn-cart-collection"%></p>
         </div>
           <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
       </div>

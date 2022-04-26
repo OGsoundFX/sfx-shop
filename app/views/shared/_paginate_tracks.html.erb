@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></pages></em>)</p>
+  <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
   <%= paginate @tracks, class: "paginator-top" %>
 </div>
 <ul>
@@ -34,8 +34,8 @@
         <% end %>
         </span>
         <span class="info-font points" id="comingSoonBtn"><%= track.points%></span>
-        <i class="far fa-heart pad-top" id="comingSoonBtn"></i>
-        <i class="fas fa-heart pad-top d-none"></i>
+        <!-- <i class="far fa-heart pad-top" id="comingSoonBtn"></i>
+        <i class="fas fa-heart pad-top d-none"></i> -->
       </div>
       <div class="d-flex justify-content-center purchase-section">
         <%# <i class="far fa-layer-plus pad-top purchase-icons" id="comingSoonBtn"></i> %>
