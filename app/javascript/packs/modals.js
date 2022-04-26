@@ -67,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// COMING SOON MODAL
+// COMING SOON MODAL --> Which became "Point value for collection"
 
 window.addEventListener('DOMContentLoaded', () => {
   // document.addEventListener('turbolinks:load', () => {
@@ -87,7 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
       icon.onmouseover = function(event) {
         const modal = document.querySelector('#comingSoon')
         modal.style.display = "block";
-        var y = event.clientY;
+        let y = event.clientY;
+        console.log(event.clientX)
         const modalContent = document.querySelector('#comingSoonContent')
         margin = (y - 220)
         modalContent.style.marginTop = `${margin}px`;
