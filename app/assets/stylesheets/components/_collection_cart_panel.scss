@@ -31,6 +31,12 @@
   font-size: 0.8rem;
 }
 
+.collection-name {
+  p {
+    margin-bottom: -4px;
+  }
+}
+
 .points-banner-margin-bottom {
   margin-bottom: 4px;
 }
@@ -40,14 +46,31 @@
 }
 
 .points-left-display {
-  color: white;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: $blue-light;
   border-radius: 50%;
-  padding: 0.24em 0.38em;
+  color: white;
+  margin-right: 4px;
+  span {
+    position: absolute;
+    left: 0.6rem;
+  }
 }
 
-.points-left-margin-top {
-  margin-top: 4px;
+.points-left-display-10 {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: $blue-light;
+  border-radius: 50%;
+  color: white;
+  margin-right: 4px;
+  span {
+    position: absolute;
+    left: 0.3rem;
+  }
 }
 
 #btn-cart-collection {
