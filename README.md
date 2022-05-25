@@ -16,14 +16,17 @@ What still need to be done:
 - some frontend details
 - add reviews
 
-### Stage 2: End of 2021 **IN PROGRESS**
+### Stage 2: 2022 Q2 **IN PROGRESS (Almost done)**
 Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
 ### Stage 3: 2022
-Invite other sound designers to sell their Sound Effect packs. They will be able to create their accounts and upload their assets after quality validation from me.
-Details need to be established.
+Onboard other sound designers to sell their Sound Effect packs after quality validation from me.
+The question is whether they will be able to manage their packs and sounds or will I be the sole administrator.
+Payment details and share aspect need to be established.
 
-### Additional feature:
+### Additional features:
+- Implement PAYPAL
+- Suggestion Forum: customers can discuss and make suggestions for wishes they may have for sound effects.
 - Player: An option for board game players (like DnD) to have access to ALL sounds available and create their own playlist curated for their sessions. This option will prbably work through subscription (24h - 7day - monthly)
 - Custom work: for clients to ask for custom designs for their projects. They can ask one of the sound designers from the website, or make open offers.
 
