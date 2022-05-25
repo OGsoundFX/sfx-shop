@@ -10,7 +10,11 @@ body {
 }
 
 .content {
-  flex: 1 0 auto;
+  flex: 1; // flex: auto; would work as well
+  // flex 1 means the following:
+  // flex-grow : 1; ➜ The div will grow in same proportion as the window-size
+  // flex-shrink : 1; ➜ The div will shrink in same proportion as the window-size
+  // flex-basis : 0; ➜ The div does not have a starting value as such and will take up screen as per the screen size available for
 }
 
 a:hover {
