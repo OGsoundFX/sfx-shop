@@ -13,9 +13,11 @@ class CollectionsController < ApplicationController
     else
       Collection.create(user_id: current_user.id, tracks: [params[:track].to_i], total_points: SingleTrack.find(params[:track].to_i).points, price_cents: 500)
     end
-    cart = current_user.cart
-    cart.sinlge_tracks.delete(params[:track].to_i)
-    cart.save
+    if !current_user.cart.nil?
+      cart = current_user.cart
+      cart.sinlge_tracks.delete(params[:track].to_i)
+      cart.save
+    end
     cart_create_update
     redirect_to request.referer
   end

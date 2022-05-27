@@ -10,7 +10,9 @@
         <hr>
         <%= render 'shared/payment_single_tracks' %>
         <hr>
-        <%= render 'shared/payment_collection_tracks' %>
+        <% if !@collection.nil? %>
+          <%= render 'shared/payment_collection_tracks' %>
+        <% end %>
         <hr>
         <button id="pay" class="btn btn-primary">Pay</button>
 
@@ -40,7 +42,7 @@
         <hr>
         <%= render 'shared/payment_single_tracks' %>
       <% end %>
-      <% if @order.collections != [] %>
+      <% if !@collection.nil? %>
         <hr>
         <%= render 'shared/payment_collection_tracks' %>
       <% end %>
