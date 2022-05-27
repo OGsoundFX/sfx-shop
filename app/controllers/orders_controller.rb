@@ -27,13 +27,14 @@ class OrdersController < ApplicationController
           images: [sfx_pack.photos[0]],
           amount: (sfx_pack_price.to_i * 100),
           currency: 'usd',
-          quantity: 1
+          quantity: 1,
+          tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
         allow_promotion_codes: true,
         success_url: dashboard_url,
         cancel_url: destroy_order_url
       )
-
+# raise
       order.update(checkout_session_id: session.id)
       redirect_to new_order_payment_path(order)
     else
@@ -123,33 +124,41 @@ class OrdersController < ApplicationController
     end
 
     # Adding collection to order
-    collection = []
-    collection << params[:collection_id].to_i
-    collection_sum = (Collection.find(params[:collection_id]).price_cents / 100.to_f)
+    if params[:collection_id]
+      collection = []
+      collection << params[:collection_id].to_i
+      collection_sum = (Collection.find(params[:collection_id]).price_cents / 100.to_f)
 
-    # creating line_item for collection
-    if collection != []
+      # creating line_item for collection
       collection_line_item = {}
       collection_line_item[:name] = 'Collection'
       collection_line_item[:amount] = (collection_sum * 100).to_i
       collection_line_item[:currency] = 'usd'
       collection_line_item[:quantity] = 1
       line_items << collection_line_item
+    else
+      collection_sum = 0
     end
     
     # Adding sum of SFX packs, single tracks & collection for the order
     total_amount += tracks_sum += collection_sum
     
     if current_user
+      # adding the 7% of taxe on all items
+      line_items.each do |item|
+        item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
+      end
+      # creating order instance
       order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, tracks: cart.sinlge_tracks, sales: @sale_orders, collections: collection)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
         allow_promotion_codes: true,
         success_url: destroy_cart_url,
-        cancel_url: destroy_order_url
+        cancel_url: destroy_order_url,
       )
-
+ # raise
+      
       order.update(checkout_session_id: session.id)
       redirect_to new_order_payment_path(order)
     else
