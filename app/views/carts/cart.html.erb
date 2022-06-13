@@ -72,6 +72,16 @@
                 <% end %>
               </span>
             </div>
+            <div class="d-flex justify-content-between cart-vat-display">
+              <span>VAT (7% inclusive)</span>
+              <span>
+                <% if @vat.class == Float %>
+                  <%= humanized_money_with_symbol @vat %>
+                <% else %>
+                  <%= humanized_money_with_symbol @vat %>,00
+                <% end %>
+              </span>
+            </div>
             <% if (@total_value - @sum) > 0 %>
               <p style="text-align: end; font-size: 0.8em"> <i>(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</i></p>
             <% else %>
