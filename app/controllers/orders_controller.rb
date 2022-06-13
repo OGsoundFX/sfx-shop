@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
       else
         sfx_pack_price = sfx_pack.price
       end
-      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user, sales: @sale_orders)
+      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user, sales: @sale_orders, collections: [])
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
@@ -137,6 +137,7 @@ class OrdersController < ApplicationController
       collection_line_item[:quantity] = 1
       line_items << collection_line_item
     else
+      collection = []
       collection_sum = 0
     end
     
@@ -157,7 +158,6 @@ class OrdersController < ApplicationController
         success_url: destroy_cart_url,
         cancel_url: destroy_order_url,
       )
- # raise
       
       order.update(checkout_session_id: session.id)
       redirect_to new_order_payment_path(order)
