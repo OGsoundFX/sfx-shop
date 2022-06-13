@@ -131,6 +131,7 @@ class CartsController < ApplicationController
       # @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
       @tracks = SingleTrack.where(id: [@items.sinlge_tracks])
     end
+    @vat = ((@sum/1.07) * 0.07)
   end
 
   def delete_item
