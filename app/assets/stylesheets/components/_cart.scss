@@ -59,6 +59,16 @@
   margin-top: 24px;
 }
 
+.collection-destroy-button {
+  color: $font-grey;
+  font-size: 2rem;
+  margin-top: 17px;
+  margin-left: 12px;
+  &:hover {
+    color: $light-grey;
+  }
+}
+
 button {
   all: unset;
   cursor: pointer;
