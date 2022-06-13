@@ -5,7 +5,9 @@
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
-          <em  style="margin-top: 32px; margin-left: 12px"><%= link_to "Delete Collection", destroy_collection_path(collection: @current_collections.first), method: :delete %></em>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button" do %>
+            <i class="fal fa-times"></i>
+          <% end %>
         </div>
         <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
       </div>
@@ -21,7 +23,7 @@
       <div class="d-flex justifiy-content-between">
         <div class="container" data-controller="collection-name">
           <% if !collection.title.nil? && collection.title != "" %>
-            <div class="d-flex">
+            <div class="d-flex justify-content-end collection-name">
               <p data-collection-name-target="collectionName">Collection name:
                 <span style="color: #69aa97"
                       data-action="click->collection-name#nameChange"
@@ -36,12 +38,12 @@
                   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                   <%= hidden_field_tag :collection, collection.id %>
                   <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#nameInput" class="submit-button">
+                  <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
                 </form>
               </div>
             </div>
           <% elsif collection.title.nil? || collection.title == "" %>
-            <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
+            <div class="d-flex justify-content-end collection-name" data-collection-name-target="collectionNoName">
               <p>Collection name: <span style="color: #69aa97"
                                       data-action="click->collection-name#name"
                                       id="collection-no-name"
@@ -61,7 +63,7 @@
                   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                   <%= hidden_field_tag :collection, collection.id %>
                   <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button">
+                  <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
                 </form>
               </div>
             </div>
@@ -174,7 +176,9 @@
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
-          <em  style="margin-top: 32px; margin-left: 12px"><%= link_to "Delete Collection", destroy_collection_path(collection: @current_collections.first), method: :delete, data: {confirm: "Are you sure?"} %></em>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button" do %>
+            <i class="fal fa-times"></i>
+          <% end %>
         </div>
         <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
       </div>

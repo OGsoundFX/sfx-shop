@@ -17,6 +17,7 @@ export default class extends Controller {
   }
 
   nameChange(event) {
+    this.replacedCollectionNameTarget.classList.add("d-none")
     if (event.target.id === "collection-no-name") {
       this.choseNameTarget.classList.add("d-none")
       this.nameChangeFormTarget.classList.remove("d-none")
@@ -27,7 +28,7 @@ export default class extends Controller {
   }
 
   nameInput() {
-    console.log("nameInput")
+    this.replacedCollectionNameTarget.classList.remove("d-none")
     this.nameChangeFormTarget.classList.add("d-none")
     this.replacedCollectionNameTarget.innerText = this.nameInputFieldTarget.value
 
