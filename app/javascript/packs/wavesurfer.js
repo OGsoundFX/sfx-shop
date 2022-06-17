@@ -40,6 +40,13 @@ window.addEventListener('DOMContentLoaded', () => {
   let ids = {};
   //inserting wavesurferplayer
   document.querySelectorAll('.wave').forEach((el, loopId) => {
+    // console.log(getComputedStyle(el))
+    let height = 50
+    if (Array.from(el.classList).includes("collection-wave")) {
+      height = 25
+    } else {
+      height = 50
+    }
     let id = el.id;
     ids[loopId] = id
     wavesurfers.push(id);
@@ -51,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
       barGap: null,
       waveColor: '#CCCCCC',
       progressColor: '#FFA500',
-      height: 50,
+      height: height,
       cursorColor: '#FFA500',
       responsive: true
     });
