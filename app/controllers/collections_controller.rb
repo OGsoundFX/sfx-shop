@@ -31,6 +31,9 @@ class CollectionsController < ApplicationController
     collection.price_cents = collection_categories(collection.total_points)
     collection.save
 
+    # re-adjust price if applies
+
+
     # destroy collection if doesn't contain tracks
     if collection.tracks == []
       cart_remove_collection(collection, cart)
@@ -84,6 +87,7 @@ class CollectionsController < ApplicationController
       collection.destroy
     else
       collection.total_points = points(collection.tracks)
+      collection.price_cents = collection_categories(collection.total_points)
       collection.save
     end
     redirect_to cart_path

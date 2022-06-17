@@ -20,57 +20,8 @@
 
   <% if !@current_collections.empty? %>
     <% @current_collections.each do |collection| %>
-      <div class="d-flex justifiy-content-between">
-        <div class="container" data-controller="collection-name">
-          <% if !collection.title.nil? && collection.title != "" %>
-            <div class="d-flex justify-content-end collection-name">
-              <p data-collection-name-target="collectionName">Collection name:
-                <span style="color: #69aa97"
-                      data-action="click->collection-name#nameChange"
-                      id="collection-name"
-                      class="hover-effect"
-                      data-collection-name-target="replacedCollectionName">
-                    <%= collection.title %>
-                </span>
-              </p>
-              <div class="collection-name-form">
-                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
-                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <%= hidden_field_tag :collection, collection.id %>
-                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
-                </form>
-              </div>
-            </div>
-          <% elsif collection.title.nil? || collection.title == "" %>
-            <div class="d-flex justify-content-end collection-name" data-collection-name-target="collectionNoName">
-              <p>Collection name: <span style="color: #69aa97"
-                                      data-action="click->collection-name#name"
-                                      id="collection-no-name"
-                                      class="hover-effect"
-                                      data-collection-name-target="choseName">
-                                      chose a name
-                                </span>
-                                <span style="color: #69aa97"
-                                      data-action="click->collection-name#name"
-                                      id="collection-no-name"
-                                      class="hover-effect"
-                                      data-collection-name-target="newCollectionName">
-                                </span>
-              </p>
-              <div class="collection-name-form">
-                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
-                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <%= hidden_field_tag :collection, collection.id %>
-                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
-                </form>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="container d-flex justify-content-between points-banner-margin-bottom">
+
+    <div class="container d-flex justify-content-between points-banner-margin-bottom">
         <% collection_points = CollectionCategory.where("points > #{collection.total_points}").first.points %>
         <% next_collection = CollectionCategory.where("points > #{collection.total_points}").second %>
         <div>
@@ -90,7 +41,7 @@
                 </div>
               <% end %>
               <div>
-                <%= "Point".pluralize(collection_points - collection.total_points) %> left before next level! (<%= humanized_money_with_symbol(next_collection.price) %>/<%= next_collection.points %>) <%= link_to "Add Tracks", list_path, id: "btn-cart-collection"%>
+                <%= "Point".pluralize(collection_points - collection.total_points) %> left before next level! (<%= humanized_money_with_symbol(next_collection.price) %>/<%= next_collection.points %>)
               </div>
             </div>
           </p>
@@ -99,6 +50,61 @@
           <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
         </div>
       </div>
+
+      <div class="d-flex justifiy-content-between">
+        <div class="container d-flex justify-content-between" data-controller="collection-name">
+          <div>
+            <% if !collection.title.nil? && collection.title != "" %>
+              <div class="d-flex collection-name">
+                <p data-collection-name-target="collectionName">Collection name:
+                  <span style="color: #69aa97"
+                        data-action="click->collection-name#nameChange"
+                        id="collection-name"
+                        class="hover-effect"
+                        data-collection-name-target="replacedCollectionName">
+                      <%= collection.title %>
+                  </span>
+                </p>
+                <div class="collection-name-form">
+                  <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <%= hidden_field_tag :collection, collection.id %>
+                    <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                    <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
+                  </form>
+                </div>
+              </div>
+            <% elsif collection.title.nil? || collection.title == "" %>
+              <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
+                <p>Collection name: <span style="color: #69aa97"
+                                        data-action="click->collection-name#name"
+                                        id="collection-no-name"
+                                        class="hover-effect"
+                                        data-collection-name-target="choseName">
+                                        chose a name
+                                  </span>
+                                  <span style="color: #69aa97"
+                                        data-action="click->collection-name#name"
+                                        id="collection-no-name"
+                                        class="hover-effect"
+                                        data-collection-name-target="newCollectionName">
+                                  </span>
+                </p>
+                <div class="collection-name-form">
+                  <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <%= hidden_field_tag :collection, collection.id %>
+                    <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                    <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
+                  </form>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <%= link_to "Add More Tracks", list_path, id: "btn-cart-collection"%>
+        </div>
+      </div>
+
       <ul class="container">
       <% collection.tracks.each do |track_id| %>
         <% track = SingleTrack.find(track_id) %>
@@ -111,11 +117,11 @@
             </div>
             <div class="d-flex wave-section elements-position">
               <% if current_page?(controller: 'carts', action: 'cart') %>
-                <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+                <div class="wave collection-wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
                   <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
                 </div>
               <% else %>
-                <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+                <div class="wave collection-wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
                   <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
                 </div>
               <% end %>
@@ -124,18 +130,11 @@
               <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
             </div>
             <div class="d-flex justify-content-between wave-section elements-position">
-              <span class="info-font pad-top">
-              <% if humanized_money_with_symbol(track.price).include?(".") %>
-                <%= humanized_money_with_symbol(track.price) %>
-              <% else %>
-                <%= humanized_money_with_symbol(track.price) %>.00
-              <% end %>
-              </span>
               <span class="info-font points" id="comingSoonBtn"><%= track.points%></span>
             </div>
             <div class="d-flex justify-content-center purchase-section">
               <%= link_to remove_collection_from_cart_path(track: track, collection: @current_collections.first), method: :post do %>
-                <i class="far fa-layer-minus pad-top purchase-icons icon-click-hover" id=""></i>
+                <i class="far fa-times pad-top purchase-icons icon-click-hover" id=""></i>
               <% end %>
             </div>
             <!-- The Track Info Modal -->
