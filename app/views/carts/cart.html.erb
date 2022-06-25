@@ -87,14 +87,14 @@
             <% else %>
               <div style="height: 10px;"></div>
             <% end %>
-            <div class="d-flex justify-content-center">
-              <div>
-              <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
-                <%= submit_tag 'Checkout', id: 'btn-cart' %>
-              <% end %>
-              </div>
+            <div class="d-flex justify-content-between">
               <div id="continue-shopping">
                 <%= link_to "Continue shopping", root_path %>
+              </div>
+              <div>
+                <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
+                  <%= submit_tag 'Checkout', id: 'btn-cart' %>
+                <% end %>
               </div>
             </div>
           </div>
