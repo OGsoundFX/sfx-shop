@@ -111,11 +111,11 @@ class CartsController < ApplicationController
       end
       # this is the You spare part, if we do it with collections vs single tracks
       # @total_value += @current_collections.last.price_cents / 100
-      single_tracks_price = 0
+      @single_tracks_price = 0
       if @current_collections.last
-        @current_collections.last.tracks.each { |track| single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) }
+        @current_collections.last.tracks.each { |track| @single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) }
       end
-      @total_value += single_tracks_price
+      @total_value += @single_tracks_price
       @icons = {
         "all": '<i class="fas fa-volume-up"></i>',
         "action": '<i class="fas fa-swords"></i>',

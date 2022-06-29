@@ -83,7 +83,7 @@
               </span>
             </div>
             <% if (@total_value - @sum) > 0 %>
-              <p style="text-align: end; font-size: 0.8em"> <i>(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</i></p>
+              <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</p>
             <% else %>
               <div style="height: 10px;"></div>
             <% end %>
