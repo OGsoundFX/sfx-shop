@@ -23,89 +23,30 @@
 
   <% if !@current_collections.empty? %>
     <% @current_collections.each do |collection| %>
-
-    <div class="container d-flex justify-content-between points-banner-margin-bottom">
-        <% collection_points = CollectionCategory.where("points > #{collection.total_points}").first.points %>
-        <% next_collection = CollectionCategory.where("points > #{collection.total_points}").second %>
-        <div>
-          <p class="points-left-text">
-            <div class="d-flex">
-              <% if (collection_points - collection.total_points) < 10 %>
-                <div class="points-left-display">
-                  <span>
-                    <%= collection_points - collection.total_points %>
-                  </span>
-                </div>
-              <% else %>
-                <div class="points-left-display-10">
-                  <span>
-                    <%= collection_points - collection.total_points %>
-                  </span>
-                </div>
-              <% end %>
-              <div>
-                <%= "Point".pluralize(collection_points - collection.total_points) %> left before next level! (<%= humanized_money_with_symbol(next_collection.price) %>/<%= next_collection.points %>)
-              </div>
+      <div class="container">
+        <div class="d-flex justify-content-between points-banner">
+          <% collection_points = CollectionCategory.where("points > #{collection.total_points}").first.points %>
+          <% next_collection = CollectionCategory.where("points > #{collection.total_points}").second %>
+          <div class="d-flex flex-column justify-content-center">  
+            <div>
+              <i class="fas fa-info-circle"></i>
+              <span class="points-left-display"><%= collection_points - collection.total_points %></span>
+              <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.points %> points / <%= humanized_money_with_symbol(next_collection.price) %>)</span>
             </div>
-          </p>
-        </div>
-        <div class="d-flex flex-column justify-content-center">
-          <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
+          </div>
         </div>
       </div>
 
-      <div class="d-flex justifiy-content-between">
-        <div class="container d-flex justify-content-between" data-controller="collection-name">
-          <div>
-            <% if !collection.title.nil? && collection.title != "" %>
-              <div class="d-flex collection-name">
-                <p data-collection-name-target="collectionName">Collection name:
-                  <span style="color: #69aa97"
-                        data-action="click->collection-name#nameChange"
-                        id="collection-name"
-                        class="hover-effect"
-                        data-collection-name-target="replacedCollectionName">
-                      <%= collection.title %>
-                  </span>
-                </p>
-                <div class="collection-name-form">
-                  <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                    <%= hidden_field_tag :collection, collection.id %>
-                    <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                    <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
-                  </form>
-                </div>
-              </div>
-            <% elsif collection.title.nil? || collection.title == "" %>
-              <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
-                <p>Collection name: <span style="color: #69aa97"
-                                        data-action="click->collection-name#name"
-                                        id="collection-no-name"
-                                        class="hover-effect"
-                                        data-collection-name-target="choseName">
-                                        chose a name
-                                  </span>
-                                  <span style="color: #69aa97"
-                                        data-action="click->collection-name#name"
-                                        id="collection-no-name"
-                                        class="hover-effect"
-                                        data-collection-name-target="newCollectionName">
-                                  </span>
-                </p>
-                <div class="collection-name-form">
-                  <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                    <%= hidden_field_tag :collection, collection.id %>
-                    <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                    <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
-                  </form>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <%= link_to "Add More Tracks", list_path, id: "btn-cart-collection"%>
-        </div>
+      <!--
+        Here add the following line inside pe tags !!!
+        render 'shared/cart/chose_collection_name', collection: collection 
+      -->
+
+      <div class="container">
+        <%= link_to "Add More Tracks To This Collection!", list_path, id: "btn-cart-collection-full-width"%>
       </div>
 
       <ul class="container">

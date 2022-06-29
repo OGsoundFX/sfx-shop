@@ -1,0 +1,53 @@
+<div class="d-flex justifiy-content-between">
+  <div class="container d-flex justify-content-between" data-controller="collection-name">
+    <div>
+      <% if !collection.title.nil? && collection.title != "" %>
+        <div class="d-flex collection-name">
+          <p data-collection-name-target="collectionName">Collection name:
+            <span style="color: #69aa97"
+                  data-action="click->collection-name#nameChange"
+                  id="collection-name"
+                  class="hover-effect"
+                  data-collection-name-target="replacedCollectionName">
+                <%= collection.title %>
+            </span>
+          </p>
+          <div class="collection-name-form">
+            <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <%= hidden_field_tag :collection, collection.id %>
+              <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+              <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
+            </form>
+          </div>
+        </div>
+      <% elsif collection.title.nil? || collection.title == "" %>
+        <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
+          <p>Collection name: <span style="color: #69aa97"
+                                  data-action="click->collection-name#name"
+                                  id="collection-no-name"
+                                  class="hover-effect"
+                                  data-collection-name-target="choseName">
+                                  chose a name
+                            </span>
+                            <span style="color: #69aa97"
+                                  data-action="click->collection-name#name"
+                                  id="collection-no-name"
+                                  class="hover-effect"
+                                  data-collection-name-target="newCollectionName">
+                            </span>
+          </p>
+          <div class="collection-name-form">
+            <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <%= hidden_field_tag :collection, collection.id %>
+              <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+              <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
+            </form>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "Add More Tracks", list_path, id: "btn-cart-collection"%>
+  </div>
+</div>
