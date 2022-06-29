@@ -5,11 +5,14 @@
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
-          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button" do %>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", data: {confirm: "Are you sure?"} do %>
             <i class="fal fa-times"></i>
           <% end %>
         </div>
-        <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+        <div class="d-flex">
+          <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+          <p style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+        </div>
       </div>
     </div>
     <div>
@@ -175,11 +178,14 @@
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
-          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button" do %>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", data: { confirm: "Are you sure?"} do %>
             <i class="fal fa-times"></i>
           <% end %>
         </div>
-        <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+        <div class="d-flex">
+          <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
+          <p style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+        </div>
       </div>
     </div>
     <div>
