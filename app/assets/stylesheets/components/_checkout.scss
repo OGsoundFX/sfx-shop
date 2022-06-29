@@ -6,6 +6,23 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.pack-details {
+  margin-left: 20px;
+}
+
+.pack-name-price {
+  font-weight: 500;
+}
+
 .display-list {
   font-size: 1.1rem;
+}
+
+.pack-payment-checkout {
+  text-align: center;
+}
+
+.pack-payment-checkout, .collection-payment-checkout, .tracks-payment-checkout, .total-checkout {
+  margin-bottom: 20px;
+  padding: 20px 42px;
 }

@@ -3,7 +3,12 @@
   <div class="checkout checkout-font">
     <% if @order.multiple == false %>
       <div class="col">
-        <h1>Checkout summary</h1>
+        <div class="flex justify-content-between">
+          <h1>Checkout summary</h1>
+          <div class="sub-total" style="margin-right:0">
+            Total amount: <span style="color: #69aa97; font-weight: 500"><%= humanized_money_with_symbol @order.amount %></span>
+          </div>
+        </div>
         
         <h3>Total purchase for <span style="color: #ffa500"><%= humanized_money_with_symbol @order.amount %><%= ".00" unless humanized_money_with_symbol(@order.amount).include?(".") %></span></h3>
         <div class="col-md-3"><%= image_tag @photo, width: '100%' %></div>
@@ -30,26 +35,42 @@
         <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p>
       </div>
     <% else %>
-      <h1>Checkout summary</h1>
+      <div class="d-flex justify-content-between">
+        <h1 style="margin-bottom: 20px">Checkout summary</h1>
+        <div class="sub-total" style="margin-right:0">
+          Total amount: <span style="color: #69aa97; font-weight: 500"><%= humanized_money_with_symbol @order.amount %></span>
+        </div>
+      </div>
 
-      <% if @current_sales_list != {} %>
-        <%= render 'shared/payment_sale' %>
-      <% else %>
-        <%= render 'shared/payment_no_sale' %>
-      <% end %>
-
-      <% if @order.tracks != [] %>
+      <div class="pack-payment-checkout packs-display">
+        <h4>SFX Packs</h4>
         <hr>
-        <%= render 'shared/payment_single_tracks' %>
-      <% end %>
-      <% if !@collection.nil? %>
-        <hr>
-        <%= render 'shared/payment_collection_tracks' %>
-      <% end %>
-      <hr>
+        <% if @current_sales_list != {} %>
+          <%= render 'shared/payment_sale' %>
+        <% else %>
+          <%= render 'shared/payment_no_sale' %>
+        <% end %>
+      </div>
 
-      <h3>For a total amount of <%= humanized_money_with_symbol @order.amount %> </h3>
-      <button id="pay" class="btn btn-primary">Pay</button>
+      <div class="collection-payment-checkout packs-display">
+        <% if !@collection.nil? %>
+          <%= render 'shared/payment_collection_tracks' %>
+        <% end %>
+      </div>
+
+      <div class="tracks-payment-checkout packs-display">
+        <% if @order.tracks != [] %>
+          <%= render 'shared/payment_single_tracks' %>
+        <% end %>
+      </div>
+
+      <div class="tracks-payment-checkout packs-display">
+        <h3>For a total amount of <%= humanized_money_with_symbol @order.amount %> </h3>
+        <button id="pay" class="btn btn-primary">Pay</button>
+          <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
+          <%# <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p> %>
+      </div>
+
       <script src="https://js.stripe.com/v3/"></script>
       <script>
         const paymentButton = document.getElementById('pay');
@@ -60,8 +81,6 @@
           });
         });
       </script>
-      <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
-      <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p>
     <% end %>
   </div>
 </div>
