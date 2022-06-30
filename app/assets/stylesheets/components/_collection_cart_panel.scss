@@ -44,7 +44,7 @@
 }
 
 .points-left-display {
-  color: $blue-light;
+  color: $orange-main;
   font-weight: 500;
 }
 
@@ -65,7 +65,7 @@
   color: white;
   border: solid 2px $darker-blue;
   border-radius: 4px;
-  padding: 0 4px;
+  padding: 4px;
   &:hover {
     background-color: $light-grey;
     border: solid 2px $light-grey;
