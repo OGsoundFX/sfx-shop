@@ -9,15 +9,13 @@
         </div>
       </div>
 
-      <div class="pack-payment-checkout packs-display">
-        <h4>SFX Packs</h4>
-        <hr>
-        <% if @current_sales_list != {} %>
-          <%= render 'shared/payment_sale' %>
-        <% else %>
-          <%= render 'shared/payment_no_sale' %>
-        <% end %>
-      </div>
+      <% if @order.packs != [] %>
+        <div class="pack-payment-checkout packs-display">
+          <h4>SFX Packs</h4>
+          <hr>
+          <%= render 'shared/payment_packs' %>
+        </div>
+      <% end %>
 
       <div class="collection-payment-checkout packs-display">
         <% if !@collection.nil? %>
