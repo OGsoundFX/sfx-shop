@@ -26,3 +26,34 @@
   margin-bottom: 20px;
   padding: 20px 42px;
 }
+
+.checkout-collection-info-box {
+  background-color: $whitesmoke;
+  padding: 8px 18px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.info-collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.total-checkout {
+  background-color: $whitesmoke;
+}
+
+#btn-add-tracks-collection {
+  display: inline-block;
+  text-align: center;
+  background-color: $light-blue;
+  color: white;
+  border: solid 2px $darker-blue;
+  border-radius: 4px;
+  padding: 4px;
+  &:hover {
+    background-color: $light-grey;
+    border: solid 2px $light-grey;
+  }
+ }
