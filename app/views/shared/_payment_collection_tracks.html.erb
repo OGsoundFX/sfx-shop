@@ -1,19 +1,41 @@
-<% collection_points = CollectionCategory.where("points > #{@collection.total_points}").first.points %>
-<% next_collection = CollectionCategory.where("points > #{@collection.total_points}").second %>
+<div data-controller="collection-checkout-modal">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-compact-disc checkout-icon-adjust"></i>
+      <div class="d-flex flex-column justify-content-center">
+        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money_with_symbol @collection.price %>
+        </div>
+      </div>
+    </div>
+    <button id="list-tracks-modal-button"
+            data-collection-checkout-modal-target="button"
+            data-action="click->collection-checkout-modal#modalDisplay">
+      List of tracks
+    </button>
+  </div>
 
-<div>
-  <h4 style="font-weight: 400">Price: <span><%= humanized_money_with_symbol(@collection.price) %></h4></span>
-  <h4 style="font-weight: 400">Number of tracks: <span><%= @collection.tracks.count %></h4></span>
-  <h4 style="font-weight: 400">Total points: <span><%= @collection.tracks.count %></h4></span>
+
+  <!-- Collection List Modal -->
+  <div id="collectionModal" class="track-list-modal" data-collection-checkout-modal-target="collectionModal">
+    <!-- Modal content -->
+    <div class="collection-modal-content">
+      <div class="d-flex justify-content-between">
+        <h3>List of tracks in your Collection</h3>
+        <span class="close"
+              data-collection-checkout-modal-target="close"
+              data-action="click->collection-checkout-modal#modalClose">&times;
+        </span>
+      </div>
+      <hr>
+
+        <% @collection.tracks.each do |track| %>
+          <% displayed_track = SingleTrack.find(track) %>
+          <div class="grid-display-list">
+            <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
+            <div><%= displayed_track.title %></div>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
 </div>
-
-
-
-<!--
-<ul>
-  <% @collection.tracks.each do |track| %>
-    <% displayed_track = SingleTrack.find(track) %>
-    <li class="display-list"><%= displayed_track.title %></li>
-  <% end %>
-</ul>
--->

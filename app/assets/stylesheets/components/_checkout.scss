@@ -14,16 +14,15 @@
   font-weight: 500;
 }
 
-.display-list {
-  font-size: 1.1rem;
-}
-
 .pack-payment-checkout {
   text-align: center;
 }
 
-.pack-payment-checkout, .collection-payment-checkout, .tracks-payment-checkout, .total-checkout {
-  margin-bottom: 20px;
+.pack-payment-checkout, .collection-payment-checkout, .tracks-payment-checkout {
+  padding: 0 42px;
+}
+
+.total-checkout {
   padding: 20px 42px;
 }
 
@@ -57,3 +56,85 @@
     border: solid 2px $light-grey;
   }
  }
+
+ #list-tracks-modal-button {
+  border: solid 2px $light-grey;
+  color: $font-grey;
+  padding: 0 12px;
+  margin-right: 18px;
+    &:hover {
+      color: $orange-main;
+      border-color: $orange-main;
+    }
+ }
+
+ .checkout-icon-adjust {
+  font-size: 3rem;
+  margin-right: 24px;
+ }
+
+ // checkout modals
+
+ /* The Modal (background) */
+.track-list-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.collection-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px 48px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.grid-display-list {
+  display: grid;
+  grid-template-columns: 1fr 20fr;
+}
+
+.btn-pay-checkout, .btn-cancel-checkout {
+  border: none;
+}
+
+.btn-pay-checkout {
+  background-color: #69aa97;
+  width: 96px;
+   &:hover {
+     background-color: #72c9ae;
+   }
+}
+
+.btn-cancel-checkout {
+  background-color: grey;
+  width: 120px;
+    &:hover {
+      background-color: rgb(168, 168, 168);
+    }
+}
