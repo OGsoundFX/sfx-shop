@@ -9,42 +9,32 @@
         </div>
       </div>
 
-      <% if @order.packs != [] %>
-        <div class="pack-payment-checkout packs-display">
-          <h4>SFX Packs</h4>
-          <hr>
-          <%= render 'shared/payment_packs' %>
+      <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
+        <% if @order.packs != [] %>
+          <div class="pack-payment-checkout">
+            <%= render 'shared/payment_packs' %>
+            <%# Sub-total is in the rendered shared file %>
+          </div>
+        <% end %>
+
+        <div class="collection-payment-checkout">
+          <% if !@collection.nil? %>
+            <%= render 'shared/payment_collection_tracks' %>
+            <hr>
+          <% end %>
         </div>
-      <% end %>
 
-      <div class="collection-payment-checkout packs-display">
-        <% if !@collection.nil? %>
-          <h4 class="text-center">Your Collection</h4>
-          <hr>
-          <%= render 'shared/payment_collection_tracks' %>
-          <hr>
-          <div class="sub-total" style="margin:0 !important; text-align: center;">
-            Sub-total: <span style="color: #69aa97; font-weight: 500"><%= humanized_money_with_symbol @collection.price %></span>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="tracks-payment-checkout packs-display">
-        <% if @order.tracks != [] %>
-          <h4 class="text-center">Single Tracks</h4>
-          <hr>
-          <%= render 'shared/payment_single_tracks' %>
-          <hr>
-          <div class="sub-total" style="margin:0 !important; text-align: center;">
-            Sub-total: <span style="color: #69aa97; font-weight: 500"><%= humanized_money_with_symbol @total_tracks_price %></span>
-          </div>
-        <% end %>
+        <div class="tracks-payment-checkout">
+          <% if @order.tracks != [] %>
+            <%= render 'shared/payment_single_tracks' %>
+          <% end %>
+        </div>
       </div>
 
       <div class="total-checkout packs-display">
-        <h3>For a total amount of <%= humanized_money_with_symbol @order.amount %> </h3>
-        <button id="pay" class="btn btn-primary">Pay</button>
-          <%= link_to "cancel", destroy_order_path, class: "btn btn-primary" %>
+        <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
+        <button id="pay" class="btn btn-primary btn-pay-checkout">Pay</button>
+          <%= link_to "cancel", destroy_order_path, class: "btn btn-primary btn-cancel-checkout" %>
           <%# <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p> %>
       </div>
 
