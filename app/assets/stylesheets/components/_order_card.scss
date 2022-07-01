@@ -6,14 +6,6 @@
   margin-bottom: 25px;
 }
 
-#newsletter-info-card {
-  padding: 15px;
-  background-color: $banner_light_blue;
-  border-radius: 3px;
-  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 25px;
-}
-
 #dashboard-newsletter {
   color: $darker-blue;
 }
@@ -24,15 +16,6 @@
 
 .dashboard-center {
   margin-top: 20px;
-  margin-bottom: 25px;
-}
-
-#dashboard-title {
-  text-align: center;
-  padding: 5px 15px 10px 15px;
-  background-color: $whitesmoke;
-  border-radius: 3px;
-  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 25px;
 }
 
@@ -93,10 +76,6 @@
   padding-top: 100px;
 }
 
-#order-space-under-title {
-  margin-bottom: 35px;
-}
-
 .pack-row {
   height: 150px;
 }
@@ -107,22 +86,6 @@
 
 #title-pack {
   margin-top: 35px;
-}
-
-#download-pack {
-  margin-top: 50px;
-}
-
-#download-pack-two {
-  margin-top: 35px;
-}
-
-#download-pack-three {
-  margin-top: 15px;
-}
-
-#download-pack-more {
-  margin-top: 0px;
 }
 
 #btn-download-order, #btn-download-order-short {
@@ -255,9 +218,6 @@ $breakpoint-laptop: 992px;
 }
 
 @media (max-width: $breakpoint-extra-small) {
-  #dashboard-title {
-    font-size: 25px;
-  }
 
   .order_card {
     padding: 15px 20px;
@@ -269,9 +229,6 @@ $breakpoint-laptop: 992px;
 }
 
 @media (max-width: $breakpoint-evenmore-super-duper-small) {
-  #dashboard-title {
-    font-size: 20px;
-  }
 
   .pack-row {
     display: block !important;
