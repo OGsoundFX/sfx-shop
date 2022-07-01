@@ -3,27 +3,6 @@
   <% @tracks = order.tracks %>
   <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
-    <hr>
-    <div>
-      <% if order.packs != [] %>
-        <div class="pack-payment-checkout">
-          <%= render 'shared/dashboard_packs', order: order%>
-        </div>
-      <% end %>
-
-      <div class="collection-payment-checkout">
-        <% if !@collection.nil? %>
-          <%= render 'shared/dashboard_collection_tracks' %>
-          <hr>
-        <% end %>
-      </div>
-
-      <div class="tracks-payment-checkout">
-        <% if order.tracks != [] %>
-          <%= render 'shared/dashboard_single_tracks' %>
-        <% end %>
-      </div>
-    </div>
 
     <% if order.multiple == false %>
     <hr>
@@ -49,12 +28,12 @@
 
         <div id="download-buttons-next">
           <% if pack.product_link.split(',').count == 1 %>
-            <div>
+            <div id="download-pack">
               <p> <%=  link_to "Download Pack", pack.product_link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
               <p> <%=  link_to "Download", pack.product_link, oncontextmenu: "return false;", id: "btn-download-order-short" %> </p>
             </div>
           <% elsif pack.product_link.split(',').count == 2 %>
-            <div>
+            <div id="download-pack-two">
               <% pack_links = pack.product_link.split(',') %>
               <% pack_links.each_with_index do |link, index| %>
                 <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
@@ -62,7 +41,7 @@
               <% end %>
             </div>
           <% elsif pack.product_link.split(',').count == 3 %>
-            <div>
+            <div id="download-pack-three">
               <% pack_links = pack.product_link.split(',') %>
               <% pack_links.each_with_index do |link, index| %>
                 <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>
@@ -70,7 +49,7 @@
               <% end %>
             </div>
           <% else %>
-            <div>
+            <div id="download-pack-more">
               <% pack_links = pack.product_link.split(',') %>
               <% pack_links.each_with_index do |link, index| %>
                 <p> <%=  link_to "Download Pack part #{index + 1}", link, oncontextmenu: "return false;", id: "btn-download-order" %> </p>

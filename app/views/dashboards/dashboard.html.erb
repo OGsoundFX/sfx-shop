@@ -1,12 +1,6 @@
 <%= render 'shared/navbar_general' %>
 <div class="container padding-navbar content dashboard-center">
-    <h2 id="dashboard-title">Hello
-      <% if current_user.username == "" %>
-        <%= "stranger, welcome to your dashboard" %>
-      <% else %>
-        <%= " #{current_user.username}, welcome to your dashboard" %>
-      <% end %>
-    </h2>
+    <h1 class="dashboard-title">Your dashboard</h1>
 
     <% if @status == "subscribed" %>
       <h6 id="newsletter-info-card"> <i class="fas fa-info-circle"></i> You have subscribed to our <strong>newsletter</strong>. Click <%= link_to "here", unsubscribe_path %> to unsubscribe and miss all our great news and deals! </h6>
@@ -14,18 +8,7 @@
       <h6 id="newsletter-info-card"> <i class="fas fa-info-circle"></i> Subscribe to our newsletter to get cool news and discounts all year long, AND receive a free pack of sounds right away! <%= link_to "CLICK HERE", subscribe_path %> </h6>
     <% end %>
 
-    <div class="d-flex justify-content-center edit-profile-position">
-      <div>
-        <h4 id="space-around-edit-button"><%= link_to "Edit your Profile", edit_user_registration_path(current_user), id: "edit-profile" %></h4>
-      </div>
-      <div>
-        <h4 id="space-around-edit-button"> <%= link_to "Browse shop", root_path, id: "browse-profile" %> </h4>
-      </div>
-    </div>
-
-    <% if @orders.count > 0 %>
-      <h4 id="list-of-orders">List of orders:</h4>
-    <% else %>
+    <% if @orders.count == 0 %>
       <h3>You haven't purchased anything yet</h3>
     <% end %>
 
