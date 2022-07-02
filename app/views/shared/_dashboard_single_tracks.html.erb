@@ -1,1 +1,54 @@
-<h1>yo temp content here</h1>
+<% total_tracks_price = 0 %>
+<% order.tracks.each { |track| total_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) } %>
+
+<div data-controller="collection-checkout-modal">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-headphones checkout-icon-adjust"></i>
+      <div class="d-flex flex-column justify-content-center">
+        <div style="font-weight: 500"><%= order.tracks.count %> indivudual tracks for <%= humanized_money_with_symbol(total_tracks_price) %>
+        </div>
+      </div>
+    </div>
+    <button id="list-tracks-modal-button"
+            data-collection-checkout-modal-target="button"
+            data-action="click->collection-checkout-modal#modalDisplay">
+      List of tracks
+    </button>
+    <div class="d-flex flex-column justify-content-center">
+      <%= link_to "download all", create_zip_path(tracks: order.tracks), id: "btn-download-collection" %>
+    </div>
+  </div>
+
+  <% order.tracks.each do |track_id| %>
+    <% track = SingleTrack.find(track_id) %>
+    <p>
+      <%= track.title %>
+      <%= link_to "download", download_single_path(url: track.link, title: track.title) %>
+    </p>
+  <% end %>
+
+
+  <!-- Collection List Modal -->
+  <div id="collectionModal" class="track-list-modal" data-collection-checkout-modal-target="collectionModal">
+    <!-- Modal content -->
+    <div class="collection-modal-content">
+      <div class="d-flex justify-content-between">
+        <h3>List of tracks</h3>
+        <span class="close"
+              data-collection-checkout-modal-target="close"
+              data-action="click->collection-checkout-modal#modalClose">&times;
+        </span>
+      </div>
+      <hr>
+        <% order.tracks.each do |track| %>
+          <% displayed_track = SingleTrack.find(track) %>
+          <div class="grid-display-list">
+            <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
+            <div><%= displayed_track.title %> (<%= humanized_money_with_symbol(displayed_track.price) %>)</div>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>

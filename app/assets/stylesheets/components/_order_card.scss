@@ -88,7 +88,7 @@
   margin-top: 35px;
 }
 
-#btn-download-order, #btn-download-order-short {
+#btn-download-order, #btn-download-order-short, #btn-download-collection {
   width: 120px;
   font-size: 120%;
   padding: 5px 12px;
@@ -101,6 +101,10 @@
     background-color: $light-grey;
     border: solid 2px $light-grey;
   }
+}
+
+#btn-download-collection {
+  width: inherit;
 }
 
 #btn-download-order-short {
