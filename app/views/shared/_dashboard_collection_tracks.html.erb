@@ -12,6 +12,9 @@
             data-action="click->collection-checkout-modal#modalDisplay">
       List of tracks
     </button>
+    <div class="d-flex flex-column justify-content-center">
+      <%= link_to "Download Collection", create_zip_collection_path(collection: @collection), id: "btn-download-collection" %>
+    </div>
   </div>
 
 
