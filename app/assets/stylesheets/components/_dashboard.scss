@@ -14,3 +14,15 @@
   margin-bottom: 22px;
   text-align: center;
 }
+
+.dashboard-collection-grid, .dashboard-tracks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.total-dashboard {
+  background-color: $whitesmoke;
+  padding: 12px;
+  gap: 12px;
+  font-size: 1.2em;
+}

@@ -26,17 +26,21 @@
     </div>
 
     <hr>
-    <p>Status: <strong><%= order.status %></strong> </p>
-    <p>Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
-    <% if order.coupon %>
-      <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
-      <% coupon_array = order.coupon.split(',') %>
-      <% if coupon_array[1].strip == "Percentage" %>
-        <% coupon_value = "#{coupon_array[2].to_i}%" %>
-      <% else %>
-        <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
-      <% end %>
-      <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
-    <% end %>
+    <div class="d-flex justify-content-start" style="padding: 0 42px">
+      <div class="total-dashboard" >
+        <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
+        <p style="margin-bottom: 0">(including VAT: <%= humanized_money_with_symbol (((order.amount_cents.to_f / 100)/1.07) * 0.07) %>)</p>
+        <% if order.coupon %>
+          <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
+          <% coupon_array = order.coupon.split(',') %>
+          <% if coupon_array[1].strip == "Percentage" %>
+            <% coupon_value = "#{coupon_array[2].to_i}%" %>
+          <% else %>
+            <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
+          <% end %>
+          <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
