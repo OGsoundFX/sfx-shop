@@ -89,8 +89,8 @@
 }
 
 #btn-download-order, #btn-download-order-short, #btn-download-collection {
-  width: 120px;
-  font-size: 120%;
+  display: block;
+  width: 200px;
   padding: 5px 12px;
   border-radius: 5px;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
@@ -104,7 +104,8 @@
 }
 
 #btn-download-collection {
-  width: inherit;
+  width: 200px;
+  text-align: center;
 }
 
 #btn-download-order-short {

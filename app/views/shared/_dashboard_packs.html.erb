@@ -6,20 +6,29 @@
       <% if index.positive? %>
         <div class="d-flex">
           <div><%= image_tag SfxPack.find(pack).photos[0], width: "120px" %></div>
-          <div class="d-flex flex-column justify-content-center pack-details">
+          <div class="d-flex flex-column justify-content-center pack-details" style="text-align: left">
           <h5><%= SfxPack.find(pack).title %></h5>
-            <% if order.sales != {} && order.sales[pack.to_s] %>
-              <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
-              <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
+            <% if order.sales != {} %>
+              <% if order.sales[pack.to_s] %>
+                <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
+                <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
+              <% else %>
+                <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price %> </strong> </h5>
+              <% end %>
             <% else %>
-              <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price %> </strong> </h5>
+              <% if index.positive? %>
+                <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price * 0.8 %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) </i> </span> </h5>
+                <h5 id="instead-under"> <i>(instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>)</i> </h5>
+              <% else %>
+                <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price %> </strong> </h5>
+              <% end %>
             <% end %>
           </div>
         </div>
       <% else %>
         <div class="d-flex">
           <div><%= image_tag SfxPack.find(pack).photos[0], width: "120px" %></div>
-          <div class="d-flex flex-column justify-content-center pack-details">
+          <div class="d-flex flex-column justify-content-center pack-details" style="text-align: left">
           <h5><%= SfxPack.find(pack).title %></h5>
             <% if order.sales != {} && order.sales[pack.to_s] %>
               <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol SfxPack.find(pack).price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
