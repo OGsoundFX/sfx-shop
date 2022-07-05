@@ -29,7 +29,9 @@
     <div class="d-flex justify-content-start" style="padding: 0 42px">
       <div class="total-dashboard" >
         <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
-        <p style="margin-bottom: 0">(including VAT: <%= humanized_money_with_symbol (((order.amount_cents.to_f / 100)/1.07) * 0.07) %>)</p>
+        <div class="d-flex justify-content-between dashboard-vat-display">
+          <div>VAT (7% inclusive)</div><div><%= humanized_money_with_symbol (((order.amount_cents.to_f / 100)/1.07) * 0.07) %></div>
+        </div>
         <% if order.coupon %>
           <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
           <% coupon_array = order.coupon.split(',') %>
