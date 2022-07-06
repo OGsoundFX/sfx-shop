@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.wave').forEach((el, loopId) => {
     // console.log(getComputedStyle(el))
     let height = 50
-    if (Array.from(el.classList).includes("collection-wave")) {
+    if (Array.from(el.classList).includes("collection-wave") || Array.from(el.classList).includes("track-wave")) {
       height = 25
     } else {
       height = 50
