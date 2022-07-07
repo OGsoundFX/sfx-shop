@@ -105,6 +105,9 @@ class CartsController < ApplicationController
         @total_value += (track.price_cents / 100.to_f)
       end
 
+      # getting the sum of points for single tracks
+      @single_tracks_points = @single_tracks_list.pluck(:points).sum
+
       # adding up price of collection
       if @current_collections.last
         @sum += @current_collections.last.price_cents / 100
