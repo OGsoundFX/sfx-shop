@@ -7,19 +7,17 @@ Here is my online Sound Effects shop that I am building. The first stage is comp
 
 Here are the different stages that I am aiming:
 
-### Stage 1: **COMPLETED** (almost)
+### Stage 1: **COMPLETED**
 Creating a Sound Effects online shop with only my Own sound effects packs.
 I am first releasing a Demo version for friends and coleagues, with free access to all sound effect packs. Official release will come soon after.
-What still need to be done:
-- devise confirmation email when creating an account
-- problem with password reset
-- some frontend details
-- add reviews
 
-### Stage 2: 2022 Q4 **IN PROGRESS (Almost done)**
+### Stage 2: Official release **COMPLETED**
+The website was officially opened to business on January 2022. Check out [BAMSFX.COM shop](https://www.bamsfx.com)
+
+### Stage 3: 2022 Q4 **IN PROGRESS (Almost done)**
 Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
-### Stage 3: 2023
+### Stage 4: 2023
 Onboard other sound designers to sell their Sound Effect packs after quality validation from me.
 The question is whether they will be able to manage their packs and sounds or will I be the sole administrator.
 Payment details and share aspect need to be established.
