@@ -16,10 +16,10 @@ What still need to be done:
 - some frontend details
 - add reviews
 
-### Stage 2: 2022 Q2 **IN PROGRESS (Almost done)**
+### Stage 2: 2022 Q4 **IN PROGRESS (Almost done)**
 Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
-### Stage 3: 2022
+### Stage 3: 2023
 Onboard other sound designers to sell their Sound Effect packs after quality validation from me.
 The question is whether they will be able to manage their packs and sounds or will I be the sole administrator.
 Payment details and share aspect need to be established.
