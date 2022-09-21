@@ -1,5 +1,6 @@
 class SingleTracksController < ApplicationController
   def index
+
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-swords"></i>',

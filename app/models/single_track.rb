@@ -2,6 +2,8 @@ class SingleTrack < ApplicationRecord
   belongs_to :sound_designer
   monetize :price_cents
 
+  enum announcement: [:standard, :new_release, :popular, :deal]
+
   include PgSearch::Model
   pg_search_scope :search_single_tracks,
     against: [ :title, :category, :tags ],
