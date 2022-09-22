@@ -74,3 +74,7 @@ gem 'kaminari'
 gem 'aws-sdk-s3', '~> 1.103'
 gem 'aws-sdk-ec2', '~> 1.0.0.rc3'
 gem 'rubyzip', '~> 1.2'
+
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
