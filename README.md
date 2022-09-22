@@ -325,4 +325,49 @@ def create_zip
   end
 ````
 
+### Heroku upgrade to 22
 
+1- Create a second heroku remote:
+```heroku create --remote heroku-22 --stack heroku-22 <your app name>-heroku-22 --region eu```
+<br>
+**(Work on a branch)**
+<br>
+2- Update gem file:<br>
+```ruby "3.1.2"
+gem "pg", "~> 1.1"
+gem "cloudinary"
+gem 'rails', '~> 6.0' # IF RAILS < 6
+gem 'psych', '< 4' # IF assets:precompile issue
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+```
+<br>
+**Run in terminal**
+
+```bundle lock --add-platform x86_64-linux```
+
+3- update active storage<br>
+    - ```rails active_storage:update```<br>
+    - ```run rails db:migrate```
+
+4- Bundle:<br>
+	- remove Gemfile.lock <br>
+	- ```bundle``` <br>
+    - ```bundle lock --add-platform x86_64-linux```
+
+5- Add webpack-cli package: **OPTIONAL** <br>
+	- ```yarn add webpack-cli``` <br>
+	- You may need to remove **node_modules** & **yarn.lock** before running
+
+6- Commit: <br>
+	- ```ga . && gcmsg “message”```
+
+7- Push to heroku-22: <br>
+	- ```git push heroku-22 master``` <br>
+	- ```heroku run rails db:migrate db:seed --app whatever-the-remote-repo-is-called```  
+
+8- Push to official heroku repo <br>
+	- Go to heroku/settings and click on **Upgrade Stack** <br>
+	- ```git push heroku master``` <br>
+	- ```heroku run rails db:migrate```
