@@ -25,4 +25,8 @@ class SingleTrack < ApplicationRecord
       default: '<i class="fas fa-volume-up"></i>'
     }
   end
+
+  before_create do
+    self.announcement = :new_release
+  end
 end
