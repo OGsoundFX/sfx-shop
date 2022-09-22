@@ -8,7 +8,6 @@ Rails.configuration.stripe = {
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
 StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]
-# StripeEvent.tax_rate = Rails.configuration.stripe[:tax_rate]
 
 StripeEvent.configure do |events|
   events.subscribe 'checkout.session.completed', StripeCheckoutSessionService.new
