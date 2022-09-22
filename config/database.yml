@@ -79,7 +79,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  # <<: *default
   database: sfx_shop_production
   username: sfx_shop
   password: <%= ENV['SFX_SHOP_DATABASE_PASSWORD'] %>
