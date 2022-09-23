@@ -60,8 +60,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'simple_form'
 gem 'devise'
 gem 'money-rails', '~>1.12'
-gem 'stripe', '5.27.0'
-gem 'stripe_event', '2.3.1'
+gem 'stripe'
+gem 'stripe_event'
 gem 'bootstrap', '~> 4.5.2'
 gem 'font-awesome-rails'
 gem "font-awesome-sass", "~> 5.7"
