@@ -39,12 +39,30 @@
   height: 55px;
 }
 
+#sword-gif {
+  height: 26px;
+  transform: rotate(45deg);
+  margin-left: -8px;
+  margin-top: -4px;
+}
+
 #comming-soon {
   margin: 12px 0 0 15px;
 }
 
 .orange-words {
   color: $orange-main;
+}
+
+#point-explanation-modal {
+  color: #999999;
+  font-size: 0.75em;
+  border: solid #FFA500 2px;
+  border-radius: 50%;
+}
+
+#collection-image {
+  width: 56vw;
 }
 
 // TRACK INFO MODAL
