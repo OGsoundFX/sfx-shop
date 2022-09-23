@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post "single_tracks_cart_remove", to: "carts#single_tracks_cart_remove"
   post "checkout", to: "orders#checkout"
   get "destroy_order", to: "orders#destroy"
+  get "update_order_status", to: "orders#update_order_status"
   get "destroy_order_dashboard", to: "orders#destroy_from_dashboard"
   get "destroy_cart", to: "carts#destroy_cart"
   get "admin", to: "administrator#admin"
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   post "convert", to: "collections#convert"
   post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
   delete "destroy_collection", to: "collections#destroy_collection"
+
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
