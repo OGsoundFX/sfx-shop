@@ -204,8 +204,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-linux)
-      racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.3)
     pg_search (2.3.6)
@@ -293,10 +291,10 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stripe (7.1.0)
-    stripe_event (2.6.0)
+    stripe (5.27.0)
+    stripe_event (2.3.1)
       activesupport (>= 3.1)
-      stripe (>= 2.8, < 8)
+      stripe (>= 2.8, < 6)
     strscan (3.0.4)
     thor (1.2.1)
     thread_safe (0.3.6)
@@ -335,7 +333,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-ec2 (~> 1.0.0.rc3)
@@ -369,8 +366,8 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
-  stripe
-  stripe_event
+  stripe (= 5.27.0)
+  stripe_event (= 2.3.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
