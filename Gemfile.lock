@@ -333,7 +333,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-ec2 (~> 1.0.0.rc3)
