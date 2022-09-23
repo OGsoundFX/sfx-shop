@@ -58,7 +58,7 @@ class SingleTracksController < ApplicationController
     require 'open-uri'
     url = params[:url]
     title = params[:title]
-    data = open(url).read
+    data = URI.open(url).read
     send_data data, :disposition => 'attachment', :filename=>"#{title}.wav"
   end
 
