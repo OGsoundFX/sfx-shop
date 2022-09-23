@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
           tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
         allow_promotion_codes: true,
-        success_url: dashboard_url,
+        success_url: update_order_status_url,
         cancel_url: destroy_order_url
       )
 # raise
@@ -174,6 +174,12 @@ class OrdersController < ApplicationController
   def destroy
     Order.where(user_id: current_user.id).last.destroy
     redirect_to cart_path
+  end
+
+  def update_order_status
+    order = current_user.orders.last
+    order.update(status: "paid")
+    redirect_to dashboard_path
   end
 
   def destroy_from_dashboard

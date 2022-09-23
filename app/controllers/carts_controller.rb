@@ -180,6 +180,8 @@ class CartsController < ApplicationController
   end
 
   def destroy_cart
+    order = current_user.orders.last
+    order.update(status: "paid")
     cart = Cart.where(user_id: current_user.id).first
     if cart.collections != []
       collection = Collection.find(cart.collections.last)
