@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
         success_url: update_order_status_url,
         cancel_url: destroy_order_url
       )
-# raise
+
       order.update(checkout_session_id: session.id)
       redirect_to new_order_payment_path(order)
     else
@@ -179,6 +179,7 @@ class OrdersController < ApplicationController
   def update_order_status
     order = current_user.orders.last
     order.update(status: "paid")
+    order.update(amount_paid_cents: order.amount_cents)
     redirect_to dashboard_path
   end
 
