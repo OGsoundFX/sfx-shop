@@ -1,25 +1,36 @@
 <% @orders.each do |order| %>
-  <% @collection = Collection.find(order.collections.first) if order.collections != [] %>
+  <% collection = Collection.find(order.collections.first) if order.collections != [] %>
   <% @tracks = order.tracks %>
   <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
-    <hr>
     <div>
+      <hr>
+      <% if order.packs == [] && order.collections == [] && order.tracks == [] %>
+        <div class="pack-payment-checkout">
+          <%= render 'shared/dashboard_single_pack', order: order %>
+        </div>
+      <% end %>
+      
       <% if order.packs != [] %>
         <div class="pack-payment-checkout">
-          <%= render 'shared/dashboard_packs', order: order%>
+          <%= render 'shared/dashboard_packs', order: order %>
         </div>
       <% end %>
 
       <div class="collection-payment-checkout">
-        <% if !@collection.nil? %>
-          <%= render 'shared/dashboard_collection_tracks' %>
-          <hr>
+        <% if !collection.nil? %>
+          <% if order.packs != [] %>
+            <hr>
+          <% end %>
+          <%= render 'shared/dashboard_collection_tracks', collection: collection %>
         <% end %>
       </div>
 
       <div class="tracks-payment-checkout">
         <% if order.tracks != [] %>
+          <% if !collection.nil? || order.packs != [] %>
+            <hr>
+          <% end %>
           <%= render 'shared/dashboard_single_tracks', order: order %>
         <% end %>
       </div>

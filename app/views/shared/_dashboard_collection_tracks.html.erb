@@ -3,7 +3,7 @@
     <div class="d-flex">
       <i class="fas fa-compact-disc checkout-icon-adjust"></i>
       <div class="d-flex flex-column justify-content-center">
-        <div style="font-weight: 500; font-size: 1.2rem">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money_with_symbol @collection.price %>
+        <div style="font-weight: 500; font-size: 1.2rem">Collection of <%= collection.tracks.count %> tracks for <%= humanized_money_with_symbol collection.price %>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-end">
-        <%= link_to "Download Collection", create_zip_collection_path(collection: @collection), id: "btn-download-collection" %>
+        <%= link_to "Download Collection", create_zip_collection_path(collection: collection), id: "btn-download-collection" %>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
       </div>
       <hr>
 
-        <% @collection.tracks.each do |track| %>
+        <% collection.tracks.each do |track| %>
           <% displayed_track = SingleTrack.find(track) %>
           <div class="grid-display-list">
             <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
