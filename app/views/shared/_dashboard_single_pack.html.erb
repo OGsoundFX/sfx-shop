@@ -2,25 +2,23 @@
 <% pack =  SfxPack.find(order.sfx_pack_id) %>
 
   <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <div><%= image_tag pack.photos[0], width: "120px" %></div>
+      <div class="d-flex flex-column justify-content-center pack-details" style="text-align: left">
+      <h5><%= pack.title %></h5>
+        <% if order.sales != {} %>
+          <% if order.sales[pack.to_s] %>
+            <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol pack.price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
+            <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
+          <% else %>
+            <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
+          <% end %>
+        <% else %>
+          <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
+        <% end %>
+      </div>
+    </div>
 
-        <div class="d-flex">
-          <div><%= image_tag pack.photos[0], width: "120px" %></div>
-          <div class="d-flex flex-column justify-content-center pack-details" style="text-align: left">
-          <h5><%= pack.title %></h5>
-            <% if order.sales != {} %>
-              <% if order.sales[pack.to_s] %>
-                <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol pack.price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
-                <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
-              <% else %>
-                <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
-              <% end %>
-            <% else %>
-              <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
-            <% end %>
-          </div>
-        </div>
-
- 
     <div id="download-buttons-next" class="d-flex flex-column justify-content-center mt-3">
       <% if pack.product_link.split(',').count == 1 %>
         <div>
