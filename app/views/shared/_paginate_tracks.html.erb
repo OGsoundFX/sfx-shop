@@ -10,6 +10,11 @@
         <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
         <span class="title-font pad-top max-width"><%= track.title %></span>
         <span class="info-icon max-width" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
+        <% if track.announcement == "new_release" %>
+          <%= image_tag asset_path("New_green_transp_small.png"), id: "new-release-track" %>
+        <% elsif track.announcement == "popular" %>
+          <%= image_tag asset_path("Popular.png"), id: "new-release-track" %>
+        <% end %>
       </div>
       <div class="d-flex wave-section elements-position">
         <% if controller_name == 'carts' && action_name == 'cart'%>
