@@ -10,6 +10,13 @@
     </div>
 
     <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
+
+      <% if @order.packs == [] && @order.collections == [] && @order.tracks == [] %>
+        <div class="pack-payment-checkout">
+          <%= render 'shared/payment_single_pack' %>
+        </div>
+      <% end %>
+
       <% if @order.packs != [] %>
         <div class="pack-payment-checkout">
           <%= render 'shared/payment_packs' %>
