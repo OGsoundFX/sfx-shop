@@ -29,4 +29,9 @@ class SingleTrack < ApplicationRecord
   before_create do
     self.announcement = :new_release
   end
+
+  def self.popular
+    array = Order.pluck(:tracks).flatten
+    array.count(array.first)
+  end
 end
