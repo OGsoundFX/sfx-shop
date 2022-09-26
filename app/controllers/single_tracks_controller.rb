@@ -1,6 +1,5 @@
 class SingleTracksController < ApplicationController
   def index
-
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-swords"></i>',
@@ -21,13 +20,27 @@ class SingleTracksController < ApplicationController
     # order by
     if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
       if params[:previous_category] != ""
-        @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
-        @dropdown = params[:previous_category]
+        if params[:order_by_dropdown] == "newest"
+          @tracks = SingleTrack.all.order(created_at: :desc).page params[:page]
+          @dropdown = params[:previous_category]
+        else
+          @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
+          @dropdown = params[:previous_category]
+        end
       elsif params[:previous_sort] == "Search by keyword" || params[:previous_sort] == ""
-        @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
+        if params[:order_by_dropdown] == "newest"
+          @tracks = SingleTrack.reorder(created_at: :desc).page params[:page]
+        else
+          @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
+        end
       else
-        @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
-        @search = params[:previous_sort]
+        if params[:order_by_dropdown] == "newest"
+          @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(created_at: :desc).page params[:page]
+          @search = params[:previous_sort]
+        else
+          @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
+          @search = params[:previous_sort]
+        end
       end
       @order = params[:order_by_dropdown]
     else
@@ -39,16 +52,32 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.page params[:page]
           @search = "Search by keyword"
         else
-          @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
-          @search = params[:search]
+          if params[:order_by_dropdown] == "newest"
+            @tracks = SingleTrack.search_single_tracks(params[:search]).reorder(created_at: :desc).page params[:page]
+            @search = params[:search]
+          else
+            @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
+            @search = params[:search]
+          end
         end
       elsif params[:dropdown] == "all"
-        @tracks = SingleTrack.page params[:page]
-        @search = "Search by keyword"
+        if params[:order_by_dropdown] == "newest"
+          @tracks = SingleTrack.all.order(created_at: :desc).page params[:page]
+          @search = "Search by keyword"
+        else
+          @tracks = SingleTrack.page params[:page]
+          @search = "Search by keyword"
+        end
       else
-        @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
-        @search = "Search by keyword"
-        @dropdown = params[:dropdown]
+        if params[:order_by_dropdown] == "newest"
+          @tracks = SingleTrack.reorder(created_at: :desc).page params[:page]
+          @search = "Search by keyword"
+          @dropdown = params[:dropdown]
+        else
+          @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
+          @search = "Search by keyword"
+          @dropdown = params[:dropdown]
+        end
       end
 
     end
