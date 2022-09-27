@@ -31,7 +31,17 @@ class SingleTrack < ApplicationRecord
   end
 
   def self.popular
-    array = Order.pluck(:tracks).flatten
-    array.count(array.first)
+    track_array = Order.pluck(:tracks).flatten + Collection.where(purchased: true).pluck(:tracks).flatten
+    track_hash = {}
+    track_array.each do |track|
+      track_hash[track] = track_array.count(track)
+    end
+    sorted = track_hash.sort_by { |k, v| -v }
+    final_list = sorted.first(100).map do |pair|
+      pair.first
+    end
+    final_list.each do |track|
+      SingleTrack.find(track).update(announcement: "popular")
+    end
   end
 end
