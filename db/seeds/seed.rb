@@ -1,7 +1,10 @@
 # Outdoor Atmospheres seed
-puts "destroying previous batch #2 entries" # replace batch number
 
-SingleTrack.where(batch: 2).destroy_all # replace batch number
+# replace batch number if necessary
+# puts "destroying previous batch #2 entries"
+
+# replace batch number if necessary
+# SingleTrack.where(batch: 2).destroy_all
 
 puts 'seeding outdoor atmospheres batch #2' # replace batch number
 
