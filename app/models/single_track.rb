@@ -23,7 +23,7 @@ class SingleTrack < ApplicationRecord
       disasters: '<i class="fas fa-volcano"></i>',
       weather: '<i class="fas fa-cloud-showers-heavy"></i>',
       miscellaneous: '<i class="fas fa-volume-up"></i>',
-      footsteps: '<i class="fa-solid fa-shoe-prints"></i>',
+      footsteps: '<i class="fas fa-shoe-prints"></i>',
       magic: '<i class="fas fa-cauldron"></i>',
       sci_fi: '<i class="fas fa-rocket"></i>',
       default: '<i class="fas fa-volume-up"></i>'
