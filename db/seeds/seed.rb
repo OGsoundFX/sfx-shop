@@ -6,13 +6,13 @@
 # replace batch number if necessary
 # SingleTrack.where(batch: 2).destroy_all
 
-puts 'seeding misc 1 batch #46' # replace batch number
+puts 'seeding misc 2 batch #47' # replace batch number
 
 require 'json'
 filepath = File.join(Rails.root, "db", "seeds", "tracks.json") # replace "tracks.json" with the JSON file name
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
-tags = %w(train horn city miscellaneous rail monorail choo passenger vehicle steam coal electric screech wheel) # replace tags
+tags = %w(fireworks new year eve party celebrate celebration explosion fire colors ceremony festival sparklers firecrackers rocket cheer bell christmas) # replace tags
 
 tracks.each do |track| # change the destination folder
   link = "https://single-track-list.s3.eu-central-1.amazonaws.com/miscellaneous/#{track['name']}"
