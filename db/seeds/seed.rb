@@ -6,20 +6,20 @@
 # replace batch number if necessary
 # SingleTrack.where(batch: 2).destroy_all
 
-puts 'seeding outdoor atmospheres batch #2' # replace batch number
+puts 'seeding misc 1 batch #46' # replace batch number
 
 require 'json'
 filepath = File.join(Rails.root, "db", "seeds", "tracks.json") # replace "tracks.json" with the JSON file name
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
-tags = %w(outdoor atmosphere nature wild wilderness scenery background dungeon game board) + %w(beach summer sand seagull ocean wave) # replace tags
+tags = %w(train horn city miscellaneous rail monorail choo passenger vehicle steam coal electric screech wheel) # replace tags
 
 tracks.each do |track| # change the destination folder
-  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/outdooratmospheres/#{track['name']}"
+  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/miscellaneous/#{track['name']}"
   
   # create preview link
   mp3 = track['name'].split(".wav")[0] + ".mp3" # change the destination folder
-  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/outdooratmospheres/previews/#{mp3}"
+  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/miscellaneous/previews/#{mp3}"
 
   title = track['name'].split('.')[0].split('_').join(' ')
   additional_tags_array = title.split(' ')
@@ -52,6 +52,6 @@ tracks.each do |track| # change the destination folder
   end
 
   # replace sound_designer_id, category, sfx_pack_id, batch
-  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "outdoor", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 3, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 2, preview_link: preview_link)
+  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "miscellaneous", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: nil, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 46, preview_link: preview_link)
   puts "new track created"
 end
