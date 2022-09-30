@@ -48,4 +48,9 @@ class SingleTrack < ApplicationRecord
       SingleTrack.find(track).update(announcement: "popular")
     end
   end
+
+  def self.check_new(months)
+    tracks = SingleTrack.where(announcement: "new_release").where("created_at < ?", months.months.ago)
+    tracks.update(announcement: "standard")
+  end
 end
