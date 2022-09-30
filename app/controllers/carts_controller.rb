@@ -132,7 +132,7 @@ class CartsController < ApplicationController
         "miscellaneous": '<i class="fas fa-volume-up"></i>',
         "footsteps": '<i class="fas fa-shoe-prints"></i>',
         "magic": '<i class="fas fa-cauldron"></i>',
-        "sci-fi": '<i class="fas fa-rocket"></i>',
+        "scifi": '<i class="fas fa-rocket"></i>',
         "default": '<i class="fas fa-volume-up"></i>'
       }
       # @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
