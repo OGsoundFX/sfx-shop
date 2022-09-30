@@ -6,20 +6,20 @@
 # replace batch number if necessary
 # SingleTrack.where(batch: 2).destroy_all
 
-puts 'seeding punch sounds batch #52' # replace batch number
+puts 'seeding scary stuff batch #53' # replace batch number
 
 require 'json'
 filepath = File.join(Rails.root, "db", "seeds", "tracks.json") # replace "tracks.json" with the JSON file name
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
-tags = %w(hit fight injury action altercation brawl battle combat conflict controversy dispute quarrel blood bones bruise fracture pain suffering wound swelling attack trauma slap blow whack) # replace tags
+tags = %w(atmosphere scary weird haunted ghost creepy eerie chilling shadow specter) # replace tags
 
 tracks.each do |track| # change the destination folder
-  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/punch/#{track['name']}"
+  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/haunted/#{track['name']}"
   
   # create preview link
   mp3 = track['name'].split(".wav")[0] + ".mp3" # change the destination folder
-  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/punch/previews/#{mp3}"
+  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/haunted/previews/#{mp3}"
 
   title = track['name'].split('.')[0].split('_').join(' ')
   additional_tags_array = title.split(' ')
@@ -52,6 +52,6 @@ tracks.each do |track| # change the destination folder
   end
 
   # replace sound_designer_id, category, sfx_pack_id, batch
-  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "action", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: nil, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 52, preview_link: preview_link)
+  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "scary", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: 6, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 53, preview_link: preview_link)
   puts "new track created"
 end
