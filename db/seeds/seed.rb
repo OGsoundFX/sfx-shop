@@ -6,20 +6,20 @@
 # replace batch number if necessary
 # SingleTrack.where(batch: 2).destroy_all
 
-puts 'seeding footsteps batch #48' # replace batch number
+puts 'seeding magic spells batch #49' # replace batch number
 
 require 'json'
 filepath = File.join(Rails.root, "db", "seeds", "tracks.json") # replace "tracks.json" with the JSON file name
 serialized_tracks = File.read(filepath)
 tracks = JSON.parse(serialized_tracks)['list']
-tags = %w(fireworks new year eve party celebrate celebration explosion fire colors ceremony festival sparklers firecrackers rocket cheer bell christmas) # replace tags
+tags = %w(fantasy magic haunted spirits hypnotic terror strange chilling eerie spooky horrifying horrific ghost manifestation demon appearance shadow soul spectre spell cast wizardry illusion freeze paralyse) # replace tags
 
 tracks.each do |track| # change the destination folder
-  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/footsteps/#{track['name']}"
+  link = "https://single-track-list.s3.eu-central-1.amazonaws.com/magic/#{track['name']}"
   
   # create preview link
   mp3 = track['name'].split(".wav")[0] + ".mp3" # change the destination folder
-  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/footsteps/previews/#{mp3}"
+  preview_link = "https://single-track-list.s3.eu-central-1.amazonaws.com/magic/previews/#{mp3}"
 
   title = track['name'].split('.')[0].split('_').join(' ')
   additional_tags_array = title.split(' ')
@@ -52,6 +52,6 @@ tracks.each do |track| # change the destination folder
   end
 
   # replace sound_designer_id, category, sfx_pack_id, batch
-  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "footsteps", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: nil, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 48, preview_link: preview_link)
+  SingleTrack.create(title: title, link: link, sound_designer_id: 1, category: "magic", tags: track_tags, size: track['fileSize'], duration: track['durationSecs'], points: points, sfx_pack_id: nil, price_cents: price_cents, bitrate: track['bitRate'], sample_rate: track['sampleRate'], batch: 49, preview_link: preview_link)
   puts "new track created"
 end
