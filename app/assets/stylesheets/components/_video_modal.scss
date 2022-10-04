@@ -1,0 +1,69 @@
+/* The Modal (background) */
+.video-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 200; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.video-modal-content {
+  position: relative;
+  // background-color: #fefefe;
+  // margin: auto;
+  // padding: 20px;
+  // border: 1px solid #888;
+}
+
+.video-modal-buttons {
+  width: 840px;
+  margin: auto;
+  background-color: #212121;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+#tracks, #close {
+  border-radius: 4px;
+  padding: 6px 18px;
+  font-size: 1.4rem;
+}
+
+#tracks {
+  background-color: $orange-main;
+  color: white;
+  &:hover {
+    background-color: $light-grey;
+    transition-duration: 0.3s;
+  }
+}
+
+#close {
+  background-color: grey;
+  &:hover {
+    background-color: $light-grey;
+    transition-duration: 0.3s;
+  }
+}
+/* The Close Button */
+.video-modal-close {
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  float: right;
+  font-size: 280px;
+  font-weight: bold;
+  &:hover,
+  &:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
