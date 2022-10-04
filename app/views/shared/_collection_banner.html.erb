@@ -1,0 +1,36 @@
+<div class="slideshow-container">
+  <div>
+    <% if @current_sales_list != {} %>
+      <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
+      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+    <% else %>
+      <%= image_tag asset_path('Promo20_2.png'), id: "promo20" %>
+      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+    <% end %>
+  </div>
+
+  <section id="scroll-down">
+    <a href="#front-title"><span></span></a>
+  </section>
+
+  <div class="">
+    <img class="slideshow-images" src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081624/carousel/jakob-owens-0Xl9HAf0RyE-unsplash_vkh5gw.jpg">
+    <div class="collection-banner-content">
+      <div><span>Create Your Collection!!!</span></div>
+      <div id="collection-video-btn">
+        Watch video &nbsp<i class="fas fa-play"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="videoModal" class="video-modal">
+
+    <!-- Modal content -->
+    <div class="video-modal-content">
+      <span class="video-modal-close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+
+  </div>
+</div>

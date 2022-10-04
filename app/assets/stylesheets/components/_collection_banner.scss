@@ -1,0 +1,35 @@
+.collection-banner-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3rem;
+  top: 18vh;
+  color: #f2f2f2;
+  padding: 8px 12px;
+  text-align: center;
+  span {
+    font-family: 'Permanent Marker', cursive;
+  font-size: 4rem;
+  }
+}
+
+#collection-video-btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 400px;
+  margin-top: 12px;
+  background-color: $blue-light;
+  border-radius: 4px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: $light-grey;
+    transition-duration: 0.3s;
+  }
+}
