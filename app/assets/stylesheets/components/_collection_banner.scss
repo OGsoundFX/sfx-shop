@@ -9,9 +9,9 @@
   color: #f2f2f2;
   padding: 8px 12px;
   text-align: center;
-  span {
+  #create-your-collection {
     font-family: 'Permanent Marker', cursive;
-  font-size: 4rem;
+    font-size: 4rem;
   }
 }
 
@@ -29,7 +29,14 @@
   transition-duration: 0.3s;
   cursor: pointer;
   &:hover {
+    width: 404px;
+    margin-top: 10px;
+    padding: 2px 0;
     background-color: $light-grey;
     transition-duration: 0.3s;
+    i {
+      transition-duration: 0.5s;
+      transform: rotate(360deg);
+    }
   }
 }
