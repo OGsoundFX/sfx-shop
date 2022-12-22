@@ -106,17 +106,17 @@
 <% end %>
 
 <% unless @current_collections.empty? %>
-  <div style="margin-top: 26px"></div>
   <%= render 'shared/cart/collections_display' %>
+  <div style="margin-top: 26px"></div>
 <% end %>
 
 <% unless @tracks.nil? || @tracks == [] %>
   <div id="cart-paginate-desktop">
-    <div style="margin-top: 26px"></div>
     <%= render 'shared/cart/paginate_tracks_cart' %>
+    <div style="margin-top: 26px"></div>
   </div>
   <div id="cart-paginate-mobile" class="screen-display">
-    <div style="margin-top: 26px"></div>
     <%= render 'shared/cart/paginate_tracks_mobile_cart' %>
+    <div style="margin-top: 26px"></div>
   </div>
 <% end %>
