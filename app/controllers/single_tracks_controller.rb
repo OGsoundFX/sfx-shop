@@ -53,7 +53,7 @@ class SingleTracksController < ApplicationController
       if params[:dropdown] == nil || params[:dropdown] == ""
         # search by keyword
         if params[:search] == nil || params[:search] == ""
-          @tracks = SingleTrack.page params[:page]
+          @tracks = SingleTrack.order("random()").page params[:page]
           @search = "Search by keyword"
         else
           if params[:order_by_dropdown] == "newest"
