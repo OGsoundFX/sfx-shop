@@ -1,0 +1,22 @@
+.left-pannel {
+  height: 100vh;
+  width: 120px;
+  background-color: $whiter-smoke;
+  border: solid 1px $whitesmoke;
+  position: sticky !important;
+  top: 56px;
+  font-size: 1.8rem;
+  .left-pannel-icon {
+    padding: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: $whitesmoke;
+    border-radius: 50%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 0.8rem;
+    color: #aaaaaa;
+  }
+}
