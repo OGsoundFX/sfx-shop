@@ -1,8 +1,8 @@
 class SfxPacksController < ApplicationController
   before_action :store_location
   def show
-    @pack = SfxPack.find(params[:id])
-    @designer = SoundDesigner.find(@pack.sound_designer_id)
+    @pack = SfxPack.includes(:sound_designer).includes(photos_attachments: :blob).find(params[:id])
+    @designer = @pack.sound_designer
     @designer_name = "#{@designer.first_name} #{@designer.last_name}"
     current_sales = Sale.where("end_date > ?", Date.current)
     current_sales.each do |sale|
