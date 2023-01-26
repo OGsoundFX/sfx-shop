@@ -1,22 +1,26 @@
-<div class="d-none"> <!-- temporary -->
+<!-- <div class="d-none">  -->
   <div class="left-pannel d-flex justify-content-center">
     <div class="d-flex flex-column text-center">
-      <div class="left-pannel-icon">
+      <div class="left-pannel-icon <%= 'pannel-active' if request.path == '/' %>">
         <i class="fal fa-box"></i>
         <p>PACKS</p>
       </div>
-      <div class="left-pannel-icon">
-      <i class="fas fa-box"></i>
-      <p>PACKS</p>
+      <div class="left-pannel-icon <%= 'pannel-active' if request.path == '/list' %>">
+        <i class="fal fa-volume-up"></i>
+        <p>SFX</p>
       </div>
       <div class="left-pannel-icon">
-      <i class="fal fa-heart"></i>
-      <p>PACKS</p>
+        <i class="fal fa-layer-group"></i>
+        <p style="font-size: 0.6rem; margin-left: -8px">COLLECTIONS</p>
       </div>
       <div class="left-pannel-icon">
-      <i class="fal fa-layer-group"></i>
-      <p>PACKS bob</p>
+        <i class="fal fa-heart"></i>
+        <p style="margin-left: -6px">FAVORITE</p>
+      </div>
+      <div class="left-pannel-icon">
+        <i class="fal fa-comments"></i>
+        <p style="font-size: 0.8rem; margin-left: -16px">COMMUNITY</p>
       </div>
     </div>
   </div>
-</div> <!-- temporary -->
+<!-- </div>  -->

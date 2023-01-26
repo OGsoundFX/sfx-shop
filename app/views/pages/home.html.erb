@@ -2,7 +2,7 @@
   <%= render 'shared/navbar' %>
 
   <%= render 'shared/collection_banner' %>
-  <div class="d-flex">
+  <div class="d-flex justify-content-between">
     <%= render "shared/left_pannel"%>
     <div>
       <% if !@announcement.nil? %>
@@ -15,11 +15,10 @@
         <h1 id="front-title">Browse through our high quality SFX Packs</h1>
       <% end %>
 
-      <div class="container-xl">
+      <div class="pack-container">
         <%= render 'shared/pack_card' %>
       </div>
     </div>
   </div>
 </div>
-
 <%= render 'shared/subscribe_modal' %>
