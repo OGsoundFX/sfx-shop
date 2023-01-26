@@ -29,3 +29,10 @@
     color: $font-grey;
   }
 }
+
+.pannel-links {
+  color: $font-grey;
+  &:hover {
+    color: $new-green;
+  }
+}
