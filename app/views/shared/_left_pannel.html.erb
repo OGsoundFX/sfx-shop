@@ -1,14 +1,18 @@
 <!-- <div class="d-none">  -->
   <div class="left-pannel d-flex justify-content-center">
     <div class="d-flex flex-column text-center">
-      <div class="left-pannel-icon <%= 'pannel-active' if request.path == '/' %>">
-        <i class="fal fa-box"></i>
-        <p>PACKS</p>
-      </div>
-      <div class="left-pannel-icon <%= 'pannel-active' if request.path == '/list' %>">
-        <i class="fal fa-volume-up"></i>
-        <p>SFX</p>
-      </div>
+      <%= link_to root_path do %>
+        <div class="left-pannel-icon <%= request.path == '/' ? 'pannel-active' :  'pannel-links' %>">
+          <i class="fal fa-box"></i>
+          <p>PACKS</p>
+        </div>
+      <% end %>
+      <%= link_to list_path do %>
+        <div class="left-pannel-icon <%= request.path == '/list' ? 'pannel-active' :  'pannel-links' %>">
+          <i class="fal fa-volume-up"></i>
+          <p>SFX</p>
+        </div>
+      <% end %>
       <div class="left-pannel-icon">
         <i class="fal fa-layer-group"></i>
         <p style="font-size: 0.6rem; margin-left: -8px">COLLECTIONS</p>
