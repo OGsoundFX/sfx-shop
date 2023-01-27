@@ -115,6 +115,16 @@
       <div><%= humanized_money_with_symbol @current_collections.first.price %>.00</div>
     </div>
   </div>
+  <% if current_user.email == 'olivier@ogsoundfx.com' %>
+    <div class="d-flex justify-content-center mb-3">
+      <%= simple_form_for :template, url: create_collection_template_path, method: :post do |form| %>
+        <%= form.hidden_field :collection, value: @current_collections.first.id %>
+        <%= form.text_field :title, placeholder: :title %>
+        <%= form.text_field :categories, placeholder: :categories %>
+        <%= form.submit "Create Collection Template" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <div class="packs-display packs-display-closed d-none" id="wrapped-collection-display" data-unwrap-cart-target="collectionWrapped">

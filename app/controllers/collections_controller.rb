@@ -148,6 +148,18 @@ class CollectionsController < ApplicationController
     send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
   end
 
+  def create_template
+    collection = Collection.find(params[:template][:collection])
+    title = params[:template][:title]
+    categories = params[:template][:categories].split(", " || "")
+    template = TemplateCollection.new(title: title, total_points: collection.total_points, price: collection.price, tracks: collection.tracks, categories: categories)
+    if template.save
+      redirect_to cart_path
+    else
+      redirect_to cart_path, alert: "Invalid entry"
+    end
+  end
+
   private
 
   def points(tracks)
