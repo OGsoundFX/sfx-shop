@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
   delete "destroy_collection", to: "collections#destroy_collection"
 
+  # create collection template --> admin
+  post "create_collection_template", to: "collections#create_template"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
