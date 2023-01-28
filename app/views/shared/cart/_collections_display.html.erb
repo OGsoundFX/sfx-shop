@@ -121,6 +121,7 @@
         <%= form.hidden_field :collection, value: @current_collections.first.id %>
         <%= form.text_field :title, placeholder: :title %>
         <%= form.text_field :categories, placeholder: :categories %>
+        <%= form.input :photo, as: :file %>
         <%= form.submit "Create Collection Template" %>
       <% end %>
     </div>
