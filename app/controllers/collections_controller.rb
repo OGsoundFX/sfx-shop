@@ -161,6 +161,10 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def templates_index
+    @templates = TemplateCollection.all
+  end
+
   private
 
   def points(tracks)
