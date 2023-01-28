@@ -153,6 +153,7 @@ class CollectionsController < ApplicationController
     title = params[:template][:title]
     categories = params[:template][:categories].split(", " || "")
     template = TemplateCollection.new(title: title, total_points: collection.total_points, price: collection.price, tracks: collection.tracks, categories: categories)
+    template.photo = params[:template][:photo]
     if template.save
       redirect_to cart_path
     else
