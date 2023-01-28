@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   # create collection template --> admin
   post "create_collection_template", to: "collections#create_template"
+  get "collection_templates", to: "collections#templates_index"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
