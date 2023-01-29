@@ -1,5 +1,5 @@
 <div class="content">
-  <% if @templates %>    
+  <% if !@templates.empty? %>    
     <% @templates.each do |template| %>
       <p><%= template.title %></p>
       <%= cl_image_tag template.photo.key, height: 300, width: 400, crop: :fill %>
