@@ -1,6 +1,10 @@
 <div class="content">
-  <% @templates.each do |template| %>
-    <p><%= template.title %></p>
-    <%= cl_image_tag template.photo.key, height: 300, width: 400, crop: :fill %>
+  <% if !@templates.empty? %>    
+    <% @templates.each do |template| %>
+      <p><%= template.title %></p>
+      <%= cl_image_tag template.photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
+  <% else %>
+    <h3>No collections at this time</h3>
   <% end %>
 </div>
