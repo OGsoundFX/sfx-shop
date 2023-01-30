@@ -1,10 +1,30 @@
+<%= render 'shared/navbar_temp' %>
 <div class="content">
-  <% if !@templates.empty? %>    
-    <% @templates.each do |template| %>
-      <p><%= template.title %></p>
-      <%= cl_image_tag template.photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %>
-  <% else %>
-    <h3>No collections at this time</h3>
-  <% end %>
+  <div class="banner">
+    <h1 class="padding-navbar">Create your own Collection !</h1>
+    <button class="learn-more" id="learnMoreBtn">Learn more</button>
+  </div>
+  <div class="d-flex">
+    <%= render "shared/left_pannel"%>
+    <div class="template-section text-center">
+      <% if !@templates.empty? %>    
+        <% @templates.each do |template| %>
+          <div class="template-card d-flex justify-content-between">
+            <div class="d-flex justify-content-between">
+              <div>
+                <%= cl_image_tag template.photo.key, class: "template-picks" %>
+              </div>
+              <div>
+                <p><%= template.title %></p>
+              </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <% end %>
+      <% else %>
+        <h3>No collections at this time</h3>
+      <% end %>
+    </div>
+  </div>
 </div>
