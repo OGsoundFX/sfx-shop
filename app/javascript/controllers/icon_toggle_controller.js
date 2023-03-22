@@ -18,4 +18,15 @@ export default class extends Controller {
       icon.style = "color: #FFA500"
     }
   }
+
+  toggleAddToCartIcon(event) {
+    const icon = event.currentTarget.querySelector("i")
+    if (icon.classList.contains("fa-trash-alt")) {
+      icon.classList.remove("fa-trash-alt")
+      icon.classList.add("fa-cart-plus")
+    } else if (icon.classList.contains("fa-cart-plus")) {
+      icon.classList.remove("fa-cart-plus")
+      icon.classList.add("fa-trash-alt")
+    }
+  }
 }
