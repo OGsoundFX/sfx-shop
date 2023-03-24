@@ -45,13 +45,25 @@
       <div class="d-flex justify-content-center purchase-section"
            data-controller="icon-toggle">
         <%# <i class="far fa-layer-plus pad-top purchase-icons" id="comingSoonBtn"></i> %>
-        <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-          <%= link_to collection_path(@collection, track: track), method: :patch, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
-            <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500"></i>
+        <% if current_user %>
+          <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+            <%= link_to collection_path(@collection, track: track), method: :patch, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+              <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500"></i>
+            <% end %>
+          <% else %>
+            <%= link_to collections_path(track: track), method: :post, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+              <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover"></i>
+            <% end %>
           <% end %>
         <% else %>
-          <%= link_to collections_path(track: track), method: :post, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
-            <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover"></i>
+          <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+            <%= link_to collection_path(@collection, track: track), method: :patch do %>
+              <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500"></i>
+            <% end %>
+          <% else %>
+            <%= link_to collections_path(track: track), method: :post do %>
+              <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover"></i>
+            <% end %>
           <% end %>
         <% end %>
 
@@ -60,8 +72,14 @@
             <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
           <% end %>
         <% else %>
-          <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
-              <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+          <% if current_user %>
+            <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
+                <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+            <% end %>
+          <% else %>
+            <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post do %>
+                <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
