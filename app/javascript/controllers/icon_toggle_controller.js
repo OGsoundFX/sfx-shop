@@ -24,9 +24,11 @@ export default class extends Controller {
     if (icon.classList.contains("fa-trash-alt")) {
       icon.classList.remove("fa-trash-alt")
       icon.classList.add("fa-cart-plus")
+      icon.style = "color: #4e4e4e; opacity: 1"
     } else if (icon.classList.contains("fa-cart-plus")) {
       icon.classList.remove("fa-cart-plus")
       icon.classList.add("fa-trash-alt")
+      icon.style = "color: #999999"
     }
   }
 }
