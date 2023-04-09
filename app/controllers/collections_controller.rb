@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :templates_index
 
   def create
     # this action is not only to create a collection from scratch but add tracks to collection
@@ -163,6 +163,22 @@ class CollectionsController < ApplicationController
 
   def templates_index
     @templates = TemplateCollection.all
+    @icons = {
+      "all": '<i class="fas fa-volume-up"></i>',
+      "action": '<i class="fas fa-swords"></i>',
+      "medieval": '<i class="fab fa-fort-awesome"></i>',
+      "outdoor":	'<i class="fas fa-trees"></i>',
+      "underground": '<i class="fas fa-dungeon"></i>',
+      "scary":	'<i class="fas fa-ghost"></i>',
+      "monsters":	'<i class="fas fa-dragon"></i>',
+      "disasters": '<i class="fas fa-volcano"></i>',
+      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
+      "miscellaneous": '<i class="fas fa-volume-up"></i>',
+      "footsteps": '<i class="fas fa-shoe-prints"></i>',
+      "magic": '<i class="fas fa-cauldron"></i>',
+      "scifi": '<i class="fas fa-rocket"></i>',
+      "default": '<i class="fas fa-volume-up"></i>'
+    }
   end
 
   private
