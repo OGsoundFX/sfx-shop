@@ -31,7 +31,7 @@
             <div>
               <i class="fas fa-info-circle"></i>
               <span class="points-left-display"><%= collection_points - collection.total_points %></span>
-              <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.points %> points / <%= humanized_money_with_symbol(next_collection.price) %>)</span>
+              <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money_with_symbol(next_collection.price) %>)</span>
             </div>
           </div>
           <div class="d-flex flex-column justify-content-center">
