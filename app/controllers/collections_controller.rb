@@ -181,6 +181,11 @@ class CollectionsController < ApplicationController
     }
   end
 
+  def add_template_to_cart
+    convert_template_to_collection(params[:template_id])
+    redirect_to cart_path
+  end
+
   private
 
   def points(tracks)
@@ -234,5 +239,26 @@ class CollectionsController < ApplicationController
 
   def name_params
     params.permit("input-name")
+  end
+
+  def convert_template_to_collection(id)
+    if Cart.where(user_id: current_user.id).last.nil?
+      Cart.create(user_id: current_user.id)
+    end
+    template = TemplateCollection.find(id)
+    if current_user.collections.where(purchased: false).count > 0
+      collection = Collection.where(user: current_user, purchased: false).first
+      collection.tracks += template.tracks
+      collection.tracks = collection.tracks.uniq
+      collection.title = template.title
+      collection.template_collection_id = template.id
+      # points = collection.total_points + template.total_points
+      points = points(collection.tracks)
+      collection.total_points = points
+      collection.price_cents = collection_categories(points)
+    else
+      collection = Collection.new(title: template.title, total_points: template.total_points, tracks: template.tracks, template_collection_id: template.id, price_cents: template.price_cents, user: current_user)
+    end
+    collection.save
   end
 end
