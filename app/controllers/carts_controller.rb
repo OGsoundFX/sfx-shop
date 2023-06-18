@@ -43,7 +43,6 @@ class CartsController < ApplicationController
 
   def cart
     collections
-
     # adding collection(s) to cart
     cart = current_user.cart
     if cart && @current_collections.last

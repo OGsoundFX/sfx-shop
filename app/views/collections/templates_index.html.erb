@@ -16,12 +16,14 @@
               </div>
               <div>
                 <p><%= template.title %></p>
+                <p><%= template.price %></p>
+                <p>Number of tracks: <%= template.tracks.size %></p>
+                <p>Points: <%= template.total_points %></p>
               </div>
               <%= render 'shared/templates/collections_display', collection: template %>
             </div>
-            <div>
-            </div>
-        </div>
+            <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: template.id), id: 'btn-cart-show' %>
+          </div>
         <% end %>
       <% else %>
         <h3>No collections at this time</h3>
