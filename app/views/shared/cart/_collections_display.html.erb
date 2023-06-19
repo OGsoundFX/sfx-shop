@@ -115,20 +115,28 @@
       <div><%= humanized_money_with_symbol @current_collections.first.price %>.00</div>
     </div>
   </div>
-  <% if current_user.email == 'olivier@ogsoundfx.com' %>
-    <hr>
-    <div class="d-flex justify-content-center mb-3">
-      <%= simple_form_for :template, url: create_collection_template_path, html: {class: "create-template-form"}, method: :post do |form| %>
-        <%= form.hidden_field :collection, value: @current_collections.first.id %>
-        <div class="d-flex justify-content-between w-100">
-          <%= form.text_field :title, placeholder: :title, class: "create-template-form-input", style: "margin-right: 8px" %>
-          <%= form.text_field :categories, placeholder: :categories, class: "create-template-form-input" %>
+  <div data-controller="template-form">
+    <% if current_user.email == 'olivier@ogsoundfx.com' %>
+      <div class="plus-icon d-flex">
+        <i class="far fa-plus-circle" data-action="mouseover->template-form#hover mouseout->template-form#mouseout click->template-form#toggleForm"></i>
+        <div class="d-flex">
+          <div class="invisible-icon d-none" data-template-form-target="leftBorder"></div>
+          <p class="template-form-text d-none" data-template-form-target="text">make this collection a template</p>
         </div>
-        <%= form.input :photo, as: :file %>
-        <%= form.submit "Create Collection Template", class: "btn btn-primary w-100" %>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+      <div class="d-none justify-content-center mb-3" data-template-form-target="form">
+        <%= simple_form_for :template, url: create_collection_template_path, html: {class: "create-template-form"}, method: :post do |form| %>
+          <%= form.hidden_field :collection, value: @current_collections.first.id %>
+          <div class="d-flex justify-content-between w-100">
+            <%= form.text_field :title, placeholder: :title, class: "create-template-form-input", style: "margin-right: 8px" %>
+            <%= form.text_field :categories, placeholder: :categories, class: "create-template-form-input" %>
+          </div>
+          <%= form.input :photo, as: :file %>
+          <%= form.submit "Create Collection Template", class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <div class="packs-display packs-display-closed d-none" id="wrapped-collection-display" data-unwrap-cart-target="collectionWrapped">

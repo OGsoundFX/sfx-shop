@@ -13,3 +13,29 @@
   margin-top: 8px !important;
 }
 
+.plus-icon {
+  font-size: 24px;
+  margin-left: 20px;
+  i {
+    margin-bottom: 16px;
+  }
+}
+
+.invisible-icon {
+  font-size: 12px;
+  border-right: 2px solid $font-grey;
+  border-radius: 100%;
+  margin-right: -8px;
+  height: 24px;
+  width: 12px;
+}
+
+.template-form-text {
+  font-size: 12px;
+  border-bottom: 2px solid $font-grey;
+  border-top: 2px solid $font-grey;
+  border-right: 2px solid $font-grey;
+  border-radius: 0 8px 8px 0;
+  padding: 1px 8px;
+  margin-left: 4px;
+}
