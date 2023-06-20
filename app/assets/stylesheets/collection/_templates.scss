@@ -3,6 +3,11 @@
   width: 80vw;
 }
 
+.template-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .template-card {
   border: solid 1px red;
   p {
@@ -14,4 +19,11 @@
   height: 50px;
   width: 50px;
   border-radius: 50%;
+}
+
+#add-button {
+  margin: auto 0;
+  a {
+    padding: 8px 80px;
+  }
 }
