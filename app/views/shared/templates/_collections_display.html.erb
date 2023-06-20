@@ -1,75 +1,93 @@
-<ul class="container">
-  <% collection.tracks.each do |track_id| %>
-    <% track = SingleTrack.find(track_id) %>
-    <li class="border-cart">
-      <div class="wrapper-cart">
-        <div class="d-flex justify-content-start elements-position">
-          <span class="icon-adjust-cart"><%= sanitize @icons[track.category.to_sym] %></span>
-          <span class="title-font pad-top-cart max-width-cart"><%= track.title %></span>
-          <span class="info-icon-cart max-width-cart-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
+<div class="packs-display template-display" style="visibility: hidden" data-unwrap-cart-target="collectionUnwrapped">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-compact-disc cart-icon-adjust"></i>
+      <div class="d-flex flex-column">
+        <div class="d-flex">
+          <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
         </div>
-        <div class="d-flex wave-section elements-position">
-          <% if controller_name == 'carts' && action_name == 'cart'%>
-            <div class="wave track-wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
-              <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
-            </div>
-          <% else %>
-            <div class="wave track-wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
-              <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
-            </div>
-          <% end %>
-          <p class="info-font pad-top-cart" id="trackDurationid<%= track.id %>"></p>
-          <i class="far fa-play-circle pad-top-cart play-icon-margin cursor" id="playid<%= track.id %>"></i>
-          <i class="far fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
-        </div>
-        <div class="d-flex justify-content-between wave-section elements-position">
-          <span class="info-font pad-top-cart">
-          <% if humanized_money_with_symbol(track.price).include?(".") %>
-            <%= humanized_money_with_symbol(track.price) %>
-          <% else %>
-            <%= humanized_money_with_symbol(track.price) %>.00
-          <% end %>
-          </span>
-          <span class="info-font points-cart" id="comingSoonBtn"><%= track.points%></span>
-        </div>
-        <div class="d-flex justify-content-center purchase-section">
-          <%# <i class="far fa-layer-plus pad-top-cart purchase-icons" id="comingSoonBtn"></i> %>
-          <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-            <%= link_to collection_path(@collection, track: track), method: :patch do %>
-              <i class="far fa-layer-minus pad-top-cart purchase-icons" style="color: #FFA500" id=""></i>
-            <% end %>
-          <% else %>
-            <%= link_to collections_path(track: track), method: :post do %>
-              <i class="far fa-layer-plus pad-top-cart purchase-icons icon-click-hover" id=""></i>
-            <% end %>
-          <% end %>
-
-          <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
-            <%= link_to single_tracks_cart_remove_path(track_id: track.id, page: params[:page]), method: :post do %>
-              <i class="fas fa-trash-alt pad-top-cart purchase-icons icon-click-hover in-cart"></i>
-            <% end %>
-          <% else %>
-            <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post do %>
-                <i class="fas fa-cart-plus pad-top-cart purchase-icons icon-click-hover"></i>
-            <% end %>
-          <% end %>
-        </div>
-        <!-- The Track Info Modal -->
-        <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= track.id %>">
-          <!-- Modal content -->
-          <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
-            <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
-            <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
-            <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
-            <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
-            <% if !track.sfx_pack_id.nil? %>
-              <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
-            <% end %>
-            <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
-            <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
-          </div>
+        <div class="d-flex">
+          <h5>PRICE <%= humanized_money_with_symbol collection.price %>.00</h5>
         </div>
       </div>
-    </li>
-  <% end %>
-</ul>
+    </div>
+    <div>
+      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+    </div>
+  </div>
+  <hr>
+    <ul class="container">
+      <% collection.tracks.each do |track_id| %>
+        <% track = SingleTrack.find(track_id) %>
+        <li class="border-cart">
+          <div class="wrapper-cart">
+            <div class="d-flex justify-content-start elements-position">
+              <span class="icon-adjust-cart"><%= sanitize @icons[track.category.to_sym] %></span>
+              <span class="title-font pad-top-cart max-width-cart"><%= track.title %></span>
+              <span class="info-icon-cart max-width-cart-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
+            </div>
+            <div class="d-flex wave-section justify-content-between elements-position">
+              <% if controller_name == 'carts' && action_name == 'cart'%>
+                <div class="wave collection-wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+                  <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
+                </div>
+              <% else %>
+                <div class="wave collection-wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+                  <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
+                </div>
+              <% end %>
+              <p class="info-font pad-top-cart" id="trackDurationid<%= track.id %>"></p>
+              <i class="far fa-play-circle pad-top-cart play-icon-margin cursor" id="playid<%= track.id %>"></i>
+              <i class="far fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
+            </div>
+            <div class="d-flex justify-content-between wave-section elements-position">
+              <span class="info-font points-cart" id="comingSoonBtn"><%= track.points%></span>
+            </div>
+            <!-- The Track Info Modal -->
+            <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= track.id %>">
+              <!-- Modal content -->
+              <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
+                <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
+                <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
+                <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
+                <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
+                <% if !track.sfx_pack_id.nil? %>
+                  <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+                <% end %>
+                <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
+                <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+  <hr>
+  <div class="d-flex justify-content-end">
+    <div class="d-flex sub-total">
+      <div>PRICE</div>
+      <div><%= humanized_money_with_symbol collection.price %>.00</div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="packs-display packs-display-closed" data-unwrap-cart-target="collectionWrapped">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-compact-disc cart-icon-adjust"></i>
+      <div class="d-flex flex-column">
+        <div class="d-flex">
+          <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
+        </div>
+        <div class="d-flex">
+          <h5>PRICE <%= humanized_money_with_symbol collection.price %>.00</h5>
+        </div>
+      </div>
+    </div>
+    <div>
+      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+    </div>
+  </div>
+</div>
