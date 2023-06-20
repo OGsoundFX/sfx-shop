@@ -34,6 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
         template.classList.add('d-none')
         template.style.visibility = ""
       })
+      document.querySelectorAll(".template-banner").forEach((templateBanner) => {
+        templateBanner.classList.remove("d-none")
+      })
     }
   }, 700);
 

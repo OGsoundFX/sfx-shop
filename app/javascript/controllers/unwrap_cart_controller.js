@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["packsUnwrapped", "packsWrapped", "singleUnwrapped", "singleWrapped", "collectionWrapped", "collectionUnwrapped"]
+  static targets = ["packsUnwrapped", "packsWrapped", "singleUnwrapped", "singleWrapped", "collectionWrapped", "collectionUnwrapped", "templateWrapped", "templateUnWrapped"]
 
   connect() {
   }
@@ -17,6 +17,19 @@ export default class extends Controller {
       this.collectionUnwrappedTarget.classList.toggle("d-none")
       this.collectionWrappedTarget.classList.toggle("d-none")
     }
+  }
+
+  templateWrap(event) {
+    this.templateWrappedTargets.forEach((template) => {
+      if (template.dataset.id == event.currentTarget.dataset.id) {
+        template.classList.toggle("d-none")
+      }
+    })
+    this.templateUnWrappedTargets.forEach((template) => {
+      if (template.dataset.id == event.currentTarget.dataset.id) {
+        template.classList.toggle("d-none")
+      }
+    })
   }
 
 }
