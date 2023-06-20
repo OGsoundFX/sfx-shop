@@ -27,11 +27,19 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById("single-display").style.visibility = ""
       document.getElementById("wrapped-single-display").classList.remove('d-none')
     }
+
+    // for loading templates in collection templates index
+    if (!!document.querySelector(".template-display")) {
+      document.querySelectorAll(".template-display").forEach((template) => {
+        template.classList.add('d-none')
+        template.style.visibility = ""
+      })
+    }
   }, 700);
 
   // loading watermark
   let watermark = new Audio('https://single-track-list.s3.eu-central-1.amazonaws.com/watermark/watermark.mp3');
-  watermark.volume = 0.3;
+  watermark.volume = 0.2;
   // creates an empty array which will be implemented with every container id (see push() function bellow)
   let wavesurfers = [];
   // creating undefined variable to be used in play() function and store the current file playing (if any)

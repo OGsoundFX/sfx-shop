@@ -6,27 +6,13 @@
   </div>
   <div class="d-flex">
     <%= render "shared/left_pannel"%>
-    <div class="template-section text-center">
-      <% if !@templates.empty? %>    
+    <div class="template-section text-center" data-controller="unwrap-cart">
+      <% if !@templates.empty? %>  
         <% @templates.each do |template| %>
-          <div class="template-card d-flex justify-content-between">
-            <div class="d-flex justify-content-between">
-              <div>
-                <i class="fas fa-volume-up template-picks"></i>
-              </div>
-              <div>
-                <p><%= template.title %></p>
-                <p><%= template.price %></p>
-                <p>Number of tracks: <%= template.tracks.size %></p>
-                <p>Points: <%= template.total_points %></p>
-              </div>
-              <%= render 'shared/templates/collections_display', collection: template %>
-            </div>
-            <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: template.id), id: 'btn-cart-show' %>
-          </div>
+          <%= render 'shared/templates/collections_display', collection: template %>
         <% end %>
       <% else %>
-        <h3>No collections at this time</h3>
+        <h3>No templates at this time</h3>
       <% end %>
     </div>
   </div>
