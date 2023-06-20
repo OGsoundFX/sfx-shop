@@ -1,0 +1,75 @@
+<% collection_points = CollectionCategory.where("points >= #{collection.total_points}").first.points %>
+<% next_collection = CollectionCategory.where("points >= #{collection.total_points}").second %>
+<div class="container">
+  <div class="points-banner">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between" data-controller="collection-name">
+        <div>
+          <% if !collection.title.nil? && collection.title != "" %>
+            <div class="d-flex collection-name">
+              <p data-collection-name-target="collectionName">Collection name:
+                <span style="color: #69aa97"
+                      data-action="click->collection-name#nameChange"
+                      id="collection-name"
+                      class="hover-effect"
+                      data-collection-name-target="replacedCollectionName">
+                    <%= collection.title %>
+                </span>
+              </p>
+              <div class="collection-name-form">
+                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <%= hidden_field_tag :collection, collection.id %>
+                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                  <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
+                </form>
+              </div>
+            </div>
+          <% elsif collection.title.nil? || collection.title == "" %>
+            <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
+              <p>Collection name: <span style="color: #69aa97"
+                                      data-action="click->collection-name#name"
+                                      id="collection-no-name"
+                                      class="hover-effect"
+                                      data-collection-name-target="choseName">
+                                      add a collection name
+                                </span>
+                                <span style="color: #69aa97"
+                                      data-action="click->collection-name#name"
+                                      id="collection-no-name"
+                                      class="hover-effect"
+                                      data-collection-name-target="newCollectionName">
+                                </span>
+              </p>
+              <div class="collection-name-form">
+                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <%= hidden_field_tag :collection, collection.id %>
+                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                  <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
+                </form>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <p><%= collection.tracks.size %> tracks</p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column justify-content-center">  
+        <div>
+          <span class="points-left-display"><%= collection_points - collection.total_points %></span>
+          <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money_with_symbol(next_collection.price) %>)</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column justify-content-center">
+        <div class="d-flex justify-content-end">
+          <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
