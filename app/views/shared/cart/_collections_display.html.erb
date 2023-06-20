@@ -23,33 +23,13 @@
 
   <% if !@current_collections.empty? %>
     <% @current_collections.each do |collection| %>
-      <div class="container">
-        <div class="d-flex justify-content-between points-banner">
-          <% collection_points = CollectionCategory.where("points >= #{collection.total_points}").first.points %>
-          <% next_collection = CollectionCategory.where("points >= #{collection.total_points}").second %>
-          <div class="d-flex flex-column justify-content-center">  
-            <div>
-              <i class="fas fa-info-circle"></i>
-              <span class="points-left-display"><%= collection_points - collection.total_points %></span>
-              <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money_with_symbol(next_collection.price) %>)</span>
-            </div>
-          </div>
-          <div class="d-flex flex-column justify-content-center">
-            <div class="d-flex justify-content-end">
-              <div id="your-points">
-                Your points
-              </div>
-              <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <!--
         Here add the following line inside pe tags !!!
         render 'shared/cart/chose_collection_name', collection: collection 
       -->
-
+      <%= render 'shared/cart/collection_info', collection: collection  %>
       <div class="container">
         <%= link_to "Add More Tracks To This Collection!", list_path, id: "btn-cart-collection-full-width"%>
       </div>
