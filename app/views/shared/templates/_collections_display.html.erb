@@ -7,7 +7,7 @@
           <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex">
-          <h5>PRICE <%= humanized_money_with_symbol collection.price %>.00</h5>
+          <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
@@ -19,17 +19,17 @@
     </div>
   </div>
   <hr>
-    <ul class="container">
+    <ul class="template-tracks-container">
       <% collection.tracks.each do |track_id| %>
         <% track = SingleTrack.find(track_id) %>
-        <li class="border-cart">
-          <div class="wrapper-cart">
+        <li class="template-tracks">
+          <div class="template-track-wrapper">
             <div class="d-flex justify-content-start elements-position">
               <span class="icon-adjust-cart"><%= sanitize @icons[track.category.to_sym] %></span>
-              <span class="title-font pad-top-cart max-width-cart"><%= track.title %></span>
-              <span class="info-icon-cart max-width-cart-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
+              <span class="title-font pad-top-cart template-max-width-title"><%= track.title %></span>
+              <span class="info-icon-cart template-max-width-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
             </div>
-            <div class="d-flex wave-section justify-content-between elements-position">
+            <div class="d-flex template-wave-section justify-content-between elements-position">
               <% if controller_name == 'carts' && action_name == 'cart'%>
                 <div class="wave collection-wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
                   <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
@@ -43,7 +43,7 @@
               <i class="far fa-play-circle pad-top-cart play-icon-margin cursor" id="playid<%= track.id %>"></i>
               <i class="far fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
             </div>
-            <div class="d-flex justify-content-between wave-section elements-position">
+            <div class="d-flex justify-content-between template-wave-section elements-position">
               <span class="info-font points-cart" id="comingSoonBtn"><%= track.points%></span>
             </div>
             <!-- The Track Info Modal -->
@@ -66,7 +66,7 @@
       <% end %>
     </ul>
 
-  <hr>
+  <hr style="margin-bottom: 8px">
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>PRICE</div>
@@ -84,7 +84,7 @@
           <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex">
-          <h5>PRICE <%= humanized_money_with_symbol collection.price %>.00</h5>
+          <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
