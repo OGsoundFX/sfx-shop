@@ -104,14 +104,15 @@
           <p class="template-form-text d-none" data-template-form-target="text">make this collection a template</p>
         </div>
       </div>
+
+      <% categories = ["all", "action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi", "default"] %>
       <div class="d-none justify-content-center mb-3" data-template-form-target="form">
         <%= simple_form_for :template, url: create_collection_template_path, html: {class: "create-template-form"}, method: :post do |form| %>
           <%= form.hidden_field :collection, value: @current_collections.first.id %>
           <div class="d-flex justify-content-between w-100">
-            <%= form.text_field :title, placeholder: :title, class: "create-template-form-input", style: "margin-right: 8px" %>
-            <%= form.text_field :categories, placeholder: :categories, class: "create-template-form-input" %>
+            <%= form.input :title, placeholder: :title, class: "create-template-form-input", wrapper_html: { style: 'width: 48%' }, style: "margin-right: 8px" %>
+            <%= form.input :categories, placeholder: :categories, class: "create-template-form-input", collection: categories, wrapper_html: { style: 'width: 48%' } %>
           </div>
-          <%= form.input :photo, as: :file %>
           <%= form.submit "Create Collection Template", class: "btn btn-primary w-100" %>
         <% end %>
       </div>
