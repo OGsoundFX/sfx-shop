@@ -27,3 +27,56 @@
     padding: 8px 80px;
   }
 }
+
+.template-banner {
+  margin: 32px 0;
+}
+
+.template-display {
+  hr{
+    margin: 12px 0 24px 0;
+    width: 100%;
+  }
+}
+
+.template-track-count {
+  margin: 0 8px;
+}
+
+.template-tracks-container {
+  margin: 0 40px;
+}
+
+.template-tracks {
+  height: 44px;
+  border: solid 1px $border-grey;
+  margin-bottom: -1px;
+  &:hover {
+    background-color: #f5f3f3b6;
+  }
+  .wrapper-cart {
+    padding-top: 4px;
+  }
+}
+
+.template-track-wrapper {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1.2fr 3fr 0.2fr;
+}
+
+.template-wave-section {
+  margin-right: 2vh;
+}
+
+.template-max-width-title {
+  display: flex;
+  justify-content: start;
+  width: 12vw;
+  overflow: hidden;
+  // text-overflow: ellipsis;
+}
+
+.max-width-cart-icon {
+  width: 2vw;
+}
