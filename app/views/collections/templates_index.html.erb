@@ -2,15 +2,15 @@
 <div class="content">
   <div class="banner">
     <h1 class="padding-navbar">Customize your Collection !</h1>
-    <button class="learn-more" id="learnMoreBtn">Learn more</button>
+    <button class="learn-more learnMoreBtn">Learn more</button>
   </div>
   <div class="d-flex">
     <%= render "shared/left_pannel"%>
     <div class="template-section text-center" data-controller="unwrap-cart">
       <div class="template-info-banner d-flex justify-content-center">
-        <div><%= image_tag("knight.png", height: "40px") %></div>&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3>Chose a template bellow, customize it, and create the perfect SFX Pack for your projects!!!</h3>&nbsp;&nbsp;&nbsp;&nbsp;
-        <div><%= image_tag("knight.png", height: "40px") %></div>
+        <div><%= image_tag("sword.png", height: "40px") %></div>&nbsp;&nbsp;
+        <h4>Chose a template bellow, customize it, and create the perfect SFX Pack for your projects!!!</h4>&nbsp;&nbsp;
+        <div><%= image_tag("sword.png", height: "40px") %></div>
       </div>
       <% if !@templates.empty? %>  
         <% @templates.each do |template| %>
@@ -20,5 +20,31 @@
         <h3>No templates at this time</h3>
       <% end %>
     </div>
+  </div>
+</div>
+
+<!-- The Learn More Modal -->
+<div id="learnMore" class="learn-more-modal">
+  <!-- Modal content -->
+  <div class="learn-more-modal-content">
+    <span class="learn-more-close">&times;</span>
+    <div class="d-flex justify-content-center">
+      <div>
+        <%= image_tag asset_path('knight.png'), id: "knight-gif" %>
+      </div>
+      <div>
+        <h2 id="comming-soon">Create your Collection!!!</h2>
+      </div>
+    </div>
+    <%# <br>
+    <h5><span class="orange-words">Collections</span> are a very cool feature that lets you
+    create your own <span class="orange-words">Sound Effects Pack</span>.</h5>
+    <p>You might need a very specific set of sounds for your film or video game. You might not want to pay for 3 different packs or
+    buy the tracks separately which can become pretty expensive!</p>
+    <br><h3 style="text-align: center">Introducing the <span class="orange-words">Collection System</span></h3> %>
+    <br><h5><%= image_tag asset_path('sword.png'), id: "sword-gif" %>Select your tracks buy clicking on the <i class="far fa-layer-plus orange-words"></i> icon.
+    <br><%= image_tag asset_path('sword.png'), id: "sword-gif" %>Each track is attributed some points <span id="point-explanation-modal">&nbsp1&nbsp</span> which are added up to determine your very attractive collection price!
+    <br><%= image_tag asset_path('sword.png'), id: "sword-gif" %>You can get up to <span class="orange-words">20</span> tracks for just <span class="orange-words">$5</span> check it out!!!</h5><br>
+    <%= image_tag asset_path('collection.png'), id: "collection-image" %>
   </div>
 </div>
