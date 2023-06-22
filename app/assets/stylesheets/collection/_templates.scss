@@ -33,6 +33,7 @@
 }
 
 .template-display {
+  margin: 32px 0;
   hr{
     margin: 12px 0 24px 0;
     width: 100%;
@@ -79,4 +80,16 @@
 
 .max-width-cart-icon {
   width: 2vw;
+}
+
+.template-icon-adjust {
+  height: 48px;
+  width: 48px;
+  font-size: 28px;
+  border-radius: 50%;
+  background-color: $font-grey;
+  color: white;
+  margin: 24px 20px 0 40px;
+  text-align: center;
+  padding: 9px 0;
 }
