@@ -1,104 +1,109 @@
-<% if Cart.where(user: current_user).empty? %>
-  <div class="padding-navbar content margins cart-font" id="cart-container">
-    <h3>Your cart is empty</h3>
-    <%= link_to "Go Shopping", root_path %>
+<div class="d-flex">
+  <div style="margin-top: 56px">
+    <%= render "shared/left_pannel"%>
   </div>
-<% else %>
-  <div class="padding-navbar content margins cart-font" id="cart-container">
-    <div class="pannel-grid" data-controller="unwrap-cart">
-      <div class="cart-pannel">
-        <% if Sale.where("end_date > ?", Date.current).count > 0 %>
-          <%= render 'shared/cart_sale' %>
-        <% else %>
-          <%= render 'shared/cart_no_sale' %>
-        <% end %>
-      </div>
+  <% if Cart.where(user: current_user).empty? %>
+    <div class="padding-navbar content margins cart-font" id="cart-container">
+      <h3>Your cart is empty</h3>
+      <%= link_to "Go Shopping", root_path %>
+    </div>
+  <% else %>
+    <div class="padding-navbar content margins cart-font" id="cart-container">
+      <div class="pannel-grid" data-controller="unwrap-cart">
+        <div class="cart-pannel">
+          <% if Sale.where("end_date > ?", Date.current).count > 0 %>
+            <%= render 'shared/cart_sale' %>
+          <% else %>
+            <%= render 'shared/cart_no_sale' %>
+          <% end %>
+        </div>
 
-      <! Checkout pannel >
-      <div class="checkout-pannel">
-        <div class="total">
-          <div class="container-cart-total">
-            <strong><h4 style="text-align: start; margin-top: 8px">TOTAL</h4></strong>
-            <hr>
+        <! Checkout pannel >
+        <div class="checkout-pannel">
+          <div class="total">
+            <div class="container-cart-total">
+              <strong><h4 style="text-align: start; margin-top: 8px">TOTAL</h4></strong>
+              <hr>
 
-            <% if @total_pack_sum != 0 %>
+              <% if @total_pack_sum != 0 %>
+                <div class="d-flex justify-content-between">
+                  <h6>Packs</h6>
+                  <span>
+                    <% if @sum.class == Float %>
+                      <%= humanized_money_with_symbol @total_pack_sum %>
+                    <% else %>
+                      <%= humanized_money_with_symbol @total_pack_sum %>.00
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+
+              <% if @current_collections.first %>
+                <div class="d-flex justify-content-between">
+                  <h6>Collection</h6>
+                  <span>
+                    <% if @sum.class == Float %>
+                      <%= humanized_money_with_symbol @current_collections.first.price %>
+                    <% else %>
+                      <%= humanized_money_with_symbol @current_collections.first.price %>.00
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+
+              <% if @single_tracks_value != 0 %>
+                <div class="d-flex justify-content-between">
+                  <h6>Single-Tracks</h6>
+                  <span>
+                    <% if @sum.class == Float %>
+                      <%= humanized_money_with_symbol @single_tracks_value %>
+                    <% else %>
+                      <%= humanized_money_with_symbol @single_tracks_value %>.00
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+
+              <hr>
               <div class="d-flex justify-content-between">
-                <h6>Packs</h6>
+                <h6>Total</h6>
                 <span>
                   <% if @sum.class == Float %>
-                    <%= humanized_money_with_symbol @total_pack_sum %>
+                    <%= humanized_money_with_symbol @sum %>
                   <% else %>
-                    <%= humanized_money_with_symbol @total_pack_sum %>.00
+                    <%= humanized_money_with_symbol @sum %>,00
                   <% end %>
                 </span>
               </div>
-            <% end %>
-
-            <% if @current_collections.first %>
-              <div class="d-flex justify-content-between">
-                <h6>Collection</h6>
+              <div class="d-flex justify-content-between cart-vat-display">
+                <span>VAT (7% inclusive)</span>
                 <span>
-                  <% if @sum.class == Float %>
-                    <%= humanized_money_with_symbol @current_collections.first.price %>
+                  <% if @vat.class == Float %>
+                    <%= humanized_money_with_symbol @vat %>
                   <% else %>
-                    <%= humanized_money_with_symbol @current_collections.first.price %>.00
+                    <%= humanized_money_with_symbol @vat %>,00
                   <% end %>
                 </span>
               </div>
-            <% end %>
-
-            <% if @single_tracks_value != 0 %>
+              <% if (@total_value - @sum) > 0 %>
+                <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</p>
+              <% else %>
+                <div style="height: 10px;"></div>
+              <% end %>
               <div class="d-flex justify-content-between">
-                <h6>Single-Tracks</h6>
-                <span>
-                  <% if @sum.class == Float %>
-                    <%= humanized_money_with_symbol @single_tracks_value %>
-                  <% else %>
-                    <%= humanized_money_with_symbol @single_tracks_value %>.00
+                <div id="continue-shopping">
+                  <%= link_to "Continue shopping", root_path %>
+                </div>
+                <div>
+                  <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
+                    <%= submit_tag 'Checkout', id: 'btn-cart' %>
                   <% end %>
-                </span>
-              </div>
-            <% end %>
-
-            <hr>
-            <div class="d-flex justify-content-between">
-              <h6>Total</h6>
-              <span>
-                <% if @sum.class == Float %>
-                  <%= humanized_money_with_symbol @sum %>
-                <% else %>
-                  <%= humanized_money_with_symbol @sum %>,00
-                <% end %>
-              </span>
-            </div>
-            <div class="d-flex justify-content-between cart-vat-display">
-              <span>VAT (7% inclusive)</span>
-              <span>
-                <% if @vat.class == Float %>
-                  <%= humanized_money_with_symbol @vat %>
-                <% else %>
-                  <%= humanized_money_with_symbol @vat %>,00
-                <% end %>
-              </span>
-            </div>
-            <% if (@total_value - @sum) > 0 %>
-              <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</p>
-            <% else %>
-              <div style="height: 10px;"></div>
-            <% end %>
-            <div class="d-flex justify-content-between">
-              <div id="continue-shopping">
-                <%= link_to "Continue shopping", root_path %>
-              </div>
-              <div>
-                <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
-                  <%= submit_tag 'Checkout', id: 'btn-cart' %>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
