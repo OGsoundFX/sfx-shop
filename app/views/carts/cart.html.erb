@@ -1,4 +1,3 @@
-<%= render 'shared/navbar_general' %>
 <% if Cart.where(user: current_user).empty? %>
   <div class="padding-navbar content margins cart-font" id="cart-container">
     <h3>Your cart is empty</h3>
