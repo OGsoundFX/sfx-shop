@@ -1,7 +1,7 @@
 <div class="packs-display template-display" style="visibility: hidden" data-id="<%=collection.id%>" data-unwrap-cart-target="templateUnWrapped">
   <div class="template-grid">
     <div class="d-flex">
-      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> cart-icon-adjust"></i>
+      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
@@ -78,7 +78,7 @@
 <div class="packs-display packs-display-closed template-banner d-none" data-id="<%=collection.id%>" data-unwrap-cart-target="templateWrapped">
   <div class="template-grid">
     <div class="d-flex">
-      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> cart-icon-adjust"></i>
+      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
       <div class="d-flex flex-column">
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong><%= collection.title %></strong> </h3>
