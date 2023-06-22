@@ -10,7 +10,12 @@
   font-size: 2em;
   font-weight: 700;
   text-align: center;
-  margin: 20px 0px 40px 0px;
+  margin: 20px auto 40px auto;
+  padding: 8px 0;
+  text-align: center;
+  border: $border-grey solid 1px;
+  border-radius: 12px;
+  background-color: $whitesmoke;
 }
 
 #front-title-sale {

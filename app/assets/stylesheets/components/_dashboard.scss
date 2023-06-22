@@ -1,5 +1,11 @@
 .dashboard-title {
+  color: $blue-light;
   text-align: center;
+  border: $border-grey solid 1px;
+  margin: 12px auto 24px auto;
+  padding: 4px 0;
+  width: 40%;
+  border-radius: 8px;
 }
 
 #newsletter-info-card {
