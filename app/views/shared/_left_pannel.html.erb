@@ -13,13 +13,12 @@
           <p>SFX</p>
         </div>
       <% end %>
-      <div class="left-pannel-icon">
-        <div style="position: relative">
-          <i style="opacity: 0.5" class="fal fa-layer-group"></i>
-          <p style="font-size: 0.6rem; margin-left: -8px; opacity: 0.5">COLLECTIONS</p>
-          <%= image_tag asset_path("soon.png"), style: "position: absolute; height: 32px; top:-14px; left: -14px; transform: rotate(-28deg)" %>
+      <%= link_to collection_templates_path do %>
+        <div class="left-pannel-icon <%= request.path == '/collection_templates' ? 'pannel-active' :  'pannel-links' %>">
+          <i class="fal fa-layer-group"></i>
+          <p style="font-size: 0.6rem; margin-left: -8px">COLLECTIONS</p>
         </div>
-      </div>
+      <% end %>
       <div class="left-pannel-icon">
         <div style="position: relative">
           <i style="opacity: 0.5" class="fal fa-heart"></i>
