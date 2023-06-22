@@ -1,12 +1,17 @@
 <%= render 'shared/navbar_temp' %>
 <div class="content">
   <div class="banner">
-    <h1 class="padding-navbar">Create your own Collection !</h1>
+    <h1 class="padding-navbar">Customize your Collection !</h1>
     <button class="learn-more" id="learnMoreBtn">Learn more</button>
   </div>
   <div class="d-flex">
     <%= render "shared/left_pannel"%>
     <div class="template-section text-center" data-controller="unwrap-cart">
+      <div class="template-info-banner d-flex justify-content-center">
+        <div><%= image_tag("knight.png", height: "40px") %></div>&nbsp;&nbsp;&nbsp;&nbsp;
+        <h3>Chose a template bellow, customize it, and create the perfect SFX Pack for your projects!!!</h3>&nbsp;&nbsp;&nbsp;&nbsp;
+        <div><%= image_tag("knight.png", height: "40px") %></div>
+      </div>
       <% if !@templates.empty? %>  
         <% @templates.each do |template| %>
           <%= render 'shared/templates/collections_display', collection: template %>
