@@ -32,6 +32,13 @@
   margin: 32px 0;
 }
 
+.template-title {
+  margin-top: 24px;
+  strong {
+    font-size: 1.6vw;
+  }
+}
+
 .template-display {
   margin: 32px 0;
   hr{
@@ -100,4 +107,7 @@
   background-color: $whitesmoke;
   border-radius: 4px;
   padding: 24px 24px 18px 24px;
+  h4 {
+    font-size: 1.6vw;
+  }
 }
