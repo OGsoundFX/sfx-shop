@@ -71,7 +71,7 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 10; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 200px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -82,13 +82,17 @@
     /* Modal Content */
   .track-info-modal-content {
     background-color: #fefefe;
-    margin: 20% 0 0 20%;
-    padding: 15px 10px 0 10px;
+    margin: auto;
+    padding: 14px 18px 8px 18px;
     border: 1px solid #888;
     border-radius: 4px;
-    width: fit-content;
+    width: 500px;
     font-size: 0.7em;
     line-height: 0.7em;
+  }
+
+  .track-info-modal-content-text {
+    margin-top: 12px;
   }
 }
 
