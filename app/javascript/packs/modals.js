@@ -48,23 +48,27 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // When the user hovers over the info icon, open the modal
   btn.forEach(icon => {
-    icon.onmouseover = function(event) {
+    icon.onclick = function(event) {
       const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
       modal.style.display = "block";
-      var y = event.clientY;
+      // var y = event.clientY;
       const modalContent = document.querySelector(`[data-modalTrackContentId="${icon.dataset.trackid}"]`)
-      margin = (y - 220)
-      modalContent.style.marginTop = `${margin}px`;
+      // margin = (y - 220)
+      // modalContent.style.margin = `auto`;
+      const close = document.querySelector(`[data-modalTrackCloseId="${icon.dataset.trackid}"]`)
+      close.onclick = function() {
+        modal.style.display = "none";
+      }
     }
   })
 
   // When the user moves the mouse out
-  btn.forEach(icon => {
-    icon.onmouseout = function() {
-      const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
-      modal.style.display = "none";
-    }
-  })
+  // btn.forEach(icon => {
+  //   icon.onmouseout = function() {
+  //     const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
+  //     modal.style.display = "none";
+  //   }
+  // })
 });
 
 
