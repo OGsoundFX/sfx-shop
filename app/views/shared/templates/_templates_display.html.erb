@@ -53,15 +53,25 @@
             <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= "#{track.id}#{collection.id}" %>">
               <!-- Modal content -->
               <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= "#{track.id}#{collection.id}" %>">
-                <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
-                <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
-                <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
-                <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= "#{track.id}#{collection.id}" %>"></span></p>
-                <% if !track.sfx_pack_id.nil? %>
-                  <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
-                <% end %>
-                <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
-                <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+                <div class="d-flex justify-content-between text-left">
+                  <div class="track-info-modal-content-text">
+                    <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
+                    <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
+                    <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
+                    <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= "#{track.id}#{collection.id}" %>"></span></p>
+                    <% if !track.sfx_pack_id.nil? %>
+                      <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+                    <% end %>
+                    <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
+                    <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+                    <% track.tags.first(8).each do |tag| %>
+                      <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
+                    <% end %>
+                  </div>
+                  <div>
+                    <span class="close" data-modalTrackCloseId="<%= "#{track.id}#{collection.id}" %>">&times;</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
