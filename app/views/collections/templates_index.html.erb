@@ -13,7 +13,7 @@
       </div>
       <% if !@templates.empty? %>  
         <% @templates.each do |template| %>
-          <%= render 'shared/templates/collections_display', collection: template %>
+          <%= render 'shared/templates/templates_display', collection: template %>
         <% end %>
       <% else %>
         <h3>No templates at this time</h3>
