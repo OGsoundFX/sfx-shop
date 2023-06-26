@@ -1,4 +1,7 @@
-<div class="packs-display template-display" style="visibility: hidden" data-id="<%=collection.id%>" data-unwrap-cart-target="templateUnWrapped">
+<div class="packs-display template-display" style="visibility: hidden; position: relative" data-id="<%=collection.id%>" data-unwrap-cart-target="templateUnWrapped">
+  <% if (collection.created_at.year - 2022) < 2 %>
+    <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:-26px; left: -26px; transform: rotate(-60deg)" %>
+  <% end %>
   <div class="template-grid">
     <div class="d-flex">
       <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
@@ -75,7 +78,10 @@
   </div>
   
 </div>
-<div class="packs-display packs-display-closed template-banner d-none" data-id="<%=collection.id%>" data-unwrap-cart-target="templateWrapped">
+<div class="packs-display packs-display-closed template-banner d-none" style="position: relative" data-id="<%=collection.id%>" data-unwrap-cart-target="templateWrapped">
+  <% if (collection.created_at.year - 2022) < 2 %>
+    <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:-26px; left: -26px; transform: rotate(-60deg)" %>
+  <% end %>
   <div class="template-grid">
     <div class="d-flex">
       <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
