@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // loading watermark
   let watermark = new Audio('https://single-track-list.s3.eu-central-1.amazonaws.com/watermark/watermark.mp3');
-  watermark.volume = 0.1;
+  watermark.volume = 0;
   // creates an empty array which will be implemented with every container id (see push() function bellow)
   let wavesurfers = [];
   // creating undefined variable to be used in play() function and store the current file playing (if any)
