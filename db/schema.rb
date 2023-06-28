@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_27_153948) do
+ActiveRecord::Schema.define(version: 2023_06_28_174904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_153948) do
     t.integer "batch"
     t.string "preview_link"
     t.integer "announcement"
+    t.boolean "loop", default: false
     t.index ["sound_designer_id"], name: "index_single_tracks_on_sound_designer_id"
   end
 
