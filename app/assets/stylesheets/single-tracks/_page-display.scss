@@ -190,6 +190,12 @@ ul {
   text-overflow: ellipsis;
 }
 
+.max-width-title-template {
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .info-font {
   color: #999999;
   font-size: 0.6em;
