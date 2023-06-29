@@ -11,63 +11,69 @@
       <% end %>
 
     </div>
-    <div class="description-box">
-      <div class="d-flex justify-content-between">
-        <h1 class="pack-title"><%= @pack.title %></h1>
+    <div class="description-box d-flex flex-column justify-content-between">
 
         <div>
-          <% if @discount %>
+          <div class="d-flex justify-content-between">
+            <h1 class="pack-title"><%= @pack.title %></h1>
+
             <div>
-              <div>
-                <h1 id="price-sale"><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h1>
-              </div>
-              <div>
-                <h4 id="price-barred-show" > <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </h4>
-              </div>
+              <% if @discount %>
+                <div>
+                  <div>
+                    <h1 id="price-sale"><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h1>
+                  </div>
+                  <div>
+                    <h4 id="price-barred-show" > <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </h4>
+                  </div>
+                </div>
+              <% else %>
+                <h1 id="price"><%= humanized_money_with_symbol(@pack.price) %></h1>
+              <% end %>
+            </div>
+
+          </div>
+          <p>Sound Designer: <%= link_to @designer_name, about_path %> </p>
+          <ul>
+            <li>
+              <% if @pack.size_mb >= 1000  %>
+                <%= @pack.size_mb / 1000.to_f %> GB
+              <% else %>
+                <%= @pack.size_mb %> MB
+              <% end %>
+            </li>
+            <li><%= @pack.duration %> minutes</li>
+            <li><%= number_with_delimiter @pack.number_of_tracks %> tracks</li>
+            <li>48 kHz / 24bit / Stereo WAV files</li>
+            <li><%= link_to "List of Sounds", @pack.list, target: :_blank %></li>
+            <li>Version: <%= @pack.version %></li>
+            <li id='pack-description'>Description: <%= @pack.description %></li>
+          </ul>
+        </div>
+        <div class="cart-or-buy-buttons">
+          <% if @pack.sku.include?("FS") %>
+            <div>
+              <%= form_tag @pack.product_link do %>
+                <%= submit_tag 'Download', id: 'btn-download', class: 'ml-4' %>
+              <%  end %>
             </div>
           <% else %>
-            <h1 id="price"><%= humanized_money_with_symbol(@pack.price) %></h1>
+            <div class="d-flex justify-content-between">
+              <div>
+              <%= form_tag orders_path do %>
+                <%= hidden_field_tag 'pack_id', @pack.id %>
+                <%= submit_tag 'Buy now', id: 'purchase-btn' %>
+              <% end %>
+              </div>
+              <div>
+                <%= form_tag cart_order_path do %>
+                  <%= hidden_field_tag 'pack_id', @pack.id %>
+                  <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
+                <%  end %>
+              </div>
+            </div>
           <% end %>
         </div>
 
-      </div>
-      <p>Sound Designer: <%= link_to @designer_name, about_path %> </p>
-      <ul>
-        <li>
-          <% if @pack.size_mb >= 1000  %>
-            <%= @pack.size_mb / 1000.to_f %> GB
-          <% else %>
-            <%= @pack.size_mb %> MB
-          <% end %>
-        </li>
-        <li><%= @pack.duration %> minutes</li>
-        <li><%= number_with_delimiter @pack.number_of_tracks %> tracks</li>
-        <li>48 kHz / 24bit / Stereo WAV files</li>
-        <li><%= link_to "List of Sounds", @pack.list, target: :_blank %></li>
-        <li>Version: <%= @pack.version %></li>
-        <li id='pack-description'>Description: <%= @pack.description %></li>
-      </ul>
-      <% if @pack.sku.include?("FS") %>
-        <div>
-          <%= form_tag @pack.product_link do %>
-            <%= submit_tag 'Download', id: 'btn-download', class: 'ml-4' %>
-          <%  end %>
-        </div>
-      <% else %>
-        <div class="d-flex">
-          <div>
-          <%= form_tag orders_path do %>
-            <%= hidden_field_tag 'pack_id', @pack.id %>
-            <%= submit_tag 'Buy now', id: 'purchase-btn' %>
-          <% end %>
-          </div>
-          <div>
-            <%= form_tag cart_order_path do %>
-              <%= hidden_field_tag 'pack_id', @pack.id %>
-              <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
-            <%  end %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
