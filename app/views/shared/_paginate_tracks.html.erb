@@ -6,9 +6,10 @@
   <% @tracks.each do |track| %>
   <li class="border">
     <div class="wrapper">
-      <div class="d-flex justify-content-start elements-position">
+      <div class="d-flex elements-position">
         <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
-        <span class="title-font pad-top max-width"><%= track.title %></span>
+        <span class="title-font pad-top max-width" style="min-width: 125px"><%= track.title %></span>
+        <span class="info-icon max-width" id="<%= 'trackInfoBtn' if track.loop %>" style="<%= 'opacity: 0' if !track.loop %>" data-trackId="<%= track.id %>"><i class="fas fa-repeat"></i></span>
         <span class="info-icon max-width" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
         <% if track.announcement == "new_release" %>
           <%= image_tag asset_path("New_green_transp_small.png"), id: "new-release-track" %>
@@ -89,6 +90,7 @@
         <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
           <div class="d-flex justify-content-between">
             <div class="track-info-modal-content-text">
+              <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span><i style="margin-left: 12px" class="fas fa-repeat <%= 'd-none' if !track.loop %>"></i></p>
               <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
               <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
               <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
@@ -98,7 +100,6 @@
               <% end %>
               <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
               <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
-              <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span></p>
               <% track.tags.first(8).each do |tag| %>
                 <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
               <% end %>
