@@ -1,18 +1,23 @@
-<div class="container padding-navbar content">
+<div class="d-flex">
+  <div style="margin-top: 56px">
+    <%= render "shared/left_pannel"%>
+  </div>
+  <div class="container padding-navbar content">
+    <% if @discount %>
+      <div>
+        <div class="text-center"><%= image_tag asset_path('Promo_orange.png'), id: "sale-show-super-duper-small" %></div>
+        <div class="text-center"><p id="sale-percentage-show-super-duper-small"><%= @discount %>%<br>OFF</p></div>
+      </div>
+    <% end %>
 
-  <% if @discount %>
-    <div>
-      <div class="text-center"><%= image_tag asset_path('Promo_orange.png'), id: "sale-show-super-duper-small" %></div>
-      <div class="text-center"><p id="sale-percentage-show-super-duper-small"><%= @discount %>%<br>OFF</p></div>
+      <%= render 'shared/back_cart_links' %>
+    <div class="desktop">
+      <%= render 'shared/desktop_pack_show' %>
     </div>
-  <% end %>
-
-    <%= render 'shared/back_cart_links' %>
-  <div class="desktop">
-    <%= render 'shared/desktop_pack_show' %>
+    <div class="tablet">
+      <%= render 'shared/tablet_pack_show' %>
+    </div>
+    <%= render 'shared/tabs' %>
   </div>
-  <div class="tablet">
-    <%= render 'shared/tablet_pack_show' %>
-  </div>
-  <%= render 'shared/tabs' %>
 </div>
+

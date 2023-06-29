@@ -68,8 +68,6 @@ li {
 }
 
 #purchase-btn {
-  margin-left: 40px;
-  margin-right: 40px;
   color: $font-grey;
   border: solid 2px $light-grey;
   background-color: white;
@@ -85,6 +83,10 @@ li {
   color: $font-grey;
   background-color: $light-green;
   border: solid 2px $light-grey;
+}
+
+.cart-or-buy-buttons {
+  margin-bottom: 12px;
 }
 
 .tablet {
@@ -121,10 +123,6 @@ $breakpoint-evenmore-super-duper-small: 316px;
 
   #pack-description {
     display: none;
-  }
-
-  #purchase-btn {
-    margin-left: 20px;
   }
 
   #btn-download  {
@@ -258,10 +256,6 @@ $breakpoint-evenmore-super-duper-small: 316px;
     width: 95px;
     font-size: 90%;
     padding: 2px 5px;
-  }
-
-  #purchase-btn {
-    margin-right: 0px;
   }
 
   #btn-cart-show {
