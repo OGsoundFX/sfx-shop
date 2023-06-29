@@ -1,5 +1,5 @@
 class SfxPacksController < ApplicationController
-  before_action :store_location
+  # before_action :store_location
   def show
     @pack = SfxPack.includes(:sound_designer).includes(photos_attachments: :blob).find(params[:id])
     @designer = @pack.sound_designer
