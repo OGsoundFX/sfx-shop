@@ -64,7 +64,7 @@
                     <% end %>
                     <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
                     <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
-                    <p><u>Loop:<i class="fas fa-repeat"></i></u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span></p>
+                    <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span></p>
                     <% track.tags.first(8).each do |tag| %>
                       <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
                     <% end %>
