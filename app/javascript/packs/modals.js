@@ -59,6 +59,11 @@ window.addEventListener('DOMContentLoaded', () => {
       close.onclick = function() {
         modal.style.display = "none";
       }
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     }
   })
 
@@ -70,7 +75,6 @@ window.addEventListener('DOMContentLoaded', () => {
   //   }
   // })
 });
-
 
 
 // COMING SOON MODAL --> Which became "Point value for collection"
