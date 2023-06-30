@@ -200,7 +200,6 @@ class CollectionsController < ApplicationController
   end
 
   def collection_categories(points)
-
     case
     when points == 0
       0
