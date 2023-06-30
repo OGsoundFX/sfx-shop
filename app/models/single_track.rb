@@ -53,4 +53,9 @@ class SingleTrack < ApplicationRecord
     tracks = SingleTrack.where(announcement: "new_release").where("created_at < ?", months.months.ago)
     tracks.update(announcement: "standard")
   end
+
+  def self.new_points_grid
+    tracks = SingleTrack.all
+    
+  end
 end
