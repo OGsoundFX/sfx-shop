@@ -8,4 +8,33 @@ class TemplateCollection < ApplicationRecord
   def order_tracks
     self.tracks = self.tracks.sort
   end
+
+  def self.recalculate
+    self.all.each do |collection|
+      points = 0
+      collection.tracks.each do |track|
+        points += SingleTrack.find(track).points
+      end
+      collection.total_points = points
+      collection.price_cents = collection.collection_categories(points)
+      collection.save
+    end
+  end
+
+  def collection_categories(points)
+    case
+    when points == 0
+      0
+    when points <= 20
+      500
+    when points <= 50 
+      1000
+    when points <= 120
+      2000
+    when points <= 300
+      4000
+    else
+      5000 # unlimited
+    end
+  end
 end

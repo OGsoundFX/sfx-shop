@@ -78,3 +78,4 @@ gem 'rubyzip', '~> 1.2'
 gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
+gem 'pry', '~> 0.14.1'
