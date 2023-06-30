@@ -32,6 +32,9 @@ class PagesController < ApplicationController
 
   end
 
+  def data_protection
+  end
+
   def subscribe
     SubscribeToNewsletterNoUserService.new(params[:email][:email]).call
     session[:subscribed] = true

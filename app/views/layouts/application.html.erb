@@ -34,12 +34,16 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar_simple' %>
-
-    <%= yield %>
-    <%= render 'shared/flashes' %>
-    <%= render 'shared/footer' %>
+    <div class="d-flex flex-column justify-content-between" style="min-height: 100vh">
+      <div>
+        <%= render 'shared/navbar_simple' %>
+        <%= yield %>
+        <%= render 'shared/flashes' %>
+      </div>
+      <div>
+        <%= render 'shared/footer' %>
+      </div>
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="724c85ca-867f-475f-8e1d-9fa1ba844e05" data-blockingmode="auto" type="text/javascript"></script>
-    <script id="CookieDeclaration" src="https://consent.cookiebot.com/724c85ca-867f-475f-8e1d-9fa1ba844e05/cd.js" type="text/javascript" async></script>
+    </div>
   </body>
 </html>

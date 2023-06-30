@@ -45,6 +45,9 @@ Rails.application.routes.draw do
 
   # user add template to cart and convert into collection
   get "add_template_to_cart", to: "collections#add_template_to_cart"
+
+  # data protection path
+  get "data_protection", to: "pages#data_protection"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
