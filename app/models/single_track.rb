@@ -1,3 +1,5 @@
+require 'pry'
+
 class SingleTrack < ApplicationRecord
   belongs_to :sound_designer
   monetize :price_cents
@@ -55,7 +57,35 @@ class SingleTrack < ApplicationRecord
   end
 
   def self.new_points_grid
-    tracks = SingleTrack.all
-    
+    grid = SingleTrack.alt_grid_1
+    # tracks = SingleTrack.all
+    tracks = SingleTrack.where(points: nil)
+    tracks.each do |track|
+      case track.size
+      when 0..1191000
+        track.points = grid[:'1191000']
+      when 1191001..4620000
+        track.points = grid[:'4620000']
+      when 4620001..8786000
+        track.points = grid[:'8786000']
+      when 8786001..26000000
+        track.points = grid[:'26000000']
+      else
+        track.points = 5
+      end
+      binding.pry
+      # track.save
+    end
+  end
+
+  private
+
+  def self.alt_grid_1
+    {
+      '1191000': 1,
+      '4620000': 2,
+      '8786000': 3,
+      '26000000': 4,
+    }
   end
 end
