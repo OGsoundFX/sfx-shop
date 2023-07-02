@@ -1,0 +1,15 @@
+.drop-dow-carets {
+  font-size: 1.8em;
+  margin-left: 4px;
+  i {
+    cursor: pointer;
+    color: $lighter-grey;
+  }
+  .fa-caret-up {
+    margin-top: -6px;
+  }
+  .fa-caret-down {
+    margin-top: -12px;
+    color: $blue-light;
+  }
+}

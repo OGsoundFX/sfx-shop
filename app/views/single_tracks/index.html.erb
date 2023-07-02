@@ -35,27 +35,33 @@
           </div>
         </div>
         <div>
-          <div class="drop-down-category">
-            <form action="/list" data-controller="select">
-              <input type="hidden" name="previous_sort" value="<%= @search %>">
-              <input type="hidden" name="previous_category" value="<%= @dropdown %>">
-              <input type="hidden" name="order" value="<%= @order %>" data-select-target="order">
-              <div class="d-flex justify-content-start">
-                <div>
-                  <select type="text" name="order_by_dropdown" placeholder="Order by">
-                    <option selected disabled>Order by</option>
-                    <option value="title" data-select-target="title">Title</option>
-                    <option value="size" data-select-target="size">Duration</option>
-                    <option value="price_cents" data-select-target="price_cents">Price</option>
-                    <option value="points" data-select-target="points">Points</option>
-                    <option value="newest" data-select-target="newest">Newest</option>
-                  </select>
+          <div class="drop-down-category d-flex">
+            <div>
+              <form action="/list" data-controller="select">
+                <input type="hidden" name="previous_sort" value="<%= @search %>">
+                <input type="hidden" name="previous_category" value="<%= @dropdown %>">
+                <input type="hidden" name="order" value="<%= @order %>" data-select-target="order">
+                <div class="d-flex justify-content-start">
+                  <div>
+                    <select type="text" name="order_by_dropdown" placeholder="Order by">
+                      <option selected disabled>Order by</option>
+                      <option value="title" data-select-target="title">Title</option>
+                      <option value="size" data-select-target="size">Duration</option>
+                      <option value="price_cents" data-select-target="price_cents">Price</option>
+                      <option value="points" data-select-target="points">Points</option>
+                      <option value="newest" data-select-target="newest">Newest</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="submit" value="GO">
+                  </div>
                 </div>
-                <div>
-                  <input type="submit" value="GO">
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
+            <div class="drop-dow-carets d-flex flex-column justify-content-between">
+              <i class="fas fa-caret-up"></i>
+              <i class="fas fa-caret-down"></i>
+            </div>
           </div>
         </div>
         <%= render 'shared/paginate_tracks' %>
