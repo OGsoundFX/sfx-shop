@@ -15,4 +15,14 @@ export default class extends Controller {
       this.ascDescTarget.value = "desc";
     }
   }
+
+  removeAsc(event) {
+    if(event.currentTarget.value === "newest") {
+      this.caretUpTarget.classList.add("d-none");
+      this.caretDownTarget.classList.add("d-none");
+    } else {
+      this.caretUpTarget.classList.remove("d-none");
+      this.caretDownTarget.classList.remove("d-none");
+    }
+  }
 }

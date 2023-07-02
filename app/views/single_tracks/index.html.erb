@@ -44,17 +44,17 @@
                 <input type="hidden" name="order" value="<%= @order %>" data-select-target="order">
                 <div class="d-flex justify-content-start">
                   <div>
-                    <select type="text" name="order_by_dropdown" placeholder="Order by">
+                    <select style="height: 30px" type="text" name="order_by_dropdown" placeholder="Order by" data-action="change->order-by#removeAsc">
                       <option selected disabled>Order by</option>
                       <option value="title" data-select-target="title">Title</option>
                       <option value="size" data-select-target="size">Duration</option>
                       <option value="price_cents" data-select-target="price_cents">Price</option>
                       <option value="points" data-select-target="points">Points</option>
-                      <option value="newest" data-select-target="newest">Newest</option>
+                      <option value="newest" data-select-target="newest" >Newest</option>
                     </select>
                   </div>
                   <div>
-                    <input type="submit" value="GO">
+                    <input style="height: 30px" type="submit" value="GO">
                   </div>
                 </div>
               </form>
