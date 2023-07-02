@@ -25,7 +25,7 @@ class SingleTracksController < ApplicationController
     if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
       if params[:previous_category] != ""
         if params[:order_by_dropdown] == "newest"
-          @tracks = SingleTrack.all.order(created_at: :desc).page params[:page]
+          @tracks = SingleTrack.where(category: params[:previous_category]).reorder(created_at: :desc).page params[:page]
           @dropdown = params[:previous_category]
         else
           @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
