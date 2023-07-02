@@ -28,6 +28,7 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.where(category: params[:previous_category]).reorder(created_at: :desc).page params[:page]
           @dropdown = params[:previous_category]
         else
+          # implement if else statement based on asc or desc order
           @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
           @dropdown = params[:previous_category]
         end
@@ -35,6 +36,7 @@ class SingleTracksController < ApplicationController
         if params[:order_by_dropdown] == "newest"
           @tracks = SingleTrack.reorder(created_at: :desc).page params[:page]
         else
+          # implement if else statement based on asc or desc order
           @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
         end
       else
@@ -42,6 +44,7 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(created_at: :desc).page params[:page]
           @search = params[:previous_sort]
         else
+          # implement if else statement based on asc or desc order
           @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
           @search = params[:previous_sort]
         end
@@ -83,7 +86,6 @@ class SingleTracksController < ApplicationController
           @dropdown = params[:dropdown]
         end
       end
-
     end
   end
 
