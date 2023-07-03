@@ -32,6 +32,23 @@ class SingleTrack < ApplicationRecord
     }
   end
 
+  def self.points_grid
+    {
+      "2":	892000,
+      "3":	1191000,
+      "5":	1756000,
+      "10":	3170000,
+      "15":	4620000,
+      "20":	6330000,
+      "30":	8786000,
+      "39":	11000000,
+      "50":	14000000,
+      "60":	17360000,
+      "90":	26000000,
+      "120": 42400000
+    }
+  end
+
   before_create do
     self.announcement = :new_release
   end
@@ -82,6 +99,11 @@ class SingleTrack < ApplicationRecord
       track.points = track.original_points
       track.save
     end
+  end
+
+  def fantasy_converter
+    self.fantasy = true if self.tags.include?("fantasy")
+    self.save
   end
 
   private

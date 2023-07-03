@@ -28,7 +28,7 @@
               </div>
             </form>
           </div>
-          <div style="margin-top: 30px"><em>OR</em></div>
+          <div style="margin-top: 30px; font-size: 12px"><strong>OR</strong></div>
           <div class="search-form">
             <form action="/list">
               <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
@@ -72,14 +72,15 @@
               <span data-action="click->filters#filtersArray" data-clicked="false" data-filters-target="pill" class="pill" data-filter-spec="loop">Loop <i class="fas fa-repeat"></i></span>
               <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
               <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="2points">< 2 points</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="4points">2 - 4 points</span>
+              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="3points">3 - 5 points</span>
               <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="5points">> 5 points</span>
               <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="30sec">< 30 seconds</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="1mn">30s - 1 minute</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="2mn">> 1 minute</span>
-              <form action="/list" class="d-none">
-                <input class="filter-inputs" type="hidden" name="previous_sort" value="<%= %>">
+              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="5sec">< 5 seconds</span>
+              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="30sec">5 - 30 seconds</span>
+              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="60sec">30s - 1 minute</span>
+              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="120sec">> 1 minute</span>
+              <form action="/list">
+                <input class="filter-inputs" type="hidden" name="filters" value="<%= @filters %>" data-filters-target="filterSelect">
                 <input type="submit" value="FILTER" class="filter-btn">
               </form>
             </div>
