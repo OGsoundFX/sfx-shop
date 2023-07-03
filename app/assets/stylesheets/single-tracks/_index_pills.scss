@@ -1,0 +1,43 @@
+.index-pills {
+  width: 100%;
+  // margin-left: 60px;
+}
+
+.pill {
+  padding: 5px 12px 4px 12px;
+  background-color: $lighter-grey;
+  border: 1px solid $lighter-grey;
+  border-radius: 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: white;
+  }
+}
+
+.filter-btn {
+  color: white;
+  font-weight: bold;
+  padding: 5px 12px 4px 12px;
+  background-color: $light-blue;
+  border: 1px solid $light-blue;
+  border-radius: 4px;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: $new-green;
+    border: 1px solid $new-green;
+  }
+}
+
+.pill-clicked {
+  background-color: $light-blue;
+  border: 1px solid $light-blue;
+  color: white;
+  &:hover {
+    background-color: $light-blue;
+    border: 1px solid $light-blue;
+    color: white;
+    opacity: 80%;
+  }
+}
