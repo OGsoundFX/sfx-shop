@@ -20,7 +20,7 @@ class SingleTracksController < ApplicationController
     @categories = @icons.keys
 
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
-
+    @newest = true if params[:order_by_dropdown] == "newest"
     # order by
     if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
       if params[:previous_category] != ""
@@ -29,7 +29,11 @@ class SingleTracksController < ApplicationController
           @dropdown = params[:previous_category]
         else
           # implement if else statement based on asc or desc order
-          @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
+          if params["asc-desc"] == "desc"
+            @tracks = SingleTrack.where(category: params[:previous_category]).reorder("#{params[:order_by_dropdown]} DESC").page params[:page]
+          else
+            @tracks = SingleTrack.where(category: params[:previous_category]).reorder(params[:order_by_dropdown]).page params[:page]
+          end
           @dropdown = params[:previous_category]
         end
       elsif params[:previous_sort] == "Search by keyword" || params[:previous_sort] == ""
@@ -37,7 +41,11 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.reorder(created_at: :desc).page params[:page]
         else
           # implement if else statement based on asc or desc order
-          @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
+          if params["asc-desc"] == "desc"
+            @tracks = SingleTrack.reorder("#{params[:order_by_dropdown]} DESC").page params[:page]
+          else
+            @tracks = SingleTrack.reorder(params[:order_by_dropdown]).page params[:page]
+          end
         end
       else
         if params[:order_by_dropdown] == "newest"
@@ -45,7 +53,11 @@ class SingleTracksController < ApplicationController
           @search = params[:previous_sort]
         else
           # implement if else statement based on asc or desc order
-          @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
+          if params["asc-desc"] == "desc"
+            @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder("#{params[:order_by_dropdown]} DESC").page params[:page]
+          else
+            @tracks = SingleTrack.search_single_tracks(params[:previous_sort]).reorder(params[:order_by_dropdown]).page params[:page]
+          end
           @search = params[:previous_sort]
         end
       end
@@ -87,6 +99,7 @@ class SingleTracksController < ApplicationController
         end
       end
     end
+    @order_type = params["asc-desc"]
   end
 
   def download_single

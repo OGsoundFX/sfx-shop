@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "caretUp", "caretDown", "ascDesc" ]
+  static targets = [ "caretUp", "caretDown", "ascDesc", "carets" ]
 
   connect() {
   }
@@ -23,6 +23,8 @@ export default class extends Controller {
     } else {
       this.caretUpTarget.classList.remove("d-none");
       this.caretDownTarget.classList.remove("d-none");
+      this.caretsTarget.classList.remove("d-none");
+      this.caretsTarget.classList.add("d-flex");
     }
   }
 }
