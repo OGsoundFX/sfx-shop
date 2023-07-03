@@ -59,15 +59,14 @@
                 </div>
               </form>
             </div>
-            <div class="drop-dow-carets d-flex flex-column justify-content-between">
-              <i class="fas fa-caret-up" data-action="click->order-by#toggleCaret" data-order-by-target="caretUp" data-order="desc"></i>
-              <i class="caret-active fas fa-caret-down" data-action="click->order-by#toggleCaret" data-order-by-target="caretDown" data-order="asc"></i>
+            <div class="<%= @newest ? 'd-none' : 'd-flex' %> drop-dow-carets flex-column justify-content-between" data-order-by-target="carets">
+              <i class="<%= 'caret-active' if @order_type == 'desc' %> fas fa-caret-up" data-action="click->order-by#toggleCaret" data-order-by-target="caretUp" data-order="desc"></i>
+              <i class="<%= 'caret-active' unless @order_type == 'desc' %> fas fa-caret-down" data-action="click->order-by#toggleCaret" data-order-by-target="caretDown" data-order="asc"></i>
             </div>
           </div>
         </div>
         <%= render 'shared/paginate_tracks' %>
       </div>
-
       <%# MOBILE %>
       <div id="paginate-mobile" class="screen-display">
         <%= render 'shared/paginate_tracks_mobile' %>
