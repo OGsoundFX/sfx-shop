@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["dropdown", "filterList", "fantasy", "points", "duration", "pill"]
+  static targets = ["dropdown", "filterList", "fantasy", "points", "duration", "pill", "filterSelect"]
 
   connect() {
   }
@@ -46,6 +46,6 @@ export default class extends Controller {
         filterArray.push(pill.dataset.filterSpec)
       }
     })
-    console.log(filterArray)
+    this.filterSelectTarget.value = filterArray.join(",")
   }
 }

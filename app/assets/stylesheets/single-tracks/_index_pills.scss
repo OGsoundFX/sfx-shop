@@ -16,6 +16,7 @@
 }
 
 .filter-btn {
+  margin-left: 24px !important;
   color: white;
   font-weight: bold;
   padding: 5px 12px 4px 12px;
@@ -35,9 +36,8 @@
   border: 1px solid $light-blue;
   color: white;
   &:hover {
-    background-color: $light-blue;
-    border: 1px solid $light-blue;
+    background-color: $new-green;
+    border: 1px solid $new-green;
     color: white;
-    opacity: 80%;
   }
 }

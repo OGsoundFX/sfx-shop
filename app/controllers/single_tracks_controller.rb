@@ -21,6 +21,7 @@ class SingleTracksController < ApplicationController
 
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     @newest = true if params[:order_by_dropdown] == "newest"
+
     # order by
     if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
       if params[:previous_category] != ""
@@ -98,6 +99,56 @@ class SingleTracksController < ApplicationController
           @dropdown = params[:dropdown]
         end
       end
+    end
+
+    # filters
+    if params[:filters] != nil && params[:filters] != ""
+      points_grid = SingleTrack.points_grid
+      filters = {fantasy: nil, loop: nil, minsize: nil, maxsize: nil, minpoints: nil, maxpoints: nil}
+      filters_array = params[:filters].split(",")
+      filters_array.each do |filter|
+        if filter.include?("sec")
+          if filter == "5sec"
+            filters[:minsize] = 0
+            filters[:maxsize] = points_grid[:"5"]
+          elsif filter == "30sec"
+            filters[:minsize] = points_grid[:"5"]
+            filters[:maxsize] = points_grid[:"30"]
+          elsif filter == "60sec"
+            filters[:minsize] = points_grid[:"30"]
+            filters[:maxsize] = points_grid[:"60"]
+          elsif filter == "120sec"
+            filters[:minsize] = points_grid[:"60"]
+            filters[:maxsize] = 1000000000
+          end
+        else
+          filters[:minsize] = 0
+          filters[:maxsize] = 1000000000
+        end
+        if filter.include?("points")
+          if filter == "2points"
+            filters[:minpoints] = 0
+            filters[:maxpoints] = 2
+          elsif filter == "3points"
+            filters[:minpoints] = 3
+            filters[:maxpoints] = 5
+          elsif filter == "5points"
+            filters[:minpoints] = 6
+            filters[:maxpoints] = 1000000000
+          end
+        else
+          filters[:minpoints] = 0
+          filters[:maxpoints] = 1000000000
+        end
+      end
+      fantasy = true if filters_array.include?("fantasy")
+      fantasy = false if filters_array.include?("nonFantasy")
+      loopable = true if filters_array.include?("loop")
+      loopable = false if filters_array.include?("nonLoop")
+      filters[:fantasy] = fantasy
+      filters[:loop] = loopable
+      @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+    else
     end
     @order_type = params["asc-desc"]
   end
