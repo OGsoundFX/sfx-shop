@@ -18,7 +18,6 @@ class SingleTracksController < ApplicationController
     }
 
     @categories = @icons.keys
-
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     @newest = true if params[:order_by_dropdown] == "newest"
 
@@ -130,10 +129,10 @@ class SingleTracksController < ApplicationController
             filters[:minpoints] = 0
             filters[:maxpoints] = 2
           elsif filter == "3points"
-            filters[:minpoints] = 3
+            filters[:minpoints] = 2
             filters[:maxpoints] = 5
           elsif filter == "5points"
-            filters[:minpoints] = 6
+            filters[:minpoints] = 5
             filters[:maxpoints] = 1000000000
           end
         else
@@ -150,6 +149,7 @@ class SingleTracksController < ApplicationController
       @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
     else
     end
+    @filters = params[:filters] || ""
     @order_type = params["asc-desc"]
   end
 

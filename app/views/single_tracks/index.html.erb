@@ -65,20 +65,20 @@
               <i class="<%= 'caret-active' if @order_type == 'desc' %> fas fa-caret-up" data-action="click->order-by#toggleCaret" data-order-by-target="caretUp" data-order="desc"></i>
               <i class="<%= 'caret-active' unless @order_type == 'desc' %> fas fa-caret-down" data-action="click->order-by#toggleCaret" data-order-by-target="caretDown" data-order="asc"></i>
             </div>
-            <div class="index-pills d-flex justify-content-center" data-filters-target="filterList">
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="fantasy" data-filters-target="fantasy pill" class="pill" data-filter-spec="fantasy">Fantasy</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="fantasy" data-filters-target="fantasy pill" class="pill" data-filter-spec="nonFantasy">Non-Fantasy</span>
+            <div class="index-pills d-flex justify-content-end" data-filters-target="filterList">
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('fantasy') ? true : false %>" data-filter="fantasy" data-filters-target="fantasy pill" class="pill <%= 'pill-clicked' if @filters.include?('fantasy') %>" data-filter-spec="fantasy">Fantasy</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('nonFantasy') ? true : false %>" data-filter="fantasy" data-filters-target="fantasy pill" class="pill <%= 'pill-clicked' if @filters.include?('nonFantasy') %>" data-filter-spec="nonFantasy">Non-Fantasy</span>
               <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filters-target="pill" class="pill" data-filter-spec="loop">Loop <i class="fas fa-repeat"></i></span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('loop') ? true : false %>" data-filters-target="pill" class="pill <%= 'pill-clicked' if @filters.include?('loop') %>" data-filter-spec="loop">Loop <i class="fas fa-repeat"></i></span>
               <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="2points">< 2 points</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="3points">3 - 5 points</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="5points">> 5 points</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('2points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('2points') %>" data-filter-spec="2points">< 2 points</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('3points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('3points') %>" data-filter-spec="3points">2 - 4 points</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('5points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('5points') %>" data-filter-spec="5points">> 4 points</span>
               <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="5sec">< 5 seconds</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="30sec">5 - 30 seconds</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="60sec">30s - 1 minute</span>
-              <span data-action="click->filters#filtersArray" data-clicked="false" data-filter="points" data-filters-target="points pill" class="pill" data-filter-spec="120sec">> 1 minute</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('5sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('5sec') %>" data-filter-spec="5sec">< 5 seconds</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('30sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('30sec') %>" data-filter-spec="30sec">5 - 30 seconds</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('60sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('60sec') %>" data-filter-spec="60sec">30s - 1 minute</span>
+              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('120sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('120sec') %>" data-filter-spec="120sec">> 1 minute</span>
               <form action="/list">
                 <input class="filter-inputs" type="hidden" name="filters" value="<%= @filters %>" data-filters-target="filterSelect">
                 <input type="submit" value="FILTER" class="filter-btn">
