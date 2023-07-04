@@ -146,7 +146,14 @@ class SingleTracksController < ApplicationController
       loopable = false if filters_array.include?("nonLoop")
       filters[:fantasy] = fantasy
       filters[:loop] = loopable
-      @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+      if params[:search] && params[:search] != "Search by keyword"
+        @tracks = SingleTrack.search_single_tracks(params[:search]).where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+      elsif params[:category]
+        @tracks = SingleTrack.where("category = '#{params[:category]}' and size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+        @dropdown = params[:category]
+      else
+        @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+      end
     else
     end
     @filters = params[:filters] || ""
