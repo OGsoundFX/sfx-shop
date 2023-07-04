@@ -148,13 +148,25 @@ class SingleTracksController < ApplicationController
       filters[:loop] = loopable
       if params[:search] && params[:search] != "Search by keyword"
         @tracks = SingleTrack.search_single_tracks(params[:search]).where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
-      elsif params[:category]
-        @tracks = SingleTrack.where("category = '#{params[:category]}' and size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
-        @dropdown = params[:category]
+        @search = params[:search]
+      elsif params[:dropdown] && params[:dropdown] != ""
+        @tracks = SingleTrack.where("category = '#{params[:dropdown]}' and size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
+        @dropdown = params[:dropdown]
       else
         @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
       end
-    else
+    elsif params[:filters] == ""
+      if params[:dropdown] && params[:dropdown] != ""
+        @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
+        @dropdown = params[:dropdown]
+        @search = "Search by keyword"
+      elsif params[:search] && params[:search] != "Search by keyword"
+        @tracks = SingleTrack.search_single_tracks(params[:search]).page params[:page]
+        @search = params[:search]
+      else
+        @tracks = SingleTrack.page params[:page]
+        @search = "Search by keyword"
+      end
     end
     @filters = params[:filters] || ""
     @order_type = params["asc-desc"]
