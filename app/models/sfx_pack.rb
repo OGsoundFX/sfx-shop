@@ -3,4 +3,8 @@ class SfxPack < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
   monetize :price_cents
+
+  def to_param
+    "#{id} #{title}".parameterize
+  end
 end
