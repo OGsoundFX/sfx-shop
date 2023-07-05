@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex justify-content-between">
   <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
   <%= paginate @tracks, class: "paginator-top" %>
 </div>
