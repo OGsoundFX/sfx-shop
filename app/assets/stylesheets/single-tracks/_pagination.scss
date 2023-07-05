@@ -41,3 +41,16 @@
   position: absolute;
   transform: rotate(-65deg);
 }
+
+.keyword-display {
+  margin-left: 8px;
+  padding: 2px 8px;
+  background-color: $orange-main;
+  border-radius: 4px;
+  height: 24px;
+  color: white;
+}
+
+.paginate-space-top {
+  margin-top: 20px;
+}

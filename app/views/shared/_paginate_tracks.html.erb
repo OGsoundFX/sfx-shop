@@ -1,6 +1,14 @@
-<div class="d-flex justify-content-between">
-  <p class="results-font-size">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
-  <%= paginate @tracks, class: "paginator-top" %>
+<hr>
+<div class="d-flex justify-content-between paginate-space-top">
+  <div class="d-flex results-font-size">
+    <p style="margin-top: 2px">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
+    <div class="keyword-display <%= 'd-none' if @search == "Search by keyword" %>">
+      <%= "keyword: #{@search}" %>
+    </div>
+  </div>
+  <div style="margin-top: 2px">
+    <%= paginate @tracks, class: "paginator-top" %>
+  </div>
 </div>
 <ul>
   <% @tracks.each do |track| %>
