@@ -22,7 +22,7 @@ class SingleTracksController < ApplicationController
     @newest = true if params[:order_by_dropdown] == "newest"
 
     # order by
-    if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != ""
+    if params[:order_by_dropdown] != nil && params[:order_by_dropdown] != "" || params[:dropdown] == "all"
       if params[:previous_category] != ""
         if params[:order_by_dropdown] == "newest"
           @tracks = SingleTrack.where(category: params[:previous_category]).reorder(created_at: :desc).page params[:page]
@@ -84,7 +84,7 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.all.order(created_at: :desc).page params[:page]
           @search = "Search by keyword"
         else
-          @tracks = SingleTrack.page params[:page]
+          @tracks = SingleTrack.all.page params[:page]
           @search = "Search by keyword"
         end
       else
@@ -99,7 +99,6 @@ class SingleTracksController < ApplicationController
         end
       end
     end
-
     # filters
     if params[:filters] != nil && params[:filters] != ""
       points_grid = SingleTrack.points_grid
@@ -156,7 +155,7 @@ class SingleTracksController < ApplicationController
         @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
       end
     elsif params[:filters] == ""
-      if params[:dropdown] && params[:dropdown] != ""
+      if params[:dropdown] && params[:dropdown] != "" && params[:dropdown] != "all"
         @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
         @dropdown = params[:dropdown]
         @search = "Search by keyword"
