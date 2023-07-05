@@ -84,7 +84,7 @@ class SingleTracksController < ApplicationController
           @tracks = SingleTrack.all.order(created_at: :desc).page params[:page]
           @search = "Search by keyword"
         else
-          @tracks = SingleTrack.all.page params[:page]
+          @tracks = SingleTrack.page params[:page]
           @search = "Search by keyword"
         end
       else
@@ -156,7 +156,7 @@ class SingleTracksController < ApplicationController
         @tracks = SingleTrack.where("size < #{filters[:maxsize]} and size > #{filters[:minsize]} and points < #{filters[:maxpoints]} and points >= #{filters[:minpoints]} #{'and loop = true' if loopable == true} #{'and fantasy = true' if fantasy == true} #{'and fantasy = false' if fantasy == false}").page params[:page]
       end
     elsif params[:filters] == ""
-      if params[:dropdown] && params[:dropdown] != ""
+      if params[:dropdown] && params[:dropdown] != "" && params[:dropdown] != "all"
         @tracks = SingleTrack.where(category: params[:dropdown]).page params[:page]
         @dropdown = params[:dropdown]
         @search = "Search by keyword"
@@ -170,6 +170,7 @@ class SingleTracksController < ApplicationController
     end
     @filters = params[:filters] || ""
     @order_type = params["asc-desc"]
+    @search = "Search by keyword" if @search == "" || @search.nil?
   end
 
   def download_single
