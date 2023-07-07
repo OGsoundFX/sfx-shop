@@ -146,6 +146,7 @@ class CollectionsController < ApplicationController
       end
     end
     send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), :disposition => 'attachment'
+    redirect_to dashboard_path, notice: "Your pack was successfully downloaded"
   end
 
   def create_template

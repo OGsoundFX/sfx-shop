@@ -15,7 +15,6 @@ export default class extends Controller {
   }
 
   download() {
-    console.log(XMLHttpRequestEventTarget)
     this.downloadModalTarget.style.display = "block";
   }
 
