@@ -36,3 +36,17 @@
     color: $new-green;
   }
 }
+
+.left-pannel-icon-the-quest {
+  border-radius: 50%;
+  margin-top: 40px;
+  background-color: black;
+  img {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+  }
+  &:hover {
+    opacity: 0.65;
+  }
+}
