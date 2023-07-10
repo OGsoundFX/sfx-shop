@@ -41,12 +41,14 @@
   border-radius: 50%;
   margin-top: 40px;
   background-color: black;
+  filter: grayscale(0.2);
+  opacity: 0.8;
   img {
     width: 50px;
     height: 50px;
     padding: 12px;
   }
   &:hover {
-    opacity: 0.65;
+    // opacity: 0.65;
   }
 }

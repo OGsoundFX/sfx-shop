@@ -35,15 +35,22 @@
           <%= image_tag asset_path("soon.png"), style: "position: absolute; height: 32px; top:-14px; left: -14px; transform: rotate(-28deg)" %>
         </div>
       </div>
-      -->
-      <%= link_to "https://the-quest.onrender.com/", target: "_blank" do %>
+      <%= link_to "https://the-quest.onrender.com/",  target: "_blank" do %>
         <div class="pannel-links">
           <div style="position: relative" class="left-pannel-icon-the-quest ">
             <%= image_tag("the-quest-fav.png") %>
           </div>
-            <p style="font-size: 0.6rem; color: #1dbb1e">THE GAME</p>
+          <p style="font-size: 0.6rem; color: #1dbb1e">THE GAME</p>
         </div>
       <% end %>
+      -->
+      <div class="pannel-links" style="position: relative">
+        <div style="position: relative" class="left-pannel-icon-the-quest ">
+          <%= image_tag("the-quest-fav.png") %>
+        </div>
+        <p style="font-size: 0.6rem; color: #1dbb1e">THE GAME</p>
+        <%= image_tag asset_path("soon.png"), style: "position: absolute; height: 32px; top:28px; left: -14px; transform: rotate(-28deg)" %>
+      </div>
     </div>
   </div>
 <!-- </div>  -->
