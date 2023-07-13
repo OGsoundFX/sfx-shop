@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "eula", to: "pages#eula"
   get "blog", to: "pages#blog"
+  get "the_quest", to: "pages#the_quest"
   post "subscribe_no_user", to: "pages#subscribe"
   resources :sfx_packs, only: :show
   resources :orders, only: [:show, :create] do

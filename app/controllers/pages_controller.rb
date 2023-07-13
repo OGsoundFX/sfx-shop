@@ -48,4 +48,7 @@ class PagesController < ApplicationController
 
   def blog
   end
+
+  def the_quest
+  end
 end
