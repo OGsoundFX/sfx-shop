@@ -4,6 +4,7 @@ class Collection < ApplicationRecord
 
   validates :total_points, numericality: { less_than_or_equal_to: 300, message: "Can't exceed 300 points, please create a new Collection" }
 
+  # use this method to recalculate the price of all un-purchased collections if there has been a change in the points of any track
   def self.recalculate
     self.where(purchased: false).each do |collection|
       points = 0

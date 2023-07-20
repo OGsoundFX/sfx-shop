@@ -9,6 +9,7 @@ class TemplateCollection < ApplicationRecord
     self.tracks = self.tracks.sort
   end
 
+  # use this method to recalculate the price of all un-purchased collections if there has been a change in the points of any track
   def self.recalculate
     self.all.each do |collection|
       points = 0
