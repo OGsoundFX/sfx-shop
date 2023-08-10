@@ -181,7 +181,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // stop audio playing before leaving page
   window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
+    // event.preventDefault(); // uncommented to prevent the alert from showing on safari and internet explorer
     audioPlaying.stop();
   });
 });
