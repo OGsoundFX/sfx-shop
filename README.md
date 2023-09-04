@@ -14,8 +14,8 @@ I am first releasing a Demo version for friends and coleagues, with free access 
 ### Stage 2: Official release **COMPLETED**
 The website was officially opened to business on January 2022. Check out [BAMSFX.COM shop](https://www.bamsfx.com)
 
-### Stage 3: 2022 Q4 **IN PROGRESS (Almost done)**
-Make your own pack: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
+### Stage 3: Create your own SFX Pack -> COLLECTIONS **COMPLETED**
+Collections: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
 ### Stage 4: 2023
 Onboard other sound designers to sell their Sound Effect packs after quality validation from me.
