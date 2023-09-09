@@ -8,7 +8,7 @@
       <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
     <% end %>
   </div>
-
+  <button id="subscribe-btn" class="<%= 'd-none' if session[:modal_closed].nil? %>">Subscribe to newsletter</button>
   <section id="scroll-down">
     <a href="#front-title"><span></span></a>
   </section>

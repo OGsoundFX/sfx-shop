@@ -17,46 +17,48 @@
           <h5 id="subscribe-text">to Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span>, right away! <%= link_to "CLICK HERE", subscribe_path %> </h5>
         </div>
       </div>
-
     </div>
-
   </div>
 <% # elsif session[:subscribed] == true  %>
 <% elsif current_user && @status == "subscribed" %>
 <% else %>
   <!-- The Modal -->
-  <div id="myModal" class="modal">
+  <% if session[:modal_closed].nil? %>
+    <div id="myModal" class="modal">
 
     <!-- Modal content -->
-    <div class="modal-content">
-      <div>
-        <span class="close">&times;</span>
-      </div>
-      <div class="d-flex justify-content-between">
+      <div class="modal-content">
         <div>
-          <%= image_tag asset_path('pixel-dragon-2.gif'), id: "dragon" %>
+          <span class="close" onclick="<%= session[:modal_closed] = true %>">&times;</span>
         </div>
-        <div>
-          <h3 id="subscribe-title">Subscribe!</h3>
-          <h5 id="subscribe-text">Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span>, right away!</h6>
-        </div>
-      </div>
-      <%= simple_form_for :email, url: subscribe_no_user_path do |f| %>
-        <%= hidden_field_tag 'subscribed', true %>
-        <div class="d-flex justify-content-between subscribe-field">
+        <div class="d-flex justify-content-between">
           <div>
-            <%= f.input :email, label: false, placeholder: "Enter your email here", required: true %>
+            <%= image_tag asset_path('pixel-dragon-2.gif'), id: "dragon" %>
           </div>
           <div>
-            <%= f.button :submit, 'Subscribe', id: 'subscribe', class: 'btn btn-primary' %>
+            <h3 id="subscribe-title">Subscribe!</h3>
+            <h5 id="subscribe-text">Get exclusive news and discounts, and a <span id="free-pack">FREE SFX PACK</span>, right away!</h6>
           </div>
         </div>
-      <% end %>
+        <%= simple_form_for :email, url: subscribe_no_user_path do |f| %>
+          <%= hidden_field_tag 'subscribed', true %>
+          <div class="d-flex justify-content-between subscribe-field">
+            <div>
+              <%= f.input :email, label: false, placeholder: "Enter your email here", required: true %>
+            </div>
+            <div>
+              <%= f.button :submit, 'Subscribe', id: 'subscribe', class: 'btn btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 <script>
+// get the subscribe button
+button = document.getElementById("subscribe-btn")
 // Get the modal
 modal = document.getElementById("myModal");
 
@@ -76,6 +78,7 @@ span.onclick = () => {
   modal.style.display = "none";
   clicked = true;
   background.style.opacity = "1";
+  button.classList.remove("d-none")
 }
 
 // When the user subscribes, close the modal
