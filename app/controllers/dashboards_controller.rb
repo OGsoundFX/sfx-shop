@@ -18,7 +18,7 @@ class DashboardsController < ApplicationController
     audience_id = ENV['MAILCHIMP_LIST_ID']
     gibbon = Gibbon::Request.new
     gibbon.lists(audience_id).members(current_user.email).update(body: { status: "unsubscribed" })
-    redirect_to dashboard_path
+    redirect_to request.referer, notice: "successfully unsubscribed to newsletter for #{current_user.email}"
   end
 
   def subscribe
@@ -29,7 +29,7 @@ class DashboardsController < ApplicationController
     begin
       Gibbon::Request.lists(audience_id).members(user.email).retrieve.nil?
       gibbon.lists(audience_id).members(current_user.email).update(body: { status: "subscribed" })
-      redirect_to dashboard_path
+      redirect_to request.referer, notice: "successfully subscribed to newsletter with #{current_user.email}"
     rescue
       gibbon.lists(audience_id).members.create(
         body: {

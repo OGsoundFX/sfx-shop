@@ -9,6 +9,33 @@
     <% end %>
   </div>
 
+  <% if session[:subscribed] != true && (@status == "Not Subscribed" || @status == "unsubscribed") || session[:modal_closed] %>
+    <% if @status == "unsubscribed" %>
+      <div id="subscribe-btn" class="<%= 'd-none' if session[:modal_closed].nil? %> <%= 'd-none' if session[:modal_closed] == false %>">
+        <%= link_to "Subscribe to our newsletter", subscribe_path %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <button id="subscribe-btn" class="<%= 'd-none' if session[:modal_closed].nil? %> <%= 'd-none' if session[:modal_closed] == false %> <%= 'd-none' if session[:subscribed] %> <%= 'd-none' if !@status.nil? %>" data-action="click->open-subscribe-modal#open" data-open-subscribe-modal-target="button">Subscribe to our newsletter</button>
+
+  <div id="subscribe-form" class="d-none" data-open-subscribe-modal-target="subscribeForm">
+    <div class="d-flex">
+      <%= simple_form_for :email, url: subscribe_no_user_path do |f| %>
+        <%= hidden_field_tag 'subscribed', true %>
+        <div class="d-flex justify-content-between subscribe-field">
+          <div>
+            <%= f.input :email, label: false, placeholder: "Enter your email here", required: true %>
+          </div>
+          <div>
+            <%= f.button :submit, 'Subscribe', id: 'subscribe', class: 'btn btn-primary', data: { action: "click->open-subscribe-modal#close" } %>
+          </div>
+        </div>
+      <% end %>
+      <div class="close" data-action="click->open-subscribe-modal#close" id="close-subscribe">&times;</div>
+    </div>
+  </div>
+
   <section id="scroll-down">
     <a href="#front-title"><span></span></a>
   </section>
@@ -34,11 +61,8 @@
               <button id="close" data-video-modal-target="close" data-action="click->video-modal#closeModal">Close</button>
             </div>
           </div>
-       
         </div>
-
       </div>
     </div>
   </div>
-
 </div>

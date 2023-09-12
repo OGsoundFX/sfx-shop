@@ -36,8 +36,15 @@ class PagesController < ApplicationController
   end
 
   def subscribe
-    SubscribeToNewsletterNoUserService.new(params[:email][:email]).call
-    session[:subscribed] = true
+    email = params[:email][:email]
+    if email.match?(/\A[^@\s!"§$%&\/()=?`´,;]{4,}+@[^@\s!"§$%&\/()=?`´,;]+[.][a-z]{2,}/)
+      SubscribeToNewsletterNoUserService.new(params[:email][:email]).call
+      session[:subscribed] = true
+      session[:modal_closed] = true
+      redirect_to root_path, notice: "Succesfully subscribed with email address #{email}"
+    else
+      redirect_to root_path, alert: "Invalid email address #{email}"
+    end
   end
 
   def about
@@ -50,5 +57,9 @@ class PagesController < ApplicationController
   end
 
   def the_quest
+  end
+
+  def modal_closed
+    session[:modal_closed] = true
   end
 end
