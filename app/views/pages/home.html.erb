@@ -1,26 +1,28 @@
-<div id="body">
-  <%= render 'shared/collection_banner' %>
-  <div class="d-flex">
-    <%= render "shared/left_pannel"%>
-    <div class="mx-auto">
-      <div>
-        <% if !@announcement.nil? %>
-          <h1 id="annoucement-content"><%= @announcement.content %></h1>
-        <% elsif @current_sales_list != {} %>
-          <div id="sale-banner">
-            <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
-          </div>
-        <% else %>
-          <div>
-            <h1 id="front-title">Browse through our high quality SFX Packs</h1>
-          </div>
-        <% end %>
+<div data-controller="open-subscribe-modal">
+  <div id="body">
+    <%= render 'shared/collection_banner' %>
+    <div class="d-flex">
+      <%= render "shared/left_pannel"%>
+      <div class="mx-auto">
+        <div>
+          <% if !@announcement.nil? %>
+            <h1 id="annoucement-content"><%= @announcement.content %></h1>
+          <% elsif @current_sales_list != {} %>
+            <div id="sale-banner">
+              <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
+            </div>
+          <% else %>
+            <div>
+              <h1 id="front-title">Browse through our high quality SFX Packs</h1>
+            </div>
+          <% end %>
 
-        <div class="pack-container">
-          <%= render 'shared/pack_card' %>
+          <div class="pack-container">
+            <%= render 'shared/pack_card' %>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <%= render 'shared/subscribe_modal' %>
 </div>
-<%= render 'shared/subscribe_modal' %>

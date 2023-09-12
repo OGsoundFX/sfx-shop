@@ -28,9 +28,22 @@
   background-color: $light-blue;
   color: white;
   border: solid 2px $darker-blue;
+  a {
+    color: white;
+  }
   &:hover {
     background-color: $light-grey;
     border: solid 2px $light-grey;
+  }
+}
+
+#subscribe-form {
+  position: absolute;
+  bottom: 35px;
+  right: 35px;
+  z-index: 10;
+  .form-group {
+    margin-bottom: 0;
   }
 }
 

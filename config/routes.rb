@@ -49,6 +49,9 @@ Rails.application.routes.draw do
 
   # data protection path
   get "data_protection", to: "pages#data_protection"
+
+  # modal close path
+  get "modal_closed", to: "pages#modal_closed"
   
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
