@@ -40,6 +40,7 @@
           <div class="grid-display-list">
             <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
             <div><%= displayed_track.title %></div>
+            <div><%= link_to "Download", download_single_path(url: SingleTrack.find(track).link, title: SingleTrack.find(track).title) %></div>
           </div>
         <% end %>
 
