@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": "16.15.1"
-  },
   "name": "sfx_shop",
   "private": true,
   "dependencies": {
@@ -20,5 +17,8 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^4.7.4"
+  },
+  "engines": {
+    "node": "16.15.1"
   }
 }
