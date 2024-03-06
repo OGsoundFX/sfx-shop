@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin2', as: 'rails_admin'
   get 'collections/create'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -28,12 +29,12 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
   resources :sales, only: [:new, :create, :destroy]
-  
+
   get 'list', to: 'single_tracks#index'
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
   get 'create_zip_collection', to: 'collections#create_zip_collection'
-  
+
   resources :collections, only: [:create, :update]
   post "name_update", to: "collections#name_update"
   post "convert", to: "collections#convert"
@@ -52,6 +53,6 @@ Rails.application.routes.draw do
 
   # modal close path
   get "modal_closed", to: "pages#modal_closed"
-  
+
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
