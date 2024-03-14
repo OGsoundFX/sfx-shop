@@ -80,4 +80,4 @@ gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'pry', '~> 0.14.1'
 
-gem "rails_admin"
+gem 'rails_admin', '~> 3.1', '>= 3.1.2'
