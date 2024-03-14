@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin2', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/rails-admin', as: 'rails_admin'
   get 'collections/create'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
