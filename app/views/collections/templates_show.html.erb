@@ -8,9 +8,9 @@
     <%= render "shared/left_pannel"%>
     <div class="container-fluid" style="position: relative">
       <% if (@collection.created_at.year - 2022) < 2 %>
-        <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:12px; left: 324px; transform: rotate(-60deg)" %>
+        <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top: 0px; left: 0px; transform: rotate(-60deg)" %>
       <% end %>
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between collection-title-banner">
         <div class="d-flex">
           <i class="<%= @icons[@collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
           <div class="d-flex flex-column">
