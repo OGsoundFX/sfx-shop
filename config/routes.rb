@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'create_zip', to: 'single_tracks#create_zip'
   get 'create_zip_collection', to: 'collections#create_zip_collection'
 
-  resources :collections, only: [:create, :update]
+  resources :collections, only: [:create, :update, :show]
   post "name_update", to: "collections#name_update"
   post "convert", to: "collections#convert"
   post "remove_collection_from_cart", to: "collections#remove_collection_from_cart"
@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   # create collection template --> admin
   post "create_collection_template", to: "collections#create_template"
   get "collection_templates", to: "collections#templates_index"
+  get "collection_templates/:id", to: "collections#templates_show"
 
   # user add template to cart and convert into collection
   get "add_template_to_cart", to: "collections#add_template_to_cart"

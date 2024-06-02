@@ -1,0 +1,65 @@
+
+<div class="content">
+  <div class="banner">
+    <h1 class="padding-navbar">Create your own Collection !</h1>
+    <button class="learn-more learnMoreBtn">Learn more</button>
+  </div>
+  <div class="d-flex">
+    <%= render "shared/left_pannel"%>
+    <div class="container-fluid" style="position: relative">
+      <% if (@collection.created_at.year - 2022) < 2 %>
+        <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top: 0px; left: 0px; transform: rotate(-60deg)" %>
+      <% end %>
+      <div class="d-flex justify-content-between collection-title-banner">
+        <div class="d-flex">
+          <i class="<%= @icons[@collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
+          <div class="d-flex flex-column">
+            <div class="d-flex">
+              <h3 class="template-title"> <strong><%= @collection.title %></strong> </h3>
+            </div>
+            <div class="d-flex">
+              <h5><%= humanized_money_with_symbol @collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= @collection.tracks.count %> tracks</h5>
+            </div>
+          </div>
+        </div>
+        <div id="add-button">
+          <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: @collection.id), id: 'btn-cart-show' %>
+        </div>
+      </div>
+      <div id="paginate-desktop" data-controller="filters">
+        <%= render 'shared/paginate_tracks' %>
+      </div>
+      <%# MOBILE %>
+      <div id="paginate-mobile" class="screen-display">
+        <%= render 'shared/paginate_tracks_mobile' %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- The Learn More Modal -->
+<div id="learnMore" class="learn-more-modal">
+  <!-- Modal content -->
+  <div class="learn-more-modal-content">
+    <span class="learn-more-close">&times;</span>
+    <div class="d-flex justify-content-center">
+      <div>
+        <%= image_tag asset_path('knight.png'), id: "knight-gif" %>
+      </div>
+      <div>
+        <h2 id="comming-soon">Create your Collection!!!</h2>
+      </div>
+    </div>
+    <%# <br>
+    <h5><span class="orange-words">Collections</span> are a very cool feature that lets you
+    create your own <span class="orange-words">Sound Effects Pack</span>.</h5>
+    <p>You might need a very specific set of sounds for your film or video game. You might not want to pay for 3 different packs or
+    buy the tracks separately which can become pretty expensive!</p>
+    <br><h3 style="text-align: center">Introducing the <span class="orange-words">Collection System</span></h3> %>
+    <br><h5><%= image_tag asset_path('sword.png'), id: "sword-gif" %>Select your tracks buy clicking on the <i class="far fa-layer-plus orange-words"></i> icon.
+    <br><%= image_tag asset_path('sword.png'), id: "sword-gif" %>Each track is attributed some points <span id="point-explanation-modal">&nbsp1&nbsp</span> which are added up to determine your very attractive collection price!
+    <br><%= image_tag asset_path('sword.png'), id: "sword-gif" %>You can get up to <span class="orange-words">20</span> tracks for just <span class="orange-words">$5</span> check it out!!!</h5><br>
+    <%= image_tag asset_path('collection.png'), id: "collection-image" %>
+  </div>
+</div>

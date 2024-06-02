@@ -115,7 +115,7 @@ class CollectionsController < ApplicationController
   end
 
   def create_zip_collection
-    
+
     Aws.config.update({
       region: 'eu-central-1',
       access_key_id: ENV['ACCESS_KEY_ID'],
@@ -182,6 +182,28 @@ class CollectionsController < ApplicationController
     }
   end
 
+  def templates_show
+    @icons = {
+      "all": '<i class="fas fa-volume-up"></i>',
+      "action": '<i class="fas fa-swords"></i>',
+      "medieval": '<i class="fab fa-fort-awesome"></i>',
+      "outdoor":	'<i class="fas fa-trees"></i>',
+      "underground": '<i class="fas fa-dungeon"></i>',
+      "scary":	'<i class="fas fa-ghost"></i>',
+      "monsters":	'<i class="fas fa-dragon"></i>',
+      "disasters": '<i class="fas fa-volcano"></i>',
+      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
+      "miscellaneous": '<i class="fas fa-volume-up"></i>',
+      "footsteps": '<i class="fas fa-shoe-prints"></i>',
+      "magic": '<i class="fas fa-cauldron"></i>',
+      "scifi": '<i class="fas fa-rocket"></i>',
+      "default": '<i class="fas fa-volume-up"></i>'
+    }
+    @collection = TemplateCollection.find(params[:id])
+    # @tracks = SingleTrack.all.reorder(created_at: :desc).page params[:page]
+    @tracks = SingleTrack.where(id: @collection.tracks).reorder(created_at: :desc).page params[:page]
+  end
+
   def add_template_to_cart
     convert_template_to_collection(params[:template_id])
     redirect_to cart_path
@@ -191,7 +213,7 @@ class CollectionsController < ApplicationController
 
   def points(tracks)
     if tracks == []
-      points = 0 
+      points = 0
     else
       points = tracks.map do |id|
         SingleTrack.find(id).points
@@ -206,7 +228,7 @@ class CollectionsController < ApplicationController
       0
     when points <= 20
       500
-    when points <= 50 
+    when points <= 50
       1000
     when points <= 120
       2000

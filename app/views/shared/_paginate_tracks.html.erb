@@ -1,8 +1,10 @@
-<hr>
+<% unless action_name == "templates_show" %>
+  <hr>
+<% end %>
 <div class="d-flex justify-content-between paginate-space-top">
   <div class="d-flex results-font-size">
     <p style="margin-top: 2px">Total results: <strong><%= number_with_delimiter(@tracks.total_count, :delimiter => ',') %></strong> (<em><%= @tracks.total_pages %> <%= "page".pluralize(@tracks.total_pages) %></em>)</p>
-    <div class="keyword-display <%= 'd-none' if @search == "Search by keyword" %>">
+    <div class="keyword-display <%= 'd-none' if @search == "Search by keyword" || action_name == "templates_show" %>">
       <%= "keyword: #{@search}" %>
     </div>
   </div>
