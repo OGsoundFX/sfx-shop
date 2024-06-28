@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action :authenticate_user!, except: :templates_index
+  before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def create
     # this action is not only to create a collection from scratch but add tracks to collection

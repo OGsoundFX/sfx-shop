@@ -1,6 +1,7 @@
 class TemplateCollection < ApplicationRecord
   before_validation :order_tracks
   monetize :price_cents
+  has_one_attached :image
 
   validates :title, presence: true, uniqueness: true
   validates :tracks, uniqueness: true
@@ -28,7 +29,7 @@ class TemplateCollection < ApplicationRecord
       0
     when points <= 20
       500
-    when points <= 50 
+    when points <= 50
       1000
     when points <= 120
       2000

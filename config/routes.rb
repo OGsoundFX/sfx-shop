@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   # create collection template --> admin
   post "create_collection_template", to: "collections#create_template"
   get "collection_templates", to: "collections#templates_index"
-  get "collection_templates/:id", to: "collections#templates_show"
+  get "collection_templates/:id", to: "collections#templates_show", as: :collection_template
 
   # user add template to cart and convert into collection
   get "add_template_to_cart", to: "collections#add_template_to_cart"
