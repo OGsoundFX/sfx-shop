@@ -4,6 +4,16 @@
     <div class="d-flex">
       <%= render "shared/left_pannel"%>
       <div class="mx-auto">
+        <div class="collection-section">
+          <div>
+            <h1 id="front-title">Browse through our Collections</h1>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="home-page-collection-display">
+              <%= render "shared/collections_horizontal", collections: TemplateCollection.all %>
+            </div>
+          </div>
+        </div>
         <div>
           <% if !@announcement.nil? %>
             <h1 id="annoucement-content"><%= @announcement.content %></h1>
