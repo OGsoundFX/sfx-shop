@@ -21,14 +21,6 @@
         <h1 id="price"><%= humanized_money_with_symbol(collection.price) %></h1>
 
       </div>
-
-      <div class="d-flex justify-content-between sfx-card-buttons">
-        <div>
-          <%= form_tag collection_template_path(collection), method: "get" do %>
-            <%= submit_tag 'Details', id: 'btn-show' %>
-          <%  end %>
-        </div>
-      </div>
     </div>
   </div>
 </div>

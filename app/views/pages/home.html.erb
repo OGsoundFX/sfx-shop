@@ -6,12 +6,14 @@
       <div class="mx-auto">
         <div class="collection-section">
           <div>
-            <h1 id="front-title">Browse through our Collections</h1>
+            <h1 id="front-collection-title">Browse our Collections</h1>
           </div>
-          <div class="d-flex justify-content-center">
-            <div class="home-page-collection-display">
+          <div class="d-flex justify-content-center scroll-container-wrapper">
+            <i class="arrow left-arrow fas fa-arrow-circle-left"></i>
+            <div class="home-page-collection-display scroll-container">
               <%= render "shared/collections_horizontal", collections: TemplateCollection.all %>
             </div>
+            <i class="arrow right-arrow fas fa-arrow-circle-right"></i>
           </div>
         </div>
         <div>
@@ -23,7 +25,7 @@
             </div>
           <% else %>
             <div>
-              <h1 id="front-title">Browse through our high quality SFX Packs</h1>
+              <h1 id="front-title">Browse our SFX Packs</h1>
             </div>
           <% end %>
 
@@ -36,3 +38,36 @@
   </div>
   <%= render 'shared/subscribe_modal' %>
 </div>
+<script>
+const scrollContainer = document.querySelector('.scroll-container');
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+
+function updateArrows() {
+  if (scrollContainer.scrollLeft === 0) {
+    leftArrow.style.display = 'none';
+  } else {
+    leftArrow.style.display = 'block';
+  }
+
+  if (scrollContainer.scrollWidth - scrollContainer.clientWidth === scrollContainer.scrollLeft) {
+    rightArrow.style.display = 'none';
+  } else {
+    rightArrow.style.display = 'block';
+  }
+}
+
+leftArrow.addEventListener('click', () => {
+  scrollContainer.scrollBy({ left: -100, behavior: 'smooth' });
+});
+
+rightArrow.addEventListener('click', () => {
+  scrollContainer.scrollBy({ left: 100, behavior: 'smooth' });
+});
+
+scrollContainer.addEventListener('scroll', updateArrows);
+
+// Initial check
+updateArrows();
+
+</script>
