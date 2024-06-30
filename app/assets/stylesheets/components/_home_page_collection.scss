@@ -1,18 +1,68 @@
-.home-page-collection-display {
-  width: 95%;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  border: solid 1px $border-grey;
-  border-radius: 4px;
-  padding: 12px;
+.scroll-container-wrapper {
+  position: relative;
 }
 
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 2;
+  color: $blue-light;
+}
+
+.left-arrow {
+  left: 60px;
+}
+
+.right-arrow {
+  right: 60px;
+}
+
+#front-collection-title{
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 40px 20px 40px;
+  padding: 8px 0;
+  text-align: center;
+  border: $border-grey solid 1px;
+  border-radius: 4px;
+  // background-color: $whiter-smoke;
+  background: rgba(105, 170, 151, 1);
+  color: white;
+}
+
+.home-page-collection-display {
+  margin: 0 40px 20px 40px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  border: solid 1px $border-grey;
+  border-radius: 4px;
+  padding: 32px 12px;
+}
+
+// Make scrollbar always visible
+.home-page-collection-display::-webkit-scrollbar {
+  height: 8px;
+}
+
+.home-page-collection-display::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.home-page-collection-display::-webkit-scrollbar-thumb {
+  background-color: $blue-light;
+  border-radius: 4px;
+}
+
+
 .info-box-collection {
-  height: 140px;
+  height: 80px;
   padding: 15px;
   color: $font-grey !important;
-  background-color: $whitesmoke;
   border-radius: 3px;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
 }
