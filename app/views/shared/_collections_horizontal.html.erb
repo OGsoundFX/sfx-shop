@@ -1,3 +1,3 @@
-<% collections.each do |collection| %>
+<% collections.order(created_at: :desc).first(6).each do |collection| %>
   <%= render "shared/collection_card", collection: collection %>
 <% end %>
