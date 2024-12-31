@@ -12,7 +12,7 @@
         <div><%= image_tag("sword.png", height: "40px") %></div>
       </div>
       <% if !@templates.empty? %>  
-        <% @templates.each do |template| %>
+        <% @templates.order(created_at: :desc).each do |template| %>
           <%= render 'shared/templates/templates_display', collection: template %>
         <% end %>
       <% else %>
