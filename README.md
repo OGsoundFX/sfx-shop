@@ -1,7 +1,9 @@
 # BAMSFX ONLINE SHOP - README _(Work in Progress)_
-
 Hello,
 Here is my online Sound Effects shop that I am building. The first stage is completed and the app is up and running here: https://www.bamsfx.com
+
+## SEO implementation
+[chatGPT](https://chatgpt.com/share/67bb37ac-85c0-8006-9a97-89ee64fb1273)
 
 ## THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
 
