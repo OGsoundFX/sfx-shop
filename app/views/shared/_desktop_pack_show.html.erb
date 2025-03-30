@@ -52,10 +52,8 @@
         </div>
         <div class="cart-or-buy-buttons">
           <% if @pack.sku.include?("FS") %>
-            <div>
-              <%= form_tag @pack.product_link do %>
-                <%= submit_tag 'Download', id: 'btn-download', class: 'ml-4' %>
-              <%  end %>
+            <div class="d-flex align-items-center">
+              <%= button_to "Download", @pack.product_link, method: :get, id: 'btn-download', class: 'ml-4' %>
             </div>
           <% else %>
             <div class="d-flex justify-content-between">
