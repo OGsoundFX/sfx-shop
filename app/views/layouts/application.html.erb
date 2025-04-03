@@ -32,12 +32,22 @@
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card data -->
-    <meta name="twitter:card" content="Summary">
+    <!--
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="BAM Sound Effects">
     <meta name="twitter:title" content="BAM Sound Effects">
     <meta name="twitter:description" content="Sound FX shop | Find the perfect sound effects for your project!">
     <meta name="twitter:creator" content="@OGmusik">
-    <meta name="twitter:image:src" content="https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png">
+    -->
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="BAM Sound Effects">
+    <meta name="twitter:title" content="<%= content_for?(:meta_title) ? yield(:meta_title) : 'BAM Sound Effects' %>">
+    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Sound FX shop | Find the perfect sound effects for your project!' %>">
+    <meta name="twitter:creator" content="@OGmusik">
+    <meta name="twitter:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url('https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png') %>">
+
 
     <%= favicon_link_tag asset_path('logo/logo_BAM_3.png') %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
