@@ -12,12 +12,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Facebook Open Graph data -->
-    <meta property="og:title" content="Olivier Girardot Full-stack Web Developer" />
+    <!--
+    <meta property="og:title" content="BamSFX - Professional Sound Effects to elevate your projects to the next level" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.bamsfx.com" />
     <meta property="og:image" content="https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png" />
     <meta property="og:description" content="Sound FX shop | Find the perfect sound effects for your project!" />
     <meta property="og:site_name" content="BAM Sound Effects" />
+    -->
+
+    <!--
+    <title><%= content_for?(:meta_title) ? yield(:meta_title) : "BamSFX" %></title>
+    -->
+    <meta property="og:title" content="<%= content_for?(:meta_title) ? yield(:meta_title) : 'BamSFX - Professional Sound Effects to elevate your projects to the next level' %>">
+    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Find the perfect sound effect for your project.' %>">
+    <meta property="og:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:site_name" content="BAM Sound Effects" />
+    <meta property="og:type" content="website" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="Summary">
