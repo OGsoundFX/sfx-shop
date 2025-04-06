@@ -19,7 +19,7 @@ The website was officially opened to business on January 2022. Check out [BAMSFX
 ### Stage 3: Create your own SFX Pack -> COLLECTIONS **COMPLETED**
 Collections: The customer can purchase sounds individually or make their own packs with hand picked sounds, in order to benefit from "pack prices" while not having to purchase pre-made packs. Gives more flexibillity to the customer with smaller budgets.
 
-### Stage 4: 2023
+### Stage 4: 2025 - In progress
 Onboard other sound designers to sell their Sound Effect packs after quality validation from me.
 The question is whether they will be able to manage their packs and sounds or will I be the sole administrator.
 Payment details and share aspect need to be established.
