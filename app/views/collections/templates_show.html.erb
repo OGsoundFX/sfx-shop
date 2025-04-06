@@ -1,3 +1,6 @@
+<% content_for :meta_title, @collection.title %>
+<% content_for :meta_description, "Create your own SFX packs with the collection system! Custom made packs at an unbeatable price!!!" %>
+<% content_for :meta_image, @collection.image.attached? ? url_for(@collection.image) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>
 
 <div class="content">
   <div class="banner">
