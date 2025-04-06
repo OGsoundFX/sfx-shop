@@ -39,4 +39,8 @@ class TemplateCollection < ApplicationRecord
       5000 # unlimited
     end
   end
+
+  def to_param
+    "#{id} #{title}".parameterize
+  end
 end
