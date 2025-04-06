@@ -8,6 +8,7 @@ Here is my online Sound Effects shop that I am building. The first stage is comp
 ## Social Media Link Preview Optimization (Open Graph & Twitter Card Integration)
 The idea is to customize the text and image being displayed when posting different pages of you app
 
+1- Modify the code in your `application.html.erb` to implemnent a default behaviour that yields to the customized behaviour when there is one
 ```erb
 # application.html.erb
 <head>
@@ -29,6 +30,15 @@ The idea is to customize the text and image being displayed when posting differe
     <meta name="twitter:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url('https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png') %>">
 (...)
 </head>
+```
+2- Customize the behaviour in the specific pages. Here is an example
+```erb
+# app/views/sfx_packs/show.html.erb
+<% content_for :meta_title, @pack.title %>
+<% content_for :meta_description, @pack.description %>
+<% content_for :meta_image, @pack.photos.attached? ? url_for(@pack.photos.first) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>
+
+(...)
 ```
 
 ## THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
