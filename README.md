@@ -5,6 +5,32 @@ Here is my online Sound Effects shop that I am building. The first stage is comp
 ## SEO implementation
 [chatGPT](https://chatgpt.com/share/67bb37ac-85c0-8006-9a97-89ee64fb1273)
 
+## Social Media Link Preview Optimization (Open Graph & Twitter Card Integration)
+The idea is to customize the text and image being displayed when posting different pages of you app
+
+```erb
+# application.html.erb
+<head>
+(...)
+    # meta
+    <meta property="og:title" content="<%= content_for?(:meta_title) ? yield(:meta_title) : 'BamSFX - Professional Sound Effects to elevate your projects to the next level' %>">
+    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Find the perfect sound effect for your project.' %>">
+    <meta property="og:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:site_name" content="BAM Sound Effects" />
+    <meta property="og:type" content="website" />
+
+    # twitter
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="BAM Sound Effects">
+    <meta name="twitter:title" content="<%= content_for?(:meta_title) ? yield(:meta_title) : 'BAM Sound Effects' %>">
+    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Sound FX shop | Find the perfect sound effects for your project!' %>">
+    <meta name="twitter:creator" content="@OGmusik">
+    <meta name="twitter:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url('https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png') %>">
+(...)
+</head>
+```
+
 ## THE DIFFERENT STAGES I AM AIMIMG FOR WITH THIS APP
 
 Here are the different stages that I am aiming:
