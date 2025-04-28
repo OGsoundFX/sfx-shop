@@ -2,14 +2,14 @@
   <div class="packs-display d-none" data-unwrap-cart-target="packsUnwrapped">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
-        <i class="fal fa-box-open cart-icon-adjust"></i>
+        <i class="fas fa-box-open cart-icon-adjust"></i>
         <div class="dflex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
           <h5>SUB-TOTAL <%= humanized_money_with_symbol @total_pack_sum %>.00</h5>
         </div>
       </div>
       <div>
-        <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
+        <i class="fas fa-angle-up" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
       </div>
     </div>
     <% @pack_list.each_with_index do |pack, index| %>
@@ -42,7 +42,7 @@
             <%= form_tag remove_item_path do %>
               <%= hidden_field_tag 'pack_id', pack.id %>
               <%= button_tag(type: "submit", id: "cart-btn-remove") do %>
-                  <i class="fal fa-times"></i>
+                  <i class="fas fa-times"></i>
               <% end %>
             <% end %>
           </div>
@@ -93,7 +93,7 @@
             <%= form_tag remove_item_path do %>
               <%= hidden_field_tag 'pack_id', pack.id %>
               <%= button_tag(type: "submit", id: "cart-btn-remove") do %>
-                  <i class="fal fa-times"></i>
+                  <i class="fas fa-times"></i>
               <% end %>
             <% end %>
           </div>
@@ -128,14 +128,14 @@
   <div class="packs-display packs-display-closed" data-unwrap-cart-target="packsWrapped">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
-        <i class="fal fa-box-open cart-icon-adjust"></i>
+        <i class="fas fa-box-open cart-icon-adjust"></i>
         <div class="d-flex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
           <h5>SUB-TOTAL <%= humanized_money_with_symbol @total_pack_sum %>.00</h5>
         </div>
       </div>
       <div>
-        <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
+        <i class="fas fa-angle-down" data-action="click->unwrap-cart#wrap" id="pack-arrow"></i>
       </div>
     </div>
   </div>

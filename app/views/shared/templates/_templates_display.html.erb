@@ -18,7 +18,7 @@
       <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), id: 'btn-cart-show' %>
     </div>
     <div class="d-flex justify-content-end">
-      <i class="fal fa-angle-up" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
+      <i class="fas fa-angle-up" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
     </div>
   </div>
   <hr>
@@ -111,7 +111,7 @@
     </div>
     <div class="d-flex justify-content-end">
       <!-- ATTENTION: the action bellow needs redesigning. it always opens the first collection template-->
-      <i class="fal fa-angle-down" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
+      <i class="fas fa-angle-down" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
     </div>
   </div>
 </div>

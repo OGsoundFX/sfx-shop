@@ -6,7 +6,7 @@
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
           <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", data: {confirm: "Are you sure?"} do %>
-            <i class="fal fa-times"></i>
+            <i class="fas fa-times"></i>
           <% end %>
         </div>
         <div class="d-flex">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div>
-      <i class="fal fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+      <i class="fas fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
     </div>
   </div>
   <hr>
@@ -140,7 +140,7 @@
         <div class="d-flex">
           <h3 class="cart-sfx-packs-title"> <strong>COLLECTION</strong> </h3>
           <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", data: { confirm: "Are you sure?"} do %>
-            <i class="fal fa-times"></i>
+            <i class="fas fa-times"></i>
           <% end %>
         </div>
         <div class="d-flex">
@@ -150,7 +150,7 @@
       </div>
     </div>
     <div>
-      <i class="fal fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
+      <i class="fas fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow"></i>
     </div>
   </div>
 </div>
