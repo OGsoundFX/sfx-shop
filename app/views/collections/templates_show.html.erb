@@ -7,6 +7,7 @@
     <h1 class="padding-navbar"><%= @collection.title %> Collection!</h1>
     <button class="learn-more learnMoreBtn">Learn more</button>
   </div>
+  <%= render "shared/left_pannel_mobile"%>
   <div class="d-flex">
     <%= render "shared/left_pannel_desktop"%>
     <div class="container-fluid" style="position: relative">
@@ -51,7 +52,7 @@
         <%= image_tag asset_path('knight.png'), id: "knight-gif" %>
       </div>
       <div>
-        <h2 id="comming-soon">Create your Collection!!!</h2>
+        <h2 id="comming-soon">Create or Customize your Collection!!!</h2>
       </div>
     </div>
     <%# <br>
