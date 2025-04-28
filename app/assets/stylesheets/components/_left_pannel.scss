@@ -22,6 +22,32 @@
   }
 }
 
+.left-pannel-mobile {
+  padding: 0 12px;
+  background-color: $whiter-smoke;
+  border: solid 1px $whitesmoke;
+  position: fixed;
+  bottom: 0;
+  z-index: 200;
+  width: 100vw;
+  font-size: 1.8rem;
+  text-align: center;
+  .left-pannel-icon {
+    padding: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: $whitesmoke;
+    border-radius: 50%;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+  p {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #aaaaaa;
+  }
+}
+
 .pannel-active {
   color: white;
   background-color: $font-grey !important;
@@ -40,6 +66,22 @@
 .left-pannel-icon-the-quest {
   border-radius: 50%;
   margin-top: 40px;
+  background-color: black;
+  filter: grayscale(0.2);
+  opacity: 0.8;
+  img {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+  }
+  &:hover {
+    opacity: 0.65;
+  }
+}
+
+.left-pannel-icon-the-quest-mobile {
+  border-radius: 50%;
+  margin-top: 16px;
   background-color: black;
   filter: grayscale(0.2);
   opacity: 0.8;

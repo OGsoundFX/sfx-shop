@@ -40,3 +40,24 @@
     }
   }
 }
+
+$breakpoint-tablet: 768px;
+
+@media (max-width: $breakpoint-tablet) {
+  .collection-banner-content {
+    font-size: 2rem;
+    top: 14vh;
+    #create-your-collection {
+      font-size: 3.4rem;
+    }
+  }
+  #promo20 {
+    bottom: 126px;
+    left: 16px;
+  }
+  #subscribe-btn {
+    height: 40px;
+    bottom: 34px;
+    right: 26px;
+  }
+}

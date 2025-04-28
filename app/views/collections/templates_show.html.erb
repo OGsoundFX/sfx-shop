@@ -8,7 +8,7 @@
     <button class="learn-more learnMoreBtn">Learn more</button>
   </div>
   <div class="d-flex">
-    <%= render "shared/left_pannel"%>
+    <%= render "shared/left_pannel_desktop"%>
     <div class="container-fluid" style="position: relative">
       <% if (@collection.created_at.year - 2022) < 2 %>
         <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top: 0px; left: 0px; transform: rotate(-60deg)" %>
