@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2024_03_06_201130) do
     t.string "title"
     t.boolean "purchased", default: false
     t.bigint "template_collection_id"
-    t.boolean "template", default: false
     t.index ["template_collection_id"], name: "index_collections_on_template_collection_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
   end

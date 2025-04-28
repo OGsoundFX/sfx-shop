@@ -20,5 +20,3 @@ SitemapGenerator::Sitemap.create do
     add sfx_pack_path(pack), lastmod: pack.updated_at, changefreq: 'weekly', priority: 0.8
   end
 end
-
-SitemapGenerator::Sitemap.ping_search_engines

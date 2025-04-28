@@ -104,13 +104,6 @@
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
 }
 
-
-// See bottom of the page for breakpoints
-// .info-box, h3 {
-//   font-weight: 700;
-//   font-size: 140%;
-// }
-
 .info-box, p {
   font-weight: 400;
   font-size: 100%;
@@ -193,7 +186,6 @@
 
 #item-in-cart {
   color: $dark-green;
-  // color: $orange-main;
   margin-top: 7.5%;
 }
 
@@ -262,6 +254,9 @@ $breakpoint-extra-large: 1599.98px;
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .info-box {
+    height: initial;
+  }
   #card-title {
     font-weight: 700;
     font-size: 180%;
