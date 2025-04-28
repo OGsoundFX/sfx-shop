@@ -9,12 +9,12 @@
         <div class="d-flex">
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
-        <div class="d-flex">
+        <div class="d-flex template-info">
           <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
-    <div id="add-button">
+    <div id="add-button" class="add-button-desktop">
       <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), id: 'btn-cart-show' %>
     </div>
     <div class="d-flex justify-content-end">
@@ -101,17 +101,17 @@
         <div class="d-flex">
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
-        <div class="d-flex">
+        <div class="d-flex template-info">
           <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
-    <div id="add-button">
+    <div id="add-button" class="add-button-desktop">
       <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), id: 'btn-cart-show' %>
     </div>
     <div class="d-flex justify-content-end">
       <!-- ATTENTION: the action bellow needs redesigning. it always opens the first collection template-->
-      <i class="fas fa-angle-down" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
+      <i class="fas fa-eye" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
     </div>
   </div>
 </div>
