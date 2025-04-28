@@ -2,17 +2,17 @@ class SingleTracksController < ApplicationController
   def index
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
-      "action": '<i class="fas fa-swords"></i>',
+      "action": '<i class="fas fa-bomb"></i>',
       "medieval": '<i class="fab fa-fort-awesome"></i>',
-      "outdoor":	'<i class="fas fa-trees"></i>',
+      "outdoor":	'<i class="fas fa-tree"></i>',
       "underground": '<i class="fas fa-dungeon"></i>',
       "scary":	'<i class="fas fa-ghost"></i>',
       "monsters":	'<i class="fas fa-dragon"></i>',
-      "disasters": '<i class="fas fa-volcano"></i>',
+      "disasters": '<i class="fas fa-mountain"></i>',
       "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
       "miscellaneous": '<i class="fas fa-volume-up"></i>',
       "footsteps": '<i class="fas fa-shoe-prints"></i>',
-      "magic": '<i class="fas fa-cauldron"></i>',
+      "magic": '<i class="fas fa-hat-wizard"></i>',
       "scifi": '<i class="fas fa-rocket"></i>',
       "default": '<i class="fas fa-volume-up"></i>'
     }
@@ -182,7 +182,7 @@ class SingleTracksController < ApplicationController
   end
 
   def create_zip
-    
+
     Aws.config.update({
       region: 'eu-central-1',
       access_key_id: ENV['ACCESS_KEY_ID'],
@@ -202,7 +202,7 @@ class SingleTracksController < ApplicationController
     files.each do |file_name|
       file_obj = bucket.object(file_name)
       file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
-      
+
     end
     require 'zip'
     require 'fileutils'

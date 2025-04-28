@@ -35,7 +35,7 @@
 .template-title {
   margin-top: 24px;
   strong {
-    font-size: 1.6vw;
+    font-size: 1.6rem;
   }
 }
 
@@ -109,5 +109,21 @@
   padding: 24px 24px 18px 24px;
   h4 {
     font-size: 1.6vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .template-title {
+    strong {
+      font-size: 1.2rem;
+    }
+  }
+  .template-info {
+    h5 {
+      font-size: 1.2rem;
+    }
+  }
+  .add-button-desktop {
+    display: none;
   }
 }
