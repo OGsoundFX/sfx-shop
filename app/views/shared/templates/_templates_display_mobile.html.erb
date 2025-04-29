@@ -2,23 +2,24 @@
   <% if (collection.created_at.year - 2022) < 2 %>
     <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:-26px; left: -26px; transform: rotate(-60deg)" %>
   <% end %>
-  <div class="template-grid">
-    <div class="d-flex">
-      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
-      <div class="d-flex flex-column">
-        <div class="d-flex">
-          <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
-        </div>
-        <div class="d-flex template-info">
-          <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
-        </div>
+  <div class="template-grid-mobile">
+    <div>
+      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust-mobile"></i>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="d-flex">
+        <h3 class="template-title-mobile"> <strong><%= collection.title %></strong> </h3>
+      </div>
+      <div class="d-flex template-info">
+        <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
       </div>
     </div>
+
     <div id="add-button" class="add-button-desktop">
       <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), id: 'btn-cart-show' %>
     </div>
-    <div class="d-flex justify-content-end">
-      <i class="fas fa-angle-up" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
+    <div>
+      <i class="fas fa-angle-up arrow-icon" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
     </div>
   </div>
   <hr>
@@ -90,20 +91,20 @@
   </div>
   
 </div>
-<div class="packs-display packs-display-closed template-banner d-none" style="position: relative" data-id="<%=collection.id%>" data-unwrap-cart-target="templateWrapped">
+<div class="packs-display template-display-mobile-closed template-banner d-none" style="position: relative" data-id="<%=collection.id%>" data-unwrap-cart-target="templateWrapped">
   <% if (Date.today.year - collection.created_at.year) < 1 %>
     <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:-26px; left: -26px; transform: rotate(-60deg)" %>
   <% end %>
-  <div class="template-grid">
-    <div class="d-flex">
-      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust"></i>
-      <div class="d-flex flex-column">
-        <div class="d-flex">
-          <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
-        </div>
-        <div class="d-flex template-info">
-          <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
-        </div>
+  <div class="template-grid-mobile">
+    <div>
+      <i class="<%= @icons[collection.categories.first.to_sym].split('"')[1] %> template-icon-adjust-mobile"></i>
+    </div>  
+    <div class="d-flex flex-column">
+      <div class="d-flex">
+        <h3 class="template-title-mobile"> <strong><%= collection.title %></strong> </h3>
+      </div>
+      <div class="d-flex template-info">
+        <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
       </div>
     </div>
     <div id="add-button" class="add-button-desktop">
@@ -111,7 +112,7 @@
     </div>
     <div class="d-flex justify-content-end">
       <!-- ATTENTION: the action bellow needs redesigning. it always opens the first collection template-->
-      <i class="fas fa-angle-down" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
+      <i class="fas fa-angle-down arrow-icon" data-action="click->unwrap-cart#templateWrap" data-id="<%=collection.id%>" id="collection-arrow"></i>
     </div>
   </div>
 </div>
