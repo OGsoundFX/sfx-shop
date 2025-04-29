@@ -163,7 +163,7 @@ class CollectionsController < ApplicationController
   end
 
   def templates_index
-    @templates = TemplateCollection.all
+    @templates = TemplateCollection.where(active: true)
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-bomb"></i>',
