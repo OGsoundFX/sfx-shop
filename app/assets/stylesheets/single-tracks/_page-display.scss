@@ -276,6 +276,21 @@ ul {
   .wave-section {
     margin-right: 1vh !important;
   }
+  .icon-adjust {
+    height: 30px;
+    width: 30px;
+    margin: 0 8px 0 8px;
+    padding: 0;
+    i {
+      font-size: 1.2rem;
+    }
+  }
+  .pad-top {
+    padding: 0;
+  }
+  .info-icon {
+    padding: 0;
+  }
 }
 
 @media (max-width: 894px) {

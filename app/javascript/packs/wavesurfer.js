@@ -102,10 +102,16 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     // play and pause buttons
-    let playButton = document.getElementById(`play${id}`);
-    let stopButton = document.getElementById(`stop${id}`);
+    if (window.innerWidth <= 768) {
+      var playButton = document.getElementById(`mobilePlay${id}`);
+      var stopButton = document.getElementById(`mobileStop${id}`);
+    } else {
+      var playButton = document.getElementById(`play${id}`);
+      var stopButton = document.getElementById(`stop${id}`);
+    }
 
     playButton.addEventListener('click', () => {
+      console.log(playButton)
       // stop watermark if any
       watermark.pause();
       // this will stop any audio playing when pressing start
