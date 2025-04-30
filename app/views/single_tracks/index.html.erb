@@ -7,8 +7,7 @@
   <div class="d-flex">
     <%= render "shared/left_pannel_desktop"%>
     <div class="container-fluid">
-      <%# DESKTOP %>
-      <div id="paginate-desktop" data-controller="filters">
+      <div id="" data-controller="filters">
         <div class="forms">
           <div class="drop-down">
             <form action="/list" data-controller="category">
@@ -90,10 +89,6 @@
           </div>
         </div>
         <%= render 'shared/paginate_tracks' %>
-      </div>
-      <!-- MOBILE -->
-      <div id="paginate-mobile" class="screen-display">
-        <% render 'shared/paginate_tracks_mobile' %>
       </div>
     </div>
   </div>

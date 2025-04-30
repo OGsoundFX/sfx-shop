@@ -30,12 +30,12 @@
           <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: @collection.id), id: 'btn-cart-show' %>
         </div>
       </div>
-      <div id="paginate-desktop" data-controller="filters">
+      <div id="" data-controller="filters">
         <%= render 'shared/paginate_tracks' %>
       </div>
       <%# MOBILE %>
       <div id="paginate-mobile" class="screen-display">
-        <%= render 'shared/paginate_tracks_mobile' %>
+        <% render 'shared/paginate_tracks_mobile' %>
       </div>
 
     </div>
