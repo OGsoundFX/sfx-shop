@@ -1,0 +1,19 @@
+.track-search-desktop {
+  display: block;
+}
+.track-search-mobile {
+  display: none;
+}
+
+#search-hr {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .track-search-desktop {
+    display: none;
+  }
+  .track-search-mobile {
+    display: block;
+  }
+}

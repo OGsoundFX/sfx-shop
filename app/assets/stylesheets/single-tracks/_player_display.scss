@@ -1,0 +1,15 @@
+.play-button-desktop {
+  display: block;
+}
+.play-button-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .play-button-desktop {
+    display: none;
+  }
+  .play-button-mobile {
+    display: block;
+  }
+}

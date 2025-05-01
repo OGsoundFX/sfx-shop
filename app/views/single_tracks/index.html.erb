@@ -7,89 +7,13 @@
   <div class="d-flex">
     <%= render "shared/left_pannel_desktop"%>
     <div class="container-fluid">
-      <div id="" data-controller="filters">
-        <div class="forms">
-          <div class="drop-down">
-            <form action="/list" data-controller="category">
-              <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
-              <input type="hidden" name="filters" value="" data-filters-target="dropdown">
-              <div class="d-flex justify-content-start">
-                <div>
-                  <select type="text" name="dropdown" placeholder="category">
-                    <option value="" selected disabled hidden>Pick a category</option>
-                    <% @categories.each do |cat| %>
-                      <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>"><%= cat.to_s.capitalize %></option>
-                    <% end %>
-                  </select>
-                </div>
-                <div>
-                  <input type="submit" value="GO">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div style="margin-top: 30px; font-size: 12px"><strong>OR</strong></div>
-          <div class="search-form">
-            <form action="/list">
-              <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
-              <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
-            </form>
-          </div>
-        </div>
-        <div>
-          <div class="drop-down-category d-flex" data-controller="order-by">
-            <div>
-              <form action="/list" data-controller="select">
-                <input class="drop-down-inputs" type="hidden" name="previous_sort" value="<%= @search %>">
-                <input class="drop-down-inputs" type="hidden" name="asc-desc" value="asc" data-order-by-target="ascDesc">
-                <input class="drop-down-inputs" type="hidden" name="previous_category" value="<%= @dropdown %>">
-                <input class="drop-down-inputs" type="hidden" name="order" value="<%= @order %>" data-select-target="order">
-                <div class="d-flex justify-content-start">
-                  <div>
-                    <select style="height: 30px" type="text" name="order_by_dropdown" placeholder="Order by" data-action="change->order-by#removeAsc">
-                      <option selected disabled>Order by</option>
-                      <option value="title" data-select-target="title">Title</option>
-                      <option value="size" data-select-target="size">Duration</option>
-                      <option value="price_cents" data-select-target="price_cents">Price</option>
-                      <option value="points" data-select-target="points">Points</option>
-                      <option value="newest" data-select-target="newest" >Newest</option>
-                    </select>
-                  </div>
-                  <div>
-                    <input class="drop-down-inputs" style="height: 30px" type="submit" value="GO">
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="<%= @newest ? 'd-none' : 'd-flex' %> drop-dow-carets flex-column justify-content-between" data-order-by-target="carets">
-              <i class="<%= 'caret-active' if @order_type == 'desc' %> fas fa-caret-up" data-action="click->order-by#toggleCaret" data-order-by-target="caretUp" data-order="desc"></i>
-              <i class="<%= 'caret-active' unless @order_type == 'desc' %> fas fa-caret-down" data-action="click->order-by#toggleCaret" data-order-by-target="caretDown" data-order="asc"></i>
-            </div>
-            <div class="index-pills d-flex justify-content-end" data-filters-target="filterList">
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('fantasy') ? true : false %>" data-filter="fantasy" data-filters-target="fantasy pill" class="pill <%= 'pill-clicked' if @filters.include?('fantasy') %>" data-filter-spec="fantasy">Fantasy</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('nonFantasy') ? true : false %>" data-filter="fantasy" data-filters-target="fantasy pill" class="pill <%= 'pill-clicked' if @filters.include?('nonFantasy') %>" data-filter-spec="nonFantasy">Non-Fantasy</span>
-              <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('loop') ? true : false %>" data-filters-target="pill" class="pill <%= 'pill-clicked' if @filters.include?('loop') %>" data-filter-spec="loop">Loop <i class="fas fa-repeat"></i></span>
-              <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('2points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('2points') %>" data-filter-spec="2points">< 2 points</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('3points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('3points') %>" data-filter-spec="3points">2 - 4 points</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('5points') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('5points') %>" data-filter-spec="5points">> 4 points</span>
-              <span style="border-left: solid 1px #dee2e6; height: 24px; margin: 4px"></span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('5sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('5sec') %>" data-filter-spec="5sec">< 5 seconds</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('30sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('30sec') %>" data-filter-spec="30sec">5 - 30 seconds</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('60sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('60sec') %>" data-filter-spec="60sec">30s - 1 minute</span>
-              <span data-action="click->filters#filtersArray" data-clicked="<%= @filters.include?('120sec') ? true : false %>" data-filter="points" data-filters-target="points pill" class="pill <%= 'pill-clicked' if @filters.include?('120sec') %>" data-filter-spec="120sec">> 1 minute</span>
-              <form action="/list">
-                <input class="filter-inputs" type="hidden" name="filters" value="<%= @filters %>" data-filters-target="filterSelect">
-                <input type="hidden" name="search" value="<%= @search %>">
-                <input type="hidden" name="dropdown" value="<%= @dropdown %>">
-                <input type="submit" value="FILTER" class="filter-btn">
-              </form>
-            </div>
-          </div>
-        </div>
-        <%= render 'shared/paginate_tracks' %>
+      <div class="track-search-desktop">
+        <%= render "track_search_desktop" %>
       </div>
+      <div class="track-search-mobile">
+        <%= render "track_search_mobile" %>
+      </div>
+      <%= render 'shared/paginate_tracks' %>
     </div>
   </div>
 </div>
