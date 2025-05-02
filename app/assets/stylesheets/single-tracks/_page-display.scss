@@ -291,6 +291,21 @@ ul {
   .info-icon {
     padding: 0;
   }
+  .elements-position {
+    align-items: center;
+    .title-font {
+      margin-left: 8px;
+    }
+    .info-icon {
+      display: none;
+    }
+    .info-font {
+      margin: 0 8px;
+    }
+    .points {
+      display: none;
+    }
+  }
 }
 
 @media (max-width: 894px) {
@@ -299,6 +314,9 @@ ul {
   }
   .wave-section {
     margin-right: 3vh;
+  }
+  .purchase-section {
+    display: none !important;
   }
 }
 

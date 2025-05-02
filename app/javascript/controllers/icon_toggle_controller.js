@@ -8,13 +8,13 @@ export default class extends Controller {
 
   toggleIcon(event) {
     const icon = event.currentTarget.querySelector("i")
-    if (icon.classList.contains("fa-layer-minus")) {
-      icon.classList.remove("fa-layer-minus")
-      icon.classList.add("fa-layer-plus")
+    if (icon.classList.contains("fa-ban")) {
+      icon.classList.remove("fa-ban")
+      icon.classList.add("fa-layer-group")
       icon.style = "color: #4e4e4e"
-    } else if (icon.classList.contains("fa-layer-plus")) {
-      icon.classList.remove("fa-layer-plus")
-      icon.classList.add("fa-layer-minus")
+    } else if (icon.classList.contains("fa-layer-group")) {
+      icon.classList.remove("fa-layer-group")
+      icon.classList.add("fa-ban")
       icon.style = "color: #FFA500"
     }
   }

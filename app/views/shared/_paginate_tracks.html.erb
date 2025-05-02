@@ -14,119 +14,174 @@
 </div>
 <ul>
   <% @tracks.each do |track| %>
-  <li class="border">
-    <div class="wrapper">
-      <div class="d-flex elements-position">
-        <div class="play-button-mobile">
-          <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="mobileStopid<%= track.id %>" style="display: none"></i>
-          <i class="far fa-play-circle pad-top play-icon-margin cursor" id="mobilePlayid<%= track.id %>"></i>
-        </div>
-        <span class="title-font pad-top max-width" style="min-width: 125px"><%= track.title %></span>
-        <span class="info-icon max-width" id="<%= 'trackInfoBtn' if track.loop %>" style="<%= 'opacity: 0' if !track.loop %>" data-trackId="<%= track.id %>"><i class="fas fa-repeat"></i></span>
-        <span class="info-icon max-width" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
-        <% if track.announcement == "new_release" %>
-          <%= image_tag asset_path("New_green_transp_small.png"), id: "new-release-track" %>
-        <% elsif track.announcement == "popular" %>
-          <%= image_tag asset_path("Popular.png"), id: "new-release-track" %>
-        <% end %>
-      </div>
-      <div class="d-flex wave-section elements-position">
-        <% if controller_name == 'carts' && action_name == 'cart'%>
-          <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
-            <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
+    <div data-controller="single-mobile-dropdown">
+      <li class="border">
+      <div class="wrapper">
+        <div class="d-flex elements-position">
+          <span class="single-tracks-desktop-display icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
+          <div class="play-button-mobile">
+            <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="mobileStopid<%= track.id %>" style="display: none"></i>
+            <i class="far fa-play-circle pad-top play-icon-margin cursor" id="mobilePlayid<%= track.id %>"></i>
           </div>
-        <% else %>
-          <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
-            <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
-          </div>
-        <% end %>
-        <p class="info-font pad-top" id="trackDurationid<%= track.id %>"></p>
-        <div class="play-button-desktop">
-          <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
-          <i class="far fa-play-circle pad-top play-icon-margin cursor" id="playid<%= track.id %>"></i>
+          <span class="title-font pad-top max-width" style="min-width: 125px"><%= track.title %></span>
+          <span class="info-icon max-width" id="<%= 'trackInfoBtn' if track.loop %>" style="<%= 'opacity: 0' if !track.loop %>" data-trackId="<%= track.id %>"><i class="fas fa-repeat"></i></span>
+          <span class="info-icon max-width" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span>
+          <% if track.announcement == "new_release" %>
+            <%= image_tag asset_path("New_green_transp_small.png"), id: "new-release-track" %>
+          <% elsif track.announcement == "popular" %>
+            <%= image_tag asset_path("Popular.png"), id: "new-release-track" %>
+          <% end %>
         </div>
-      </div>
-      <div class="d-flex justify-content-between wave-section elements-position">
-        <span class="info-font pad-top">
-        <% if humanized_money_with_symbol(track.price).include?(".") %>
-          <%= humanized_money_with_symbol(track.price) %>
-        <% else %>
-          <%= humanized_money_with_symbol(track.price) %>.00
-        <% end %>
-        </span>
-        <span class="info-font points" id="comingSoonBtn"><%= track.points%></span>
-        <!-- <i class="far fa-heart pad-top" id="comingSoonBtn"></i>
-        <i class="fas fa-heart pad-top d-none"></i> -->
-      </div>
-      <div class="d-flex justify-content-center purchase-section"
-           data-controller="icon-toggle">
-        <%# <i class="far fa-layer-plus pad-top purchase-icons" id="comingSoonBtn"></i> %>
-        <% if current_user %>
-          <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-            <%= link_to collection_path(@collection, track: track), method: :patch, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
-              <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500"></i>
-            <% end %>
+        <div class="d-flex wave-section elements-position">
+          <% if controller_name == 'carts' && action_name == 'cart'%>
+            <div class="wave wave-cart" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+              <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
+            </div>
           <% else %>
-            <%= link_to collections_path(track: track), method: :post, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
-              <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover"></i>
-            <% end %>
+            <div class="wave wave-index" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+              <div id="loading_flag<%= track.id %>" class="loading-countdown"></div>
+            </div>
           <% end %>
-        <% else %>
-          <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-            <%= link_to collection_path(@collection, track: track), method: :patch do %>
-              <i class="far fa-layer-minus pad-top purchase-icons" style="color: #FFA500"></i>
-            <% end %>
+          <p class="info-font pad-top" id="trackDurationid<%= track.id %>"></p>
+          <div class="play-button-desktop">
+            <i class="far fa-pause-circle pad-top play-icon-margin cursor" id="stopid<%= track.id %>" style="display: none"></i>
+            <i class="far fa-play-circle pad-top play-icon-margin cursor" id="playid<%= track.id %>"></i>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center wave-section elements-position">
+          <span class="info-font pad-top">
+          <% if humanized_money_with_symbol(track.price).include?(".") %>
+            <%= humanized_money_with_symbol(track.price) %>
           <% else %>
-            <%= link_to collections_path(track: track), method: :post do %>
-              <i class="far fa-layer-plus pad-top purchase-icons icon-click-hover"></i>
-            <% end %>
+            <%= humanized_money_with_symbol(track.price) %>.00
           <% end %>
-        <% end %>
-
-        <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
-          <%= link_to single_tracks_cart_remove_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
-            <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
-          <% end %>
-        <% else %>
+          </span>
+          <span class="info-font points points-tooltip" id="comingSoonBtn"><%= track.points%>
+            <span class="points-tooltip-text">Collection Points</span>
+          </span>
+          <!-- <i class="far fa-heart pad-top" id="comingSoonBtn"></i>
+          <i class="fas fa-heart pad-top d-none"></i> -->
+        </div>
+        <div class="single-tracks-mobile-display-dropdown">
+          <i class="fas fa-angle-down" data-action="click->single-mobile-dropdown#toggle"></i>
+        </div>
+        <div class="d-flex justify-content-center purchase-section"
+            data-controller="icon-toggle">
+          <%# <i class="fas fa-layer-group pad-top purchase-icons" id="comingSoonBtn"></i> %>
           <% if current_user %>
-            <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
-                <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+            <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+              <%= link_to collection_path(@collection, track: track), method: :patch, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+                <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
+              <% end %>
+            <% else %>
+              <%= link_to collections_path(track: track), method: :post, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+                <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
+              <% end %>
             <% end %>
           <% else %>
-            <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post do %>
-                <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+            <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+              <%= link_to collection_path(@collection, track: track), method: :patch do %>
+                <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
+              <% end %>
+            <% else %>
+              <%= link_to collections_path(track: track), method: :post do %>
+                <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <!-- The Track Info Modal -->
-      <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= track.id %>">
-        <!-- Modal content -->
-        <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
-          <div class="d-flex justify-content-between">
-            <div class="track-info-modal-content-text">
-              <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span><i style="margin-left: 12px" class="fas fa-repeat <%= 'd-none' if !track.loop %>"></i></p>
-              <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
-              <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
-              <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
-              <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
-              <% if !track.sfx_pack_id.nil? %>
-                <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+
+          <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
+            <%= link_to single_tracks_cart_remove_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
+              <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
+            <% end %>
+          <% else %>
+            <% if current_user %>
+              <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
+                  <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
               <% end %>
-              <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
-              <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
-              <% track.tags.first(8).each do |tag| %>
-                <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
+            <% else %>
+              <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post do %>
+                  <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
               <% end %>
-            </div>
-            <div>
-              <span class="close" data-modalTrackCloseId="<%= track.id %>">&times;</span>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- The Track Info Modal -->
+        <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= track.id %>">
+          <!-- Modal content -->
+          <div id="trackContentInfo" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
+            <div class="d-flex justify-content-between">
+              <div class="track-info-modal-content-text">
+                <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span><i style="margin-left: 12px" class="fas fa-repeat <%= 'd-none' if !track.loop %>"></i></p>
+                <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
+                <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
+                <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
+                <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
+                <% if !track.sfx_pack_id.nil? %>
+                  <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+                <% end %>
+                <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
+                <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+                <% track.tags.first(8).each do |tag| %>
+                  <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
+                <% end %>
+              </div>
+              <div>
+                <span class="close" data-modalTrackCloseId="<%= track.id %>">&times;</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      </li>
+
+      <div class="single-tracks-mobile-display-dropdown-panel d-none" data-controller="icon-toggle" data-single-mobile-dropdown-target="panel">
+      <i class="fas fa-info-circle"id="trackInfoBtn" data-trackId="<%= track.id %>"></i>
+      <!--
+      <i class="fas fa-layer-group"></i>
+      <i class="fas fa-cart-plus"></i>
+      -->
+      <% if current_user %>
+        <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+          <%= link_to collection_path(@collection, track: track), method: :patch, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+            <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
+          <% end %>
+        <% else %>
+          <%= link_to collections_path(track: track), method: :post, data: {action: "icon-toggle#toggleIcon"}, remote: true do %>
+            <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
+          <%= link_to collection_path(@collection, track: track), method: :patch do %>
+            <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
+          <% end %>
+        <% else %>
+          <%= link_to collections_path(track: track), method: :post do %>
+            <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if current_user && Cart.where(user_id: current_user.id).first && Cart.where(user_id: current_user.id).first.sinlge_tracks != nil && (Cart.where(user_id: current_user.id).first.sinlge_tracks.include? track.id) %>
+        <%= link_to single_tracks_cart_remove_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
+          <i class="fas fa-trash-alt pad-top purchase-icons icon-click-hover in-cart"></i>
+        <% end %>
+      <% else %>
+        <% if current_user %>
+          <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post, data: { action: "click->icon-toggle#toggleAddToCartIcon" }, remote: true do %>
+              <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+          <% end %>
+        <% else %>
+          <%= link_to single_tracks_cart_path(track_id: track.id, page: params[:page]), method: :post do %>
+              <i class="fas fa-cart-plus pad-top purchase-icons icon-click-hover"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <span class="info-font-mobile" id="comingSoonBtn"><%= track.points%></span>
       </div>
     </div>
-  </li>
   <% end %>
 </ul>
 <div class="d-flex justify-content-between">

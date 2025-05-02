@@ -1,15 +1,73 @@
+// /note/ 👇 what should and should not be displayed in the different views 👇
+.single-tracks-desktop-display {
+  display: block;
+}
+
+.single-tracks-mobile-display {
+  display: none;
+}
+
+.single-tracks-mobile-display-dropdown-panel {
+  display: none;
+}
+// /note/ 👆 what should and should not be displayed in the different views 👆
+
 .play-button-desktop {
   display: block;
 }
 .play-button-mobile {
   display: none;
+  i {
+    font-size: 2.4rem;
+  }
+}
+.single-tracks-mobile-display-dropdown {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  // /note/ 👇 what should and should not be displayed in the different views 👇
+  .single-tracks-desktop-display {
+    display: none;
+  }
+
+  .single-tracks-mobile-display {
+    display: block;
+  }
+  // /note/ 👆 what should and should not be displayed in the different views 👆
   .play-button-desktop {
     display: none;
   }
   .play-button-mobile {
     display: block;
+  }
+  .single-tracks-mobile-display-dropdown {
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 2rem;
+    }
+  }
+  .info-font-mobile {
+      color: #999999;
+      font-size: 0.8em;
+      width: 30px;
+      height: 22px;
+      width: 22px;
+      text-align: center;
+      border: solid #FFA500 2px;
+      border-radius: 50%;
+  }
+  .single-tracks-mobile-display-dropdown-panel {
+    justify-content: space-around;
+    border: 1px solid #FFA500;
+    border-radius: 50px;
+    height: 52px;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: -5px;
+    i {
+      font-size: 1.8rem;
+    }
   }
 }
