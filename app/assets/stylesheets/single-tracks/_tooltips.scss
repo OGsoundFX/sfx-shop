@@ -1,0 +1,24 @@
+.points-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.points-tooltip .points-tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  top: -6px;
+}
+
+.points-tooltip:hover .points-tooltip-text {
+  visibility: visible;
+}

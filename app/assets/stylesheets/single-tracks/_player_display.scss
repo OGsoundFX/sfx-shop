@@ -1,15 +1,47 @@
+// /note/ 👇 what should and should not be displayed in the different views 👇
+.single-tracks-desktop-display {
+  display: block;
+}
+
+.single-tracks-mobile-display {
+  display: none;
+}
+// /note/ 👆 what should and should not be displayed in the different views 👆
+
 .play-button-desktop {
   display: block;
 }
 .play-button-mobile {
   display: none;
+  i {
+    font-size: 2.4rem;
+  }
+}
+.single-tracks-mobile-display-dropdown {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  // /note/ 👇 what should and should not be displayed in the different views 👇
+  .single-tracks-desktop-display {
+    display: none;
+  }
+
+  .single-tracks-mobile-display {
+    display: block;
+  }
+  // /note/ 👆 what should and should not be displayed in the different views 👆
   .play-button-desktop {
     display: none;
   }
   .play-button-mobile {
     display: block;
+  }
+  .single-tracks-mobile-display-dropdown {
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 2rem;
+    }
   }
 }
