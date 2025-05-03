@@ -22,3 +22,32 @@
 .points-tooltip:hover .points-tooltip-text {
   visibility: visible;
 }
+
+@media (max-width: 768px) {
+  .points-tooltip-mobile {
+    position: relative;
+    display: inline-block;
+  }
+  .points-tooltip-mobile-text {
+    font-size: 0.8rem;
+  }
+  .points-tooltip-mobile .points-tooltip-mobile-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+  
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    right: 32px;
+    top: -4px;
+  }
+  
+  .points-tooltip-mobile:active .points-tooltip-mobile-text {
+    visibility: visible;
+  }
+}
