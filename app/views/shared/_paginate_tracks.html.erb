@@ -179,7 +179,7 @@
         <% end %>
       <% end %>
 
-      <span class="info-font-mobile points-tooltip-mobile" id="comingSoonBtn"><%= track.points%>
+      <span class="info-font-mobile points-tooltip-mobile" id="comingSoonBtn" onclick="showTooltip(this)"><%= track.points%>
         <span class="points-tooltip-mobile-text">Collection Points</span>
       </span>
       </div>
@@ -192,3 +192,17 @@
 </div>
 
 <%= render 'shared/coming_soon_modals' %>
+
+<script>
+function showTooltip(el) {
+  el.classList.add('show-tooltip');
+
+  // Clear any previous timeout to prevent stacking
+  if (el.hideTimeout) clearTimeout(el.hideTimeout);
+
+  // Hide after 3 seconds
+  el.hideTimeout = setTimeout(() => {
+    el.classList.remove('show-tooltip');
+  }, 1000);
+}
+</script>
