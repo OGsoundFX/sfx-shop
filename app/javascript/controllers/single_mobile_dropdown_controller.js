@@ -2,6 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = ["panel"]
+
   toggle(event) {
     if (event.currentTarget.classList.contains("fa-angle-down")) {
       event.currentTarget.classList.remove("fa-angle-down")
