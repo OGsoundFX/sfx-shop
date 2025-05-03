@@ -45,9 +45,11 @@
     z-index: 1;
     right: 32px;
     top: -4px;
+    transition: 1s ease;
   }
   
-  .points-tooltip-mobile:active .points-tooltip-mobile-text {
+  .points-tooltip-mobile.show-tooltip .points-tooltip-mobile-text {
     visibility: visible;
+    transition: 1s ease;
   }
 }

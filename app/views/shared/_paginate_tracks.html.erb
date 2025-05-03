@@ -179,7 +179,11 @@
         <% end %>
       <% end %>
 
-      <span class="info-font-mobile points-tooltip-mobile" id="comingSoonBtn"><%= track.points%>
+      <span class="info-font-mobile points-tooltip-mobile"
+            id="comingSoonBtn"
+            data-controller="tooltip-mobile"
+            data-action="click->tooltip-mobile#tooltipDisplay">
+        <%= track.points%>
         <span class="points-tooltip-mobile-text">Collection Points</span>
       </span>
       </div>
