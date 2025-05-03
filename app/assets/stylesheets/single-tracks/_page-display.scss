@@ -87,6 +87,7 @@
   font-size: 150%;
   h1 {
     font-size: 2rem;
+    margin: 0 16px;
   }
   .learn-more {
     margin: 20px 0 40px 0;
@@ -305,6 +306,29 @@ ul {
     .points {
       display: none;
     }
+  }
+  .track-info-modal .track-info-modal-content {
+    width: 96vw !important;
+  }
+  .learn-more-modal-content {
+    width: 96vw !important;
+  }
+  #collection-image {
+    width: 84vw !important;
+  }
+  .double-carrot-last {
+    display: none;
+  }
+  .page-item {
+    margin-top: -12px;
+    font-size: 2.4rem;
+  }
+  .count-customize, .dash {
+    margin-top: 4px !important;
+    font-size: 1.1rem;
+  }
+  .results-font-size > p {
+    font-size: 0.9rem;
   }
 }
 
