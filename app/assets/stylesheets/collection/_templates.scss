@@ -189,4 +189,17 @@
     }
     align-items: center;
   }
+
+  .template-tracks-mobile {
+    height: 48px !important;
+    border: solid 1px #AEAEAE;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    &:hover {
+      background-color: #f5f3f3b6;
+    }
+  }
 }
