@@ -7,7 +7,7 @@
         <div>
           <% if !collection.title.nil? && collection.title != "" %>
             <div class="d-flex collection-name">
-              <p data-collection-name-target="collectionName">Collection name:
+              <p data-collection-name-target="collectionName"><span id="collection-name-label">Collection name:</span>
                 <span style="color: #69aa97"
                       data-action="click->collection-name#nameChange"
                       id="collection-name"
@@ -27,7 +27,7 @@
             </div>
           <% elsif collection.title.nil? || collection.title == "" %>
             <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
-              <p>Collection name: <span style="color: #69aa97"
+              <p><span id="collection-name-label">Collection name: </span><span style="color: #69aa97"
                                       data-action="click->collection-name#name"
                                       id="collection-no-name"
                                       class="hover-effect"

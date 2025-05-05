@@ -1,0 +1,17 @@
+.collection-tracks-desktop {
+  display: block;
+}
+
+.collection-tracks-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .collection-tracks-desktop {
+    display: none;
+  }
+  
+  .collection-tracks-mobile {
+    display: block;
+  }
+}
