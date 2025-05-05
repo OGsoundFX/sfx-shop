@@ -4,12 +4,12 @@
     <%= render "shared/left_pannel_desktop"%>
   </div>
   <% if Cart.where(user: current_user).empty? %>
-    <div class="padding-navbar content margins cart-font" id="cart-container">
+    <div class="padding-navbar content cart-margins cart-font" id="cart-container">
       <h3>Your cart is empty</h3>
       <%= link_to "Go Shopping", root_path %>
     </div>
   <% else %>
-    <div class="padding-navbar content margins cart-font" id="cart-container">
+    <div class="padding-navbar content cart-margins cart-font" id="cart-container">
       <div class="pannel-grid" data-controller="unwrap-cart">
         <div class="cart-pannel">
           <% if Sale.where("end_date > ?", Date.current).count > 0 %>
@@ -19,7 +19,7 @@
           <% end %>
         </div>
 
-        <! Checkout pannel >
+        <!-- Checkout pannel -->
         <div class="checkout-pannel">
           <div class="total">
             <div class="container-cart-total">

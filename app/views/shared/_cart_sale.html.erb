@@ -102,21 +102,21 @@
       </div>
     </div>
   </div>
-  <div style="margin-top: 26px"></div>
+  <div class="cart-section-margin"></div>
 <% end %>
 
 <% unless @current_collections.empty? %>
   <%= render 'shared/cart/collections_display' %>
-  <div style="margin-top: 26px"></div>
+  <div class="cart-section-margin"></div>
 <% end %>
 
 <% unless @tracks.nil? || @tracks == [] %>
   <div id="cart-paginate-desktop">
     <%= render 'shared/cart/paginate_tracks_cart' %>
-    <div style="margin-top: 26px"></div>
+    <div class="cart-section-margin"></div>
   </div>
   <div id="cart-paginate-mobile" class="screen-display">
     <%= render 'shared/cart/paginate_tracks_mobile_cart' %>
-    <div style="margin-top: 26px"></div>
+    <div class="cart-section-margin"></div>
   </div>
 <% end %>

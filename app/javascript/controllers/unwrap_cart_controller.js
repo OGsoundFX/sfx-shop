@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["packsUnwrapped", "packsWrapped", "singleUnwrapped", "singleWrapped", "collectionWrapped", "collectionUnwrapped", "templateWrapped", "templateUnWrapped"]
+  static targets = ["packsUnwrapped", "packsWrapped", "singleUnwrapped", "singleWrapped", "collectionWrapped", "collectionUnwrapped", "templateWrapped", "templateUnWrapped", "youSpare"]
 
   connect() {
   }
@@ -14,6 +14,7 @@ export default class extends Controller {
       this.singleUnwrappedTarget.classList.toggle("d-none")
       this.singleWrappedTarget.classList.toggle("d-none")
     } else if (event.target.id === "collection-arrow") {
+      this.youSpareTarget.classList.toggle("d-none")
       this.collectionUnwrappedTarget.classList.toggle("d-none")
       this.collectionWrappedTarget.classList.toggle("d-none")
     }
