@@ -11,7 +11,7 @@
         </div>
         <div class="d-flex">
           <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
-          <p style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+          <p class="d-none" data-unwrap-cart-target="youSpare"  style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@
         </div>
         <div class="d-flex">
           <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
-          <p style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+          <p class="d-none" data-unwrap-cart-target="youSpare" style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
         </div>
       </div>
     </div>
