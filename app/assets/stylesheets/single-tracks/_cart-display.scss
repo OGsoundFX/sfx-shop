@@ -86,10 +86,27 @@
   }
 }
 
-.container-cart-single {
+.margins-vertical {
+  margin: 20px 44px 4px 44px;
+}
+
+.container-cart-single-desktop {
+  display: flex;
+  justify-content: space-between;
   margin: 0 15px;
 }
 
-.margins-vertical {
-  margin: 20px 44px 4px 44px;
+.container-cart-single-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container-cart-single-desktop {
+    display: none;
+  }
+  
+  .container-cart-single-mobile {
+    display: block;
+    margin: 0 15px;
+  }
 }

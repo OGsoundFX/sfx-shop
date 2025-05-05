@@ -64,7 +64,7 @@
               </div>
               <div class="d-flex justify-content-center purchase-section">
                 <%= link_to remove_collection_from_cart_path(track: track, collection: @current_collections.first), method: :post do %>
-                  <i class="far fa-times pad-top-cart purchase-icons icon-click-hover" id=""></i>
+                  <i class="fas fa-ban pad-top-cart purchase-icons icon-click-hover" id=""></i>
                 <% end %>
               </div>
               <!-- The Track Info Modal -->
@@ -125,14 +125,11 @@
                 <p class="info-font pad-top" id="trackDurationid<%= track.id %>"></p>
               </div>
               <div>
-                <span class="info-font-mobile-templates points-tooltip-mobile"
-                      id="comingSoonBtn"
-                      data-controller="tooltip-mobile"
-                      data-action="click->tooltip-mobile#tooltipDisplay"
-                      style="align-items: center">
-                  <%= track.points%>
-                  <span class="points-tooltip-mobile-text">Collection Points</span>
-                </span>
+              </div>
+              <div class="d-flex elements-position fa-ban-color">
+                <%= link_to remove_collection_from_cart_path(track: track, collection: @current_collections.first), method: :post do %>
+                  <i class="fas fa-ban pad-top-cart purchase-icons icon-click-hover" id=""></i>
+                <% end %>
               </div>
 
               <div class="d-flex justify-content-center purchase-section"
@@ -146,6 +143,7 @@
                 <div id="trackContentInfo" style="text-align: start" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
                   <div class="d-flex justify-content-between">
                     <div class="track-info-modal-content-text">
+                      <p><u>Points:</u> <span class="modal-orange-text" ><%= track.points %></span></p>
                       <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
                       <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span><i style="margin-left: 12px" class="fas fa-repeat <%= 'd-none' if !track.loop %>"></i></p>
                       <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
