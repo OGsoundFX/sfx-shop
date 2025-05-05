@@ -3,7 +3,6 @@
   background-color: black;
   padding: 10px 50px 0px;
   color: white;
-  // margin-top: 40px;
 }
 
 .footer-links {
@@ -74,6 +73,8 @@ $breakpoint-400: 400px;
 @media (max-width: $breakpoint-tablet) {
   .footer {
     padding-bottom: 10px;
+  }
+  .footer-margin-bottom-mobile {
     margin-bottom: 100px;
   }
 
