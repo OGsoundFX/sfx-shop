@@ -98,8 +98,14 @@ window.addEventListener('DOMContentLoaded', () => {
       wavesurfers[loopId].on('ready', () => {
         const trackSeconds = wavesurfers[loopId].getDuration();
         const trackDuration = timeConverter(trackSeconds);
-        document.getElementById(`trackDuration${id}`).innerText = trackDuration;
-        document.getElementById(`trackDurationModal${id}`).innerText = trackDuration;
+        // document.getElementById(`trackDuration${id}`).innerText = trackDuration;
+        // document.getElementById(`trackDurationModal${id}`).innerText = trackDuration;
+        document.querySelectorAll(`#trackDuration${id}`).forEach((track) => {
+          track.innerText = trackDuration
+        })
+        document.querySelectorAll(`#trackDurationModal${id}`).forEach((track) => {
+          track.innerText = trackDuration
+        })
       })
   
       // play and pause buttons

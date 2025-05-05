@@ -1,17 +1,17 @@
-.collection-tracks-desktop {
+.collection-tracks-desktop, .cart-single-tracks-desktop {
   display: block;
 }
 
-.collection-tracks-mobile {
+.collection-tracks-mobile, .cart-single-tracks-mobile {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .collection-tracks-desktop {
+  .collection-tracks-desktop, .cart-single-tracks-desktop {
     display: none;
   }
   
-  .collection-tracks-mobile {
+  .collection-tracks-mobile, .cart-single-tracks-mobile {
     display: block;
   }
   .add-to-collection-mobile {
@@ -20,6 +20,9 @@
   }
   .fa-ban-color i {
     font-size: 1.6rem;
+    color: $orange-main;
+  }
+  .fa-trash-color i {
     color: $orange-main;
   }
 }
