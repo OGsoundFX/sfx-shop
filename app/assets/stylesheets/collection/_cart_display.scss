@@ -14,4 +14,12 @@
   .collection-tracks-mobile {
     display: block;
   }
+  .add-to-collection-mobile {
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+  .fa-ban-color i {
+    font-size: 1.6rem;
+    color: $orange-main;
+  }
 }
