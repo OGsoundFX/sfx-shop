@@ -307,6 +307,17 @@ ul {
       display: none;
     }
   }
+  .elements-position-single-tracks-mobile {
+    align-items: center;
+    .info-font {
+      margin: 0 0 0 8px;
+    }
+  }
+  .info-icon-template-single-tracks-mobile {
+    margin-top: 2px;
+    font-size: 16px;
+    margin-left: 4px;
+  }
   .track-info-modal .track-info-modal-content {
     width: 96vw !important;
   }
