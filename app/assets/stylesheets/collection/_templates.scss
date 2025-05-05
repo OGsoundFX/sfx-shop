@@ -118,6 +118,10 @@
 
 // mobile classes
 
+.template-tracks-container-mobile {
+  margin: 0 8px;
+}
+
 .template-grid-mobile {
   display: flex;
   justify-content: space-between;
@@ -184,5 +188,18 @@
       font-size: 0.8rem;
     }
     align-items: center;
+  }
+
+  .template-tracks-mobile {
+    height: 48px !important;
+    border: solid 1px #AEAEAE;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    &:hover {
+      background-color: #f5f3f3b6;
+    }
   }
 }
