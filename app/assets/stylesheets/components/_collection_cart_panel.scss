@@ -77,3 +77,9 @@
     border: solid 2px $light-grey;
   }
  }
+
+ @media (max-width: 768px) {
+  #collection-name-label {
+    display: none;
+  }
+ }
