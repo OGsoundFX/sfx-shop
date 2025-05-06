@@ -1,0 +1,22 @@
+.navbar-burger-mobile {
+  display: none;
+}
+
+.navbar-burger-desktop {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .navbar-burger-mobile {
+    display: flex;
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 !important;
+    }
+  }
+  
+  .navbar-burger-desktop {
+    display: none;
+  }
+}
