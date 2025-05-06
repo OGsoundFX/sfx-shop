@@ -1,0 +1,67 @@
+<div data-controller="collection-checkout-modal">
+  <div class="">
+    <div class="d-flex">
+      <i class="fas fa-compact-disc checkout-icon-adjust"></i>
+      <div class="d-flex flex-column justify-content-center">
+        <div style="font-weight: 500; font-size: 1.2rem">
+          <h4 id="title-collection">Collection of <%= collection.tracks.count %> tracks</h4>
+          <h5 id="price-pack">Price: <%= humanized_money_with_symbol collection.price %></h5>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center list-tracks-modal-button-wrapper">
+      <button id="list-tracks-modal-button" style="margin: 0"
+              data-collection-checkout-modal-target="button"
+              data-action="click->collection-checkout-modal#modalDisplay">
+        List of tracks
+      </button>
+    </div>
+    <div class="d-flex flex-column justify-content-center">
+      <div class="d-flex justify-content-end">
+        <%= link_to "Download Collection", create_zip_collection_path(collection: collection), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Collection List Modal -->
+  <div id="collectionModal" class="track-list-modal" data-collection-checkout-modal-target="collectionModal">
+    <!-- Modal content -->
+    <div class="collection-modal-content">
+      <div class="d-flex justify-content-between">
+        <h3>List of tracks in your Collection</h3>
+        <span class="close"
+              data-collection-checkout-modal-target="close"
+              data-action="click->collection-checkout-modal#modalClose">&times;
+        </span>
+      </div>
+      <hr>
+
+        <% collection.tracks.each do |track| %>
+          <% displayed_track = SingleTrack.find(track) %>
+          <div class="grid-display-list">
+            <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
+            <div><%= displayed_track.title %></div>
+            <div><%= link_to "Download", download_single_path(url: SingleTrack.find(track).link, title: SingleTrack.find(track).title) %></div>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+
+  <!-- Download will start modal -->
+  <div class="download-modal" data-collection-checkout-modal-target="downloadModal">
+    <div class="download-modal-content">
+      <div class="d-flex justify-content-between" id="zipping-modal-text">
+        <p data-collection-checkout-modal-target="modalText">Zipping File: Your download will start shortly</p>
+        <span class="close"
+          data-collection-checkout-modal-target="close"
+          data-action="click->collection-checkout-modal#downloadModalClose">&times;
+        </span>
+      </div>
+      <div class="d-flex justify-content-center">
+        <div data-collection-checkout-modal-target="loading" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
+  </div>
+</div>

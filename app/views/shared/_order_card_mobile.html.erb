@@ -1,9 +1,27 @@
 <% @orders.each do |order| %>
-<% @tracks = order.tracks %>
-  <div class="order_card">
-    <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
-    <h6 id="chrome-download"> <i class="fas fa-exclamation-triangle"></i> &nbsp &nbsp If you are experiencing problems downloading your packs with <strong style="color: #ffa500">Chrome</strong>, please try another browser. </h6>
-  <hr>
+  <% collection = Collection.find(order.collections.first) if order.collections != [] %>
+  <% @tracks = order.tracks %>
+  <div class="order_card packs-display">
+    <h3 id="order-space-under-title-mobile">Order from <%= order.created_at.strftime("%B #{order.created_at.day.ordinalize} %Y") %> </h3>
+    <hr>
+    <div class="">
+      <% if !collection.nil? %>
+        <% if order.packs != [] %>
+          <hr>
+        <% end %>
+        <%= render 'shared/dashboard_collection_tracks_mobile', collection: collection %>
+      <% end %>
+    </div>
+    <hr>
+    <div class="">
+      <% if order.tracks != [] %>
+        <% if !collection.nil? || order.packs != [] %>
+          <hr>
+        <% end %>
+        <%= render 'shared/dashboard_single_tracks_mobile', order: order %>
+      <% end %>
+    </div>
+    <hr>
     <% if order.product_link != "" %>
       <% order.packs << order.sfx_pack_id %>
     <% end %>
@@ -76,18 +94,27 @@
         <hr>
       <% end %>
     <% end %>
-    <p>Status: <strong><%= order.status %></strong> </p>
-    <p>Total order value: <strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></p>
-    <% if order.coupon %>
-      <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
-      <% coupon_array = order.coupon.split(',') %>
-      <% if coupon_array[1].strip == "Percentage" %>
-        <% coupon_value = "#{coupon_array[2].to_i}%" %>
-      <% else %>
-        <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
-      <% end %>
-      <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
-      </p>
-    <% end %>
+
+    <div>
+      <div class="total-dashboard" >
+        <div class="d-flex justify-content-between">
+          <div style="margin-bottom: 0">Total order value:</div>
+          <div><strong><%= humanized_money_with_symbol order.amount_cents.to_f / 100 %></strong></div>
+        </div>
+        <div class="d-flex justify-content-between dashboard-vat-display">
+          <div>VAT (7% inclusive)</div><div><%= humanized_money_with_symbol (((order.amount_cents.to_f / 100)/1.07) * 0.07) %></div>
+        </div>
+        <% if order.coupon %>
+          <p>Total amount paid: <strong><%= humanized_money_with_symbol order.amount_paid_cents.to_f / 100 %></strong> </p>
+          <% coupon_array = order.coupon.split(',') %>
+          <% if coupon_array[1].strip == "Percentage" %>
+            <% coupon_value = "#{coupon_array[2].to_i}%" %>
+          <% else %>
+            <% coupon_value = humanized_money_with_symbol coupon_array[2].to_i / 100 %>
+          <% end %>
+          <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
