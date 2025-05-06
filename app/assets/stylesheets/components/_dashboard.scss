@@ -45,4 +45,13 @@
   .dashboard-title {
     width: inherit;
   }
+  #newsletter-info-card {
+    display: none;
+  }
+  .dashboard-title {
+    font-size: 1.9rem;
+    border-radius: 3px;
+    border: solid 1px #dee2e6;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+  }
 }

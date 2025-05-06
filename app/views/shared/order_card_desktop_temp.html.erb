@@ -2,7 +2,7 @@
   <% @collection = Collection.find(order.collections.first) if order.collections != [] %>
   <% @tracks = order.tracks %>
   <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
-    <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%Y-%m-%d") %> </h3>
+    <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%B #{order.created_at.day.ordinalize} %Y") %> </h3>
 
     <% if order.multiple == false %>
     <hr>

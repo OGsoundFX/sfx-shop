@@ -60,7 +60,6 @@
 
 .order_card {
   padding: 25px 100px;
-  background-color: $whitesmoke;
 }
 
 .pending_card {
@@ -142,8 +141,8 @@ $breakpoint-laptop: 992px;
     padding: 3px 8px;
   }
 
-  #title-pack {
-    font-size: 20px;
+  #title-pack, #title-collection {
+    font-size: 1.3rem;
   }
 
   #price-pack {
@@ -152,6 +151,16 @@ $breakpoint-laptop: 992px;
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .list-tracks-modal-button-wrapper {
+    margin: 12px 0;
+  }
+  #list-tracks-modal-button {
+    width: 100%;
+    text-align: center;
+  }
+  #btn-download-collection {
+    width: 100%;
+  }
   #instead-dashboard {
     display: none;
   }
