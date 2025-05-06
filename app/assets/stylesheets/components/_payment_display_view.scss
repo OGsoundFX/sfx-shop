@@ -1,0 +1,54 @@
+.payment_collection_tracks_desktop_view {
+  display: block;
+}
+.payment_collection_tracks_mobile_view {
+  display: none;
+}
+.payment-total-desktop {
+  display: block;
+}
+.payment-total-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .payment_collection_tracks_desktop_view {
+    display: none;
+  }
+  .payment_collection_tracks_mobile_view {
+    display: block;
+  }
+  .payment-total-desktop {
+    display: none;
+  }
+  .payment-total-mobile {
+    display: block;
+  }
+  .payment-mobile-collection-text {
+    text-align: center;
+    font-weight: 500;
+  }
+  #list-tracks-modal-button {
+    width: 100%;
+    margin-top: 12px;
+  }
+  .collection-modal-content {
+    padding: 20px 18px;
+    width: 90%;
+  }
+  .total-checkout {
+    padding: 20px;
+    font-size: 1.6rem;
+  }
+  .payment-buttons-mobile {
+    display: flex;
+    justify-content: space-between;
+  }
+  #payment-total-h3-mobile {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+  #payment-total-amount-mobile {
+    margin-bottom: 8px;
+  }
+}

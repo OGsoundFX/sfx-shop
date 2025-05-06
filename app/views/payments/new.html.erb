@@ -25,23 +25,42 @@
 
       <div class="collection-payment-checkout">
         <% if !@collection.nil? %>
-          <%= render 'shared/payment_collection_tracks' %>
+          <div class="payment_collection_tracks_desktop_view">
+            <%= render 'shared/payment_collection_tracks' %>
+          </div>
+          <div class="payment_collection_tracks_mobile_view">
+            <%= render 'shared/payment_collection_tracks_mobile' %>
+          </div>
           <hr>
         <% end %>
       </div>
 
       <div class="tracks-payment-checkout">
         <% if @order.tracks != [] %>
-          <%= render 'shared/payment_single_tracks' %>
+          <div class="payment_collection_tracks_desktop_view">
+            <%= render 'shared/payment_single_tracks' %>
+          </div>
+          <div class="payment_collection_tracks_mobile_view">
+            <%= render 'shared/payment_single_tracks_mobile' %>
+          </div>
         <% end %>
       </div>
     </div>
 
     <div class="total-checkout packs-display">
-      <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
-      <button id="pay" class="btn btn-primary btn-pay-checkout">Pay</button>
+      <div class="payment-total-desktop">
+        <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
+      </div>
+      <div class="payment-total-mobile">
+        <h3 id="payment-total-h3-mobile">For a total amount of:</h3>
+        <div id="payment-total-amount-mobile">
+          <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> 
+        </div>
+      </div>
+      <div class="payment-buttons-mobile">
+        <button id="pay" class="btn btn-primary btn-pay-checkout">Pay</button>
         <%= link_to "cancel", destroy_order_path, class: "btn btn-primary btn-cancel-checkout" %>
-        <%# <p>If you are having trouble paying please make sure that the url is secure: <strong><span style="color: #ffa500">https</span></strong> (and not http). If the url is http, just add the <strong><span style="color: #ffa500">s</span></strong> at the end and press <strong><span style="color: #ffa500">PAY</span></strong>.</p> %>
+      </div>
     </div>
 
     <script src="https://js.stripe.com/v3/"></script>
