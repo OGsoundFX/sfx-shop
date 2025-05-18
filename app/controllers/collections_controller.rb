@@ -114,40 +114,75 @@ class CollectionsController < ApplicationController
     collection.save
   end
 
-  def create_zip_collection
+  # /note/👇 old way for zipping files, using asset folder for local storage
+  # def create_zip_collection
+  #   Aws.config.update({
+  #     region: 'eu-central-1',
+  #     access_key_id: ENV['ACCESS_KEY_ID'],
+  #     secret_access_key: ENV['SECRET_ACCESS_KEY']
+  #   })
+  #   s3 = Aws::S3::Resource.new
+  #   bucket = s3.bucket('single-track-list')
+  #   files = []
+  #   collection = Collection.find(params[:collection]).title
+  #   tracks = Collection.find(params[:collection]).tracks
+  #   tracks.each do |track|
+  #     name = SingleTrack.find(track).link.split('.com').last[1..-1]
+  #     files << name
+  #   end
+  #   time = Time.now.to_i
+  #   folder = "#{current_user.username}_#{collection}_#{time}"
+  #   Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
+  #   files.each do |file_name|
+  #     file_obj = bucket.object(file_name)
+  #     file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
+  #   end
+  #   require 'zip'
+  #   require 'fileutils'
+  #   Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
+  #     files.each do |file_name|
+  #      # Add the file to the zip
+  #       zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last)))
+  #     end
+  #   end
+  #   send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), disposition: 'attachment'
+  #   # redirect_to dashboard_path, notice: "Your pack was successfully downloaded"
+  # end
 
-    Aws.config.update({
-      region: 'eu-central-1',
-      access_key_id: ENV['ACCESS_KEY_ID'],
-      secret_access_key: ENV['SECRET_ACCESS_KEY']
-    })
-    s3 = Aws::S3::Resource.new
-    bucket = s3.bucket('single-track-list')
-    files = []
-    collection = Collection.find(params[:collection]).title
-    tracks = Collection.find(params[:collection]).tracks
-    tracks.each do |track|
-      name = SingleTrack.find(track).link.split('.com').last[1..-1]
-      files << name
-    end
+  require 'zip'
+  require 'stringio'
+  require 'open-uri'
+
+  def create_zip_collection
+    collection = Collection.find(params[:collection])
+    tracks = collection.tracks
     time = Time.now.to_i
-    folder = "#{current_user.username}_#{collection}_#{time}"
-    Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
-    files.each do |file_name|
-      file_obj = bucket.object(file_name)
-      file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
-    end
-    require 'zip'
-    require 'fileutils'
-    Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
-      files.each do |file_name|
-       # Add the file to the zip
-        zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last)))
+    zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
+
+    # Set up in-memory zip
+    compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+      tracks.each do |track_id|
+        track = SingleTrack.find(track_id)
+        s3_key = track.link.split('.com').last[1..-1]
+        filename = File.basename(s3_key)
+
+        # Get the file stream from S3 (public or presigned)
+        s3_url = "https://single-track-list.s3.eu-central-1.amazonaws.com/#{s3_key}"
+        file_stream = URI.open(s3_url)
+
+        # Add it to the zip stream
+        zos.put_next_entry(filename)
+        IO.copy_stream(file_stream, zos)
       end
     end
-    send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), disposition: 'attachment'
-    # redirect_to dashboard_path, notice: "Your pack was successfully downloaded"
+
+    compressed_filestream.rewind
+
+    send_data compressed_filestream.read,
+              filename: zip_filename,
+              type: 'application/zip'
   end
+
 
   def create_template
     collection = Collection.find(params[:template][:collection])
