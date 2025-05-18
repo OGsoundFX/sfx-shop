@@ -16,7 +16,11 @@
     </div>
     <div class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-end">
-        <%= link_to "Download Collection", create_zip_collection_path(collection: collection), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
+        <% if collection.tracks.sum {|track| SingleTrack.find(track).size } > 500_000_000 %>
+          Too large to compress
+        <% else %>
+          <%= link_to "Download Collection", create_zip_collection_path(collection: collection), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
+        <% end %>
       </div>
     </div>
   </div>
