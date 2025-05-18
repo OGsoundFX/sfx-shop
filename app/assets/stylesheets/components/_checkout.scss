@@ -116,7 +116,8 @@
 
 .grid-display-list {
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 1fr 10fr 2fr;
+  border-bottom: 1px solid lightgray;
 }
 
 .btn-pay-checkout, .btn-cancel-checkout {

@@ -1,12 +1,13 @@
 <ul>
   <% @tracks.each do |track_id| %>
+  prout
     <li>
       <% if SingleTrack.exists?(id: track_id) %>
         <% track = SingleTrack.find(track_id) %>
         <%= track.title %>
         <%= link_to "download", download_single_path(url: track.link, title: track.title) %>
       <% else %>
-        <p>This track does no longer exist</p>
+        <p>This track no longer exists</p>
       <% end %>
     </li>
   <% end %>
