@@ -196,10 +196,14 @@ class CollectionsController < ApplicationController
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     })
     time = Time.now.to_i
+    order = Order.find(params[:order])
+
     if params[:type] == "single_tracks"
+      collection_download = false
       tracks = params[:tracks]
       zip_filename = "#{current_user.username}_tracks_#{time}.zip"
     else
+      collection_download = true
       collection = Collection.find(params[:collection])
       tracks = collection.tracks
       zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
@@ -237,6 +241,12 @@ class CollectionsController < ApplicationController
     tempfile.close
     tempfile.unlink
 
+    # create a download_link and redirect
+    if collection_download
+      link = DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.hour))
+    else
+      link = DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.hour))
+    end
     # Return the URL to the user (e.g., as JSON)
     render json: { download_url: url }
   end

@@ -1,5 +1,7 @@
 class Collection < ApplicationRecord
   belongs_to :user
+  has_many :download_links
+  
   monetize :price_cents
 
   validates :total_points, numericality: { less_than_or_equal_to: 300, message: "Can't exceed 300 points, please create a new Collection" }
@@ -23,7 +25,7 @@ class Collection < ApplicationRecord
       0
     when points <= 20
       500
-    when points <= 50 
+    when points <= 50
       1000
     when points <= 120
       2000

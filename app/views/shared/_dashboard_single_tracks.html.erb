@@ -22,7 +22,7 @@
         <% if order.tracks.sum {|track| SingleTrack.find(track).size } > 200_000_000 %>
           Too large to compress
         <% else %>
-          <%= link_to "Download All", create_zip_path(tracks: order.tracks), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
+          <%= link_to "Download All", create_zip_collection_path(tracks: order.tracks, type: "single_tracks", order: order), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
         <% end %>
         <!--
         <%= link_to "Download All", create_zip_collection_path(tracks: order.tracks, type: "single_tracks"), id: "btn-download-collection", data: { action: "click->collection-checkout-modal#download"} %>
