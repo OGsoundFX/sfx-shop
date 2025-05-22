@@ -150,9 +150,44 @@ class CollectionsController < ApplicationController
   # end
 
   # /note/👇 new way for zipping files, using AWS S3 to stream. Problem files larger then 500mb crash on Heroku
+  # require 'zip'
+  # require 'stringio'
+  # require 'open-uri'
+
+  # def create_zip_collection
+  #   collection = Collection.find(params[:collection])
+  #   tracks = collection.tracks
+  #   time = Time.now.to_i
+  #   zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
+
+  #   # Set up in-memory zip
+  #   compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+  #     tracks.each do |track_id|
+  #       track = SingleTrack.find(track_id)
+  #       s3_key = track.link.split('.com').last[1..-1]
+  #       filename = File.basename(s3_key)
+
+  #       # Get the file stream from S3 (public or presigned)
+  #       s3_url = "https://single-track-list.s3.eu-central-1.amazonaws.com/#{s3_key}"
+  #       file_stream = URI.open(s3_url)
+
+  #       # Add it to the zip stream
+  #       zos.put_next_entry(filename)
+  #       IO.copy_stream(file_stream, zos)
+  #     end
+  #   end
+
+  #   compressed_filestream.rewind
+
+  #   send_data compressed_filestream.read,
+  #             filename: zip_filename,
+  #             type: 'application/zip'
+  # end
+
+  # /note/👇 this approach creates the zipfile and stores it on AWS
   require 'zip'
-  require 'stringio'
   require 'open-uri'
+  require 'aws-sdk-s3'
 
   def create_zip_collection
     collection = Collection.find(params[:collection])
@@ -160,30 +195,41 @@ class CollectionsController < ApplicationController
     time = Time.now.to_i
     zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
 
-    # Set up in-memory zip
-    compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+    # Create a temp file on disk
+    tempfile = Tempfile.new([zip_filename, '.zip'], binmode: true)
+
+    Zip::OutputStream.open(tempfile) do |zos|
       tracks.each do |track_id|
         track = SingleTrack.find(track_id)
         s3_key = track.link.split('.com').last[1..-1]
         filename = File.basename(s3_key)
 
-        # Get the file stream from S3 (public or presigned)
+        # Stream from S3
         s3_url = "https://single-track-list.s3.eu-central-1.amazonaws.com/#{s3_key}"
-        file_stream = URI.open(s3_url)
-
-        # Add it to the zip stream
-        zos.put_next_entry(filename)
-        IO.copy_stream(file_stream, zos)
+        URI.open(s3_url) do |file_stream|
+          zos.put_next_entry(filename)
+          IO.copy_stream(file_stream, zos)
+        end
       end
     end
 
-    compressed_filestream.rewind
+    tempfile.rewind
 
-    send_data compressed_filestream.read,
-              filename: zip_filename,
-              type: 'application/zip'
+    # Upload to S3 using aws-sdk-s3
+    s3 = Aws::S3::Resource.new(region: 'eu-central-1')
+    obj = s3.bucket('bamsfx-temp-zip-files').object("zips/#{zip_filename}")
+    obj.upload_file(tempfile.path, acl: 'private')
+
+    # Generate a presigned URL (expires in 1 hour)
+    url = obj.presigned_url(:get, expires_in: 3600)
+
+    # Clean up temp file
+    tempfile.close
+    tempfile.unlink
+
+    # Return the URL to the user (e.g., as JSON)
+    render json: { download_url: url }
   end
-
 
   def create_template
     collection = Collection.find(params[:template][:collection])
