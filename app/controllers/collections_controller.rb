@@ -190,10 +190,15 @@ class CollectionsController < ApplicationController
   require 'aws-sdk-s3'
 
   def create_zip_collection
-    collection = Collection.find(params[:collection])
-    tracks = collection.tracks
     time = Time.now.to_i
-    zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
+    if params[:type] == "single_tracks"
+      tracks = params[:tracks]
+      zip_filename = "#{current_user.username}_tracks_#{time}.zip"
+    else
+      collection = Collection.find(params[:collection])
+      tracks = collection.tracks
+      zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
+    end
 
     # Create a temp file on disk
     tempfile = Tempfile.new([zip_filename, '.zip'], binmode: true)
@@ -220,8 +225,8 @@ class CollectionsController < ApplicationController
     obj = s3.bucket('bamsfx-temp-zip-files').object("zips/#{zip_filename}")
     obj.upload_file(tempfile.path, acl: 'private')
 
-    # Generate a presigned URL (expires in 1 hour)
-    url = obj.presigned_url(:get, expires_in: 3600)
+    # Generate a presigned URL (expires in 1 day)
+    url = obj.presigned_url(:get, expires_in: 86400)
 
     # Clean up temp file
     tempfile.close
