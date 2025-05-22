@@ -21,13 +21,9 @@ export default class extends Controller {
       .then(response => response.blob())
       .then(() => {
         console.log(navigator);
-        this.modalTextTarget.innerText = "Your collection has been zipped! Your download will begin shortly.";
+        this.modalTextTarget.innerText = "Your file have been zipped! Your download link will be available shortly.";
         this.modalTextTarget.parentElement.style.marginBottom = "0px";
         this.loadingTarget.style.display = "none";
-        // setTimeout(() => {
-        //   this.modalTextTarget.innerText = "Thank You!";
-        //   this.modalTextTarget.style.fontSize = "24px";
-        // }, 4000);
       });
   }
 

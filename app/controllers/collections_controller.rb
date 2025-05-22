@@ -118,8 +118,8 @@ class CollectionsController < ApplicationController
   # def create_zip_collection
   #   Aws.config.update({
   #     region: 'eu-central-1',
-  #     access_key_id: ENV['ACCESS_KEY_ID'],
-  #     secret_access_key: ENV['SECRET_ACCESS_KEY']
+  #     access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  #     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
   #   })
   #   s3 = Aws::S3::Resource.new
   #   bucket = s3.bucket('single-track-list')
@@ -190,6 +190,11 @@ class CollectionsController < ApplicationController
   require 'aws-sdk-s3'
 
   def create_zip_collection
+    Aws.config.update({
+      region: 'eu-central-1',
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    })
     time = Time.now.to_i
     if params[:type] == "single_tracks"
       tracks = params[:tracks]
