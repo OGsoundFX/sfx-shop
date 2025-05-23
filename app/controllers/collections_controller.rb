@@ -118,8 +118,8 @@ class CollectionsController < ApplicationController
   # def create_zip_collection
   #   Aws.config.update({
   #     region: 'eu-central-1',
-  #     access_key_id: ENV['ACCESS_KEY_ID'],
-  #     secret_access_key: ENV['SECRET_ACCESS_KEY']
+  #     access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  #     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
   #   })
   #   s3 = Aws::S3::Resource.new
   #   bucket = s3.bucket('single-track-list')
@@ -190,11 +190,20 @@ class CollectionsController < ApplicationController
   require 'aws-sdk-s3'
 
   def create_zip_collection
+    Aws.config.update({
+      region: 'eu-central-1',
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    })
     time = Time.now.to_i
+    order = Order.find(params[:order])
+
     if params[:type] == "single_tracks"
+      collection_download = false
       tracks = params[:tracks]
       zip_filename = "#{current_user.username}_tracks_#{time}.zip"
     else
+      collection_download = true
       collection = Collection.find(params[:collection])
       tracks = collection.tracks
       zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
@@ -232,8 +241,15 @@ class CollectionsController < ApplicationController
     tempfile.close
     tempfile.unlink
 
+    # create a download_link and redirect
+    if collection_download
+      DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.hour))
+    else
+      DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.hour))
+    end
     # Return the URL to the user (e.g., as JSON)
-    render json: { download_url: url }
+    # render json: { download_url: url }
+    redirect_to dashboard_path
   end
 
   def create_template

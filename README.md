@@ -310,8 +310,8 @@ gem 'rubyzip', '~> 1.2'
 You can find your credential keys: **https://console.aws.amazon.com/iam/home#/users/IAM_USER**
 In your ```.env``` file add the keys like so:
 ````
-ACCESS_KEY_ID=[YOUR ACCESS KEY ID]
-SECRET_ACCESS_KEY=[YOUR SECRET ACCESS KEY]
+AWS_ACCESS_KEY_ID=[YOUR ACCESS KEY ID]
+AWS_SECRET_ACCESS_KEY=[YOUR SECRET ACCESS KEY]
 ````
 ### Don't forget to add those keys to production
 
@@ -331,8 +331,8 @@ get 'create_zip', to: 'single_tracks#create_zip'
 def create_zip
     Aws.config.update({
       region: 'eu-central-1',
-      access_key_id: ENV['ACCESS_KEY_ID'],
-      secret_access_key: ENV['SECRET_ACCESS_KEY']
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     })
 
     s3 = Aws::S3::Resource.new

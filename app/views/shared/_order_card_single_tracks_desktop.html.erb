@@ -1,6 +1,5 @@
 <ul>
   <% @tracks.each do |track_id| %>
-  prout
     <li>
       <% if SingleTrack.exists?(id: track_id) %>
         <% track = SingleTrack.find(track_id) %>
