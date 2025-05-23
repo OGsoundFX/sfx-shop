@@ -9,7 +9,7 @@ class DownloadLink < ApplicationRecord
   validates :validity_duration, presence: true
 
   def expired?
-    created_at + validity_duration > 1
+    (validity_duration.to_i - (Time.now - created_at)) < 0
   end
 
   private

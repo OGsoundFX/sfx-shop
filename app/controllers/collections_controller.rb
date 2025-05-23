@@ -243,12 +243,13 @@ class CollectionsController < ApplicationController
 
     # create a download_link and redirect
     if collection_download
-      link = DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.hour))
+      DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.hour))
     else
-      link = DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.hour))
+      DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.hour))
     end
     # Return the URL to the user (e.g., as JSON)
-    render json: { download_url: url }
+    # render json: { download_url: url }
+    redirect_to dashboard_path
   end
 
   def create_template

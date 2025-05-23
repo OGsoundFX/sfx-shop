@@ -102,6 +102,22 @@
   }
 }
 
+#btn-download-get-link {
+  display: block;
+  text-align: center;
+  width: 200px;
+  padding: 5px 12px;
+  border-radius: 5px;
+  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  background-color: $light-grey;
+  color: white;
+  border: solid 2px $light-grey;
+  &:hover {
+    background-color: #bbbb;
+    border: solid 2px #bbbb;
+  }
+}
+
 #btn-download-collection {
   width: 200px;
   text-align: center;
@@ -158,7 +174,7 @@ $breakpoint-laptop: 992px;
     width: 100%;
     text-align: center;
   }
-  #btn-download-collection {
+  #btn-download-collection, #btn-download-get-link {
     width: 100%;
   }
   #instead-dashboard {
