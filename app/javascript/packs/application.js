@@ -21,3 +21,5 @@ import './wavesurfer';
 import './modals';
 // import './responsive';
 import "controllers"
+
+import "@hotwired/turbo-rails"

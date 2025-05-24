@@ -55,5 +55,5 @@ Rails.application.routes.draw do
   # modal close path
   get "modal_closed", to: "pages#modal_closed"
 
-  mount StripeEvent::Engine, at: '/stripe-webhooks'
+  # mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
