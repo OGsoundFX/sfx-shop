@@ -80,7 +80,7 @@
             <% end %>
           <% else %>
             <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-              <%= link_to collection_path(@collection, track: track), method: :patch do %>
+              <%= link_to collection_path(@collection, track: track), data: { turbo_method: :patch } do %>
                 <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
               <% end %>
             <% else %>
