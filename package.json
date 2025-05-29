@@ -18,7 +18,7 @@
   },
   "version": "0.1.0",
   "engines": {
-    "node": "18.12.0"
+    "node": "18.20.8"
   },
   "resolutions": {
     "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"

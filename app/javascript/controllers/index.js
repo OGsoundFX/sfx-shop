@@ -4,5 +4,50 @@
 
 import { application } from "./application"
 
+import CategoryController from "./category_controller"
+application.register("category", CategoryController)
+
+import CollectionCheckoutModalController from "./collection_checkout_modal_controller"
+application.register("collection-checkout-modal", CollectionCheckoutModalController)
+
+import CollectionNameController from "./collection_name_controller"
+application.register("collection-name", CollectionNameController)
+
+import FiltersController from "./filters_controller"
+application.register("filters", FiltersController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import HorizontalScrollController from "./horizontal_scroll_controller"
+application.register("horizontal-scroll", HorizontalScrollController)
+
+import IconToggleController from "./icon_toggle_controller"
+application.register("icon-toggle", IconToggleController)
+
+import OpenSubscribeModalController from "./open_subscribe_modal_controller"
+application.register("open-subscribe-modal", OpenSubscribeModalController)
+
+import OrderByController from "./order_by_controller"
+application.register("order-by", OrderByController)
+
+import SelectController from "./select_controller"
+application.register("select", SelectController)
+
+import SingleMobileDropdownController from "./single_mobile_dropdown_controller"
+application.register("single-mobile-dropdown", SingleMobileDropdownController)
+
+import TemplateFormController from "./template_form_controller"
+application.register("template-form", TemplateFormController)
+
+import TheQuestModalController from "./the_quest_modal_controller"
+application.register("the-quest-modal", TheQuestModalController)
+
+import TooltipMobileController from "./tooltip_mobile_controller"
+application.register("tooltip-mobile", TooltipMobileController)
+
+import UnwrapCartController from "./unwrap_cart_controller"
+application.register("unwrap-cart", UnwrapCartController)
+
+import VideoModalController from "./video_modal_controller"
+application.register("video-modal", VideoModalController)

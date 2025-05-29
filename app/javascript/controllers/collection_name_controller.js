@@ -38,7 +38,6 @@ export default class extends Controller {
   }
 
   newNameInput() {
-    console.log("newNameInput")
     this.nameFormTarget.classList.add("d-none")
     this.newCollectionNameTarget.innerText = this.nameInputFieldTarget.value
     if (this.nameInputFieldTarget.value === "") {

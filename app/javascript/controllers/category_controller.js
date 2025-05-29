@@ -5,6 +5,5 @@ export default class extends Controller {
 
   connect() {
     this.targets.find(this.dropdownTarget.value).setAttribute('selected', '')
-    console.log(this.disastersTarget)
   }
 }

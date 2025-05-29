@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = [ "modal" ]
 
   connect() {
-    console.log("hello")
   }
 
   close() {

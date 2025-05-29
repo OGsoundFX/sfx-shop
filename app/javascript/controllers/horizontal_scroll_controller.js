@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["scrollContainer", "leftArrow", "rightArrow"]
 
   connect() {
-    console.log(this.scrollContainerTarget, this.leftArrowTarget, this.rightArrowTarget)
     this.scrollContainerTarget.addEventListener('scroll', this.#updateArrows.bind(this));
     this.#updateArrows()
   }

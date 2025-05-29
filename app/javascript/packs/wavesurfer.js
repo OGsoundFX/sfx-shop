@@ -390,7 +390,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     playButton.addEventListener('click', () => {
-      console.log(playButton)
       // stop watermark if any
       watermark.pause();
       // this will stop any audio playing when pressing start
