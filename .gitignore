@@ -42,3 +42,5 @@ yarn-debug.log*
 app/assets/uploads/*
 app/assets/uploads/*/
 !.gitkeep
+/app/assets/builds/*
+!/app/assets/builds/.keep

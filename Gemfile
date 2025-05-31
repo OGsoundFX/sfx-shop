@@ -5,18 +5,31 @@ ruby '3.1.2'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+# /note/👇 removed for rails 7 upgrade
+# gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+# ! 👇upgrading to rails 7
+gem 'rails', '~> 7.1.2' # or the latest 7.1.x
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+# /note/👇 removed for rails 7 upgrade
+# gem 'sass-rails', '>= 6'
+# ! 👇upgrading to rails 7
+gem 'sassc-rails'
+
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'psych', '< 4'
-gem 'webpacker', '~> 4.0'
+# /note/👇 removed for rails 7 upgrade
+# gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# /note/👇 removed for rails 7 upgrade
+# gem 'turbolinks', '~> 5'
+# ! 👇upgrading to rails 7
+gem 'turbo-rails'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -40,8 +53,8 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'spring'
+  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
@@ -61,7 +74,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'money-rails', '~>1.12'
 gem 'stripe'
-gem 'stripe_event'
+# gem 'stripe_event'
 gem 'bootstrap', '~> 4.5.2'
 gem 'font-awesome-rails'
 gem "font-awesome-sass", "~> 5.7"
@@ -83,3 +96,8 @@ gem 'pry', '~> 0.14.1'
 gem 'rails_admin', '~> 3.1', '>= 3.1.2'
 
 gem 'sitemap_generator'
+
+# ! 👇upgrading to rails 7
+gem 'jsbundling-rails'   # for JS (esbuild/webpack/rollup)
+gem 'cssbundling-rails'  # for CSS (tailwind/sass/postcss)
+gem 'stimulus-rails'     # if using Stimulus

@@ -2,27 +2,32 @@
   "name": "sfx_shop",
   "private": true,
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.13",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "node-sass": "^9.0.0",
     "popper.js": "^1.16.1",
     "rails_admin": "3.1.2",
+    "sass": "^1.89.0",
     "stimulus": "^3.0.1",
-    "turbolinks": "^5.2.0",
     "wavesurfer.js": "^5.2.0"
   },
   "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^4.7.4"
-  },
   "engines": {
-    "node": "16.15.1"
+    "node": "18.20.8"
   },
   "resolutions": {
     "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/application.js --bundle --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.4"
   }
 }
