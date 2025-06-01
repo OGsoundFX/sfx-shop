@@ -1,6 +1,6 @@
 // LEAR MORE MODAL
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('turbo:load', () => {
   // Get the modal
   const modal = document.getElementById("learnMore");
   
@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // TRACK INFO MODAL
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('turbo:load', () => {
 // document.addEventListener('turbolinks:load', () => {
   
   // Get the modal
