@@ -20,14 +20,9 @@
       <div class="d-flex justify-content-center">
         <% if collection.download_links.present? && !collection.download_links.last.expired? %>
           <a href="<%= collection.download_links.last.url %>" id="btn-download-collection">Click to download</a>
-        <% elsif collection.tracks.sum {|track| SingleTrack.find(track).size } > 200_000_000 %>
-          Too large to compress
         <% else %>
           <%= link_to "Get Download Link", create_zip_collection_path(collection: collection, order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>
         <% end %>
-        <!--
-        <%= link_to "Get Download Link", create_zip_collection_path(collection: collection, order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>
-        -->
       </div>
     </div>
   </div>

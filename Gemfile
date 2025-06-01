@@ -101,3 +101,6 @@ gem 'sitemap_generator'
 gem 'jsbundling-rails'   # for JS (esbuild/webpack/rollup)
 gem 'cssbundling-rails'  # for CSS (tailwind/sass/postcss)
 gem 'stimulus-rails'     # if using Stimulus
+
+# Backgroud jobs
+gem 'solid_queue'
