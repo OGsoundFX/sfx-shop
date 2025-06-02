@@ -16,7 +16,9 @@
     </div>
     <div class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-end">
-        <% if collection.download_links.present? && !collection.download_links.last.expired? %>
+        <% if SolidQueue::Job.all.any? { |job| job.arguments["arguments"][0]["order"].to_i == order.id } && (!collection.download_links.present? || collection.download_links.last.expired?) %>
+          <div class="loader"></div>
+        <% elsif collection.download_links.present? && !collection.download_links.last.expired? %>
           <a href="<%= collection.download_links.last.url %>" id="btn-download-collection">Click to download</a>
         <% else %>
           <%= link_to "Get Download Link", create_zip_collection_path(collection: collection, order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>

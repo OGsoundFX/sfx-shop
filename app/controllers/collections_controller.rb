@@ -192,6 +192,7 @@ class CollectionsController < ApplicationController
       params_object = {order: params[:order], collection: params[:collection]}
     end
     ZipCollectionJob.perform_later(params_object, current_user.id)
+    # ZipCollectionJob.perform_now(params_object, current_user.id)
     # Aws.config.update({
     #   region: 'eu-central-1',
     #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],

@@ -18,5 +18,6 @@ module SfxShop
 
     # Background jobs
     config.active_job.queue_adapter = :solid_queue
+    config.mission_control.jobs.http_basic_auth_enabled = false
   end
 end

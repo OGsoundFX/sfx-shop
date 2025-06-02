@@ -19,7 +19,9 @@
     </div>
     <div class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-end">
-        <% if order.download_links.where(collection_download: false).present? && !order.download_links.where(collection_download: false).last.expired? %>
+        <% if SolidQueue::Job.all.any? { |job| job.arguments["arguments"][0]["order"].to_i == order.id } && (!order.download_links.where(collection_download: false).present? || order.download_links.where(collection_download: false).last.expired?) %>
+          Processing: Refresh later
+        <% elsif order.download_links.where(collection_download: false).present? && !order.download_links.where(collection_download: false).last.expired? %>
           <a href="<%= order.download_links.where(collection_download: false).last.url %>" id="btn-download-collection">Click to download</a>
         <% else %>
           <%= link_to "Get Download Link", create_zip_collection_path(tracks: order.tracks, type: "single_tracks", order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>

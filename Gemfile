@@ -104,3 +104,4 @@ gem 'stimulus-rails'     # if using Stimulus
 
 # Backgroud jobs
 gem 'solid_queue'
+gem "mission_control-jobs"
