@@ -15,5 +15,9 @@ module SfxShop
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # Background jobs
+    config.active_job.queue_adapter = :solid_queue
+    config.mission_control.jobs.http_basic_auth_enabled = false
   end
 end

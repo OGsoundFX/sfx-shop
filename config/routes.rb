@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/rails-admin', as: 'rails_admin'
+
+  authenticate :user, ->(u) { u.admin? } do
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+  end
+
   get 'collections/create'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

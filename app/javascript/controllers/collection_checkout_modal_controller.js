@@ -14,15 +14,15 @@ export default class extends Controller {
     this.collectionModalTarget.style.display = "none";
   }
 
-  download(event) {
+  download() {
     this.downloadModalTarget.style.display = "block";
-    fetch(event.currentTarget.href)
-      .then(response => response.blob())
-      .then(() => {
-        this.modalTextTarget.innerText = "Your file have been zipped! Your download link will be available shortly.";
-        this.modalTextTarget.parentElement.style.marginBottom = "0px";
-        this.loadingTarget.style.display = "none";
-      });
+    // fetch(event.currentTarget.href)
+    //   .then(response => response.blob())
+    //   .then(() => {
+    //     this.modalTextTarget.innerText = "Your file have been zipped! Your download link will be available shortly.";
+    //     this.modalTextTarget.parentElement.style.marginBottom = "0px";
+    //     this.loadingTarget.style.display = "none";
+    //   });
   }
 
   downloadModalClose() {
