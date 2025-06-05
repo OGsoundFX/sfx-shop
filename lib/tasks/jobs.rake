@@ -11,12 +11,12 @@ namespace :jobs do
     end
 
     # fetching ZipCollectionJob jobs that are not connected to a download_link
-    idle_jobs = SolidQueue::Job.where(class_name: "ZipCollectionJob").reject { |job| DownloadLink.find_by("job_id = ?", job.active_job_id) }
+    idle_jobs = SolidQueue::Job.where(class_name: "ZipCollectionJob").where.not(active_job_id: DownloadLink.select(:job_id))
     # fetching all jobs older then 2 days
     old_jobs = SolidQueue::Job.where("created_at < ?", 2.days.ago)
 
     # Removing idle and old jobs
-    idle_jobs.each(&:destroy)
+    idle_jobs.destroy_all
     old_jobs.destroy_all
   end
 end
