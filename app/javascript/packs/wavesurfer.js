@@ -12,7 +12,6 @@ const timeConverter = (time) => {
 
 // multiple track display
 window.addEventListener('turbo:load', () => {
-  console.log("loading")
   setTimeout(() => {
     // for loading the waveforms of collections display section in cart
     if (!!document.getElementById("collection-display")) {
