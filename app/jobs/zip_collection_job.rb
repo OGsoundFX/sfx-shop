@@ -58,9 +58,9 @@ class ZipCollectionJob < ApplicationJob
 
     # create a download_link and redirect
     if collection_download
-      DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.day))
+      DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.day), job_id: self.job_id)
     else
-      DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.day))
+      DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.day), job_id: self.job_id)
     end
     # Return the URL to the user (e.g., as JSON)
     # render json: { download_url: url }
