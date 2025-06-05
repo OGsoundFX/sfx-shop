@@ -21,7 +21,13 @@
         <% if SolidQueue::Job.all.any? { |job| job.arguments["arguments"][0]["collection"].present? && job.arguments["arguments"][0]["order"].to_i == order.id } && (!collection.download_links.present? || collection.download_links.last.expired?) %>
           <div class="loader"></div>
         <% elsif collection.download_links.present? && !collection.download_links.last.expired? %>
-          <a href="<%= collection.download_links.last.url %>" id="btn-download-collection">Click to download</a>
+          <a href="<%= collection.download_links.last.url %>"
+             id="btn-download-collection"
+             data-controller="delete-job"
+             data-action="click->delete-job#delete"
+             data-delete-job-job-id-value="<%= collection.download_links.last.job_id %>">
+            Click to download
+          </a>
         <% else %>
           <%= link_to "Get Download Link", create_zip_collection_path(collection: collection, order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>
         <% end %>

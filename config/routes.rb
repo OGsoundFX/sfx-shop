@@ -60,5 +60,8 @@ Rails.application.routes.draw do
   # modal close path
   get "modal_closed", to: "pages#modal_closed"
 
+  # jobs routes
+  delete "jobs/:job_id", to: "jobs#destroy", as: :job
+
   # mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

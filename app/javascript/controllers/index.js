@@ -13,6 +13,9 @@ application.register("collection-checkout-modal", CollectionCheckoutModalControl
 import CollectionNameController from "./collection_name_controller"
 application.register("collection-name", CollectionNameController)
 
+import DeleteJobController from "./delete_job_controller"
+application.register("delete-job", DeleteJobController)
+
 import FiltersController from "./filters_controller"
 application.register("filters", FiltersController)
 
