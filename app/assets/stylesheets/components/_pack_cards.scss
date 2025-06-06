@@ -2,8 +2,16 @@
   margin-bottom: 50px;
 }
 
+.pack_pic_wrapper {
+  border-top: solid $border-grey 1px;
+  border-left: solid $border-grey 1px;
+  border-right: solid $border-grey 1px;
+  border-radius: 8px 8px 0 0;
+}
+
 .pack_pic {
-  width: 100%;
+  width: calc(100% - 24px);
+  margin: 12px;
   transition: 0.5s;
 }
 
@@ -71,8 +79,7 @@
   background-color: white;
   border: solid 2px $light-grey;
   top: 50%;
-  left: 40%;
-  transform: translate(-50%, -50%);
+  left: 20%;
   padding: 10px;
   visibility: hidden;
   border-radius: 4px;
@@ -99,9 +106,11 @@
   height: 140px;
   padding: 15px;
   color: $font-grey !important;
-  background-color: $whitesmoke;
-  border-radius: 3px;
-  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  background-color: $whiter-smoke;
+  border-bottom: solid $border-grey 1px;
+  border-left: solid $border-grey 1px;
+  border-right: solid $border-grey 1px;
+  border-radius: 0 0 8px 8px;
 }
 
 .info-box, p {

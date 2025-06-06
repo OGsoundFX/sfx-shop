@@ -14,8 +14,9 @@ a:hover {
 }
 
 .pack-box {
-  background-color: $whitesmoke;
+  background-color: white;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+  border: solid 1px $border-grey;
 }
 
 .pack-title {
@@ -26,8 +27,7 @@ a:hover {
 
 .pic-price {
   position: relative;
-  margin-left: 25px;
-  margin-top: 25px;
+  margin: 24px;
   flex: 1;
 
   img {
@@ -107,9 +107,6 @@ $breakpoint-evenmore-super-duper-small: 316px;
 
 @media (max-width: $breakpoint-laptop) {
   .pic-price {
-    margin-left: 10px;
-    margin-top: 30px;
-
     img {
       height: 350px;
     }
@@ -157,10 +154,6 @@ $breakpoint-evenmore-super-duper-small: 316px;
 
   #sound-designer {
     padding-left: 20px;
-  }
-
-  .pic-price {
-    margin-top: 10px;
   }
 
   .description-box {

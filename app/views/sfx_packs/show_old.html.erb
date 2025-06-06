@@ -3,7 +3,9 @@
 <% content_for :meta_image, @pack.photos.attached? ? url_for(@pack.photos.first) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>
 
 <div class="d-flex">
-  <%= render "shared/left_pannel_desktop"%>
+  <div style="margin-top: 56px">
+    <%= render "shared/left_pannel_desktop"%>
+  </div>
   <div class="container padding-navbar content">
     <% if @discount %>
       <div>
