@@ -6,7 +6,7 @@
       <% if @order.packs.count == 1 %>
         <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
       <% else %>
-        <div><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
+        <div style="margin-bottom: 8px"><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
       <% end %>
       <div class="d-flex flex-column justify-content-center pack-details">
         <% if @current_sales_list != {} %>
@@ -23,7 +23,7 @@
       <% if @order.packs.count == 1 %>
         <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
       <% else %>
-        <div><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
+        <div style="margin-bottom: 8px"><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
       <% end %>
       <div class="d-flex flex-column justify-content-center pack-details">
         <% if @current_sales_list != {} %>
@@ -37,4 +37,6 @@
     </div>
   <% end %>
 <% end %>
-<hr>
+<% unless @order.collections == [] && @order.tracks == [] %>
+  <hr>
+<% end %>
