@@ -105,15 +105,11 @@ $breakpoint-extra-small: 440px;
 $breakpoint-super-duper-small: 375px;
 $breakpoint-evenmore-super-duper-small: 316px;
 
+
 @media (max-width: $breakpoint-laptop) {
-  .pic-price {
-    img {
-      height: 350px;
-    }
-  }
 
   .pack-title{
-    font-size: 2rem !important;
+    font-size: 1.6rem !important;
     font-weight: 700;
     text-align: center;
   }
@@ -152,13 +148,16 @@ $breakpoint-evenmore-super-duper-small: 316px;
     padding: 10px 20px 0px 20px;
   }
 
-  #sound-designer {
-    padding-left: 20px;
+  .cart-or-buy-buttons {
+    margin-top: 12px;
   }
 
   .description-box {
-    padding: 0;
-    margin-top: 10px;
+    padding: 0 24px;
+  }
+
+  #sound-designer {
+    padding-left: 20px;
   }
 
   #purchase-btn, #btn-cart-show, #btn-download  {
@@ -192,20 +191,14 @@ $breakpoint-evenmore-super-duper-small: 316px;
   #desktop-file-caracteristics {
     display: none;
   }
-}
 
-@media (max-width: $breakpoint-tablet) {
   .pic-price {
     img {
-      height: 250px;
+      width: 100%;
+      height: 100%;
       margin-bottom: 15px;
     }
   }
-
-  .description-box {
-    margin-top: 30px;
-  }
-
 }
 
 @media (max-width: $breakpoint-small) {
@@ -226,20 +219,12 @@ $breakpoint-evenmore-super-duper-small: 316px;
     padding: 5px 7px;
   }
 
-  .description-box {
-    margin-top: 15px;
-  }
-
   #tablet-file-caracteristics {
     font-size: 1rem;
   }
 }
 
 @media (max-width: $breakpoint-super-duper-small) {
-  .pic-price {
-    display: none;
-  }
-
   #tablet-file-caracteristics {
     font-size: 1.3rem;
   }
