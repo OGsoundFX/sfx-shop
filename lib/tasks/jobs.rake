@@ -6,7 +6,9 @@ namespace :jobs do
 
     # destroying these links and corresponding ZipCollectionJob jobs
     outdated_links.each do |link|
-      SolidQueue::Job.find_by(active_job_id: link.job_id).destroy if link.job_id.present?
+      if link.job_id.present? &&  SolidQueue::Job.find_by(active_job_id: link.job_id)
+        SolidQueue::Job.find_by(active_job_id: link.job_id).destroy
+      end
       link.destroy
     end
 
