@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating: 1
+  content: MyText
+  author: MyString
+  status: 1
+  user: one
+  sfx_pack: one
+
+two:
+  rating: 1
+  content: MyText
+  author: MyString
+  status: 1
+  user: two
+  sfx_pack: two

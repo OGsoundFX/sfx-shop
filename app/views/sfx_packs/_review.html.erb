@@ -1,0 +1,17 @@
+<div class="d-flex flex-column" data-controller="show-review">
+  <div class="d-flex justify-content-between review__wrapper">
+    <div class="review__header">
+      <div class="review__star-wrapper">
+        <% review.rating.times do %>
+          <i class="fas fa-star" style="height: 18px; color: #ffa500"></i>
+        <% end %>
+        <span style="margin-left: 8px">
+          <strong><%= review.title %></strong>
+        </span>
+        <p><em><small>(<%= review.author || review.user.email.split("@").first %>)</small></em></p>
+      </div>
+    </div>
+    <div class="btn btn-light" style="margin-top: 8px" data-action="click->show-review#toggle">Read review</div>
+  </div>
+  <div class="review__desc d-none" data-show-review-target="reviewContent"><em><%= review.content %></em></div>
+</div>

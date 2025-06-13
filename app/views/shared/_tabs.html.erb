@@ -41,7 +41,19 @@
 </div>
 
 <div id="reviews" class="tabcontent">
-  <h4 id="review-tab-title">Reviews are not yet implemented, coming soon!</h4>
+
+  <% if @pack.reviews.present? %>
+    <div class="reviews__main">
+      <% @pack.reviews.accepted.each_with_index do |review, index| %>
+        <%= render "sfx_packs/review", review: review %>
+        <% if index < @pack.reviews.count - 1 %>
+          <hr>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <h4 id="review-tab-title">No Reviews Yet</h4>
+  <% end %>
 </div>
 
 <div id="list" class="tabcontent">
