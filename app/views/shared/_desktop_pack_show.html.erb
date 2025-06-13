@@ -9,7 +9,10 @@
           <p id="sale-percentage-show"><%= @discount %>%<br>OFF</p>
         </div>
       <% end %>
-
+        <div class="d-flex" style="margin-top: 8px">
+          <h5 style="margin-right: 8px">Average rating: </h5>
+          <h5><%= (@pack.reviews.sum { |review| review.rating } / @pack.reviews.count.to_f).ceil(1) %><i class="fas fa-star" style="height: 18px; color: #ffa500"></i></h5>
+        </div>
     </div>
     <div class="description-box d-flex flex-column justify-content-between">
 

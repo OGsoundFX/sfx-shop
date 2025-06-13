@@ -37,6 +37,9 @@ application.register("order-by", OrderByController)
 import SelectController from "./select_controller"
 application.register("select", SelectController)
 
+import ShowReviewController from "./show_review_controller"
+application.register("show-review", ShowReviewController)
+
 import SingleMobileDropdownController from "./single_mobile_dropdown_controller"
 application.register("single-mobile-dropdown", SingleMobileDropdownController)
 

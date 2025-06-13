@@ -1,0 +1,32 @@
+#reviews {
+  padding-bottom: 12px;
+  hr {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+.reviews__main {
+  margin-top: 8px;
+}
+
+.review__wrapper {
+  padding-bottom: 12px;
+}
+
+.review__header {
+  height: 38px;
+}
+
+// .slide-toggle {
+//   overflow: hidden;
+//   max-height: 0;
+//   opacity: 0;
+//   transition: max-height 0.5s ease, opacity 0.5s ease;
+// }
+
+// .slide-toggle.active {
+//   max-height: 500px; /* Set to something large enough to contain the full content */
+//   opacity: 1;
+// }
+
