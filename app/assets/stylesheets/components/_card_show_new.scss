@@ -11,6 +11,10 @@
   padding: 20px;
 }
 
+.sfx_card__image, .sfx_card__description {
+  padding-left: 0;
+}
+
 .sfx_card__designer {
   // font-size: 1.2rem;
 }
@@ -23,4 +27,21 @@
 .sfx_card__price {
   text-align: right;
   // font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .sfx_card__cover {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .sfx_card__image {
+    padding: 8px;
+  }
+  .sfx_card__description {
+    padding-left: 8px;
+    text-align: justify;
+  }
+  .card-body {
+    padding-top: 0;
+  }
 }
