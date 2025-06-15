@@ -56,7 +56,7 @@
               <% if @pack.sound_designer.photo.attached? %>
                 <%= cl_image_tag @pack.sound_designer.photo.key, alt: "#{@pack.sound_designer.full_name}", class: "rounded-circle sfx_card__designer_pic" %>
               <% else %>
-                <%= image_tag "/logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.full_name}", class: "rounded-circle sfx_card__designer_pic"  %>
+                <%= image_tag "logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.full_name}", class: "rounded-circle sfx_card__designer_pic"  %>
               <% end %>
               <span class="small text-muted ml-2 sfx_card__designer"><%= @pack.sound_designer.full_name %></span>
             </div>
