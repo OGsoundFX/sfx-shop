@@ -53,8 +53,12 @@
           <!-- Author and Actions -->
           <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top">
             <div class="d-flex align-items-center gap-2">
-              <%= cl_image_tag @pack.sound_designer.photo.key, alt: "Marc Miles", class: "rounded-circle sfx_card__designer_pic" %>
-              <span class="small text-muted ml-2 sfx_card__designer">Olivier Girardot</span>
+              <% if @pack.sound_designer.photo.attached? %>
+                <%= cl_image_tag @pack.sound_designer.photo.key, alt: "#{@pack.sound_designer.full_name}", class: "rounded-circle sfx_card__designer_pic" %>
+              <% else %>
+                <%= image_tag "/logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.full_name}", class: "rounded-circle sfx_card__designer_pic"  %>
+              <% end %>
+              <span class="small text-muted ml-2 sfx_card__designer"><%= @pack.sound_designer.full_name %></span>
             </div>
             <div class="sfx_card__price">
               <p class="fs-5 fw-semibold mb-1">
