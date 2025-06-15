@@ -1,3 +1,11 @@
+.desktop-reviews-display {
+  display: block;
+}
+
+.mobile-reviews-display {
+  display: none;
+}
+
 #reviews {
   max-height: 350px;
   overflow-y: scroll;
@@ -20,15 +28,16 @@
   height: 38px;
 }
 
-// .slide-toggle {
-//   overflow: hidden;
-//   max-height: 0;
-//   opacity: 0;
-//   transition: max-height 0.5s ease, opacity 0.5s ease;
-// }
+@media (max-width: 768px) {
+  .desktop-reviews-display {
+    display: none;
+  }
 
-// .slide-toggle.active {
-//   max-height: 500px; /* Set to something large enough to contain the full content */
-//   opacity: 1;
-// }
+  .mobile-reviews-display {
+    display: block;
+  }
 
+  .review__wrapper {
+    padding: 0;
+  }
+}

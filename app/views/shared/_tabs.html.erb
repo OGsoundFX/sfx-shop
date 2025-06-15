@@ -45,7 +45,12 @@
   <% if @pack.reviews.present? %>
     <div class="reviews__main">
       <% @pack.reviews.accepted.each_with_index do |review, index| %>
-        <%= render "sfx_packs/review", review: review %>
+        <div class="desktop-reviews-display">
+          <%= render "sfx_packs/review", review: review %>
+        </div>
+        <div class="mobile-reviews-display">
+          <%= render "sfx_packs/mobile_review", review: review %>
+        </div>
         <% if index < @pack.reviews.count - 1 %>
           <hr>
         <% end %>
