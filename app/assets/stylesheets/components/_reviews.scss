@@ -1,4 +1,6 @@
 #reviews {
+  max-height: 350px;
+  overflow-y: scroll;
   padding-bottom: 12px;
   hr {
     margin-top: 0.4rem;

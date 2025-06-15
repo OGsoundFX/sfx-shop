@@ -6,10 +6,12 @@ class User < ApplicationRecord
   has_many :orders
   has_many :collections
   has_one :cart, dependent: :destroy
+  has_one :sound_designer, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   private
+
   def subscribe_to_newsletter
     SubscribeToNewsletterService.new(self).call if subscribe
   end

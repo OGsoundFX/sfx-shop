@@ -11,7 +11,9 @@
         <p><em><small>(<%= review.author || review.user.email.split("@").first %>)</small></em></p>
       </div>
     </div>
-    <div class="btn btn-light" style="margin-top: 8px" data-action="click->show-review#toggle">Read review</div>
+    <% if review.content.present? %>
+      <div class="btn btn-light" style="margin-top: 8px" data-action="click->show-review#toggle">Read review</div>
+    <% end %>
   </div>
   <div class="review__desc d-none" data-show-review-target="reviewContent"><em><%= review.content %></em></div>
 </div>
