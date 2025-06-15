@@ -6,8 +6,8 @@
 
 #sale {
   position: absolute;
-  top: 4vh;
-  right: 11vh;
+  top: 0;
+  right: 0;
   height: 100px;
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
@@ -18,8 +18,8 @@
   color: white;
   font-weight: bold;
   font-size: 28px;
-  top: 7.2vh;
-  right: 13.5vh;
+  top: 8%;
+  right: 8%;
   line-height: 80%;
 }
 
@@ -78,43 +78,43 @@ $breakpoint-super-large: 1400px;
 
 @media (min-width: $breakpoint-large) and (max-width: $breakpoint-super-large) {
   #sale {
-    top: 3.5vh;
-    right: 10.5vh;
+    // top: 3.5vh;
+    // right: 10.5vh;
     height: 80px;
   }
 
   #sale-percentage {
     font-size: 23px;
-    top: 6.4vh;
-    right: 12.6vh;
+    // top: 6.4vh;
+    // right: 12.6vh;
   }
 }
 
 @media (max-width: $breakpoint-large) {
   #sale {
-    top: 4.5vh;
-    right: 14.5vh;
+    // top: 4.5vh;
+    // right: 14.5vh;
     height: 100px;
   }
 
   #sale-percentage {
     font-size: 31px;
-    top: 8.2vh;
-    right: 17.3vh;
+    // top: 8.2vh;
+    // right: 17.3vh;
   }
 }
 
 @media (max-width: $breakpoint-laptop) {
   #sale {
-    top: 5vh;
-    right: 15vh;
+    // top: 5vh;
+    // right: 15vh;
     height: 110px;
   }
 
   #sale-percentage {
     font-size: 35px;
-    top: 8.4vh;
-    right: 17.4vh;
+    // top: 8.4vh;
+    // right: 17.4vh;
   }
 
   #sale-show {
@@ -132,15 +132,15 @@ $breakpoint-super-large: 1400px;
 
 @media (max-width: $breakpoint-tablet) {
   #sale {
-    top: 8vw;
-    right: 25vw;
+    // top: 8vw;
+    // right: 25vw;
     height: 28vw;
   }
 
   #sale-percentage {
     font-size: 8.5vw;
-    top: 16vw;
-    right: 31vw;
+    // top: 16vw;
+    // right: 31vw;
   }
 
   #sale-show {

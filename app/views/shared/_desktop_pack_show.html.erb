@@ -1,80 +1,97 @@
-  <div class="d-flex mb-5 pack-box">
-    <div class="pic-price">
-      <% @pack.photos.each do |photo| %>
-        <%= image_tag photo %>
-      <% end %>
+<div class="">
+  <div class="card shadow sfx_card__border overflow-hidden">
+    <div class="row g-0">
+      <!-- Cover Image -->
+      <div class="col-md-5" style="padding-right: 0">
+        <%= cl_image_tag @pack.photos.first.key, alt: "Weather Effects Cover", class: "img-fluid h-100 object-fit-cover sfx_card__cover", style: "object-fit: cover;" %>
+      </div>
 
-      <% if @discount %>
-        <div><%= image_tag asset_path('Promo_orange.png'), id: "sale-show" %>
-          <p id="sale-percentage-show"><%= @discount %>%<br>OFF</p>
-        </div>
-      <% end %>
-        <div class="d-flex" style="margin-top: 8px">
-          <h5 style="margin-right: 8px">Average rating: </h5>
-          <h5><%= (@pack.reviews.sum { |review| review.rating } / @pack.reviews.count.to_f).ceil(1) %><i class="fas fa-star" style="height: 18px; color: #ffa500"></i></h5>
-        </div>
-    </div>
-    <div class="description-box d-flex flex-column justify-content-between">
+      <!-- Text Content -->
+      <div class="col-md-7" style="padding-left: 0">
+        <div class="card-body d-flex flex-column h-100">
 
-        <div>
-          <div class="d-flex justify-content-between">
-            <h1 class="pack-title"><%= @pack.title %></h1>
-
+          <div class="d-flex flex-column h-100 justify-content-between">
             <div>
-              <% if @discount %>
-                <div>
-                  <div>
-                    <h1 id="price-sale"><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h1>
-                  </div>
-                  <div>
-                    <h4 id="price-barred-show" > <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </h4>
-                  </div>
-                </div>
-              <% else %>
-                <h1 id="price"><%= humanized_money_with_symbol(@pack.price) %></h1>
-              <% end %>
+              <!-- Title and Rating -->
+              <div class="mb-2">
+                <h3 class="card-title mb-1"><%= @pack.title %></h3>
+                <% if @average_rating.present? %>                  
+                  <p class="text-warning mb-2">
+                    <strong><%= @average_rating %></strong> <i class="fas fa-star"></i>
+                  </p>
+                <% else %>
+                  <em>(No ratings yet)</em>
+                <% end %>
+              </div>
+
+              <!-- Description -->
+              <p class="card-text text-muted mb-3">
+                <strong>Description:</strong> <%= @pack.description %>
+              </p>
+
+              <!-- Metadata -->
+              <div class="mb-3 text-muted small">
+                <p class="mb-1">• 48kHz / 24bit High Def Audio</p>
+                <% if @pack.size_mb > 1000 %>
+                  <p class="mb-1">• <%= (@pack.size_mb / 1000.to_f).ceil(1) %> GB</p>
+                <% else %>
+                  <p class="mb-1">• <%= @pack.size_mb %> MB</p>
+                <% end %>
+                <p class="mb-1">• <%= @pack.number_of_tracks %> Sounds</p>
+                <p class="mb-0">• Format: WAV</p>
+              </div>
             </div>
 
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 pb-2">
+              <% @pack.tags.split(", ").each do |tag| %>
+                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill" style="background-color: #0d9488; opacity: 0.6"><%= tag %></span>
+              <% end %>
+            </div>
           </div>
-          <p>Sound Designer: <%= link_to @designer_name, about_path %> </p>
-          <ul>
-            <li>
-              <% if @pack.size_mb >= 1000  %>
-                <%= @pack.size_mb / 1000.to_f %> GB
-              <% else %>
-                <%= @pack.size_mb %> MB
-              <% end %>
-            </li>
-            <li><%= @pack.duration %> minutes</li>
-            <li><%= number_with_delimiter @pack.number_of_tracks %> tracks</li>
-            <li>48 kHz / 24bit / Stereo WAV files</li>
-            <li><%= link_to "List of Sounds", @pack.list, target: :_blank %></li>
-            <li>Version: <%= @pack.version %></li>
-            <li id='pack-description'>Description: <%= @pack.description %></li>
-          </ul>
-        </div>
-        <div class="cart-or-buy-buttons">
-          <% if @pack.sku.include?("FS") %>
-            <div class="d-flex align-items-center">
-              <%= button_to "Download", @pack.product_link, method: :get, id: 'btn-download', class: 'ml-4' %>
-            </div>
-          <% else %>
-            <div class="d-flex justify-content-between">
-              <div>
-              <%= form_tag orders_path do %>
-                <%= hidden_field_tag 'pack_id', @pack.id %>
-                <%= submit_tag 'Buy now', id: 'purchase-btn' %>
-              <% end %>
-              </div>
-              <div>
-                <%= form_tag cart_order_path do %>
-                  <%= hidden_field_tag 'pack_id', @pack.id %>
-                  <%= submit_tag 'Add to Cart', id: 'btn-cart-show' %>
-                <%  end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
 
-    </div>
-  </div>
+          <!-- Author and Actions -->
+          <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top">
+            <div class="d-flex align-items-center gap-2">
+              <%= cl_image_tag @pack.sound_designer.photo.key, alt: "Marc Miles", class: "rounded-circle sfx_card__designer_pic" %>
+              <span class="small text-muted ml-2 sfx_card__designer">Olivier Girardot</span>
+            </div>
+            <div class="sfx_card__price">
+              <p class="fs-5 fw-semibold mb-1">
+                <% if @discount %>
+                  <div>
+                    <div>
+                      <h3><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h3>
+                    </div>
+                    <div>
+                      <p> <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </p>
+                    </div>
+                  </div>
+                <% else %>
+                  <h3><%= humanized_money_with_symbol(@pack.price) %></h3>
+                <% end %>
+              </p>
+
+              <div class="d-flex gap-2">
+                <% if @pack.sku.include?("FS") %>
+                  <%= button_to "Download", @pack.product_link, method: :get, class: "btn text-white btn-sm ml-2", style: "background-color: #0d9488;" %>
+                <% else %>
+                  <%= form_tag orders_path do %>
+                    <%= hidden_field_tag 'pack_id', @pack.id %>
+                    <%= submit_tag 'Buy now', class: "btn btn-outline-secondary btn-sm" %>
+                  <% end %>
+                  <%= form_tag cart_order_path do %>
+                    <%= hidden_field_tag 'pack_id', @pack.id %>
+                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2", style: "background-color: #0d9488;" %>
+                  <% end %>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+
+        </div> <!-- /card-body -->
+      </div>
+    </div> <!-- /row -->
+  </div> <!-- /card -->
+</div>
