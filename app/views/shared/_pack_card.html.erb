@@ -39,6 +39,7 @@
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
               <p class="card-text text-muted"><%= size %> • <%= pack.number_of_tracks %> Sounds</p>
             </div>
+
           </div>
 
             <div class="card-body-pack border-top py-2 d-flex justify-content-between align-items-center text-muted small">
@@ -71,9 +72,8 @@
                 <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
                 <%= form_tag cart_order_path do %>
                   <%= hidden_field_tag 'pack_id', pack.id %>
-                  <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2", style: "background-color: #0d9488;" %>
+                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
                 <% end %>
-                <button class="btn btn-teal btn-sm text-white" style="background-color: #0d9488; margin-left: 8px">Add to Cart</button>
               </div>
             </div>
         </div>
