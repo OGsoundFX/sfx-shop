@@ -54,7 +54,7 @@
 
             <div class="card-body-pack d-flex justify-content-between align-items-center py-3">
 
-              <% if @discount %>
+              <% if @current_sales_list[pack.id] %>
                 <div>
                   <div>
                     <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money_with_symbol(pack.price * ((100 - @discount) / 100.to_f)) %></strong>
