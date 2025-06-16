@@ -15,9 +15,9 @@
               <!-- Title and Rating -->
               <div class="mb-2">
                 <h3 class="card-title mb-1"><%= @pack.title %></h3>
-                <% if @average_rating.present? %>                  
+                <% if @pack.average_rating.present? %>                  
                   <p class="text-warning mb-2">
-                    <strong><%= @average_rating %></strong> <i class="fas fa-star"></i>
+                    <strong><%= @pack.average_rating %></strong> <i class="fas fa-star"></i>
                   </p>
                 <% else %>
                   <em>(No ratings yet)</em>
