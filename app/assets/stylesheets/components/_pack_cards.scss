@@ -1,18 +1,13 @@
 .pack_specifics {
   margin-bottom: 50px;
-}
-
-.pack_pic_wrapper {
-  border-top: solid $border-grey 1px;
-  border-left: solid $border-grey 1px;
-  border-right: solid $border-grey 1px;
-  border-radius: 8px 8px 0 0;
+  border: solid $border-grey 1px;
+  border-radius: 8px;
 }
 
 .pack_pic {
-  width: calc(100% - 24px);
-  margin: 12px;
+  width:100%;
   transition: 0.5s;
+  border-radius: 8px 8px 0 0;
 }
 
 #cart-btn-remove, #checkout-btn-remove {
@@ -26,8 +21,42 @@
   padding-left: 1rem;
 }
 
+.card-body-pack {
+  padding: 0.6rem;
+}
+
 #wrapper {
   position: relative;
+}
+
+.truncate-title {
+  width: 210px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip-title {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-title .tooltiptext-title {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip-title:hover .tooltiptext-title {
+  visibility: visible;
 }
 
 #triangle {
@@ -55,8 +84,18 @@
   width: 8rem;
 }
 
-.cart-pack-img-container{
+.cart-pack-img-container {
   text-align: center;
+}
+
+.pack_card__designer_pic {
+  width: 44px;
+  object-fit: cover;
+}
+
+.add-to-cart-hover:hover {
+  filter: grayscale(1);
+  transition: 0.3s;
 }
 
 #wrapper:hover .pack_pic, #wrapper:hover .pack_pic_cart, #wrapper:hover #image-pack {
@@ -296,5 +335,42 @@ $breakpoint-extra-large: 1599.98px;
 
   #item-in-cart {
     font-size: 15px;
+  }
+}
+
+// tooltip on title
+@media (min-width: 820px) {
+  .truncate-title {
+    width: inherit;
+  }
+  .tooltip-title:hover .tooltiptext-title {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 992px) {
+  .truncate-title {
+    width: 180px;
+  }
+  .tooltip-title:hover .tooltiptext-title {
+    visibility: visible;
+  }
+}
+
+@media (min-width: 1140px) {
+  .truncate-title {
+    width: 210px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .truncate-title {
+    width: 14vw;
+  }
+}
+
+@media (min-width: 1499px) {
+  .truncate-title {
+    width: inherit;
   }
 }

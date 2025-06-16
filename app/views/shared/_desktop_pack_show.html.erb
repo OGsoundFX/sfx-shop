@@ -15,9 +15,9 @@
               <!-- Title and Rating -->
               <div class="mb-2">
                 <h3 class="card-title mb-1"><%= @pack.title %></h3>
-                <% if @average_rating.present? %>                  
+                <% if @pack.average_rating.present? %>                  
                   <p class="text-warning mb-2">
-                    <strong><%= @average_rating %></strong> <i class="fas fa-star"></i>
+                    <strong><%= @pack.average_rating %></strong> <i class="fas fa-star"></i>
                   </p>
                 <% else %>
                   <em>(No ratings yet)</em>
@@ -86,7 +86,7 @@
                   <% end %>
                   <%= form_tag cart_order_path do %>
                     <%= hidden_field_tag 'pack_id', @pack.id %>
-                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2", style: "background-color: #0d9488;" %>
+                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2 add-to-cart-hover", style: "background-color: #0d9488;" %>
                   <% end %>
                 <% end %>
               </div>

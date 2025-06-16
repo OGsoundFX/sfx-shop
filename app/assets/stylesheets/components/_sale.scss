@@ -8,7 +8,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 100px;
+  height: 6rem;
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
@@ -17,9 +17,9 @@
   position: absolute;
   color: white;
   font-weight: bold;
-  font-size: 28px;
-  top: 8%;
-  right: 8%;
+  font-size: 1.8rem;
+  top: 1.4rem;
+  right: 1.2rem;
   line-height: 80%;
 }
 
@@ -131,18 +131,6 @@ $breakpoint-super-large: 1400px;
 }
 
 @media (max-width: $breakpoint-tablet) {
-  #sale {
-    // top: 8vw;
-    // right: 25vw;
-    height: 28vw;
-  }
-
-  #sale-percentage {
-    font-size: 8.5vw;
-    // top: 16vw;
-    // right: 31vw;
-  }
-
   #sale-show {
     top: 15px;
     left: 50px;

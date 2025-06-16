@@ -9,4 +9,8 @@ class SfxPack < ApplicationRecord
   def to_param
     "#{id} #{title}".parameterize
   end
+
+  def average_rating
+    (reviews.sum { |review| review.rating } / reviews.count.to_f).ceil(1) if reviews.present?
+  end
 end

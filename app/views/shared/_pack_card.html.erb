@@ -2,7 +2,7 @@
   <% @sfx_packs.each do |pack| %>
     <% unless pack.title == 'Single Tracks' %>
       <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-        <div class="container pack_specifics">
+        <div class="pack_specifics">
           <div id="wrapper">
             <%= link_to sfx_pack_path(pack) do %>
               <% if pack.announcement %>
@@ -18,70 +18,64 @@
                   </div>
                 <% end %>
               <% end %>
-
               <div class="pop-up">See Pack Details</div>
             <% end %>
           </div>
-          <div class="info-box d-flex flex-column justify-content-between">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h3 id="card-title"><%= pack.title %></h3>
-                <!--
-                <div class="d-flex">
-                  <div id="circle"></div>
-                  <div><p><%= pack.sound_designer.first_name %> <%= pack.sound_designer.last_name %></p></div>
+          <div>
+            <div class="card-body-pack">
+              <div class="d-flex justify-content-between">
+                <div class="tooltip-title">
+                  <h5 class="card-title fw-bold mb-1 truncate-title"><%= pack.title %></h5>
+                  <span class="tooltiptext-title"><%= pack.title %></span>
                 </div>
-                -->
+                <div>
+                  <% if pack.average_rating %>
+                    <%= pack.average_rating %> <i class="fas fa-star"></i>
+                  <% else %>
+                    <small><em>No rating</em></small>
+                  <% end %>
+                </div>
               </div>
-              <div>
-                <% if @current_sales_list[pack.id]%>
-                  <h1 id="price-sale"><%= humanized_money_with_symbol(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f)) %></h1>
-                  <h4 id="price-barred" > <strike><%= humanized_money_with_symbol(pack.price) %></strike> </h4>
+              <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
+              <p class="card-text text-muted"><%= size %> • <%= pack.number_of_tracks %> Sounds</p>
+            </div>
+
+          </div>
+
+            <div class="card-body-pack border-top py-2 d-flex justify-content-between align-items-center text-muted small">
+              <div class="d-flex align-items-center" style="margin-top: 8px">
+                <% if pack.sound_designer.photo.attached? %>
+                  <%= cl_image_tag pack.sound_designer.photo.key, alt: "#{pack.sound_designer.full_name}", class: "rounded-circle pack_card__designer_pic" %>
                 <% else %>
-                  <h1 id="price"><%= humanized_money_with_symbol(pack.price) %></h1>
+                  <%= image_tag "logo/logo_BAM_5.png" , alt: "#{pack.sound_designer.full_name}", class: "rounded-circle pack_card__designer_pic" %>
+                <% end %>
+                <span style="margin-left: 8px; font-size: 1rem"><%= pack.sound_designer.full_name %></span>
+              </div>
+            </div>
+
+            <div class="card-body-pack d-flex justify-content-between align-items-center py-3">
+
+              <% if @current_sales_list[pack.id] %>
+                <div class="d-flex align-items-end">
+                  <div>
+                    <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money_with_symbol(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f)) %></strong>
+                  </div>
+                  <div style="margin: 2px 4px">
+                    <strike><%= humanized_money_with_symbol(pack.price) %></strike>
+                  </div>
+                </div>
+              <% else %>
+                <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money_with_symbol(pack.price) %></strong>
+              <% end %>
+
+              <div class="d-flex">
+                <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
+                <%= form_tag cart_order_path do %>
+                  <%= hidden_field_tag 'pack_id', pack.id %>
+                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
                 <% end %>
               </div>
             </div>
-            <div class="d-flex justify-content-end">
-              <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
-                <div id="item-in-cart">already in your cart <i class="far fa-check-circle"></i></div>
-              <% end %>
-            </div>
-            <% if pack.sku.include?("FS") %>
-              <div class='d-flex justify-content-between sfx-card-buttons'>
-                <div>
-                  <%= form_tag sfx_pack_path(pack), method: "get" do %>
-                    <%= submit_tag 'Details', id: 'btn-show' %>
-                  <% end %>
-                </div>
-                <div class="d-flex align-items-center">
-                  <%= button_to "Download", pack.product_link, method: :get, id: 'btn-download-front' %>
-                </div>
-              </div>
-            <% else %>
-              <div class="d-flex justify-content-between sfx-card-buttons">
-                <div>
-                  <%= form_tag sfx_pack_path(pack), method: "get" do %>
-                    <%= submit_tag 'Details', id: 'btn-show' %>
-                  <%  end %>
-                </div>
-                <div>
-                  <% if current_user && current_user.cart && current_user.cart.items.include?(pack.id) %>
-                    <%= form_tag remove_item_path do %>
-                      <%= hidden_field_tag 'remain', true %>
-                      <%= hidden_field_tag 'pack_id', pack.id %>
-                      <%= submit_tag 'Remove', id: 'btn-remove' %>
-                    <% end %>
-                  <% else %>
-                    <%= form_tag cart_order_path do %>
-                      <%= hidden_field_tag 'pack_id', pack.id %>
-                      <%= submit_tag 'Add to Cart', id: 'btn-cart' %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
         </div>
       </div>
     <% end %>
