@@ -1,0 +1,31 @@
+<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+  <div class="container">
+    <div id="wrapper">
+      <%= link_to collection_template_path(collection) do %>
+        <div class="" style="position: relative">
+          <% if collection.image.attached? %>
+            <%= image_tag collection.image, class: 'pack_pic' %>
+          <% else %>
+            <%= image_tag TemplateCollection.where(title: "Punch in the Face").first.image, class: 'pack_pic' %>
+          <% end %>
+          <% if collection.title == "2025 Action Collection" %>
+            <div style="position: absolute; top: -25px; left: -25px">
+              <%= image_tag "2025_pink.png", height: 120, width: 120 %>
+            </div>
+          <% end %>
+        </div>
+        <div class="pop-up">Track List</div>
+      <% end %>
+    </div>
+    <div class="info-box-collection d-flex flex-column justify-content-between">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h3 id="card-title"><%= collection.title %></h3>
+        </div>
+
+        <h1 id="price"><%= humanized_money_with_symbol(collection.price) %></h1>
+
+      </div>
+    </div>
+  </div>
+</div>

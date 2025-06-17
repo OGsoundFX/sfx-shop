@@ -79,14 +79,8 @@
               <% end %>
             <% end %>
           <% else %>
-            <% if !@collection.nil? && @collection.tracks.include?(track.id) %>
-              <%= link_to collection_path(@collection, track: track), data: { turbo_method: :patch } do %>
-                <i class="fas fa-ban pad-top purchase-icons" style="color: #FFA500"></i>
-              <% end %>
-            <% else %>
-              <%= link_to collections_path(track: track), method: :post do %>
-                <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
-              <% end %>
+            <%= link_to collections_path(track: track), method: :post do %>
+              <i class="fas fa-layer-group pad-top purchase-icons icon-click-hover"></i>
             <% end %>
           <% end %>
 
