@@ -305,9 +305,10 @@ class CollectionsController < ApplicationController
       "scifi": '<i class="fas fa-rocket"></i>',
       "default": '<i class="fas fa-volume-up"></i>'
     }
-    @collection = TemplateCollection.find(params[:id])
+    @template_collection = TemplateCollection.find(params[:id])
+    @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     # @tracks = SingleTrack.all.reorder(created_at: :desc).page params[:page]
-    @tracks = SingleTrack.where(id: @collection.tracks).reorder(created_at: :desc).page params[:page]
+    @tracks = SingleTrack.where(id: @template_collection.tracks).reorder(created_at: :desc).page params[:page]
   end
 
   def add_template_to_cart

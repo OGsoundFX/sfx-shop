@@ -10,6 +10,14 @@ class TemplateCollection < ApplicationRecord
     self.tracks = self.tracks.sort
   end
 
+  def size_mb
+    tracks.sum { |track| SingleTrack.find(track).size } / 1_000_000
+  end
+
+  def number_of_tracks
+    tracks.count
+  end
+
   # use this method to recalculate the price of all un-purchased collections if there has been a change in the points of any track
   def self.recalculate
     self.all.each do |collection|
