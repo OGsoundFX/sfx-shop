@@ -6,6 +6,9 @@
 
 .pack_pic {
   width:100%;
+  aspect-ratio: 1 / 1.365;
+  // overflow: hidden;
+  // object-fit: cover;
   transition: 0.5s;
   border-radius: 8px 8px 0 0;
 }
