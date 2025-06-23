@@ -9,7 +9,7 @@
                 <div id="triangle"></div>
                 <div id="announcement"> <%= pack.announcement %> </div>
               <% end %>
-              <div class="pack_pic_wrapper"><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
+              <div class="pack_pic_wrapper"><%= cl_image_tag pack.photos.first.key, class: 'pack_pic' %></div>
 
               <% if @current_sales_list != {} %>
                 <% if @current_sales_list[pack.id]  %>

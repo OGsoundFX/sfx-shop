@@ -4,7 +4,7 @@
   <% if index.positive? %>
     <div class="d-flex">
       <% if @order.packs.count == 1 %>
-        <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
+        <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px", style: "aspect-ratio: 1 / 1.365;" %></div>
       <% else %>
         <div style="margin-bottom: 8px"><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
       <% end %>
@@ -21,7 +21,7 @@
   <% else %>
     <div class="d-flex">
       <% if @order.packs.count == 1 %>
-        <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px" %></div>
+        <div><%= image_tag SfxPack.find(pack).photos[0], width: "100px", style: "aspect-ratio: 1 / 1.365;" %></div>
       <% else %>
         <div style="margin-bottom: 8px"><%= image_tag SfxPack.find(pack).photos[0], width: "50px" %></div>
       <% end %>
