@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_10_100022) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_23_123355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_100022) do
     t.bigint "template_collection_id"
     t.index ["template_collection_id"], name: "index_collections_on_template_collection_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "designer_submissions", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "location"
+    t.string "email"
+    t.string "random_password"
+    t.boolean "individual_tracks"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "download_links", force: :cascade do |t|
@@ -301,6 +313,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_100022) do
     t.index ["user_id"], name: "index_sound_designers_on_user_id"
   end
 
+  create_table "submission_links", force: :cascade do |t|
+    t.string "url"
+    t.string "title"
+    t.text "description"
+    t.bigint "designer_submission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["designer_submission_id"], name: "index_submission_links_on_designer_submission_id"
+  end
+
   create_table "template_collections", force: :cascade do |t|
     t.string "title"
     t.integer "total_points"
@@ -347,4 +369,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_100022) do
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "sound_designers", "users"
+  add_foreign_key "submission_links", "designer_submissions"
 end

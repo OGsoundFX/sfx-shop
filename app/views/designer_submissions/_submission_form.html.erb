@@ -1,0 +1,13 @@
+<%= simple_form_for designer_submission, data: {designer_submission_form_target: "mainForm"} do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <%= f.input :location %>
+  <div class="d-flex">
+    <%= f.input :individual_tracks, label: "Check this box if you are interested in selling your tracks individually, and available for collections" %>
+    <a href="/" class="mt-3" style="font-size: 1.6rem"><i class="fas fa-info-circle"></i></a>
+  </div>
+  <div class="text-center mt-2">
+    <%= f.submit "Confirm information", class: "btn btn-dark w-100" %>
+  </div>
+<% end %>

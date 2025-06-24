@@ -1,0 +1,52 @@
+<div class="dark-background">
+  <div class="submission-form__container">
+    <h3 class="text-center mb-4"><strong>Step2: Share links to your work for evaluation</strong></h3>
+    <div class="submission-form__box" data-controller="designer-submission-form">
+      <h4 class="text-center">Your Information</h4>
+      <hr style="border-color: white">
+      <div class="submission-form__edit">
+        <div class="submission-form__edit-grid" data-designer-submission-form-target="submissionInfo">
+          <div class="d-flex flex-column">
+            <div>First name:</div>
+            <div>Last name:</div>
+            <div>Email:</div>
+            <div>Location:</div>
+            <div>Collection participation:</div>
+          </div>
+          <div class="d-flex flex-column">
+            <div><%= @designer_submission.first_name %></div>
+            <div><%= @designer_submission.last_name %></div>
+            <div><%= @designer_submission.email %></div>
+            <div><%= @designer_submission.location.present? ? @designer_submission.location : "Not specified" %></div>
+            <div><%= @designer_submission.individual_tracks ? "Yes" : "No" %></div>
+          </div>
+        </div>
+        <div data-designer-submission-form-target="editButton">
+          <button class="btn btn-dark mt-3 submission-form__edit" data-action="click->designer-submission-form#editForm">Update your information</button>
+        </div>
+        <div class="d-none" data-designer-submission-form-target="editForm">
+          <%= render "designer_submissions/submission_form", designer_submission: @designer_submission %>
+        </div>
+      </div>
+      <hr data-designer-submission-form-target="line" style="border-color: white">
+      <% if @designer_submission.submission_links.present? %>
+        <% @designer_submission.submission_links.each_with_index do |link, index| %>
+          <div class="d-flex justify-content-between align-items-center bg-light submission-form__link-display">
+            <a href="<%= link.url %>"><%= link.title %></a><div><%= link_to "Delete", submission_link_path(link), method: :delete, class: "btn btn-dark w-100" %></div>
+          </div>
+        <% end %>
+      <% end %>
+      <% if @designer_submission.submission_links.count < 5 %>
+        <button class="submission-form__submit btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"><i class="fas fa-plus-circle"></i> Add Link</button>
+      <% else %>
+        <button class="submission-form__submit btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"disabled>Maximum 5 links</button>
+      <% end %>
+      <div class="d-none" data-designer-submission-form-target="form">
+        <% if @designer_submission.id %>
+          <%= render "designer_submissions/link_form", designer: @designer_submission, link: @submission_link %>
+        <% end %>
+      </div>
+      <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
+    </div>
+  </div>
+</div>
