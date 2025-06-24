@@ -1,0 +1,53 @@
+.submission-form__container {
+padding-top: 80px;
+}
+
+.submission-form__box {
+  border-radius: 8px;
+  background-color: $dark-modal;
+  padding: 40px 60px;
+  width: 40%;
+  margin: auto;
+}
+
+.submission-form__submit, .submission-form__edit {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.submission-form__edit-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+.submission-form__link-display {
+  border-radius: 4px;
+  padding: 0 0 0 12px;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.thank-you__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.thank-you__box {
+  border-radius: 8px;
+  background-color: $dark-modal;
+  padding: 40px 60px;
+  width: 60%;
+  margin: auto;
+  h2 {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .thank-you__box {
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+  }
+}

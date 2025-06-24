@@ -54,6 +54,16 @@ Rails.application.routes.draw do
   # user add template to cart and convert into collection
   get "add_template_to_cart", to: "collections#add_template_to_cart"
 
+  # Sound Designer Submission
+  resources :designer_submissions, only: %i(new create show update) do
+    resources :submission_links, only: :create
+  end
+
+  resources :submission_links, only: :destroy
+
+  # thank you for your submission
+  get "thank_you", to: "designer_submissions#thank_you", as: :thank_you
+
   # data protection path
   get "data_protection", to: "pages#data_protection"
 
