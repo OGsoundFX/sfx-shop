@@ -1,0 +1,55 @@
+.submission-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.submission-modal-content {
+  background: white;
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  width: 60%;
+  li {
+    font-size: 1rem;
+  }
+}
+
+.submission-modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.submission-modal-hidden {
+  display: none !important;
+}
+
+.fade-in {
+  display: grid !important;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .submission-modal-content {
+    width: 90%;
+  }
+}

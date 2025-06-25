@@ -8,6 +8,13 @@ padding-top: 80px;
   padding: 40px 60px;
   width: 40%;
   margin: auto;
+  a {
+    transition: color 0.4s;
+    &:hover {
+      color: white;
+      transition: 0.4s;
+    }
+  }
 }
 
 .submission-form__submit, .submission-form__edit {

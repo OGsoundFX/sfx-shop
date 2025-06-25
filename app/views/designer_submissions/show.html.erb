@@ -46,7 +46,9 @@
           <%= render "designer_submissions/link_form", designer: @designer_submission, link: @submission_link %>
         <% end %>
       </div>
-      <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
+      <% if @designer_submission.submission_links.count > 0 %>
+        <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
+      <% end %>
     </div>
   </div>
 </div>
