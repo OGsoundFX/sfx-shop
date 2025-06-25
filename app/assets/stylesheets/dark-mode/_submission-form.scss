@@ -52,9 +52,20 @@ padding-top: 80px;
 }
 
 @media (max-width: 768px) {
+  .submission-form__container {
+    h3 {
+      font-size: 1.4rem;
+    }
+  }
+
   .thank-you__box {
     padding: 20px;
     width: 90%;
     margin: auto;
+  }
+
+  .submission-form__box {
+    padding: 12px;
+    width: 90%;
   }
 }
