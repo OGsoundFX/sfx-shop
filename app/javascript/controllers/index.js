@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ApplicationModalController from "./application_modal_controller"
+application.register("application-modal", ApplicationModalController)
+
 import CategoryController from "./category_controller"
 application.register("category", CategoryController)
 

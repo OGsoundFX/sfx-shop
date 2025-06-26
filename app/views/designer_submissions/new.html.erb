@@ -1,7 +1,11 @@
 <%= render "shared/left_pannel_mobile"%>
 <div class="dark-background">
   <div class="submission-form__container">
-    <h3 class="text-center mb-4"><strong>Step1: Apply to sell on BAMSFX</strong></h3>
+    <h3 class="text-center mb-4"><strong>Contact Information</strong></h3>
+    <div class="d-flex justify-content-center" data-controller="application-modal">
+      <button class="submission-form__about-applying btn btn-light mb-3" data-action="click->application-modal#show"><i class="fas fa-info-circle"></i> About Applying</button>
+      <%= render "designer_submissions/application_modal" %>
+    </div>
     <div class="submission-form__box">
       <%= render "submission_form", designer_submission: @designer_submission  %>
     </div>
