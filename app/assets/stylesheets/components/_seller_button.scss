@@ -1,0 +1,37 @@
+.shadow-dance-container-mobile {
+  display: none;
+}
+
+.shadow-dance-text {
+  border: solid 1px white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 0 #ff005e, 4px 4px 0 #00d4ff;
+  animation: shadow-dance 2s infinite;
+}
+
+@keyframes shadow-dance {
+  0%, 100% {
+      text-shadow: 2px 2px 0 #ff005e, 4px 4px 0 #00d4ff;
+  }
+  50% {
+      text-shadow: -2px -2px 0 #00d4ff, -4px -4px 0 #ff005e;
+  }
+
+    0%, 100% {
+      box-shadow: 2px 2px 0 #ff005e, 4px 4px 0 #00d4ff;
+  }
+  50% {
+      box-shadow: -2px -2px 0 #00d4ff, -4px -4px 0 #ff005e;
+  }
+}
+
+@media (max-width: 768px) {
+  .shadow-dance-container-mobile {
+    display: block;
+  }
+  .shadow-dance-text {
+    background-color: #ffffff80;
+  }
+}
