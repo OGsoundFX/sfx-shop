@@ -17,6 +17,18 @@ padding-top: 80px;
   }
 }
 
+.submission-form__about-applying {
+  box-sizing: border-box;
+  width: 40%;
+    a {
+    transition: color 0.4s;
+    &:hover {
+      color: white;
+      transition: 0.4s;
+    }
+  }
+}
+
 .submission-form__submit, .submission-form__edit {
   box-sizing: border-box;
   width: 100%;

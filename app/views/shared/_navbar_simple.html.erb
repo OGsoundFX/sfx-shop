@@ -13,9 +13,11 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="shadow-dance-container">
-    <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
-  </div>
+  <% unless controller_name == "designer_submissions" %>
+    <div class="shadow-dance-container">
+      <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
+    </div>
+  <% end %>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
