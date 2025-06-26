@@ -43,7 +43,10 @@
   <div class="">
     <img class="slideshow-images" src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg">
     <div class="collection-banner-content">
-      <div><span id="create-your-collection">Create Your Collection!!!</span></div>
+      <div class="shadow-dance-container shadow-dance-container-mobile">
+        <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
+      </div>
+      <div class="collection-banner-text"><span id="create-your-collection">Create Your Collection!!!</span></div>
       <!--
       <div data-controller="video-modal">
         <div id="collection-video-btn" data-video-modal-target="button" data-action="click->video-modal#openModal">

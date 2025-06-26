@@ -46,15 +46,21 @@ $breakpoint-tablet: 768px;
 @media (max-width: $breakpoint-tablet) {
   .collection-banner-content {
     font-size: 2rem;
-    top: 14vh;
+    top: 9vh;
     #create-your-collection {
       font-size: 3.4rem;
     }
   }
+
+  .collection-banner-text{
+    margin-top: 40px;
+  }
+
   #promo20 {
-    bottom: 126px;
+    bottom: 70px;
     left: 16px;
   }
+
   #subscribe-btn {
     height: 40px;
     bottom: 34px;
