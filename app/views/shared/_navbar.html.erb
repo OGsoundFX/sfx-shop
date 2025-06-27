@@ -1,24 +1,22 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <div class="d-flex">
-      <div><%= image_tag asset_path('logo/bam_pride.png') %></div>
-      <br>
-      <div id="text-logo">Sound Effects</div>
-      <div id="text-logo-small">SFX</div>
-    </div>
-  <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="new-single-tracks">
-    <%= link_to "Collections", list_path, class: "single-track-link" %>
-    <%= image_tag asset_path('New_pale_green_transp.png'), class: "new_sticker" %>
+  <div class="navbar-left">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <div class="d-flex">
+        <div><%= image_tag asset_path('logo/bam_pride.png') %></div>
+        <br>
+        <div id="text-logo">Sound Effects</div>
+        <div id="text-logo-small">SFX</div>
+      </div>
+    <% end %>
   </div>
 
+  <div class="navbar-center">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="navbar-right collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
         <li class="nav-item">

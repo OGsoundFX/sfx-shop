@@ -3,8 +3,27 @@
 }
 
 .navbar-burger-desktop {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "left center right";
+  align-items: center;
+  
+  .navbar-left {
+    grid-area: left;
+    justify-self: start;
+  }
+  
+  .navbar-center {
+    grid-area: center;
+    justify-self: center;
+  }
+  
+  .navbar-right {
+    grid-area: right;
+    justify-self: end;
+  }
 }
+
 
 @media (max-width: 768px) {
   .navbar-burger-mobile {

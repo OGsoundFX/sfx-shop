@@ -1,25 +1,29 @@
 <!-- DESKTOP VIEW -->
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-burger-desktop">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <div class="d-flex">
-      <div><%= image_tag asset_path('logo/bam_pride.png') %></div>
-      <br>
-      <div id="text-logo">Sound Effects</div>
-      <div id="text-logo-small">SFX</div>
-    </div>
-  <% end %>
+  <div class="navbar-left">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <div class="d-flex">
+        <div><%= image_tag asset_path('logo/bam_pride.png') %></div>
+        <br>
+        <div id="text-logo">Sound Effects</div>
+        <div id="text-logo-small">SFX</div>
+      </div>
+    <% end %>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  
+  <div class="navbar-center">
+    <% unless controller_name == "designer_submissions" %>
+      <div class="shadow-dance-container">
+        <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
+      </div>
+    <% end %>
+  </div>
 
-  <% unless controller_name == "designer_submissions" %>
-    <div class="shadow-dance-container">
-      <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
-    </div>
-  <% end %>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="navbar-right collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
         <li class="nav-item">
@@ -60,7 +64,7 @@
 </div>
 
 <!-- MOBILE VIEW -->
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-burger-mobile">
+<div class="navbar navbar-light navbar-lewagon navbar-burger-mobile">
   <%= link_to root_path, class: "navbar-brand" do %>
     <div class="d-flex">
       <div><%= image_tag asset_path('logo/bam_pride.png') %></div>
@@ -88,11 +92,6 @@
         <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>
       <% if current_user %>
-        <!--
-        <li class="nav-item">
-          <%= image_tag asset_path("logo/avatar.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        -->
         <li class="nav-item">
           <%= link_to "Dashboard", dashboard_path, class: "nav-link text-white" %>
         </li>
@@ -105,10 +104,6 @@
         <li class="nav-item">
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
         </li>
-
-        <!--
-        </li>
-        -->
       <% else %>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>
