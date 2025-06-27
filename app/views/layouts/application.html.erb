@@ -59,7 +59,7 @@
   </head>
 
   <body>
-    <div class="d-flex flex-column justify-content-between" style="min-height: 100vh">
+    <div class="d-flex flex-column justify-content-between" style="min-height: 100vh; <%= 'background-color: #202020' if controller_name == "administrator" %>">
       <div>
         <%= render 'shared/navbar_simple' %>
         <%= yield %>

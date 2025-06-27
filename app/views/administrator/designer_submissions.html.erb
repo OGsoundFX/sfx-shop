@@ -1,0 +1,41 @@
+<div class="dark-background submission-container text-center">
+  <div style="width: 100vw">
+    <% @submissions.each do |submission| %>
+      <div class="submission-card d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="submission-card-date">
+            <div class="day"><%= submission.created_at.strftime("%b %y") %></div>
+            <div class="date"><%= submission.created_at.strftime("%d") %></div>
+          </div>
+          <div class="submission-card-content">
+            <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status">(<%= submission.status %>)</span></div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column">
+          <% submission.submission_links.each do |link| %>
+            <%= link_to link.title, link.url, target: "_blank" %>
+          <% end %>
+        </div>
+
+        <div>
+          <div class="submission-card-actions">
+            <a href="mailto:<%= submission.email %>" target="blank"><span class="icon">✉️</span></a>
+            <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
+              <%= link_to submission_accepted_path(submission), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                <div >
+                  <i class="fas fa-check"></i>
+                </div>
+              <% end %>
+              <%= link_to submission_rejected_path(submission), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                <div>
+                  <i class="fas fa-ban"></i>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

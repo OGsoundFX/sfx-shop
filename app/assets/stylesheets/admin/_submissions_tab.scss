@@ -1,0 +1,94 @@
+.submission-container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.submission-card {
+  width: 90%;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3a3a3a;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #fff;
+  margin: 20px auto;
+}
+
+.submission-card-date {
+  text-align: center;
+  margin-right: 20px;
+  border-right: 1px solid #888;
+  padding-right: 20px;
+}
+
+.day {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.date {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.submission-card-content .title {
+  font-size: 16px;
+}
+
+.status {
+  font-style: italic;
+  color: #81ad79;
+  margin-left: 6px;
+}
+
+.submission-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.btn {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.success {
+  background-color: #77b77a;
+}
+
+.cancel {
+  background-color: #99b79c;
+}
+
+.view-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.submission-card_btn-group {
+  width: 3rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #81ad79;
+}
+
+.submission-card__confirm-accept {
+  border-radius: 8px 0 0 8px;
+}
+
+.submission-card__confirm-reject {
+  border-radius: 0 8px 8px 0;
+}

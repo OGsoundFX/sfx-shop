@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   get "update_order_status", to: "orders#update_order_status"
   get "destroy_order_dashboard", to: "orders#destroy_from_dashboard"
   get "destroy_cart", to: "carts#destroy_cart"
-  get "admin", to: "administrator#admin"
   get "about", to: "pages#about"
   get "eula", to: "pages#eula"
   get "blog", to: "pages#blog"
@@ -63,6 +62,12 @@ Rails.application.routes.draw do
 
   # thank you for your submission
   get "thank_you", to: "designer_submissions#thank_you", as: :thank_you
+
+  # admin routes
+  get "admin", to: "administrator#admin"
+  get "admin/designer_submissions", to: "administrator#designer_submissions", as: :submissions
+  get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
+  get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
 
   # data protection path
   get "data_protection", to: "pages#data_protection"
