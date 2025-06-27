@@ -78,7 +78,7 @@
 $breakpoint-mobile: 575px;
 $breakpoint-mobile-up: 576px;
 
-@media (max-width: $breakpoint-mobile) {
+@media (max-width: 768px) {
   .navbar-toggler {
     margin-top: -5px;
     background-color:$orange-main;
