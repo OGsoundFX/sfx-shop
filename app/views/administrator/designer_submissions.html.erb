@@ -1,5 +1,8 @@
 <div class="dark-background submission-container text-center">
   <div style="width: 100vw">
+    <div class="text-left ml-5">
+      <h6>Submission count: <%= @submissions.count %></h6>
+    </div>
     <% @submissions.each do |submission| %>
       <div class="submission-card d-flex justify-content-between">
         <div class="d-flex align-items-center">
