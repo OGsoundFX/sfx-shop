@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_23_123355) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_30_123141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_23_123355) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token"
+    t.index ["access_token"], name: "index_designer_submissions_on_access_token", unique: true
   end
 
   create_table "download_links", force: :cascade do |t|

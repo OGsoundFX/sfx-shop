@@ -1,11 +1,15 @@
 class DesignerSubmission < ApplicationRecord
-  before_create :generate_password
+  before_create :generate_password, :generate_access_token
   has_many :submission_links, dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true
   validate :links_count
 
   enum status: [:profile_created, :submited, :accepted, :rejected]
+
+  def to_param
+    access_token
+  end
 
   private
 
@@ -17,5 +21,9 @@ class DesignerSubmission < ApplicationRecord
 
   def generate_password
     self.random_password = SecureRandom.alphanumeric(12)
+  end
+
+  def generate_access_token
+    self.access_token = SecureRandom.hex(20)
   end
 end
