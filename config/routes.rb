@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resources :submission_links, only: :create
   end
 
+  resources :designer_submissions, only: :destroy
   resources :submission_links, only: :destroy
 
   # thank you for your submission
