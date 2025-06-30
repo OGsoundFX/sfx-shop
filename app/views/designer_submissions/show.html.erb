@@ -38,9 +38,9 @@
         <% end %>
       <% end %>
       <% if @designer_submission.submission_links.count < 5 %>
-        <button class="submission-form__submit btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"><i class="fas fa-plus-circle"></i> Add Link</button>
+        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"><i class="fas fa-plus-circle"></i> Add Link</button>
       <% else %>
-        <button class="submission-form__submit btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"disabled>Maximum 5 links</button>
+        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"disabled>Maximum 5 links</button>
       <% end %>
       <div class="d-none" data-designer-submission-form-target="form">
         <% if @designer_submission.id %>

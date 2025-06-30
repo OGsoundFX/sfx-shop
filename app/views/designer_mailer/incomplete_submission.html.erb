@@ -1,0 +1,22 @@
+<h1>Hello <%= @designer.first_name %></h1>
+<h3>Subject: Complete Your Sound Designer Submission</h3>
+
+<p>Hi there,</p>
+
+<p>Thanks for registering your interest in joining our platform as a sound designer!</p>
+
+<p>To move forward with your application, please take a moment to share samples of your work.</p>
+
+<p>This will help us review your submission and get back to you as soon as possible.</p>
+
+<p>
+  To do so, acces your <strong>👉 <%= link_to "Your submission page", designer_submission_url(@designer.id) %> 👈</strong> and click on <strong><i class="fas fa-plus-circle"></i> Add link</strong>
+</p>
+
+<h5>You can add up to 5 links to showcase your work 🎧!</h5>
+
+<p>If you have any questions, feel free to reply to this email. We are looking forward to hearing your work!</p>
+
+<p>— The BAMSFX Team</p>
+
+<img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1751279360/screenshots/share_links_fbuhib.png" alt="Incomplete submission screenshot" style="width: 320px">
