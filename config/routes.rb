@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get "add_template_to_cart", to: "collections#add_template_to_cart"
 
   # Sound Designer Submission
-  resources :designer_submissions, only: %i(new create show update) do
+  resources :designer_submissions, param: :access_token, only: %i(new create show update) do
     resources :submission_links, only: :create
   end
 

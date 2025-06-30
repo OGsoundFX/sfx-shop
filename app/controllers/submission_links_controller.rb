@@ -1,7 +1,7 @@
 class SubmissionLinksController < ApplicationController
   def create
     @submission_link = SubmissionLink.new(link_params)
-    @designer_submission = DesignerSubmission.find(params[:designer_submission_id])
+    @designer_submission = DesignerSubmission.find_by!(access_token: params[:designer_submission_access_token])
     @submission_link.designer_submission = @designer_submission
     if @submission_link.save
       redirect_to designer_submission_path(@designer_submission)
