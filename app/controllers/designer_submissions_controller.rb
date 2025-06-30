@@ -31,6 +31,11 @@ class DesignerSubmissionsController < ApplicationController
     @designer_submission.save
   end
 
+  def destroy
+    DesignerSubmission.find(params[:id]).destroy
+    redirect_to submissions_path
+  end
+
   private
 
   def designer_submission_params
