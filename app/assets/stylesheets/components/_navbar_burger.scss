@@ -1,3 +1,7 @@
+.navbar {
+  padding: 0 12px;
+}
+
 .navbar-burger-mobile {
   display: none;
 }
@@ -7,21 +11,33 @@
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas: "left center right";
   align-items: center;
-  
-  .navbar-left {
-    grid-area: left;
-    justify-self: start;
-  }
-  
-  .navbar-center {
-    grid-area: center;
-    justify-self: center;
+  height: 56px;
+  overflow: hidden;
+
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    display: contents;
   }
   
   .navbar-right {
     grid-area: right;
     justify-self: end;
+    a {
+      margin-top: -2px;
+    }
   }
+  
+  // .navbar-left {
+  //   grid-area: left;
+  //   justify-self: start;
+  // }
+  
+  // .navbar-center {
+  //   margin-top: -12px;
+  //   grid-area: center;
+  //   justify-self: center;
+  // }
 }
 
 

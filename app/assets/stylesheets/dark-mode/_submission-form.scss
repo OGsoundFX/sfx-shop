@@ -49,6 +49,12 @@ padding-top: 80px;
   padding: 0 0 0 12px;
   margin-bottom: 8px;
   color: black;
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    color: black;
+  }
 }
 
 .thank-you__wrapper {

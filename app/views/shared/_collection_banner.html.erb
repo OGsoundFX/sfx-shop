@@ -1,13 +1,4 @@
 <div class="slideshow-container">
-  <div>
-    <% if @current_sales_list != {} %>
-      <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
-      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
-    <% else %>
-      <%= image_tag asset_path('Promo20_2.png'), id: "promo20" %>
-      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
-    <% end %>
-  </div>
 
   <% if session[:subscribed] != true && (@status == "Not Subscribed" || @status == "unsubscribed") || session[:modal_closed] %>
     <% if @status == "unsubscribed" %>
@@ -41,29 +32,64 @@
   </section>
 
   <div class="">
+    <div id="carouselExampleAutoplaying" class="slideshow-images carousel slide" data-bs-ride="carousel" style="opacity: 1">
+      <div class="carousel-inner home-page__carousel-slides">
+        <div class="carousel-item active">
+          <div class="collection-banner-content">
+            <div class="collection-banner-text"><span id="create-your-collection">Browse our SFX Packs</span></div>
+          </div>
+          <div>
+            <% if @current_sales_list != {} %>
+              <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
+              <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+            <% else %>
+              <%= image_tag asset_path('Promo20_2.png'), id: "promo20" %>
+              <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+            <% end %>
+          </div>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg" class="d-block w-100" alt="Browse our packs and save 20% off the second pack and all following packs">
+        </div>
+        <div class="carousel-item">
+          <div class="collection-banner-content">
+            <div class="collection-banner-text"><span id="create-your-collection">Create your own collection</span>
+              <div class="shadow-dance-container mt-3">
+                <%= link_to "Learn More", list_path, class: "text-white shadow-dance-text-still" %>
+              </div>
+            </div>
+          </div>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081624/carousel/exocorps-delay_zrb6bd.jpg" class="d-block w-100" alt="Create your own cheryy picked collection of sounds, for the low price of a pack">
+        </div>
+        <div class="carousel-item">
+          <div class="collection-banner-content">
+            <div class="collection-banner-text">
+              <span id="create-your-collection">
+                Sell your own Sound effects
+                <div class="shadow-dance-container">
+                  <%= link_to "Become a Seller", new_designer_submission_path, class: "text-white shadow-dance-text-still" %>
+                </div>
+              </span>
+            </div>
+          </div>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1603997659/carousel/lightning_jbflq6.jpg" class="d-block w-100" alt="Join the Sound designer pool and sell your sounds on BamSFX">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!--
     <img class="slideshow-images" src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg">
+    -->
     <div class="collection-banner-content">
       <div class="shadow-dance-container shadow-dance-container-mobile">
         <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
       </div>
-      <div class="collection-banner-text"><span id="create-your-collection">Create Your Collection!!!</span></div>
-      <!--
-      <div data-controller="video-modal">
-        <div id="collection-video-btn" data-video-modal-target="button" data-action="click->video-modal#openModal">
-          Watch video &nbsp<i class="fas fa-play"></i>
-        </div>  
-        <div data-video-modal-target="videoModal" class="video-modal">
-          <div class="video-modal-content">
-            <iframe width="840" height="472" src="https://www.youtube.com/embed/X9utcnnj9Mo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
-            <div class="d-flex justify-content-between video-modal-buttons">
-              <button></button>
-              <%= link_to "Create Your Collection Now", list_path, id: "tracks" %>
-              <button id="close" data-video-modal-target="close" data-action="click->video-modal#closeModal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
     </div>
   </div>
 </div>

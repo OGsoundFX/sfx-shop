@@ -5,7 +5,9 @@ export default class extends Controller {
   static targets = ["container"]
 
   connect() {
-    this.hide()
+    this.containerTarget.classList.remove("hidden")
+    this.containerTarget.classList.add("fade-in")
+    this.containerTarget.setAttribute("aria-hidden", "false")
   }
 
   show(event) {

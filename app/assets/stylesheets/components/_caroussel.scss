@@ -1,5 +1,11 @@
 * {box-sizing:border-box}
 
+.home-page__carousel-slides {
+  img {
+    object-fit: cover;
+  }
+}
+
 /* Slideshow container */
 .slideshow-container {
   background-color: black;
@@ -7,6 +13,9 @@
   height: 600px;
   position: relative;
   margin: auto;
+  img {
+    height: 600px;
+  }
 }
 
 #promo20 {
@@ -69,7 +78,7 @@
 
 /* Next & previous buttons */
 .prev, .next {
-  background-color: $orange-main;
+  background-color: black;
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -131,7 +140,7 @@
 }
 
 .active, .dot:hover {
-  background-color: $orange-main;
+  background-color: black;
 }
 
 /* Fading animation */
