@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-end">
-        <% if SolidQueue::Job.all.any? { |job| job.arguments["arguments"][0]["collection"].present? && job.arguments["arguments"][0]["order"].to_i == order.id } && (!collection.download_links.present? || collection.download_links.last.expired?) %>
+        <% if SolidQueue::Job.where(class_name: "ZipCollectionJob").any? { |job| job.arguments["arguments"][0]["collection"].present? && job.arguments["arguments"][0]["order"].to_i == order.id } && (!collection.download_links.present? || collection.download_links.last.expired?) %>
           <div class="loader"></div>
         <% elsif collection.download_links.present? && !collection.download_links.last.expired? %>
           <a href="<%= collection.download_links.last.url %>"
