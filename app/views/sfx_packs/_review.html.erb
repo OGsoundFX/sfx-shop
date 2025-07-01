@@ -15,7 +15,7 @@
       </div>
     </div>
     <% if review.content.present? %>
-      <div class="btn btn-light" style="margin-top: 8px" data-action="click->show-review#toggle">Read review</div>
+      <div class="btn btn-dark" style="margin-top: 8px" data-action="click->show-review#toggle">Read review</div>
     <% end %>
   </div>
   <div class="review__desc d-none" data-show-review-target="reviewContent"><em><%= review.content %></em></div>

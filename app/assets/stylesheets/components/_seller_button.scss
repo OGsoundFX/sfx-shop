@@ -27,6 +27,21 @@
   }
 }
 
+.shadow-dance-text-still {
+  border: solid 1px white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 3rem;
+  text-shadow: 2px 2px 0 #ff005e, 4px 4px 0 #00d4ff;
+  box-shadow: 2px 2px 0 #ff005e, 4px 4px 0 #00d4ff;
+  text-decoration: none;
+  animation: shadow-dance 2s infinite;
+  &:hover {
+    animation: shadow-dance 2s infinite;
+  }
+}
+
+
 @media (max-width: 768px) {
   .shadow-dance-container-mobile {
     display: block;
