@@ -7,7 +7,8 @@
 /* Tooltip text */
 .submission-link-tooltip .submission-link-tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 32vw;
+  max-height: 320px;
   background-color: black;
   color: #fff;
   text-align: center;
@@ -17,6 +18,7 @@
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
+  overflow-y: scroll;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */

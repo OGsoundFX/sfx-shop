@@ -20,7 +20,7 @@
             <div class="d-flex">
               <%= link_to link.title, link.url, target: "_blank" %>
               <div class="submission-link-tooltip <%= 'd-none' unless link.description.present? %> ml-3">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-info-circle ms-2"></i>
                 <span class="submission-link-tooltiptext"><%= link.description %></span>
               </div>
             </div>
