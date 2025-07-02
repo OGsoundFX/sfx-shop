@@ -17,9 +17,11 @@ body {
   // flex-basis : 0; ➜ The div does not have a starting value as such and will take up screen as per the screen size available for
 }
 
-a:hover {
+a {
   text-decoration: none;
-  color: $font-grey;
+  &:hover {
+    color: $font-grey;
+  }
 }
 
 // Appart from font-family and color, all the components applied to the html, body and
