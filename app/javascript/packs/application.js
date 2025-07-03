@@ -2,7 +2,8 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-import "bootstrap";
+import * as bootstrap from "bootstrap"
+window.bootstrap = bootstrap
 
 require("@rails/ujs").start()
 // removed turbolinks to be able to stop all sounds: see window.addEventlistener('beforeunload', callback());
