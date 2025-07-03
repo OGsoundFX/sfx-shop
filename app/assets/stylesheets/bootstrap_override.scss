@@ -7,3 +7,9 @@
 .btn-dark:hover {
   color: rgb(228, 228, 228) !important;
 }
+
+/* Make the navbar collapse container positioned so dropdown z-index works */
+.navbar {
+  overflow: visible !important; /* Also prevent clipping */
+  z-index: 1100;
+}
