@@ -25,12 +25,12 @@ class SalesController < ApplicationController
 
     @sale.packs = pack_array
     @sale.save
-    redirect_to admin_path
+    redirect_to list_sales_path
   end
 
   def destroy
     Sale.find(params[:id]).destroy
-    redirect_to admin_path
+    redirect_to list_sales_path
   end
 
   private

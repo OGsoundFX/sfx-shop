@@ -1,15 +1,29 @@
-<div class="container padding-navbar content">
-  <h1>Create a Sale</h1>
+<div class="container padding-navbar content bg-dark text-light admin-min-height">
+  <%= render "administrator/admin_menu" %>
+  <h1 class="text-light">Create a Sale</h1>
 
-  <%= simple_form_for @sale do |f| %>
-    <%= f.input :title, label: 'Title' %>
-    <%= f.input :percentage, label: 'Percentage' %>
-    <%= f.input :start_date, label: 'Start date' %>
-    <%= f.input :end_date, label: 'End date' %>
+  <%= simple_form_for @sale, html: { class: "text-light" } do |f| %>
+    <div class="mb-3">
+      <%= f.input :title, label: 'Title', input_html: { class: 'form-control bg-dark text-light' }, label_html: { class: 'form-label text-light' } %>
+    </div>
 
-    <%= f.input :packs, label: 'Packs', collection: @packs, input_html: { multiple: true } %>
+    <div class="mb-3">
+      <%= f.input :percentage, label: 'Percentage', input_html: { class: 'form-control bg-dark text-light' }, label_html: { class: 'form-label text-light' } %>
+    </div>
 
-    <%= f.button :submit %>
+    <div class="mb-3">
+      <%= f.input :start_date, label: 'Start date', input_html: { class: 'form-control bg-dark text-light' }, label_html: { class: 'form-label text-light' } %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.input :end_date, label: 'End date', input_html: { class: 'form-control bg-dark text-light' }, label_html: { class: 'form-label text-light' } %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.input :packs, label: 'Packs', collection: @packs, input_html: { multiple: true, class: 'form-select bg-dark text-light' }, label_html: { class: 'form-label text-light' } %>
+    </div>
+
+    <%= f.button :submit, class: "btn btn-secondary" %>
   <% end %>
-
 </div>
+

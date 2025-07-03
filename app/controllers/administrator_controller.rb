@@ -2,10 +2,6 @@ class AdministratorController < ApplicationController
   before_action :check_admin
 
   def admin
-    @all_sales = Sale.all
-    @current_sales = Sale.where("end_date > ?", Date.current)
-    @sale = Sale.last
-
     paid_orders = Order.where(status: "paid")
 
     orders = Order.all
@@ -52,6 +48,16 @@ class AdministratorController < ApplicationController
   def submission_rejected
     DesignerSubmission.find(params[:id]).rejected!
     redirect_to submissions_path
+  end
+
+  def stats
+  end
+
+  def sales
+    @all_sales = Sale.all
+    @current_sales = Sale.where("end_date > ?", Date.current)
+    @previous_sales = Sale.where("end_date <= ?", Date.current).order(end_date: :desc)
+    @sale = Sale.last
   end
 
   private

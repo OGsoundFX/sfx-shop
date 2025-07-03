@@ -1,8 +1,5 @@
-<div class="container padding-navbar content">
-  <h1 class="d-flex justify-content-center mt-3 mb-2">Hey Olivier</h1>
-  <div class="text-center mb-3">
-    <%= link_to "Designer Submissions", submissions_path, class: "btn btn-dark" %>
-  </div>
+<div class="container padding-navbar content admin-min-height">
+  <%= render "admin_menu" %>
   <div class="d-flex justify-content-between">
     <div>
       <p>
@@ -46,22 +43,6 @@
         <% end %>
       </table>
 
-    </div>
-
-    <div>
-      <h3> <%= link_to "Create a Sale", new_sale_path %> </h3>
-
-
-      <h5>Current Sales:</h5>
-      <% @current_sales.each do |sale| %>
-
-        <p> <%= sale.title %> </p>
-        <p> <%= sale.percentage %> </p>
-        <p> <%= sale.packs %> </p>
-        <p> <%= sale.start_date %> </p>
-        <p> <%= sale.end_date %> </p>
-        <%= link_to "Delete Sale", sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }  %>
-      <% end %>
     </div>
   </div>
 </div>
