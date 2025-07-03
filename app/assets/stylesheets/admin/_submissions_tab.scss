@@ -1,11 +1,11 @@
 .submission-container {
-  margin-top: 80px;
+  margin: 30px auto 0 auto;
   display: flex;
   justify-content: center;
+  max-width: 1320px;
 }
 
 .submission-card {
-  width: 90%;
   min-height: 78px;
   display: flex;
   align-items: center;
@@ -24,12 +24,12 @@
   padding-right: 20px;
 }
 
-.day {
+.submission-day {
   font-size: 14px;
   color: #ccc;
 }
 
-.date {
+.submission-date {
   font-size: 24px;
   font-weight: bold;
 }
@@ -40,7 +40,7 @@
 
 .status {
   font-style: italic;
-  color: #81ad79;
+  color: $new-green;
   margin-left: 6px;
 }
 
@@ -82,7 +82,7 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #81ad79;
+  background-color: $new-green;
 }
 
 .submission-card__confirm-accept {
