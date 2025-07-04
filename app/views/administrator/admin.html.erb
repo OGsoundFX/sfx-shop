@@ -32,7 +32,7 @@
             </div>
             <div class="submission-card-content d-flex">
               <div class="title"><%= order.user.username.present? ? order.user.username : order.user.email.split('@').first %></div>
-              <% if order.user.location %>                
+              <% if order.user.location.present? %>                
                 <div class="mx-3">|</div>
                 <div><%= order.user.location %></div>
               <% end %>
