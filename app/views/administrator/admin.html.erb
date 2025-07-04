@@ -51,6 +51,14 @@
                 <% end %>
               </div>
             <% end %>
+            <% if !order.collections.empty? %>
+              <% order.collections.each do |collection| %>
+                  <div>Collection<%= " (#{Collection.find(collection).title})"if Collection.find(collection).title.present? %></div>
+              <% end %>
+            <% end %>
+            <% if !order.tracks.empty? %>
+              Individual tracks
+            <% end %>
           </div>
         </div>
       <% end %>
