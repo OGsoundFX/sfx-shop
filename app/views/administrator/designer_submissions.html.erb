@@ -1,10 +1,10 @@
-<div class="padding-navbar content admin-min-height">
+<div class="padding-navbar content admin-min-height bg-dark">
   <div class="container">
     <%= render "admin_menu" %>
   </div>
   <div class="submission-container text-center">
     <div style="width: 100vw">
-      <div class="text-lef text-white ml-5">
+      <div class="text-start text-white ml-5">
         <h6>Submission count: <%= @submissions.count %></h6>
       </div>
       <% @submissions.each do |submission| %>
