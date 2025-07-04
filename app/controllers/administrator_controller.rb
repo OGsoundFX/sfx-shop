@@ -1,7 +1,39 @@
 class AdministratorController < ApplicationController
   before_action :check_admin
 
+  # main tab
   def admin
+    # total orders
+    @total_orders_count = Order.count
+    @total_orders_amount = Order.sum(&:amount_cents) / 100
+
+    # current month oders
+    @month_orders_count = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+    @month_orders_amount = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).sum(&:amount_cents) / 100
+
+    # compared to previsous mont
+    @delta_count = @month_orders_count - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month).count
+    @delta_amount = @month_orders_amount - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month).sum(&:amount_cents) / 100
+
+    # last 10 orders
+    @orders = Order.last(10).reverse
+  end
+
+  def designer_submissions
+    @submissions = DesignerSubmission.all.order(:status)
+  end
+
+  def submission_accepted
+    DesignerSubmission.find(params[:id]).accepted!
+    redirect_to submissions_path
+  end
+
+  def submission_rejected
+    DesignerSubmission.find(params[:id]).rejected!
+    redirect_to submissions_path
+  end
+
+  def stats
     paid_orders = Order.where(status: "paid")
 
     orders = Order.all
@@ -34,23 +66,6 @@ class AdministratorController < ApplicationController
       end
     end
     @packs = pack_hash.sort_by {|_key, value| -value}.to_h
-  end
-
-  def designer_submissions
-    @submissions = DesignerSubmission.all.order(:status)
-  end
-
-  def submission_accepted
-    DesignerSubmission.find(params[:id]).accepted!
-    redirect_to submissions_path
-  end
-
-  def submission_rejected
-    DesignerSubmission.find(params[:id]).rejected!
-    redirect_to submissions_path
-  end
-
-  def stats
   end
 
   def sales

@@ -1,4 +1,48 @@
-<div class="container padding-navbar content admin-min-height">
+<div class="container padding-navbar content admin-min-height bg-dark">
   <%= render "admin_menu" %>
-  <h1>Stats ... coming soon</h1>
+  <div class="d-flex justify-content-between">
+    <div>
+      <p>
+        There have been <%= @paid_orders %> orders
+      </p>
+      <p>
+        Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
+      </p>
+      <p>
+        Total Amount earned today: <%= humanized_money_with_symbol @amount_earned_today / 100 %>
+      </p>
+      <p>
+        Number of customers: <%= @buyers %>
+      </p>
+      <p>
+        Made by <br>
+        <% @top_five.each do |key, value|  %>
+          <p> <%= mail_to User.find(key).email %>: <%= value %> </p>
+        <% end %>
+      </p>
+
+      <p>
+        Number of users: <%= User.count %>
+      </p>
+      <p>Number of carts: <%= @carts %></p>
+      <p>Number of items in carts: <%= @items_in_carts %></p>
+    </div>
+    <div>
+
+      <table id="pack_table">
+        <tr>
+          <th>Pack</th>
+          <th>Nb of sales</th>
+        </tr>
+
+        <% @packs.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
 </div>

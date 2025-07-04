@@ -1,48 +1,59 @@
-<div class="container padding-navbar content admin-min-height">
-  <%= render "admin_menu" %>
-  <div class="d-flex justify-content-between">
-    <div>
-      <p>
-        There have been <%= @paid_orders %> orders
-      </p>
-      <p>
-        Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
-      </p>
-      <p>
-        Total Amount earned today: <%= humanized_money_with_symbol @amount_earned_today / 100 %>
-      </p>
-      <p>
-        Number of customers: <%= @buyers %>
-      </p>
-      <p>
-        Made by <br>
-        <% @top_five.each do |key, value|  %>
-          <p> <%= mail_to User.find(key).email %>: <%= value %> </p>
-        <% end %>
-      </p>
+<div class="padding-navbar content admin-min-height bg-dark">
+  <div class="container">
+    <%= render "admin_menu" %>
+  </div>
+  <div class="submission-container text-center">
+    <div style="width: 100vw">
+      <div class="d-flex text-white ml-5 bg-secondary p-2 rounded-1">
+        <div>
+          Total order count: <%= @total_orders_count %> / <%= number_to_currency(@total_orders_amount, unit: "$ ", separator: ",", precision: 2) %>
+        </div>
+        <div class="mx-3">
+          |
+        </div>
+        <div>
+          This month: <%= @month_orders_count %> / <%= number_to_currency(@month_orders_amount, unit: "$ ", separator: ",", precision: 2) %>
+        </div>
+        <div class="mx-3">
+          |
+        </div>
+        <div>
+          previous month: <span class="<%= @delta_count.positive? ? 'text-success' : 'text-danger-emphasis' %>"><%= @delta_count %></span>
+          /
+          <span class="<%= @delta_amount.positive? ? 'text-success' : 'text-danger-emphasis' %>"><%= number_to_currency(@delta_amount, unit: "$ ", separator: ",", precision: 2) %></span>
+        </div>
+      </div>
+      <% @orders.each do |order| %>
+        <div class="submission-card justify-content-between admin__order-grid">
+          <div class="d-flex align-items-center">
+            <div class="submission-card-date">
+              <div class="submission-day"><%= order.created_at.strftime("%b %y") %></div>
+              <div class="submission-date"><%= order.created_at.strftime("%d") %></div>
+            </div>
+            <div class="submission-card-content d-flex">
+              <div class="title"><%= order.user.username.present? ? order.user.username : order.user.email.split('@').first %></div>
+              <% if order.user.location %>                
+                <div class="mx-3">|</div>
+                <div><%= order.user.location %></div>
+              <% end %>
+            </div>
+          </div>
 
-      <p>
-        Number of users: <%= User.count %>
-      </p>
-      <p>Number of carts: <%= @carts %></p>
-      <p>Number of items in carts: <%= @items_in_carts %></p>
-    </div>
-    <div>
+          <div class="d-flex flex-column">
+            <div class="submission-date"><%= number_to_currency(order.amount_paid_cents / 100, unit: "$ ", separator: ",", precision: 2) %></div>
+          </div>
 
-      <table id="pack_table">
-        <tr>
-          <th>Pack</th>
-          <th>Nb of sales</th>
-        </tr>
-
-        <% @packs.each do |key, value| %>
-          <tr>
-            <td><%= key %></td>
-            <td><%= value %></td>
-          </tr>
-        <% end %>
-      </table>
-
+          <div>
+            <% if !order.packs.empty? %>
+              <div class="d-flex flex-column">
+                <% order.packs.each do |pack| %>
+                  <div><%= SfxPack.find(pack).title %></div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
