@@ -69,7 +69,11 @@
               <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
               <%= form_tag cart_order_path do %>
                 <%= hidden_field_tag 'pack_id', pack.id %>
-                <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
+                <% if pack.sku.include?("FS") %>
+                  <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2", style: "background-color: #0d9488;" %>
+                <% else %>
+                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
+                <% end %>
               <% end %>
             </div>
           </div>

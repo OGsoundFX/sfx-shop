@@ -4,19 +4,18 @@ class AdministratorController < ApplicationController
   # main tab
   def admin
     # total orders
-    @total_orders_count = Order.count
-    @total_orders_amount = Order.sum(&:amount_cents) / 100
+    @total_orders_count = Order.where(status: "paid").count
+    @total_orders_amount = Order.where(status: "paid").sum(&:amount_cents) / 100
 
     # current month oders
-    @month_orders_count = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
-    @month_orders_amount = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).sum(&:amount_cents) / 100
+    @month_orders_count = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month, status: "paid").count
+    @month_orders_amount = Order.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month, status: "paid").sum(&:amount_cents) / 100
 
     # compared to previsous mont
-    @delta_count = @month_orders_count - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month).count
-    @delta_amount = @month_orders_amount - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month).sum(&:amount_cents) / 100
-
+    @delta_count = @month_orders_count - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month, status: "paid").count
+    @delta_amount = @month_orders_amount - Order.where(created_at: Time.current.last_month.beginning_of_month..Time.current.last_month.end_of_month, status: "paid").sum(&:amount_cents) / 100
     # last 10 orders
-    @orders = Order.last(10).reverse
+    @orders = Order.where(status: "paid").last(10).reverse
   end
 
   def designer_submissions
