@@ -59,7 +59,7 @@
   </head>
 
   <body>
-    <div class="d-flex flex-column justify-content-betwee min-vh-100 <%= 'bg-dark' if controller_name == "administrator" || (controller_name == "sales" && action_name == "new") %>">
+    <div class="d-flex flex-column justify-content-between min-vh-100 <%= 'bg-dark' if controller_name == "administrator" || (controller_name == "sales" && action_name == "new") %>">
       <div>
         <%= render 'shared/navbar_simple' %>
         <%= yield %>

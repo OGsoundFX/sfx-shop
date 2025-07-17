@@ -15,16 +15,11 @@
   </button>
   
   <div class="navbar-center">
-    <% unless controller_name == "designer_submissions" %>
-      <div class="shadow-dance-container">
-        <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white shadow-dance-text" %>
-      </div>
-    <% end %>
   </div>
 
   <div class="navbar-right collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
+      <% if current_user && current_user.admin %>
         <li class="nav-item dropdown">
           <%= link_to "R-admin", rails_admin_path, class: "nav-link text-white" %>
         </li>
@@ -32,6 +27,9 @@
           <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
         </li>
       <% end %>
+      <li class="nav-item dropdown">
+        <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white", style: "color: pink !important" %>
+      </li>
       <li class="nav-item dropdown">
         <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>
@@ -78,7 +76,7 @@
 
   <div class="navbar-burger-mobile collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if current_user && current_user.email == "olivier@ogsoundfx.com" %>
+      <% if current_user && current_user.admin %>
         <li class="nav-item">
           <%= link_to "R-admin", rails_admin_path, class: "nav-link text-white" %>
         </li>

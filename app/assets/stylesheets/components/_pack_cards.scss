@@ -6,9 +6,9 @@
 
 .pack_pic {
   width:100%;
-  aspect-ratio: 1 / 1.365;
-  // overflow: hidden;
-  // object-fit: cover;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  object-fit: cover;
   transition: 0.5s;
   border-radius: 8px 8px 0 0;
 }
@@ -24,8 +24,12 @@
   padding-left: 1rem;
 }
 
-.card-body-pack {
+.card-body-pack-info {
   padding: 0.6rem;
+}
+
+.card-body-pack-price {
+  padding: 0 0.6rem 0.6rem 0.6rem;
 }
 
 #wrapper {
@@ -93,8 +97,15 @@
 }
 
 .pack_card__designer_pic {
-  width: 44px;
+  width: 20px;
   object-fit: cover;
+}
+
+.pack_card__designer_no_pic {
+  font-size: 0.8rem;
+  border: solid 1px black;
+  border-radius: 50%;
+  padding: 4px;
 }
 
 .add-to-cart-hover:hover {
