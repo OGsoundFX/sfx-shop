@@ -46,6 +46,7 @@
 }
 
 .nav-link {
+  margin-top: 2px !important;
   cursor: pointer;
   color: white !important;
 }
@@ -73,6 +74,20 @@
   padding: 4px 0px 4px 10px;
   color: $darker-blue;
   font-weight: 700;
+}
+
+.become-seller {
+  color: pink !important;
+  border: 1px solid pink;
+  margin-right: 22px;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin-top: 4px !important;
+  margin-bottom: 4px;
+  &:hover {
+    color: white !important;
+    border: white solid 1px;
+  }
 }
 
 $breakpoint-mobile: 575px;
