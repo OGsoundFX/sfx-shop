@@ -72,6 +72,10 @@ Rails.application.routes.draw do
   get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
 
+  # sound designer dashboard routes
+  get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard
+  get "content_submissions", to: "designer_dashboards#submissions", as: :content_submissions
+
   # data protection path
   get "data_protection", to: "pages#data_protection"
 

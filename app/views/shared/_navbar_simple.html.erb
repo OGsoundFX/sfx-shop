@@ -27,9 +27,11 @@
           <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
         </li>
       <% end %>
-      <li class="nav-item dropdown">
-        <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link become-seller" %>
-      </li>
+      <% if !user_signed_in? || (user_signed_in? && (!current_user.designer && !current_user.admin)) %>        
+        <li class="nav-item dropdown">
+          <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link become-seller" %>
+        </li>
+      <% end %>
       <li class="nav-item dropdown">
         <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>

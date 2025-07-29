@@ -1,0 +1,56 @@
+.submissions-live__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 12px;
+}
+
+.live {
+  color: $new-green !important;
+}
+
+.declined {
+  color: $indian-red !important;
+}
+
+.else {
+  color: $light-orange !important;
+}
+
+.submissions__pack-description {
+  p {
+    color: whitesmoke !important;
+  }
+}
+
+.submissions__pack-price {
+  color: whitesmoke !important;
+  #submissions__pack-price-font {
+    font-size: 1rem;
+  }
+}
+
+.designer-dashboard__packs-filter-pills {
+  cursor: pointer;
+  background-color: $light-card-background;
+}
+
+.designer-dashboard__packs-filter-pills.active {
+  background-color: $new-green;
+}
+
+.designer-dashboard__pills {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1399px) {
+  .submissions-live__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 991px) {
+  .submissions-live__grid {
+    grid-template-columns: 1fr;
+  }
+}

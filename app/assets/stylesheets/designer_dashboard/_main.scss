@@ -1,0 +1,25 @@
+.designer-dashboard__welcome {
+  color: $whitesmoke;
+  text-align: center;
+  margin-top: 24px;
+  h3 {
+    font-size: 1.4rem;
+    display: inline-block;
+    border: 1px solid $whitesmoke;
+    border-radius: 8px;
+    padding: 12px;
+  }
+}
+
+.designer-dashboard__container {
+  color: $whitesmoke;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: $light-card-background;
+}
+
+.designer-dashboard__label {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}

@@ -19,6 +19,9 @@ application.register("collection-name", CollectionNameController)
 import DeleteJobController from "./delete_job_controller"
 application.register("delete-job", DeleteJobController)
 
+import DesignerPackFilterController from "./designer_pack_filter_controller"
+application.register("designer-pack-filter", DesignerPackFilterController)
+
 import DesignerSubmissionFormController from "./designer_submission_form_controller"
 application.register("designer-submission-form", DesignerSubmissionFormController)
 

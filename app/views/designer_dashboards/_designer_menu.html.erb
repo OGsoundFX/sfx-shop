@@ -1,0 +1,7 @@
+<div class="d-flex mt-4 mb-2">
+  <%= link_to "Main", designer_main_dashboard_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "main"}" %>
+  <%= link_to "Submissions", content_submissions_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "submissions"}" %>
+  <%= link_to "Stats", stats_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if action_name == "stats"}" %>
+  <%= link_to "Sales", list_sales_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if action_name == "sales" || (controller_name == "sales" && action_name == "new")}" %>
+</div>
+<hr style="border-color: white">

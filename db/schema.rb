@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_30_123141) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_28_110305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -170,6 +170,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_30_123141) do
     t.string "product_link"
     t.integer "display_order"
     t.string "announcement"
+    t.integer "status"
     t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id"
   end
 
