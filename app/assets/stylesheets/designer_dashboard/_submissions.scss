@@ -29,13 +29,27 @@
   }
 }
 
-@media (max-width: 992px) {
+.designer-dashboard__packs-filter-pills {
+  cursor: pointer;
+  background-color: $light-card-background;
+}
+
+.designer-dashboard__packs-filter-pills.active {
+  background-color: $new-green;
+}
+
+.designer-dashboard__pills {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1399px) {
   .submissions-live__grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 991px) {
   .submissions-live__grid {
     grid-template-columns: 1fr;
   }

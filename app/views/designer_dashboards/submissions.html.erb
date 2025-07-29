@@ -1,15 +1,17 @@
+<%= render "shared/left_pannel_mobile"%>
 <div class="padding-navbar content admin-min-height bg-dark">
   <div class="designer-dashboard__welcome">
     <h3>Welcome to your designer dashboard!</h3>
   </div>
-  <div class="container">
+  <div class="container" data-controller="designer-pack-filter">
     <%= render "designer_menu" %>
     <div class="mb-3" data-filter="all">
-      <span style="color: whitesmoke !important; margin-right: 8px">Filter:</span>
-      <span class="text-white px-3 py-1 badge rounded-pill" style="font-size: 0.9rem; background-color: #558b7b;">all</span>
-      <span class="text-white px-3 py-1 badge rounded-pill" style="font-size: 0.9rem; background-color: #6c757d;">live</span>
-      <span class="text-white px-3 py-1 badge rounded-pill" style="font-size: 0.9rem; background-color: #6c757d;">submitted</span>
-      <span class="text-white px-3 py-1 badge rounded-pill" style="font-size: 0.9rem; background-color: #6c757d;">declined</span>
+      <span style="color: whitesmoke !important; margin-right: 8px; font-size: 0.8rem !important">Filter:</span>
+      <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
+      <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
+      <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
+      <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
+      <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
     </div>
     <div class="submissions-live__grid">
       <% @packs.each do |pack| %>
@@ -18,7 +20,9 @@
         <% when "declined" then pill_color_class = "declined" %>
         <% else pill_color_class = "else" %>
         <% end %>
-        <div class="designer-dashboard__container mb-3">
+        <div class="designer-dashboard__container mb-3"
+             data-designer-pack-filter-target="status"
+             data-status="<%= pack.status %>">
           <div class="designer-dashboard__user-profile">
             <div class="d-flex justify-content-between">
               <div>
@@ -49,7 +53,7 @@
                   <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
                   <p class="mb-0">• Format: WAV</p>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="designer-dashboard__pills">
                   <div class="flex flex-wrap gap-2 pb-2">
                     <% pack.category.split(", ").each do |tag| %>
                       <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill" style="background-color: #0d9488;"><%= tag %></span>
