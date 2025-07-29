@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     @designers = SoundDesigner.all
     # includes makes sure that the sound_designer from separate table and attachment are loaded in the request
     # rather then each attachment and sound_designere loaded separatly on html display (in iteration)
-    @sfx_packs = SfxPack.live.includes(:sound_designer).includes(photos_attachments: :blob).all.sort_by(&:display_order)
+    @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).all.sort_by(&:display_order)
     if Date.today < Annoucement.last.end_date && Date.today >= Annoucement.last.start_date
       @announcement = Annoucement.last
     end
