@@ -1,0 +1,45 @@
+<div class="padding-navbar content admin-min-height bg-dark">
+  <div class="designer-dashboard__welcome">
+    <h3>Welcome to your designer dashboard!</h3>
+  </div>
+  <div class="container">
+    <%= render "designer_menu" %>
+    <div class="designer-dashboard__container">
+      <div class="designer-dashboard__user-profile">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="designer-dashboard__label">Profile Information</p>
+          </div>
+          <div>
+            <i class="fas fa-pen"></i>
+          </div>
+        </div>
+        <hr style="margin-top: 0">
+        <p><span style="color: orange">Name:</span> <%= @designer.first_name %> <%= @designer.last_name %></p>
+        <p><span style="color: orange">Email:</span> <%= @designer.user.email %></p>
+        <p><span style="color: orange">Location:</span> <%= @designer.location %></p>
+      </div>
+    </div>
+    <div class="designer-dashboard__container mt-3">
+      <div class="designer-dashboard__user-profile">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="designer-dashboard__label">About you</p>
+          </div>
+          <div>
+            <i class="fas fa-pen"></i>
+          </div>
+        </div>
+        <hr style="margin-top: 0">
+        <% if @designer.bio.present? %>
+          <span><%= @designer.bio %></span>
+        <% else %>
+          <p>Tell the World about yourself</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-secondary mt-3 mb-3" style="padding: 10px 8px">Write to Support</a>
+    </div>
+  </div>
+</div>

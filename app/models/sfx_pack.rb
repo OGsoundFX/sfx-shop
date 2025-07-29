@@ -6,6 +6,8 @@ class SfxPack < ApplicationRecord
   has_one_attached :banner
   monetize :price_cents
 
+  enum status: ["draft", "submitted", "live", "declined"]
+
   def to_param
     "#{id} #{title}".parameterize
   end

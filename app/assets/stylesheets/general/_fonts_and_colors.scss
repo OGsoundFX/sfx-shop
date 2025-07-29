@@ -3,10 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 // font-family: 'Permanent Marker', cursive;
 
 // $body-font: "Roboto", "Helvetica", "sans-serif";
 $body-font: 'Roboto', sans-serif;
+// $body-font: "League Spartan", sans-serif;
 $the-quest-font: 'Press Start 2P', cursive;
 $orange-main: #ffa500;
 $orange-light: #ffe3d3;
@@ -28,6 +30,7 @@ $border-grey: #dee2e6;
 $dark-green: green;
 // $light-green: #a0ff49;
 $light-green: #ffa500;
+$light-orange: #ffa500;
 $indian-red: #ff5c55;
 // $new-green: #349b55;
 $new-green: #558b7b;
@@ -39,3 +42,6 @@ $alert-text: #467c85;
 $dark-background: #202020;
 $dark-modal: #4d4d4d;
 $dark-modal-light: #939393;
+$dark-card-background: #3a3a3a;
+$light-card-background: #6c757d; // bootstrap btn-secondary color
+$medium-card-background: #525252;
