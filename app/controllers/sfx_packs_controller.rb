@@ -17,10 +17,26 @@ class SfxPacksController < ApplicationController
     @sfx_pack = SfxPack.new(sfx_pack_params)
     @sfx_pack.sound_designer = @designer
 
-    # taking care of the category field
-    params[:sfx_pack][:category].shift
+    # taking care of the category and tags fields
+    params[:sfx_pack][:category]
+    params[:sfx_pack][:tags]
     @sfx_pack.category = params[:sfx_pack][:category].join(", ")
+    @sfx_pack.tags = params[:sfx_pack][:tags].join(", ")
+
     @sfx_pack.status = "submitted"
+    # creating the SKU
+    if @designer.sfx_packs.count == 0
+      increment = "001"
+    else
+      sfx_packs = @designer.sfx_packs.where.not(sku: nil)
+      increment = (sfx_packs.last.sku[6, 3].to_i + 1).to_s
+      case increment.size
+      when 1 then incement = "00" + increment
+      when 2 then incement = "0" + increment
+      end
+    end
+    @sfx_pack.sku = @designer.first_name[0].capitalize + @designer.last_name[0].capitalize + "PACK" + increment
+
     if @sfx_pack.save
       redirect_to content_submissions_path
     else
