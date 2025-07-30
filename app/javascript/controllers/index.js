@@ -64,6 +64,9 @@ application.register("template-form", TemplateFormController)
 import TheQuestModalController from "./the_quest_modal_controller"
 application.register("the-quest-modal", TheQuestModalController)
 
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)
+
 import TooltipMobileController from "./tooltip_mobile_controller"
 application.register("tooltip-mobile", TooltipMobileController)
 
