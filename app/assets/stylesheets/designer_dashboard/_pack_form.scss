@@ -1,0 +1,81 @@
+.submission-form__back-button {
+  padding: 2px 6px;
+  border: solid white 2px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  color: white;
+  transition-duration: 0.3s;
+  &:hover {
+    transition-duration: 0.3s;
+    color: grey;
+    border-color: grey;
+  }
+}
+
+.pack-submission-form__box {
+  border-radius: 8px;
+  background-color: $dark-modal;
+  padding: 40px 60px;
+  width: 60%;
+  margin: auto;
+  a {
+    transition: color 0.4s;
+    &:hover {
+      color: white;
+      transition: 0.4s;
+    }
+  }
+}
+
+.designer-dashboard__submit-pack {
+  color: $whitesmoke;
+  text-align: center;
+  margin-bottom: 12px;
+  h3 {
+    font-size: 1.4rem;
+    display: inline-block;
+    border: 1px solid $whitesmoke;
+    border-radius: 8px;
+    padding: 12px;
+  }
+}
+
+.pack-submission-form__photo-upload {
+  margin-top: 12px;
+  width: 240px;
+  background-color: $dark-background;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: grey;
+    transition-duration: 0.3s;
+  }
+}
+
+.pack-submission-form__image-placeholder {
+  object-fit: cover;
+  height: 240px;
+  width: 240px;
+  border-radius: 8px;
+}
+
+.custom-file-input {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.custom-file-input:hover {
+  background-color: #bfbfbf;
+}
+
+@media (max-width: 768px) {
+  .pack-submission-form__box {
+    padding: 12px;
+    width: 90%;
+  }
+}

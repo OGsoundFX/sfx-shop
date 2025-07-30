@@ -43,6 +43,16 @@
   justify-content: space-between;
 }
 
+.designer-dashboard__add-pack-pill {
+  background-color: whitesmoke;
+  color: $font-grey;
+  transition-duration: 0.3s;
+  &:hover {
+    background-color: $light-grey;
+    transition-duration: 0.3s;
+  }
+}
+
 @media (max-width: 1399px) {
   .submissions-live__grid {
     grid-template-columns: 1fr 1fr;

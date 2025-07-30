@@ -52,6 +52,9 @@ application.register("show-review", ShowReviewController)
 import SingleMobileDropdownController from "./single_mobile_dropdown_controller"
 application.register("single-mobile-dropdown", SingleMobileDropdownController)
 
+import SubmissionImagePreviewController from "./submission_image_preview_controller"
+application.register("submission-image-preview", SubmissionImagePreviewController)
+
 import SubmissionModalController from "./submission_modal_controller"
 application.register("submission-modal", SubmissionModalController)
 

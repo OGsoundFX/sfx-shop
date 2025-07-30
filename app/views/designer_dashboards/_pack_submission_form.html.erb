@@ -1,0 +1,55 @@
+<%= simple_form_for [@designer, @sfx_pack] do |f| %>
+  <div class="mb-3">
+    <div class="d-flex">
+      <div class="d-flex flex-column" data-controller="submission-image-preview">
+        <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
+        <div>
+          <label for="file-upload" class="inline-block text-white py-2 px-4 rounded pack-submission-form__photo-upload">
+            Upload Cover (Square)
+          </label>
+          <%= f.input :photos,
+                    as: :file,
+                    label: false,
+                    input_html: { id: "file-upload", class: "d-none", data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
+        </div>
+      </div>
+      <div class="ms-5">
+        <em>
+          Note: Please make sure that your image to illustrate your sound effect pack is as square as possible, as all sound effect pack covers will be displayed in this shape throughout the webiste. Thank you!!!
+        </em>
+      </div>
+    </div>
+  </div>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <hr>
+  <%= f.input :category, collection: ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"], multiple: true, label: "Category (Max. 3)" %>
+  <hr>
+  <div class="d-flex justify-content-between">
+    <%= f.input :size_mb, label: "Size in MB" %>
+    <%= f.input :duration %>
+    <%= f.input :number_of_tracks %>
+  </div>
+  <hr>
+  <%= f.input :price %>
+    <small><em>Note: Leave 0 for free packs.</em></small>
+  <hr>
+  <%= f.input :link, label: "Share your demo link" %>
+  <%= f.input :list, label: "Share a url where we can find the list of tracks" %>
+  <div class="text-center mt-4">
+    <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
+  </div>
+<% end %>
+
+
+    <%#
+    t.integer "price_cents", default: 0, null: false
+    t.string "sku"
+    t.float "version"
+    t.string "link"
+    t.string "list"
+    t.string "product_link"
+    t.integer "display_order"
+    t.string "announcement"
+    t.integer "status"
+    t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id" %>
