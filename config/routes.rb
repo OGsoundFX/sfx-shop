@@ -29,6 +29,11 @@ Rails.application.routes.draw do
   get "the_quest", to: "pages#the_quest"
   post "subscribe_no_user", to: "pages#subscribe"
   resources :sfx_packs, only: :show
+
+  resources :sound_designers, only: [] do
+    resources :sfx_packs, only: [:create, :update]
+  end
+
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
   end
@@ -75,6 +80,7 @@ Rails.application.routes.draw do
   # sound designer dashboard routes
   get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard
   get "content_submissions", to: "designer_dashboards#submissions", as: :content_submissions
+  get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
 
   # data protection path
   get "data_protection", to: "pages#data_protection"

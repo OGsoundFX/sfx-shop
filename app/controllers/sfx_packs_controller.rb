@@ -11,4 +11,32 @@ class SfxPacksController < ApplicationController
       end
     end
   end
+
+  def create
+    @designer = SoundDesigner.find(params[:sound_designer_id])
+    @sfx_pack = SfxPack.new(sfx_pack_params)
+    @sfx_pack.sound_designer = @designer
+
+    # taking care of the category field
+    params[:sfx_pack][:category].shift
+    @sfx_pack.category = params[:sfx_pack][:category].join(", ")
+    @sfx_pack.status = "submitted"
+    if @sfx_pack.save
+      redirect_to content_submissions_path
+    else
+      render "designer_dashboards/pack_form", status: :unprocessable_entity
+    end
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
+
+  def sfx_pack_params
+    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :list)
+  end
 end

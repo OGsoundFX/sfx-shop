@@ -13,6 +13,11 @@ class DesignerDashboardsController < ApplicationController
     @packs = @designer.sfx_packs.where.not(id: 100).order(:status)
   end
 
+  def pack_form
+    @designer = current_user.sound_designer
+    @sfx_pack = SfxPack.new
+  end
+
   private
 
   def load_designer
