@@ -59,6 +59,22 @@
   border-radius: 8px;
 }
 
+.pack-submission-form__tom-select-input {
+  .ts-wrapper {
+    padding: 0;
+  }
+
+  .ts-control {
+    border: none !important;
+  }
+}
+
+.submission-form__note {
+  background-color: grey;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
 .custom-file-input {
   padding: 10px;
   background-color: white;

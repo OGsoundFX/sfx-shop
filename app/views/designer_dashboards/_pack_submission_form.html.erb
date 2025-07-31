@@ -15,7 +15,7 @@
       </div>
       <div class="ms-5">
         <em>
-          Note: Please make sure that your image to illustrate your sound effect pack is as square as possible, as all sound effect pack covers will be displayed in this shape throughout the webiste. Thank you!!!
+          Note: Please make sure that your image to illustrate your sound effect pack is as square as possible, as all sound effect pack covers will be displayed in this shape throughout the webiste.<br><br> Thank you!!!
         </em>
       </div>
     </div>
@@ -23,21 +23,30 @@
   <%= f.input :title %>
   <%= f.input :description %>
   <hr>
-  <%= f.input :category, collection: ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"], multiple: true, label: "Category (Max. 3)", input_html: {data: {controller: "tom-select"}} %>
+  <%= f.input :category, collection: ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"], multiple: true, label: "Category (Max. 3)", input_html: {data: {controller: "tom-select-pack-submission-category"}, class: "pack-submission-form__tom-select-input"}, placeholder: "Select from list" %>
   <hr>
-  <%= f.input :tags, collection: SfxPack::TAGS, multiple: true, label: "Tags (Max. 10)", input_html: {data: {controller: "tom-select"}} %>
+  <%= f.input :tags, collection: SfxPack::TAGS, multiple: true, label: "Tags (Max. 10)", input_html: {data: {controller: "tom-select-pack-submission-tags"}, class: "pack-submission-form__tom-select-input"} %>
   <hr>
   <div class="d-flex justify-content-between">
-    <%= f.input :size_mb, label: "Size in MB" %>
-    <%= f.input :duration %>
     <%= f.input :number_of_tracks %>
+    <%= f.input :size_mb, label: "Size in MB" %>
+    <%= f.input :duration, label: "Duration in minutes" %>
   </div>
   <hr>
-  <%= f.input :price %>
+  <%= f.input :price, label: "Price ($)" %>
+  <div class="submission-form__note mt-2">
     <small><em>Note: Leave 0 for free packs.</em></small>
+  </div>
   <hr>
   <%= f.input :link, label: "Share your demo link" %>
-  <%= f.input :list, label: "Share a url where we can find the list of tracks" %>
+  <div class="submission-form__note mt-2">
+    <small><em>Note: Share a link to your work that accurately illustrates this pack, for potential buyers.</em></small>
+  </div>
+  <hr>
+  <%= f.input :product_link, label: "Share a url where we can find the list of tracks" %>
+    <div class="submission-form__note mt-2">
+      <small><em>Note: Share a download link to your pack, so we can upload it to our Cloud Service</em></small>
+    </div>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
