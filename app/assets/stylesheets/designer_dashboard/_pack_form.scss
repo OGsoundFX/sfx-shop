@@ -40,6 +40,19 @@
   }
 }
 
+.pack-submission-form__photo-upload-wrapper {
+  display: flex;
+}
+
+.pack-submission-form__photo-upload-note {
+  margin-left: 24px;
+}
+
+.pack-submission-form-metadata {
+  display: flex;
+  justify-content: space-between;
+}
+
 .pack-submission-form__photo-upload {
   margin-top: 12px;
   width: 240px;
@@ -93,5 +106,22 @@
   .pack-submission-form__box {
     padding: 12px;
     width: 90%;
+  }
+
+}
+
+@media (max-width: 1200px) {
+  .pack-submission-form-metadata {
+    display: block;
+  }
+}
+
+@media (max-width: 992px) {
+  .pack-submission-form__photo-upload-wrapper {
+    display: block;
+  }
+
+  .pack-submission-form__photo-upload-note {
+    margin-left: 0;
   }
 }
