@@ -8,13 +8,14 @@ class SfxPack < ApplicationRecord
     "teleport", "shield", "trap", "clicks", "footsteps", "heartbeat"
   ].freeze
 
-  before_destroy :purge_photos
+  before_destroy :purge_files
 
   belongs_to :sound_designer
   has_many :orders, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
   has_one_attached :banner
+  has_one_attached :sound_list
   monetize :price_cents
 
   # enum status: ["draft", "submitted", "live", "declined"]
@@ -56,7 +57,8 @@ class SfxPack < ApplicationRecord
     end
   end
 
-  def purge_photos
+  def purge_files
     photos.each(&:purge_later)
+    sound_list.purge_later
   end
 end

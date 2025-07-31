@@ -44,23 +44,15 @@
   </div>
   <hr>
   <%= f.input :product_link, label: "Share a url where we can find the list of tracks" %>
-    <div class="submission-form__note mt-2">
-      <small><em>Note: Share a download link to your pack, so we can upload it to our Cloud Service</em></small>
-    </div>
+  <div class="submission-form__note mt-2">
+    <small><em>Note: Share a download link to your pack, so we can upload it to our Cloud Service</em></small>
+  </div>
+  <hr>
+  <%= f.input :sound_list, as: :file, label: "Share a PDF listing the sounds (optional)", input_html: {id: "file-upload"} %>
+  <div class="submission-form__note mt-2">
+    <small><em>Note: Share a PDF file containing the list of the sounds contain in this Pack.</em></small>
+  </div>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
 <% end %>
-
-
-    <%#
-    t.integer "price_cents", default: 0, null: false
-    t.string "sku"
-    t.float "version"
-    t.string "link"
-    t.string "list"
-    t.string "product_link"
-    t.integer "display_order"
-    t.string "announcement"
-    t.integer "status"
-    t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id" %>

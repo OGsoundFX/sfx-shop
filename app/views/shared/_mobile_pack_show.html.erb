@@ -45,7 +45,7 @@
           <li><%= @pack.duration %> minutes</li>
           <li><%= number_with_delimiter @pack.number_of_tracks %> tracks</li>
           <li>48 kHz / 24bit / Stereo WAV files</li>
-          <li><%= link_to "List of Sounds", @pack.list, target: :_blank %></li>
+          <li><%= link_to "List of Sounds", @pack.sound_list.url, target: :_blank %></li>
           <li>Version: <%= @pack.version %></li>
           <li id='pack-description'>Description: <%= @pack.description %></li>
         </ul>
