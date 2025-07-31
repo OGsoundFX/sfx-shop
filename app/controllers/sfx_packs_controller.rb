@@ -18,8 +18,9 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sound_designer = @designer
 
     # taking care of the category and tags fields
-    params[:sfx_pack][:category]
-    params[:sfx_pack][:tags]
+    params[:sfx_pack][:category].shift
+    params[:sfx_pack][:tags].shift
+
     @sfx_pack.category = params[:sfx_pack][:category].join(", ")
     @sfx_pack.tags = params[:sfx_pack][:tags].join(", ")
 
@@ -53,6 +54,6 @@ class SfxPacksController < ApplicationController
   private
 
   def sfx_pack_params
-    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :list)
+    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link)
   end
 end

@@ -64,8 +64,11 @@ application.register("template-form", TemplateFormController)
 import TheQuestModalController from "./the_quest_modal_controller"
 application.register("the-quest-modal", TheQuestModalController)
 
-import TomSelectController from "./tom_select_controller"
-application.register("tom-select", TomSelectController)
+import TomSelectPackSubmissionCategoryController from "./tom_select_pack_submission_category_controller"
+application.register("tom-select-pack-submission-category", TomSelectPackSubmissionCategoryController)
+
+import TomSelectPackSubmissionTagsController from "./tom_select_pack_submission_tags_controller"
+application.register("tom-select-pack-submission-tags", TomSelectPackSubmissionTagsController)
 
 import TooltipMobileController from "./tooltip_mobile_controller"
 application.register("tooltip-mobile", TooltipMobileController)

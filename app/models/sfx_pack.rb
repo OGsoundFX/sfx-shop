@@ -20,8 +20,12 @@ class SfxPack < ApplicationRecord
   # enum status: ["draft", "submitted", "live", "declined"]
   enum status: { draft: 0, submitted: 1, live: 2, declined:3 }
 
-  validates :title, :size_mb, :description, :category, :tags, :duration, :number_of_tracks, :price, :link, :list, presence: true
-  # validates :price, numericality: { only_integer: true }
+  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price,:link, :product_link, presence: true
+  validates :link, :product_link, format: {
+    with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
+    message: 'must be a valid URL'
+  }
+
   validate :photo_presence, :categories_max, :tags_max
 
   def to_param
@@ -42,13 +46,13 @@ class SfxPack < ApplicationRecord
 
   def categories_max
     if category.split(", ").size > 3
-      errors.add(:category, "You can only select 3 categories maximum")
+      errors.add(:category, ": You can only select 3 categories maximum")
     end
   end
 
   def tags_max
     if tags.split(", ").size > 10
-      errors.add(:tags, "You can only select 10 tags maximum")
+      errors.add(:tags, ": You can only select 10 tags maximum")
     end
   end
 
