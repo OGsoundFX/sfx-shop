@@ -54,6 +54,6 @@ class SfxPacksController < ApplicationController
   private
 
   def sfx_pack_params
-    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link)
+    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list)
   end
 end
