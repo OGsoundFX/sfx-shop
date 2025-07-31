@@ -1,6 +1,6 @@
 <%= simple_form_for [@designer, @sfx_pack] do |f| %>
   <div class="mb-3">
-    <div class="d-flex">
+    <div class="pack-submission-form__photo-upload-wrapper">
       <div class="d-flex flex-column" data-controller="submission-image-preview">
         <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
         <div>
@@ -13,7 +13,7 @@
                     input_html: { id: "file-upload", class: "d-none", data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
         </div>
       </div>
-      <div class="ms-5">
+      <div class="pack-submission-form__photo-upload-note">
         <em>
           Note: Please make sure that your image to illustrate your sound effect pack is as square as possible, as all sound effect pack covers will be displayed in this shape throughout the webiste.<br><br> Thank you!!!
         </em>
@@ -27,7 +27,7 @@
   <hr>
   <%= f.input :tags, collection: SfxPack::TAGS, multiple: true, label: "Tags (Max. 10)", input_html: {data: {controller: "tom-select-pack-submission-tags"}, class: "pack-submission-form__tom-select-input"} %>
   <hr>
-  <div class="d-flex justify-content-between">
+  <div class="pack-submission-form-metadata">
     <%= f.input :number_of_tracks %>
     <%= f.input :size_mb, label: "Size in MB" %>
     <%= f.input :duration, label: "Duration in minutes" %>
@@ -48,10 +48,18 @@
     <small><em>Note: Share a download link to your pack, so we can upload it to our Cloud Service</em></small>
   </div>
   <hr>
-  <%= f.input :sound_list, as: :file, label: "Share a PDF listing the sounds (optional)", input_html: {id: "file-upload"} %>
-  <div class="submission-form__note mt-2">
-    <small><em>Note: Share a PDF file containing the list of the sounds contain in this Pack.</em></small>
+  <div class="submission-form__pdf-list">
+    <div class="mb-2">
+      <%= f.label :sound_list, "Share sound list (PDF)" %>
+      <em><small>* optional</small></em>
+    </div>
+    <label for="sound_list_upload" class="custom-file-upload">
+      📄 Choose PDF
+    </label>
+    <%= f.file_field :sound_list, id: "sound_list_upload", class: "hidden-file-input" %>
+    <span id="file-name">No file selected</span>
   </div>
+  <hr>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>

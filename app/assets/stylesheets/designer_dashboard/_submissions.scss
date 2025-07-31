@@ -53,6 +53,27 @@
   }
 }
 
+.custom-file-upload {
+  margin-right: 8px;
+  width: 50%;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.custom-file-upload:hover {
+  background-color: #444;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
 @media (max-width: 1399px) {
   .submissions-live__grid {
     grid-template-columns: 1fr 1fr;
