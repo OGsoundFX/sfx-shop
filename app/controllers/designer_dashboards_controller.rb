@@ -18,6 +18,11 @@ class DesignerDashboardsController < ApplicationController
     @sfx_pack = SfxPack.new
   end
 
+  def update_pack_form
+    @designer = current_user.sound_designer
+    @sfx_pack = SfxPack.find(params[:id])
+  end
+
   private
 
   def load_designer

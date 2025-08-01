@@ -39,7 +39,9 @@
                 <%= link_to sfx_pack_path(pack), target: "_blank" do %>
                   <i class="fas fa-eye me-2"></i>
                 <% end %>
-                <i class="fas fa-pen"></i>
+                <%= link_to update_pack_path(pack), class: "designer-dashboard__icon-white" do %>
+                  <i class="fas fa-pen"></i>
+                <% end %>
               </div>
             </div>
             <hr>

@@ -46,6 +46,13 @@ class SfxPacksController < ApplicationController
   end
 
   def update
+    pack = SfxPack.find(params[:id])
+    pack.update(sfx_pack_params)
+    if pack.save
+      redirect_to content_submissions_path
+    else
+      render "designer_dashboards/update_pack_form", status: :unprocessable_entity
+    end
   end
 
   def destroy

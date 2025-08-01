@@ -6,6 +6,7 @@ export default class extends Controller {
   
   preview() {
     const file = this.inputTarget.files[0]
+    console.log(file)
     if (file) {
       const reader = new FileReader()
 
