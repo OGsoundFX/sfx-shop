@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard
   get "content_submissions", to: "designer_dashboards#submissions", as: :content_submissions
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
+  get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
 
   # data protection path
   get "data_protection", to: "pages#data_protection"
