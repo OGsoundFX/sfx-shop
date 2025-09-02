@@ -58,6 +58,9 @@ application.register("submission-image-preview", SubmissionImagePreviewControlle
 import SubmissionModalController from "./submission_modal_controller"
 application.register("submission-modal", SubmissionModalController)
 
+import SubmissionPdfPreviewController from "./submission_pdf_preview_controller"
+application.register("submission-pdf-preview", SubmissionPdfPreviewController)
+
 import TemplateFormController from "./template_form_controller"
 application.register("template-form", TemplateFormController)
 
