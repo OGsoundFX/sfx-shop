@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get "your_listings", to: "designer_dashboards#listings", as: :designer_listings
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
+  delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack
 
   # data protection path
   get "data_protection", to: "pages#data_protection"

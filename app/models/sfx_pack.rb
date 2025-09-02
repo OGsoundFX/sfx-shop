@@ -19,7 +19,7 @@ class SfxPack < ApplicationRecord
   monetize :price_cents
 
   # enum status: ["draft", "submitted", "live", "declined"]
-  enum status: { draft: 0, submitted: 1, live: 2, declined:3 }
+  enum status: { draft: 0, submitted: 1, live: 2, declined:3, removed: 4 }
 
   validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price,:link, :product_link, presence: true
   validates :link, :product_link, format: {

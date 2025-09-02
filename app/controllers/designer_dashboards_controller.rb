@@ -1,5 +1,6 @@
 class DesignerDashboardsController < ApplicationController
   before_action :unauthorized_redirect, :load_designer
+  before_action :load_pack, only: [:update_pack_form, :remove_pack]
 
   def main
   end
@@ -20,7 +21,11 @@ class DesignerDashboardsController < ApplicationController
 
   def update_pack_form
     @designer = current_user.sound_designer
-    @sfx_pack = SfxPack.find(params[:id])
+  end
+
+  def remove_pack
+    @sfx_pack.removed!
+    redirect_to designer_listings_path
   end
 
   private
@@ -31,5 +36,9 @@ class DesignerDashboardsController < ApplicationController
 
   def unauthorized_redirect
     redirect_to root_path, notice: "You need to sign in to access this page" if !user_signed_in?
+  end
+
+  def load_pack
+    @sfx_pack = SfxPack.find(params[:id])
   end
 end

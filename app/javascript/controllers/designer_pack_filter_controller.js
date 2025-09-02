@@ -8,7 +8,7 @@ export default class extends Controller {
   }
   
   connect() {
-    this.statusValues = ["all", "live", "submitted", "declined", "drafts"]
+    this.statusValues = ["all", "live", "submitted", "declined", "drafts", "removed"]
   }
 
   filter(event) {
