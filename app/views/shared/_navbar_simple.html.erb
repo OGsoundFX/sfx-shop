@@ -39,6 +39,7 @@
         <li class="nav-item dropdown">
           <%= image_tag asset_path("logo/avatar.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", "data-bs-toggle": "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "Seller", designer_listings_path, class: "dropdown-item" %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
             <div class="d-flex">
               <div>
@@ -90,6 +91,9 @@
         <%= link_to "About", about_path, class: "nav-link text-white" %>
       </li>
       <% if current_user %>
+        <li class="nav-item">
+          <%= link_to "Seller", designer_listings_path, class: "nav-link text-white" %>
+        </li>
         <li class="nav-item">
           <%= link_to "Dashboard", dashboard_path, class: "nav-link text-white" %>
         </li>

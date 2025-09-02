@@ -4,7 +4,7 @@ class DesignerDashboardsController < ApplicationController
   def main
   end
 
-  def submissions
+  def listings
     # @live_packs = @designer.sfx_packs.live.order(updated_at: :desc)
     # @pending_packs = @designer.sfx_packs.pending.order(updated_at: :desc)
     # @under_review_packs = @designer.sfx_packs.under_review.order(updated_at: :desc)
