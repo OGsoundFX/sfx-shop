@@ -68,15 +68,17 @@
       <%= f.label :sound_list, "Share sound list (PDF)" %>
       <em><small>* optional</small></em>
     </div>
-    <label for="sound_list_upload" class="custom-file-upload">
-      📄 Choose PDF
-    </label>
-    <%= f.file_field :sound_list, id: "sound_list_upload", class: "hidden-file-input" %>
-    <% if @sfx_pack.sound_list.attached? %>
-      File selected: <%= @sfx_pack.sound_list.filename %>
-    <% else %>
-      <span id="file-name">No file selected</span>
-    <% end %>
+    <div data-controller="submission-pdf-preview">
+      <label for="sound_list_upload" class="custom-file-upload">
+        📄 Choose PDF
+      </label>
+      <%= f.file_field :sound_list, id: "sound_list_upload", class: "hidden-file-input", data: { action: "change->submission-pdf-preview#preview" } %>
+      <% if @sfx_pack.sound_list.attached? %>
+        File selected: <div data-submission-pdf-preview-target="filename"><%= @sfx_pack.sound_list.filename %></div>
+      <% else %>
+        <span id="file-name">No file selected</span>
+      <% end %>
+    </div>
   </div>
   <hr>
   <div class="text-center mt-4">

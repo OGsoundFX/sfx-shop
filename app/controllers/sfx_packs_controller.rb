@@ -46,9 +46,15 @@ class SfxPacksController < ApplicationController
   end
 
   def update
-    pack = SfxPack.find(params[:id])
-    pack.update(sfx_pack_params)
-    if pack.save
+    @sfx_pack = SfxPack.find(params[:id])
+    @designer = @sfx_pack.sound_designer
+
+    # be careful, only execute the following lines if a new photo or pdf is added
+    @sfx_pack.sound_list.purge if @sfx_pack.sound_list.present? && sfx_pack_params[:sound_list].present?
+    @sfx_pack.photos.purge if @sfx_pack.photos.present? && sfx_pack_params[:photos].present?
+
+    @sfx_pack.update(sfx_pack_params)
+    if @sfx_pack.save
       redirect_to content_submissions_path
     else
       render "designer_dashboards/update_pack_form", status: :unprocessable_entity
