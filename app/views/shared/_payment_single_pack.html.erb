@@ -8,10 +8,10 @@
 
       <div class="d-flex flex-column justify-content-center pack-details">
         <% if @current_sales_list != {} %>
-          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money_with_symbol (SfxPack.find(pack).price * (1 - (@current_sales_list[pack] / 100.to_f))) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money_with_symbol SfxPack.find(pack).price %>)</span></p>
+          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money((SfxPack.find(pack).price * (1 - (@current_sales_list[pack] / 100.to_f))), symbol: session[:currency]) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money(SfxPack.find(pack).price, symbol: session[:currency]) %>)</span></p>
           <% total_pack_price += (SfxPack.find(pack).price * (1 - (@current_sales_list[pack] / 100.to_f))) %>
         <% else %>
-          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money_with_symbol SfxPack.find(pack).price %></span></p>
+          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money(SfxPack.find(pack).price, symbol: session[:currency]) %></span></p>
           <% total_pack_price += (SfxPack.find(pack).price) %>
         <% end %>
       </div>

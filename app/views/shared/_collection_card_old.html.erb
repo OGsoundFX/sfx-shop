@@ -23,7 +23,7 @@
           <h3 id="card-title"><%= collection.title %></h3>
         </div>
 
-        <h1 id="price"><%= humanized_money_with_symbol(collection.price) %></h1>
+        <h1 id="price"><%= humanized_money(collection.price, symbol: session[:currency]) %></h1>
 
       </div>
     </div>

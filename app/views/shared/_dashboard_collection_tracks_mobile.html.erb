@@ -5,7 +5,7 @@
       <div class="d-flex flex-column justify-content-center">
         <div style="font-weight: 500; font-size: 1.2rem">
           <h4 id="title-collection">Collection of <%= collection.tracks.count %> tracks</h4>
-          <h5 id="price-pack">Price: <%= humanized_money_with_symbol collection.price %></h5>
+          <h5 id="price-pack">Price: <%= humanized_money(collection.price, symbol: session[:currency]) %></h5>
         </div>
       </div>
     </div>

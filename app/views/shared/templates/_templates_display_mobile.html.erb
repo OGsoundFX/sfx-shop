@@ -11,7 +11,7 @@
         <h3 class="template-title-mobile"> <strong><%= collection.title %></strong> </h3>
       </div>
       <div class="d-flex template-info">
-        <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+        <h5><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
       </div>
     </div>
 
@@ -154,7 +154,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>PRICE</div>
-      <div><%= humanized_money_with_symbol collection.price %>.00</div>
+      <div><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</div>
     </div>
   </div>
   
@@ -172,7 +172,7 @@
         <h3 class="template-title-mobile"> <strong><%= collection.title %></strong> </h3>
       </div>
       <div class="d-flex template-info">
-        <h5><%= humanized_money_with_symbol collection.price %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+        <h5><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
       </div>
     </div>
     <div id="add-button" class="add-button-desktop">

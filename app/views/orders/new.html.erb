@@ -6,7 +6,7 @@
       <ul class="list-unstyled">
         <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
         <li><strong>TEDDY</strong> <%= @order.sfx_packs.name %> [<%= # @order.teddy_sku %>]</li>
-        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        <li><strong>TOTAL</strong> <%= humanized_money(@order.amount, symbol: session[:currency]) %></li>
         </li>
       </ul>
       <p>Estimated delivery in <strong>2 business days</strong></p>

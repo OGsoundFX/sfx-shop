@@ -6,10 +6,10 @@
         There have been <%= @paid_orders %> orders
       </p>
       <p>
-        Total Amount earned: <%= humanized_money_with_symbol Order.all.sum(&:amount_paid_cents) / 100 %>
+        Total Amount earned: <%= humanized_money(Order.all.sum(&:amount_paid_cents) / 100, symbol: session[:currency]) %>
       </p>
       <p>
-        Total Amount earned today: <%= humanized_money_with_symbol @amount_earned_today / 100 %>
+        Total Amount earned today: <%= humanized_money(@amount_earned_today / 100, symbol: session[:currency]) %>
       </p>
       <p>
         Number of customers: <%= @buyers %>

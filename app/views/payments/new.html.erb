@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between">
       <h1 style="margin-bottom: 20px">Checkout summary</h1>
       <div class="sub-total" style="margin-right:0">
-        Total amount: <span style="color: #69aa97; font-weight: 500"><%= humanized_money_with_symbol @order.amount %></span>
+        Total amount: <span style="color: #69aa97; font-weight: 500"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span>
       </div>
     </div>
 
@@ -49,12 +49,12 @@
 
     <div class="total-checkout packs-display">
       <div class="payment-total-desktop">
-        <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
+        <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
       </div>
       <div class="payment-total-mobile">
         <h3 id="payment-total-h3-mobile">For a total amount of:</h3>
         <div id="payment-total-amount-mobile">
-          <span style="color: #69aa97"><%= humanized_money_with_symbol @order.amount %></span> <em style="font-size: 1rem">(VAT included)</em> 
+          <span style="color: #69aa97"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span> <em style="font-size: 1rem">(VAT included)</em> 
         </div>
       </div>
       <div class="payment-buttons-mobile">
