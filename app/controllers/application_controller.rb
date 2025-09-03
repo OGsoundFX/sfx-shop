@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_currency
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -27,5 +28,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :username, :location, :subscribe) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :username, :location, :current_password) }
+  end
+
+  def set_currency
+    location = Geocoder.search(request.remote_ip).first
+    country = location&.country_code
+    eurozone_countries = %w[AT BE CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES]
+    session[:currency] = eurozone_countries.include?(country) ? 'eur' : 'usd'
   end
 end
