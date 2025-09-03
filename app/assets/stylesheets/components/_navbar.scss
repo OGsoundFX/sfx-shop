@@ -90,6 +90,11 @@
   }
 }
 
+.dropdown-item.seller {
+  color: $new-green;
+  font-weight: 700;
+}
+
 $breakpoint-mobile: 575px;
 $breakpoint-mobile-up: 576px;
 
