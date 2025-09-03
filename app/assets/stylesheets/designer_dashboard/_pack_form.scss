@@ -82,6 +82,12 @@
   }
 }
 
+.pack-submission-form-price {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  gap: 18px;
+}
+
 .submission-form__note {
   background-color: grey;
   border-radius: 8px;

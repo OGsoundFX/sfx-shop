@@ -18,10 +18,13 @@ class SfxPack < ApplicationRecord
   has_one_attached :sound_list
   monetize :price_cents
 
-  # enum status: ["draft", "submitted", "live", "declined"]
+  # enum for status
   enum status: { draft: 0, submitted: 1, live: 2, declined:3, removed: 4 }
 
-  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price,:link, :product_link, presence: true
+  # enum for currencies
+  enum currency: { eur: 0, usd: 1}
+
+  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, presence: true
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
