@@ -1,6 +1,9 @@
 class SfxPacksController < ApplicationController
   def show
     @pack = SfxPack.includes(:sound_designer).includes(photos_attachments: :blob).find(params[:id])
+    unless @pack.live? || @pack.sound_designer.user == current_user
+      redirect_to root_path, alert: "Pack unavailable"
+    end
     @designer = @pack.sound_designer
     @designer_name = "#{@designer.first_name} #{@designer.last_name}"
     @average_rating = (@pack.reviews.sum { |review| review.rating } / @pack.reviews.count.to_f).ceil(1) if @pack.reviews.present?
@@ -39,7 +42,7 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sku = @designer.first_name[0].capitalize + @designer.last_name[0].capitalize + "PACK" + increment
 
     if @sfx_pack.save
-      redirect_to content_submissions_path
+      redirect_to designer_listings_path
     else
       render "designer_dashboards/pack_form", status: :unprocessable_entity
     end
@@ -54,8 +57,9 @@ class SfxPacksController < ApplicationController
     @sfx_pack.photos.purge if @sfx_pack.photos.present? && sfx_pack_params[:photos].present?
 
     @sfx_pack.update(sfx_pack_params)
+    @sfx_pack.submitted! if @sfx_pack.removed?
     if @sfx_pack.save
-      redirect_to content_submissions_path
+      redirect_to designer_listings_path
     else
       render "designer_dashboards/update_pack_form", status: :unprocessable_entity
     end
