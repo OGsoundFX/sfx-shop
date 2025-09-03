@@ -133,6 +133,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.0)
     daemons (1.4.1)
     date (3.3.4)
     devise (4.9.3)
@@ -162,6 +163,9 @@ GEM
     fugit (1.10.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
+    geocoder (1.8.3)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     gibbon (3.5.0)
       faraday (>= 1.0)
       multi_json (>= 1.11.0)
@@ -427,6 +431,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-rails
   font-awesome-sass (~> 5.7)
+  geocoder
   gibbon
   jbuilder (~> 2.7)
   jsbundling-rails

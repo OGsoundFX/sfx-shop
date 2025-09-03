@@ -108,3 +108,6 @@ gem "mission_control-jobs"
 
 # updating rake
 gem "rake", "~> 13.3"
+
+# Stripe geocoding prices
+gem "geocoder"

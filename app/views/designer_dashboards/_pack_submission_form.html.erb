@@ -48,7 +48,10 @@
     <%= f.input :duration, label: "Duration in minutes" %>
   </div>
   <hr>
-  <%= f.input :price, label: "Price ($)" %>
+  <div class="pack-submission-form-price">
+    <%= f.input :price, label: "Price" %>
+    <%= f.input :currency, collection: ["EUR", "USD"], label: "Currency", selected: @sfx_pack.currency.upcase %>
+  </div>
   <div class="submission-form__note mt-2">
     <small><em>Note: Leave 0 for free packs.</em></small>
   </div>
@@ -73,8 +76,11 @@
         📄 Choose PDF
       </label>
       <%= f.file_field :sound_list, id: "sound_list_upload", class: "hidden-file-input", data: { action: "change->submission-pdf-preview#preview" } %>
+      <br>
       <% if @sfx_pack.sound_list.attached? %>
-        File selected: <div data-submission-pdf-preview-target="filename"><%= @sfx_pack.sound_list.filename %></div>
+        <div class="d-flex">
+          <div class="me-1">File selected:</div><div data-submission-pdf-preview-target="filename"><%= @sfx_pack.sound_list.filename %></div>
+        </div>
       <% else %>
         <span id="file-name">No file selected</span>
       <% end %>
