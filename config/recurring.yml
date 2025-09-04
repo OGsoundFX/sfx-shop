@@ -1,9 +1,0 @@
-development:
-  fetch_conversion_rate_task:
-    class: RateConversionJob
-    schedule: every minute
-
-production:
-  fetch_conversion_rate_task:
-    class: RateConversionRateJob
-    schedule: every 2 minutes
