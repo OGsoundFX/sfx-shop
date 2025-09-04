@@ -8,13 +8,13 @@
       <h5><%= pack.title %></h5>
         <% if order.sales != {} %>
           <% if order.sales[pack.to_s] %>
-            <h5 id="price-pack">Price:  <strong> <%= humanized_money_with_symbol pack.price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
-            <h5 id="instead-under"> <i> (instead of <%= humanized_money_with_symbol pack.price %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
+            <h5 id="price-pack">Price:  <strong> <%= humanized_money(pack.price * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f), symbol: session[:currency]) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>
+            <h5 id="instead-under"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </h5>
           <% else %>
-            <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
+            <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
           <% end %>
         <% else %>
-          <h5 id="price-pack">Price: <strong> <%= humanized_money_with_symbol pack.price %> </strong> </h5>
+          <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
         <% end %>
       </div>
     </div>

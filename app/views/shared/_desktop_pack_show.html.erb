@@ -65,14 +65,14 @@
                 <% if @discount %>
                   <div>
                     <div>
-                      <h3><%= humanized_money_with_symbol(@pack.price * ((100 - @discount) / 100.to_f)) %></h3>
+                      <h3><%= humanized_money(@pack.price * ((100 - @discount) / 100.to_f), symbol: session[:currency]) %></h3>
                     </div>
                     <div>
-                      <p> <strike><%= humanized_money_with_symbol(@pack.price) %></strike> </p>
+                      <p> <strike><%= humanized_money(@pack.price, symbol: session[:currency]) %></strike> </p>
                     </div>
                   </div>
                 <% else %>
-                  <h3><%= humanized_money_with_symbol(@pack.price) %></h3>
+                  <h3><%= humanized_money(@pack.price, symbol: session[:currency]) %></h3>
                 <% end %>
               </p>
 

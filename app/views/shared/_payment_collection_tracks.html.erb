@@ -3,7 +3,7 @@
     <div class="d-flex">
       <i class="fas fa-compact-disc checkout-icon-adjust"></i>
       <div class="d-flex flex-column justify-content-center">
-        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money_with_symbol @collection.price %>
+        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price, symbol: session[:currency]) %>
         </div>
       </div>
     </div>

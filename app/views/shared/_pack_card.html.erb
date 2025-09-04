@@ -56,14 +56,14 @@
             <% if @current_sales_list[pack.id] %>
               <div class="d-flex align-items-end">
                 <div>
-                  <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money_with_symbol(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f)) %></strong>
+                  <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f), symbol: session[:currency]) %></strong>
                 </div>
                 <div style="margin: 2px 4px">
-                  <strike><%= humanized_money_with_symbol(pack.price) %></strike>
+                  <strike><%= humanized_money(pack.price, symbol: session[:currency]) %></strike>
                 </div>
               </div>
             <% else %>
-              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money_with_symbol(pack.price) %></strong>
+              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price, symbol: session[:currency]) %></strong>
             <% end %>
             <div class="d-flex">
               <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>

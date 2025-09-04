@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_03_135407) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_04_104409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_135407) do
     t.bigint "template_collection_id"
     t.index ["template_collection_id"], name: "index_collections_on_template_collection_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "currency_rates", force: :cascade do |t|
+    t.string "base", null: false
+    t.string "target", null: false
+    t.decimal "rate", precision: 12, scale: 6
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "designer_submissions", force: :cascade do |t|

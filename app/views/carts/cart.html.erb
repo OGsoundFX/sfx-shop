@@ -31,9 +31,9 @@
                   <h6>Packs</h6>
                   <span>
                     <% if @sum.class == Float %>
-                      <%= humanized_money_with_symbol @total_pack_sum %>
+                      <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money_with_symbol @total_pack_sum %>.00
+                      <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>.00
                     <% end %>
                   </span>
                 </div>
@@ -44,9 +44,9 @@
                   <h6>Collection</h6>
                   <span>
                     <% if @sum.class == Float %>
-                      <%= humanized_money_with_symbol @current_collections.first.price %>
+                      <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money_with_symbol @current_collections.first.price %>.00
+                      <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00
                     <% end %>
                   </span>
                 </div>
@@ -57,9 +57,9 @@
                   <h6>Single-Tracks</h6>
                   <span>
                     <% if @sum.class == Float %>
-                      <%= humanized_money_with_symbol @single_tracks_value %>
+                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money_with_symbol @single_tracks_value %>.00
+                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>.00
                     <% end %>
                   </span>
                 </div>
@@ -70,9 +70,9 @@
                 <h6>Total</h6>
                 <span>
                   <% if @sum.class == Float %>
-                    <%= humanized_money_with_symbol @sum %>
+                    <%= humanized_money(@sum, symbol: session[:currency]) %>
                   <% else %>
-                    <%= humanized_money_with_symbol @sum %>,00
+                    <%= humanized_money(@sum, symbol: session[:currency]) %>,00
                   <% end %>
                 </span>
               </div>
@@ -80,14 +80,14 @@
                 <span>VAT (7% inclusive)</span>
                 <span>
                   <% if @vat.class == Float %>
-                    <%= humanized_money_with_symbol @vat %>
+                    <%= humanized_money(@vat, symbol: session[:currency]) %>
                   <% else %>
-                    <%= humanized_money_with_symbol @vat %>,00
+                    <%= humanized_money(@vat, symbol: session[:currency]) %>,00
                   <% end %>
                 </span>
               </div>
               <% if (@total_value - @sum) > 0 %>
-                <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money_with_symbol (@total_value - @sum) %>)</p>
+                <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money(@total_value - @sum, symbol: session[:currency]) %>)</p>
               <% else %>
                 <div style="height: 10px;"></div>
               <% end %>

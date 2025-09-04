@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
     location = Geocoder.search(request.remote_ip).first
     country = location&.country_code
     eurozone_countries = %w[AT BE CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES]
-    session[:currency] = eurozone_countries.include?(country) ? 'eur' : 'usd'
+    session[:currency] = eurozone_countries.include?(country) ? '€' : '$'
   end
 end

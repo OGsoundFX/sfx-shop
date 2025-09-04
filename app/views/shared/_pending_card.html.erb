@@ -10,7 +10,7 @@
           <tr class="pack-info-dashboard">
             <td><%= image_tag pack.photos[0], width: "100px" %></td>
             <td><%= pack.title %></td>
-            <td>(<i><%= humanized_money_with_symbol(pack.price) %>)</i></td>
+            <td>(<i><%= humanized_money(pack.price, symbol: session[:currency]) %>)</i></td>
           </tr>
         <% end %>
       </tbody>

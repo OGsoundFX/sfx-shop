@@ -10,8 +10,8 @@
           <% end %>
         </div>
         <div class="d-flex">
-          <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
-          <p class="d-none" data-unwrap-cart-target="youSpare"  style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00</h5>
+          <p class="d-none" data-unwrap-cart-target="youSpare"  style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money(@single_tracks_price - @current_collections.first.price_cents / 100, symbol: session[:currency]) %>)</p>
         </div>
       </div>
     </div>
@@ -223,7 +223,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>SUB-TOTAL</div>
-      <div><%= humanized_money_with_symbol @current_collections.first.price %>.00</div>
+      <div><%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00</div>
     </div>
   </div>
   <div data-controller="template-form">
@@ -263,8 +263,8 @@
           <% end %>
         </div>
         <div class="d-flex">
-          <h5>SUB-TOTAL <%= humanized_money_with_symbol @current_collections.first.price %>.00</h5>
-          <p class="d-none" data-unwrap-cart-target="youSpare" style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money_with_symbol (@single_tracks_price - @current_collections.first.price_cents / 100) %>)</p>
+          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00</h5>
+          <p class="d-none" data-unwrap-cart-target="youSpare" style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money(@single_tracks_price - @current_collections.first.price_cents / 100, symbol: session[:currency]) %>)</p>
         </div>
       </div>
     </div>

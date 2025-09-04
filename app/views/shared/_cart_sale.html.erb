@@ -5,7 +5,7 @@
         <i class="fas fa-box-open cart-icon-adjust"></i>
         <div class="dflex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
-          <h5>SUB-TOTAL <%= humanized_money_with_symbol @total_pack_sum %>.00</h5>
+          <h5>SUB-TOTAL <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>.00</h5>
         </div>
       </div>
       <div>
@@ -29,17 +29,17 @@
               <div class="d-flex">
                 <div>
                   <% if @current_sales_list[pack.id] %>
-                    <h3><strong class="price-color"><%= humanized_money_with_symbol pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f) %></strong></h3>
+                    <h3><strong class="price-color"><%= humanized_money(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f), symbol: session[:currency]) %></strong></h3>
                   <% else %>
-                    <h3><strong class="price-color"><%= humanized_money_with_symbol pack.price %></strong></h3>
+                    <h3><strong class="price-color"><%= humanized_money(pack.price, symbol: session[:currency]) %></strong></h3>
                   <% end %>
                 </div>
                 <% if @current_sales_list[pack.id] %>
-                  <div id="instead"><i>(instead of <%= humanized_money_with_symbol pack.price %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
+                  <div id="instead"><i>(instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
                 <% end %>
               </div>
               <% if @current_sales_list[pack.id] %>
-                <div id="instead-mobile"><i>(inst. of <%= humanized_money_with_symbol pack.price %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
+                <div id="instead-mobile"><i>(inst. of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
                 <% end %>
             </div>
           </div>
@@ -64,11 +64,11 @@
           <div>
             <div class="d-flex justify-content-center">
               <div>
-                <h3><strong class="price-color"><%= humanized_money_with_symbol pack.price * 0.8 %></strong></h3>
+                <h3><strong class="price-color"><%= humanized_money(pack.price * 0.8, symbol: session[:currency]) %></strong></h3>
               </div>
               <div>
-               <div id="instead"><i>(instead of <%= humanized_money_with_symbol pack.price %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
-               <div id="instead-mobile"><i>(inst. of <%= humanized_money_with_symbol pack.price %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
+               <div id="instead"><i>(instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
+               <div id="instead-mobile"><i>(inst. of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= @current_sales_list[pack.id]%>% OFF</i></div>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
     <div class="d-flex justify-content-end">
       <div class="d-flex sub-total">
         <div>SUB-TOTAL</div>
-        <div><%= humanized_money_with_symbol @total_pack_sum %>,00</div>
+        <div><%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>,00</div>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
         <i class="fas fa-box-open cart-icon-adjust"></i>
         <div class="d-flex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
-          <h5>SUB-TOTAL <%= humanized_money_with_symbol @total_pack_sum %>.00</h5>
+          <h5>SUB-TOTAL <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>.00</h5>
         </div>
       </div>
       <div>

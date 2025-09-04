@@ -2,3 +2,5 @@ web: env RUBY_DEBUG_OPEN=true bin/rails server
 js: yarn build --watch
 css: yarn build:css --watch
 worker: bundle exec rails solid_queue:work
+dispatcher: bundle exec rails solid_queue:dispatch
+

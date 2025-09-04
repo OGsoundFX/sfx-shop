@@ -5,7 +5,7 @@
       <i class="fas fa-headphones cart-icon-adjust"></i>
       <div class="d-flex flex-column">
         <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
-        <h5>SUB-TOTAL <%= humanized_money_with_symbol @single_tracks_value %></h5>
+        <h5>SUB-TOTAL <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %></h5>
       </div>
     </div>
     <div>
@@ -20,7 +20,7 @@
     <!-- Desktop View -->
     <div class="container-cart-single-desktop points-banner">
       <div class="d-flex flex-column justify-content-center">
-        <span><i class="fas fa-info-circle"></i> Add all these track to your collection and save up to <span style="color: #ffa500"><%= humanized_money_with_symbol @single_tracks_value %></span> !!!</span>
+        <span><i class="fas fa-info-circle"></i> Add all these track to your collection and save up to <span style="color: #ffa500"><%= humanized_money(@single_tracks_value, symbol: session[:currency]) %></span> !!!</span>
       </div>
       <div class="d-flex flex-column justify-content-center">
         <span>Total track points  <span class="collection-points" style="color: white"><%= @single_tracks_points %></span></span> 
@@ -32,7 +32,7 @@
         <strong><span>Total track points  <span class="collection-points" style="color: white"><%= @single_tracks_points %></span></span></strong>
       </div>
       <div class="d-flex flex-column justify-content-center add-to-collection-mobile">
-        <em><span><i class="fas fa-info-circle"></i> Add all these track to your collection and save up to <span style="color: #ffa500"><%= humanized_money_with_symbol @single_tracks_value %></span> !!!</span></em>
+        <em><span><i class="fas fa-info-circle"></i> Add all these track to your collection and save up to <span style="color: #ffa500"><%= humanized_money(@single_tracks_value, symbol: session[:currency]) %></span> !!!</span></em>
       </div>
     </div>
     <!-- Convert button -->
@@ -44,7 +44,7 @@
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center">
           <% if price_difference > 0 %>
-            <span><i class="fas fa-info-circle"></i> Get these tracks for <span style="color: #ffa500"><%= humanized_money_with_symbol CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price %></span> (save <span style="color: #ffa500"><%= humanized_money_with_symbol (@single_tracks_value - CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price.to_i) %></span>) convert into a Collection</span>
+            <span><i class="fas fa-info-circle"></i> Get these tracks for <span style="color: #ffa500"><%= humanized_money(CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price, symbol: session[:currency]) %></span> (save <span style="color: #ffa500"><%= humanized_money((@single_tracks_value - CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price.to_i), symbol: session[:currency]) %></span>) convert into a Collection</span>
           <% else %>
             <span><i class="fas fa-info-circle"></i> Create a Collection and get up to 20 tracks for only<span></span><span style="color: #ffa500"> $5 </span>!
           <% end %>
@@ -85,10 +85,10 @@
           </div>
           <div class="d-flex justify-content-between wave-section elements-position">
             <span class="info-font pad-top-cart">
-            <% if humanized_money_with_symbol(track.price).include?(".") %>
-              <%= humanized_money_with_symbol(track.price) %>
+            <% if humanized_money(track.price, symbol: session[:currency]).include?(".") %>
+              <%= humanized_money(track.price, symbol: session[:currency]) %>
             <% else %>
-              <%= humanized_money_with_symbol(track.price) %>.00
+              <%= humanized_money(track.price, symbol: session[:currency]) %>.00
             <% end %>
             </span>
             <span class="info-font points-cart" id="comingSoonBtn"><%= track.points%></span>
@@ -286,7 +286,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>SUB-TOTAL</div>
-      <div><%= humanized_money_with_symbol @single_tracks_value %></div>
+      <div><%= humanized_money(@single_tracks_value, symbol: session[:currency]) %></div>
     </div>
   </div>
 
@@ -299,7 +299,7 @@
       <i class="fas fa-headphones cart-icon-adjust"></i>
       <div class="d-flex flex-column">
         <h3 class="cart-sfx-packs-title"> <strong>SINGLE TRACKS</strong> </h3>
-        <h5>SUB-TOTAL <%= humanized_money_with_symbol @single_tracks_value %></h5>
+        <h5>SUB-TOTAL <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %></h5>
       </div>
     </div>
     <div>

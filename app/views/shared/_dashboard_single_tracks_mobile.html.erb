@@ -8,7 +8,7 @@
       <div class="d-flex flex-column justify-content-center">
         <div style="font-weight: 500; font-size: 1.2rem">
           <h4 id="title-collection"><%= order.tracks.count %> individual tracks</h4>
-          <h5 id="price-pack">Price: <%= humanized_money_with_symbol(total_tracks_price) %></h5>
+          <h5 id="price-pack">Price: <%= humanized_money(total_tracks_price, symbol: session[:currency]) %></h5>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
         <% displayed_track = SingleTrack.find(track) %>
         <div class="grid-display-list">
           <div><%= sanitize SingleTrack.categories[displayed_track.category.to_sym].to_s %></div>
-          <div><%= displayed_track.title %> (<%= humanized_money_with_symbol(displayed_track.price) %>)</div>
+          <div><%= displayed_track.title %> (<%= humanized_money(displayed_track.price, symbol: session[:currency]) %>)</div>
           <div><%= link_to "Download", download_single_path(url: SingleTrack.find(track).link, title: SingleTrack.find(track).title) %></div>
         </div>
       <% end %>

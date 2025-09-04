@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="card-body-pack d-flex justify-content-between border-top align-items-center py-3">
-        <strong class="fw-semibold mb-0" style="font-size: 1.2rem"><%= humanized_money_with_symbol(collection.price) %></strong>
+        <strong class="fw-semibold mb-0" style="font-size: 1.2rem"><%= humanized_money(collection.price, symbol: session[:currency]) %></strong>
         <div class="d-flex">
           <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
         </div>
