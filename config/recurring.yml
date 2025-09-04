@@ -1,9 +1,9 @@
-production:
-  fetch_conversion_rate_task:
-    command: "job:RateConversionJob"
-    schedule: every 2 minutes
-    # schedule: every 2 days at 12am
 development:
   fetch_conversion_rate_task:
-    command: "job:RateConversionJob"
+    class: RateConversionJob
     schedule: every minute
+
+production:
+  fetch_conversion_rate_task:
+    class: RateConversionRateJob
+    schedule: every 2 minutes
