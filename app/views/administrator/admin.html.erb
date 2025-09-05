@@ -2,7 +2,18 @@
   <div class="container">
     <%= render "admin_menu" %>
   </div>
-  <div class="submission-container text-center">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= link_to "Exchange Rate Dashboard", "https://exchangerate.host/dashboard", class: "btn btn-primary", target: "_blank" %>
+      </div>
+      <div>
+        <%= link_to "Re-calculate Exchange Rate", calculate_exchange_rate_path, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <div class="btn btn-primary">EUR/USD: <%= CurrencyRate.where(base: "EUR").order(created_at: :desc).first.rate.to_f %></div>
+      </div>
+    </div>
+  </div>
+  <div class="container submission-container text-center">
     <div style="width: 100vw">
       <div class="d-flex text-white ml-5 bg-secondary p-2 rounded-1">
         <div>
