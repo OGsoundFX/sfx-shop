@@ -12,6 +12,12 @@
     <%= paginate @tracks, class: "paginator-top" %>
   </div>
 </div>
+<% pack = SfxPack.find(100) %>
+<% if pack.currency_symbol != session[:currency] %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
 <ul>
   <% @tracks.each do |track| %>
     <div data-controller="single-mobile-dropdown">
@@ -50,10 +56,10 @@
         </div>
         <div class="d-flex justify-content-center wave-section elements-position">
           <span class="info-font pad-top">
-          <% if humanized_money(track.price, symbol: session[:currency]).include?(".") %>
-            <%= humanized_money(track.price, symbol: session[:currency]) %>
+          <% if humanized_money(track.price * conversion_rate, symbol: session[:currency]).include?(".") %>
+            <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>
           <% else %>
-            <%= humanized_money(track.price, symbol: session[:currency]) %>.00
+            <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>.00
           <% end %>
           </span>
           <span class="info-font points points-tooltip" id="comingSoonBtn"><%= track.points%>

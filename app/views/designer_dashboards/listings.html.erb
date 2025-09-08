@@ -82,7 +82,7 @@
                       <span class="text-white text-xs px-2 py-1 badge rounded-pill" style="background-color: #ff00fe;">free</span>
                     <% else %>
                       <div id="submissions__pack-price-font">
-                        <%= number_to_currency(pack.price, unit: "$ ", separator: ",", precision: 2) %>
+                        <%= number_to_currency(pack.price, unit: "#{pack.currency_symbol} ", separator: ",", precision: 2) %>
                       </div>
                     <% end %>
                   </div>

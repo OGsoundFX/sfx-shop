@@ -11,6 +11,11 @@
         <div class="card-body d-flex flex-column h-100">
 
           <div class="d-flex flex-column h-100 justify-content-between">
+            <% if @pack.currency_symbol != session[:currency] %>
+              <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", @pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f %>
+            <% else %>
+              <% conversion_rate = 1 %>
+            <% end %>
             <div>
               <!-- Title and Rating -->
               <div class="mb-2">
@@ -65,14 +70,19 @@
                 <% if @discount %>
                   <div>
                     <div>
-                      <h3><%= humanized_money(@pack.price * ((100 - @discount) / 100.to_f), symbol: session[:currency]) %></h3>
+                      <h3><%= humanized_money((@pack.price * conversion_rate) * ((100 - @discount) / 100.to_f), symbol: session[:currency]) %></h3>
                     </div>
                     <div>
-                      <p> <strike><%= humanized_money(@pack.price, symbol: session[:currency]) %></strike> </p>
+                      <p> <strike><%= humanized_money(@pack.price * conversion_rate, symbol: session[:currency]) %></strike> </p>
                     </div>
                   </div>
                 <% else %>
-                  <h3><%= humanized_money(@pack.price, symbol: session[:currency]) %></h3>
+                  <div class="d-flex justify-content-end">
+                    <h3><%= humanized_money(@pack.price * conversion_rate, symbol: session[:currency]) %></h3>
+                    <% if @pack.currency_symbol != session[:currency] %>
+                      <em style="margin-top: 6px; margin-left: 4px">(<%= humanized_money(@pack.price, symbol: @pack.currency_symbol) %>)</em>
+                    <% end %>
+                  </div>
                 <% end %>
               </p>
 
