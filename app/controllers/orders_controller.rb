@@ -46,9 +46,9 @@ class OrdersController < ApplicationController
   def checkout
     # cart = Cart.where(user_id: current_user.id).first
     cart = Cart.find(params[:cart_id])
-    
+
     cart.items.count == 1 ? multiple = false : multiple = true
-    
+
     # list SFX packs
     ordered_list = []
     cart.items.each do |item|
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
     ordered_list.map! do |item|
       item.id
     end
-    
+
     current_sales = Sale.where("end_date > ?", Date.current)
     current_sales_list = {}
     current_sales.each do |sale|
@@ -71,21 +71,29 @@ class OrdersController < ApplicationController
     total_amount = 0
     ordered_list.each_with_index do |item, index|
       pack = SfxPack.find(item)
+
+      # calculating conversion rate
+      if pack.currency_symbol != session[:currency]
+        conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+      else
+        conversion_rate = 1
+      end
+
       line_item = {}
       line_item[:name] = pack.title
       line_item[:images] = [pack.photos[0]]
 
       if current_sales.count > 0
         if current_sales_list[pack.id]
-          line_item[:amount] = (pack.price_cents * (100 - current_sales_list[pack.id]) / 100.to_f).to_i
+          line_item[:amount] = ((pack.price_cents * conversion_rate) * (100 - current_sales_list[pack.id]) / 100.to_f).to_i
         else
-          line_item[:amount] = pack.price_cents
+          line_item[:amount] = pack.price_cents * conversion_rate
         end
       else
         if index.positive?
-          line_item[:amount] = (pack.price_cents * 0.8).to_i
+          line_item[:amount] = ((pack.price_cents * conversion_rate) * 0.8).to_i
         else
-          line_item[:amount] = pack.price_cents
+          line_item[:amount] = pack.price_cents * conversion_rate
         end
       end
       line_item[:currency] = 'usd'
@@ -140,10 +148,10 @@ class OrdersController < ApplicationController
       collection = []
       collection_sum = 0
     end
-    
+
     # Adding sum of SFX packs, single tracks & collection for the order
     total_amount += tracks_sum += collection_sum
-    
+
     if current_user
       # adding the 7% of taxe on all items
       line_items.each do |item|
@@ -158,7 +166,7 @@ class OrdersController < ApplicationController
         success_url: destroy_cart_url,
         cancel_url: destroy_order_url,
       )
-      
+
       order.update(checkout_session_id: session.id)
       redirect_to new_order_payment_path(order)
     else
