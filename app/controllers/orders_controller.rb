@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
           name: sfx_pack.title,
           images: [sfx_pack.photos[0]],
           amount: (sfx_pack_price.to_i * 100),
-          currency: 'usd',
+          currency: CurrencySymbolService.call[params[:currency]],
           quantity: 1,
           tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
@@ -73,7 +73,7 @@ class OrdersController < ApplicationController
       pack = SfxPack.find(item)
 
       # calculating conversion rate
-      if pack.currency_symbol != session[:currency]
+      if pack.currency_symbol != params[:currency]
         conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
       else
         conversion_rate = 1
@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
           line_item[:amount] = pack.price_cents * conversion_rate
         end
       end
-      line_item[:currency] = 'usd'
+      line_item[:currency] = CurrencySymbolService.call[params[:currency]]
       line_item[:quantity] = 1
       line_items << line_item
       total_amount += line_item[:amount] / 100.to_f
@@ -126,7 +126,7 @@ class OrdersController < ApplicationController
       single_line_item[:name] = 'Individual tracks'
       # single_line_item[:image]
       single_line_item[:amount] = (tracks_sum * 100).to_i
-      single_line_item[:currency] = 'usd'
+      single_line_item[:currency] = CurrencySymbolService.call[params[:currency]]
       single_line_item[:quantity] = 1
       line_items << single_line_item
     end
@@ -141,7 +141,7 @@ class OrdersController < ApplicationController
       collection_line_item = {}
       collection_line_item[:name] = 'Collection'
       collection_line_item[:amount] = (collection_sum * 100).to_i
-      collection_line_item[:currency] = 'usd'
+      collection_line_item[:currency] = CurrencySymbolService.call[params[:currency]]
       collection_line_item[:quantity] = 1
       line_items << collection_line_item
     else
