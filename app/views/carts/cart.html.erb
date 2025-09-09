@@ -66,10 +66,10 @@
                 <div class="d-flex justify-content-between">
                   <h6>Single-Tracks</h6>
                   <span>
-                    <% if (@single_tracks_value * conversion_rate) == (@single_tracks_value * conversion_rate).to_i %>
-                      <%= humanized_money(@single_tracks_value * conversion_rate, symbol: session[:currency]) %>.00
+                    <% if @single_tracks_value == @single_tracks_value.to_i %>
+                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>.00
                     <% else %>
-                      <%= humanized_money(@single_tracks_value * conversion_rate, symbol: session[:currency]) %>
+                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>
                     <% end %>
                   </span>
                 </div>
