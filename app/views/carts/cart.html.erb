@@ -48,7 +48,7 @@
                 <div class="d-flex justify-content-between">
                   <h6>Collection</h6>
                   <span>
-                    <% if (@current_collections.first.price * conversion_rate) == (@current_collections.first.price * conversion_rate).to_i %>
+                    <% if humanized_money(@current_collections.first.price * conversion_rate) == (@current_collections.first.price * conversion_rate).to_i %>
                       <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %>
                     <% else %>
                       <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %>.00
