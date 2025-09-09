@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
 
       # calculating conversion rate
       if pack.currency_symbol != params[:currency]
-        conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+        conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "usd").order(created_at: :desc).first.rate.to_f
       else
         conversion_rate = 1
       end
