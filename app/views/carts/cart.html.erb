@@ -40,26 +40,36 @@
               <% end %>
 
               <% if @current_collections.first %>
+                <% if "$" != session[:currency] %>
+                  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+                <% else %>
+                  <% conversion_rate = 1 %>
+                <% end %>
                 <div class="d-flex justify-content-between">
                   <h6>Collection</h6>
                   <span>
-                    <% if @sum.class == Float %>
-                      <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>
+                    <% if (@current_collections.first.price * conversion_rate).class == Float %>
+                      <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00
+                      <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %>.00
                     <% end %>
                   </span>
                 </div>
               <% end %>
 
               <% if @single_tracks_value != 0 %>
+                <% if "$" != session[:currency] %>
+                  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+                <% else %>
+                  <% conversion_rate = 1 %>
+                <% end %>
                 <div class="d-flex justify-content-between">
                   <h6>Single-Tracks</h6>
                   <span>
-                    <% if @sum.class == Float %>
-                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>
+                    <% if (@single_tracks_value * conversion_rate) == (@single_tracks_value * conversion_rate).to_i %>
+                      <%= humanized_money(@single_tracks_value * conversion_rate, symbol: session[:currency]) %>.00
                     <% else %>
-                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>.00
+                      <%= humanized_money(@single_tracks_value * conversion_rate, symbol: session[:currency]) %>
                     <% end %>
                   </span>
                 </div>
@@ -72,7 +82,7 @@
                   <% if @sum.class == Float %>
                     <%= humanized_money(@sum, symbol: session[:currency]) %>
                   <% else %>
-                    <%= humanized_money(@sum, symbol: session[:currency]) %>,00
+                    <%= humanized_money(@sum, symbol: session[:currency]) %>.00
                   <% end %>
                 </span>
               </div>

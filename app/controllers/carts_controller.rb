@@ -111,7 +111,13 @@ class CartsController < ApplicationController
       @single_tracks_value = 0
 
       @single_tracks_list.each do |track|
-        @single_tracks_value += (track.price_cents / 100.to_f)
+        single_tracks = SfxPack.find(100)
+        if single_tracks.currency_symbol != session[:currency]
+          conversion_rate = CurrencyRate.where("base = ? AND target = ?", single_tracks.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+        else
+          conversion_rate = 1
+        end
+        @single_tracks_value += ((track.price_cents / 100.to_f) * conversion_rate)
         @sum += (track.price_cents / 100.to_f)
         @total_value += (track.price_cents / 100.to_f)
       end
@@ -121,9 +127,15 @@ class CartsController < ApplicationController
 
       # adding up price of collection
       if @current_collections.last
-        @sum += @current_collections.last.price_cents / 100
+        single_tracks = SfxPack.find(100)
+        if single_tracks.currency_symbol != session[:currency]
+          conversion_rate = CurrencyRate.where("base = ? AND target = ?", single_tracks.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+        else
+          conversion_rate = 1
+        end
+        @sum += ((@current_collections.last.price_cents / 100) * conversion_rate)
       end
-      # this is the You spare part, if we do it with collections vs single tracks
+      # this is the "You spare" part, if we do it with collections vs single tracks
       # @total_value += @current_collections.last.price_cents / 100
       @single_tracks_price = 0
       if @current_collections.last
