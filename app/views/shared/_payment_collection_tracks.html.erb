@@ -1,9 +1,14 @@
+<% if "$" != session[:currency] %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
 <div data-controller="collection-checkout-modal">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-compact-disc checkout-icon-adjust"></i>
       <div class="d-flex flex-column justify-content-center">
-        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price, symbol: session[:currency]) %>
+        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %>
         </div>
       </div>
     </div>
