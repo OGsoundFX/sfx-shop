@@ -87,19 +87,19 @@ class OrdersController < ApplicationController
         if current_sales_list[pack.id]
           line_item[:amount] = ((pack.price_cents * conversion_rate) * (100 - current_sales_list[pack.id]) / 100.to_f).to_i
         else
-          line_item[:amount] = pack.price_cents * conversion_rate
+          line_item[:amount] = (pack.price_cents * conversion_rate).to_i
         end
       else
         if index.positive?
           line_item[:amount] = ((pack.price_cents * conversion_rate) * 0.8).to_i
         else
-          line_item[:amount] = pack.price_cents * conversion_rate
+          line_item[:amount] = (pack.price_cents * conversion_rate).to_i
         end
       end
       line_item[:currency] = CurrencySymbolService.call[params[:currency]]
       line_item[:quantity] = 1
       line_items << line_item
-      total_amount += line_item[:amount] / 100.to_f
+      total_amount += (line_item[:amount] / 100.to_f)
     end
 
     if cart.items != []
