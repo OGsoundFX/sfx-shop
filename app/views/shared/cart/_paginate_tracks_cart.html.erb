@@ -51,7 +51,7 @@
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center">
           <% if price_difference > 0 %>
-            <span><i class="fas fa-info-circle"></i> Get these tracks for <span style="color: #ffa500"><%= humanized_money((CollectionCategory.where("points > #{@tracks.sum(:points)}").first * conversion_rate).price, symbol: session[:currency]) %></span> (save <span style="color: #ffa500"><%= humanized_money((@single_tracks_value - (CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price * conversion_rate).to_i), symbol: session[:currency]) %></span>) convert into a Collection</span>
+            <span><i class="fas fa-info-circle"></i> Get these tracks for <span style="color: #ffa500"><%= humanized_money((CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price * conversion_rate), symbol: session[:currency]) %></span> (save <span style="color: #ffa500"><%= humanized_money((@single_tracks_value - (CollectionCategory.where("points > #{@tracks.sum(:points)}").first.price * conversion_rate).to_i), symbol: session[:currency]) %></span>) convert into a Collection</span>
           <% else %>
             <span><i class="fas fa-info-circle"></i> Create a Collection and get up to 20 tracks for only<span></span><span style="color: #ffa500"> $5 </span>!
           <% end %>

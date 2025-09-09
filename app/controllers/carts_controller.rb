@@ -118,8 +118,8 @@ class CartsController < ApplicationController
           conversion_rate = 1
         end
         @single_tracks_value += ((track.price_cents / 100.to_f) * conversion_rate)
-        @sum += (track.price_cents / 100.to_f)
-        @total_value += (track.price_cents / 100.to_f)
+        @sum += ((track.price_cents / 100.to_f) * conversion_rate)
+        @total_value += ((track.price_cents / 100.to_f) * conversion_rate)
       end
 
       # getting the sum of points for single tracks

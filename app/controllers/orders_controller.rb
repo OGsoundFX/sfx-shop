@@ -114,10 +114,17 @@ class OrdersController < ApplicationController
       tracks_list << SingleTrack.find(track)
     end
 
+    # Calculating conversion rate for single tracks
+    if "$" != params[:currency]
+      single_tracks_conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
+    else
+      single_tracks_conversion_rate = 1
+    end
+
     # Total amount of Single Tracks
     tracks_sum = 0
     tracks_list.each do |track|
-      tracks_sum += (track.price_cents / 100.to_f)
+      tracks_sum += ((track.price_cents * single_tracks_conversion_rate) / 100.to_f)
     end
 
     # creating line_item for single tracks as one track if any
@@ -133,9 +140,14 @@ class OrdersController < ApplicationController
 
     # Adding collection to order
     if params[:collection_id]
+      if "$" != params[:currency]
+        conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
+      else
+        conversion_rate = 1
+      end
       collection = []
       collection << params[:collection_id].to_i
-      collection_sum = (Collection.find(params[:collection_id]).price_cents / 100.to_f)
+      collection_sum = ((Collection.find(params[:collection_id]).price_cents * conversion_rate) / 100.to_f)
 
       # creating line_item for collection
       collection_line_item = {}
