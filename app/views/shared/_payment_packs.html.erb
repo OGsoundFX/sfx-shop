@@ -1,6 +1,12 @@
 <% total_pack_price = 0 %>
 
 <% @order.packs.each_with_index do |pack, index| %>
+  <% sfx_pack = SfxPack.find(pack) %>
+  <% if sfx_pack.currency_symbol != session[:currency] %>
+    <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", sfx_pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f %>
+  <% else %>
+    <% conversion_rate = 1 %>
+  <% end %>
   <% if index.positive? %>
     <div class="d-flex">
       <% if @order.packs.count == 1 %>
@@ -10,11 +16,11 @@
       <% end %>
       <div class="d-flex flex-column justify-content-center pack-details">
         <% if @current_sales_list != {} %>
-          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money((SfxPack.find(pack).price * (1 - (@current_sales_list[pack] / 100.to_f))), symbol: session[:currency]) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money(SfxPack.find(pack).price, symbol: session[:currency]) %>)</span></p>
-          <% total_pack_price += (SfxPack.find(pack).price * (1 - (@current_sales_list[pack] / 100.to_f))) %>
+          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money(((SfxPack.find(pack).price * conversion_rate) * (1 - (@current_sales_list[pack] / 100.to_f))), symbol: session[:currency]) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money(SfxPack.find(pack).price * conversion_rate, symbol: session[:currency]) %>)</span></p>
+          <% total_pack_price += ((SfxPack.find(pack).price * conversion_rate) * (1 - (@current_sales_list[pack] / 100.to_f))) %>
         <% else %>
-          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money(SfxPack.find(pack).price * 0.8, symbol: session[:currency]) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money(SfxPack.find(pack).price, symbol: session[:currency]) %>)</span></p>
-          <% total_pack_price += (SfxPack.find(pack).price * 0.8) %>
+          <p><span class="pack-name-price"><%= SfxPack.find(pack).title %></span> for <span class="pack-name-price"><%= humanized_money((SfxPack.find(pack).price * conversion_rate) * 0.8, symbol: session[:currency]) %></span><span style="color: #ffa500; font-style: italic"> (instead of <%= humanized_money(SfxPack.find(pack).price * conversion_rate, symbol: session[:currency]) %>)</span></p>
+          <% total_pack_price += ((SfxPack.find(pack).price * conversion_rate) * 0.8) %>
         <% end %>
       </div>
     </div>

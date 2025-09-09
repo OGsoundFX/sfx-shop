@@ -23,6 +23,14 @@ class SfxPack < ApplicationRecord
 
   # enum for currencies
   enum currency: { eur: 0, usd: 1}
+  CURRENCY_SYMBOLS = {
+    "eur" => "€",
+    "usd" => "$"
+  }.freeze
+
+  def currency_symbol
+    CURRENCY_SYMBOLS[currency]
+  end
 
   validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, presence: true
   validates :link, :product_link, format: {

@@ -35,6 +35,11 @@ class AdministratorController < ApplicationController
     redirect_to submissions_path
   end
 
+  def calculate_exchange_rate
+    RateConversionJob.perform_now
+    redirect_to admin_path
+  end
+
   def stats
     paid_orders = Order.where(status: "paid")
 

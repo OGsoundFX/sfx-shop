@@ -1,3 +1,8 @@
+<% if session[:currency] != "$" %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
 <div class="packs-display template-display" style="visibility: hidden; position: relative" data-id="<%=collection.id%>" data-unwrap-cart-target="templateUnWrapped">
   <% if (collection.created_at.year - 2022) < 2 %>
     <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 62px; top:-26px; left: -26px; transform: rotate(-60deg)" %>
@@ -10,7 +15,7 @@
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex template-info">
-          <h5><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+          <h5><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
@@ -87,7 +92,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>PRICE</div>
-      <div><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</div>
+      <div><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></div>
     </div>
   </div>
   
@@ -104,7 +109,7 @@
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex template-info">
-          <h5><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+          <h5><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>

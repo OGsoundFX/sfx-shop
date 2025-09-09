@@ -42,6 +42,7 @@ class CartsController < ApplicationController
   end
 
   def cart
+    # fetching collections
     collections
     # adding collection(s) to cart
     cart = current_user.cart
@@ -82,18 +83,29 @@ class CartsController < ApplicationController
       # adding up prices of Packs depending on sales or not and usual 20% discount
       if current_sales.count > 0
         @pack_list.each do |pack|
-          @current_sales_list[pack.id] ? @sum += (pack.price_cents * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += (pack.price_cents / 100)
-          @total_value += (pack.price_cents / 100)
+          # calculating conversion rate
+          if pack.currency_symbol != session[:currency]
+            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+          else
+            conversion_rate = 1
+          end
+          @current_sales_list[pack.id] ? @sum += ((pack.price_cents * conversion_rate) * ((100 - @current_sales_list[pack.id]) / 100.to_f)) / 100 : @sum += ((pack.price_cents * conversion_rate) / 100)
+          @total_value += ((pack.price_cents * conversion_rate) / 100)
         end
-        @total_pack_sum = @sum
       else
         @pack_list.sort_by!(&:price_cents).reverse!
         @pack_list.each_with_index do |pack, index|
-          @total_value += (pack.price_cents / 100)
-          index.positive? ? @sum += ((pack.price_cents / 100) * 0.8) : @sum += (pack.price_cents / 100)
+          # calculating conversion rate
+          if pack.currency_symbol != session[:currency]
+            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+          else
+            conversion_rate = 1
+          end
+          @total_value += ((pack.price_cents * conversion_rate) / 100)
+          index.positive? ? @sum += (((pack.price_cents * conversion_rate) / 100) * 0.8) : @sum += ((pack.price_cents * conversion_rate) / 100)
         end
-        @total_pack_sum = @sum
       end
+      @total_pack_sum = @sum
 
       # adding up prices of single tracks
       @single_tracks_value = 0

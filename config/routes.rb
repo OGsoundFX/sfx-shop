@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   get "admin/sales", to: "administrator#sales", as: :list_sales
   get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
+  get "calculate_exchange_rate", to: "administrator#calculate_exchange_rate", as: :calculate_exchange_rate
 
   # sound designer dashboard routes
   get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard

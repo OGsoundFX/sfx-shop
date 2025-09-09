@@ -96,7 +96,7 @@
                   <%= link_to "Continue shopping", root_path %>
                 </div>
                 <div>
-                  <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first) do %>
+                  <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first, currency: session[:currency]) do %>
                     <%= submit_tag 'Checkout', id: 'btn-cart' %>
                   <% end %>
                 </div>

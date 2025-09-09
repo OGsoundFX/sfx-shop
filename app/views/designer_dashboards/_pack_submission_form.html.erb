@@ -77,13 +77,9 @@
       </label>
       <%= f.file_field :sound_list, id: "sound_list_upload", class: "hidden-file-input", data: { action: "change->submission-pdf-preview#preview" } %>
       <br>
-      <% if @sfx_pack.sound_list.attached? %>
-        <div class="d-flex">
-          <div class="me-1">File selected:</div><div data-submission-pdf-preview-target="filename"><%= @sfx_pack.sound_list.filename %></div>
-        </div>
-      <% else %>
-        <span id="file-name">No file selected</span>
-      <% end %>
+      <div class="d-flex">
+        <div class="me-1">File selected:</div><div data-submission-pdf-preview-target="filename"><%= @sfx_pack.sound_list.attached? ? @sfx_pack.sound_list.filename : "No file selected" %></div>
+      </div>
     </div>
   </div>
   <hr>

@@ -1,5 +1,10 @@
 <div class="row">
   <% @sfx_packs.each do |pack| %>
+    <% if pack.currency_symbol != session[:currency] %>
+      <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f %>
+    <% else %>
+      <% conversion_rate = 1 %>
+    <% end %>
     <% unless pack.title == 'Single Tracks' %>
       <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <div class="pack_specifics">
@@ -56,14 +61,19 @@
             <% if @current_sales_list[pack.id] %>
               <div class="d-flex align-items-end">
                 <div>
-                  <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * ((100 - @current_sales_list[pack.id]) / 100.to_f), symbol: session[:currency]) %></strong>
+                  <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money((pack.price * conversion_rate) * ((100 - @current_sales_list[pack.id]) / 100.to_f), symbol: session[:currency]) %></strong>
                 </div>
                 <div style="margin: 2px 4px">
-                  <strike><%= humanized_money(pack.price, symbol: session[:currency]) %></strike>
+                  <strike><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></strike>
                 </div>
               </div>
             <% else %>
-              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price, symbol: session[:currency]) %></strong>
+              <div class="d-flex align-items-end">
+                <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></strong>
+                <% if pack.currency_symbol != session[:currency] %>
+                  <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(pack.price, symbol: pack.currency_symbol) %>)</em>
+                <% end %>
+              </div>
             <% end %>
             <div class="d-flex">
               <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
