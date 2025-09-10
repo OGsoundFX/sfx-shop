@@ -31,12 +31,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_currency
-    # location = Geocoder.search(request.remote_ip).first
-    # country = location&.country_code
-    # eurozone_countries = %w[AT BE CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES]
-    # session[:currency] = eurozone_countries.include?(country) ? '€' : '$'
-
-    # for testing locally
-    session[:currency] = '€'
+    if Rails.env.development?
+      # for testing locally
+      session[:currency] = '€'
+    else
+      location = Geocoder.search(request.remote_ip).first
+      country = location&.country_code
+      eurozone_countries = %w[AT BE CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES]
+      session[:currency] = eurozone_countries.include?(country) ? '€' : '$'
+    end
   end
 end
