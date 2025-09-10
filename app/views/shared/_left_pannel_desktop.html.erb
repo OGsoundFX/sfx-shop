@@ -14,9 +14,9 @@
         </div>
       <% end %>
       <%= link_to collection_templates_path do %>
-        <div style="position: relative" class="left-pannel-icon <%= request.path == '/collection_templates' ? 'pannel-active' :  'pannel-links' %>">
-          <i class="fas fa-layer-group"></i>
-          <p style="font-size: 0.6rem; margin-left: -8px">COLLECTIONS</p>
+        <div style="position: relative;" class="left-pannel-icon <%= request.path == '/collection_templates' ? 'pannel-active' :  'pannel-links' %>">
+          <i class="fas fa-box-open"></i>
+          <p style="line-height: 1rem">BUILDER</p>
             <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 32px; top:-14px; left: -14px; transform: rotate(-60deg)" %>
         </div>
       <% end %>
