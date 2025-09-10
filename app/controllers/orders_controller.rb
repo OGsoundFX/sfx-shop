@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
           name: sfx_pack.title,
           images: [sfx_pack.photos[0]],
           amount: (sfx_pack_price.to_i * 100),
-          currency: CurrencySymbolService.call[params[:currency]],
+          currency: CurrencySymbolService.lookup(params[:currency]),
           quantity: 1,
           tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
           line_item[:amount] = (pack.price_cents * conversion_rate).to_i
         end
       end
-      line_item[:currency] = CurrencySymbolService.call[params[:currency]]
+      line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
       line_item[:quantity] = 1
       line_items << line_item
       total_amount += (line_item[:amount] / 100.to_f)
@@ -133,7 +133,7 @@ class OrdersController < ApplicationController
       single_line_item[:name] = 'Individual tracks'
       # single_line_item[:image]
       single_line_item[:amount] = (tracks_sum * 100).to_i
-      single_line_item[:currency] = CurrencySymbolService.call[params[:currency]]
+      single_line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
       single_line_item[:quantity] = 1
       line_items << single_line_item
     end
@@ -153,7 +153,7 @@ class OrdersController < ApplicationController
       collection_line_item = {}
       collection_line_item[:name] = 'Collection'
       collection_line_item[:amount] = (collection_sum * 100).to_i
-      collection_line_item[:currency] = CurrencySymbolService.call[params[:currency]]
+      collection_line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
       collection_line_item[:quantity] = 1
       line_items << collection_line_item
     else
