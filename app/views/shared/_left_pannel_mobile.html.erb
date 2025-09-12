@@ -1,7 +1,7 @@
 <div class="mobile-only">
   <div class="left-pannel-mobile d-flex justify-content-between mobile-only">
-    <%= link_to root_path do %>
-      <div class="left-pannel-icon <%= request.path == '/' ? 'pannel-active' :  'pannel-links' %>">
+    <%= link_to sfx_packs_path do %>
+      <div class="left-pannel-icon <%= request.path == '/sfx_packs' ? 'pannel-active' :  'pannel-links' %>">
         <i class="fas fa-box"></i>
         <p>PACKS</p>
       </div>

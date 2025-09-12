@@ -28,7 +28,7 @@
   <%= f.input :description %>
   <hr>
   <%= f.input :category,
-              collection: ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"],
+              collection: SfxPack.categories,
               selected: @sfx_pack.category.present? ? @sfx_pack.category.split(", ") : "",
               multiple: true, label: "Category (Max. 3)",
               input_html: {data: {controller: "tom-select-pack-submission-category", tom_select_pack_submission_category_placeholder_value: @sfx_pack.category.present? ? "false" : "true"},

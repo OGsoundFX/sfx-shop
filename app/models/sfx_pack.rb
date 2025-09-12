@@ -72,4 +72,8 @@ class SfxPack < ApplicationRecord
     photos.each(&:purge_later)
     sound_list.purge_later
   end
+
+  def self.categories
+    ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"]
+  end
 end

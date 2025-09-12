@@ -363,6 +363,10 @@ ul {
 }
 
 @media (max-width: 1200px) {
+  .drop-down-category {
+    display: none !important;
+  }
+
   .wave-cart {
     width: 35vw;
   }
