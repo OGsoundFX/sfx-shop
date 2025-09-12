@@ -29,7 +29,6 @@ class PagesController < ApplicationController
         @status = "Not Subscribed"
       end
     end
-
   end
 
   def data_protection

@@ -6,7 +6,7 @@
   margin: 0 40px
 }
 
-#front-title {
+#front-title, #front-title-index {
   font-size: 2em;
   font-weight: 700;
   text-align: center;
@@ -16,6 +16,10 @@
   border: $border-grey solid 1px;
   border-radius: 4px;
   background-color: $whiter-smoke;
+}
+
+#front-title-index {
+  margin: 80px 40px 0 40px;
 }
 
 #front-title-sale {

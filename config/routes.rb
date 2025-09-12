@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get "blog", to: "pages#blog"
   get "the_quest", to: "pages#the_quest"
   post "subscribe_no_user", to: "pages#subscribe"
-  resources :sfx_packs, only: :show
+  resources :sfx_packs, only: [:show, :index]
 
   resources :sound_designers, only: [] do
     resources :sfx_packs, only: [:create, :update]
