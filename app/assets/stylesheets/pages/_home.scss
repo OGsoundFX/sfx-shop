@@ -6,7 +6,7 @@
   margin: 0 40px
 }
 
-#front-title, #front-title-index {
+#front-title, #front-title-index, #front-title-home {
   font-size: 2em;
   font-weight: 700;
   text-align: center;
@@ -20,6 +20,10 @@
 
 #front-title-index {
   margin: 80px 40px 0 40px;
+}
+
+#front-title-home {
+  margin: 20px 40px 0 40px;
 }
 
 #front-title-sale {
