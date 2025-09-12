@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @categories = SfxPack.categories
     @designers = SoundDesigner.all
     # includes makes sure that the sound_designer from separate table and attachment are loaded in the request
     # rather then each attachment and sound_designere loaded separatly on html display (in iteration)
