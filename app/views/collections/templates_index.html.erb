@@ -14,30 +14,18 @@
           <h4>Chose a template bellow, customize it, and create the perfect SFX Pack for your projects!!!</h4>&nbsp;&nbsp;
           <div><%= image_tag("sword.png", height: "40px") %></div>
         </div>
-        <% if !@templates.empty? %>  
-          <% @templates.order(created_at: :desc).each do |template| %>
-            <%= render 'shared/templates/templates_display', collection: template %>
-          <% end %>
-        <% else %>
-          <h3>No collections at this time</h3>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <!-- Mobile display -->
-  <div class="template-display-mobile">
-    <div class="d-flex">
-      <%= render "shared/left_pannel_desktop"%>
-      <div class="template-section text-center" data-controller="unwrap-cart">
-        <div class="template-info-banner d-flex justify-content-center">
-          <div><%= image_tag("sword.png", height: "28px") %></div>&nbsp;&nbsp;
-          <h4>Select and customize one of the templates bellow, for your projects!!!</h4>&nbsp;&nbsp;
-          <div><%= image_tag("sword.png", height: "28px") %></div>
-        </div>
-        <% if !@templates.empty? %>  
-          <% @templates.order(created_at: :desc).each do |template| %>
-            <%= render 'shared/templates/templates_display_mobile', collection: template %>
-          <% end %>
+        <% if !@templates.empty? %>
+        <!--
+          <div class="template-section-grid">
+            <% @templates.order(created_at: :desc).each do |template| %>
+              <%# render 'shared/templates/templates_display', collection: template %>
+              <%= render 'shared/collection_card', collection: template %>
+            <% end %>
+          </div>
+        -->
+          <div class="">
+            <%= render 'shared/collection_card' %>
+          </div>
         <% else %>
           <h3>No collections at this time</h3>
         <% end %>

@@ -19,6 +19,10 @@
   }
 }
 
+.template-price-mobile {
+  display: none;
+}
+
 .template-picks {
   height: 50px;
   width: 50px;
@@ -156,8 +160,39 @@
 }
 
 @media (max-width: 768px) {
+  .collection-title-banner {
+    display: block !important;
+  }
+  .template-icon-adjust {
+    margin: 14px;
+    aspect-ratio: 1/1;
+  }
+  .template-title {
+    margin: 14px 0 14px 8px;
+  }
+  .template-price-desktop {
+    display: none;
+  }
+  .template-price-mobile {
+    display: block;
+    margin: 0 0 14px 14px;
+  }
+  #add-button a {
+    margin: 0;
+    // width: 100%;
+  }
+  .card-body-template-add {
+    padding: 0 0.6rem 0.6rem 0.6rem;
+    input {
+      padding: 0.4rem 2rem;
+      font-size: 1.2rem;
+    }
+  }
   .template-display-desktop {
-    display: none !important;
+    margin: 0 8px;
+    .card-title {
+      font-size: 1.8rem;
+    }
   }
   .template-display-mobile {
     display: block !important;

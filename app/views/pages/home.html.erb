@@ -6,20 +6,6 @@
     <div class="d-flex">
       <%= render "shared/left_pannel_desktop" %>
       <div class="mx-auto">
-        <!--
-        <div class="collection-section">
-          <div>
-            <h1 id="front-collection-title">Browse our Collections</h1>
-          </div>
-          <div class="d-flex justify-content-center scroll-container-wrapper" data-controller="horizontal-scroll">
-            <i class="arrow left-arrow fas fa-arrow-circle-left" data-horizontal-scroll-target="leftArrow" data-action="click->horizontal-scroll#leftArrowMove"></i>
-            <div class="home-page-collection-display scroll-container" data-horizontal-scroll-target="scrollContainer">
-              <%= render "shared/collections_horizontal", collections: TemplateCollection.where(active: true) %>
-            </div>
-            <i class="arrow right-arrow fas fa-arrow-circle-right" data-horizontal-scroll-target="rightArrow" data-action="click->horizontal-scroll#rightArrowMove"></i>
-          </div>
-        </div>
-        -->
         <div>
           <% if !@announcement.nil? %>
             <h1 id="annoucement-content"><%= @announcement.content %></h1>
