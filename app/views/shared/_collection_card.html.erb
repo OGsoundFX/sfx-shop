@@ -1,41 +1,43 @@
-<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 px-3">
-  <div class="collection-card-wrapper">
-    <div id="wrapper">
-      <%= link_to collection_template_path(collection) do %>
-        <div class="" style="position: relative">
-          <% if collection.image.attached? %>
-            <%= image_tag collection.image, class: 'collection_pic' %>
-          <% else %>
-            <%= image_tag TemplateCollection.where(title: "Punch in the Face").first.image, class: 'collection_pic' %>
-          <% end %>
-          <% if collection.title == "2025 Action Collection" %>
-            <div style="position: absolute; top: -25px; left: -25px">
-              <%= image_tag "2025_pink.png", height: 120, width: 120 %>
-            </div>
-          <% end %>
-        </div>
-        <div class="collection-pop-up">See Details</div>
-      <% end %>
-    </div>
-    <div>
-      <div>
-        <div class="card-body-pack">
-          <div class="d-flex justify-content-between">
-            <div class="tooltip-title">
-              <h5 class="card-title fw-bold mb-1 truncate-title"><%= collection.title %></h5>
-              <span class="tooltiptext-title"><%= collection.title %></span>
+<% if session[:currency] != "$" %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
+<div class="row">
+  <% @templates.order(created_at: :desc).each do |pack| %>
+    <% unless pack.title == 'Single Tracks' %>
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="pack_specifics">
+          <div id="wrapper">
+            <%= link_to collection_template_path(pack) do %>
+              <div class="pack_pic_wrapper"><%= cl_image_tag pack.image.key, class: 'pack_pic' %></div>
+              <div class="pop-up">List of Tracks</div>
+            <% end %>
+          </div>
+          <div>
+            <div class="card-body-pack-info">
+              <div class="d-flex justify-content-center">
+                <div class="tooltip-title">
+                  <h5 class="card-title fw-bold mb-1 truncate-title"><%= pack.title %></h5>
+                  <span class="tooltiptext-title"><%= pack.title %></span>
+                </div>
+              </div>
+              <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
+              <p class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</p>
             </div>
           </div>
-          <% size = collection.size_mb > 1000 ? "#{(collection.size_mb / 1000.to_f).ceil(1)} GB" : "#{collection.size_mb} MB" %>
-          <p class="card-text text-muted"><%= size %> • <%= collection.number_of_tracks %> Sounds</p>
+
+          <div class="border-top pt-2 card-body-pack-price d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-end">
+              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></strong>
+              <% if "$" != session[:currency] %>
+                <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(pack.price, symbol: "$") %>)</em>
+              <% end %>
+            </div>
+            <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: pack.id), class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px"  %>
+          </div>
         </div>
       </div>
-      <div class="card-body-pack d-flex justify-content-between border-top align-items-center py-3">
-        <strong class="fw-semibold mb-0" style="font-size: 1.2rem"><%= humanized_money(collection.price, symbol: session[:currency]) %></strong>
-        <div class="d-flex">
-          <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: collection.id), class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #0d9488; margin-left: 8px" %>
-        </div>
-      </div>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
