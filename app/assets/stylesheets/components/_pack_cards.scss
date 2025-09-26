@@ -13,10 +13,23 @@
   border-radius: 8px 8px 0 0;
 }
 
+.pack_pic_template {
+  padding: 56px;
+}
+
 #cart-btn-remove, #checkout-btn-remove {
   outline: none;
   &:hover {
     color: $light-grey;
+  }
+}
+
+.bg-color-pink {
+  background-color: $flash-pink;
+  &:hover{
+    background-color: $flash-pink;
+    filter: grayscale(0.3);
+    opacity: 0.5;
   }
 }
 

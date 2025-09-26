@@ -3,7 +3,67 @@
 <% else %>
   <% conversion_rate = 1 %>
 <% end %>
+<% if user_signed_in? && Collection.where(user: current_user).where(purchased: false).present? %>
+  <% custom_collection =  Collection.where(user: current_user).where(purchased: false).last %>
+<% end %>
+
 <div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="pack_specifics">
+      <div id="wrapper">
+        <%= link_to list_path do %>
+          <div class="pack_pic_wrapper"><%= image_tag "https://res.cloudinary.com/dk9a86uhu/image/upload/v1758807239/sfx_shop/Misc/plus_transp_aligyu.png", class: 'pack_pic pack_pic_template' %></div>
+        <% end %>
+      </div>
+      <div>
+        <div class="border-top card-body-pack-info">
+          <div class="d-flex justify-content-center">
+            <div class="tooltip-title">
+              <% if custom_collection %>                
+                <% if custom_collection.title.present? %>
+                  <h5 class="card-title fw-bold mb-1 truncate-title"><%= custom_collection.title %></h5>
+                  <span class="tooltiptext-title"><%= custom_collection.title %></span>
+                <% else %>
+                  <h5 class="card-title fw-bold mb-1 truncate-title">Give a name to your pack</h5>
+                <% end %>
+              <% else %>
+                <h5 class="card-title fw-bold mb-1 truncate-title">Build from scratch</h5>
+                <p class="card-text text-muted" style="font-size: 0.9rem">Pick your sound effects!</p>
+              <% end %>
+            </div>
+          </div>
+          <% if custom_collection %>
+            <% custom_collection =  Collection.where(user: current_user).where(purchased: false).last %>
+            <% size = (custom_collection.tracks.sum { |track| SingleTrack.find(track).size } / 1000_000) > 1000 ? "#{((custom_collection.tracks.sum { |track| SingleTrack.find(track).size } / 1000_000) / 1000.to_f).ceil(1)} GB" : "#{(custom_collection.tracks.sum { |track| SingleTrack.find(track).size } / 1000_000)} MB" %>
+            <p class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= custom_collection.tracks.count %> Sounds</p>
+          <% else %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="border-top pt-2 card-body-pack-price d-flex justify-content-between align-items-center">
+          <% if custom_collection %>
+            <div class="d-flex align-items-end">
+              <% custom_collection =  Collection.where(user: current_user).where(purchased: false).last %>
+              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(custom_collection.price * conversion_rate, symbol: session[:currency]) %></strong>
+              <% if "$" != session[:currency] %>
+                <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(custom_collection.price, symbol: "$") %>)</em>
+              <% end %>
+            </div>
+            <%= link_to 'Continue building', list_path, class: "btn btn-teal btn-sm text-white add-to-cart-hover bg-color-pink", style: "margin-left: 8px"  %>
+          <% else %>
+            <div class="d-flex align-items-end">
+              <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(5 * conversion_rate, symbol: session[:currency]) %></strong>
+              <% if "$" != session[:currency] %>
+                <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(5, symbol: "$") %>)</em>
+              <% end %>
+            </div>
+            <%= link_to 'Start building', list_path, class: "btn btn-teal btn-sm text-white add-to-cart-hover bg-color-pink", style: "margin-left: 8px"  %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
   <% @templates.order(created_at: :desc).each do |pack| %>
     <% unless pack.title == 'Single Tracks' %>
       <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
