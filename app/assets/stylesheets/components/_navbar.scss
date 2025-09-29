@@ -91,8 +91,13 @@
 }
 
 .dropdown-item.seller {
-  color: $new-green;
+  background-color: $flash-pink;
+  color: white;
   font-weight: 700;
+  &:hover {
+    filter: grayscale(0.5);
+    opacity: 0.5;
+  }
 }
 
 $breakpoint-mobile: 575px;
