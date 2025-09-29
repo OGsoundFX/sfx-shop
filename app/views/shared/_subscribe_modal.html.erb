@@ -30,7 +30,7 @@
   <% if session[:modal_closed].nil? || session[:modal_closed] == false %>
     <div id="myModal" class="modal">
 
-    <!-- Modal content -->
+      <!-- Modal content -->
       <div class="modal-content">
         <div>
           <%= link_to modal_closed_path, remote: true, data: { action: "click->open-subscribe-modal#close" } do %>

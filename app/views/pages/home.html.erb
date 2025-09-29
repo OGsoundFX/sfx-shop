@@ -6,57 +6,59 @@
     <div class="d-flex">
       <%= render "shared/left_pannel_desktop" %>
       <div class="mx-auto">
-        <div>
-          <% if !@announcement.nil? %>
-            <h1 id="annoucement-content"><%= @announcement.content %></h1>
-          <% elsif @current_sales_list != {} %>
-            <div id="sale-banner">
-              <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
-            </div>
-          <% else %>
-            <div>
-              <h1 id="front-title-home">Browse our SFX Packs</h1>
-            </div>
-          <% end %>
-
-          <div class="pack-container">
-            <div class="forms">
-              <div class="drop-down">
-                <form action="/sfx_packs" data-controller="category">
-                  <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
-                  <input type="hidden" name="filters" value="" data-filters-target="dropdown">
-                  <div class="d-flex justify-content-start">
-                    <div>
-                      <select type="text" name="dropdown" placeholder="category">
-                        <% unless @category %>
-                          <option value="" selected disabled hidden>Pick a category</option>
-                        <% end %>
-                        <option value="all" data-category-target="all">All</option>
-                        <% @categories.each do |cat| %>
-                          <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>" <%= 'selected' if cat.to_s.split("-").join == @category %>><%= cat.to_s.capitalize %></option>
-                        <% end %>
-                        <option value="free" data-category-target="free">Free</option>
-                      </select>
-                    </div>
-                    <div>
-                      <input type="submit" value="GO">
-                    </div>
-                  </div>
-                </form>
+        <section id="next-section">
+          <div>
+            <% if !@announcement.nil? %>
+              <h1 id="annoucement-content"><%= @announcement.content %></h1>
+            <% elsif @current_sales_list != {} %>
+              <div id="sale-banner">
+                <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
               </div>
-              <div style="margin: 30px 8px 0 8px; font-size: 12px"><strong>OR</strong></div>
-              <div class="search-form">
-                <form action="/sfx_packs">
-                  <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
-                  <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
-                </form>
+            <% else %>
+              <div>
+                <h1 id="front-title-home">Browse our SFX Packs</h1>
               </div>
-            </div>
+            <% end %>
 
-            <hr id="search-hr">
-            <%= render 'shared/pack_card' %>
+            <div class="pack-container">
+              <div class="forms">
+                <div class="drop-down">
+                  <form action="/sfx_packs" data-controller="category">
+                    <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
+                    <input type="hidden" name="filters" value="" data-filters-target="dropdown">
+                    <div class="d-flex justify-content-start">
+                      <div>
+                        <select type="text" name="dropdown" placeholder="category">
+                          <% unless @category %>
+                            <option value="" selected disabled hidden>Pick a category</option>
+                          <% end %>
+                          <option value="all" data-category-target="all">All</option>
+                          <% @categories.each do |cat| %>
+                            <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>" <%= 'selected' if cat.to_s.split("-").join == @category %>><%= cat.to_s.capitalize %></option>
+                          <% end %>
+                          <option value="free" data-category-target="free">Free</option>
+                        </select>
+                      </div>
+                      <div>
+                        <input type="submit" value="GO">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div style="margin: 30px 8px 0 8px; font-size: 12px"><strong>OR</strong></div>
+                <div class="search-form">
+                  <form action="/sfx_packs">
+                    <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
+                    <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
+                  </form>
+                </div>
+              </div>
+
+              <hr id="search-hr">
+              <%= render 'shared/pack_card' %>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
