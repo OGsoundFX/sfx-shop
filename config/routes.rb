@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
   delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack
+  post "sound_designers/:id/paypal_account", to: "designer_dashboards#paypal_account", as: :paypal_account
 
   # data protection path
   get "data_protection", to: "pages#data_protection"

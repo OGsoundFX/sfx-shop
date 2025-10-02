@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_04_104409) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_02_075148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -133,6 +133,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_04_104409) do
     t.integer "collections", default: [], array: true
     t.index ["sfx_pack_id"], name: "index_orders_on_sfx_pack_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payment_infos", force: :cascade do |t|
+    t.integer "preferred_method", default: 0
+    t.string "paypal_account"
+    t.integer "status", default: 0
+    t.bigint "sound_designer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sound_designer_id"], name: "index_payment_infos_on_sound_designer_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -370,6 +380,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_04_104409) do
   add_foreign_key "download_links", "orders"
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
+  add_foreign_key "payment_infos", "sound_designers"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"
   add_foreign_key "sfx_packs", "sound_designers"

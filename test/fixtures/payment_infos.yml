@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  preferred_method: 1
+  paypal_account: MyString
+  status: 1
+  sound_designer: one
+
+two:
+  preferred_method: 1
+  paypal_account: MyString
+  status: 1
+  sound_designer: two
