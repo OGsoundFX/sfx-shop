@@ -23,3 +23,19 @@
   font-size: 1.2rem;
   margin-bottom: 4px;
 }
+
+.designer-dashboard__paypal-account {
+  font-weight: bold;
+}
+
+.designer-dashboard__paypal-pending {
+  background-color: $orange-main;
+}
+
+.designer-dashboard__paypal-active {
+  background-color: $new-green;
+}
+
+.designer-dashboard__paypal-inactive {
+  background-color: $indian-red;
+}

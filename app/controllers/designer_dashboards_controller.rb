@@ -28,10 +28,15 @@ class DesignerDashboardsController < ApplicationController
     redirect_to designer_listings_path
   end
 
+  def paypal_account
+    raise
+  end
+
   private
 
   def load_designer
     @designer = current_user.sound_designer
+    @paypal = @designer.payment_infos.last
   end
 
   def unauthorized_redirect
