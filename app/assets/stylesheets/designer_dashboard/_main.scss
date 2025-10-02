@@ -17,6 +17,12 @@
   width: 100%;
   border-radius: 8px;
   background-color: $light-card-background;
+  i {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 .designer-dashboard__label {

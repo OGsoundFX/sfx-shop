@@ -29,14 +29,17 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def paypal_account
-    raise
+    @paypal.update(payment_params)
+    @paypal.sound_designer = @designer
+    @paypal.save
+    redirect_to designer_main_dashboard_path, notice: "Paypal account updated"
   end
 
   private
 
   def load_designer
     @designer = current_user.sound_designer
-    @paypal = @designer.payment_infos.last
+    @paypal = @designer.payment_infos.last || @designer.payment_infos.new
   end
 
   def unauthorized_redirect
@@ -45,5 +48,9 @@ class DesignerDashboardsController < ApplicationController
 
   def load_pack
     @sfx_pack = SfxPack.find(params[:id])
+  end
+
+  def payment_params
+    params.require(:payment_info).permit(:paypal_account)
   end
 end

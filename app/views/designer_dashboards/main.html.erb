@@ -21,35 +21,40 @@
         <p><span style="color: orange">Location:</span> <%= @designer.location %></p>
       </div>
     </div>
-    <div class="designer-dashboard__container mt-3">
+    <div class="designer-dashboard__container mt-3" data-controller="update-paypal">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
             <p class="designer-dashboard__label">Paypal Account</p>
           </div>
-          <div>
+          <div data-action="click->update-paypal#toggleEdit">
             <i class="fas fa-pen"></i>
           </div>
         </div>
         <hr style="margin-top: 0">
-          <% if @paypal %>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
-              </div>
-              <div>
-                <% if @paypal.pending_verif? %>
-                  <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending</div>
-                <% elsif @paypal.active? %>
-                  <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
-                <% elsif @paypal.inactive? %>
-                  <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Inactive</div>
-                <% end %>
-              </div>
+        <% if @paypal.paypal_account.present? %>
+          <div class="d-flex justify-content-between" data-update-paypal-target="data">
+            <div>
+              <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
             </div>
-          <% else %>
-            <p>Please inform your paypal account, so we can proceed to sending you payouts</p>
+            <div>
+              <% if @paypal.pending_verif? %>
+                <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending</div>
+              <% elsif @paypal.active? %>
+                <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
+              <% elsif @paypal.inactive? %>
+                <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Inactive</div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <p data-update-paypal-target="data">Please add your paypal account, so we can proceed to sending you payments.</p>
+        <% end %>
+        <div class="d-none" data-update-paypal-target="form">
+          <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post do |f| %>
+            <%= f.input :paypal_account, label: "Please enter your Paypal account", placeholder: @paypal ? @paypal.paypal_account : "Enter your PayPal account" %>
           <% end %>
+        </div>
       </div>
     </div>
     <div class="designer-dashboard__container mt-3">

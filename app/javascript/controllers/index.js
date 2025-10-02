@@ -79,5 +79,8 @@ application.register("tooltip-mobile", TooltipMobileController)
 import UnwrapCartController from "./unwrap_cart_controller"
 application.register("unwrap-cart", UnwrapCartController)
 
+import UpdatePaypalController from "./update_paypal_controller"
+application.register("update-paypal", UpdatePaypalController)
+
 import VideoModalController from "./video_modal_controller"
 application.register("video-modal", VideoModalController)
