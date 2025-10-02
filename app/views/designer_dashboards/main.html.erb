@@ -32,22 +32,24 @@
           </div>
         </div>
         <hr style="margin-top: 0">
-        <div class="d-flex justify-content-between">
-          <div>
-            <% if @paypal %>
-              <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
-            <% else %>
-              <p>Please inform your paypal account, so we can proceed to sending you payouts</p>
-            <% end %>
-          </div>
-          <% if @paypal.pending_verif? %>
-            <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending</div>
-          <% elsif @paypal.active? %>
-            <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
-          <% elsif @paypal.inactive? %>
-            <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Inactive</div>
+          <% if @paypal %>
+            <div class="d-flex justify-content-between">
+              <div>
+                <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
+              </div>
+              <div>
+                <% if @paypal.pending_verif? %>
+                  <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending</div>
+                <% elsif @paypal.active? %>
+                  <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
+                <% elsif @paypal.inactive? %>
+                  <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Inactive</div>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <p>Please inform your paypal account, so we can proceed to sending you payouts</p>
           <% end %>
-        </div>
       </div>
     </div>
     <div class="designer-dashboard__container mt-3">
