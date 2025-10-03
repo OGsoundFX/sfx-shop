@@ -30,18 +30,45 @@
   margin-bottom: 4px;
 }
 
+.designer-dashboard__info span {
+  color: $light-blue;
+}
+
 .designer-dashboard__paypal-account {
   font-weight: bold;
 }
 
+.designer-dashboard__update-email {
+  background-color: $orange-main;
+}
+
 .designer-dashboard__paypal-pending {
   background-color: $orange-main;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: $orange-main;
+    cursor: default;   
+  }
 }
 
 .designer-dashboard__paypal-active {
   background-color: $new-green;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: $new-green;
+    cursor: default;   
+  }
 }
 
 .designer-dashboard__paypal-inactive {
   background-color: $indian-red;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: $indian-red;
+    cursor: default;   
+  }
+}
+
+.designer-dashboard__btn-form {
+  background-color: $new-green;
 }

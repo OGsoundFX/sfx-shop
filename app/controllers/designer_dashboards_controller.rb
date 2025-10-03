@@ -35,6 +35,25 @@ class DesignerDashboardsController < ApplicationController
     redirect_to designer_main_dashboard_path, notice: "Paypal account updated"
   end
 
+  def update_designer_info
+    @designer.update(designer_params)
+    @designer.user.save if @designer.user.changed?
+    if @designer.save
+      redirect_to designer_main_dashboard_path, notice: "Information updated"
+    else
+      render :main, status: :unprocessable_entity
+    end
+  end
+
+  def update_designer_bio
+    @designer.update(bio_params)
+    if @designer.save
+      redirect_to designer_main_dashboard_path, notice: "Bio updated"
+    else
+      render :main, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def load_designer
@@ -52,5 +71,13 @@ class DesignerDashboardsController < ApplicationController
 
   def payment_params
     params.require(:payment_info).permit(:paypal_account)
+  end
+
+  def designer_params
+    params.require(:sound_designer).permit(:first_name, :last_name, :location)
+  end
+
+  def bio_params
+    params.require(:sound_designer).permit(:bio)
   end
 end
