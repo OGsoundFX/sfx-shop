@@ -5,35 +5,46 @@
   </div>
   <div class="container">
     <%= render "designer_menu" %>
-    <div class="designer-dashboard__container">
+    <div class="designer-dashboard__container" data-controller="update-info">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
             <p class="designer-dashboard__label">Profile Information</p>
           </div>
-          <div>
+          <div data-action="click->update-info#toggleEdit">
             <i class="fas fa-pen"></i>
           </div>
         </div>
         <hr style="margin-top: 0">
-        <p><span style="color: orange">Name:</span> <%= @designer.first_name %> <%= @designer.last_name %></p>
-        <p><span style="color: orange">Email:</span> <%= @designer.user.email %></p>
-        <p><span style="color: orange">Location:</span> <%= @designer.location %></p>
+        <div class="designer-dashboard__info" data-update-info-target="data">
+          <p><span>Name:</span> <%= @designer.first_name %> <%= @designer.last_name %></p>
+          <p><span>Location:</span> <%= @designer.location %></p>
+          <hr style="margin-top: 0">
+          <div><span>Email:</span> <%= @designer.user.email %></div>
+        </div>
+        <div class="d-none" data-update-info-target="form">
+          <%= simple_form_for @designer, url: update_designer_info_path(@designer), method: :post do |f| %>
+            <%= f.input :first_name, label: "First Name", placeholder: @designer.first_name ? @designer.first_name : "Enter your first name" %>
+            <%= f.input :last_name, label: "Last Name", placeholder: @designer.last_name ? @designer.last_name : "Enter your last name" %>
+            <%= f.input :location, label: "Location", placeholder: @designer.location ? @designer.location : "Enter your location" %>
+            <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="designer-dashboard__container mt-3" data-controller="update-paypal">
+    <div class="designer-dashboard__container mt-3" data-controller="update-info">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
             <p class="designer-dashboard__label">Paypal Account</p>
           </div>
-          <div data-action="click->update-paypal#toggleEdit">
+          <div data-action="click->update-info#toggleEdit">
             <i class="fas fa-pen"></i>
           </div>
         </div>
         <hr style="margin-top: 0">
         <% if @paypal.paypal_account.present? %>
-          <div class="d-flex justify-content-between" data-update-paypal-target="data">
+          <div class="d-flex justify-content-between" data-update-info-target="data">
             <div>
               <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
             </div>
@@ -48,31 +59,39 @@
             </div>
           </div>
         <% else %>
-          <p data-update-paypal-target="data">Please add your paypal account, so we can proceed to sending you payments.</p>
+          <p data-update-info-target="data">Please add your paypal account, so we can proceed to sending you payments.</p>
         <% end %>
-        <div class="d-none" data-update-paypal-target="form">
+        <div class="d-none" data-update-info-target="form">
           <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post do |f| %>
             <%= f.input :paypal_account, label: "Please enter your Paypal account", placeholder: @paypal ? @paypal.paypal_account : "Enter your PayPal account" %>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="designer-dashboard__container mt-3">
+    <div class="designer-dashboard__container mt-3" data-controller="update-info">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
             <p class="designer-dashboard__label">About you</p>
           </div>
-          <div>
+          <div data-action="click->update-info#toggleEdit">
             <i class="fas fa-pen"></i>
           </div>
         </div>
         <hr style="margin-top: 0">
-        <% if @designer.bio.present? %>
-          <span><%= @designer.bio %></span>
-        <% else %>
-          <p>Tell the World about yourself</p>
-        <% end %>
+        <div data-update-info-target="data">
+          <% if @designer.bio.present? %>
+            <span><%= @designer.bio %></span>
+          <% else %>
+            <p>Tell the World about yourself</p>
+          <% end %>
+        </div>
+        <div class="d-none" data-update-info-target="form">
+          <%= simple_form_for @designer, url: update_designer_bio_path(@designer), method: :post do |f| %>
+            <%= f.input :bio, as: :text, label: "Your Bio", placeholder: @designer.bio ? @designer.bio : "Tell the World about yourself" %>
+            <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="d-flex justify-content-end">
