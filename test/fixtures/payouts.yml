@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sound_designer: one
+  status: 1
+  payout_date: 2025-10-04
+  fail_reason: MyString
+  currency: 1
+  amount: 9.99
+
+two:
+  sound_designer: two
+  status: 1
+  payout_date: 2025-10-04
+  fail_reason: MyString
+  currency: 1
+  amount: 9.99
