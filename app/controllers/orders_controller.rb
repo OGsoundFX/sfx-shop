@@ -36,7 +36,6 @@ class OrdersController < ApplicationController
       )
 
       order.update(checkout_session_id: session.id)
-      redirect_to new_order_payment_path(order)
 
       # creating sold_item instance
       SoldItem.create!(
@@ -47,6 +46,8 @@ class OrdersController < ApplicationController
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none'
       )
+
+      redirect_to new_order_payment_path(order)
     else
       redirect_to(new_user_session_path)
     end
@@ -190,6 +191,18 @@ class OrdersController < ApplicationController
       )
 
       order.update(checkout_session_id: session.id)
+
+      # creating sold_item instance
+      raise
+      SoldItem.create!(
+        sound_designer: current_user.sound_designer,
+        order: order,
+        amount: order.amount,
+        status: 'pending',
+        discount: @discount ? true : false,
+        discount_type: @discount ? 'sale' : 'none'
+      )
+
       redirect_to new_order_payment_path(order)
     else
       redirect_to(new_user_session_path)
