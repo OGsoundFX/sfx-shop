@@ -3,5 +3,10 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
+    <ul>
+      <% @sold_items.each do |item| %>
+        <li><%= item.sfx_packtitle %> - <%= item.amount %></li>
+      <% end %>
+    </ul>
   </div>
 </div>

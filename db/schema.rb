@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_10_04_093735) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_04_100530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -243,8 +243,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_04_093735) do
     t.integer "discount_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sfx_pack_id"
     t.index ["order_id"], name: "index_sold_items_on_order_id"
     t.index ["payout_id"], name: "index_sold_items_on_payout_id"
+    t.index ["sfx_pack_id"], name: "index_sold_items_on_sfx_pack_id"
     t.index ["sound_designer_id"], name: "index_sold_items_on_sound_designer_id"
   end
 
@@ -416,6 +418,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_04_093735) do
   add_foreign_key "single_tracks", "sound_designers"
   add_foreign_key "sold_items", "orders"
   add_foreign_key "sold_items", "payouts"
+  add_foreign_key "sold_items", "sfx_packs"
   add_foreign_key "sold_items", "sound_designers"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

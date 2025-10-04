@@ -17,6 +17,7 @@ class SfxPack < ApplicationRecord
   has_one_attached :banner
   has_one_attached :sound_list
   monetize :price_cents
+  has_many :sold_items, dependent: :nullify
 
   # enum for status
   enum status: { draft: 0, submitted: 1, live: 2, declined:3, removed: 4 }
