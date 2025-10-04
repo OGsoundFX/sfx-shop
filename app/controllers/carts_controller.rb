@@ -85,7 +85,7 @@ class CartsController < ApplicationController
         @pack_list.each do |pack|
           # calculating conversion rate
           if pack.currency_symbol != session[:currency]
-            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, CurrencySymbolService.lookup(session[:currency]).upcase).order(created_at: :desc).first.rate.to_f
           else
             conversion_rate = 1
           end
@@ -97,7 +97,7 @@ class CartsController < ApplicationController
         @pack_list.each_with_index do |pack, index|
           # calculating conversion rate
           if pack.currency_symbol != session[:currency]
-            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f
+            conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, CurrencySymbolService.lookup(session[:currency]).upcase).order(created_at: :desc).first.rate.to_f
           else
             conversion_rate = 1
           end
