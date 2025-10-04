@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_10_02_075148) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_04_100530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -142,7 +142,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_02_075148) do
     t.bigint "sound_designer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "preferred_currency"
     t.index ["sound_designer_id"], name: "index_payment_infos_on_sound_designer_id"
+  end
+
+  create_table "payouts", force: :cascade do |t|
+    t.bigint "sound_designer_id", null: false
+    t.integer "status", default: 0
+    t.date "payout_date"
+    t.string "fail_reason"
+    t.integer "currency"
+    t.integer "amount_cents", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sound_designer_id"], name: "index_payouts_on_sound_designer_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -218,6 +231,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_02_075148) do
     t.integer "original_points", default: 0
     t.boolean "fantasy", default: false
     t.index ["sound_designer_id"], name: "index_single_tracks_on_sound_designer_id"
+  end
+
+  create_table "sold_items", force: :cascade do |t|
+    t.bigint "sound_designer_id", null: false
+    t.bigint "payout_id", null: false
+    t.bigint "order_id", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.integer "status"
+    t.boolean "discount"
+    t.integer "discount_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "sfx_pack_id"
+    t.index ["order_id"], name: "index_sold_items_on_order_id"
+    t.index ["payout_id"], name: "index_sold_items_on_payout_id"
+    t.index ["sfx_pack_id"], name: "index_sold_items_on_sfx_pack_id"
+    t.index ["sound_designer_id"], name: "index_sold_items_on_sound_designer_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -381,10 +411,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_02_075148) do
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_infos", "sound_designers"
+  add_foreign_key "payouts", "sound_designers"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"
   add_foreign_key "sfx_packs", "sound_designers"
   add_foreign_key "single_tracks", "sound_designers"
+  add_foreign_key "sold_items", "orders"
+  add_foreign_key "sold_items", "payouts"
+  add_foreign_key "sold_items", "sfx_packs"
+  add_foreign_key "sold_items", "sound_designers"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

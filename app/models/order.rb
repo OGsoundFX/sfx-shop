@@ -3,4 +3,5 @@ class Order < ApplicationRecord
   belongs_to :sfx_pack
   monetize :amount_cents
   has_many :download_links, dependent: :destroy
+  has_many :sold_items, dependent: :destroy
 end

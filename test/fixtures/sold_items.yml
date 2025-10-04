@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sound_designer: one
+  payout: one
+  order: one
+  amount: 9.99
+  status: 1
+  discount: false
+  discount_type: 1
+
+two:
+  sound_designer: two
+  payout: two
+  order: two
+  amount: 9.99
+  status: 1
+  discount: false
+  discount_type: 1

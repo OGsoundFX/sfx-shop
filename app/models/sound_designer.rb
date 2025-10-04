@@ -5,6 +5,8 @@ class SoundDesigner < ApplicationRecord
   has_many :sfx_packs, dependent: :destroy
   has_many :single_tracks, dependent: :destroy
   has_many :payment_infos, dependent: :destroy
+  has_many :sold_items
+  has_many :payouts
 
   validates :first_name, :last_name, presence: true
 
