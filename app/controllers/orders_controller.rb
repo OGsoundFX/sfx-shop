@@ -19,7 +19,14 @@ class OrdersController < ApplicationController
       else
         sfx_pack_price = sfx_pack.price
       end
-      order = Order.create!(product_link: sfx_pack.product_link, sfx_pack: sfx_pack, amount: sfx_pack_price, status: 'pending', user: current_user, sales: @sale_orders, collections: [])
+      order = Order.create!(
+        product_link: sfx_pack.product_link,
+        sfx_pack: sfx_pack, amount: sfx_pack_price,
+        amount_paid_currency: CurrencySymbolService.lookup(params[:currency]).upcase,
+        status: 'pending',
+        user: current_user,
+        sales: @sale_orders,
+        collections: [])
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
@@ -181,7 +188,18 @@ class OrdersController < ApplicationController
         item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
       end
       # creating order instance
-      order = Order.create!(product_link: "", sfx_pack: sfx_pack, amount: total_amount, status: 'pending', user: current_user, multiple: multiple, packs: ordered_list, tracks: cart.sinlge_tracks, sales: @sale_orders, collections: collection)
+      order = Order.create!(
+        product_link: "",
+        sfx_pack: sfx_pack,
+        amount: total_amount,
+        amount_paid_currency: CurrencySymbolService.lookup(params[:currency]).upcase,
+        status: 'pending',
+        user: current_user,
+        multiple: multiple,
+        packs: ordered_list,
+        tracks: cart.sinlge_tracks,
+        sales: @sale_orders,
+        collections: collection)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
@@ -200,7 +218,7 @@ class OrdersController < ApplicationController
           sound_designer: pack.sound_designer,
           order: order,
           sfx_pack: pack,
-          amount: item[:amount],
+          amount_cents: item[:amount],
           status: 'pending',
           discount: @discount ? true : false,
           discount_type: @discount ? 'sale' : 'no_discount'
@@ -225,8 +243,10 @@ class OrdersController < ApplicationController
 
   def update_order_status
     order = current_user.orders.last
-    order.update(status: "paid")
-    order.update(amount_paid_cents: order.amount_cents)
+    order.update(
+      status: "paid",
+      amount_paid_cents: order.amount_cents
+    )
     redirect_to dashboard_path
   end
 

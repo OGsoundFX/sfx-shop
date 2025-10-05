@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
     if Rails.env.development?
       # for testing locally
       session[:currency] = '€'
+      # session[:currency] = '$'
     else
       location = Geocoder.search(request.remote_ip).first
       country = location&.country_code
