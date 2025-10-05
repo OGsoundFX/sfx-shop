@@ -3,7 +3,7 @@
 <% @order.packs.each_with_index do |pack, index| %>
   <% sfx_pack = SfxPack.find(pack) %>
   <% if sfx_pack.currency_symbol != session[:currency] %>
-    <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", sfx_pack.currency.upcase, "USD").order(created_at: :desc).first.rate.to_f %>
+    <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", sfx_pack.currency.upcase, CurrencySymbolService.lookup(session[:currency]).upcase).order(created_at: :desc).first.rate.to_f %>
   <% else %>
     <% conversion_rate = 1 %>
   <% end %>
