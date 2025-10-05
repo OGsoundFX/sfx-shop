@@ -192,16 +192,20 @@ class OrdersController < ApplicationController
 
       order.update(checkout_session_id: session.id)
 
-      # creating sold_item instance
-      raise
-      SoldItem.create!(
-        sound_designer: current_user.sound_designer,
-        order: order,
-        amount: order.amount,
-        status: 'pending',
-        discount: @discount ? true : false,
-        discount_type: @discount ? 'sale' : 'none'
-      )
+      # creating sold_item instances
+      line_items_pack = line_items.select {|item| item[:images].present?}
+      line_items_pack.each do |item|
+        pack = SfxPack.find(item[:images].first[:record_id])
+        SoldItem.create!(
+          sound_designer: pack.sound_designer,
+          order: order,
+          sfx_pack: pack,
+          amount: item[:amount],
+          status: 'pending',
+          discount: @discount ? true : false,
+          discount_type: @discount ? 'sale' : 'no_discount'
+        )
+      end
 
       redirect_to new_order_payment_path(order)
     else
