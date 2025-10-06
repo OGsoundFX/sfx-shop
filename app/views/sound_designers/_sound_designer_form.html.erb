@@ -1,0 +1,36 @@
+<%= simple_form_for [@sound_designer] do |f| %>
+  <div class="mb-3">
+    <div class="pack-submission-form__photo-upload-wrapper">
+      <div class="d-flex flex-column" data-controller="submission-image-preview">
+        <% if @sound_designer.photo.attached? %>
+          <%= cl_image_tag @sound_designer.photo.key, class: "pack-submission-form__image-placeholder", data: {submission_image_preview_target: "preview"} %>
+        <% else %>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
+        <% end %>
+        <div>
+          <label for="file-upload" class="inline-block text-white py-2 px-4 rounded pack-submission-form__photo-upload">
+            Upload Photo (Square)
+          </label>
+          <%= f.input :photo,
+                    as: :file,
+                    label: false,
+                    input_html: { id: "file-upload", class: "d-none", data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <hr>
+  <%= f.input :bio, as: :text, label: "Tell us about yourself" %>
+  <hr>
+  <div class="pack-submission-form-metadata">
+    <%= f.input :location %>
+  </div>
+  <hr>
+  <h3>Payment Information</h3>
+
+  <div class="text-center mt-4">
+    <%= f.submit "Submit Profile", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
+  </div>
+<% end %>

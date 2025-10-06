@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_10_04_125011) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_06_143056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,7 +95,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_04_125011) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "access_token"
+    t.bigint "user_id"
     t.index ["access_token"], name: "index_designer_submissions_on_access_token", unique: true
+    t.index ["user_id"], name: "index_designer_submissions_on_user_id"
   end
 
   create_table "download_links", force: :cascade do |t|
@@ -406,6 +408,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_04_125011) do
   add_foreign_key "carts", "users"
   add_foreign_key "collections", "template_collections"
   add_foreign_key "collections", "users"
+  add_foreign_key "designer_submissions", "users"
   add_foreign_key "download_links", "collections"
   add_foreign_key "download_links", "orders"
   add_foreign_key "orders", "sfx_packs"

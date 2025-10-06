@@ -1,5 +1,5 @@
 class DesignerDashboardsController < ApplicationController
-  before_action :unauthorized_redirect, :load_designer
+  before_action :unauthorized_redirect, :new_designer, :load_designer
   before_action :load_pack, only: [:update_pack_form, :remove_pack]
 
   def main
@@ -70,6 +70,10 @@ class DesignerDashboardsController < ApplicationController
 
   def unauthorized_redirect
     redirect_to root_path, notice: "You need to sign in to access this page" if !user_signed_in?
+  end
+
+  def new_designer
+    redirect_to new_sound_designer_path if user_signed_in? && current_user.designer && current_user.sound_designer.nil?
   end
 
   def load_pack

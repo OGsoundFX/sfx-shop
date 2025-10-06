@@ -11,6 +11,7 @@ class SoundDesigner < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   has_one_attached :photo
+  has_one_attached :banner
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"

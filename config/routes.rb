@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   post "subscribe_no_user", to: "pages#subscribe"
   resources :sfx_packs, only: [:show, :index]
 
-  resources :sound_designers, only: [] do
+  resources :sound_designers, only: [:new, :create] do
     resources :sfx_packs, only: [:create, :update]
   end
 
