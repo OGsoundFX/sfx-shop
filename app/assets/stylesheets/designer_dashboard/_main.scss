@@ -30,8 +30,25 @@
   margin-bottom: 4px;
 }
 
-.designer-dashboard__info span {
-  color: $light-blue;
+.designer-dashboard__info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+}
+
+.designer-dashboard__info {
+  .info-color {
+    color: $lighter-grey;
+  }
+}
+
+.designer-dashboard__preferred-currency {
+  width: 80px;
+  background-color: $new-green;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: $new-green;
+    cursor: default;   
+  }
 }
 
 .designer-dashboard__paypal-account {

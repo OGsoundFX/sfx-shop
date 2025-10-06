@@ -18,7 +18,7 @@
   </div>
 
   <div class="navbar-right collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul style="align-items: center;" class="navbar-nav mr-auto">
       <% if current_user && current_user.admin %>
         <li class="nav-item dropdown">
           <%= link_to "R-admin", rails_admin_path, class: "nav-link text-white" %>
@@ -78,7 +78,7 @@
   </button>
 
   <div class="navbar-burger-mobile collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul style="align-items: center;" class="navbar-nav mr-auto">
       <% if current_user && current_user.admin %>
         <li class="nav-item">
           <%= link_to "R-admin", rails_admin_path, class: "nav-link text-white" %>

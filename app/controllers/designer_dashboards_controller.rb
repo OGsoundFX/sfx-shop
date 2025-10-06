@@ -37,6 +37,7 @@ class DesignerDashboardsController < ApplicationController
   def paypal_account
     @paypal.update(payment_params)
     @paypal.sound_designer = @designer
+    @paypal.preferred_currency = params[:payment_info][:preferred_currency].downcase
     @paypal.save
     redirect_to designer_main_dashboard_path, notice: "Paypal account updated"
   end

@@ -90,7 +90,7 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sku = @designer.first_name[0].capitalize + @designer.last_name[0].capitalize + "PACK" + increment
 
     # Apply currency
-    @sfx_pack.currency = params[:sfx_pack][:currency].downcase
+    @sfx_pack.currency = @designer.payment_infos.last.preferred_currency.downcase
     if @sfx_pack.save
       redirect_to designer_listings_path
     else
@@ -107,7 +107,7 @@ class SfxPacksController < ApplicationController
     @sfx_pack.photos.purge if @sfx_pack.photos.present? && sfx_pack_params[:photos].present?
 
     # Applying currency
-    @sfx_pack.currency = params[:sfx_pack][:currency].downcase
+    @sfx_pack.currency = @designer.payment_infos.last.preferred_currency.downcase
 
     @sfx_pack.update(sfx_pack_params)
     @sfx_pack.submitted! if @sfx_pack.removed?

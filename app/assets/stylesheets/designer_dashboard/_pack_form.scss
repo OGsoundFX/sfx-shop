@@ -88,6 +88,43 @@
   gap: 18px;
 }
 
+.pack-submission-form__currency {
+  display: flex;
+  justify-self: end;
+  align-self: flex-end;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: $whitesmoke;
+  i {
+    margin-left: 6px;
+  }
+}
+
+.currency-info-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.currency-info-tooltip .currency-info-tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 1rem;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+.currency-info-tooltip:hover .currency-info-tooltiptext {
+  visibility: visible;
+}
+
 .submission-form__note {
   background-color: grey;
   border-radius: 8px;

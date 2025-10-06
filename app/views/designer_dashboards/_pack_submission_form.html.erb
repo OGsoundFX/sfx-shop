@@ -50,7 +50,13 @@
   <hr>
   <div class="pack-submission-form-price">
     <%= f.input :price, label: "Price" %>
-    <%= f.input :currency, collection: ["EUR", "USD"], label: "Currency", selected: @sfx_pack.currency.upcase %>
+    <span class="pack-submission-form__currency">
+      <%= @sfx_pack.currency.upcase %>
+      <div class="currency-info-tooltip">
+        <i class="fas fa-info-circle"></i>
+        <span class="currency-info-tooltiptext">Modify your preferred currency in your payout info section</span>
+      </div>
+    </span>
   </div>
   <div class="submission-form__note mt-2">
     <small><em>Note: Leave 0 for free packs.</em></small>

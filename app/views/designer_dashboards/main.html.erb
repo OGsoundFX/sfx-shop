@@ -15,10 +15,16 @@
         </div>
         <hr style="margin-top: 0">
         <div class="designer-dashboard__info" data-update-info-target="data">
-          <p><span>Name:</span> <%= @designer.first_name %> <%= @designer.last_name %></p>
-          <p><span>Location:</span> <%= @designer.location %></p>
+          <div class="designer-dashboard__info-grid mb-3">
+            <span class="mb-2">Name:</span>
+            <em><span class="info-color"><%= @designer.full_name %></span></em>
+            <div></div>
+            <span>Location:</span>
+            <em><span class="info-color"><%= @designer.location %></span></em>
+            <div></div>
+          </div>
           <hr style="margin-top: 0">
-          <div><span>Email:</span> <%= @designer.user.email %></div>
+          <div class="designer-dashboard__info-grid"><span>Email:</span><em><span class="info-color"><%= @designer.user.email %></span></em></div>
         </div>
         <div class="d-none" data-update-info-target="form">
           <%= simple_form_for @designer, url: update_designer_info_path(@designer), method: :post do |f| %>
@@ -34,26 +40,37 @@
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
-            <p class="designer-dashboard__label">Paypal Account</p>
+            <p class="designer-dashboard__label">Payout Information</p>
           </div>
+          <!--
           <div data-action="click->update-info#toggleEdit">
             <i class="fas fa-pen"></i>
+          </div>
+          -->
+          <div class="d-flex justify-content-end mb-2">
+            <% if @paypal.pending_verif? %>
+              <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending Approval</div>
+            <% elsif @paypal.active? %>
+              <!--
+              <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
+              -->
+              <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-dark">Request Modification</a>
+            <% elsif @paypal.inactive? %>
+              <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>
+            <% end %>
           </div>
         </div>
         <hr style="margin-top: 0">
         <% if @paypal.paypal_account.present? %>
-          <div class="d-flex justify-content-between" data-update-info-target="data">
-            <div>
-              <span class="designer-dashboard__paypal-account"><%= @paypal.paypal_account %></span>
+          <div data-update-info-target="data">
+            <div class="designer-dashboard__info-grid mb-2">
+              <span>Paypal Account:</span>
+              <em><span class="info-color"><%= @paypal.paypal_account %></span></em>
+
             </div>
-            <div>
-              <% if @paypal.pending_verif? %>
-                <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending</div>
-              <% elsif @paypal.active? %>
-                <div class="btn me-2 btn-admin designer-dashboard__paypal-active">Active</div>
-              <% elsif @paypal.inactive? %>
-                <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Inactive</div>
-              <% end %>
+            <div class="designer-dashboard__info-grid">
+              <span>Preferred Currency:</span>
+              <span class="designer-dashboard__preferred-currency btn btn-admin"><%= @paypal.preferred_currency.upcase %></span>
             </div>
           </div>
         <% else %>
@@ -62,6 +79,8 @@
         <div class="d-none" data-update-info-target="form">
           <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post do |f| %>
             <%= f.input :paypal_account, label: "Please enter your Paypal account", placeholder: @paypal ? @paypal.paypal_account : "Enter your PayPal account" %>
+            <%= f.input :preferred_currency, label: "Please enter your Preferred Currency", collection: ["EUR", "USD"], selected: @paypal.preferred_currency.present? ? @paypal.preferred_currency.upcase : "USD" %>
+            <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
           <% end %>
         </div>
       </div>
