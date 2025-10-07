@@ -8,6 +8,8 @@ class SoundDesigner < ApplicationRecord
   has_many :sold_items
   has_many :payouts
 
+  accepts_nested_attributes_for :payment_infos, allow_destroy: true
+
   validates :first_name, :last_name, presence: true
 
   has_one_attached :photo

@@ -24,11 +24,15 @@
   <hr>
   <%= f.input :bio, as: :text, label: "Tell us about yourself" %>
   <hr>
-  <div class="pack-submission-form-metadata">
+
     <%= f.input :location %>
-  </div>
+
   <hr>
   <h3>Payment Information</h3>
+  <%= f.simple_fields_for :payment_infos do |pf| %>
+    <%= pf.input :paypal_account, label: "PayPal Account", placeholder: "Enter your PayPal account email" %>
+    <%= pf.input :preferred_currency, as: :select, collection: PaymentInfo.preferred_currencies.keys.map { |currency| [currency.upcase, currency] }, label: "Preferred Currency" %>
+  <% end %>  
 
   <div class="text-center mt-4">
     <%= f.submit "Submit Profile", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
