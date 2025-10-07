@@ -26,7 +26,16 @@ class AdministratorController < ApplicationController
   end
 
   def submission_accepted
-    DesignerSubmission.find(params[:id]).accepted!
+    submission = DesignerSubmission.find(params[:id])
+    submission.accepted!
+    if User.find_by(email: submission.email)
+      user = User.find_by(email: submission.email)
+    else
+      user = User.create(email: submission.email, password: submission.access_token, designer: true)
+    end
+    user.designer = true
+    user.save
+    submission.update(user: user)
     redirect_to submissions_path
   end
 

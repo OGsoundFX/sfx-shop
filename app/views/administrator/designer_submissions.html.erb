@@ -35,12 +35,12 @@
             <div class="submission-card-actions">
               <a href="mailto:<%= submission.email %>" target="blank"><span class="icon">✉️</span></a>
               <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
-                <%= link_to submission_accepted_path(submission), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                <%= link_to submission_accepted_path(submission.id), class: "submission-card_btn-group submission-card__confirm-accept" do %>
                   <div >
                     <i class="fas fa-check"></i>
                   </div>
                 <% end %>
-                <%= link_to submission_rejected_path(submission), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                <%= link_to submission_rejected_path(submission.id), class: "submission-card_btn-group submission-card__confirm-reject" do %>
                   <div>
                     <i class="fas fa-ban"></i>
                   </div>
