@@ -1,3 +1,26 @@
 <div class="designer-dashboard__welcome">
-  <h3>Welcome to your designer dashboard!</h3>
+  <div class="container">
+    <div class="designer-dashboard__banner">
+      <div class="designer-dashboard__banner-designer-photo"
+           data-controller="photo-upload submission-image-preview"
+           data-action="click->photo-upload#trigger">
+        <div class="designer-dashboard__banner-photo-display">
+          <% if @designer.photo.attached? %>
+            <%= cl_image_tag @designer.photo.key, class: "pack-submission-form__image-placeholder", data: {submission_image_preview_target: "preview"} %>
+          <% else %>
+            <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
+          <% end %>
+          <i class="fas fa-camera" data-photo-upload-target="icon"></i>
+        </div>
+        <div data-photo-upload-target="form" class="d-none designer-dashboard__banner-photo-form">
+          <%= simple_form_for @designer, url: update_designer_photo_path(@designer), method: :post do |f| %>
+            <div class="d-flex">
+            <%= f.input :photo, as: :file, label: false, input_html: {data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
+            <%= f.submit "Upload", class: "btn btn-light", style: "color: black" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

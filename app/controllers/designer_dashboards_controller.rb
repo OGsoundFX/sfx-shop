@@ -61,6 +61,14 @@ class DesignerDashboardsController < ApplicationController
     end
   end
 
+  def update_designer_photo
+    if @designer.update(photo_params)
+      redirect_to designer_main_dashboard_path, notice: "Photo updated"
+    else
+      render :main, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def load_designer
@@ -90,5 +98,9 @@ class DesignerDashboardsController < ApplicationController
 
   def bio_params
     params.require(:sound_designer).permit(:bio)
+  end
+
+  def photo_params
+    params.require(:sound_designer).permit(:photo)
   end
 end
