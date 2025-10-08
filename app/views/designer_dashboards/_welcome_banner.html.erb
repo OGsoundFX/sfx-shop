@@ -14,9 +14,9 @@
         </div>
         <div data-photo-upload-target="form" class="d-none designer-dashboard__banner-photo-form">
           <%= simple_form_for @designer, url: update_designer_photo_path(@designer), method: :post do |f| %>
-            <div class="d-flex">
-            <%= f.input :photo, as: :file, label: false, input_html: {data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
-            <%= f.submit "Upload", class: "btn btn-light", style: "color: black" %>
+            <div class="designer-dashboard__banner-photo-form-inputs">
+              <%= f.input :photo, as: :file, label: false, input_html: {data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
+              <%= f.submit "Upload", class: "btn btn-light", id: "submit", style: "color: black" %>
             </div>
           <% end %>
         </div>

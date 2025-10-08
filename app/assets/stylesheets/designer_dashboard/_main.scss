@@ -75,6 +75,10 @@
   }
 }
 
+.designer-dashboard__banner-photo-form-inputs {
+  display: flex;
+}
+
 .designer-dashboard__label {
   font-size: 1.2rem;
   margin-bottom: 4px;
@@ -138,4 +142,18 @@
 
 .designer-dashboard__btn-form {
   background-color: $new-green;
+}
+
+@media (max-width: 768px) {
+  .designer-dashboard__banner-photo-form-inputs {
+    display: block;
+  }
+
+  .designer-dashboard__banner-photo-form {
+    bottom: 38px;
+    #submit {
+      margin-top: 12px;
+      width: 100%;
+    }
+  }
 }
