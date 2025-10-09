@@ -7,6 +7,9 @@ import { application } from "./application"
 import ApplicationModalController from "./application_modal_controller"
 application.register("application-modal", ApplicationModalController)
 
+import BannerFormController from "./banner_form_controller"
+application.register("banner-form", BannerFormController)
+
 import CategoryController from "./category_controller"
 application.register("category", CategoryController)
 
@@ -42,6 +45,9 @@ application.register("open-subscribe-modal", OpenSubscribeModalController)
 
 import OrderByController from "./order_by_controller"
 application.register("order-by", OrderByController)
+
+import PhotoUploadController from "./photo_upload_controller"
+application.register("photo-upload", PhotoUploadController)
 
 import SelectController from "./select_controller"
 application.register("select", SelectController)
@@ -79,8 +85,8 @@ application.register("tooltip-mobile", TooltipMobileController)
 import UnwrapCartController from "./unwrap_cart_controller"
 application.register("unwrap-cart", UnwrapCartController)
 
-import UpdatePaypalController from "./update_info_controller"
-application.register("update-info", UpdatePaypalController)
+import UpdateInfoController from "./update_info_controller"
+application.register("update-info", UpdateInfoController)
 
 import VideoModalController from "./video_modal_controller"
 application.register("video-modal", VideoModalController)
