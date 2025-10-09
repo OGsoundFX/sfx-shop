@@ -22,6 +22,8 @@
 .designer-dashboard__banner {
   height: 180px;
   position: relative;
+  background-size: cover;
+  background-position: center;
 }
 
 .designer-dashboard__banner-designer-photo {
@@ -75,8 +77,32 @@
   }
 }
 
+.designer-dashboard__banner-image-form {
+  position: absolute;
+  bottom: 130px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 8px;
+  .form-group {
+    margin-top: 0 !important;
+  }
+  input {
+    color: white;
+  }
+}
+
 .designer-dashboard__banner-photo-form-inputs {
   display: flex;
+}
+
+.designer-dashboard__banner-icon {
+  i {
+    cursor: pointer;
+    &:hover {
+      color: $font-grey;
+    }
+  }
 }
 
 .designer-dashboard__label {
@@ -150,10 +176,32 @@
   }
 
   .designer-dashboard__banner-photo-form {
-    bottom: 38px;
+    bottom: auto;
+    left: 20%;
     #submit {
       margin-top: 12px;
       width: 100%;
+    }
+  }
+
+  .designer-dashboard__banner-image-form-inputs {
+    display: block;
+  }
+
+  .designer-dashboard__banner-image-form {
+    bottom: auto;
+    left: 20%;
+    #submit {
+      margin-top: 12px;
+      width: 100%;
+    }
+  }
+
+  .designer-dashboard__banner-image-form-buttons {
+    display: flex;
+    justify-content: space-between;
+    .designer-dashboard__banner-image-form-icon {
+      margin-top: 12px;
     }
   }
 }

@@ -69,6 +69,16 @@ class DesignerDashboardsController < ApplicationController
     end
   end
 
+  def banner
+    @designer.banner.purge if @designer.banner.present?
+    @designer.banner.attach(params[:sound_designer][:banner])
+    if @designer.save
+      redirect_to designer_main_dashboard_path, notice: "Banner updated"
+    else
+      render :main, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def load_designer

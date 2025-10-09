@@ -1,16 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="photo-upload"
+// Connects to data-controller="banner-form"
 export default class extends Controller {
-  static targets = ["input", "form", "icon"]
+  static targets = ["form", "icon"]
 
-  trigger() {
+  displayForm() {
     this.formTarget.classList.remove("d-none")
     this.iconTarget.classList.add("d-none")
   }
 
-  hide(event) {
-    event.stopPropagation()
+  hideForm() {
     this.formTarget.classList.add("d-none")
     this.iconTarget.classList.remove("d-none")
   }

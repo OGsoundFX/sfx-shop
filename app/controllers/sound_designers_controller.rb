@@ -15,6 +15,7 @@ class SoundDesignersController < ApplicationController
   end
 
   def create
+    @sound_designer.photo.purge if @sound_designer.photo.present? && sound_designer_params[:photo].present?
     @sound_designer = SoundDesigner.new(sound_designer_params)
     if @sound_designer.save
       redirect_to root_path, notice: "Sound Designer profile created successfully."

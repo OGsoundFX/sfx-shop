@@ -1,6 +1,6 @@
 <div class="designer-dashboard__welcome">
   <div class="container">
-    <div class="designer-dashboard__banner">
+    <div class="designer-dashboard__banner" style="background-image: url('<%= cl_image_path(@designer.banner.key) if @designer.banner.attached? %>')">
       <div class="designer-dashboard__banner-designer-photo"
            data-controller="photo-upload submission-image-preview"
            data-action="click->photo-upload#trigger">
@@ -16,7 +16,32 @@
           <%= simple_form_for @designer, url: update_designer_photo_path(@designer), method: :post do |f| %>
             <div class="designer-dashboard__banner-photo-form-inputs">
               <%= f.input :photo, as: :file, label: false, input_html: {data: { submission_image_preview_target: "input", action: "change->submission-image-preview#preview" }} %>
-              <%= f.submit "Upload", class: "btn btn-light", id: "submit", style: "color: black" %>
+              <div class="d-flex designer-dashboard__banner-image-form-buttons">
+                <%= f.submit "Upload", class: "btn btn-light", id: "submit", style: "color: black" %>
+                <div class="btn btn-light ms-2 designer-dashboard__banner-image-form-icon" style="color: black" data-action="click->photo-upload#hide">
+                  <strong>X</strong>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div data-controller="banner-form">
+        <div class="d-flex justify-content-end designer-dashboard__banner-icon"
+             data-action="click->banner-form#displayForm"
+             data-banner-form-target="icon">
+          <i class="fas fa-pen"></i>
+        </div>
+        <div class="d-none designer-dashboard__banner-image-form" data-banner-form-target="form">
+          <%= simple_form_for @designer, url: designer_banner_path(@designer), method: :post do |f| %>
+            <div class="designer-dashboard__banner-photo-form-inputs">
+              <%= f.input :banner, as: :file, label: false %>
+              <div class="designer-dashboard__banner-image-form-buttons">
+                <%= f.submit "Upload", class: "btn btn-light", id: "submit", style: "color: black" %>
+                <div class="btn btn-light ms-2 designer-dashboard__banner-image-form-icon" style="color: black" data-action="click->banner-form#hideForm">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
             </div>
           <% end %>
         </div>
