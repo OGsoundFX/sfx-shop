@@ -54,7 +54,7 @@
 #text-logo {
   padding: 1px 0px 0px 3px;
   color: $orange-main;
-  font-family: 'Permanent Marker', cursive;
+  font-family: $logo-font;
 }
 
 // #text-logo-small {
@@ -66,7 +66,7 @@
 }
 
 .font-permanent-marker {
-  font-family: 'Permanent Marker', cursive;
+  font-family: $title-font;
 }
 
 #cart-count {
@@ -128,7 +128,7 @@ $breakpoint-mobile-up: 576px;
   #text-logo-small {
     padding: 1px 0px 0px 3px;
     color: $orange-main;
-    font-family: 'Permanent Marker', cursive;
+    font-family: $title-font;
   }
 
   #text-logo {

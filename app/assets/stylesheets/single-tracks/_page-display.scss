@@ -82,7 +82,7 @@
   background-repeat: no-repeat;
   // height: 280px;
   width: 100%;
-  // font-family: 'Permanent Marker', cursive;
+  // font-family: $title-font;
   color: white;
   text-align: center;
   padding-top: 50px;
@@ -107,6 +107,13 @@
   }
 }
 
+.designer-show__banner {
+  padding: 70px 0 24px 0;
+  h1 {
+    font-size: 3rem !important;
+  }
+}
+
 .show-banner {
   // background-image: url(https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg);
   background-size: cover;
@@ -114,7 +121,7 @@
   background-repeat: no-repeat;
   // height: 280px;
   width: 100%;
-  // font-family: 'Permanent Marker', cursive;
+  // font-family: $title-font;
   color: white;
   text-align: center;
   padding-top: 50px;
