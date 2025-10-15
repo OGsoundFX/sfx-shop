@@ -72,9 +72,43 @@
     color: #a3a3a3;
   }
 }
-
 .banner {
   background-image: url(https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg);
+}
+
+.banner, .designer-show__banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // height: 280px;
+  width: 100%;
+  // font-family: 'Permanent Marker', cursive;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 150%;
+  h1 {
+    font-size: 2rem;
+    margin: 0 16px;
+  }
+  .learn-more {
+    margin: 20px 0 40px 0;
+    height: 40px;
+    width: 146px;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.3rem;
+    border: none;
+    background-color: black;
+    &:hover {
+      color: white;
+      background-color: grey;
+    }
+  }
+}
+
+.show-banner {
+  // background-image: url(https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

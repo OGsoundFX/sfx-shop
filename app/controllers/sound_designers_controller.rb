@@ -1,4 +1,20 @@
 class SoundDesignersController < ApplicationController
+  def show
+    @designer = SoundDesigner.find(params[:id])
+    @sfx_packs = @designer.sfx_packs.where(status: "live")
+    # sales
+    current_sales = Sale.where("end_date > ?", Date.current)
+    @current_sales_list = {}
+    current_sales.each do |sale|
+      sale.packs.each do |pack_id|
+        @current_sales_list[pack_id] = sale.percentage
+      end
+    end
+
+    @categories = SfxPack.categories
+
+  end
+
   def new
     if user_signed_in? && current_user.designer && current_user.sound_designer.nil?
       @sound_designer = SoundDesigner.new
@@ -15,7 +31,6 @@ class SoundDesignersController < ApplicationController
   end
 
   def create
-    @sound_designer.photo.purge if @sound_designer.photo.present? && sound_designer_params[:photo].present?
     @sound_designer = SoundDesigner.new(sound_designer_params)
     if @sound_designer.save
       redirect_to root_path, notice: "Sound Designer profile created successfully."
