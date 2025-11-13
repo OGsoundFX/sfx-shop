@@ -20,7 +20,7 @@
 
           <div class="forms">
             <div class="drop-down">
-              <form action="/sfx_packs" data-controller="category">
+              <form action="/sound_designers/<%= @designer.id %>" data-controller="category">
                 <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
                 <input type="hidden" name="filters" value="" data-filters-target="dropdown">
                 <div class="d-flex justify-content-start">
@@ -44,7 +44,7 @@
             </div>
             <div style="margin: 30px 8px 0 8px; font-size: 12px"><strong>OR</strong></div>
             <div class="search-form">
-              <form action="/sfx_packs">
+              <form action="/sound_designers/<%= @designer.id %>">
                 <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
                 <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
               </form>
@@ -53,6 +53,13 @@
 
           <hr id="search-hr">
           <div class="">
+            <% if @sfx_packs.empty? && @category %>
+              <h3>No packs for this category</h3>
+            <% elsif @sfx_packs.empty? && @search %>
+              <h3>No packs for this search</h3>
+            <% elsif @sfx_packs.empty? %>
+              <h3>No packs from this Designer</h3>
+            <% end %>
             <%= render 'shared/pack_card' %>
           </div>
         </div>
