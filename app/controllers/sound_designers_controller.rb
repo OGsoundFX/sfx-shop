@@ -2,6 +2,18 @@ class SoundDesignersController < ApplicationController
   def show
     @designer = SoundDesigner.find(params[:id])
     @sfx_packs = @designer.sfx_packs.where(status: "live")
+
+    # search features
+    if params[:dropdown] && params[:dropdown] != "all"
+      @sfx_packs = @sfx_packs.where("title ilike :query OR category ilike :query OR tags ilike :query", query: "%#{params[:dropdown]}%").includes(photos_attachments: :blob).sort_by(&:display_order)
+      @category = params[:dropdown]
+    end
+
+    if params[:search]
+      @sfx_packs = SfxPack.where(status: "live").where("title ilike :query OR category ilike :query OR tags ilike :query OR description ilike :query", query: "%#{params[:search]}%").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
+      @search = params[:search]
+    end
+
     # sales
     current_sales = Sale.where("end_date > ?", Date.current)
     @current_sales_list = {}
