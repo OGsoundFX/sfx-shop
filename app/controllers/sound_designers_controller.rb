@@ -10,7 +10,7 @@ class SoundDesignersController < ApplicationController
     end
 
     if params[:search]
-      @sfx_packs = SfxPack.where(status: "live").where("title ilike :query OR category ilike :query OR tags ilike :query OR description ilike :query", query: "%#{params[:search]}%").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
+      @sfx_packs = @sfx_packs.where("title ilike :query OR category ilike :query OR tags ilike :query OR description ilike :query", query: "%#{params[:search]}%").includes(photos_attachments: :blob).sort_by(&:display_order)
       @search = params[:search]
     end
 
