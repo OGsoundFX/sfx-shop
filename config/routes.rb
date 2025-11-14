@@ -81,7 +81,7 @@ Rails.application.routes.draw do
   # sound designer dashboard routes
   get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard
   get "your_listings", to: "designer_dashboards#listings", as: :designer_listings
-  get "stats", to: "designer_dashboards#stats", as: :designer_stats
+  get "sales", to: "designer_dashboards#sales", as: :designer_sales
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
   delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack

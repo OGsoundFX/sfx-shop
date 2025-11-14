@@ -5,6 +5,40 @@
   max-width: 1320px;
 }
 
+.designer-dashboard__sales-grid {
+  align-items: center;
+  padding: 8px 20px;
+  background-color: $dark-card-background;
+  border-radius: 6px;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: -4px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.6fr;
+}
+
+.submission-card-titles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  background-color: $dark-card-background;
+  border-radius: 6px;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: -4px;
+}
+
+.sales-card-titles-price {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+}
+
+.sales-card-titles-buyer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .submission-card {
   min-height: 78px;
   display: flex;
@@ -14,7 +48,12 @@
   padding: 12px 20px;
   border-radius: 6px;
   color: #fff;
-  margin: 20px auto;
+  margin-top: 20px;
+}
+.submission-card-date-title {
+  text-align: center;
+  margin-right: 20px;
+  padding-right: 20px;
 }
 
 .submission-card-date {

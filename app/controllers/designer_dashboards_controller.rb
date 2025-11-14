@@ -5,7 +5,7 @@ class DesignerDashboardsController < ApplicationController
   def main
   end
 
-  def stats
+  def sales
     @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum(:amount_cents) / 100.0
