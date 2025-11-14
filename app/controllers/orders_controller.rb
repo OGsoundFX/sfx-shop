@@ -47,8 +47,12 @@ class OrdersController < ApplicationController
       # creating sold_item instance
       SoldItem.create!(
         sound_designer: current_user.sound_designer,
+        sfx_pack_id: sfx_pack.id,
         order: order,
-        amount: order.amount,
+        amount_cents: order.amount,
+        currency: order.amount_paid_currency,
+        payout_amount_cents: 0,
+        payout_amount_currency: sfx_pack.currency,
         status: 'pending',
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none'
@@ -219,6 +223,9 @@ class OrdersController < ApplicationController
           order: order,
           sfx_pack: pack,
           amount_cents: item[:amount],
+          currency: order.amount_paid_currency,
+          payout_amount_cents: 0,
+          payout_amount_currency: pack.currency,
           status: 'pending',
           discount: @discount ? true : false,
           discount_type: @discount ? 'sale' : 'no_discount'
