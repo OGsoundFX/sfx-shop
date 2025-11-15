@@ -78,18 +78,17 @@ I will add details about how I build this app and the various tools I used (devi
 
 **Stripe** is an awesome payment tool super easy to implement. I will describe the different steps here: _Coming Soon_
 
-**Testing payments**
-Testing stripe locally/in development (assuming you have installed Stripe properly): <br>
-1/ ngrok
-```
-gem ‘ngrok’
-```
-```
-bundle
-```
+**Testing webhooks with ngrok**
+There is a conflict between the **ngrok gem** and the **javascript package** causing the ngrok library to be located in the wrong place. To fix that:
+
+1/ To fix that:
+- run `which ngrok` in the terminal
+- if you get `/Users/oliviergirardot/.rbenv/shims/ngrok`, this is **WRONG**
+- run the following command to fix it: `rm -f ~/.rbenv/shims/ngrok` and proceed with the normal process.
+
 2/ In terminal run: 
 ```
-./ngrok http 3000
+ngrok http 3000
 ```
 3/ Get link like this one ```https://04a7-87-123-193-136.ngrok.io``` <br>
 and paste it in config/environments/development.rb like so:
