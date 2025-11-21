@@ -4,6 +4,6 @@
   <div class="container">
     <%= render "designer_menu" %>
     <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
-    <%= render "sold_items" %>
+    <%= render "payouts_list" %>
   </div>
 </div>

@@ -1,0 +1,64 @@
+<div class="designer-dashboard__sales-grid">
+  <div class="d-flex align-items-center">
+    <div class="submission-card-date-title">
+      <div>Date Paid</div>
+    </div>
+    <div class="submission-card-content d-flex align-items-center">
+      <div>Paypal account</div>
+    </div>
+  </div>
+
+  <div class="sales-card-titles-price">
+    <span>Amount paid</span>
+    <span></span>
+    <span>Items sold</span>
+  </div>
+  <div class="sales-card-titles-buyer">
+    <span>Time period</span>
+  </div>
+</div>
+<% @payouts.each do |payout| %>
+  <div class="designer-dashboard__sales-grid">
+    <div class="d-flex align-items-center">
+      <div class="payouts-card-date">
+        <div class="submission-day"><%= payout.created_at.strftime("%b") %> <%= payout.created_at.strftime("%d") %></div>
+        <div class="submission-day"><%= payout.created_at.strftime("%Y") %></div>
+      </div>
+      <div class="submission-card-content d-flex align-items-center">
+        <div><%= payout.paypal_account %></div>
+      </div>
+    </div>
+
+    <div class="sales-card-titles-price">
+      <div>
+        <div class="submission-date"><%= number_to_currency(payout.amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(payout.currency)} ", separator: ",", precision: 2) %></div>
+      </div>
+      <div class="d-flex align-items-center">
+        <em><small></small></em>
+      </div>
+      <div class="d-flex align-items-center items-sold__section" data-controller="items-sold">
+        <div class="btn btn-secondary" data-action="click->items-sold#modal">Show list</div>
+        <div class="items-sold__modal d-none" data-items-sold-target="soldItems">
+          <div>
+            <% payout.sold_items.each do |item| %>
+              <%= item.sfx_pack.title %> (<%= item.created_at.strftime("%d %b %Y") %>)
+              <br>
+            <% end %>
+          </div>
+          <div class="btn btn-secondary mt-3" data-action="click->items-sold#close">
+            Close
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sales-card-titles-buyer">
+      <span>
+        <% if payout.sold_items.order(:created_at).first.created_at.month == payout.sold_items.order(:created_at).last.created_at.month %>
+          <%= payout.sold_items.order(:created_at).first.created_at.strftime("%B %y") %>
+        <% else %>
+          <%= payout.sold_items.order(:created_at).first.created_at.strftime("%b. %y") %> to <%= payout.sold_items.order(:created_at).last.created_at.strftime("%b. %y") %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+<% end %>
