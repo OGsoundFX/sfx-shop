@@ -74,7 +74,9 @@ gem 'simple_form'
 gem 'devise'
 gem 'money-rails', '~>1.12'
 gem 'stripe'
-# gem 'stripe_event'
+# stripe webhooks
+gem 'stripe_event'
+
 gem "bootstrap", "~> 5.2"
 gem 'font-awesome-rails'
 gem "font-awesome-sass", "~> 5.7"

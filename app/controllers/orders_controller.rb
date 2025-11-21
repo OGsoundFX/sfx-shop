@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :sale_orders, only: [:create, :checkout]
+  before_action :sale_orders, only: [:create, :checkout]#
 
   # action to purchase pack directly
   def create
@@ -37,7 +37,11 @@ class OrdersController < ApplicationController
           quantity: 1,
           tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
+        metadata: {
+          order_id: order.id
+        },
         allow_promotion_codes: true,
+        customer_email: current_user.email,
         success_url: update_order_status_url,
         cancel_url: destroy_order_url
       )
@@ -50,9 +54,9 @@ class OrdersController < ApplicationController
         sfx_pack_id: sfx_pack.id,
         order: order,
         amount_cents: order.amount,
-        currency: order.amount_paid_currency,
+        currency: order.amount_paid_currency.downcase,
         payout_amount_cents: 0,
-        payout_amount_currency: sfx_pack.currency,
+        payout_currency: sfx_pack.currency,
         status: 'pending',
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none'
@@ -207,11 +211,14 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: line_items,
+        metadata: {
+          order_id: order.id
+        },
         allow_promotion_codes: true,
+        customer_email: current_user.email,
         success_url: destroy_cart_url,
         cancel_url: destroy_order_url,
       )
-
       order.update(checkout_session_id: session.id)
 
       # creating sold_item instances
@@ -223,9 +230,9 @@ class OrdersController < ApplicationController
           order: order,
           sfx_pack: pack,
           amount_cents: item[:amount],
-          currency: order.amount_paid_currency,
+          currency: order.amount_paid_currency.downcase,
           payout_amount_cents: 0,
-          payout_amount_currency: pack.currency,
+          payout_currency: pack.currency,
           status: 'pending',
           discount: @discount ? true : false,
           discount_type: @discount ? 'sale' : 'no_discount'
