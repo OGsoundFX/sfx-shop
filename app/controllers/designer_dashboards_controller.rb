@@ -5,12 +5,6 @@ class DesignerDashboardsController < ApplicationController
   def main
   end
 
-  def sales
-    @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
-    @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
-    @payout_amount = @sold_items.sum(:amount_cents) / 100.0
-  end
-
   def listings
     # @live_packs = @designer.sfx_packs.live.order(updated_at: :desc)
     # @pending_packs = @designer.sfx_packs.pending.order(updated_at: :desc)
@@ -18,6 +12,20 @@ class DesignerDashboardsController < ApplicationController
     # @declined_packs = @designer.sfx_packs.declined.order(updated_at: :desc)
 
     @packs = @designer.sfx_packs.where.not(id: 100).order(:status)
+  end
+
+  def sales
+    @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
+    @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
+    @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
+    @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
+  end
+
+  def payouts
+    @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
+    @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
+    @payouts = Payout.where(sound_designer: @designer, status: "paid").order(payout_date: :desc)
+    @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
   end
 
   def pack_form

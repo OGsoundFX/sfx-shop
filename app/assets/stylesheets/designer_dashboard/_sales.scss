@@ -5,3 +5,16 @@
     border-radius: 4px;
   }
 }
+
+.paid-pill {
+  font-size: 0.7rem;
+  padding: 4px;
+  background-color: $orange-main;
+  border: 1px solid $orange-main;
+  border-radius: 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: white;
+  }
+}

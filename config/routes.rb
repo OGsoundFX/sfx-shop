@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get "designer_dashboard", to: "designer_dashboards#main", as: :designer_main_dashboard
   get "your_listings", to: "designer_dashboards#listings", as: :designer_listings
   get "sales", to: "designer_dashboards#sales", as: :designer_sales
+  get "payouts", to: "designer_dashboards#payouts", as: :designer_payouts
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
   delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack

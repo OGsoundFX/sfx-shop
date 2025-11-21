@@ -11,10 +11,10 @@
   <div class="sales-card-titles-price">
     <span>Price <em>(incl. VAT)</em></span>
     <span style="margin-left: 8px"><small><em>VAT</em></small></span>
-    <span>Payout Calc.</span>
+    <span>Payout</span>
   </div>
   <div class="sales-card-titles-buyer">
-    <span>Username</span>
+    <span>Buyer</span>
     <span>Location</span>
   </div>
 </div>
@@ -49,7 +49,10 @@
         <em><small><%= number_to_currency((item.amount_cents * 0.07) / 100, unit: "#{CurrencySymbolService.lookup(item.order.amount_paid_currency.downcase)} ", separator: ",", precision: 2) %></small></em>
       </div>
       <div class="d-flex align-items-center">
-        <span>Payout Calc.</span>
+        <span>
+          <%= number_to_currency(item.payout_amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(item.payout_currency)} ", separator: ",", precision: 2) %>
+          <em class="paid-pill"><%= item.status %></em>
+        </span>
       </div>
     </div>
     <div class="sales-card-titles-buyer">

@@ -5,4 +5,6 @@ class Payout < ApplicationRecord
 
   enum status: { pending: 0, paid: 1, failed: 2 }
   enum currency: { usd: 0, eur: 1 }
+
+  validates :paypal_account, presence: true
 end

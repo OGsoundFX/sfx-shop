@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
         amount_cents: order.amount,
         currency: order.amount_paid_currency.downcase,
         payout_amount_cents: 0,
-        payout_currency: sfx_pack.currency,
+        payout_currency: current_user.sound_designer.payment_infos.last.preferred_currency,
         status: 'pending',
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none'
@@ -232,7 +232,7 @@ class OrdersController < ApplicationController
           amount_cents: item[:amount],
           currency: order.amount_paid_currency.downcase,
           payout_amount_cents: 0,
-          payout_currency: pack.currency,
+          payout_currency: current_user.sound_designer.payment_infos.last.preferred_currency,
           status: 'pending',
           discount: @discount ? true : false,
           discount_type: @discount ? 'sale' : 'no_discount'

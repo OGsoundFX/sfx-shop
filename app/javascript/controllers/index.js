@@ -40,6 +40,9 @@ application.register("horizontal-scroll", HorizontalScrollController)
 import IconToggleController from "./icon_toggle_controller"
 application.register("icon-toggle", IconToggleController)
 
+import ItemsSoldController from "./items_sold_controller"
+application.register("items-sold", ItemsSoldController)
+
 import OpenSubscribeModalController from "./open_subscribe_modal_controller"
 application.register("open-subscribe-modal", OpenSubscribeModalController)
 

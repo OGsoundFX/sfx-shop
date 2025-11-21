@@ -1,0 +1,23 @@
+.payouts-card-date {
+  width: 80px;
+  text-align: center;
+  margin-right: 28px;
+  border-right: 1px solid #888;
+  padding-right: 20px;
+}
+
+.items-sold__section {
+  position: relative;
+}
+
+.items-sold__modal {
+  width: 150%;
+  padding: 24px;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  position: absolute;
+  margin: auto;
+  left: 100px;
+  top: 0;
+}
