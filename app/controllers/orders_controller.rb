@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :sale_orders, only: [:create, :checkout]#
+  before_action :sale_orders, only: [:create, :checkout]
 
   # action to purchase pack directly
   def create
@@ -59,7 +59,9 @@ class OrdersController < ApplicationController
         payout_currency: current_user.sound_designer.payment_infos.last.preferred_currency,
         status: 'pending',
         discount: @discount ? true : false,
-        discount_type: @discount ? 'sale' : 'none'
+        discount_type: @discount ? 'sale' : 'none',
+        discount_percentage: discount_percentage,
+        discount_name: discount_name
       )
 
       redirect_to new_order_payment_path(order)
@@ -221,9 +223,33 @@ class OrdersController < ApplicationController
       )
       order.update(checkout_session_id: session.id)
 
+      # checking sales
+      current_sales = Sale.where("end_date > ?", Date.current)
+
       # creating sold_item instances
       line_items_pack = line_items.select {|item| item[:images].present?}
-      line_items_pack.each do |item|
+      line_items_pack.each_with_index do |item, index|
+        sfx_pack = SfxPack.find_by_title(item[:name])
+        current_sales.each do |sale|
+          sale.packs.each do |pack_id|
+            @discount = sale.percentage if sfx_pack.id == pack_id
+          end
+        end
+        if @discount
+          discount = true
+          discount_type = 'sale'
+          discount_percentage = order.sales.first[1].values.first
+          discount_name = order.sales.first[1].keys.first
+        else
+          if index > 0
+            discount = true
+            discount_type = 'additional'
+          else
+            discount = false
+            discount_type = 'no_discount'
+          end
+        end
+
         pack = SfxPack.find(item[:images].first[:record_id])
         SoldItem.create!(
           sound_designer: pack.sound_designer,
@@ -234,8 +260,10 @@ class OrdersController < ApplicationController
           payout_amount_cents: 0,
           payout_currency: current_user.sound_designer.payment_infos.last.preferred_currency,
           status: 'pending',
-          discount: @discount ? true : false,
-          discount_type: @discount ? 'sale' : 'no_discount'
+          discount: discount,
+          discount_type: discount_type,
+          discount_percentage: order.sales.first[1].values.first,
+          discount_name: order.sales.first[1].keys.first
         )
       end
 
@@ -281,6 +309,9 @@ class OrdersController < ApplicationController
         @sale_orders[pack_id][sale.title] = sale.percentage
       end
     end
+  end
+
+  def check_sales
   end
 
   def create_cart(item)

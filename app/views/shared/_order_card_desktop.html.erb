@@ -4,7 +4,7 @@
   <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
     <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%B #{order.created_at.day.ordinalize} %Y") %> </h3>
     <div>
-      <hr>
+      <hr class="mb-3">
       <% if order.packs == [] && order.collections == [] && order.tracks == [] %>
         <div class="pack-payment-checkout">
           <%= render 'shared/dashboard_single_pack', order: order %>
@@ -37,7 +37,7 @@
     </div>
 
     <hr>
-    <div class="d-flex justify-content-start" style="padding: 0 42px">
+    <div class="d-flex justify-content-start mt-4" style="padding: 0 42px">
       <div class="total-dashboard" >
         <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money(order.amount_cents.to_f / 100, symbol: session[:currency]) %></strong></p>
         <div class="d-flex justify-content-between dashboard-vat-display">

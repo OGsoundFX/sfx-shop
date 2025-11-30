@@ -76,8 +76,7 @@ Rails.application.configure do
   # ngrok config
   # config.hosts << "afeaf84b5547.ngrok.io"
   # config.hosts << "1779-2001-16b8-5cd6-e000-44f-6006-34f-2e22.ngrok.io"
-  config.hosts << "29adac4c2396.ngrok-free.app"
+  config.hosts << "850adf46f70f.ngrok-free.app"
   # the stripe webhook link looks like this:
   # https://1779-2001-16b8-5cd6-e000-44f-6006-34f-2e22.ngrok.io/stripe-webhooks
 end
-
