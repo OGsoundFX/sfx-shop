@@ -244,6 +244,8 @@ class OrdersController < ApplicationController
           if index > 0
             discount = true
             discount_type = 'additional'
+            discount_percentage = 20
+            discount_name = "Multiple Purchase"
           else
             discount = false
             discount_type = 'no_discount'
@@ -262,8 +264,8 @@ class OrdersController < ApplicationController
           status: 'pending',
           discount: discount,
           discount_type: discount_type,
-          discount_percentage: order.sales.first[1].values.first,
-          discount_name: order.sales.first[1].keys.first
+          discount_percentage: discount_percentage,
+          discount_name: discount_name
         )
       end
 

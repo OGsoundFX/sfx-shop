@@ -6,15 +6,23 @@
   }
 }
 
-.paid-pill {
+.paid-pill, .pending-pill {
   font-size: 0.7rem;
   padding: 4px;
-  background-color: $orange-main;
-  border: 1px solid $orange-main;
   border-radius: 16px;
   margin: 0 4px;
   cursor: pointer;
   &:hover {
     background-color: white;
   }
+}
+
+.pending-pill {
+  background-color: $orange-main;
+  border: 1px solid $orange-main;
+}
+
+.paid-pill {
+  background-color: $new-green;
+  border: 1px solid $new-green;
 }
