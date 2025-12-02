@@ -41,7 +41,7 @@
         <div class="items-sold__modal d-none" data-items-sold-target="soldItems">
           <div>
             <% payout.sold_items.each do |item| %>
-              <%= item.sfx_pack.title %> (<%= item.created_at.strftime("%d %b %Y") %>)
+              <span class="items-sold__list-title">• <%= item.sfx_pack.title %> (<%= item.created_at.strftime("%b-%y") %>)</span>
               <br>
             <% end %>
           </div>
