@@ -91,6 +91,37 @@ class AdministratorController < ApplicationController
     @sale = Sale.last
   end
 
+  def payouts
+    currency_rate = CurrencyRate.where(base: "USD", target: "EUR").last.rate
+    @designers = SoundDesigner.joins(:sold_items).distinct.includes(:sold_items)
+    @total_payout = SoldItem.pending.sum do |sold_item|
+      sold_item.payout_currency == "eur" ? sold_item.payout_amount_cents : sold_item.payout_amount_cents * currency_rate
+    end / 100.0
+
+    @due_payouts = @designers.map do |designer|
+      sold_items = designer.sold_items.pending.order(created_at: :desc)
+      amount_due = sold_items.sum(:payout_amount_cents)
+      # due date calculation
+      if amount_due >= 50
+        month = Date.today.month == 12 ? 1 : Date.today.month + 1
+        year = Date.today.month == 12 ? Date.today.year + 1 : Date.today.year
+        due_date = Date.new(year, month, 01)
+      else
+        "payment threshold not reached"
+      end
+
+      {
+        due_date: due_date,
+        paypal_account: designer.payment_infos.last.paypal_account,
+        amount_due_cents: amount_due,
+        currency: designer.payment_infos.last.preferred_currency,
+        sold_items: sold_items,
+        designer: designer,
+        time_period: [sold_items.first.created_at, sold_items.last.created_at]
+      }
+    end
+  end
+
   private
 
   def check_admin
