@@ -1,1 +1,60 @@
-<h1>Create a payout</h1>
+<div class="padding-navbar content admin-min-height bg-dark">
+  <div class="container">
+    <%= render "administrator/admin_menu" %>
+    <div class="payout-create__card">
+      <div class="payout-create__designer-card">
+        <div class="text-center">
+          <h5>Designer Profile</h5>
+        </div>
+        <hr>
+        <div>
+          Name: 
+          <% if @designer.first_name.present? && @designer.last_name.present? %>
+            <%= @designer.first_name.capitalize %> <%= @designer.last_name.capitalize %>
+          <% elsif @designer.first_name.present? || @designer.last_name.present?  %>
+            <%= @designer.first_name.capitalize || @designer.last_name.capitalize %>
+          <% else %>
+            <%= @designer.user.email.split("@").first.capitalize %>
+          <% end %>
+        </div>
+        <div>
+          location: <%= @designer.location.capitalize || "Unknown" %>
+        </div>
+        <div>
+          Paypal account: <%= @payout_info %>
+          <%= link_to "Go to Paypal", "https://www.paypal.com/de/home", class: "btn btn-secondary ms-3", target: "_blank" %>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center">
+          <div class="me-4">
+            Total amount due:
+          </div>
+          <div class="btn btn-secondary">
+            <%= humanized_money(params[:payout][:amount_due_cents].to_i / 100.0, symbol: "#{CurrencySymbolService.lookup(params[:payout][:currency])} ") %>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <div>
+            Number of packs: <%= @designer.sfx_packs.count %>
+          </div>
+          <div>
+            Average rating: <%= DesignerAverageRatingService.lookup(@designer) %>
+          </div>
+        </div>
+      </div>
+      <div class="payout-create__designer-card">
+        <div class="text-center">
+          <h5>Sales</h5>
+          <hr>
+          <% @sold_items.each do |item| %>
+            <%= render "sold_item_card", item: item %>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <%= link_to "Create Payout", payouts_path, data: { turbo_method: :post}, class: "btn btn-secondary w-100" %>
+      </div>
+    </div>
+  </div>
+</div>

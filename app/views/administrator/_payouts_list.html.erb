@@ -64,7 +64,7 @@
         <% end %>
       </span>
       <div>
-        <%= link_to "Pay", new_payout_path(sound_designer_id: payout[:designer].id), class: "btn btn-secondary" %>
+        <%= link_to "Pay", new_payout_path(sound_designer_id: payout[:designer].id, payout: payout, sold_items: payout[:sold_items].map { |item| item.to_global_id.to_s}), class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
