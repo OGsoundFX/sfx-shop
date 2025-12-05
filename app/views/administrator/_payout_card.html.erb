@@ -32,13 +32,14 @@
         </div>
       </div>
     </div>
+    <% raise %>
   </div>
   <div class="sales-card-titles-buyer">
     <span>
       <% if payout[:time_period][0].strftime("%b %y") == payout[:time_period][1].strftime("%b %y") %>
         <%= payout[:time_period][1].strftime("%b %y") %>
       <% else %>
-        <%= payout[:time_period][0].strftime("%b %y") %> - <%= payout[:time_period][1].strftime("%b %y") %>
+        <%= payout[:time_period][1].strftime("%b %y") %> - <%= payout[:time_period][0].strftime("%b %y") %>
       <% end %>
     </span>
     <div>
