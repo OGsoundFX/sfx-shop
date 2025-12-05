@@ -42,6 +42,6 @@
   </div>
   <div class="sales-card-titles-buyer">
     <span><%= item.order.user.location.present? ? item.order.user.location : "Unknown" %></span>
-    <input type="checkbox" name="item_id" value="<%= dom_id(item) %>">
+    <%= check_box_tag "sold_item_ids[]", item.id, false %>
   </div>
 </div>
