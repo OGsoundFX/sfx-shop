@@ -1,7 +1,7 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-4">
   <div class="container">
     <%= render "admin_menu" %>
-    <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@total_payout, symbol: "€ ") %></div>
+    <div style="color: white; opacity: 0.7">Tota payout amount: <%= humanized_money(@total_payout_eur, symbol: "€ ") %> / <%= humanized_money(@total_payout_usd, symbol: "$ ") %></div>
     <%= render "payouts_list" %>
   </div>
 </div>
