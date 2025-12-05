@@ -1,0 +1,47 @@
+<div class="sold-item-card__grid">
+  <div class="d-flex align-items-center">
+    <div class="submission-card-date">
+      <div class="submission-day"><%= item.created_at.strftime("%b") %></div>
+      <div class="submission-date"><%= item.created_at.strftime("%d") %></div>
+    </div>
+    <div class="submission-card-content d-flex align-items-center">
+      <div class="sound-designer-dashboard__sales-image">
+        <%= cl_image_tag item.sfx_pack.photos.first.key, width: 42, height: 42 %>
+      </div>
+      <div><%= item.sfx_pack.title %></div>
+    </div>
+  </div>
+
+  <div class="sales-card-titles-price">
+    <div class="ms-4">
+      <% if item.order.amount_paid_currency.downcase == item.sfx_pack.currency %>
+        <div class="submission-date"><%= number_to_currency(item.amount_cents / 100, unit: "#{CurrencySymbolService.lookup(item.sfx_pack.currency)} ", separator: ",", precision: 2) %></div>
+      <% else %>
+        <% conversion_rate = CurrencyRate.where(target: item.order.amount_paid_currency).last.rate %>
+        <% converted_price = (item.amount_cents * conversion_rate) / 100 %>
+        <div class="submission-date">
+          <%= number_to_currency(converted_price, unit: "#{CurrencySymbolService.lookup(item.order.amount_paid_currency.downcase)} ", separator: ",", precision: 2) %>
+        </div>
+      <% end %>
+      <em><small>VAT: <%= number_to_currency((item.amount_cents * 0.07) / 100, unit: "#{CurrencySymbolService.lookup(item.order.amount_paid_currency.downcase)} ", separator: ",", precision: 2) %></small></em>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="d-flex flex-column w-100 text-center">
+        <span><%= item.discount? && item.discount_percentage.present? ? "#{item.discount_percentage}%" : "No discount" %></span>
+        <% if item.discount? && item.discount_percentage.present? %>
+          <em><small>(<%= item.discount_name %>)</small></em>
+        <% end %>
+      </div>
+    </div>
+    <div class="d-flex align-items-center ms-4">
+      <span>
+        <%= number_to_currency(item.payout_amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(item.payout_currency)} ", separator: ",", precision: 2) %>
+        <em class="<%= item.status == "paid" ? 'paid' : 'pending' %>-pill"><%= item.status %></em>
+      </span>
+    </div>
+  </div>
+  <div class="sales-card-titles-buyer">
+    <span><%= item.order.user.location.present? ? item.order.user.location : "Unknown" %></span>
+    <%= check_box_tag "sold_item_ids[]", item.id, false %>
+  </div>
+</div>

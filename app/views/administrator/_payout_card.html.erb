@@ -1,0 +1,48 @@
+<div class="designer-dashboard__sales-grid">
+  <div class="d-flex align-items-center">
+    <div class="payouts-card-date">
+      <div class="submission-day"><%= payout[:due_date].strftime("%b") %> <%= payout[:due_date].strftime("%d") %></div>
+      <div class="submission-day"><%= payout[:due_date].strftime("%Y") %></div>
+    </div>
+    <div class="submission-card-content d-flex align-items-center">
+      <div><%= payout[:paypal_account] %></div>
+    </div>
+  </div>
+
+  <div class="sales-card-titles-price">
+    <div class="d-flex align-items-center">
+      <%= link_to sound_designer_path(payout[:designer]), target: "_blank" do %>
+        <%= payout[:designer].first_name %> <%= payout[:designer].last_name %>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="submission-date"><%= number_to_currency(payout[:amount_due_cents] / 100.0, unit: "#{CurrencySymbolService.lookup(payout[:currency])} ", separator: ",", precision: 2) %></div>
+    </div>
+    <div class="d-flex align-items-center items-sold__section" data-controller="items-sold">
+      <div class="btn btn-secondary" data-action="click->items-sold#modal">Show list</div>
+      <div class="items-sold__modal d-none" data-items-sold-target="soldItems">
+        <div>
+          <% payout[:sold_items].each do |item| %>
+            <span class="items-sold__list-title">• <%= item.sfx_pack.title %> (<%= item.created_at.strftime("%b-%y") %>)</span>
+            <br>
+          <% end %>
+        </div>
+        <div class="btn btn-secondary mt-3" data-action="click->items-sold#close">
+          Close
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sales-card-titles-buyer">
+    <span>
+      <% if payout[:time_period][0].strftime("%b %y") == payout[:time_period][1].strftime("%b %y") %>
+        <%= payout[:time_period][1].strftime("%b %y") %>
+      <% else %>
+        <%= payout[:time_period][0].strftime("%b %y") %> - <%= payout[:time_period][1].strftime("%b %y") %>
+      <% end %>
+    </span>
+    <div>
+      <%= link_to "Pay", new_payout_path(sound_designer_id: payout[:designer].id, payout: payout, sold_items: payout[:sold_items].map { |item| item.to_global_id.to_s}), class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

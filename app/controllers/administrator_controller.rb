@@ -120,6 +120,8 @@ class AdministratorController < ApplicationController
         time_period: [sold_items.first.created_at, sold_items.last.created_at]
       }
     end
+
+    @past_payouts = Payout.paid.order(payout_date: :desc)
   end
 
   private
