@@ -94,8 +94,12 @@ class AdministratorController < ApplicationController
   def payouts
     currency_rate = CurrencyRate.where(base: "USD", target: "EUR").last.rate
     @designers = SoundDesigner.joins(:sold_items).distinct.includes(:sold_items)
-    @total_payout = SoldItem.pending.sum do |sold_item|
-      sold_item.payout_currency == "eur" ? sold_item.payout_amount_cents : sold_item.payout_amount_cents * currency_rate
+    @total_payout_eur = SoldItem.pending.sum do |sold_item|
+      sold_item.payout_currency == "eur" ? sold_item.payout_amount_cents : 0
+    end / 100.0
+
+    @total_payout_usd = SoldItem.pending.sum do |sold_item|
+      sold_item.payout_currency == "usd" ? sold_item.payout_amount_cents : 0
     end / 100.0
 
     @due_payouts = @designers.map do |designer|
