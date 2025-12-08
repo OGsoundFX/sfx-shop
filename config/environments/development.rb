@@ -64,14 +64,15 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "mail.privateemail.com",
     port: 587,
-    domain: "bamsfx.com",
+    domain: "localhost",
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV["EMAIL_USERNAME"],
-    password:ENV["EMAIL_PASSWORD"]
+    password:ENV["EMAIL_PASSWORD"],
+    openssl_verify_mode: 'none'
   }
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # ngrok config
   # config.hosts << "afeaf84b5547.ngrok.io"
