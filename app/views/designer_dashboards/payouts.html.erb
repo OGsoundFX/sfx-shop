@@ -15,7 +15,9 @@
                         label: false,
                         required: false,
                         wrapper_input_html: { class: "designer-dashboard__payout-year-select" } %>
-            <%= f.button :submit, "Select year"%>
+            <%= button_tag type: :submit, class: "btn" do %>
+               <i class="fas fa-check"></i>
+            <% end %>
           </div>
         <% end %>
       <% else %>

@@ -1,0 +1,18 @@
+<h1>Congratulations <%= @designer.first_name %></h1>
+<h3>Your Sound Effect pack <%= @sfx_pack.title %> is now live 🎉</h3>
+
+<p>Hi there,</p>
+
+<p>First of all, thank you so much for contributing to this amazing community!</p>
+
+<p>We obviously find that your work is of great quality and brings value to the BamSFX plateform!</p>
+
+<p>We are therefore very happy to announce that your Sound Effects pack <strong><%= @sfx_pack.title %> that you have submitted, has been approved and is now live 🚀</p>
+
+<p>Thank you so much for your participation in this project!</p>
+
+<p>— The BAMSFX Team</p>
+
+<%= link_to "https://www.bamsfx.com" do %>
+  <%= cl_image_tag @sfx_pack.photos.first.key, width: 320 %>
+<% end %>
