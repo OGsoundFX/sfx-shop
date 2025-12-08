@@ -19,6 +19,9 @@ application.register("collection-checkout-modal", CollectionCheckoutModalControl
 import CollectionNameController from "./collection_name_controller"
 application.register("collection-name", CollectionNameController)
 
+import DatePickerDesignerSalesController from "./date_picker_designer_sales_controller"
+application.register("date-picker-designer-sales", DatePickerDesignerSalesController)
+
 import DeleteJobController from "./delete_job_controller"
 application.register("delete-job", DeleteJobController)
 
@@ -27,6 +30,9 @@ application.register("designer-pack-filter", DesignerPackFilterController)
 
 import DesignerSubmissionFormController from "./designer_submission_form_controller"
 application.register("designer-submission-form", DesignerSubmissionFormController)
+
+import DisplayCalendarDesignerSalesController from "./display_calendar_designer_sales_controller"
+application.register("display-calendar-designer-sales", DisplayCalendarDesignerSalesController)
 
 import FiltersController from "./filters_controller"
 application.register("filters", FiltersController)

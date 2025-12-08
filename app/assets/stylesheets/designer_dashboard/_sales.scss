@@ -26,3 +26,28 @@
   background-color: $new-green;
   border: 1px solid $new-green;
 }
+
+.designer-dashboard__sales-dates {
+  color: white;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  cursor: pointer;
+  #designer-dashboard__sales-pen {
+    margin-left: 8px;
+  }
+  &:hover {
+    opacity: unset;
+    color: white;
+  }
+}
+#designer-dashboard__sales-clear {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  color: white;
+  margin-left: 12px;
+  cursor: pointer;
+  &:hover {
+    opacity: unset;
+    color: white;
+  }
+}

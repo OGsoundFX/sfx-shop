@@ -24,7 +24,9 @@
 <% if @past_sold_items.present? && @sold_items.present? %>
   <hr style="border-color: white; margin-top: 24px">
 <% else %>
-  <h4 class="mt-4 text-light">You haven't made any sales yet</h4>
+  <div class="designer-dashboard__no-payout">
+    <h4>There are no sales for this period</h4>
+  </div>
 <% end %>
 <% @past_sold_items.each do |item| %>
   <%= render "sold_item_card", item: item %>

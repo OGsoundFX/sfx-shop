@@ -19,6 +19,18 @@ class DesignerDashboardsController < ApplicationController
     @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
     @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
+    @start_date = @sold_items.first.order.created_at.to_date.beginning_of_month.to_s
+    @end_date = Date.today.to_s
+    if params[:filters].present? && params[:filters][:range_date].present?
+      @start_date = params[:filters][:range_date].split("to").first.strip
+      @end_date = params[:filters][:range_date].split("to").last.strip
+      @sold_items = @sold_items.select do |item|
+        item.order.created_at.to_date >= @start_date.to_date && item.order.created_at.to_date <= @end_date.to_date
+      end
+      @past_sold_items = @past_sold_items.select do |item|
+        item.order.created_at.to_date >= @start_date.to_date && item.order.created_at.to_date <= @end_date.to_date
+      end
+    end
   end
 
   def payouts
@@ -29,7 +41,7 @@ class DesignerDashboardsController < ApplicationController
     @first_payout_year = @payouts.last.payout_date.year
     @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
     @year = Date.today.year
-    if params[:filters].present? && params[:filters][:year]
+    if params[:filters].present? && params[:filters][:year].present?
       @payouts = @payouts.select { |payout| payout.payout_date.year == params[:filters][:year].to_i }
       @year = params[:filters][:year].to_i
     else
