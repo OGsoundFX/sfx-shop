@@ -9,6 +9,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "bootstrap": "^5.3.7",
+    "flatpickr": "^4.6.13",
     "node-sass": "^9.0.0",
     "rails_admin": "3.1.2",
     "sass": "^1.89.0",
