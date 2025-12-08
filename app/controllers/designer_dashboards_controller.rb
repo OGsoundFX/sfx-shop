@@ -25,7 +25,16 @@ class DesignerDashboardsController < ApplicationController
     @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
     @payouts = Payout.where(sound_designer: @designer, status: "paid").order(payout_date: :desc)
+    @prior_year_payments = @payouts.first.payout_date.year != @payouts.last.payout_date.year
+    @first_payout_year = @payouts.last.payout_date.year
     @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
+    @year = Date.today.year
+    if params[:filters].present? && params[:filters][:year]
+      @payouts = @payouts.select { |payout| payout.payout_date.year == params[:filters][:year].to_i }
+      @year = params[:filters][:year].to_i
+    else
+      @payouts = @payouts.select { |payout| payout.payout_date.year == Date.today.year }
+    end
   end
 
   def pack_form
