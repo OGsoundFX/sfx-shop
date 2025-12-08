@@ -3,7 +3,25 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
-    <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
+    <div class="d-flex justify-content-between">
+      <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
+      <% if @prior_year_payments %>
+        <%= simple_form_for :filters, url: payouts_path, method: :get, html: {class: "designer-dashboard__payout-form"} do |f| %>
+          <div class="d-flex">
+            <%= f.input :year,
+                        collection: (@first_payout_year..Date.today.year).to_a.reverse,
+                        selected: params[:filters].present? && params[:filters][:year].present? ? params[:filters][:year] : Date.today.year,
+                        include_blank: false,
+                        label: false,
+                        required: false,
+                        wrapper_input_html: { class: "designer-dashboard__payout-year-select" } %>
+            <%= f.button :submit, "Select year"%>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="btn btn-secondary"><%= @year %></div>
+      <% end %>
+    </div>
     <%= render "payouts_list" %>
   </div>
 </div>

@@ -1,3 +1,8 @@
+.payout-card-titles-price {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .payouts-card-date {
   width: 80px;
   text-align: center;
@@ -11,17 +16,57 @@
 }
 
 .items-sold__modal {
-  width: 150%;
-  padding: 24px;
+  z-index: 100;
+  text-align: start;
+  width: 20vw;
+  padding: 12px;
   background-color: white;
   color: black;
   border-radius: 8px;
   position: absolute;
   margin: auto;
-  left: 100px;
-  top: 0;
+  left: -14vw;
+  top: -100%;
 }
 
 .items-sold__list-title {
   font-size: 0.8rem;
+}
+
+.designer-dashboard__payout-amount {
+  text-align: center;
+}
+
+.designer-dashboard__payout-form {
+  .form-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 !important;
+    label {
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    select {
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      background-color: $new-green;
+      color: white;
+      border: none;
+    }
+  }
+}
+
+.designer-dashboard__payout-year-select {
+  display: flex;
+  justify-content: between;
+  color: red;
+  background-color: red;
+}
+
+.designer-dashboard__no-payout {
+  color: white;
+  text-align: center;
+  margin-top: 24px;
 }
