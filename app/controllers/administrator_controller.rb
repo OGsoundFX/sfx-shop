@@ -3,8 +3,8 @@ class AdministratorController < ApplicationController
 
   # main tab
   def admin
-    # removing test orders from admin user olivier@ogsoundfx.com (Use with id 6)
-    orders = Order.joins(:user).where.not(user: { email: "olivier@ogsoundfx.com"})
+    # removing test orders from admin user bamsfx@ogsoundfx.com (Use with id 6)
+    orders = Order.joins(:user).where.not(user: { email: "olivier@bamsfx.com.com"})
 
     # total orders
     @total_orders_count = orders.where(status: "paid").count
@@ -131,7 +131,7 @@ class AdministratorController < ApplicationController
   private
 
   def check_admin
-    if current_user.nil? || current_user.email != 'olivier@ogsoundfx.com'
+    if current_user.nil? || current_user.email != 'olivier@bamsfx.com'
       redirect_to root_path, alert: "You are not authorised to visit this page"
     end
   end
