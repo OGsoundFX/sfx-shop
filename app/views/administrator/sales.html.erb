@@ -1,67 +1,72 @@
-<div class="container padding-navbar content admin-min-height bg-dark">
-  <%= render "admin_menu" %>
-  <div>
-    <h3> <%= link_to "Create a Sale", new_sale_path, class: "btn btn-secondary" %> </h3>
-
-
-    <h5><%= @current_sales.empty? ? 'No current sales' : 'Current Sales:' %></h5>
-    <% @current_sales.each do |sale| %>
-
-        <div class="submission-card d-flex justify-content-between">
-          <div class="d-flex align-items-center">
-            <div class="submission-card-date">
-              <div class="submission-day"><%= sale.start_date.strftime("%Y") %></div>
-            </div>
-            <div class="submission-card-date">
-              <div>From:</div>
-              <div class="submission-day"><%= sale.start_date.strftime("%b %d") %></div>
-            </div>
-            <div class="submission-card-date">
-              <div>To:</div>
-              <div class="submission-day"><%= sale.end_date.strftime("%b %d") %></div>
-            </div>
-            <div class="submission-card-content">
-              <div class="title"><%= sale.title %></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="title"><%= number_to_currency(sale.amount_earned / 100, unit: "$ ", separator: ",", precision: 2) %></div>
-          </div>
-        </div>
-      <%= link_to "Delete Sale", sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }  %>
-    <% end %>
-  </div>
-  <hr style="border-color: white">
-  <div class="submission-container text-center">
-    <div style="width: 100vw">
-      <div class="text-lef text-white ml-5">
-        <h6>Passed Sales</h6>
+<div class="padding-navbar content admin-min-height bg-dark pb-5">
+  <div class="container">
+    <div>
+      <%= render "admin_menu" %>
+      <div class="d-flex">
+        <% if @current_sales.empty? %>
+          <h3><%= link_to "Create a Sale", new_sale_path, class: "btn btn-secondary" %></h3>
+          <em><h5 style="margin: 8px 0 0 8px">(No current sales)</h5></em>
+        <% else %>
+        <% end %>
       </div>
-      <% @previous_sales.each do |sale| %>
-        <div class="submission-card d-flex justify-content-between">
-          <div class="d-flex align-items-center">
-            <div class="submission-card-date">
-              <div class="submission-day"><%= sale.start_date.strftime("%Y") %></div>
+      <% @current_sales.each do |sale| %>
+          <div class="submission-card d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="submission-card-date">
+                <div class="submission-day"><%= sale.start_date.strftime("%Y") %></div>
+              </div>
+              <div class="submission-card-date">
+                <div>From:</div>
+                <div class="submission-day"><%= sale.start_date.strftime("%b %d") %></div>
+              </div>
+              <div class="submission-card-date">
+                <div>To:</div>
+                <div class="submission-day"><%= sale.end_date.strftime("%b %d") %></div>
+              </div>
+              <div class="submission-card-content">
+                <div class="title"><%= sale.title %></div>
+              </div>
             </div>
-            <div class="submission-card-date">
-              <div>From:</div>
-              <div class="submission-day"><%= sale.start_date.strftime("%b %d") %></div>
+            <div>
+              <%= link_to "Delete Sale", sale_path(sale), method: :delete, class: "btn btn-warning", data: { confirm: 'Are you sure?' }  %> 
             </div>
-            <div class="submission-card-date">
-              <div>To:</div>
-              <div class="submission-day"><%= sale.end_date.strftime("%b %d") %></div>
-            </div>
-            <div class="submission-card-content">
-              <div class="title"><%= sale.title %></div>
+            <div>
+              <div class="title"><%= number_to_currency(sale.amount_earned / 100, unit: "$ ", separator: ",", precision: 2) %></div>
             </div>
           </div>
-
-          <div>
-            <div class="title"><%= number_to_currency(sale.amount_earned / 100, unit: "$ ", separator: ",", precision: 2) %></div>
-          </div>
-        </div>
       <% end %>
     </div>
-  </div>
+    <hr style="border-color: white">
+    <div class="submission-container text-center">
+      <div style="width: 100vw">
+        <div class="text-lef text-white ml-5">
+          <h6>Previous Sales</h6>
+        </div>
+        <% @previous_sales.each do |sale| %>
+          <div class="submission-card d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="submission-card-date">
+                <div class="submission-day"><%= sale.start_date.strftime("%Y") %></div>
+              </div>
+              <div class="submission-card-date">
+                <div>From:</div>
+                <div class="submission-day"><%= sale.start_date.strftime("%b %d") %></div>
+              </div>
+              <div class="submission-card-date">
+                <div>To:</div>
+                <div class="submission-day"><%= sale.end_date.strftime("%b %d") %></div>
+              </div>
+              <div class="submission-card-content">
+                <div class="title"><%= sale.title %></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="title"><%= number_to_currency(sale.amount_earned / 100, unit: "$ ", separator: ",", precision: 2) %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>  
 </div>

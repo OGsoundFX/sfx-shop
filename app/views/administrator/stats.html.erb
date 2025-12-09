@@ -1,48 +1,50 @@
-<div class="container padding-navbar content admin-min-height bg-dark">
-  <%= render "admin_menu" %>
-  <div class="d-flex justify-content-between">
-    <div>
-      <p>
-        There have been <%= @paid_orders %> orders
-      </p>
-      <p>
-        Total Amount earned: <%= humanized_money(Order.all.sum(&:amount_paid_cents) / 100, symbol: session[:currency]) %>
-      </p>
-      <p>
-        Total Amount earned today: <%= humanized_money(@amount_earned_today / 100, symbol: session[:currency]) %>
-      </p>
-      <p>
-        Number of customers: <%= @buyers %>
-      </p>
-      <p>
-        Made by <br>
-        <% @top_five.each do |key, value|  %>
-          <p> <%= mail_to User.find(key).email %>: <%= value %> </p>
-        <% end %>
-      </p>
+<div class="padding-navbar content admin-min-height bg-dark pb-5">
+  <div class="container">
+    <%= render "admin_menu" %>
+    <div class="d-flex justify-content-between">
+      <div>
+        <p>
+          There have been <%= @paid_orders %> orders
+        </p>
+        <p>
+          Total Amount earned: <%= humanized_money(Order.all.sum(&:amount_paid_cents) / 100, symbol: session[:currency]) %>
+        </p>
+        <p>
+          Total Amount earned today: <%= humanized_money(@amount_earned_today / 100, symbol: session[:currency]) %>
+        </p>
+        <p>
+          Number of customers: <%= @buyers %>
+        </p>
+        <p>
+          Made by <br>
+          <% @top_five.each do |key, value|  %>
+            <p> <%= mail_to User.find(key).email %>: <%= value %> </p>
+          <% end %>
+        </p>
 
-      <p>
-        Number of users: <%= User.count %>
-      </p>
-      <p>Number of carts: <%= @carts %></p>
-      <p>Number of items in carts: <%= @items_in_carts %></p>
-    </div>
-    <div>
+        <p>
+          Number of users: <%= User.count %>
+        </p>
+        <p>Number of carts: <%= @carts %></p>
+        <p>Number of items in carts: <%= @items_in_carts %></p>
+      </div>
+      <div>
 
-      <table id="pack_table">
-        <tr>
-          <th>Pack</th>
-          <th>Nb of sales</th>
-        </tr>
-
-        <% @packs.each do |key, value| %>
+        <table id="pack_table">
           <tr>
-            <td><%= key %></td>
-            <td><%= value %></td>
+            <th>Pack</th>
+            <th>Nb of sales</th>
           </tr>
-        <% end %>
-      </table>
 
+          <% @packs.each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+          <% end %>
+        </table>
+
+      </div>
     </div>
   </div>
 </div>
