@@ -1,5 +1,5 @@
 class DesignerDashboardsController < ApplicationController
-  before_action :unauthorized_redirect, :new_designer, :load_designer
+  before_action :unauthenticated_redirect, :new_designer, :load_designer
   before_action :load_pack, only: [:update_pack_form, :remove_pack]
 
   def main
@@ -57,7 +57,8 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def update_pack_form
-    @designer = current_user.sound_designer
+    @designer = @sfx_pack.sound_designer
+    redirect_to designer_listings_path, notice: "You do not have authorisation to access this page" if current_user != @designer.user && !current_user.admin?
   end
 
   def remove_pack
@@ -117,7 +118,7 @@ class DesignerDashboardsController < ApplicationController
     @paypal = @designer.payment_infos.last || @designer.payment_infos.new
   end
 
-  def unauthorized_redirect
+  def unauthenticated_redirect
     redirect_to root_path, notice: "You need to sign in to access this page" if !user_signed_in?
   end
 

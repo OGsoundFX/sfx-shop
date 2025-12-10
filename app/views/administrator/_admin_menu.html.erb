@@ -1,6 +1,7 @@
 <div class="d-flex mt-5 mb-2">
   <%= link_to "Main", admin_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if action_name == "admin"}" %>
-  <%= link_to "Designer Submissions", submissions_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if action_name == "designer_submissions"}" %>
+  <%= link_to "Designer Submissions", submissions_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "administrator" && action_name == "designer_submissions"}" %>
+  <%= link_to "Pack Submissions", pack_submissions_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "administrator" && action_name == "pack_submissions"}" %>
   <%= link_to "Stats", stats_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if action_name == "stats"}" %>
   <%= link_to "Sales", list_sales_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if action_name == "sales" || (controller_name == "sales" && action_name == "new")}" %>
   <%= link_to "Payouts", admin_payouts_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if (controller_name == "administrator" && action_name == "payouts") || (controller_name == "payouts" && action_name == "new")}" %>

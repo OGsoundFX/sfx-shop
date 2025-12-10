@@ -1,3 +1,8 @@
 <div class="top-links">
-  <%= link_to 'Back', url_for(:back), class: "btn-cart-show" %>
+  <%= link_to 'Back', url_for(:back), class: "btn btn-secondary" %>
+  <% if !@pack.live? %>
+    <div class="btn btn-warning">
+      <%= @pack.status %>
+    </div>
+  <% end %>
 </div>

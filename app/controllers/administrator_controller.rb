@@ -25,6 +25,10 @@ class AdministratorController < ApplicationController
     @submissions = DesignerSubmission.all.order(:status)
   end
 
+  def pack_submissions
+    @packs = SfxPack.submitted
+  end
+
   def submission_accepted
     submission = DesignerSubmission.find(params[:id])
     submission.accepted!
@@ -42,6 +46,18 @@ class AdministratorController < ApplicationController
   def submission_rejected
     DesignerSubmission.find(params[:id]).rejected!
     redirect_to submissions_path
+  end
+
+  def pack_accepted
+    @pack = SfxPack.find(params[:id])
+    @pack.live!
+    PackPublishedMailer.approved(@pack).deliver_later
+    redirect_to pack_submissions_path
+  end
+
+  def pack_rejected
+    # probably need a form for rejection reasons
+    raise
   end
 
   def calculate_exchange_rate

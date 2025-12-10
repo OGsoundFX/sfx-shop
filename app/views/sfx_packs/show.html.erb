@@ -2,7 +2,7 @@
 <% content_for :meta_description, @pack.description %>
 <% content_for :meta_image, @pack.photos.attached? ? url_for(@pack.photos.first) : image_url("https://res.cloudinary.com/dk9a86uhu/image/upload/v1695194012/sfx_shop/BamSFX_meta_vcgic4.png") %>
 <%= render "shared/left_pannel_mobile"%>
-<div class="d-flex">
+<div class="d-flex <%= 'bg-dark' if !@pack.live? %>">
   <%= render "shared/left_pannel_desktop"%>
   <div class="container padding-navbar content">
     <% if @discount %>
@@ -12,7 +12,7 @@
       </div>
     <% end %>
 
-  <%= render 'shared/back_cart_links' %>
+    <%= render 'shared/back_cart_links' %>
     <div class="desktop">
       <%= render 'shared/desktop_pack_show' %>
     </div>
