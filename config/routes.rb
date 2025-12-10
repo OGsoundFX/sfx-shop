@@ -72,11 +72,14 @@ Rails.application.routes.draw do
   # admin routes
   get "admin", to: "administrator#admin"
   get "admin/designer_submissions", to: "administrator#designer_submissions", as: :submissions
+  get "admin/pack_submissions", to: "administrator#pack_submissions", as: :pack_submissions
+  get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
+  get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
+  get "pack_accepted/:id", to: "administrator#pack_accepted", as: :sfx_pack_accepted
+  get "pack_rejected/:id", to: "administrator#pack_rejected", as: :sfx_pack_rejected
   get "admin/stats", to: "administrator#stats", as: :stats
   get "admin/sales", to: "administrator#sales", as: :list_sales
   get "admin/payouts", to: "administrator#payouts", as: :admin_payouts
-  get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
-  get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
   get "calculate_exchange_rate", to: "administrator#calculate_exchange_rate", as: :calculate_exchange_rate
   resources :payouts, only: [:new, :create]
 

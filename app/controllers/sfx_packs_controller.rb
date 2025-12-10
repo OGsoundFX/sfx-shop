@@ -1,7 +1,7 @@
 class SfxPacksController < ApplicationController
   def show
     @pack = SfxPack.includes(:sound_designer).includes(photos_attachments: :blob).find(params[:id])
-    unless @pack.live? || @pack.sound_designer.user == current_user
+    unless @pack.live? || @pack.sound_designer.user == current_user || current_user.admin?
       redirect_to root_path, alert: "Pack unavailable"
     end
     @designer = @pack.sound_designer

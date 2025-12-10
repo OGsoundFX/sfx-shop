@@ -50,7 +50,7 @@
             <!-- Tags -->
             <div class="flex flex-wrap gap-2 pb-2">
               <% @pack.tags.split(", ").each do |tag| %>
-                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill" style="background-color: #0d9488; opacity: 0.6"><%= tag %></span>
+                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color" style="opacity: 0.6"><%= tag %></span>
               <% end %>
             </div>
           </div>
@@ -96,7 +96,7 @@
                   <% end %>
                   <%= form_tag cart_order_path do %>
                     <%= hidden_field_tag 'pack_id', @pack.id %>
-                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2 add-to-cart-hover", style: "background-color: #0d9488;" %>
+                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2 add-to-cart-hover", style: "background-color: #558b7b;" %>
                   <% end %>
                 <% end %>
               </div>
