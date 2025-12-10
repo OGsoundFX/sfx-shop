@@ -67,6 +67,7 @@ class SfxPacksController < ApplicationController
     @designer = SoundDesigner.find(params[:sound_designer_id])
     @sfx_pack = SfxPack.new(sfx_pack_params)
     @sfx_pack.sound_designer = @designer
+    @sfx_pack.display_order = 100
 
     # taking care of the category and tags fields
     params[:sfx_pack][:category].shift
