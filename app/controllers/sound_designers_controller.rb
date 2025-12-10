@@ -28,16 +28,19 @@ class SoundDesignersController < ApplicationController
   end
 
   def new
+    session[:new_designer] = true
     if user_signed_in? && current_user.designer && current_user.sound_designer.nil?
       @sound_designer = SoundDesigner.new
       @payment_info = @sound_designer.payment_infos.build
+    elsif user_signed_in? && !current_user.designer
+      redirect_to new_designer_submission_path
     else
       if !user_signed_in?
-        redirect_to root_path, notice: "You must be logged in to create a Sound Designer profile."
+        redirect_to new_user_session_path, notice: "You must be logged in to create a Sound Designer profile."
       elsif !current_user.designer
         redirect_to root_path, notice: "You must be approved as a Sound Designer to create a Sound Designer profile. Please contact us if you think this is an error."
       else
-        redirect_to root_path, notice: "You already have a Sound Designer profile."
+        redirect_to designer_main_dashboard_path, notice: "You already have a Sound Designer profile."
       end
     end
   end

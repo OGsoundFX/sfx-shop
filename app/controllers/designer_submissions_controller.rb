@@ -8,6 +8,8 @@ class DesignerSubmissionsController < ApplicationController
 
   def create
     @designer_submission = DesignerSubmission.new(designer_submission_params)
+    @designer_submission.email = current_user.email
+    @designer_submission.user = current_user
     @designer_submission.profile_created!
     if @designer_submission.save
       redirect_to designer_submission_url(access_token: @designer_submission.access_token), notice: "Information successfully submitted"
@@ -28,7 +30,6 @@ class DesignerSubmissionsController < ApplicationController
   def thank_you
     @designer_submission = DesignerSubmission.find(params[:id])
     @designer_submission.submited!
-    @designer_submission.save
   end
 
   def destroy
@@ -39,7 +40,7 @@ class DesignerSubmissionsController < ApplicationController
   private
 
   def designer_submission_params
-    params.require(:designer_submission).permit(:first_name, :last_name, :email, :location, :individual_tracks)
+    params.require(:designer_submission).permit(:first_name, :last_name, :location, :individual_tracks)
   end
 
   def find_designer_submission

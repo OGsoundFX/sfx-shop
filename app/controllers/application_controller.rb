@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def after_sign_in_path_for(resource)
-    params[:url] || root_path
+    session[:new_designer] ? new_sound_designer_path : root_path
   end
 
   protected

@@ -27,19 +27,24 @@
           <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
         </li>
       <% end %>
-      <% if !user_signed_in? || (user_signed_in? && (!current_user.designer && !current_user.admin)) %>        
+      <% if !user_signed_in? %>
         <li class="nav-item dropdown">
-          <%#= link_to "Become a Seller", new_designer_submission_path, class: "nav-link become-seller" %>
+          <%= link_to "Become a Seller", new_sound_designer_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
+        </li>
+      <% elsif user_signed_in? && current_user.designer_submission.present? && (current_user.designer_submission.submited? || current_user.designer_submission.profile_created?) %>
+        <li class="nav-item dropdown">
+          <%= link_to "Seller submission Pending", designer_submission_path(current_user.designer_submission.access_token), class: "btn btn-secondary" %>
         </li>
       <% end %>
-      <li class="nav-item dropdown">
-        <%= link_to "About", about_path, class: "nav-link text-white" %>
-      </li>
       <% if current_user %>
         <li class="nav-item dropdown">
           <%= image_tag asset_path("logo/avatar.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", "data-bs-toggle": "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <%= link_to "Seller Dashboard", designer_listings_path, class: "dropdown-item seller" %>
+            <% if current_user.sound_designer.present? %>
+              <%= link_to "Seller Dashboard", designer_listings_path, class: "dropdown-item seller" %>
+            <% elsif current_user.designer %>
+              <%= link_to "Create Seller Profile", new_sound_designer_path, class: "dropdown-item seller" %>
+            <% end %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
             <div class="d-flex">
               <div>
@@ -56,7 +61,7 @@
         </li>
       <% else %>
         <li class="nav-item dropdown">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-secondary ms-3" %>
         </li>
       <% end %>
     </ul>
@@ -108,7 +113,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "About", about_path, class: "nav-link text-white" %>
+          <%= link_to "Become a Seller", new_sound_designer_path, class: "nav-link text-white" %>
         </li>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>
