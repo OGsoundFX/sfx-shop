@@ -41,6 +41,7 @@ class StripeCheckoutSessionService
           item.stripe_fees_cents = fees
         end
         item.save
+        DesignerMailer.you_made_a_sale(item).deliver_later
       end
     when 'payment_intent.succeeded'
     else
