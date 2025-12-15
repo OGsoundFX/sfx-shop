@@ -1,7 +1,6 @@
 <div class="container submit-form padding-navbar content">
 
   <h2 class="header">Log in</h2>
-
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
       <%= hidden_field_tag 'url', request.referer %>
