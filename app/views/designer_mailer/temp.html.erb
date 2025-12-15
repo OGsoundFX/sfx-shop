@@ -1,0 +1,17 @@
+<h1>Hello <%= @designer.first_name %></h1>
+<h3>Subject: You Made a Sale 🎉</h3>
+
+<h4>Congratulations, you've just made a sale on <strong><a href="https://www.bamsfx.com">BamSFX.com</a></strong></h4>
+
+<p>Item: <%= @sfx_pack.title %></p>
+<%= cl_image_tag @sfx_pack.photos.first.key, width: 280 %>
+
+<p>Price: <%= humanized_money((@sold_item.amount_cents / 100.0), symbol: CurrencySymbolService.lookup(@sold_item.currency)) %></p>
+<% if @sold_item.discount %>
+  <p>Discount: <%= @sold_item.discount_percentage %> %</p>
+<% end %>
+<p>Payout amount: <%= humanized_money(@sold_item.payout_amount_cents, symbol: CurrencySymbolService.lookup(@sold_item.payout_currency)) %></p>
+
+<p>If you have any questions, feel free to reply to this email. We are looking forward to hearing your work!</p>
+
+<p>— The BAMSFX Team</p>
