@@ -22,7 +22,7 @@ class AdministratorController < ApplicationController
   end
 
   def designer_submissions
-    @submissions = DesignerSubmission.all.order(:status)
+    @submissions = DesignerSubmission.all.order(created_at: :desc).order(:status)
   end
 
   def pack_submissions
@@ -32,6 +32,7 @@ class AdministratorController < ApplicationController
   def submission_accepted
     submission = DesignerSubmission.find(params[:id])
     submission.accepted!
+    DesignerMailer.submission_accepted(submission).deliver_later
     if User.find_by(email: submission.email)
       user = User.find_by(email: submission.email)
     else
