@@ -5,6 +5,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :orders, dependent: :destroy
   has_many :collections, dependent: :destroy
+  has_one :legal_entity, dependent: :destroy
+  has_many :payment_infos, through: :legal_entity
   has_one :cart, dependent: :destroy
   has_one :designer_submission, dependent: :destroy
   has_one :sound_designer, dependent: :destroy

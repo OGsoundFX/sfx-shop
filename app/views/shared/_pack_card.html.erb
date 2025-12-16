@@ -50,11 +50,11 @@
             <%= link_to sound_designer_path(pack.sound_designer) do %>
               <div class="d-flex align-items-center">
                 <% if pack.sound_designer.photo.attached? %>
-                  <%= cl_image_tag pack.sound_designer.photo.key, alt: "#{pack.sound_designer.full_name}", class: "rounded-circle pack_card__designer_pic" %>
+                  <%= cl_image_tag pack.sound_designer.photo.key, alt: "#{pack.sound_designer.artist_name}", class: "rounded-circle pack_card__designer_pic" %>
                 <% else %>
                   <i class="fas fa-headphones pack_card__designer_no_pic"></i>
                 <% end %>
-                <span style="margin-left: 8px; font-size: 0.9rem"><%= pack.sound_designer.full_name %></span>
+                <span style="margin-left: 8px; font-size: 0.9rem"><%= pack.sound_designer.artist_name %></span>
               </div>
             <% end %>
           </div>

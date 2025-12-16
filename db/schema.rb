@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_16_135432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,6 +114,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.index ["order_id"], name: "index_download_links_on_order_id"
   end
 
+  create_table "legal_entities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "entity_type"
+    t.string "legal_name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "company_name"
+    t.string "street_name"
+    t.string "street_number"
+    t.string "address_line_2"
+    t.string "postal_code"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_legal_entities_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "product_link"
     t.string "sku"
@@ -142,11 +161,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.integer "preferred_method", default: 0
     t.string "paypal_account"
     t.integer "status", default: 0
-    t.bigint "sound_designer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "preferred_currency"
-    t.index ["sound_designer_id"], name: "index_payment_infos_on_sound_designer_id"
+    t.bigint "legal_entity_id", null: false
+    t.index ["legal_entity_id"], name: "index_payment_infos_on_legal_entity_id"
   end
 
   create_table "payouts", force: :cascade do |t|
@@ -364,14 +383,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
   end
 
   create_table "sound_designers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "bio"
     t.bigint "user_id"
+    t.string "artist_name"
     t.index ["user_id"], name: "index_sound_designers_on_user_id"
   end
 
@@ -419,9 +436,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
   add_foreign_key "designer_submissions", "users"
   add_foreign_key "download_links", "collections"
   add_foreign_key "download_links", "orders"
+  add_foreign_key "legal_entities", "users"
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
-  add_foreign_key "payment_infos", "sound_designers"
+  add_foreign_key "payment_infos", "legal_entities"
   add_foreign_key "payouts", "sound_designers"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"

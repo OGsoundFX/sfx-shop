@@ -113,3 +113,6 @@ gem "rake", "~> 13.3"
 
 # Stripe geocoding prices
 gem "geocoder"
+
+# pdf reader
+gem "pdf-reader"

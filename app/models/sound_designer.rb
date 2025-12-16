@@ -4,19 +4,20 @@ class SoundDesigner < ApplicationRecord
   belongs_to :user
   has_many :sfx_packs, dependent: :destroy
   has_many :single_tracks, dependent: :destroy
-  has_many :payment_infos, dependent: :destroy
   has_many :sold_items
   has_many :payouts
 
-  accepts_nested_attributes_for :payment_infos, allow_destroy: true
-
-  validates :first_name, :last_name, presence: true
+  validates :artist_name, presence: true
 
   has_one_attached :photo
   has_one_attached :banner
 
-  def full_name
-    "#{first_name.capitalize} #{last_name.capitalize}"
+  def payment_infos
+    self.user.payment_infos
+  end
+
+  def legal_entity
+    self.user.legal_entity
   end
 
   private
