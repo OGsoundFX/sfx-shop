@@ -1,7 +1,5 @@
-<%= render "shared/left_pannel_mobile"%>
 <div class="dark-background">
   <div class="submission-form__container">
-    <h3 class="text-center mb-4"><strong>Contact Information</strong></h3>
     <div class="d-flex justify-content-center" data-controller="application-modal">
       <button class="submission-form__about-applying btn btn-light mb-3" data-action="click->application-modal#show"><i class="fas fa-info-circle"></i> About Applying</button>
       <%= render "designer_submissions/application_modal" %>
@@ -10,4 +8,8 @@
       <%= render "submission_form", designer_submission: @designer_submission  %>
     </div>
   </div>
+      <div class="d-flex justify-content-center submission-form__progress-bar-wrapper">
+      <div class="submission-form__progress-bar-dot me-2 blinking"></div>
+      <div class="submission-form__progress-bar-dot ms-2"></div>
+    </div>
 </div>

@@ -2,6 +2,7 @@ class DesignerSubmissionsController < ApplicationController
   before_action :find_designer_submission, only: [:show, :update]
 
   def new
+    redirect_to designer_submission_path(current_user.designer_submission.access_token) if current_user.designer_submission.present?
     @designer_submission = DesignerSubmission.new
     @designer_submission.submission_links.build
   end
