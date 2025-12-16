@@ -1,0 +1,29 @@
+<div class="padding-navbar content admin-min-height bg-dark pb-4">
+  <%= render "welcome_banner" %>
+  <div class="container">
+    <%= render "designer_menu" %>
+    <div class="designer-dashboard__container" data-controller="update-info">
+      <div class="designer-dashboard__user-profile">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="designer-dashboard__label">Profile Information</p>
+          </div>
+          <div data-action="click->update-info#toggleEdit">
+            <i class="fas fa-pen"></i>
+          </div>
+        </div>
+        <hr style="margin-top: 0">
+        <div class="designer-dashboard__info" data-update-info-target="data">
+          <div class="designer-dashboard__info-grid mb-3">
+            <span class="mb-2">Artist name:</span>
+            <em><span class="info-color"><%=  %></span></em>
+            <div></div>
+            <span>Location:</span>
+            <em><span class="info-color"><%=  %></span></em>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

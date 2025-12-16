@@ -2,6 +2,7 @@
   <%= link_to "Listings", designer_listings_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "listings"}" %>
   <%= link_to "Sales", designer_sales_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "sales"}" %>
   <%= link_to "Payouts", designer_payouts_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "payouts"}" %>
-  <%= link_to "Settings", designer_main_dashboard_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "main"}" %>
+  <%= link_to "Profile", designer_main_dashboard_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "main"}" %>
+  <%= link_to "Settings", settings_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "settings"}" %>
 </div>
 <hr style="border-color: white">
