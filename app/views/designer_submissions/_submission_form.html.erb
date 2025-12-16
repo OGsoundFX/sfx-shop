@@ -1,11 +1,13 @@
+<h5 class="text-center mb-4"><strong>Contact Information</strong></h5>
+<hr>
 <%= simple_form_for designer_submission, data: {designer_submission_form_target: "mainForm"} do |f| %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :location %>
-  <div class="d-flex">
+  <div class="d-flex my-3">
     <%= f.input :individual_tracks, label: "Check this box if you are interested in selling your tracks individually, and available for collections" %>
-    <div data-controller="submission-modal">
-      <a href="#" class="mt-3" style="font-size: 1.6rem" data-action="click->submission-modal#show"><i class="fas fa-info-circle"></i></a>
+    <div class="mt-2" data-controller="submission-modal">
+      <a href="#" style="font-size: 1.4rem" data-action="click->submission-modal#show"><i class="fas fa-info-circle"></i></a>
       <%= render "designer_submissions/individual_tracks_modal" %>
     </div>
   </div>

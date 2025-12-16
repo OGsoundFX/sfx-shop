@@ -1,9 +1,31 @@
-<%= render "shared/left_pannel_mobile"%>
 <div class="dark-background">
-  <div class="submission-form__container">
-    <h3 class="text-center mb-4"><strong>Share links to your work</strong></h3>
-    <div class="submission-form__box" data-controller="designer-submission-form">
-      <h4 class="text-center">Your Information</h4>
+  <div class="submission-form__container" data-controller="designer-submission-form">
+    <div class="submission-form__box mb-3">
+      <h5 class="text-center mb-4"><strong>Share links to your work</strong></h5>
+      <hr style="border-color: white">
+      <% if @designer_submission.submission_links.present? %>
+        <% @designer_submission.submission_links.each_with_index do |link, index| %>
+          <div class="d-flex justify-content-between align-items-center bg-light submission-form__link-display">
+            <a href="<%= link.url %>"><%= link.title %></a><div><%= link_to "Delete", submission_link_path(link), method: :delete, class: "btn btn-dark w-100" %></div>
+          </div>
+        <% end %>
+      <% end %>
+      <% if @designer_submission.submission_links.count < 5 %>
+        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"><i class="fas fa-plus-circle"></i> Add Link</button>
+      <% else %>
+        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"disabled>Maximum 5 links</button>
+      <% end %>
+      <div class="d-none" data-designer-submission-form-target="form">
+        <% if @designer_submission.id %>
+          <%= render "designer_submissions/link_form", designer: @designer_submission, link: @submission_link %>
+        <% end %>
+      </div>
+      <% if @designer_submission.submission_links.count > 0 %>
+        <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
+      <% end %>
+    </div>
+    <div class="submission-form__box">
+      <h5 class="text-center">Your Contact Information</h5>
       <hr style="border-color: white">
       <div class="submission-form__edit">
         <div class="submission-form__edit-grid" data-designer-submission-form-target="submissionInfo">
@@ -29,27 +51,10 @@
           <%= render "designer_submissions/submission_form", designer_submission: @designer_submission %>
         </div>
       </div>
-      <hr data-designer-submission-form-target="line" style="border-color: white">
-      <% if @designer_submission.submission_links.present? %>
-        <% @designer_submission.submission_links.each_with_index do |link, index| %>
-          <div class="d-flex justify-content-between align-items-center bg-light submission-form__link-display">
-            <a href="<%= link.url %>"><%= link.title %></a><div><%= link_to "Delete", submission_link_path(link), method: :delete, class: "btn btn-dark w-100" %></div>
-          </div>
-        <% end %>
-      <% end %>
-      <% if @designer_submission.submission_links.count < 5 %>
-        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"><i class="fas fa-plus-circle"></i> Add Link</button>
-      <% else %>
-        <button class="submission-form__add-link btn btn-light w-100 mt-3" data-action="click->designer-submission-form#displayForm" data-designer-submission-form-target="add"disabled>Maximum 5 links</button>
-      <% end %>
-      <div class="d-none" data-designer-submission-form-target="form">
-        <% if @designer_submission.id %>
-          <%= render "designer_submissions/link_form", designer: @designer_submission, link: @submission_link %>
-        <% end %>
-      </div>
-      <% if @designer_submission.submission_links.count > 0 %>
-        <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
-      <% end %>
     </div>
+  </div>
+  <div class="d-flex justify-content-center submission-form__progress-bar-wrapper">
+    <div class="submission-form__progress-bar-dot me-2 active"></div>
+    <div class="submission-form__progress-bar-dot ms-2 blinking"></div>
   </div>
 </div>

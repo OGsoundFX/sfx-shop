@@ -5,7 +5,7 @@ padding-top: 80px;
 .submission-form__box {
   border-radius: 8px;
   background-color: $dark-modal;
-  padding: 40px 60px;
+  padding: 24px 60px 32px 60px;
   width: 40%;
   margin: auto;
   a {
@@ -54,6 +54,52 @@ padding-top: 80px;
   }
   a:hover {
     color: black;
+  }
+}
+
+.submission-form__progress-bar-wrapper {
+  height: 22px;
+  width: 20%;
+  margin: 12px auto 20px auto
+}
+
+.submission-form__progress-bar-dot {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: $dark-modal-light;
+}
+
+.submission-form__progress-bar-dot.active {
+  background-color: $new-green;
+}
+
+.submission-form__progress-bar-dot.blinking {
+  animation: blink_smooth 1s infinite;
+}
+
+// keyframe animations
+@keyframes blink_smooth {
+  0% {
+    background-color: $new-green;
+    -webkit-box-shadow:0px 0px 15px 0px rgba(73,204,149,0.9);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(73,204,149,0.9);
+    box-shadow: 0px 0px 15px 0px rgba(73,204,149,0.9);
+  }
+
+  50% {
+    background-color: $dark-modal-light;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  100% {
+    background-color: $new-green;
+    -webkit-box-shadow:0px 0px 15px 0px rgba(73,204,149,0.9);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(73,204,149,0.9);
+    box-shadow: 0px 0px 15px 0px rgba(73,204,149,0.9);
   }
 }
 
