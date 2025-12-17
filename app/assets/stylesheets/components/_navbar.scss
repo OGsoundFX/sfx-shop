@@ -90,13 +90,23 @@
   }
 }
 
-.dropdown-item.seller {
-  background-color: $flash-pink;
-  color: white;
-  font-weight: 700;
-  &:hover {
-    filter: grayscale(0.5);
-    opacity: 0.5;
+.dropdown-menu {
+  padding: 0;
+  border-radius: 8px;
+  .dropdown-item.seller {
+    background-color: $new-green;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .dropdown-item.log-out {
+    border-radius: 0 0 8px 8px;
+  }
+  .dropdown-item:hover {
+    background-color: $dark-modal-light;
+    color: white;
   }
 }
 
