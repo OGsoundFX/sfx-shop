@@ -97,9 +97,10 @@ Rails.application.routes.draw do
   post "sound_designers/:id/update_bio", to: "designer_dashboards#update_designer_bio", as: :update_designer_bio
   post "sound_designers/:id/update_photo", to: "designer_dashboards#update_designer_photo", as: :update_designer_photo
   post "sound_designers/:id/banner", to: "designer_dashboards#banner", as: :designer_banner
-  resources :users, only: [] do
-    resources :legal_entities, only: :create
-  end
+
+  # legal entities
+  resources :legal_entities, only: [:new, :create]
+  
   # data protection path
   get "data_protection", to: "pages#data_protection"
 

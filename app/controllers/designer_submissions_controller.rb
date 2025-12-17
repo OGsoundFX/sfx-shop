@@ -20,6 +20,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def show
+    redirect_to designer_listings_path if current_user.sound_designer.present?
     @submission_link = SubmissionLink.new
   end
 

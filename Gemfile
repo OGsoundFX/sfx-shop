@@ -116,3 +116,6 @@ gem "geocoder"
 
 # pdf reader
 gem "pdf-reader"
+
+# country_select
+gem "country_select"

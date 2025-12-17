@@ -82,6 +82,9 @@ application.register("template-form", TemplateFormController)
 import TheQuestModalController from "./the_quest_modal_controller"
 application.register("the-quest-modal", TheQuestModalController)
 
+import TomSelectCountryController from "./tom_select_country_controller"
+application.register("tom-select-country", TomSelectCountryController)
+
 import TomSelectPackSubmissionCategoryController from "./tom_select_pack_submission_category_controller"
 application.register("tom-select-pack-submission-category", TomSelectPackSubmissionCategoryController)
 
