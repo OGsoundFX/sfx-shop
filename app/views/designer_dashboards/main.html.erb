@@ -6,7 +6,7 @@
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
-            <p class="designer-dashboard__label">Profile Information</p>
+            <p class="designer-dashboard__label">Designer Profile</p>
           </div>
           <div data-action="click->update-info#toggleEdit">
             <i class="fas fa-pen"></i>
@@ -55,49 +55,6 @@
         <div class="d-none" data-update-info-target="form">
           <%= simple_form_for @designer, url: update_designer_bio_path(@designer), method: :post do |f| %>
             <%= f.input :bio, as: :text, label: "Your Bio", placeholder: @designer.bio ? @designer.bio : "Tell the World about yourself" %>
-            <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="designer-dashboard__container mt-3" data-controller="update-info">
-      <div class="designer-dashboard__user-profile">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="designer-dashboard__label">Payout Information</p>
-          </div>
-          <div class="d-flex justify-content-end mb-2">
-            <% if @paypal.pending_verif? %>
-              <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending Approval</div>
-            <% elsif @paypal.active? %>
-              <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-dark">Request Modification</a>
-            <% elsif @paypal.inactive? %>
-              <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>
-            <% end %>
-          </div>
-        </div>
-        <hr style="margin-top: 0">
-        <% if @paypal.paypal_account.present? %>
-          <div data-update-info-target="data">
-            <div class="designer-dashboard__info-grid mb-2">
-              <span>Paypal Account:</span>
-              <em><span class="info-color"><%= @paypal.paypal_account %></span></em>
-            </div>
-            <div class="designer-dashboard__info-grid">
-              <span>Preferred Currency:</span>
-              <span class="designer-dashboard__preferred-currency btn btn-admin"><%= @paypal.preferred_currency.upcase %></span>
-            </div>
-          </div>
-        <% elsif @paypal.paypal_account.nil? || @paypal_account.unknown? %>
-          <div class="d-flex justify-content-between" data-update-info-target="data">
-            <p>Please add your paypal account, so we can proceed to sending you payments.</p>
-            <div data-action="click->update-info#toggleEdit"><button class="btn btn-secondary btn-admin-active">ADD</button></div>
-          </div>
-        <% end %>
-        <div class="d-none" data-update-info-target="form">
-          <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post do |f| %>
-            <%= f.input :paypal_account, label: "Please enter your Paypal account", placeholder: @paypal ? @paypal.paypal_account : "Enter your PayPal account" %>
-            <%= f.input :preferred_currency, label: "Please enter your Preferred Currency", collection: ["EUR", "USD"], selected: @paypal.preferred_currency.present? ? @paypal.preferred_currency.upcase : "USD" %>
             <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
           <% end %>
         </div>

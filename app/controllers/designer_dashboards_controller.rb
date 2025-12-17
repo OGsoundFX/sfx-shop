@@ -1,5 +1,5 @@
 class DesignerDashboardsController < ApplicationController
-  before_action :unauthenticated_redirect, :new_designer, :load_designer
+  before_action :unauthenticated_redirect, :new_designer, :check_legal_entity, :load_designer
   before_action :load_pack, only: [:update_pack_form, :remove_pack]
 
   def main
@@ -18,7 +18,7 @@ class DesignerDashboardsController < ApplicationController
     @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
-    @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
+    @currency_symbol = CurrencySymbolService.lookup(@designer.user.legal_entity.payment_infos.last.preferred_currency)
     @start_date = @sold_items.first.order.created_at.to_date.beginning_of_month.to_s
     @end_date = Date.today.to_s
     if params[:filters].present? && params[:filters][:range_date].present?
@@ -38,7 +38,7 @@ class DesignerDashboardsController < ApplicationController
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
     @payouts = Payout.where(sound_designer: @designer, status: "paid").order(payout_date: :desc)
     @year = Date.today.year
-    @currency_symbol = CurrencySymbolService.lookup(@designer.payment_infos.last.preferred_currency)
+    @currency_symbol = CurrencySymbolService.lookup(@designer.user.legal_entity.payment_infos.last.preferred_currency)
     if @payouts.present?
       @prior_year_payments = @payouts.first.payout_date.year != @payouts.last.payout_date.year
       @first_payout_year = @payouts.last.payout_date.year
@@ -119,9 +119,19 @@ class DesignerDashboardsController < ApplicationController
 
   private
 
+  def check_legal_entity
+    if !current_user.legal_entity.present?
+      redirect_to new_legal_entity_path
+    elsif current_user.legal_entity.incomplete?
+      redirect_to edit_legal_entity_path
+    elsif !current_user.designer && !current_user.sound_designer.present?
+      redirect_to root_path, notice: "You need a seller account to access this page!"
+    end
+  end
+
   def load_designer
     @designer = current_user.sound_designer
-    @paypal = @designer.payment_infos.last || @designer.payment_infos.new
+    @paypal = @designer.user.legal_entity.payment_infos.last || @designer.user.legal_entity.payment_infos.new
   end
 
   def unauthenticated_redirect

@@ -12,10 +12,6 @@ class SoundDesigner < ApplicationRecord
   has_one_attached :photo
   has_one_attached :banner
 
-  def payment_infos
-    self.user.payment_infos
-  end
-
   def legal_entity
     self.user.legal_entity
   end

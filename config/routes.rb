@@ -99,8 +99,8 @@ Rails.application.routes.draw do
   post "sound_designers/:id/banner", to: "designer_dashboards#banner", as: :designer_banner
 
   # legal entities
-  resources :legal_entities, only: [:new, :create]
-  
+  resources :legal_entities, only: [:new, :create, :edit, :update]
+
   # data protection path
   get "data_protection", to: "pages#data_protection"
 

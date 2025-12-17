@@ -31,7 +31,6 @@ class SoundDesignersController < ApplicationController
     session[:new_designer] = true
     if user_signed_in? && current_user.designer && current_user.sound_designer.nil?
       @sound_designer = SoundDesigner.new
-      # @payment_info = @sound_designer.payment_infos.build
     elsif user_signed_in? && !current_user.designer
       redirect_to new_designer_submission_path
     else
