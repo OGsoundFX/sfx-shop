@@ -52,7 +52,7 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def settings
-    legal_entity = current_user.legal_entity
+    @legal_entity = current_user.legal_entity
   end
 
   def pack_form

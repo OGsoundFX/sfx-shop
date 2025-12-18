@@ -9,6 +9,7 @@ class LegalEntitiesController < ApplicationController
   def create
     @legal_entity = LegalEntity.new(legal_entity_params)
     @legal_entity.user = current_user
+    @legal_entity.pending!
     if @legal_entity.save
       redirect_to designer_listings_path, notice: "Legal entity created successfully."
     else
@@ -17,11 +18,18 @@ class LegalEntitiesController < ApplicationController
   end
 
   def edit
-    @legal_entity = LegalEntity.find(params[:id])
+    # @legal_entity = LegalEntity.find(params[:id])
+    redirect_to settings_path
   end
 
   def update
-    raise
+    @legal_entity = LegalEntity.find(params[:id])
+    if @legal_entity.update(legal_entity_params)
+      @legal_entity.pending!
+      redirect_to settings_path, notice: "Legal entity updated successfully. Waiting Approval."
+    else
+      render "designer_dashboards/settings", status: :unprocessable_entity
+    end
   end
 
   private

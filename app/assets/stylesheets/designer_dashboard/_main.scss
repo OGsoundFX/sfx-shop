@@ -108,6 +108,10 @@
 .designer-dashboard__label {
   font-size: 1.2rem;
   margin-bottom: 4px;
+  .approved-icon {
+    color: $new-green;
+    font-size: 1.4rem;
+  }
 }
 
 .designer-dashboard__info-grid {
@@ -168,6 +172,13 @@
 
 .designer-dashboard__btn-form {
   background-color: $new-green;
+}
+
+.designer-dashboard__edit-icon {
+  cursor: pointer;
+  &:hover {
+    color: $font-grey;
+  }
 }
 
 @media (max-width: 768px) {

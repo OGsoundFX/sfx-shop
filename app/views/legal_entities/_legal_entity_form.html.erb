@@ -28,17 +28,18 @@
       <%= f.input :state %>
     </div>
   </div>
-  <hr>
-  <h3>Payment Information</h3>
-  <%= f.simple_fields_for :payment_infos do |pf| %>
-    <%= pf.input :paypal_account, label: "PayPal Account", placeholder: "Enter your PayPal account email" %>
-    <%= pf.input :preferred_currency,
-                 as: :select,
-                 collection: PaymentInfo.preferred_currencies.keys.map { |currency| [currency.upcase, currency] },
-                 label: "Select Preferred Currency",
-                 selected: PaymentInfo.preferred_currencies.keys.first %>
+  <% if controller_name == "legal_entities" && action_name == "new" %>
+    <hr>
+    <h3>Payment Information</h3>
+    <%= f.simple_fields_for :payment_infos do |pf| %>
+      <%= pf.input :paypal_account, label: "PayPal Account", placeholder: "Enter your PayPal account email" %>
+      <%= pf.input :preferred_currency,
+                  as: :select,
+                  collection: PaymentInfo.preferred_currencies.keys.map { |currency| [currency.upcase, currency] },
+                  label: "Select Preferred Currency",
+                  selected: PaymentInfo.preferred_currencies.keys.first %>
+    <% end %>
   <% end %>
-
   <div class="text-center mt-4">
     <%= f.submit "Submit information", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
