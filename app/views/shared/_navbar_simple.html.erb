@@ -27,7 +27,7 @@
           <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
         </li>
       <% end %>
-      <% unless current_user.admin? %>
+      <% unless user_signed_in? && current_user.admin? %>
         <% if !user_signed_in? || !current_user.designer_submission.present? %>
           <li class="nav-item dropdown">
             <%= link_to "Become a Seller", new_sound_designer_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
