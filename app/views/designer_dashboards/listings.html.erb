@@ -3,93 +3,99 @@
   <%= render "welcome_banner" %>
   <div class="container" data-controller="designer-pack-filter">
     <%= render "designer_menu" %>
-    <div class="d-flex justify-content-between">
-      <div class="mb-3">
-        <span style="color: whitesmoke !important; margin-right: 8px; font-size: 0.8rem !important">Filter:</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
-        <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
+    <% if !current_user.legal_entity.accepted? && !current_user.admin?%>
+      <div class="designer-dashboard__no-payout">
+        <h4 >Please sign the Seller Agreement to proceed</h4>
       </div>
-      <div>
-        <%= link_to add_new_pack_path do %>
-          <span class="px-3 py-1 rounded-pill designer-dashboard__add-pack-pill"><i class="fas fa-plus"></i> Add a Pack</span>
-        <% end %>
+    <% else %>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <span style="color: whitesmoke !important; margin-right: 8px; font-size: 0.8rem !important">Filter:</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
+        </div>
+        <div>
+          <%= link_to add_new_pack_path do %>
+            <span class="px-3 py-1 rounded-pill designer-dashboard__add-pack-pill"><i class="fas fa-plus"></i> Add a Pack</span>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="submissions-live__grid">
-      <% @packs.each do |pack| %>
-        <% case pack.status %>
-        <% when "live" then pill_color_class = "live" %>
-        <% when "declined" then pill_color_class = "declined" %>
-        <% when "removed" then pill_color_class = "removed" %>
-        <% else pill_color_class = "else" %>
-        <% end %>
-        <div class="designer-dashboard__container mb-3"
-             data-designer-pack-filter-target="status"
-             data-status="<%= pack.status %>">
-          <div class="designer-dashboard__user-profile">
-            <div class="d-flex justify-content-between">
-              <div>
-                <%= pack.title %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
-              </div>
-              <div>
-                <%= link_to sfx_pack_path(pack), target: "_blank" do %>
-                  <i class="fas fa-eye me-2"></i>
-                <% end %>
-                <%= link_to update_pack_path(pack), class: "designer-dashboard__icon-white" do %>
-                  <i class="fas fa-pen me-2"></i>
-                <% end %>
-                
-                <% unless pack.removed? %>                  
-                  <%= link_to remove_pack_path(pack), method: :delete, data: { confirm: "Are you sure you want to remove this pack?" }, class: "designer-dashboard__icon-white" do %>
-                    <i class="fas fa-trash"></i>
-                  <% end %>
-                <% end %>
-                
-              </div>
-            </div>
-            <hr>
-            <div class="d-flex submissions__pack-description">
-              <div class="me-4">
-                <% if pack.photos.present? %>
-                  <%= cl_image_tag pack.photos.first.key, height: 180, width: 180, style: "border-radius: 8px" %>
-                <% end %>
-              </div>
-              <div class="text-muted small d-flex flex-column justify-content-between">
+      <div class="submissions-live__grid">
+        <% @packs.each do |pack| %>
+          <% case pack.status %>
+          <% when "live" then pill_color_class = "live" %>
+          <% when "declined" then pill_color_class = "declined" %>
+          <% when "removed" then pill_color_class = "removed" %>
+          <% else pill_color_class = "else" %>
+          <% end %>
+          <div class="designer-dashboard__container mb-3"
+              data-designer-pack-filter-target="status"
+              data-status="<%= pack.status %>">
+            <div class="designer-dashboard__user-profile">
+              <div class="d-flex justify-content-between">
                 <div>
-                  <p class="mb-1">• 48kHz / 24bit High Def Audio</p>
-                  <% if pack.size_mb > 1000 %>
-                    <p class="mb-1">• <%= (pack.size_mb / 1000.to_f).ceil(1) %> GB</p>
-                  <% else %>
-                    <p class="mb-1">• <%= pack.size_mb %> MB</p>
-                  <% end %>
-                  <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
-                  <p class="mb-0">• Format: WAV</p>
+                  <%= pack.title %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
                 </div>
-                <div class="designer-dashboard__pills">
-                  <div class="flex flex-wrap gap-2 pb-2">
-                    <% pack.category.split(", ").each do |tag| %>
-                      <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color"><%= tag %></span>
+                <div>
+                  <%= link_to sfx_pack_path(pack), target: "_blank" do %>
+                    <i class="fas fa-eye me-2"></i>
+                  <% end %>
+                  <%= link_to update_pack_path(pack), class: "designer-dashboard__icon-white" do %>
+                    <i class="fas fa-pen me-2"></i>
+                  <% end %>
+                  
+                  <% unless pack.removed? %>                  
+                    <%= link_to remove_pack_path(pack), method: :delete, data: { confirm: "Are you sure you want to remove this pack?" }, class: "designer-dashboard__icon-white" do %>
+                      <i class="fas fa-trash"></i>
                     <% end %>
-                  </div>
-                  <div class="submissions__pack-price">
-                    <% if pack.price_cents == 0 %>
-                      <span class="text-white text-xs px-2 py-1 badge rounded-pill" style="background-color: #ff00fe;">free</span>
+                  <% end %>
+                  
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex submissions__pack-description">
+                <div class="me-4">
+                  <% if pack.photos.present? %>
+                    <%= cl_image_tag pack.photos.first.key, height: 180, width: 180, style: "border-radius: 8px" %>
+                  <% end %>
+                </div>
+                <div class="text-muted small d-flex flex-column justify-content-between">
+                  <div>
+                    <p class="mb-1">• 48kHz / 24bit High Def Audio</p>
+                    <% if pack.size_mb > 1000 %>
+                      <p class="mb-1">• <%= (pack.size_mb / 1000.to_f).ceil(1) %> GB</p>
                     <% else %>
-                      <div id="submissions__pack-price-font">
-                        <%= number_to_currency(pack.price, unit: "#{pack.currency_symbol} ", separator: ",", precision: 2) %>
-                      </div>
+                      <p class="mb-1">• <%= pack.size_mb %> MB</p>
                     <% end %>
+                    <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
+                    <p class="mb-0">• Format: WAV</p>
+                  </div>
+                  <div class="designer-dashboard__pills">
+                    <div class="flex flex-wrap gap-2 pb-2">
+                      <% pack.category.split(", ").each do |tag| %>
+                        <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color"><%= tag %></span>
+                      <% end %>
+                    </div>
+                    <div class="submissions__pack-price">
+                      <% if pack.price_cents == 0 %>
+                        <span class="text-white text-xs px-2 py-1 badge rounded-pill" style="background-color: #ff00fe;">free</span>
+                      <% else %>
+                        <div id="submissions__pack-price-font">
+                          <%= number_to_currency(pack.price, unit: "#{pack.currency_symbol} ", separator: ",", precision: 2) %>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

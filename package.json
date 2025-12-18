@@ -6,6 +6,7 @@
     "@hotwired/turbo-rails": "^8.0.13",
     "@popperjs/core": "^2.11.8",
     "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^8.1.100",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "bootstrap": "^5.3.7",
@@ -15,6 +16,7 @@
     "sass": "^1.89.0",
     "stimulus": "^3.0.1",
     "tom-select": "^2.4.3",
+    "trix": "^2.1.15",
     "wavesurfer.js": "^5.2.0"
   },
   "version": "0.1.0",

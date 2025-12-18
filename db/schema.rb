@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_17_120108) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +44,31 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_120108) do
     t.datetime "created_at", precision: nil, null: false
     t.string "service_name"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "agreement_acceptances", force: :cascade do |t|
+    t.bigint "agreement_id", null: false
+    t.bigint "legal_entity_id", null: false
+    t.date "accepted_at"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.string "legal_name_snapshot"
+    t.string "artist_name_snapshot"
+    t.string "address_snapshot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agreement_id"], name: "index_agreement_acceptances_on_agreement_id"
+    t.index ["legal_entity_id"], name: "index_agreement_acceptances_on_legal_entity_id"
+  end
+
+  create_table "agreements", force: :cascade do |t|
+    t.string "key"
+    t.string "version"
+    t.string "title"
+    t.boolean "active"
+    t.date "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "annoucements", force: :cascade do |t|
@@ -74,6 +109,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_120108) do
     t.bigint "template_collection_id"
     t.index ["template_collection_id"], name: "index_collections_on_template_collection_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "content_acceptances", force: :cascade do |t|
+    t.bigint "legal_entity_id", null: false
+    t.bigint "sfx_pack_id", null: false
+    t.date "accepted_at"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_entity_id"], name: "index_content_acceptances_on_legal_entity_id"
+    t.index ["sfx_pack_id"], name: "index_content_acceptances_on_sfx_pack_id"
   end
 
   create_table "currency_rates", force: :cascade do |t|
@@ -431,9 +478,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_120108) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "agreement_acceptances", "agreements"
+  add_foreign_key "agreement_acceptances", "legal_entities"
   add_foreign_key "carts", "users"
   add_foreign_key "collections", "template_collections"
   add_foreign_key "collections", "users"
+  add_foreign_key "content_acceptances", "legal_entities"
+  add_foreign_key "content_acceptances", "sfx_packs"
   add_foreign_key "designer_submissions", "users"
   add_foreign_key "download_links", "collections"
   add_foreign_key "download_links", "orders"

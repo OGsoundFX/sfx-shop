@@ -1,4 +1,5 @@
 class LegalEntitiesController < ApplicationController
+
   def new
     redirect_to edit_legal_entity_path(current_user.legal_entity) if current_user.legal_entity.present?
     @legal_entity = LegalEntity.new

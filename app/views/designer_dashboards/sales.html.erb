@@ -2,38 +2,44 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
-    <div class="d-flex justify-content-between">
-      <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
-      <div data-controller="display-calendar-designer-sales" >
-        <div class="d-flex">
-          <div class="designer-dashboard__sales-dates d-flex" data-display-calendar-designer-sales-target="dates" data-action="click->display-calendar-designer-sales#calendar">
-            <div id="designer-dashboard__sales-dates-display">
-              Sales from <%= @start_date.to_date.strftime("%b. %-d %Y") %> to <%= @end_date.to_date.strftime("%b. %-d %Y") %>
+    <% if @sold_items.empty? %>
+      <div class="designer-dashboard__no-payout">
+        <h4 >No Sales Yet!</h4>
+      </div>
+    <% else %>
+      <div class="d-flex justify-content-between">
+        <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
+        <div data-controller="display-calendar-designer-sales" >
+          <div class="d-flex">
+            <div class="designer-dashboard__sales-dates d-flex" data-display-calendar-designer-sales-target="dates" data-action="click->display-calendar-designer-sales#calendar">
+              <div id="designer-dashboard__sales-dates-display">
+                Sales from <%= @start_date.to_date.strftime("%b. %-d %Y") %> to <%= @end_date.to_date.strftime("%b. %-d %Y") %>
+              </div>
+              <div id="designer-dashboard__sales-pen">
+                <i class="fas fa-pen"></i>
+              </div>
             </div>
-            <div id="designer-dashboard__sales-pen">
-              <i class="fas fa-pen"></i>
-            </div>
+            <%= link_to designer_sales_path do %>
+              <div id="designer-dashboard__sales-clear" data-display-calendar-designer-sales-target="reset">
+                <i class="fas fa-times-circle"></i>
+              </div>
+            <% end %>
           </div>
-          <%= link_to designer_sales_path do %>
-            <div id="designer-dashboard__sales-clear" data-display-calendar-designer-sales-target="reset">
-              <i class="fas fa-times-circle"></i>
+          <%= simple_form_for :filters, url: designer_sales_path, method: :get, html: {class: "designer-dashboard__payout-form d-none", data: { display_calendar_designer_sales_target: "calendar"}} do |f| %>
+            <div class="d-flex justify-content-end">
+              <%= f.input :range_date,
+                          as: :string,
+                          label: false,
+                          placeholder: "Select Date Range",
+                          required: false,
+                          wrapper_input_html: { class: "designer-dashboard__payout-year-select" },
+                          input_html: { data: { controller: "date-picker-designer-sales" } } %>
+              <%= f.button :submit, "GO", class: "btn btn-secondary"%>
             </div>
           <% end %>
         </div>
-        <%= simple_form_for :filters, url: designer_sales_path, method: :get, html: {class: "designer-dashboard__payout-form d-none", data: { display_calendar_designer_sales_target: "calendar"}} do |f| %>
-          <div class="d-flex justify-content-end">
-            <%= f.input :range_date,
-                        as: :string,
-                        label: false,
-                        placeholder: "Select Date Range",
-                        required: false,
-                        wrapper_input_html: { class: "designer-dashboard__payout-year-select" },
-                        input_html: { data: { controller: "date-picker-designer-sales" } } %>
-            <%= f.button :submit, "GO", class: "btn btn-secondary"%>
-          </div>
-        <% end %>
       </div>
-    </div>
-    <%= render "sold_items" %>
+      <%= render "sold_items" %>
+    <% end %>
   </div>
 </div>

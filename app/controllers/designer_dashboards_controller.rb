@@ -19,7 +19,7 @@ class DesignerDashboardsController < ApplicationController
     @past_sold_items = @designer.sold_items.where(status: 'paid').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
     @currency_symbol = CurrencySymbolService.lookup(@designer.user.legal_entity.payment_infos.last.preferred_currency)
-    @start_date = @sold_items.first.order.created_at.to_date.beginning_of_month.to_s
+    @start_date = @sold_items.first.order.created_at.to_date.beginning_of_month.to_s if @sold_items.present?
     @end_date = Date.today.to_s
     if params[:filters].present? && params[:filters][:range_date].present?
       @start_date = params[:filters][:range_date].split("to").first.strip
@@ -120,12 +120,14 @@ class DesignerDashboardsController < ApplicationController
   private
 
   def check_legal_entity
-    if !current_user.legal_entity.present?
-      redirect_to new_legal_entity_path
-    elsif current_user.legal_entity.incomplete?
-      redirect_to edit_legal_entity_path
-    elsif !current_user.designer && !current_user.sound_designer.present?
-      redirect_to root_path, notice: "You need a seller account to access this page!"
+    unless current_user.admin?
+      if !current_user.legal_entity.present?
+        redirect_to new_legal_entity_path
+      elsif current_user.legal_entity.incomplete?
+        redirect_to edit_legal_entity_path
+      elsif !current_user.designer && !current_user.sound_designer.present?
+        redirect_to root_path, notice: "You need a seller account to access this page!"
+      end
     end
   end
 

@@ -12,7 +12,7 @@
             <% if @paypal.pending_verif? %>
               <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending Verification</div>
             <% elsif @paypal.active? %>
-              <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-dark">Request Modification</a>
+              <a href="mailto: support@bamsfx.com?subject=Request Paypal Modification" target="blank" class="btn btn-dark">Request Modification</a>
             <% elsif @paypal.inactive? %>
               <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>
             <% else %>
