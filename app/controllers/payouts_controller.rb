@@ -8,8 +8,8 @@ class PayoutsController < ApplicationController
 
   def create
     designer = SoundDesigner.find(params[:payout][:designer_id])
-    currency = designer.payment_infos.last.preferred_currency
-    paypal_account = designer.payment_infos.last.paypal_account
+    currency = designer.user.legal_entity.payment_infos.last.preferred_currency
+    paypal_account = designer.user.legal_entity.payment_infos.last.paypal_account
     sold_items = SoldItem.where(id: params[:sold_item_ids])
     amount_paid = sold_items.sum(&:payout_amount_cents)
 

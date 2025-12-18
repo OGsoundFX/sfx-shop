@@ -1,9 +1,17 @@
 class PaymentInfo < ApplicationRecord
-  belongs_to :sound_designer
+  after_create_commit :payment_info_pending
+
+  belongs_to :legal_entity
 
   validates :paypal_account, :preferred_currency, presence: true
 
-  enum status: {pending_verif: 0, active: 1, inactive: 2}
+  enum status: {unknown: 0, pending_verif: 1, active: 2, inactive: 3}
   enum preferred_method: {paypal: 0, bank_transfer: 1}
   enum preferred_currency: {usd: 0, eur: 1}
+
+  private
+
+  def payment_info_pending
+    self.pending_verif!
+  end
 end

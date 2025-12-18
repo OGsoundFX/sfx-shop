@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   get "your_listings", to: "designer_dashboards#listings", as: :designer_listings
   get "sales", to: "designer_dashboards#sales", as: :designer_sales
   get "payouts", to: "designer_dashboards#payouts", as: :designer_payouts
+  get "settings", to: "designer_dashboards#settings", as: :settings
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
   delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack
@@ -96,6 +97,9 @@ Rails.application.routes.draw do
   post "sound_designers/:id/update_bio", to: "designer_dashboards#update_designer_bio", as: :update_designer_bio
   post "sound_designers/:id/update_photo", to: "designer_dashboards#update_designer_photo", as: :update_designer_photo
   post "sound_designers/:id/banner", to: "designer_dashboards#banner", as: :designer_banner
+
+  # legal entities
+  resources :legal_entities, only: [:new, :create, :edit, :update]
 
   # data protection path
   get "data_protection", to: "pages#data_protection"

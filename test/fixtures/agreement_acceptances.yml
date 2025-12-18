@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agreement: one
+  legal_entity: one
+  accepted_at: 2025-12-17
+  ip_address: MyString
+  user_agent: MyString
+  legal_name_snapshot: MyString
+  artist_name_snapshot: MyString
+  address_snapshot: MyString
+
+two:
+  agreement: two
+  legal_entity: two
+  accepted_at: 2025-12-17
+  ip_address: MyString
+  user_agent: MyString
+  legal_name_snapshot: MyString
+  artist_name_snapshot: MyString
+  address_snapshot: MyString

@@ -1,0 +1,46 @@
+<%= simple_form_for @legal_entity do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :company_name %>
+  <hr>
+  <div class="d-flex gap-3">
+    <div class="flex-grow-1">
+      <%= f.input :street_name %>
+    </div>
+    <div class="flex-grow-1">
+      <%= f.input :street_number %>
+    </div>
+  </div>
+  <%= f.input :address_line_2 %>
+  <div class="d-flex gap-3">
+    <div class="flex-grow-1">
+      <%= f.input :postal_code %>
+    </div>
+    <div class="flex-grow-1">
+      <%= f.input :city %>
+    </div>
+  </div>
+  <div class="d-flex gap-3">
+    <div class="flex-grow-1 legal-entity-form__country-input">
+      <%= f.input :country, input_html: {data: {controller: "tom-select-country"}} %>
+    </div>
+    <div class="flex-grow-1">
+      <%= f.input :state %>
+    </div>
+  </div>
+  <% if controller_name == "legal_entities" && action_name == "new" %>
+    <hr>
+    <h3>Payment Information</h3>
+    <%= f.simple_fields_for :payment_infos do |pf| %>
+      <%= pf.input :paypal_account, label: "PayPal Account", placeholder: "Enter your PayPal account email" %>
+      <%= pf.input :preferred_currency,
+                  as: :select,
+                  collection: PaymentInfo.preferred_currencies.keys.map { |currency| [currency.upcase, currency] },
+                  label: "Select Preferred Currency",
+                  selected: PaymentInfo.preferred_currencies.keys.first %>
+    <% end %>
+  <% end %>
+  <div class="text-center mt-4">
+    <%= f.submit "Submit information", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
+  </div>
+<% end %>

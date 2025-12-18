@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +44,31 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.datetime "created_at", precision: nil, null: false
     t.string "service_name"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "agreement_acceptances", force: :cascade do |t|
+    t.bigint "agreement_id", null: false
+    t.bigint "legal_entity_id", null: false
+    t.date "accepted_at"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.string "legal_name_snapshot"
+    t.string "artist_name_snapshot"
+    t.string "address_snapshot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agreement_id"], name: "index_agreement_acceptances_on_agreement_id"
+    t.index ["legal_entity_id"], name: "index_agreement_acceptances_on_legal_entity_id"
+  end
+
+  create_table "agreements", force: :cascade do |t|
+    t.string "key"
+    t.string "version"
+    t.string "title"
+    t.boolean "active"
+    t.date "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "annoucements", force: :cascade do |t|
@@ -76,6 +111,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
+  create_table "content_acceptances", force: :cascade do |t|
+    t.bigint "legal_entity_id", null: false
+    t.bigint "sfx_pack_id", null: false
+    t.date "accepted_at"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_entity_id"], name: "index_content_acceptances_on_legal_entity_id"
+    t.index ["sfx_pack_id"], name: "index_content_acceptances_on_sfx_pack_id"
+  end
+
   create_table "currency_rates", force: :cascade do |t|
     t.string "base", null: false
     t.string "target", null: false
@@ -114,6 +161,26 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.index ["order_id"], name: "index_download_links_on_order_id"
   end
 
+  create_table "legal_entities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "entity_type"
+    t.string "legal_name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "company_name"
+    t.string "street_name"
+    t.string "street_number"
+    t.string "address_line_2"
+    t.string "postal_code"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.index ["user_id"], name: "index_legal_entities_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "product_link"
     t.string "sku"
@@ -142,11 +209,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
     t.integer "preferred_method", default: 0
     t.string "paypal_account"
     t.integer "status", default: 0
-    t.bigint "sound_designer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "preferred_currency"
-    t.index ["sound_designer_id"], name: "index_payment_infos_on_sound_designer_id"
+    t.bigint "legal_entity_id", null: false
+    t.index ["legal_entity_id"], name: "index_payment_infos_on_legal_entity_id"
   end
 
   create_table "payouts", force: :cascade do |t|
@@ -364,14 +431,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
   end
 
   create_table "sound_designers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "bio"
     t.bigint "user_id"
+    t.string "artist_name"
     t.index ["user_id"], name: "index_sound_designers_on_user_id"
   end
 
@@ -413,15 +478,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_114127) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "agreement_acceptances", "agreements"
+  add_foreign_key "agreement_acceptances", "legal_entities"
   add_foreign_key "carts", "users"
   add_foreign_key "collections", "template_collections"
   add_foreign_key "collections", "users"
+  add_foreign_key "content_acceptances", "legal_entities"
+  add_foreign_key "content_acceptances", "sfx_packs"
   add_foreign_key "designer_submissions", "users"
   add_foreign_key "download_links", "collections"
   add_foreign_key "download_links", "orders"
+  add_foreign_key "legal_entities", "users"
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
-  add_foreign_key "payment_infos", "sound_designers"
+  add_foreign_key "payment_infos", "legal_entities"
   add_foreign_key "payouts", "sound_designers"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"

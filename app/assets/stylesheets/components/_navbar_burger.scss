@@ -40,6 +40,10 @@
   // }
 }
 
+.seller-submission-pending {
+  pointer-events: none;
+}
+
 
 @media (max-width: 768px) {
   .navbar-burger-mobile {

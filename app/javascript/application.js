@@ -17,3 +17,6 @@ window.bootstrap = bootstrap
 import './packs/wavesurfer';
 import './packs/modals';
 // import './responsive'; // Uncomment if needed
+
+import "trix"
+import "@rails/actiontext"

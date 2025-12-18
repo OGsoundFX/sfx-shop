@@ -133,9 +133,9 @@ class AdministratorController < ApplicationController
 
       {
         due_date: due_date,
-        paypal_account: designer.payment_infos.last.paypal_account,
+        paypal_account: designer.user.legal_entity.payment_infos.last.paypal_account,
         amount_due_cents: amount_due,
-        currency: designer.payment_infos.last.preferred_currency,
+        currency: designer.user.legal_entity.payment_infos.last.preferred_currency,
         sold_items: sold_items,
         designer: designer,
         time_period: [sold_items.first.created_at, sold_items.last.created_at]

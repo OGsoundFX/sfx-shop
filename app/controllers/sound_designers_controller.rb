@@ -31,7 +31,6 @@ class SoundDesignersController < ApplicationController
     session[:new_designer] = true
     if user_signed_in? && current_user.designer && current_user.sound_designer.nil?
       @sound_designer = SoundDesigner.new
-      @payment_info = @sound_designer.payment_infos.build
     elsif user_signed_in? && !current_user.designer
       redirect_to new_designer_submission_path
     else
@@ -57,6 +56,6 @@ class SoundDesignersController < ApplicationController
   private
 
   def sound_designer_params
-    params.require(:sound_designer).permit(:first_name, :last_name, :address, :location, :bio, :photo, payment_infos_attributes: [:paypal_account, :preferred_currency]).merge(user: current_user)
+    params.require(:sound_designer).permit(:artist_name, :location, :bio, :photo).merge(user: current_user)
   end
 end

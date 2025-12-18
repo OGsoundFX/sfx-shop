@@ -27,14 +27,22 @@
           <%= link_to "Admin", admin_path, class: "nav-link text-white" %>
         </li>
       <% end %>
-      <% if !user_signed_in? %>
-        <li class="nav-item dropdown">
-          <%= link_to "Become a Seller", new_sound_designer_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
-        </li>
-      <% elsif user_signed_in? && current_user.designer_submission.present? && (current_user.designer_submission.submited? || current_user.designer_submission.profile_created?) %>
-        <li class="nav-item dropdown">
-          <%= link_to "Seller submission Pending", designer_submission_path(current_user.designer_submission.access_token), class: "btn btn-secondary" %>
-        </li>
+      <% unless current_user.admin? %>
+        <% if !user_signed_in? || !current_user.designer_submission.present? %>
+          <li class="nav-item dropdown">
+            <%= link_to "Become a Seller", new_sound_designer_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
+          </li>
+        <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.submited? %>
+          <li class="nav-item dropdown">
+            <div class="btn btn-secondary seller-submission-pending">Seller submission Pending</div>
+          </li>
+        <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.profile_created? %>
+          <li class="nav-item dropdown"> 
+            <%= link_to "Seller submission incomplete ⚠️", designer_submission_path(current_user.designer_submission.access_token), class: "btn btn-warning" %>
+          </li>
+        <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.accepted? && !current_user.sound_designer.present? %>
+            <%= link_to "Seller submission Accepted! 🎉", new_sound_designer_path, class: "btn btn-secondary btn-admin-active" %>
+        <% end %>
       <% end %>
       <% if current_user %>
         <li class="nav-item dropdown">
@@ -42,21 +50,16 @@
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <% if current_user.sound_designer.present? %>
               <%= link_to "Seller Dashboard", designer_listings_path, class: "dropdown-item seller" %>
-            <% elsif current_user.designer %>
+            <% elsif current_user.designer && current_user.designer_submission.accepted? %>
               <%= link_to "Create Seller Profile", new_sound_designer_path, class: "dropdown-item seller" %>
             <% end %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
-            <div class="d-flex">
-              <div>
-                <%= link_to "Your Cart", cart_path, class: "dropdown-item"%>
+            <%= link_to cart_path do %>
+              <div class="dropdown-item">
+                Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
               </div>
-              <div>
-                <% if current_user.cart %>
-                  <%= link_to "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})", cart_path, class: "dropdown-item", id:"cart-count"%>
-                <% end %>
-              </div>
-            </div>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <% end %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item log-out" %>
           </div>
         </li>
       <% else %>
