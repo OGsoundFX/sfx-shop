@@ -133,8 +133,11 @@ class DesignerDashboardsController < ApplicationController
 
   def load_designer
     @designer = current_user.sound_designer
-    redirect_to new_legal_entity_path if @designer.user.legal_entity.nil?
-    @paypal = @designer.user.legal_entity.payment_infos.last || @designer.user.legal_entity.payment_infos.new
+    if @designer.user.legal_entity.nil?
+      redirect_to new_legal_entity_path
+    else
+      @paypal = @designer.user.legal_entity.payment_infos.last || @designer.user.legal_entity.payment_infos.new
+    end
   end
 
   def unauthenticated_redirect
