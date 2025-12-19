@@ -1,10 +1,11 @@
 <!-- app/views/agreements/show.html.erb -->
 <div class="padding-navbar content admin-min-height bg-dark pb-4">
-  <div style="height: 60px">
+  <div style="height: 60px" class="d-flex justify-content-center align-items-center mt-4">
     <%= link_to "View Seller Agreement (PDF)",
               rails_blob_path(@agreement.pdf, disposition: "inline"),
               target: "_blank",
-              rel: "noopener" %>
+              rel: "noopener",
+              class: "btn btn-admin-active btn-lg" %>
   </div>
   <div class="container">
     <div class="agreement-body">
