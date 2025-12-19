@@ -122,4 +122,4 @@ gem "country_select"
 
 # pdf creator
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary'
