@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   get "admin/stats", to: "administrator#stats", as: :stats
   get "admin/sales", to: "administrator#sales", as: :list_sales
   get "admin/payouts", to: "administrator#payouts", as: :admin_payouts
+  get "admin/agreements", to: "administrator#agreements", as: :admin_agreements
   get "calculate_exchange_rate", to: "administrator#calculate_exchange_rate", as: :calculate_exchange_rate
   resources :payouts, only: [:new, :create]
 
@@ -100,6 +101,9 @@ Rails.application.routes.draw do
 
   # legal entities
   resources :legal_entities, only: [:new, :create, :edit, :update]
+
+  # agreements
+  get "agreements/:key/:version", to: "agreements#show", as: :agreement
 
   # data protection path
   get "data_protection", to: "pages#data_protection"

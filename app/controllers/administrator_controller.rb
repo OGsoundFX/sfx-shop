@@ -145,6 +145,10 @@ class AdministratorController < ApplicationController
     @past_payouts = Payout.paid.order(payout_date: :desc)
   end
 
+  def agreements
+    @agreements = Agreement.order(version: :desc)
+  end
+
   private
 
   def check_admin
