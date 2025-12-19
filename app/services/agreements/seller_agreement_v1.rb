@@ -265,7 +265,7 @@ module Agreements
     HTML
 
     def self.create_agreement!
-      agreement = Agreement.find_or_initialize_by(key: "seller_agreement", version: "1.0")
+      agreement = Agreement.find_or_initialize_by(key: "seller_agreement", version: "1_0")
       agreement.title = "BamSFX Seller Agreement"
       agreement.active = true
       agreement.published_at ||= Date.today
