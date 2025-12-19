@@ -119,3 +119,7 @@ gem "pdf-reader"
 
 # country_select
 gem "country_select"
+
+# pdf creator
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

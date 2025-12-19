@@ -77,7 +77,7 @@ module Agreements
       <br>
       <br>
       <h2>6. License Granted to BamSFX</h2>
-      <p>The Seller hereby grants to BamSFX a worldwide, non-exclusive, royalty-free license to:
+      <p>The Seller hereby grants to BamSFX a worldwide, non-exclusive, royalty-free license to:</p>
       <ul>
         <li>&nbsp &nbsp• host,
           reproduce, distribute, market, promote, and sell the Content through the Platform
@@ -158,29 +158,31 @@ module Agreements
       <br>
       <h2>8. Taxes &amp; VAT Handling</h2>
       <ul>
-      <li>
-        &nbsp &nbsp• BamSFX acts as the <strong>merchant of record</strong> and <strong>deemed supplier</strong>
-        for VAT purposes on all sales of digital content made through the Platform.
-      </li>
+        <li>
+          &nbsp &nbsp• BamSFX acts as the <strong>merchant of record</strong> and <strong>deemed supplier</strong>
+          for VAT purposes on all sales of digital content made through the Platform.
+        </li>
 
-      <li>
-        &nbsp &nbsp• BamSFX is solely responsible for calculating, collecting, and remitting any applicable
-        value-added tax (VAT) or similar indirect taxes to the relevant tax authorities.
-      </li>
+        <li>
+          &nbsp &nbsp• BamSFX is solely responsible for calculating, collecting, and remitting any applicable
+          value-added tax (VAT) or similar indirect taxes to the relevant tax authorities.
+        </li>
 
-      <li>
-        &nbsp &nbsp• Seller payouts are calculated on a <strong>net-of-VAT</strong> basis.
-      </li>
+        <li>
+          &nbsp &nbsp• Seller payouts are calculated on a <strong>net-of-VAT</strong> basis.
+        </li>
 
-      <li>
-        &nbsp &nbsp• The Seller shall not charge, collect, or declare VAT in relation to sales made through the Platform.
-      </li>
+        <li>
+          &nbsp &nbsp• The Seller shall not charge, collect, or declare VAT in relation to sales made through the Platform.
+        </li>
 
-      <li>
-        &nbsp &nbsp• The Seller remains solely responsible for declaring and paying any applicable
-        income taxes, social contributions, or similar obligations arising from amounts
-        received from BamSFX.
-      </li>
+        <li>
+          &nbsp &nbsp• The Seller remains solely responsible for declaring and paying any applicable
+          income taxes, social contributions, or similar obligations arising from amounts
+          received from BamSFX.
+        </li>
+      </ul>
+
       <br>
       <br>
       <h2>9. Currency, Pricing &amp; Promotions</h2>
@@ -211,6 +213,7 @@ module Agreements
         BamSFX reserves the right to immediately remove Content or terminate Seller accounts
         without prior notice in case of:
       </p>
+
       <ul>
         <li>&nbsp &nbsp• Violation of this Agreement;</li>
         <li>&nbsp &nbsp• Infringement of third-party rights;</li>
@@ -271,7 +274,7 @@ module Agreements
       agreement.published_at ||= Date.today
       agreement.body = AGREEMENT_HTML
       agreement.save!
-      agreement
+      create_pdf(agreement)
     end
 
     def self.update_agreement!
@@ -280,7 +283,49 @@ module Agreements
 
       agreement.body = AGREEMENT_HTML
       agreement.save!
-      agreement
+      create_pdf(agreement)
+    end
+
+    private
+
+    def self.create_pdf(agreement)
+      html = <<~HTML
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8">
+          </head>
+          <body>
+            <style>
+              body {
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.6;
+              }
+
+              h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+              }
+            </style>
+            #{AGREEMENT_HTML.gsub(/&nbsp\s*(?:•|-)\s*/, "")}
+          </body>
+        </html>
+      HTML
+
+      pdf = WickedPdf.new.pdf_from_string(
+        html,
+        page_size: "A4",
+        margin: { top: 15, bottom: 15, left: 20, right: 20 },
+        encoding: "UTF-8"
+      )
+
+      agreement.pdf.purge if agreement.pdf.attached?
+
+      agreement.pdf.attach(
+        io: StringIO.new(pdf),
+        filename: "#{agreement.key}_version_#{agreement.version}.pdf",
+        content_type: "application/pdf"
+      )
     end
   end
 end
