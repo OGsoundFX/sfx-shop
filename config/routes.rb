@@ -104,6 +104,7 @@ Rails.application.routes.draw do
 
   # agreements
   get "agreements/:key/:version", to: "agreements#show", as: :agreement
+  get "agreements/:key/:version/pdf", to: "agreements#pdf", as: :pdf_agreement
 
   # data protection path
   get "data_protection", to: "pages#data_protection"
