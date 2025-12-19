@@ -1,0 +1,31 @@
+<div class="padding-navbar content admin-min-height bg-dark pb-5">
+  <div class="container">
+    <div>
+      <%= render "admin_menu" %>
+      <% @agreements.each do |agreement| %>
+          <div class="submission-card d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="submission-card-date">
+                <div class="submission-day"><%= agreement.published_at.strftime("%d/%m/%Y") %></div>
+              </div>
+              <div class="submission-card-content">
+                <div class="title"><%= agreement.title %></div>
+              </div>
+            </div>
+            <div>
+              <div class="title"><%= agreement.key %> / <%= agreement.version %></div>
+            </div>
+            <div>
+              <%= link_to agreement_path(agreement.key, agreement.version) do %>
+                <% if agreement.active %>
+                  <div class="btn btn-admin-active">Live</div>
+                <% else %>
+                  <div class="btn btn-warning">Inactive</div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>  
+</div>
