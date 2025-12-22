@@ -1,5 +1,9 @@
 .btn-admin-active {
   background-color: $new-green;
+  &:hover {
+    background-color: $light-grey;
+    color: white;
+  }
 }
 
 .admin-min-height {

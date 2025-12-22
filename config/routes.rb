@@ -107,6 +107,11 @@ Rails.application.routes.draw do
   get "agreements/:key/:version/pdf", to: "agreements#pdf", as: :pdf_agreement
   get "sound_designers/:id/seller_agreement", to: "agreements#seller_agreement", as: :seller_agreement
 
+  # agreement acceptances
+  resources :sound_designers, only: [] do
+    resources :agreement_acceptances, only: :create
+  end
+
   # data protection path
   get "data_protection", to: "pages#data_protection"
 

@@ -44,26 +44,6 @@
         <span>Address:</span>
         <em><pre class="info-color"><%= @legal_entity.address %></pre></em>
       </div>
-      <hr>
-
-      <div class="designer-dashboard__settings-grid mb-2">
-        <span>Seller Agreement:</span>
-        <% if !@legal_entity.agreement_acceptances.present? %>
-          <%= link_to seller_agreement_path(@designer) do %>
-            <div class="btn me-2 btn-admin-active">Review Seller Agreement</div>
-          <% end %>
-        <% elsif @paypal.active? %>
-          <a href="mailto: support@bamsfx.com?subject=Request Paypal Modification" target="blank" class="btn btn-dark">Request Modification</a>
-        <% elsif @paypal.inactive? %>
-          <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>
-        <% else %>
-          <div class="btn btn-danger designer-dashboard__paypal-no-account">No Payment Infos</div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="d-none" data-update-info-target="form">
-      <%= render "legal_entities/legal_entity_form" %>
     </div>
   </div>
 </div>

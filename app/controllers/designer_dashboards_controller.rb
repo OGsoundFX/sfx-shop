@@ -1,5 +1,5 @@
 class DesignerDashboardsController < ApplicationController
-  before_action :unauthenticated_redirect, :new_designer, :check_legal_entity, :load_designer
+  before_action :unauthenticated_redirect, :new_designer, :check_legal_entity, :load_designer, :agreement_signed
   before_action :load_pack, only: [:update_pack_form, :remove_pack]
 
   def main
@@ -166,5 +166,13 @@ class DesignerDashboardsController < ApplicationController
 
   def photo_params
     params.require(:sound_designer).permit(:photo)
+  end
+
+  def agreement_signed
+    @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
+
+    # this shows the agreement template. we nee to generate the custom agreement for the designer
+    @agreement_acceptance = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).last if @agreement_signed
+    @agreement = Agreement.find(@agreement_acceptance.agreement_id) if @agreement_acceptance
   end
 end
