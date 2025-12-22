@@ -28,28 +28,30 @@
     <hr style="margin-top: 0">
 
     <div data-update-info-target="data">
-      <div class="designer-dashboard__info-grid mb-2">
+      <div class="designer-dashboard__settings-grid mb-2">
         <span>Full legal name:</span>
         <em><span class="info-color"><%= @legal_entity.legal_name %></span></em>
       </div>
 
       <% if @legal_entity.company_name? %>        
-        <div class="designer-dashboard__info-grid mb-2">
+        <div class="designer-dashboard__settings-grid mb-2">
           <span>Company:</span>
           <em><span class="info-color"><%= @legal_entity.company_name %></span></em>
       </div>
       <% end %>
 
-      <div class="designer-dashboard__info-grid mb-2">
+      <div class="designer-dashboard__settings-grid mb-2">
         <span>Address:</span>
         <em><pre class="info-color"><%= @legal_entity.address %></pre></em>
       </div>
       <hr>
 
-      <div class="designer-dashboard__info-grid mb-2">
+      <div class="designer-dashboard__settings-grid mb-2">
         <span>Seller Agreement:</span>
-        <% if @paypal.pending_verif? %>
-          <div class="btn me-2 btn-admin designer-dashboard__paypal-pending">Pending Verification</div>
+        <% if !@legal_entity.agreement_acceptances.present? %>
+          <%= link_to seller_agreement_path(@designer) do %>
+            <div class="btn me-2 btn-admin-active">Review Seller Agreement</div>
+          <% end %>
         <% elsif @paypal.active? %>
           <a href="mailto: support@bamsfx.com?subject=Request Paypal Modification" target="blank" class="btn btn-dark">Request Modification</a>
         <% elsif @paypal.inactive? %>

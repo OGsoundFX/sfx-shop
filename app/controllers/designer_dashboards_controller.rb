@@ -157,7 +157,7 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def designer_params
-    params.require(:sound_designer).permit(:first_name, :last_name, :location)
+    params.require(:sound_designer).permit(:artist_name, :location)
   end
 
   def bio_params
