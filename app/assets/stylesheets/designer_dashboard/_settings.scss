@@ -1,0 +1,10 @@
+.designer-dashboard__settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+@media (max-width: 994px) {
+  .designer-dashboard__settings-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}

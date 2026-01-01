@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AgreementAcceptanceFormController from "./agreement_acceptance_form_controller"
+application.register("agreement-acceptance-form", AgreementAcceptanceFormController)
+
 import ApplicationModalController from "./application_modal_controller"
 application.register("application-modal", ApplicationModalController)
 

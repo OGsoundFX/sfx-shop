@@ -263,7 +263,6 @@ module Agreements
         <strong>Accepted by:</strong> {{legal_name}}<br>
         <strong>Artist Name:</strong> {{artist_name}}<br>
         <strong>Date:</strong> {{accepted_at}}<br>
-        <strong>IP Address:</strong> {{ip_address}}
       </p>
     HTML
 
@@ -284,6 +283,22 @@ module Agreements
       agreement.body = AGREEMENT_HTML
       agreement.save!
       create_pdf(agreement)
+    end
+
+    def self.generate_seller_agreement(designer, request)
+      agreement = Agreement.find_by(key: "seller_agreement", version: "1_0")
+      return unless agreement
+
+      accepted_at = Time.current.strftime("%B %d, %Y")
+      ip_address = request.remote_ip || "N/A"
+      legal_name = designer.user.legal_entity.present? ? designer.user.legal_entity.legal_name : "#{designer.user.first_name} #{designer.user.last_name}"
+
+      agreement.body = AGREEMENT_HTML
+        .gsub("{{legal_name}}", legal_name)
+        .gsub("{{artist_name}}", designer.artist_name)
+        .gsub("{{accepted_at}}", accepted_at)
+
+      agreement
     end
 
     private

@@ -19,11 +19,11 @@
     <hr style="margin-top: 0">
     <% if @paypal.paypal_account.present? %>
       <div data-update-info-target="data">
-        <div class="designer-dashboard__info-grid mb-2">
+        <div class="designer-dashboard__settings-grid mb-2">
           <span>Paypal Account:</span>
           <em><span class="info-color"><%= @paypal.paypal_account %></span></em>
         </div>
-        <div class="designer-dashboard__info-grid">
+        <div class="designer-dashboard__settings-grid">
           <span>Preferred Currency:</span>
           <span class="designer-dashboard__preferred-currency btn btn-admin"><%= @paypal.preferred_currency.upcase %></span>
         </div>

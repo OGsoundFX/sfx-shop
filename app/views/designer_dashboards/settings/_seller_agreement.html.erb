@@ -1,0 +1,35 @@
+<div class="designer-dashboard__container mt-3" data-controller="update-info">
+  <div class="designer-dashboard__user-profile">
+    <div>
+      <div class="d-flex">
+        <div class="mb-3">
+          <h5 style="margin: 0">Seller Agreement</h5>
+        </div>
+        <% if @legal_entity.accepted? && @agreement_acceptance %>
+          <div class="designer-dashboard__label ms-3">
+            <i class="fas fa-check-circle approved-icon"></i>
+          </div>
+        <% end %>
+      </div>
+      <hr style="margin-top: 0">
+      <% if !@legal_entity.agreement_acceptances.present? %>
+        <%= link_to seller_agreement_path(@designer) do %>
+          <div class="btn me-2 btn-warning">Review Seller Agreement</div>
+        <% end %>
+      <% elsif @paypal.active? %>
+        <a href="mailto: support@bamsfx.com?subject=Request Paypal Modification" target="blank" class="btn btn-dark">Request Modification</a>
+      <% elsif @paypal.inactive? %>
+        <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>
+      <% else %>
+        <%= link_to seller_agreement_path(@designer) do %>
+          <div class="btn btn-admin-active designer-dashboard__paypal-no-account">
+            Read the agreement
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="d-none" data-update-info-target="form">
+      <%= render "legal_entities/legal_entity_form" %>
+    </div>
+  </div>
+</div>

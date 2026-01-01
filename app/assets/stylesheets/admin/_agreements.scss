@@ -1,6 +1,22 @@
 .agreement-body {
-  color: $light-grey;
+  color: $lighter-grey;
   p, li {
     font-size: 16px;
   }
+}
+
+.seller-agreement__acceptance-section {
+  align-items: center;
+  .form-check {
+    padding-left: 2rem;
+    margin-top: 0;
+  }
+  .form-check-input {
+    font-size: 1.8rem;
+  }
+}
+
+.seller-agreement__acceptance-section__checkbox:checked {
+  background-color: $new-green;
+  border-color: $new-green;
 }

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.3.4'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -87,8 +87,8 @@ gem 'gibbon'
 gem 'pg_search', '~> 2.3.0'
 gem 'kaminari'
 
-gem 'aws-sdk-s3', '~> 1.103'
-gem 'aws-sdk-ec2', '~> 1.0.0.rc3'
+gem 'aws-sdk-s3', '~> 1.128'    # latest stable S3 gem
+gem 'aws-sdk-ec2', '~> 1.121'   # latest stable EC2 gem
 gem 'rubyzip', '~> 1.2'
 
 gem 'net-smtp', require: false

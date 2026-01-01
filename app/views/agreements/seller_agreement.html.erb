@@ -1,0 +1,28 @@
+<div class="padding-navbar content admin-min-height bg-dark pb-4">
+  <div style="height: 40px">
+  </div>
+  <div class="container">
+    <%= link_to :back, class: "submission-form__back-button" do %>
+      <i class="fas fa-arrow-left mb-4"></i>
+    <% end %>
+    <div class="agreement-body">
+      <%= @agreement.body.to_s.html_safe %>
+    </div>
+    <% if @agreement_signed %>
+    <% else %>
+      <div class="seller-agreement__acceptance-section">
+        <%= simple_form_for [@designer, @agreement_acceptance] do |f| %>
+          <%= f.input :agreement_id, as: :hidden, input_html: { value: @agreement.id } %>
+          <div class="d-flex align-items-end" data-controller="agreement-acceptance-form" >
+            <div>
+              <%= f.input :accepted, as: :boolean, label: false, input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" }  } %>
+            </div>
+            <div>
+              <%= f.submit "Accept Agreement", class: "btn btn-admin-active", disabled: true, data: { agreement_acceptance_form_target: "submit"} %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
