@@ -263,7 +263,6 @@ module Agreements
         <strong>Accepted by:</strong> {{legal_name}}<br>
         <strong>Artist Name:</strong> {{artist_name}}<br>
         <strong>Date:</strong> {{accepted_at}}<br>
-        <strong>IP Address:</strong> {{ip_address}}
       </p>
     HTML
 
@@ -298,7 +297,6 @@ module Agreements
         .gsub("{{legal_name}}", legal_name)
         .gsub("{{artist_name}}", designer.artist_name)
         .gsub("{{accepted_at}}", accepted_at)
-        .gsub("{{ip_address}}", ip_address)
 
       agreement
     end
