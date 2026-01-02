@@ -334,8 +334,6 @@ module Agreements
         encoding: "UTF-8"
       )
 
-      # agreement.pdf.purge if agreement.pdf.attached?
-
       agreement.pdf.attach(
         io: StringIO.new(pdf),
         filename: "#{agreement.key}_version_#{agreement.version}.pdf",
