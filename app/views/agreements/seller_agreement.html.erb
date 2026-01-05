@@ -1,15 +1,28 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-4">
   <div style="height: 40px">
   </div>
-  <div class="container">
-    <%= link_to :back, class: "submission-form__back-button" do %>
-      <i class="fas fa-arrow-left mb-4"></i>
+  <div class="container d-flex justify-content-between">
+    <div>
+      <%= link_to :back, class: "submission-form__back-button" do %>
+        <i class="fas fa-arrow-left mb-4"></i>
+      <% end %>
+    </div>
+    <% if @agreement_acceptance.pdf.attached? %>      
+      <div style="height: 60px" class="">
+        <%= link_to "View Seller Agreement (PDF)",
+                  rails_blob_path(@agreement_acceptance.pdf, disposition: "inline"),
+                  target: "_blank",
+                  rel: "noopener",
+                  class: "btn btn-admin-active btn-lg" %>
+      </div>
     <% end %>
+    <div></div>
+  </div>
+  <div class="container">
     <div class="agreement-body">
       <%= @agreement.body.to_s.html_safe %>
     </div>
-    <% if @agreement_signed %>
-    <% else %>
+    <% unless @agreement_signed %>
       <div class="seller-agreement__acceptance-section">
         <%= simple_form_for [@designer, @agreement_acceptance] do |f| %>
           <%= f.input :agreement_id, as: :hidden, input_html: { value: @agreement.id } %>

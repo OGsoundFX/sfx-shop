@@ -13,6 +13,8 @@ class AgreementAcceptancesController < ApplicationController
       address_snapshot: @designer.legal_entity.address
     )
     if @agreement_acceptance.save && params[:agreement_acceptance][:accepted] == "1"
+      # Generate PDF
+      Agreements::Base.create_seller_pdf(@agreement, @designer, @agreement_acceptance)
       redirect_to settings_path, notice: "Agreement accepted successfully."
     else
       render "agreements/seller_agreement", status: :unprocessable_entity
