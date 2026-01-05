@@ -104,6 +104,9 @@ Rails.application.routes.draw do
 
   # agreements
   get "agreements/:key/:version", to: "agreements#show", as: :agreement
+  delete "agreements/:key/:version", to: "agreements#destroy", as: :delete_agreement
+  get "agreements/:key/:version/deactivate", to: "agreements#deactivate", as: :deactivate_agreement
+  get "agreements/:key/:version/activate", to: "agreements#activate", as: :activate_agreement
   get "agreements/:key/:version/pdf", to: "agreements#pdf", as: :pdf_agreement
   get "sound_designers/:id/seller_agreement", to: "agreements#seller_agreement", as: :seller_agreement
 

@@ -23,6 +23,11 @@
                   <div class="btn btn-warning">Inactive</div>
                 <% end %>
               <% end %>
+              <% if agreement.active %>
+                <%= link_to "deactivate", deactivate_agreement_path(agreement.key, agreement.version), data: {turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+              <% else %>
+                <%= link_to "activate", activate_agreement_path(agreement.key, agreement.version), data: {turbo_confirm: "Are you sure?"}, class: "btn btn-admin-active" %>
+              <% end %>
             </div>
           </div>
       <% end %>

@@ -1,5 +1,5 @@
 module Agreements
-  module SellerAgreementV1
+  class SellerAgreementV1 < Base
     AGREEMENT_HTML = <<~HTML
       <h1>BamSFX Seller Agreement</h1>
       <h5>Version 1.0 - Effective Date: December 1, 2025</h5>
@@ -266,79 +266,8 @@ module Agreements
       </p>
     HTML
 
-    def self.create_agreement!
-      agreement = Agreement.find_or_initialize_by(key: "seller_agreement", version: "1_0")
-      agreement.title = "BamSFX Seller Agreement"
-      agreement.active = true
-      agreement.published_at ||= Date.today
-      agreement.body = AGREEMENT_HTML
-      agreement.save!
-      create_pdf(agreement)
-    end
-
-    def self.update_agreement!
-      agreement = Agreement.find_by(key: "seller_agreement", version: "1_0")
-      return unless agreement
-
-      agreement.body = AGREEMENT_HTML
-      agreement.save!
-      create_pdf(agreement)
-    end
-
-    def self.generate_seller_agreement(designer, request)
-      agreement = Agreement.find_by(key: "seller_agreement", version: "1_0")
-      return unless agreement
-
-      accepted_at = Time.current.strftime("%B %d, %Y")
-      ip_address = request.remote_ip || "N/A"
-      legal_name = designer.user.legal_entity.present? ? designer.user.legal_entity.legal_name : "#{designer.user.first_name} #{designer.user.last_name}"
-
-      agreement.body = AGREEMENT_HTML
-        .gsub("{{legal_name}}", legal_name)
-        .gsub("{{artist_name}}", designer.artist_name)
-        .gsub("{{accepted_at}}", accepted_at)
-
-      agreement
-    end
-
-    private
-
-    def self.create_pdf(agreement)
-      html = <<~HTML
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8">
-          </head>
-          <body>
-            <style>
-              body {
-                font-family: Helvetica, Arial, sans-serif;
-                font-size: 16px;
-                line-height: 1.6;
-              }
-
-              h1, h2, h3, h4, h5, h6 {
-                page-break-after: avoid;
-              }
-            </style>
-            #{AGREEMENT_HTML.gsub(/&nbsp\s*(?:•|-)\s*/, "")}
-          </body>
-        </html>
-      HTML
-
-      pdf = WickedPdf.new.pdf_from_string(
-        html,
-        page_size: "A4",
-        margin: { top: 15, bottom: 15, left: 20, right: 20 },
-        encoding: "UTF-8"
-      )
-
-      agreement.pdf.attach(
-        io: StringIO.new(pdf),
-        filename: "#{agreement.key}_version_#{agreement.version}.pdf",
-        content_type: "application/pdf"
-      )
+    def initialize
+      super(key: "seller_agreement", version: "1_0", title: "BamSFX Seller Agreement", html: AGREEMENT_HTML)
     end
   end
 end
