@@ -2,6 +2,7 @@ class SoundDesigner < ApplicationRecord
   after_create_commit :update_user
 
   belongs_to :user
+  has_one :legal_entity, through: :user
   has_many :sfx_packs, dependent: :destroy
   has_many :single_tracks, dependent: :destroy
   has_many :sold_items

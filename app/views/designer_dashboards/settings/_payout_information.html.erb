@@ -1,8 +1,13 @@
 <div class="designer-dashboard__container mt-3" data-controller="update-info">
   <div class="designer-dashboard__user-profile">
     <div class="d-flex justify-content-between">
-      <div>
-        <p class="designer-dashboard__label">Payout Information</p>
+      <div class="d-flex">
+        <p class="designer-dashboard__label me-3">Payout Information</p>
+        <% if @paypal.active? %>
+          <div class="designer-dashboard__label">
+            <i class="fas fa-check-circle approved-icon"></i>
+          </div>
+        <% end %>
       </div>
       <div class="d-flex justify-content-end mb-2">
         <% if @paypal.pending_verif? %>

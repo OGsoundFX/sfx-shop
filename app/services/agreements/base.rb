@@ -42,6 +42,47 @@ module Agreements
       agreement
     end
 
+    def self.create_seller_pdf(agreement, designer, acceptance)
+      html = <<~HTML
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8">
+          </head>
+          <body>
+            <style>
+              body {
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.6;
+              }
+
+              h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+              }
+            </style>
+            #{agreement.body.to_s
+              .gsub("{{legal_name}}", acceptance.legal_name_snapshot)
+              .gsub("{{artist_name}}", designer.artist_name)
+              .gsub("{{accepted_at}}", acceptance.accepted_at.strftime("%B %d, %Y"))}
+          </body>
+        </html>
+      HTML
+
+      pdf = WickedPdf.new.pdf_from_string(
+        html,
+        page_size: "A4",
+        margin: { top: 15, bottom: 15, left: 20, right: 20 },
+        encoding: "UTF-8"
+      )
+
+      acceptance.pdf.attach(
+        io: StringIO.new(pdf),
+        filename: "#{agreement.key}_version_#{agreement.version}_#{designer.artist_name.parameterize}.pdf",
+        content_type: "application/pdf"
+      )
+    end
+
     private
 
     def create_pdf(agreement)
