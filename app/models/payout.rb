@@ -1,5 +1,5 @@
 class Payout < ApplicationRecord
-  belongs_to :sound_designer
+  belongs_to :legal_entity
   has_many :sold_items, dependent: :nullify
   monetize :amount_cents
 

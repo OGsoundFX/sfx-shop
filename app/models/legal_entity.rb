@@ -3,6 +3,7 @@ class LegalEntity < ApplicationRecord
 
   belongs_to :user
   has_many :payment_infos, dependent: :destroy
+  has_many :payouts
   has_many :agreement_acceptances, dependent: :destroy
   has_many :agreements, through: :agreement_acceptances
 

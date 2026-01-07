@@ -36,7 +36,7 @@ class DesignerDashboardsController < ApplicationController
   def payouts
     @sold_items = @designer.sold_items.where(status: 'pending').includes(:sfx_pack).joins(:order).where(order: {status: "paid"}).order(created_at: :desc)
     @payout_amount = @sold_items.sum { |payout| payout.payout_amount_cents if payout.status != "paid"} / 100.0
-    @payouts = Payout.where(sound_designer: @designer, status: "paid").order(payout_date: :desc)
+    @payouts = Payout.where(legal_entity: @designer.legal_entity, status: "paid").order(payout_date: :desc)
     @year = Date.today.year
     @currency_symbol = CurrencySymbolService.lookup(@designer.user.legal_entity.payment_infos.last.preferred_currency)
     if @payouts.present?
