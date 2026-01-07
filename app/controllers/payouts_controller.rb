@@ -14,7 +14,7 @@ class PayoutsController < ApplicationController
     amount_paid = sold_items.sum(&:payout_amount_cents)
 
     payout = Payout.create(
-      sound_designer: designer,
+      legal_entity: designer.legal_entity,
       status: "paid",
       payout_date: Date.today,
       currency: currency,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_07_100348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -217,7 +217,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
   end
 
   create_table "payouts", force: :cascade do |t|
-    t.bigint "sound_designer_id", null: false
     t.integer "status", default: 0
     t.date "payout_date"
     t.string "fail_reason"
@@ -226,7 +225,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paypal_account"
-    t.index ["sound_designer_id"], name: "index_payouts_on_sound_designer_id"
+    t.bigint "legal_entity_id", null: false
+    t.index ["legal_entity_id"], name: "index_payouts_on_legal_entity_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -492,7 +492,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_172220) do
   add_foreign_key "orders", "sfx_packs"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_infos", "legal_entities"
-  add_foreign_key "payouts", "sound_designers"
+  add_foreign_key "payouts", "legal_entities"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"
   add_foreign_key "sfx_packs", "sound_designers"
