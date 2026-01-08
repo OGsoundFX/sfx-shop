@@ -6,6 +6,15 @@
   }
 }
 
+.btn-rejected {
+  background-color: $indian-red;
+  pointer-events: none  ;
+}
+
 .admin-min-height {
   min-height: calc(100vh - 78px);
+}
+
+.btn-hover-dismiss {
+  pointer-events: none;
 }

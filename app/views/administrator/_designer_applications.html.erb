@@ -43,7 +43,7 @@
                 </div>
               <% end %>
             </div>
-            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-rejected", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
           </div>
         </div>
       </div>

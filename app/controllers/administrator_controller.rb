@@ -28,7 +28,24 @@ class AdministratorController < ApplicationController
 
   def designer_legal_entities
     @tab = 'legal_entities'
-    @legal_entities = LegalEntity.includes(:sound_designer, :user).order(created_at: :desc).order(:status)
+    @legal_entities = LegalEntity.where.not(status: "accepted").includes(:sound_designer, :user).order(:status).order(created_at: :desc)
+  end
+
+  def legal_entity_show
+    @legal_entity = LegalEntity.find(params[:id])
+  end
+
+  def legal_entity_accept
+    legal_entity = LegalEntity.find(params[:id])
+    legal_entity.accepted!
+    # LegalEntityMailer.legal_entity_accepted(legal_entity).deliver_later
+    redirect_to request.referer
+  end
+
+  def legal_entity_reject
+    legal_entity = LegalEntity.find(params[:id])
+    legal_entity.rejected!
+    redirect_to request.referer
   end
 
   def pack_submissions

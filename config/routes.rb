@@ -83,6 +83,9 @@ Rails.application.routes.draw do
   get "admin/payouts", to: "administrator#payouts", as: :admin_payouts
   get "admin/agreements", to: "administrator#agreements", as: :admin_agreements
   get "calculate_exchange_rate", to: "administrator#calculate_exchange_rate", as: :calculate_exchange_rate
+  get "admin/legal_entity/:id", to: "administrator#legal_entity_show", as: :legal_entity
+  get "admin/legal_entity_accept/:id", to: "administrator#legal_entity_accept", as: :legal_entity_accept
+  get "admin/legal_entity_reject/:id", to: "administrator#legal_entity_reject", as: :legal_entity_reject
   resources :payouts, only: [:new, :create]
 
   # sound designer dashboard routes

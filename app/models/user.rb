@@ -3,6 +3,9 @@ class User < ApplicationRecord
   after_create :subscribe_to_newsletter
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
   has_many :orders, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_one :legal_entity, dependent: :destroy
@@ -10,8 +13,6 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_one :designer_submission, dependent: :destroy
   has_one :sound_designer, dependent: :destroy
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 
   private
 

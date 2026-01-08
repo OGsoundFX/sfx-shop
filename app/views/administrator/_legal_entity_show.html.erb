@@ -1,0 +1,96 @@
+<div class="designer-dashboard__welcome">
+  <div class="designer-dashboard__banner" style="background-image: url('<%= cl_image_path(@legal_entity.sound_designer.banner.key) if @legal_entity.sound_designer.banner.attached? %>')">
+    <div class="designer-dashboard__banner-designer-photo"
+          data-controller="photo-upload submission-image-preview"
+          data-action="click->photo-upload#trigger">
+      <div class="designer-dashboard__banner-photo-display">
+        <% if @legal_entity.sound_designer.photo.attached? %>
+          <%= cl_image_tag @legal_entity.sound_designer.photo.key, class: "pack-submission-form__image-placeholder", data: {submission_image_preview_target: "preview"} %>
+        <% else %>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="designer-dashboard__container mt-3">
+  <div class="designer-dashboard__user-profile">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex me-3">
+        <div>
+          <p class="designer-dashboard__label me-3">Legal Information</p>
+        </div>
+        <% if @legal_entity.accepted? %>
+          <div class="designer-dashboard__label">
+            <i class="fas fa-check-circle approved-icon"></i>
+          </div>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <% if @legal_entity.pending? %>
+          <div class="btn btn-admin designer-dashboard__paypal-pending">Pending Verification</div>
+        <% elsif @legal_entity.incomplete? %>
+          <div class="btn btn-warning designer-dashboard__paypal-inactive">Incomplete</div>
+        <% elsif @legal_entity.rejected? %>
+          <div class="btn btn-danger designer-dashboard__paypal-no-account">Rejected</div>
+        <% end %>
+      </div>
+    </div>
+    <hr style="margin-top: 0">
+
+    <div>
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Email:</span>
+        <span class="info-color"><em><%= @legal_entity.user.email %></em><a href="mailto:<%= @legal_entity.user.email %>" target="blank" class="letter-icon">✉️</a></span>
+      </div>
+
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Full legal name:</span>
+        <em><span class="info-color"><%= @legal_entity.legal_name %></span></em>
+      </div>
+
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Artist name:</span>
+        <em><span class="info-color"><%= @legal_entity.sound_designer.artist_name %></span></em>
+      </div>
+
+      <% if @legal_entity.company_name? %>        
+        <div class="designer-dashboard__settings-grid mb-2">
+          <span>Company:</span>
+          <em><span class="info-color"><%= @legal_entity.company_name %></span></em>
+      </div>
+      <% end %>
+
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Address:</span>
+        <em><pre class="info-color"><%= @legal_entity.address %></pre></em>
+      </div>
+      <%= link_to "See profile page", sound_designer_path(@legal_entity.sound_designer), class: "btn btn-light text-dark" %>
+      <hr>
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Submitted on:</span>
+        <em><span class="info-color"><%= @legal_entity.created_at.strftime("%B %d, %Y") %></span></em>
+      </div>
+      <div class="designer-dashboard__settings-grid mb-2">
+        <span>Validity:</span>
+        <div>
+          <span class="info-color btn btn-hover-dismiss <%= @legal_entity.valid? ? 'btn-admin-active' : 'btn-warning' %>"><%= @legal_entity.valid? ? "Valid" : "Invalid" %></span>
+        </div>
+      </div>
+      <% unless @legal_entity.accepted? %>
+        <hr>
+        <%= link_to legal_entity_accept_path(@legal_entity), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+          <div >
+            <i class="fas fa-check"></i>
+          </div>
+        <% end %>
+        <%= link_to legal_entity_reject_path(@legal_entity), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+          <div>
+            <i class="fas fa-ban"></i>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
