@@ -2,6 +2,7 @@ class LegalEntity < ApplicationRecord
   before_validation :set_default
 
   belongs_to :user
+  has_one :sound_designer, through: :user
   has_many :payment_infos, dependent: :destroy
   has_many :payouts
   has_many :agreement_acceptances, dependent: :destroy

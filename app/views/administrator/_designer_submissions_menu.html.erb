@@ -1,0 +1,4 @@
+<div class="d-flex">
+  <%= link_to "Applications", submissions_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if active_submission_tab?(submissions_path)}", data: { turbo_action: "replace", turbo_frame: "designers_tab_content" } %>
+  <%= link_to "Legal Entities", legal_entities_submissions_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if active_submission_tab?(legal_entities_submissions_path)}", data: { turbo_action: "replace",turbo_frame: "designers_tab_content" } %>
+</div>

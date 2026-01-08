@@ -5,7 +5,7 @@ class SfxPacksController < ApplicationController
       redirect_to root_path, alert: "Pack unavailable"
     end
     @designer = @pack.sound_designer
-    @designer_name = "#{@designer.first_name} #{@designer.last_name}"
+    @designer_name = @designer.artist_name
     @average_rating = (@pack.reviews.sum { |review| review.rating } / @pack.reviews.count.to_f).ceil(1) if @pack.reviews.present?
     current_sales = Sale.where("end_date > ?", Date.current)
     current_sales.each do |sale|

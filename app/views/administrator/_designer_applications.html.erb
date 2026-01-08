@@ -1,0 +1,52 @@
+<%= render "designer_submissions_menu" %>
+<div class="submission-container text-center">
+  <div style="width: 100vw">
+    <div class="text-start text-white ml-5">
+      <h6>Applications count: <%= @submissions.count %></h6>
+    </div>
+    <% @submissions.each do |submission| %>
+      <div class="submission-card d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="submission-card-date">
+            <div class="submission-day"><%= submission.created_at.strftime("%b %y") %></div>
+            <div class="submission-date"><%= submission.created_at.strftime("%d") %></div>
+          </div>
+          <div class="submission-card-content">
+            <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status">(<%= submission.status %>)</span></div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column">
+          <% submission.submission_links.each do |link| %>
+            <div class="d-flex">
+              <%= link_to link.title, link.url, target: "_blank" %>
+              <div class="submission-link-tooltip <%= 'd-none' unless link.description.present? %> ml-3">
+                <i class="fas fa-info-circle ms-2"></i>
+                <span class="submission-link-tooltiptext"><%= link.description %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div>
+          <div class="submission-card-actions">
+            <a href="mailto:<%= submission.email %>" target="blank"><span class="icon">✉️</span></a>
+            <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
+              <%= link_to submission_accepted_path(submission.id), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                <div >
+                  <i class="fas fa-check"></i>
+                </div>
+              <% end %>
+              <%= link_to submission_rejected_path(submission.id), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                <div>
+                  <i class="fas fa-ban"></i>
+                </div>
+              <% end %>
+            </div>
+            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-rejected", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

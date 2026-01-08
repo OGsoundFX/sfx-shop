@@ -58,12 +58,15 @@
           <!-- Author and Actions -->
           <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top">
             <div class="d-flex align-items-center gap-2">
-              <% if @pack.sound_designer.photo.attached? %>
-                <%= cl_image_tag @pack.sound_designer.photo.key, alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic" %>
-              <% else %>
-                <%= image_tag "logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic"  %>
+              <%= link_to sound_designer_path(@pack.sound_designer) do %>
+                <% if @pack.sound_designer.photo.attached? %>
+                  <%= cl_image_tag @pack.sound_designer.photo.key, alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic" %>
+                <% else %>
+                  <%= image_tag "logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic"  %>
+                <% end %>
+                <span style="margin-left: 8px; font-size: 0.9rem"><%= @pack.sound_designer.artist_name %></span>
               <% end %>
-              <span class="small text-muted ml-2 sfx_card__designer"><%= @pack.sound_designer.artist_name %></span>
+            
             </div>
             <div class="sfx_card__price">
               <p class="fs-5 fw-semibold mb-1">

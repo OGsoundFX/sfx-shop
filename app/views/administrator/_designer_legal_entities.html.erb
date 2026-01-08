@@ -1,0 +1,53 @@
+<%= render "designer_submissions_menu" %>
+<div class="submission-container text-center">
+  <div style="width: 100vw">
+    <div class="text-start text-white ml-5">
+      <h6>Applications count: <%= @legal_entities.count %></h6>
+    </div>
+    <% @legal_entities.each do |legal_entity| %>
+      <div class="submission-card d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="submission-card-date">
+            <div class="submission-day"><%= legal_entity.created_at.strftime("%b %y") %></div>
+            <div class="submission-date"><%= legal_entity.created_at.strftime("%d") %></div>
+          </div>
+          <div class="d-flex submission-card-content">
+            <div class="title"><%= legal_entity.first_name %> <%= legal_entity.last_name %></div>
+            <% if legal_entity.valid? %>
+              <div class="designer-dashboard__label ms-3 me-2">
+                <i class="fas fa-check-circle approved-icon"></i>
+              </div>
+            <% else %>
+              <div class="designer-dashboard__label ms-3 me-2">
+                <i class="fas fa-times-circle invalid-icon"></i>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div>
+          <%= link_to "View", legal_entity_path(legal_entity), class: "btn btn-admin-active legal-entity-submission__show-btn", data: { turbo_frame: "_top" } %>
+        </div>
+        <div>
+          <% if legal_entity.rejected? %>
+            <div class="btn btn-rejected">Rejected</div>
+          <% else %>
+            <div class="submission-card-actions">
+              <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
+                <%= link_to legal_entity_accept_path(legal_entity), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                  <div >
+                    <i class="fas fa-check"></i>
+                  </div>
+                <% end %>
+                <%= link_to legal_entity_reject_path(legal_entity), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                  <div>
+                    <i class="fas fa-ban"></i>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
