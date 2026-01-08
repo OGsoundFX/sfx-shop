@@ -4,7 +4,7 @@ class AdministratorController < ApplicationController
   # main tab
   def admin
     # removing test orders from admin user bamsfx@ogsoundfx.com (Use with id 6)
-    orders = Order.joins(:user).where.not(user: { email: "olivier@bamsfx.com.com"})
+    orders = Order.joins(:user).where.not(user: { email: "olivier@bamsfx.com"})
 
     # total orders
     @total_orders_count = orders.where(status: "paid").count

@@ -1,10 +1,11 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-5">
   <div class="container">
     <%= render "admin_menu" %>
+    <%= render "designer_submissions_menu" %>
     <div class="submission-container text-center">
       <div style="width: 100vw">
         <div class="text-start text-white ml-5">
-          <h6>Submission count: <%= @submissions.count %></h6>
+          <h6>Applications count: <%= @submissions.count %></h6>
         </div>
         <% @submissions.each do |submission| %>
           <div class="submission-card d-flex justify-content-between">
