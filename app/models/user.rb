@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_one :designer_submission, dependent: :destroy
   has_one :sound_designer, dependent: :destroy
-  has_one :designer_submission, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

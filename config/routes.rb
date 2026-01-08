@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   # admin routes
   get "admin", to: "administrator#admin"
   get "admin/designer_submissions", to: "administrator#designer_submissions", as: :submissions
+  get "admin/designer_legal_entities", to: "administrator#designer_legal_entities", as: :legal_entities_submissions
   get "admin/pack_submissions", to: "administrator#pack_submissions", as: :pack_submissions
   get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected

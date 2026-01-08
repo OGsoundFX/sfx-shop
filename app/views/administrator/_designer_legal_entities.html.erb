@@ -1,0 +1,40 @@
+<%= render "designer_submissions_menu" %>
+<div class="submission-container text-center">
+  <div style="width: 100vw">
+    <div class="text-start text-white ml-5">
+      <h6>Applications count: <%= @legal_entities.count %></h6>
+    </div>
+    <% @legal_entities.each do |legal_entity| %>
+      <div class="submission-card d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="submission-card-date">
+            <div class="submission-day"><%= legal_entity.created_at.strftime("%b %y") %></div>
+            <div class="submission-date"><%= legal_entity.created_at.strftime("%d") %></div>
+          </div>
+          <div class="submission-card-content">
+            <div class="title"><%= legal_entity.first_name %> <%= legal_entity.last_name %> <span class="status">(<%= legal_entity.status %>)</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="submission-card-actions">
+            <a href="mailto:<%= legal_entity.user.email %>" target="blank"><span class="icon">✉️</span></a>
+            <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
+              <%= link_to submission_accepted_path(legal_entity.id), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                <div >
+                  <i class="fas fa-check"></i>
+                </div>
+              <% end %>
+              <%= link_to submission_rejected_path(legal_entity.id), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                <div>
+                  <i class="fas fa-ban"></i>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

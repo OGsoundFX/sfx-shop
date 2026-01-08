@@ -22,7 +22,13 @@ class AdministratorController < ApplicationController
   end
 
   def designer_submissions
+    @tab = 'applications'
     @submissions = DesignerSubmission.all.order(created_at: :desc).order(:status)
+  end
+
+  def designer_legal_entities
+    @tab = 'legal_entities'
+    @legal_entities = LegalEntity.includes(:sound_designer, :user).order(created_at: :desc).order(:status)
   end
 
   def pack_submissions
