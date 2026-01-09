@@ -21,7 +21,7 @@
         <% elsif @legal_entity.incomplete? %>
           <div class="btn btn-warning designer-dashboard__paypal-inactive">Incomplete</div>
         <% elsif @legal_entity.rejected? %>
-          <div class="btn btn-danger designer-dashboard__paypal-no-account">Rejected</div>
+          <div class="btn btn-rejected designer-dashboard__paypal-no-account">Rejected</div>
         <% end %>
       </div>
     </div>
