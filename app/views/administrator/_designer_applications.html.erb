@@ -32,18 +32,18 @@
           <div class="submission-card-actions">
             <a href="mailto:<%= submission.email %>" target="blank"><span class="icon">✉️</span></a>
             <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
-              <%= link_to submission_accepted_path(submission.id), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+              <%= button_to submission_accepted_path(submission.id), method: "patch", class: "submission-card_btn-group submission-card__confirm-accept" do %>
                 <div >
                   <i class="fas fa-check"></i>
                 </div>
               <% end %>
-              <%= link_to submission_rejected_path(submission.id), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+              <%= button_to submission_rejected_path(submission.id), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "submission-card_btn-group submission-card__confirm-reject" do %>
                 <div>
                   <i class="fas fa-ban"></i>
                 </div>
               <% end %>
             </div>
-            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-rejected", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-reject", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
           </div>
         </div>
       </div>

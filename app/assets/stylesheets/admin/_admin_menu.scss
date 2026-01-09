@@ -11,10 +11,29 @@
   pointer-events: none  ;
 }
 
+.btn-reject {
+  background-color: $indian-red;
+  &:hover {
+    background: opacify($color: grey, $amount: 0) ;
+  }
+}
+
+.btn-orange {
+  background-color: $orange-main;
+  &:hover {
+    color: white;
+    background: opacify($color: grey, $amount: 0) ;
+  }
+}
+
 .admin-min-height {
   min-height: calc(100vh - 78px);
 }
 
 .btn-hover-dismiss {
   pointer-events: none;
+}
+
+.paypal-info-status {
+  width: 120px;
 }

@@ -71,8 +71,8 @@
             </div>
             <hr>
             <div class="d-flex justify-content-between">
-              <div><%= link_to "Accept", sfx_pack_accepted_path(pack), class: "btn btn-admin-active", style: "width: 100%" %></div>
-              <div><%= link_to "Reject", sfx_pack_rejected_path(pack), class: "btn btn-warning" %></div>
+              <div><%= button_to "Accept", sfx_pack_accepted_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-admin-active", style: "width: 100%" %></div>
+              <div><%= button_to "Reject", sfx_pack_rejected_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-warning" %></div>
             </div>
           </div>
         </div>

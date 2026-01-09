@@ -14,7 +14,7 @@
       <hr style="margin-top: 0">
       <% if !@legal_entity.agreement_acceptances.present? %>
         <%= link_to seller_agreement_path(@designer) do %>
-          <div class="btn me-2 btn-warning">Review Seller Agreement</div>
+          <div class="btn me-2 btn-orange">Review Seller Agreement</div>
         <% end %>
       <% elsif @paypal.inactive? %>
         <div class="btn me-2 btn-admin designer-dashboard__paypal-inactive">Suspended</div>

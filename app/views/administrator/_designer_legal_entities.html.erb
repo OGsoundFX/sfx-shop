@@ -33,12 +33,12 @@
           <% else %>
             <div class="submission-card-actions">
               <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
-                <%= link_to legal_entity_accept_path(legal_entity), class: "submission-card_btn-group submission-card__confirm-accept" do %>
+                <%= button_to legal_entity_accept_path(legal_entity), method: "patch", class: "submission-card_btn-group submission-card__confirm-accept" do %>
                   <div >
                     <i class="fas fa-check"></i>
                   </div>
                 <% end %>
-                <%= link_to legal_entity_reject_path(legal_entity), class: "submission-card_btn-group submission-card__confirm-reject" do %>
+                <%= button_to legal_entity_reject_path(legal_entity), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "submission-card_btn-group submission-card__confirm-reject" do %>
                   <div>
                     <i class="fas fa-ban"></i>
                   </div>

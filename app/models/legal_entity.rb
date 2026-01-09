@@ -1,5 +1,5 @@
 class LegalEntity < ApplicationRecord
-  before_validation :set_default
+  before_validation :set_default, on: :create
 
   belongs_to :user
   has_one :sound_designer, through: :user
@@ -19,6 +19,7 @@ class LegalEntity < ApplicationRecord
   def address
     "#{street_number} #{street_name},\n#{address_line_2.present? ? address_line_2 + ', ' : ''}#{city}, #{state.present? ? state + ', ' : ''}#{postal_code},\n#{ISO3166::Country[country].iso_short_name}"
   end
+
   private
 
   def set_default

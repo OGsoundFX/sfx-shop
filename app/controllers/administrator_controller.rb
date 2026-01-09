@@ -31,8 +31,28 @@ class AdministratorController < ApplicationController
     @legal_entities = LegalEntity.where.not(status: "accepted").includes(:sound_designer, :user).order(:status).order(created_at: :desc)
   end
 
-  def legal_entity_show
+  def legal_entity
     @legal_entity = LegalEntity.find(params[:id])
+    @payment_info = @legal_entity.payment_infos.last
+    Rails.logger.debug "payment info status is #{@payment_info.status}"
+  end
+
+  def paypal_accept
+    payment_info = PaymentInfo.find(params[:id])
+    payment_info.active!
+    legal_entity = payment_info.legal_entity
+    Rails.logger.debug "payment info status is #{payment_info.status}"
+    redirect_to legal_entity_path(legal_entity)
+    # redirect_to admin_path
+  end
+
+  def paypal_reject
+    payment_info = PaymentInfo.find(params[:id])
+    payment_info.inactive!
+    legal_entity = payment_info.legal_entity
+    Rails.logger.debug "payment info status is #{payment_info.status}"
+    redirect_to legal_entity_path(legal_entity)
+    # redirect_to admin_path
   end
 
   def legal_entity_accept

@@ -74,18 +74,20 @@ Rails.application.routes.draw do
   get "admin/designer_submissions", to: "administrator#designer_submissions", as: :submissions
   get "admin/designer_legal_entities", to: "administrator#designer_legal_entities", as: :legal_entities_submissions
   get "admin/pack_submissions", to: "administrator#pack_submissions", as: :pack_submissions
-  get "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
-  get "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
-  get "pack_accepted/:id", to: "administrator#pack_accepted", as: :sfx_pack_accepted
-  get "pack_rejected/:id", to: "administrator#pack_rejected", as: :sfx_pack_rejected
+  patch "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
+  patch "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
+  patch "pack_accepted/:id", to: "administrator#pack_accepted", as: :sfx_pack_accepted
+  patch "pack_rejected/:id", to: "administrator#pack_rejected", as: :sfx_pack_rejected
   get "admin/stats", to: "administrator#stats", as: :stats
   get "admin/sales", to: "administrator#sales", as: :list_sales
   get "admin/payouts", to: "administrator#payouts", as: :admin_payouts
   get "admin/agreements", to: "administrator#agreements", as: :admin_agreements
   get "calculate_exchange_rate", to: "administrator#calculate_exchange_rate", as: :calculate_exchange_rate
-  get "admin/legal_entity/:id", to: "administrator#legal_entity_show", as: :legal_entity
-  get "admin/legal_entity_accept/:id", to: "administrator#legal_entity_accept", as: :legal_entity_accept
-  get "admin/legal_entity_reject/:id", to: "administrator#legal_entity_reject", as: :legal_entity_reject
+  get "admin/legal_entity/:id", to: "administrator#legal_entity", as: :legal_entity
+  patch "admin/legal_entity_accept/:id", to: "administrator#legal_entity_accept", as: :legal_entity_accept
+  patch "admin/legal_entity_reject/:id", to: "administrator#legal_entity_reject", as: :legal_entity_reject
+  patch "admin/paypal_accept/:id", to: "administrator#paypal_accept", as: :paypal_accept
+  patch "admin/paypal_reject/:id", to: "administrator#paypal_reject", as: :paypal_reject
   resources :payouts, only: [:new, :create]
 
   # sound designer dashboard routes
