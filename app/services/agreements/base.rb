@@ -42,7 +42,7 @@ module Agreements
       agreement
     end
 
-    def self.create_seller_pdf(agreement, designer, acceptance)
+    def create_seller_pdf(agreement, designer, acceptance)
       html = <<~HTML
         <!DOCTYPE html>
         <html>
