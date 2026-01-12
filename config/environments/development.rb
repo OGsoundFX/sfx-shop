@@ -60,6 +60,13 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # bullet performance check
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.rails_logger = true
+  end
+
   # Reset password config
   config.action_mailer.smtp_settings = {
     address: "mail.privateemail.com",
