@@ -4,15 +4,15 @@
       <%= render "admin_menu" %>
       <div class="d-flex justify-content-between">
         <div>
-          <%= link_to "Exchange Rate Dashboard", "https://exchangerate.host/dashboard", class: "btn btn-primary", target: "_blank" %>
+          <%= link_to "Exchange Rate Dashboard", "https://exchangerate.host/dashboard", class: "btn btn-admin-active", target: "_blank" %>
         </div>
         <div>
-          <%= link_to "Re-calculate Exchange Rate", calculate_exchange_rate_path, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-          <div class="btn btn-primary">EUR/USD: <%= CurrencyRate.where(base: "EUR").order(created_at: :desc).first.rate.to_f %></div>
+          <%= link_to "Re-calculate Exchange Rate", calculate_exchange_rate_path, class: "btn btn-reject", data: { confirm: "Are you sure?" } %>
+          <div class="btn btn-secondary">EUR/USD: <%= CurrencyRate.where(base: "EUR").order(created_at: :desc).first.rate.to_f %></div>
         </div>
       </div>
     </div>
-    <div class="container submission-container text-center">
+    <div class="submission-container text-center">
       <div style="width: 100vw">
         <div class="d-flex text-white ml-5 bg-secondary p-2 rounded-1">
           <div>
@@ -28,9 +28,9 @@
             |
           </div>
           <div>
-            previous month: <span class="<%= @delta_count.positive? ? 'text-success' : 'text-danger-emphasis' %>"><%= @delta_count %></span>
+            previous month: <span class="<%= @delta_count.positive? ? 'text-green-main' : 'text-red-main' %>"><%= @delta_count %></span>
             /
-            <span class="<%= @delta_amount.positive? ? 'text-success' : 'text-danger-emphasis' %>"><%= number_to_currency(@delta_amount, unit: "$ ", separator: ",", precision: 2) %></span>
+            <span class="<%= @delta_amount.positive? ? 'text-green-main' : 'text-red-main' %>"><%= number_to_currency(@delta_amount, unit: "$ ", separator: ",", precision: 2) %></span>
           </div>
         </div>
         <% @orders.each do |order| %>
