@@ -3,9 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="designer-pack-filter"
 export default class extends Controller {
   static targets = ["status", "pill"]
-  static values = {
-    status: String
-  }
   
   connect() {
     this.statusValues = ["all", "live", "submitted", "declined", "drafts", "removed"]

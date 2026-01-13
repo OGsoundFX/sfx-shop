@@ -1,3 +1,26 @@
+<div class="designer-dashboard__welcome mb-3">
+  <div class="designer-dashboard__banner" style="background-image: url('<%= cl_image_path(@designer.banner.key) if @designer.banner.attached? %>')">
+    <div class="designer-dashboard__banner-designer-photo">
+      <div class="designer-dashboard__banner-photo-display">
+        <% if @designer.photo.attached? %>
+          <%= cl_image_tag @designer.photo.key, class: "pack-submission-form__image-placeholder" %>
+        <% else %>
+          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<hr style="border-color: white">
+<div class="mb-3">
+  <span style="color: whitesmoke !important; margin-right: 8px; font-size: 0.8rem !important">Filter:</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
+  <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
+</div>
 <div class="submissions-live__grid">
   <% packs.each do |pack| %>
     <% case pack.status %>

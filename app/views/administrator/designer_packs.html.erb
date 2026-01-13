@@ -1,6 +1,11 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-5">
-  <div class="container">
+  <div class="container" data-controller="designer-pack-filter">
     <%= render "admin_menu" %>
+    <div>
+      <%= link_to request.referer || admin_path, class: "submission-form__back-button" do %>
+        <i class="fas fa-arrow-left mb-4"></i>
+      <% end %>
+    </div>
     <%= render "designer_packs_list", packs: @packs %>
   </div>
 </div>
