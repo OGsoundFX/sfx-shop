@@ -193,7 +193,7 @@ class OrdersController < ApplicationController
     total_amount += tracks_sum += collection_sum
 
     if current_user
-      # adding the 7% of taxe on all items
+      # adding the VAT on all items
       line_items.each do |item|
         item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
       end
