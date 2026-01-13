@@ -35,6 +35,10 @@ class AdministratorController < ApplicationController
     @designers = SoundDesigner.joins(:user, :legal_entity).where(legal_entity: {status: "accepted"})
   end
 
+  def designers_offline_list
+    @designers = SoundDesigner.joins(:user, :legal_entity).where.not(legal_entity: {status: "accepted"})
+  end
+
   def legal_entity
     @legal_entity = LegalEntity.find(params[:id])
     @payment_info = @legal_entity.payment_infos.last

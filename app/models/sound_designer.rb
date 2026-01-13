@@ -30,7 +30,11 @@ class SoundDesigner < ApplicationRecord
   end
 
   def currency
-    self.legal_entity.payment_infos.active.last.preferred_currency
+    if self.legal_entity.payment_infos.active.present?
+      self.legal_entity.payment_infos.active.last.preferred_currency
+    else
+      self.legal_entity.payment_infos.last.preferred_currency
+    end
   end
 
   def main_categories
