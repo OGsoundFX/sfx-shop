@@ -10,7 +10,7 @@
       class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "administrator" && action_name == "pack_submissions"}" %>
   <%= link_to "Designers",
       designers_list_path,
-      class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "administrator" && (action_name == "designers_list" || action_name == "designers_offline_list")}"  %>
+      class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "administrator" && (action_name == "designers_list" || action_name == "designers_offline_list" || action_name == "designer_packs")}"  %>
   <%= link_to "Stats",
       stats_path,
       class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if action_name == "stats"}" %>
