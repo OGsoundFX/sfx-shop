@@ -84,7 +84,7 @@
                 <% if pack.sku.include?("FS") %>
                   <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
                 <% else %>
-                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #558b7b; margin-left: 8px" %>
+                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover" %>
                 <% end %>
               <% end %>
             </div>

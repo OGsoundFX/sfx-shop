@@ -94,7 +94,7 @@
                 <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(pack.price, symbol: "$") %>)</em>
               <% end %>
             </div>
-            <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: pack.id), class: "btn btn-teal btn-sm text-white add-to-cart-hover", style: "background-color: #558b7b; margin-left: 8px"  %>
+            <%= link_to 'Add to Cart', add_template_to_cart_path(template_id: pack.id), class: "btn btn-teal btn-sm text-white add-to-cart-hover"  %>
           </div>
         </div>
       </div>

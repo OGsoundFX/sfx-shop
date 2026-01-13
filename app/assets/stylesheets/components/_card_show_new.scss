@@ -25,6 +25,10 @@
   text-align: right;
 }
 
+.sfx-card__pills-color {
+  background-color: $blue-light;
+}
+
 @media (max-width: 768px) {
   .sfx_card__cover {
     padding-top: 8px;
