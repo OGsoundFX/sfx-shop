@@ -17,6 +17,37 @@ class SoundDesigner < ApplicationRecord
     self.user.legal_entity
   end
 
+  def amount_sold
+    conversion_rate = CurrencyRate.last(2).find { |currency| currency.target == self.currency.upcase }.rate
+    puts conversion_rate
+    self.sold_items.sum do |item|
+      if item.currency == self.currency
+        item.amount_cents
+      else
+        item.amount_cents * conversion_rate
+      end
+    end / 100.0
+  end
+
+  def currency
+    self.legal_entity.payment_infos.active.last.preferred_currency
+  end
+
+  def main_categories
+    categories = []
+    self.sfx_packs.each do |pack|
+      categories << pack.category.split(", ") if pack.category.present?
+    end
+    categories_count = Hash.new(0)
+    categories.flatten.each do |category|
+      categories_count[category] += 1
+    end
+    categories_count.sort_by { |_, count| -count }.first(3).map(&:first)
+  end
+
+  def payout_due
+  end
+
   private
 
   def update_user
