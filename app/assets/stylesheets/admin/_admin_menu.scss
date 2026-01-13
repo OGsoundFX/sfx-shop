@@ -26,6 +26,19 @@
   }
 }
 
+.admin-dashboard__back-button {
+  padding: 2px 6px;
+  border: solid white 2px;
+  border-radius: 50%;
+  color: white;
+  transition-duration: 0.3s;
+  &:hover {
+    transition-duration: 0.3s;
+    color: grey;
+    border-color: grey;
+  }
+}
+
 .text-red-main {
   color: $indian-red;
 }

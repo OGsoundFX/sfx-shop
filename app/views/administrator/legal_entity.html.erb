@@ -1,11 +1,6 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-5">
   <div class="container">
     <%= render "admin_menu" %>
-    <div>
-      <%= link_to request.referer || admin_path, class: "submission-form__back-button" do %>
-        <i class="fas fa-arrow-left mb-4"></i>
-      <% end %>
-    </div>
     <%= render "legal_entity_show" %>
   </div>
 </div>
