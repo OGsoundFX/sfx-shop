@@ -19,6 +19,13 @@
   background-color: $light-card-background;
 }
 
+.designer-dashboard__hover-effect {
+  color: white;
+  &:hover {
+    color: $new-green;
+  }
+}
+
 .designer-dashboard__banner {
   height: 180px;
   position: relative;

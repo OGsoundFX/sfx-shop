@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   get "admin/designer_submissions", to: "administrator#designer_submissions", as: :submissions
   get "admin/designer_legal_entities", to: "administrator#designer_legal_entities", as: :legal_entities_submissions
   get "admin/pack_submissions", to: "administrator#pack_submissions", as: :pack_submissions
+  get "admin/designers_list", to: "administrator#designers_list", as: :designers_list
   patch "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   patch "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
   patch "pack_accepted/:id", to: "administrator#pack_accepted", as: :sfx_pack_accepted
