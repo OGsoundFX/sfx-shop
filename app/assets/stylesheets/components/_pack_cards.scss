@@ -121,9 +121,12 @@
   padding: 4px;
 }
 
-.add-to-cart-hover:hover {
-  filter: grayscale(1);
-  transition: 0.3s;
+.add-to-cart-hover {
+  background-color: $blue-light;
+  &:hover {
+    filter: grayscale(1);
+    transition: 0.3s;
+  }
 }
 
 #wrapper:hover .pack_pic, #wrapper:hover .pack_pic_cart, #wrapper:hover #image-pack {
