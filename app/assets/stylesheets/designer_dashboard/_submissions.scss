@@ -5,7 +5,8 @@
 }
 
 .live {
-  color: $new-green !important;
+  color: white !important;
+  background-color: $new-green !important;
 }
 
 .declined {
@@ -15,6 +16,11 @@
 .removed {
   color: white !important;
   background-color: $indian-red !important;
+}
+
+.pending {
+  color: white !important;
+  background-color: $orange-main !important;
 }
 
 .else {
