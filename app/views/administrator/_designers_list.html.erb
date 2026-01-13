@@ -44,9 +44,11 @@
               <% end %>
             </div>
           </div>
-          <div class="ms-auto text-end">
-            <%= link_to "Legal profile", legal_entity_path(designer.legal_entity), class: "btn btn-admin-active", data: { turbo_frame: "_top" } %>
-          </div>
+        </div>
+        <hr>
+        <div class="d-flex gap-2">
+          <%= link_to "Legal profile", legal_entity_path(designer.legal_entity), class: "btn btn-admin-active", data: { turbo_frame: "_top" } %>
+          <%= link_to "Listings", designer_packs_path(designer), class: "btn btn-reject", data: { turbo_frame: "_top" } %>
         </div>
       </div>
     </div>

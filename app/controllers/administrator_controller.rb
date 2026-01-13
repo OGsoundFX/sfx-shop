@@ -39,6 +39,11 @@ class AdministratorController < ApplicationController
     @designers = SoundDesigner.joins(:user, :legal_entity).where.not(legal_entity: {status: "accepted"})
   end
 
+  def designer_packs
+    @designer = SoundDesigner.includes(:sfx_packs).find(params[:id])
+    @packs = @designer.sfx_packs.reject { |pack| pack.id == 100}
+  end
+
   def legal_entity
     @legal_entity = LegalEntity.find(params[:id])
     @payment_info = @legal_entity.payment_infos.last
