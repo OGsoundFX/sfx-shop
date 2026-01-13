@@ -132,7 +132,7 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def load_designer
-    if current_user.admin
+    if current_user.admin && params[:designer_id].present?
       @designer = SoundDesigner.find(params[:designer_id])
     else
       @designer = current_user.sound_designer
