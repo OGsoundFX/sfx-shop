@@ -2,6 +2,7 @@
   <div class="text-center">
     <div class="thank-you__box">
       <h2>Thank you for your submission <%= @designer_submission.first_name.present? ? @designer_submission.first_name : @designer_submission.email.split("@").first %></h2>
+      <h6>A confirmation link has been sent to <span style="color: #69aa97"><strong><%= current_user.email %></strong></span>, please confirm your email address to continue</h6>
       <p>We will get back to you shortly, in the meantime feel free to browse <%= link_to "BamsSFX.com", root_path %></p>
       <p style="font-size: 60px">🙌</p>
     </div>
