@@ -164,6 +164,12 @@ module Agreements
         </li>
 
         <li>
+            &nbsp &nbsp• The Seller sets the retail prices for their Content. All prices defined by the Seller
+            are <strong>VAT-inclusive consumer prices</strong>, meaning that applicable VAT is included
+            in the price displayed to Customers.
+        </li>
+
+        <li>
           &nbsp &nbsp• BamSFX is solely responsible for calculating, collecting, and remitting any applicable
           value-added tax (VAT) or similar indirect taxes to the relevant tax authorities.
         </li>
