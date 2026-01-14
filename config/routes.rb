@@ -79,6 +79,7 @@ Rails.application.routes.draw do
   get "admin/designers/:id/packs", to: "administrator#designer_packs", as: :designer_packs
   patch "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   patch "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
+  post "admin/resend_confirmation/:user_id", to: "administrator#resend_confirmation", as: :resend_confirmation
   patch "pack_accepted/:id", to: "administrator#pack_accepted", as: :sfx_pack_accepted
   patch "pack_rejected/:id", to: "administrator#pack_rejected", as: :sfx_pack_rejected
   get "admin/stats", to: "administrator#stats", as: :stats
