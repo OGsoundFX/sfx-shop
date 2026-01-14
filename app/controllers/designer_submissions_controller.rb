@@ -30,6 +30,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def thank_you
+    current_user.send_confirmation_instructions if current_user.confirmation_sent_at.nil? || current_user.confirmation_sent_at.yesterday? || current_user.confirmed?
     @designer_submission = DesignerSubmission.find(params[:id])
     @designer_submission.submited!
   end
