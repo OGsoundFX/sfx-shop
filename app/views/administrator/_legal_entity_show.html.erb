@@ -94,7 +94,18 @@
     <div>
       <div class="designer-dashboard__settings-grid mb-2">
         <span>Email:</span>
-        <span class="info-color"><em><%= @legal_entity.user.email %></em><a href="mailto:<%= @legal_entity.user.email %>" target="blank" class="letter-icon">✉️</a></span>
+        <div class="d-flex">
+          <%= mail_to @legal_entity.user.email, @legal_entity.user.email, class: "info-color" %>
+          <% if @legal_entity.user.confirmed? %>
+            <div class="designer-dashboard__label ms-3">
+              <i class="fas fa-check-circle approved-icon"></i>
+            </div>
+          <% elsif !@legal_entity.user.confirmation_sent_at.nil? && @legal_entity.user.confirmation_sent_at.to_date > 24.hours.ago.to_date %>
+            <span class="btn btn-orange btn-hover-dismiss ms-3">Pending</span>
+          <% else %>
+            <%= link_to "Re-send Confirmation", resend_confirmation_path(@legal_entity.user), class: "btn btn-reject ms-3", data: { turbo_method: "POST" } %>
+          <% end %>
+        </div>
       </div>
 
       <div class="designer-dashboard__settings-grid mb-2">

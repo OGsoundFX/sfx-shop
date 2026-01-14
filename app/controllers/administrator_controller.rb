@@ -100,6 +100,12 @@ class AdministratorController < ApplicationController
     redirect_to submissions_path
   end
 
+  def resend_confirmation
+    user = User.find(params[:user_id])
+    user.send_confirmation_instructions
+    redirect_to legal_entity_path(user.legal_entity)
+  end
+
   def pack_accepted
     @pack = SfxPack.find(params[:id])
     @pack.live!
