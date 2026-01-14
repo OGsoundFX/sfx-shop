@@ -100,7 +100,7 @@
             <div class="designer-dashboard__label ms-3">
               <i class="fas fa-check-circle approved-icon"></i>
             </div>
-          <% elsif !@legal_entity.user.confirmation_sent_at.nil? && @legal_entity.user.confirmation_sent_at.to_date > 24.hours.ago.to_date %>
+          <% elsif !@legal_entity.user.confirmation_sent_at.nil? && @legal_entity.user.confirmation_sent_at.to_i < 24.hours.ago.to_i %>
             <span class="btn btn-orange btn-hover-dismiss ms-3">Pending</span>
           <% else %>
             <%= link_to "Re-send Confirmation", resend_confirmation_path(@legal_entity.user), class: "btn btn-reject ms-3", data: { turbo_method: "POST" } %>
