@@ -3,7 +3,7 @@
     <div class="designer-dashboard__banner-designer-photo">
       <div class="designer-dashboard__banner-photo-display">
         <% if @designer.photo.attached? %>
-          <%= cl_image_tag @designer.photo.key, class: "pack-submission-form__image-placeholder" %>
+          <%= image_tag @designer.photo, class: "pack-submission-form__image-placeholder" %>
         <% else %>
           <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder">
         <% end %>
