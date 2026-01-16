@@ -10,8 +10,8 @@ class SoundDesigner < ApplicationRecord
 
   validates :artist_name, presence: true
 
-  has_one_attached :photo, service: Rails.env.production? ? :aws_s3_designer_contracts : :cloudinary
-  # has_one_attached :photo, service: :aws_s3_designer_contracts
+  has_one_attached :photo, service: Rails.env.production? ? :aws_s3_profile_pics : :cloudinary
+  # has_one_attached :photo, service: :aws_s3_profile_pics
 
   has_one_attached :banner
 
