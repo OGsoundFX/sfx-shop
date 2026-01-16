@@ -101,6 +101,7 @@ class DesignerDashboardsController < ApplicationController
 
   def update_designer_photo
     # raise
+    @designer.photo.purge_later
     @designer.photo.attach(
       io: photo_params[:photo].tempfile,
       filename: photo_params[:photo].original_filename,
