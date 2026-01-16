@@ -102,19 +102,19 @@ class DesignerDashboardsController < ApplicationController
   def update_designer_photo
     # raise
     # @designer.photo.purge_later
-    # @designer.photo.attach(
-    #   io: photo_params[:photo].tempfile,
-    #   filename: photo_params[:photo].original_filename,
-    #   content_type: photo_params[:photo].content_type,
-    #   service_name: :aws_s3_profile_pics
-    # )
-    # redirect_to designer_main_dashboard_path, notice: "Photo updated"
+    @designer.photo.attach(
+      io: photo_params[:photo].tempfile,
+      filename: photo_params[:photo].original_filename,
+      content_type: photo_params[:photo].content_type,
+      service_name: :aws_s3_profile_pics
+    )
+    redirect_to designer_main_dashboard_path, notice: "Photo updated"
 
-    if @designer.update(photo_params)
-      redirect_to designer_main_dashboard_path, notice: "Photo updated"
-    else
-      render :main, status: :unprocessable_entity
-    end
+    # if @designer.update(photo_params)
+    #   redirect_to designer_main_dashboard_path, notice: "Photo updated"
+    # else
+    #   render :main, status: :unprocessable_entity
+    # end
   end
 
   def banner
