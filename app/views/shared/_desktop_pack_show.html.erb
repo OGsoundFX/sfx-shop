@@ -3,7 +3,7 @@
     <div class="row g-0">
       <!-- Cover Image -->
       <div class="col-md-5 sfx_card__image">
-        <%= cl_image_tag @pack.photos.first.key, alt: "Weather Effects Cover", class: "img-fluid sfx_card__cover" %>
+        <%= image_tag @pack.photos.first, alt: "Weather Effects Cover", class: "img-fluid sfx_card__cover" %>
       </div>
 
       <!-- Text Content -->
@@ -60,7 +60,7 @@
             <div class="d-flex align-items-center gap-2">
               <%= link_to sound_designer_path(@pack.sound_designer) do %>
                 <% if @pack.sound_designer.photo.attached? %>
-                  <%= cl_image_tag @pack.sound_designer.photo.key, alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic" %>
+                  <%= image_tag @pack.sound_designer.photo, alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic" %>
                 <% else %>
                   <%= image_tag "logo/logo_BAM_5.png" , alt: "#{@pack.sound_designer.artist_name}", class: "rounded-circle sfx_card__designer_pic"  %>
                 <% end %>

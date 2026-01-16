@@ -62,7 +62,7 @@
               <div class="d-flex submissions__pack-description">
                 <div class="me-4">
                   <% if pack.photos.present? %>
-                    <%= cl_image_tag pack.photos.first.key, height: 180, width: 180, style: "border-radius: 8px" %>
+                    <%= image_tag pack.photos.first, height: 180, width: 180, style: "border-radius: 8px" %>
                   <% end %>
                 </div>
                 <div class="text-muted small d-flex flex-column justify-content-between">
