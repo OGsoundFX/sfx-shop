@@ -14,7 +14,7 @@
                 <div id="triangle"></div>
                 <div id="announcement"> <%= pack.announcement %> </div>
               <% end %>
-              <div class="pack_pic_wrapper"><%= cl_image_tag pack.photos.first.key, class: 'pack_pic' %></div>
+              <div class="pack_pic_wrapper"><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
 
               <% if @current_sales_list != {} %>
                 <% if @current_sales_list[pack.id]  %>
@@ -50,7 +50,7 @@
             <%= link_to sound_designer_path(pack.sound_designer) do %>
               <div class="d-flex align-items-center">
                 <% if pack.sound_designer.photo.attached? %>
-                  <%= cl_image_tag pack.sound_designer.photo.key, alt: "#{pack.sound_designer.artist_name}", class: "rounded-circle pack_card__designer_pic" %>
+                  <%= image_tag pack.sound_designer.photo, alt: "#{pack.sound_designer.artist_name}", class: "rounded-circle pack_card__designer_pic" %>
                 <% else %>
                   <i class="fas fa-headphones pack_card__designer_no_pic"></i>
                 <% end %>

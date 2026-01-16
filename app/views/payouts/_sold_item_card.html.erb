@@ -6,7 +6,7 @@
     </div>
     <div class="submission-card-content d-flex align-items-center">
       <div class="sound-designer-dashboard__sales-image">
-        <%= cl_image_tag item.sfx_pack.photos.first.key, width: 42, height: 42 %>
+        <%= image_tag item.sfx_pack.photos.first, width: 42, height: 42 %>
       </div>
       <div><%= item.sfx_pack.title %></div>
     </div>
