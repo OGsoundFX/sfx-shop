@@ -1,6 +1,6 @@
 <div class="designer-dashboard__welcome">
   <div class="container">
-    <div class="designer-dashboard__banner" style="background-image: url('<%= cl_image_path(@designer.banner.key) if @designer.banner.attached? %>')">
+    <div class="designer-dashboard__banner" style="background-image: url('<%= url_for(@designer.banner) if @designer.banner.attached? %>')">
       <div class="designer-dashboard__banner-designer-photo"
            data-controller="photo-upload submission-image-preview"
            data-action="click->photo-upload#trigger">
