@@ -102,12 +102,12 @@ class DesignerDashboardsController < ApplicationController
   def update_designer_photo
     # raise
     @designer.photo.attach(
-      io: params[:sound_designer][:photo].tempfile,
-      filename: params[:sound_designer][:photo].original_filename,
-      content_type: params[:sound_designer][:photo].content_type,
+      io: photo_params[:photo].tempfile,
+      filename: photo_params[:photo].original_filename,
+      content_type: photo_params[:photo].content_type,
       service_name: :aws_s3_profile_pics
     )
-      redirect_to designer_main_dashboard_path, notice: "Photo updated"
+    redirect_to designer_main_dashboard_path, notice: "Photo updated"
 
     # if @designer.update(photo: params[:sound_designer][:photo])
     #   redirect_to designer_main_dashboard_path, notice: "Photo updated"
