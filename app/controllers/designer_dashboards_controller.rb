@@ -100,7 +100,14 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def update_designer_photo
-    if @designer.update(photo_params)
+    # raise
+    # @designer.photo.attach(
+    #   io: params[:sound_designer][:photo].tempfile,
+    #   filename: params[:sound_designer][:photo].original_filename,
+    #   content_type: params[:sound_designer][:photo].content_type,
+    #   service_name: :aws_s3_profile_pics
+    # )
+    if @designer.update(photo: params[:sound_designer][:photo])
       redirect_to designer_main_dashboard_path, notice: "Photo updated"
     else
       render :main, status: :unprocessable_entity
