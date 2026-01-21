@@ -3,6 +3,15 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
+    <% if @designer.invalid?%>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
+      </div>
+    <% elsif !@agreement_signed && @designer.valid? %>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
+      </div>
+    <% else %>
     <div class="d-flex justify-content-between">
       <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
       <% if @prior_year_payments %>
@@ -25,5 +34,6 @@
       <% end %>
     </div>
     <%= render "payouts_list" %>
+    <% end %>
   </div>
 </div>

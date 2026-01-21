@@ -12,7 +12,12 @@
         <% end %>
       </div>
       <hr style="margin-top: 0">
-      <% if !@legal_entity.agreement_acceptances.present? %>
+
+      <% if @designer.invalid?%>
+        <%= link_to designer_main_dashboard_path(@designer) do %>
+          <div class="btn me-2 btn-reject">Complete Your Profile</div>
+        <% end %>
+      <% elsif !@legal_entity.agreement_acceptances.present? %>
         <%= link_to seller_agreement_path(@designer) do %>
           <div class="btn me-2 btn-orange">Review Seller Agreement</div>
         <% end %>

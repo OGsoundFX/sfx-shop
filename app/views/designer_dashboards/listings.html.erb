@@ -5,11 +5,11 @@
     <%= render "designer_menu" %>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
-        <h4> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-admin-active" %></h4>
+        <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
       </div>
     <% elsif !@agreement_signed && @designer.valid? %>
       <div class="designer-dashboard__no-payout">
-        <h4> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-admin-active" %></h4>
+        <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
       </div>
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
       <div class="d-flex justify-content-center btn btn-secondary">Your submission is pending approval</div>

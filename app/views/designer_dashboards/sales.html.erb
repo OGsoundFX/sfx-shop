@@ -2,7 +2,15 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
-    <% if @sold_items.empty? %>
+    <% if @designer.invalid?%>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
+      </div>
+    <% elsif !@agreement_signed && @designer.valid? %>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
+      </div>
+    <% elsif @sold_items.empty? %>
       <div class="designer-dashboard__no-payout">
         <h4 >No Sales Yet!</h4>
       </div>

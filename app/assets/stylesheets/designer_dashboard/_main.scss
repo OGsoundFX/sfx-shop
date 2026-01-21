@@ -19,6 +19,12 @@
   background-color: $light-card-background;
 }
 
+.designer-dashboard__info-banner {
+  background-color: $light-card-background;
+  padding: 8px 0;
+  border-radius: 8px
+}
+
 .designer-dashboard__hover-effect {
   color: white;
   &:hover {
