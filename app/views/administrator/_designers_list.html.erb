@@ -1,26 +1,37 @@
 <%= render "designers_list_menu" %>
 <div class="submissions-live__grid mt-4">
   <% @designers.each do |designer| %>
-    <% case designer.legal_entity.status %>
-    <% when "accepted" then pill_color_class = "live" %>
-    <% when "rejected" then pill_color_class = "declined" %>
-    <% when "incomplete" then pill_color_class = "removed" %>
-    <% when "pending" then pill_color_class = "pending" %>
-    <% else pill_color_class = "else" %>
+    <% legal_entity_present = designer.legal_entity.present? %>
+    <% if legal_entity_present %>      
+      <% case designer.legal_entity.status %>
+      <% when "accepted" then pill_color_class = "live" %>
+      <% when "rejected" then pill_color_class = "declined" %>
+      <% when "incomplete" then pill_color_class = "removed" %>
+      <% when "pending" then pill_color_class = "pending" %>
+      <% else pill_color_class = "else" %>
+      <% end %>
+    <% else %>
+      <% pill_color_class = "removed" %>
     <% end %>
     <div class="designer-dashboard__container mb-3">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
-            <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= designer.legal_entity.accepted? ? "live" : designer.legal_entity.status %></span>
+            <% if legal_entity_present %>
+              <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= designer.legal_entity.accepted? ? "live" : designer.legal_entity.status %></span>
+            <% else %>
+              <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>">Legal Entity Incomplete</span>
+            <% end %>
           </div>
           <div class="d-flex">
             <%= link_to sound_designer_path(designer), target: "_blank", class: "designer-dashboard__hover-effect" do %>
               <i class="fas fa-eye me-2" style="font-size: 1.1rem; margin-top: 3px"></i>
             <% end %>
             <a href="mailto:<%= designer.user.email %>" target="_blank"><i class="fas fa-envelope me-2 designer-dashboard__hover-effect"></i></a>
-            <%= button_to legal_entity_reject_path(designer.legal_entity), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "designer-dashboard__hover-effect" do %>
-              <i class="fas fa-trash"></i>
+            <% if legal_entity_present %>              
+              <%= button_to legal_entity_reject_path(designer.legal_entity), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "designer-dashboard__hover-effect" do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -33,14 +44,18 @@
           </div>
           <div class="text-muted small d-flex flex-column justify-content-between">
             <div>
-              <p class="mb-1">• Active packs: <%= designer.sfx_packs.live.count %>
-                <% if designer.sfx_packs.submitted.present? %>
-                  <em style="color: orange"> (<%= designer.sfx_packs.submitted.count %> pending)</em>
-                <% end %>
-              </p>
-              <p class="mb-1">• Since: <%= designer.created_at.strftime("%m / %Y") %></p>
-              <p class="mb-1">• Sold items: <%= designer.sold_items.count %></p>
-              <p class="mb-0">• Amount sold: <%= humanized_money(designer.amount_sold, symbol: "#{designer.currency.upcase} ") %></p>
+              <% if legal_entity_present %>
+                <p class="mb-1">• Active packs: <%= designer.sfx_packs.live.count %>
+                  <% if designer.sfx_packs.submitted.present? %>
+                    <em style="color: orange"> (<%= designer.sfx_packs.submitted.count %> pending)</em>
+                  <% end %>
+                </p>
+                <p class="mb-1">• Since: <%= designer.created_at.strftime("%m / %Y") %></p>
+                <p class="mb-1">• Sold items: <%= designer.sold_items.count %></p>
+                <p class="mb-0">• Amount sold: <%= humanized_money(designer.amount_sold, symbol: "#{designer.currency.upcase} ") %></p>
+              <% else %>
+                <p class="mb-1 btn btn-rejected">Legal Entity Inclomplete</p>
+              <% end %>
             </div>
             <div class="flex flex-wrap gap-2 pb-2">
               <% designer.main_categories.each do |tag| %>
@@ -51,8 +66,10 @@
         </div>
         <hr>
         <div class="d-flex gap-2">
-          <%= link_to "Legal profile", legal_entity_path(designer.legal_entity), class: "btn btn-admin-active", data: { turbo_frame: "_top" } %>
-          <%= link_to "Listings", designer_packs_path(designer), class: "btn btn-reject", data: { turbo_frame: "_top" } %>
+          <% if legal_entity_present %>
+            <%= link_to "Legal profile", legal_entity_path(designer.legal_entity), class: "btn btn-admin-active", data: { turbo_frame: "_top" } %>
+            <%= link_to "Listings", designer_packs_path(designer), class: "btn btn-reject", data: { turbo_frame: "_top" } %>
+          <% end %>
         </div>
       </div>
     </div>
