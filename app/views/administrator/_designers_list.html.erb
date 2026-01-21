@@ -2,7 +2,7 @@
 <div class="submissions-live__grid mt-4">
   <% @designers.each do |designer| %>
     <% legal_entity_present = designer.legal_entity.present? %>
-    <% if legal_entity_present %>      
+    <% if legal_entity_present && !designer.rejected %>      
       <% case designer.legal_entity.status %>
       <% when "accepted" then pill_color_class = "live" %>
       <% when "rejected" then pill_color_class = "declined" %>
@@ -17,7 +17,9 @@
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
           <div>
-            <% if legal_entity_present %>
+            <% if designer.rejected %>
+              <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>">Designer Rejected</span>
+            <% elsif legal_entity_present %>
               <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= designer.legal_entity.accepted? ? "live" : designer.legal_entity.status %></span>
             <% else %>
               <%= designer.artist_name %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>">Legal Entity Incomplete</span>
@@ -28,11 +30,11 @@
               <i class="fas fa-eye me-2" style="font-size: 1.1rem; margin-top: 3px"></i>
             <% end %>
             <a href="mailto:<%= designer.user.email %>" target="_blank"><i class="fas fa-envelope me-2 designer-dashboard__hover-effect"></i></a>
-            <% if legal_entity_present %>              
-              <%= button_to legal_entity_reject_path(designer.legal_entity), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "designer-dashboard__hover-effect" do %>
+
+              <%= button_to reject_designer_path(designer), method: "post", data: { turbo_confirm: "Are you sure?" }, class: "designer-dashboard__hover-effect" do %>
                 <i class="fas fa-trash"></i>
               <% end %>
-            <% end %>
+
           </div>
         </div>
         <hr>
@@ -64,13 +66,19 @@
             </div>
           </div>
         </div>
-        <hr>
-        <div class="d-flex gap-2">
-          <% if legal_entity_present %>
+        <% if legal_entity_present %>
+          <hr>
+          <div class="d-flex gap-2">
             <%= link_to "Legal profile", legal_entity_path(designer.legal_entity), class: "btn btn-admin-active", data: { turbo_frame: "_top" } %>
             <%= link_to "Listings", designer_packs_path(designer), class: "btn btn-reject", data: { turbo_frame: "_top" } %>
-          <% end %>
-        </div>
+          </div>
+        <% elsif !legal_entity_present && designer.rejected %>
+        <% else %>
+          <hr>
+          <div class="d-flex gap-2">
+            <%= link_to "Reject", reject_designer_path(designer), class: "btn btn-reject", data: { turbo_method: "POST", turbo_confirm: "Are You Sure?" } %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
