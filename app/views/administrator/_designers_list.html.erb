@@ -33,7 +33,11 @@
           </div>
           <div class="text-muted small d-flex flex-column justify-content-between">
             <div>
-              <p class="mb-1">• Active packs: <%= designer.sfx_packs.count %></p>
+              <p class="mb-1">• Active packs: <%= designer.sfx_packs.live.count %>
+                <% if designer.sfx_packs.submitted.present? %>
+                  <em style="color: orange"> (<%= designer.sfx_packs.submitted.count %> pending)</em>
+                <% end %>
+              </p>
               <p class="mb-1">• Since: <%= designer.created_at.strftime("%m / %Y") %></p>
               <p class="mb-1">• Sold items: <%= designer.sold_items.count %></p>
               <p class="mb-0">• Amount sold: <%= humanized_money(designer.amount_sold, symbol: "#{designer.currency.upcase} ") %></p>
