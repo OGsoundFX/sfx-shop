@@ -100,7 +100,8 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def update_designer_photo
-    if @designer.photo.attach(photo_params[:photo])
+    @designer.photo.attach(photo_params[:photo])
+    if @designer.save(validate: false)
       redirect_to designer_main_dashboard_path, notice: "Photo updated"
     else
       render :main, status: :unprocessable_entity
@@ -108,9 +109,8 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def banner
-    @designer.banner.purge if @designer.banner.present?
     @designer.banner.attach(params[:sound_designer][:banner])
-    if @designer.save
+    if @designer.save(validate: false)
       redirect_to designer_main_dashboard_path, notice: "Banner updated"
     else
       render :main, status: :unprocessable_entity

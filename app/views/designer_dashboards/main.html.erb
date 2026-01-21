@@ -16,7 +16,11 @@
         <div class="designer-dashboard__info" data-update-info-target="data">
           <div class="designer-dashboard__info-grid mb-3">
             <span class="mb-2">Artist name:</span>
-            <em><span class="info-color"><%= @designer.artist_name %></span></em>
+            <% if @designer.artist_name.present? %>
+              <em><span class="info-color"><%= @designer.artist_name %></span></em>
+            <% else %>
+              <p class="btn btn-rejected">Artist Name Missing</p>
+            <% end %>
             <div></div>
             <span>Location:</span>
             <em><span class="info-color"><%= @designer.location %></span></em>
