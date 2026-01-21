@@ -36,7 +36,8 @@ class AdministratorController < ApplicationController
   end
 
   def designers_offline_list
-    @designers = SoundDesigner.joins(:user, :legal_entity).where.not(legal_entity: {status: "accepted"})
+    @designers = SoundDesigner.joins(:user).left_joins(:legal_entity).where.not(legal_entity: {status: "accepted"}).or(SoundDesigner.left_joins(:legal_entity).where(legal_entity: { id: nil }))
+
   end
 
   def designer_packs
