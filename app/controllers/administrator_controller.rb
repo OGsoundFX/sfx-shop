@@ -32,12 +32,15 @@ class AdministratorController < ApplicationController
   end
 
   def designers_list
-    @designers = SoundDesigner.joins(:user, :legal_entity).where(legal_entity: {status: "accepted"})
+    @designers = SoundDesigner.joins(:user, :legal_entity).where(legal_entity: {status: "accepted"}).where(rejected: false)
   end
 
   def designers_offline_list
-    @designers = SoundDesigner.joins(:user).left_joins(:legal_entity).where.not(legal_entity: {status: "accepted"}).or(SoundDesigner.left_joins(:legal_entity).where(legal_entity: { id: nil }))
+    @designers = SoundDesigner.joins(:user).left_joins(:legal_entity).where.not(legal_entity: {status: "accepted"}).or(SoundDesigner.left_joins(:legal_entity).where(legal_entity: { id: nil })).where.not(rejected: true)
+  end
 
+  def designers_rejected_list
+    @designers = SoundDesigner.where(rejected: true)
   end
 
   def designer_packs
@@ -74,6 +77,14 @@ class AdministratorController < ApplicationController
   def legal_entity_reject
     legal_entity = LegalEntity.find(params[:id])
     legal_entity.rejected!
+    redirect_to request.referer
+  end
+
+  def reject_designer
+    designer = SoundDesigner.find(params[:designer_id])
+    designer.rejected = true
+    designer.save
+    designer.sfx_packs.each { |pack| pack.removed! }
     redirect_to request.referer
   end
 

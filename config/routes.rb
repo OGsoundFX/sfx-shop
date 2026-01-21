@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   get "admin/pack_submissions", to: "administrator#pack_submissions", as: :pack_submissions
   get "admin/designers_list", to: "administrator#designers_list", as: :designers_list
   get "admin/designers_offline", to: "administrator#designers_offline_list", as: :designers_offline_list
+  get "admin/designers_rejected", to: "administrator#designers_rejected_list", as: :designers_rejected_list
   get "admin/designers/:id/packs", to: "administrator#designer_packs", as: :designer_packs
   patch "submission_accepted/:id", to: "administrator#submission_accepted", as: :submission_accepted
   patch "submission_rejected/:id", to: "administrator#submission_rejected", as: :submission_rejected
@@ -90,6 +91,7 @@ Rails.application.routes.draw do
   get "admin/legal_entity/:id", to: "administrator#legal_entity", as: :legal_entity
   patch "admin/legal_entity_accept/:id", to: "administrator#legal_entity_accept", as: :legal_entity_accept
   patch "admin/legal_entity_reject/:id", to: "administrator#legal_entity_reject", as: :legal_entity_reject
+  post "admin/reject_designer/:designer_id", to: "administrator#reject_designer", as: :reject_designer
   patch "admin/paypal_accept/:id", to: "administrator#paypal_accept", as: :paypal_accept
   patch "admin/paypal_reject/:id", to: "administrator#paypal_reject", as: :paypal_reject
   resources :payouts, only: [:new, :create]
