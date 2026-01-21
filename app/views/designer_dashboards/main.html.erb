@@ -2,6 +2,9 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
+    <% if @designer.invalid?%>
+      <span class="btn btn-rejected w-100 mb-3" style="font-size: 1.2rem"> Please complete your profile to continue <i class="fas fa-arrow-alt-circle-down me-3"></i></span>
+    <% end %>
     <div class="designer-dashboard__container" data-controller="update-info">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
@@ -19,7 +22,7 @@
             <% if @designer.artist_name.present? %>
               <em><span class="info-color"><%= @designer.artist_name %></span></em>
             <% else %>
-              <p class="btn btn-rejected">Artist Name Missing</p>
+              <p class="btn btn-reject" data-action="click->update-info#toggleEdit">Artist Name Missing</p>
             <% end %>
             <div></div>
             <span>Location:</span>
