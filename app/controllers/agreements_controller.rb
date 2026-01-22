@@ -1,12 +1,12 @@
 class AgreementsController < ApplicationController
   before_action :authenticate_user!
+  before_action :allow_access, only: :seller_agreement
 
   def show
     @agreement = Agreement.find_by!(key: params[:key], version: params[:version])
   end
 
   def seller_agreement
-    @designer = SoundDesigner.find(params[:id])
     @agreement = Agreements::SellerAgreementV1.new.generate_seller_agreement(@designer, request)
     @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
     if @agreement_signed
@@ -32,5 +32,12 @@ class AgreementsController < ApplicationController
     agreement = Agreement.find_by!(key: params[:key], version: params[:version])
     agreement.destroy
     redirect_to admin_agreements_path, notice: "Agreement deleted successfully."
+  end
+
+  private
+
+  def allow_access
+    @designer = SoundDesigner.find(params[:id])
+    redirect_to settings_path, alert: "You don't have permission to access this page." if @designer != current_user.sound_designer
   end
 end
