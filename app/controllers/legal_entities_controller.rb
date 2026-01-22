@@ -2,6 +2,7 @@ class LegalEntitiesController < ApplicationController
 
   def new
     redirect_to edit_legal_entity_path(current_user.legal_entity) if current_user.legal_entity.present?
+    redirect_to new_sound_designer_path if !current_user.sound_designer.present?
     @legal_entity = LegalEntity.new
     @payment_info = @legal_entity.payment_infos.build
   end

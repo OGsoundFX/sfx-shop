@@ -11,6 +11,8 @@
       <div class="designer-dashboard__no-payout">
         <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
       </div>
+    <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
+      <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
     <% else %>
     <div class="d-flex justify-content-between">
       <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>

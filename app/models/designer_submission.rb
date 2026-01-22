@@ -1,7 +1,7 @@
 class DesignerSubmission < ApplicationRecord
   before_create :generate_password, :generate_access_token
   has_many :submission_links, dependent: :destroy
-  belongs_to :user, optional: true
+  belongs_to :user
 
   validates :first_name, :last_name, :email, presence: true
   validate :links_count

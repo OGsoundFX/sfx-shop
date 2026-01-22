@@ -124,3 +124,6 @@ gem "country_select"
 
 # pdf creator
 gem 'wicked_pdf'
+
+# attachment validator
+gem 'active_storage_validations'

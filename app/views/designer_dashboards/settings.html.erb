@@ -2,6 +2,9 @@
   <%= render "welcome_banner" %>
   <div class="container">
     <%= render "designer_menu" %>
+    <% if !current_user.legal_entity.accepted? && !current_user.admin?%>
+      <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss mb-3">Your submission is pending approval</div>
+    <% end %>
     <%= render "designer_dashboards/settings/seller_agreement" %>
     <%= render "designer_dashboards/settings/payout_information" %>
     <%= render "designer_dashboards/settings/legal_information" %>

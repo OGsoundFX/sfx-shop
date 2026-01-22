@@ -9,6 +9,8 @@ class SoundDesigner < ApplicationRecord
   has_many :sold_items
 
   validates :artist_name, presence: true
+  validates :photo, attached: true, content_type: ['image/png', 'image/jpeg']
+  validates :bio, presence: true, length: { minimum: 20, maximum: 200 }
 
   has_one_attached :photo, service: Rails.env.production? ? :aws_s3_profile_pics : :cloudinary
   has_one_attached :banner, service: Rails.env.production? ? :aws_s3_profile_pics : :cloudinary

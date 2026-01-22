@@ -1,8 +1,20 @@
 <%= simple_form_for [@sound_designer] do |f| %>
+
+  <% if @sound_designer.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(@sound_designer.errors.count, "error") %> need to be corrected:</h5>
+      <ul>
+        <% @sound_designer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="mb-3">
     <div class="pack-submission-form__photo-upload-wrapper">
       <div class="d-flex flex-column" data-controller="submission-image-preview">
-        <% if @sound_designer.photo.attached? %>
+        <% if @sound_designer.photo.attached? && @sound_designer.persisted? %>
           <%= image_tag @sound_designer.photo, class: "pack-submission-form__image-placeholder", data: {submission_image_preview_target: "preview"} %>
         <% else %>
           <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
@@ -21,7 +33,7 @@
   </div>
   <%= f.input :artist_name %>
   <hr>
-  <%= f.input :bio, as: :text, label: "Tell us about yourself" %>
+  <%= f.input :bio, as: :text, label: "Tell us about yourself", placeholder: "min. 20 characters" %>
   <hr>
   <%= f.input :location %>
   <hr>

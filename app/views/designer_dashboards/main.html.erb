@@ -4,6 +4,8 @@
     <%= render "designer_menu" %>
     <% if @designer.invalid?%>
       <span class="btn btn-rejected w-100 mb-3" style="font-size: 1.2rem"> Please complete your profile to continue <i class="fas fa-arrow-alt-circle-down me-3"></i></span>
+    <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
+      <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss mb-3">Your submission is pending approval</div>
     <% end %>
     <div class="designer-dashboard__container" data-controller="update-info">
       <div class="designer-dashboard__user-profile">
