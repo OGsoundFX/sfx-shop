@@ -9,12 +9,10 @@
         <hr>
         <div>
           Name: 
-          <% if @designer.first_name.present? && @designer.last_name.present? %>
-            <%= @designer.first_name.capitalize %> <%= @designer.last_name.capitalize %>
-          <% elsif @designer.first_name.present? || @designer.last_name.present?  %>
-            <%= @designer.first_name.capitalize || @designer.last_name.capitalize %>
+          <% if @designer.artist_name.present? %>
+            <%= @designer.artist_name %>
           <% else %>
-            <%= @designer.user.email.split("@").first.capitalize %>
+            <%= @designer.legal_entity.legal_name %>
           <% end %>
         </div>
         <div>

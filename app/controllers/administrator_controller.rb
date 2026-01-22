@@ -70,7 +70,8 @@ class AdministratorController < ApplicationController
   def legal_entity_accept
     legal_entity = LegalEntity.find(params[:id])
     legal_entity.accepted!
-    # LegalEntityMailer.legal_entity_accepted(legal_entity).deliver_later
+    @designer = legal_entity.sound_designer
+    DesignerMailer.seller_accepted(@designer).deliver_later
     redirect_to request.referer
   end
 

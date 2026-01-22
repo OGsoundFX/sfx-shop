@@ -88,7 +88,7 @@ class SfxPacksController < ApplicationController
       when 2 then incement = "0" + increment
       end
     end
-    @sfx_pack.sku = @designer.first_name[0].capitalize + @designer.last_name[0].capitalize + "PACK" + increment
+    @sfx_pack.sku = @designer.artist_name.slice(0, 2).upcase + "PACK" + increment
 
     # Apply currency
     @sfx_pack.currency = @designer.user.legal_entity.payment_infos.last.preferred_currency.downcase
