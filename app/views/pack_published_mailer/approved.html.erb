@@ -1,4 +1,4 @@
-<h1>Congratulations <%= @designer.first_name %></h1>
+<h1>Congratulations <%= @designer.artist_name %></h1>
 <h3>Your Sound Effect pack <%= @sfx_pack.title %> is now live 🎉</h3>
 
 <p>Hi there,</p>
@@ -13,6 +13,8 @@
 
 <p>— The BAMSFX Team</p>
 
-<%= link_to "https://www.bamsfx.com" do %>
-  <%= image_tag @sfx_pack.photos.first, width: 320 %>
+<%= link_to sfx_pack_url(@sfx_pack) do %>
+    <img src="<%= @sfx_pack.photos.first.url %>"
+       width="320"
+       style="display:block; max-width:320px;" />
 <% end %>

@@ -11,6 +11,18 @@ class DesignerMailer < ApplicationMailer
     mail(to: email, subject: "Your submission to BamSFX has been Accepted!")
   end
 
+  def submission_completed(legal_entity)
+    email = legal_entity.user.email
+    @designer = legal_entity.user.sound_designer
+    mail(to: email, subject: "Your Seller Profile is under review!")
+  end
+
+  def seller_accepted(designer)
+    email = designer.user.email
+    @designer = designer
+    mail(to: email, subject: "Congrats! You are now an official Seller on BAMSFX.com!")
+  end
+
   def you_made_a_sale(sold_item)
     email = sold_item.sound_designer.user.email
     @sold_item = sold_item

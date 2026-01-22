@@ -1,7 +1,12 @@
 <div class="container submit-form padding-navbar content">
-  <p>Welcome <%= @email %>!</p>
+  <% if @resource.designer_submission %>
+    <h4>Congratulations! 🎉</h4>
+    <p>We received our submission to become a seller! We will now review it, and get back to you!</p>
+  <% else %>
+    <p>Welcome <%= @email %>!</p>
+  <% end %>
 
-  <p>You can confirm your account email through the link below:</p>
+  <p><%= @resource.designer_submission ? "In the meantime, y" : "Y" %>ou can confirm your account email through the link below:</p>
 
   <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 </div>

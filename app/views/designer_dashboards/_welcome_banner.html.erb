@@ -32,6 +32,9 @@
              data-banner-form-target="icon">
           <i class="fas fa-pen"></i>
         </div>
+        <% unless @designer.banner.attached? %>
+          <h5>Add A Banner to your profile</h5>
+        <% end %>
         <div class="d-none designer-dashboard__banner-image-form" data-banner-form-target="form">
           <%= simple_form_for @designer, url: designer_banner_path(@designer), method: :post do |f| %>
             <div class="designer-dashboard__banner-photo-form-inputs">

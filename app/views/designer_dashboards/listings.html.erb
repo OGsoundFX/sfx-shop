@@ -12,7 +12,7 @@
         <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
       </div>
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
-      <div class="d-flex justify-content-center btn btn-secondary">Your submission is pending approval</div>
+      <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
     <% else %>
       <div class="d-flex justify-content-between">
         <div class="mb-3">
