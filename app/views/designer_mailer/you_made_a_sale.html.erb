@@ -10,7 +10,12 @@
   <p>Discount: <%= @sold_item.discount_percentage %> % <em><small>(<%= @sold_item.discount_name %>)</small></em></p>
 <% end %>
 <p>Payout amount: <%= humanized_money((@sold_item.payout_amount_cents / 100.0), symbol: "#{CurrencySymbolService.lookup(@sold_item.payout_currency)} ") %></p>
-<%= image_tag @sfx_pack.photos.first, width: 280 %>
+
+<%= link_to designer_sales_url do %>
+    <img src="<%= @sfx_pack.photos.first.url %>"
+       width="320"
+       style="display:block; max-width:320px;" />
+<% end %>
 
 <div style="margin-top: 12px"></div>
 

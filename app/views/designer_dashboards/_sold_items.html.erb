@@ -23,7 +23,7 @@
 <% end %>
 <% if @past_sold_items.present? && @sold_items.present? %>
   <hr style="border-color: white; margin-top: 24px">
-<% else %>
+<% elsif !@sold_items.present? %>
   <div class="designer-dashboard__no-payout">
     <h4>There are no sales for this period</h4>
   </div>
