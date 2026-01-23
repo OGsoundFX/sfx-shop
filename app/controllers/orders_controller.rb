@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
         amount_cents: order.amount,
         currency: order.amount_paid_currency.downcase,
         payout_amount_cents: 0,
-        payout_currency: current_user.legal_entity.payment_infos.last.preferred_currency,
+        payout_currency: session[:currency],
         status: 'pending',
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none',
@@ -253,6 +253,7 @@ class OrdersController < ApplicationController
         end
 
         pack = SfxPack.find(item[:images].first[:record_id])
+        raise
         SoldItem.create!(
           sound_designer: pack.sound_designer,
           order: order,
@@ -260,7 +261,7 @@ class OrdersController < ApplicationController
           amount_cents: item[:amount],
           currency: order.amount_paid_currency.downcase,
           payout_amount_cents: 0,
-          payout_currency: current_user.legal_entity.payment_infos.last.preferred_currency,
+          payout_currency: session[:currency],
           status: 'pending',
           discount: discount,
           discount_type: discount_type,
