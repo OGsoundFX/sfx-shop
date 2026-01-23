@@ -1,0 +1,20 @@
+<h1>Hi <%= @user.username.present? ? @user.username : @user.email %>!</h1>
+<% if @sale %>
+  <h3>
+    The <%= @sale.title.capitalize %> Sale is on right now at <a href="https://www.bamsfx.com">BamSFX.com</a> 🎉
+    <br>
+    Save up to <strong><%= @sale.percentage %>%</strong> 💸
+  </h3>
+<% end %>
+
+<p>You have items waiting in your <strong><%= link_to "cart", cart_url %></strong>, are you hesitating to go through with your purchase?</p>
+
+<% if @sale %>
+  <h5>Well good news! There is a Sale going on right now and all Packs are <%= @sale.percentage %>% off right now! 🚀</h5>
+<% else %>
+  <p>Check out your <strong><%= link_to "cart", cart_url %></strong> 🚀</p>
+<% end %>
+
+<p>If you have any questions, feel free to reply to this email 📧</p>
+
+<p>— The BAMSFX Team</p>
