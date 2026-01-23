@@ -253,7 +253,6 @@ class OrdersController < ApplicationController
         end
 
         pack = SfxPack.find(item[:images].first[:record_id])
-        raise
         SoldItem.create!(
           sound_designer: pack.sound_designer,
           order: order,
