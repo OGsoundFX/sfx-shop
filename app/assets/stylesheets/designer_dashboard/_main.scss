@@ -118,6 +118,17 @@
   }
 }
 
+.designer-dashboard__banner-artist-name {
+  text-align: left;
+  margin: -1rem 0 0 9rem;
+  font-size: 1.6rem;
+  span {
+    background-color: $light-card-background;
+    padding: 4px;
+    border-radius: 8px
+  }
+}
+
 .designer-dashboard__label {
   font-size: 1.2rem;
   margin-bottom: 4px;

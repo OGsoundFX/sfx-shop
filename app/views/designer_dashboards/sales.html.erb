@@ -12,10 +12,6 @@
       </div>
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
       <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
-    <% elsif @sold_items.empty? %>
-      <div class="designer-dashboard__no-payout">
-        <h4 >No Sales Yet!</h4>
-      </div>
     <% else %>
       <div class="d-flex justify-content-between">
         <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
