@@ -1,7 +1,7 @@
 <%= render "shared/left_pannel_mobile"%>
 <div class="padding-navbar content admin-min-height bg-dark">
   <%= render "welcome_banner" %>
-  <div class="container" data-controller="designer-pack-filter">
+  <div class="container" data-controller="designer-pack-filter" data-designer-pack-filter-pack-count-value="<%= @pack_count.to_json %>">
     <%= render "designer_menu" %>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
@@ -23,6 +23,10 @@
           <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
           <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
           <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
+          <span style="color: whitesmoke">/</span>
+          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active btn-hover-dismiss" data-designer-pack-filter-target="count">
+            Count: <%= @pack_count[:all] %>
+          </span>
         </div>
         <div>
           <%= link_to add_new_pack_path do %>

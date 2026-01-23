@@ -1,5 +1,5 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-5">
-  <div class="container" data-controller="designer-pack-filter">
+  <div class="container" data-controller="designer-pack-filter" data-designer-pack-filter-pack-count-value="<%= @pack_count.to_json %>">
     <%= render "admin_menu" %>
     <%= render "designer_banner" %>
     <%= render "designer_packs_list", packs: @packs %>

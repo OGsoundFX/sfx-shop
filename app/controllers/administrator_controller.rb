@@ -45,7 +45,15 @@ class AdministratorController < ApplicationController
 
   def designer_packs
     @designer = SoundDesigner.includes(:sfx_packs).find(params[:id])
-    @packs = @designer.sfx_packs.reject { |pack| pack.id == 100}
+    @packs = @designer.sfx_packs.where.not(id: 100)
+    @pack_count = {
+      all: @packs.count,
+      live: @packs.live.count,
+      submitted: @packs.submitted.count,
+      declined: @packs.declined.count,
+      drafts: @packs.draft.count,
+      removed: @packs.removed.count
+    }
   end
 
   def legal_entity
@@ -90,7 +98,15 @@ class AdministratorController < ApplicationController
   end
 
   def pack_submissions
-    @packs = SfxPack.submitted
+    @packs = SfxPack.where.not(id: 100)
+    @pack_count = {
+      all: @packs.count,
+      live: @packs.live.count,
+      submitted: @packs.submitted.count,
+      declined: @packs.declined.count,
+      drafts: @packs.draft.count,
+      removed: @packs.removed.count
+    }
   end
 
   def submission_accepted

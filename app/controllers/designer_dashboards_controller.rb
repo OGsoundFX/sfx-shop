@@ -12,6 +12,14 @@ class DesignerDashboardsController < ApplicationController
     # @declined_packs = @designer.sfx_packs.declined.order(updated_at: :desc)
 
     @packs = @designer.sfx_packs.where.not(id: 100).order(:status)
+    @pack_count = {
+      all: @packs.count,
+      live: @packs.live.count,
+      submitted: @packs.submitted.count,
+      declined: @packs.declined.count,
+      drafts: @packs.draft.count,
+      removed: @packs.removed.count
+    }
   end
 
   def sales
