@@ -8,7 +8,7 @@ module Agreements
         This Seller Agreement (the <strong>“Agreement”</strong>) is entered into between
         <strong>BamSFX.com</strong> (the <strong>“Platform”</strong>, <strong>“BamSFX”</strong>, <strong>“we”</strong>, or <strong>“us”</strong>)
         and <strong>{{legal_name}}</strong>, operating under the artist name
-        <strong>{{artist_name}}</strong> (the <strong>“Seller”</strong>, <strong>“you”</strong>, or <strong>“your”</strong>).
+        <strong>{{artist_name}}</strong> (the <strong>“Seller”</strong>, <strong>“you”</strong>, or <strong>“your”</strong>), {{address}}.
       </p>
 
       <p>
@@ -268,6 +268,7 @@ module Agreements
       <p>
         <strong>Accepted by:</strong> {{legal_name}}<br>
         <strong>Artist Name:</strong> {{artist_name}}<br>
+        <strong>Address:</strong> {{address}}<br>
         <strong>Date:</strong> {{accepted_at}}<br>
       </p>
     HTML

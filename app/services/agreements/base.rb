@@ -37,6 +37,7 @@ module Agreements
       agreement.body = @html
         .gsub("{{legal_name}}", legal_name)
         .gsub("{{artist_name}}", designer.artist_name)
+        .gsub("{{address}}", designer.legal_entity.address)
         .gsub("{{accepted_at}}", accepted_at)
 
       agreement
@@ -64,6 +65,7 @@ module Agreements
             #{agreement.body.to_s
               .gsub("{{legal_name}}", acceptance.legal_name_snapshot)
               .gsub("{{artist_name}}", designer.artist_name)
+              .gsub("{{address}}", designer.legal_entity.address)
               .gsub("{{accepted_at}}", acceptance.accepted_at.strftime("%B %d, %Y"))}
           </body>
         </html>
