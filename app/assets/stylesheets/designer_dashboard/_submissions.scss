@@ -34,6 +34,7 @@
 }
 
 .submissions__pack-price {
+  align-self: flex-end;
   color: whitesmoke !important;
   #submissions__pack-price-font {
     font-size: 1rem;
@@ -52,6 +53,9 @@
 .designer-dashboard__pills {
   display: flex;
   justify-content: space-between;
+  .pills-width {
+    max-width: 8rem;
+  }
 }
 
 .designer-dashboard__pills-color {
@@ -96,6 +100,19 @@
 @media (max-width: 1399px) {
   .submissions-live__grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .designer-dashboard__pills {
+    .pills-width {
+      max-width: 12rem;
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .designer-dashboard__pills {
+    .pills-width {
+      max-width: 11rem;
+    }
   }
 }
 
