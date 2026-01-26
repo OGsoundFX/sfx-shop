@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_21_120005) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_26_094512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -274,6 +274,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_21_120005) do
     t.string "announcement"
     t.integer "status"
     t.integer "currency", default: 0
+    t.integer "sample_rate"
+    t.integer "bit_depth"
     t.index ["sound_designer_id"], name: "index_sfx_packs_on_sound_designer_id"
   end
 

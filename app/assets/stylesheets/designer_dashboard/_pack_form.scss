@@ -51,6 +51,14 @@
 .pack-submission-form-metadata {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  .pack-submission-form__infos {
+    width: 33%;
+  }
+  .pack-submission-form__wav-formats {
+    width: 50%;
+  }
 }
 
 .pack-submission-form__photo-upload {
@@ -156,6 +164,12 @@
 @media (max-width: 1200px) {
   .pack-submission-form-metadata {
     display: block;
+    .pack-submission-form__infos {
+      width: 100%;
+    }
+    .pack-submission-form__wav-formats {
+      width: 100%;
+    }
   }
 }
 

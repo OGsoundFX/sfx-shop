@@ -33,11 +33,13 @@ class SfxPack < ApplicationRecord
     CURRENCY_SYMBOLS[currency]
   end
 
-  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, presence: true
+  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
   }
+  validates :sample_rate, inclusion: { in: [44100, 48000]}
+  validates :bit_depth, inclusion: { in: [16, 24, 32]}
 
   validate :photo_presence, :categories_max, :tags_max
 
