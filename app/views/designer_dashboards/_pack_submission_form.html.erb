@@ -43,9 +43,24 @@
               class: "pack-submission-form__tom-select-input"} %>
   <hr>
   <div class="pack-submission-form-metadata">
-    <%= f.input :number_of_tracks %>
-    <%= f.input :size_mb, label: "Size in MB" %>
-    <%= f.input :duration, label: "Duration in minutes" %>
+    <div class="pack-submission-form__infos">
+      <%= f.input :number_of_tracks %>
+    </div>
+    <div class="pack-submission-form__infos">
+      <%= f.input :size_mb, label: "Size in MB" %>
+    </div>
+    <div class="pack-submission-form__infos">
+      <%= f.input :duration, label: "Duration in minutes" %>
+    </div>
+  </div>
+  <hr>
+  <div class="pack-submission-form-metadata">
+    <div class="pack-submission-form__wav-formats">
+      <%= f.input :sample_rate, collection: [44100, 48000] %>
+    </div>
+    <div class="pack-submission-form__wav-formats">
+      <%= f.input :bit_depth, collection: [16, 24, 32] %>
+    </div>
   </div>
   <hr>
   <div class="pack-submission-form-price">

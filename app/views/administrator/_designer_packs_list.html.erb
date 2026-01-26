@@ -46,7 +46,7 @@
           </div>
           <div class="text-muted small d-flex flex-column justify-content-between">
             <div>
-              <p class="mb-1">• 48kHz / 24bit High Def Audio</p>
+              <p class="mb-1">• <%= pack.sample_rate == 44100 ? pack.sample_rate / 1000.0 : pack.sample_rate / 1000 %>kHz / <%= pack.bit_depth %>bit High Def Audio</p>
               <% if pack.size_mb > 1000 %>
                 <p class="mb-1">• <%= (pack.size_mb / 1000.to_f).ceil(1) %> GB</p>
               <% else %>
