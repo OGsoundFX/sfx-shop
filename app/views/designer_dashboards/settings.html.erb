@@ -1,7 +1,12 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-4">
   <%= render "welcome_banner" %>
   <div class="container">
-    <%= render "designer_menu" %>
+    <div class="designer-menu__desktop">
+      <%= render "designer_menu" %>
+    </div>
+    <div class="designer-menu__mobile">
+      <%= render "designer_menu_mobile" %>
+    </div>
     <% if !current_user.legal_entity.accepted? && !current_user.admin?%>
       <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss mb-3">Your submission is pending approval</div>
     <% end %>
