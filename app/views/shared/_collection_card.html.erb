@@ -70,7 +70,9 @@
         <div class="pack_specifics">
           <div id="wrapper">
             <%= link_to collection_template_path(pack) do %>
-              <div class="pack_pic_wrapper"><%= image_tag pack.image, class: 'pack_pic' %></div>
+              <% if pack.image.attached? %>
+                <div class="pack_pic_wrapper"><%= image_tag pack.image, class: 'pack_pic' %></div>
+              <% end %>
               <div class="pop-up">List of Tracks</div>
             <% end %>
           </div>

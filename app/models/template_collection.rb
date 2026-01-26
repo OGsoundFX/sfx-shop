@@ -2,6 +2,7 @@ class TemplateCollection < ApplicationRecord
   before_validation :order_tracks
   monetize :price_cents
   has_one_attached :image
+  has_many :collections, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true
   validates :tracks, uniqueness: true
