@@ -1,0 +1,60 @@
+.designer-menu__desktop {
+  display: block;
+}
+
+.designer-menu__mobile {
+  display: none;
+}
+
+.designer-menu__mobile-settings-tab {
+  display: block;
+}
+
+.designer-menu__xs-settings-tab {
+  display: none;
+}
+
+.designer-menu__desktop-filter-pills {
+  display: block;
+}
+
+.designer-menu__mobile-filter-pills {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .designer-menu__desktop-filter-pills {
+    display: none;
+  }
+
+  .designer-menu__mobile-filter-pills {
+    display: block;
+  }
+
+  .designer-menu__mobile-filter-pills__font-size {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .designer-menu__desktop {
+    display: none;
+  }
+
+  .designer-menu__mobile {
+    display: block;
+  }
+
+  .designer-menu__xs-support-tab {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .designer-menu__mobile-settings-tab {
+    display: none;
+  }
+  .designer-menu__xs-settings-tab {
+    display: block;
+  }
+}

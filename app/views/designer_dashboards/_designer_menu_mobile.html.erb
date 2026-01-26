@@ -1,0 +1,12 @@
+<div class="d-flex mt-4 mb-2">
+  <%= link_to "Listings", designer_listings_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "listings"}" %>
+  <%= link_to "Sales", designer_sales_path, class: "btn btn-secondary me-2 btn-admin  #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "sales"}" %>
+  <%= link_to "Payouts", designer_payouts_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "payouts"}" %>
+  <%= link_to "Profile", designer_main_dashboard_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "main"}" %>
+  <%= link_to "Settings", settings_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "settings"} designer-menu__mobile-settings-tab" %>
+  <div>
+    <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-secondary btn-admin designer-menu__xs-support-tab">Support</a>
+  </div>
+</div>
+<%= link_to "Settings", settings_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "settings"} designer-menu__xs-settings-tab" %>
+<hr style="border-color: white">

@@ -1,0 +1,12 @@
+
+<div class="d-flex mb-3 designer-menu__mobile-filter-pills__font-size" style="overflow-x: scroll">
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
+  <span class="text-white me-2 px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
+  <%= link_to add_new_pack_path do %>
+    <span class="text-white px-3 py-2 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter"><i class="fas fa-plus"></i></span>
+  <% end %>
+</div>

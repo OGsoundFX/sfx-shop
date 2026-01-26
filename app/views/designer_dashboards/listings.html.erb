@@ -1,8 +1,12 @@
-<%= render "shared/left_pannel_mobile"%>
 <div class="padding-navbar content admin-min-height bg-dark">
   <%= render "welcome_banner" %>
   <div class="container" data-controller="designer-pack-filter" data-designer-pack-filter-pack-count-value="<%= @pack_count.to_json %>">
-    <%= render "designer_menu" %>
+    <div class="designer-menu__desktop">
+      <%= render "designer_menu" %>
+    </div>
+    <div class="designer-menu__mobile">
+      <%= render "designer_menu_mobile" %>
+    </div>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
         <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
@@ -14,25 +18,11 @@
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
       <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
     <% else %>
-      <div class="d-flex justify-content-between">
-        <div class="mb-3">
-          <span style="color: whitesmoke !important; margin-right: 8px; font-size: 0.8rem !important">Filter:</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">all</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">live</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">submitted</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">declined</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">drafts</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills" data-designer-pack-filter-target="pill" data-action="click->designer-pack-filter#filter">removed</span>
-          <span style="color: whitesmoke">/</span>
-          <span class="text-white px-3 py-1 badge rounded-pill designer-dashboard__packs-filter-pills active btn-hover-dismiss" data-designer-pack-filter-target="count">
-            Count: <%= @pack_count[:all] %>
-          </span>
-        </div>
-        <div>
-          <%= link_to add_new_pack_path do %>
-            <span class="px-3 py-1 rounded-pill designer-dashboard__add-pack-pill"><i class="fas fa-plus"></i> Add a Pack</span>
-          <% end %>
-        </div>
+      <div class="designer-menu__desktop-filter-pills">
+        <%= render "filter_pills_desktop" %>
+      </div>
+      <div class="designer-menu__mobile-filter-pills">
+        <%= render "filter_pills_mobile" %>
       </div>
       <div class="submissions-live__grid">
         <% @packs.each do |pack| %>

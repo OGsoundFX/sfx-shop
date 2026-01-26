@@ -1,7 +1,12 @@
 <div class="padding-navbar content admin-min-height bg-dark pb-4">
   <%= render "welcome_banner" %>
   <div class="container">
-    <%= render "designer_menu" %>
+    <div class="designer-menu__desktop">
+      <%= render "designer_menu" %>
+    </div>
+    <div class="designer-menu__mobile">
+      <%= render "designer_menu_mobile" %>
+    </div>
     <% if @designer.invalid?%>
       <span class="btn btn-rejected w-100 mb-3" style="font-size: 1.2rem"> Please complete your profile to continue <i class="fas fa-arrow-alt-circle-down me-3"></i></span>
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
