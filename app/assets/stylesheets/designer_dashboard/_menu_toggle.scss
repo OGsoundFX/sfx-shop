@@ -1,0 +1,34 @@
+.designer-menu__desktop {
+  display: block;
+}
+
+.designer-menu__mobile {
+  display: none;
+}
+
+.designer-menu__mobile-settings-tab {
+  display: block;
+}
+
+.designer-menu__xs-settings-tab {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .designer-menu__desktop {
+    display: none;
+  }
+
+  .designer-menu__mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 380px) {
+  .designer-menu__mobile-settings-tab {
+    display: none;
+  }
+  .designer-menu__xs-settings-tab {
+    display: block;
+  }
+}

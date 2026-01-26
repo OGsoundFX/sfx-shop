@@ -2,7 +2,12 @@
 <div class="padding-navbar content admin-min-height bg-dark">
   <%= render "welcome_banner" %>
   <div class="container" data-controller="designer-pack-filter" data-designer-pack-filter-pack-count-value="<%= @pack_count.to_json %>">
-    <%= render "designer_menu" %>
+    <div class="designer-menu__desktop">
+      <%= render "designer_menu" %>
+    </div>
+    <div class="designer-menu__mobile">
+      <%= render "designer_menu_mobile" %>
+    </div>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
         <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
