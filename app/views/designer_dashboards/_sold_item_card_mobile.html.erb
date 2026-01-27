@@ -1,0 +1,38 @@
+<div class="designer-dashboard__sales-grid">
+  <div class="d-flex align-items-center">
+    <div class="submission-card-date">
+      <div><%= item.created_at.strftime("%b") %></div>
+      <div><%= item.created_at.strftime("%d") %></div>
+    </div>
+    <div class="submission-card-content d-flex align-items-center">
+      <div class="sound-designer-dashboard__sales-image">
+        <%= image_tag item.sfx_pack.photos.first, width: 42, height: 42 %>
+      </div>
+      <div><%= item.sfx_pack.title %></div>
+    </div>
+  </div>
+
+  <div class="sales-card-titles-price">
+    <div class="ms-4">
+      <% if item.order.amount_paid_currency.downcase == item.sfx_pack.currency %>
+        <div><%= number_to_currency(item.amount_cents / 100, unit: "#{CurrencySymbolService.lookup(item.sfx_pack.currency)} ", separator: ",", precision: 2) %></div>
+      <% else %>
+        <% conversion_rate = CurrencyRate.where(target: item.order.amount_paid_currency).last.rate %>
+        <% converted_price = (item.amount_cents * conversion_rate) / 100 %>
+        <div>
+          <%= number_to_currency(converted_price, unit: "#{CurrencySymbolService.lookup(item.order.amount_paid_currency.downcase)} ", separator: ",", precision: 2) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="d-flex flex-column w-100 text-center">
+        <span><%= item.discount? && item.discount_percentage.present? ? "#{item.discount_percentage}%" : "No discount" %></span>
+      </div>
+    </div>
+    <div class="d-flex align-items-center ms-5">
+      <span>
+        <%= number_to_currency(item.payout_amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(item.payout_currency)} ", separator: ",", precision: 2) %>
+      </span>
+    </div>
+  </div>
+</div>

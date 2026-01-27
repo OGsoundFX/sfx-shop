@@ -50,7 +50,15 @@
           <% end %>
         </div>
       </div>
-      <%= render "sold_items" %>
+      <div class="designer-dashboard__sales-desktop">
+        <%= render "sold_items_desktop" %>
+      </div>
+      <div class="designer-dashboard__sales-mobile">
+        <%= render "sold_items_mobile" %>
+      </div>
+      <div class="designer-dashboard__sales-xs">
+        <%= render "sold_items_xs" %>
+      </div>
     <% end %>
   </div>
 </div>

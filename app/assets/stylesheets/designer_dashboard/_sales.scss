@@ -1,3 +1,15 @@
+.designer-dashboard__sales-desktop {
+  display: inherit;
+}
+
+.designer-dashboard__sales-mobile {
+  display: none;
+}
+
+.designer-dashboard__sales-xs {
+  display: none;
+}
+
 .sound-designer-dashboard__sales-image {
   margin-right: 12px;
   border-radius: 4px;
@@ -49,5 +61,47 @@
   &:hover {
     opacity: unset;
     color: white;
+  }
+}
+
+@media (max-width: 991px) {
+  .designer-dashboard__sales-desktop {
+    display: none;
+  }
+
+  .designer-dashboard__sales-mobile {
+    display: inherit;
+  }
+
+  .designer-dashboard__sales-xs {
+    display: none;
+  }
+
+  .designer-dashboard__sales-grid {
+    grid-template-columns: 0.7fr 1.2fr;
+  }
+}
+
+@media (max-width: 634px) {
+    .designer-dashboard__sales-desktop {
+    display: none;
+  }
+
+  .designer-dashboard__sales-mobile {
+    display: none;
+  }
+
+  .designer-dashboard__sales-xs {
+    display: inherit;
+  }
+
+  .designer-dashboard__sales-grid {
+    grid-template-columns: 0.4fr 2fr 1fr;
+  }
+
+  .submission-card-date {
+    text-align: start;
+    margin-right: 8px;
+    padding-right: 0;
   }
 }
