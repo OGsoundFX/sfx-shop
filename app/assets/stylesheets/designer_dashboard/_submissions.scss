@@ -58,6 +58,14 @@
   }
 }
 
+.designer-dashboard__pills.pills-desktop {
+  display: flex
+}
+
+.designer-dashboard__pills.pills-mobile {
+  display: none
+}
+
 .designer-dashboard__pills-color {
   background-color: $new-green;
 }
@@ -119,5 +127,27 @@
 @media (max-width: 991px) {
   .submissions-live__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .designer-dashboard__pills.pills-desktop {
+    display: none
+  }
+
+  .designer-dashboard__pills.pills-mobile {
+    display: flex
+  }
+
+  .designer-dashboard__pills {
+    .pills-width {
+      margin-top: 8px;
+      max-width: 100%;
+    }
+  }
+
+  .designer-dashboard__banner-artist-name {
+    font-size: 1rem;
+    margin-left: 8rem;
   }
 }
