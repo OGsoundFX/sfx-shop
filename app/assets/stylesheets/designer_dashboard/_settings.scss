@@ -1,10 +1,27 @@
 .designer-dashboard__settings-grid {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  .payment-info-desktop {
+    display: inherit;
+  }
+  .payment-info-mobile {
+    display: none;
+  }
 }
 
 @media (max-width: 994px) {
   .designer-dashboard__settings-grid {
     grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .designer-dashboard__settings-grid {
+    .payment-info-desktop {
+      display: none;
+    }
+    .payment-info-mobile {
+      display: inherit;
+    }
   }
 }
