@@ -17,6 +17,11 @@
   width: 100%;
   border-radius: 8px;
   background-color: $light-card-background;
+  .designer-dashboard__pack-image {
+    width: 180px;
+    aspect-ratio: 1;
+    border-radius: 8px
+  }
 }
 
 .designer-dashboard__info-banner {
@@ -241,6 +246,14 @@
     justify-content: space-between;
     .designer-dashboard__banner-image-form-icon {
       margin-top: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .designer-dashboard__container, .designer-dashboard__banner {
+    .designer-dashboard__pack-image {
+      width: 120px;
     }
   }
 }
