@@ -15,7 +15,7 @@
   <div class="sales-card-titles-price">
     <div class="ms-4">
       <% if item.order.amount_paid_currency.downcase == item.sfx_pack.currency %>
-        <div class="submission-date"><%= number_to_currency(item.amount_cents / 100, unit: "#{CurrencySymbolService.lookup(item.sfx_pack.currency)} ", separator: ",", precision: 2) %></div>
+        <div class="submission-date"><%= number_to_currency(item.amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(item.sfx_pack.currency)} ", separator: ",", precision: 2) %></div>
       <% else %>
         <% conversion_rate = CurrencyRate.where(target: item.order.amount_paid_currency).last.rate %>
         <% converted_price = (item.amount_cents * conversion_rate) / 100 %>

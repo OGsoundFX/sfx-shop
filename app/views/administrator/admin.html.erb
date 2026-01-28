@@ -50,7 +50,7 @@
             </div>
 
             <div class="d-flex flex-column">
-              <div class="submission-date"><%= number_to_currency(order.amount_paid_cents / 100, unit: "$ ", separator: ",", precision: 2) %></div>
+              <div class="submission-date"><%= number_to_currency(order.amount_paid_cents / 100.0, unit: "$ ", separator: ",", precision: 2) %></div>
             </div>
 
             <div>
