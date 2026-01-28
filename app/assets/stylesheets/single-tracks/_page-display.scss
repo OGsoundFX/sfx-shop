@@ -56,7 +56,7 @@
     padding-left: 10px;
     border: solid 1px $border-grey;
     height: 40px;
-    width: 60vw;
+    width: 48vw;
     max-width: 980px;
   }
   input::placeholder {
@@ -309,11 +309,21 @@ ul {
 }
 
 @media (max-width: 812px) {
+  #front-title-sale {
+    margin: 20px;
+  }
+  #search-hr {
+    display: none;
+  }
   .drop-down {
     margin: 20px 0 6px 0;
   }
   .search-form {
-    margin: 6px 0 20px 0;
+    margin: 16px 0 !important;
+    width: 100%;
+    input {
+      width: 100%;
+    }
   }
   .wave-section {
     margin-right: 1vh !important;

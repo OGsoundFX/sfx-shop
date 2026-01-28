@@ -7,13 +7,13 @@
     <%= render "shared/left_pannel_mobile" %>
     <div class="d-flex">
       <%= render "shared/left_pannel_desktop" %>
-      <div class="mx-3">
+      <div class="mx-3 w-100">
         <div>
           <% if !@announcement.nil? %>
             <h1 id="annoucement-content"><%= @announcement.content %></h1>
           <% elsif @current_sales_list != {} %>
             <div id="sale-banner">
-              <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
+              <h1 id="front-title-sale-index"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
             </div>
           <% end %>
 
@@ -41,19 +41,23 @@
                 </div>
               </form>
             </div>
-            <div style="margin: 30px 8px 0 8px; font-size: 12px"><strong>OR</strong></div>
+            <div class="search-form-or"><strong>OR</strong></div>
             <div class="search-form">
               <form action="/sfx_packs">
-                <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
+                <input type="text" name="search" placeholder="<%= @search.present? ? @search : 'Search by keyword' %>">
                 <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
               </form>
             </div>
           </div>
 
           <hr id="search-hr">
-          <div class="">
+          <% if @sfx_packs.empty? %>
+            <div class="text-center" style="font-size: 1.2rem">
+              No results for <%= @search.present? ? @search : params[:dropdown] %>
+            </div>
+          <% else %>
             <%= render 'shared/pack_card' %>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
