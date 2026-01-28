@@ -173,15 +173,13 @@
   }
 }
 
-@media (max-width: 768px) {
-  #sale-banner {
-    display: none;
-  }
-  #film-title {
-    font-size: 25vw;
-  }
-
+@media (max-width: 812px) {
   .pack-container {
+    .drop-down {
+      display: none;
+    }
+  }
+  .forms {
     .drop-down {
       display: none;
     }
@@ -189,6 +187,15 @@
 
   .search-form-or {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #sale-banner {
+    display: none;
+  }
+  #film-title {
+    font-size: 25vw;
   }
 
   #atmos-title {
