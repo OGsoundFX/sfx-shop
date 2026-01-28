@@ -55,7 +55,7 @@
               <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
               <p class="mb-0">• Format: WAV</p>
             </div>
-            <div class="designer-dashboard__pills">
+            <div class="designer-dashboard__pills designer-dashboard__pills pills-desktop">
               <div class="flex flex-wrap gap-2 pb-2">
                 <% pack.category.split(", ").each do |tag| %>
                   <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color"><%= tag %></span>
@@ -73,6 +73,24 @@
             </div>
           </div>
         </div>
+
+        <div class="designer-dashboard__pills pills-mobile">
+          <div class="flex flex-wrap gap-2 pills-width">
+            <% pack.category.split(", ").each do |tag| %>
+              <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color"><%= tag %></span>
+            <% end %>
+          </div>
+          <div class="submissions__pack-price">
+            <% if pack.price_cents == 0 %>
+              <span class="text-white text-xs px-2 py-1 badge rounded-pill" style="background-color: #ff00fe;">free</span>
+            <% else %>
+              <div id="submissions__pack-price-font">
+                <%= number_to_currency(pack.price, unit: "#{pack.currency_symbol} ", separator: ",", precision: 2) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
         <hr>
         <% if pack.live? %>
             <div><%= button_to "Cancel", sfx_pack_rejected_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-reject" %></div>

@@ -19,12 +19,17 @@
       <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
     <% else %>
       <div class="d-flex justify-content-between">
-        <div style="color: white; opacity: 0.7">Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %></div>
+        <div class="designer-dashboard_next-payout">
+          Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %>
+        </div>
         <div data-controller="display-calendar-designer-sales" >
           <div class="d-flex">
             <div class="designer-dashboard__sales-dates d-flex" data-display-calendar-designer-sales-target="dates" data-action="click->display-calendar-designer-sales#calendar">
-              <div id="designer-dashboard__sales-dates-display">
+              <div id="designer-dashboard__sales-dates-display-desktop">
                 Sales from <%= @start_date.to_date.strftime("%b. %-d %Y") %> to <%= @end_date.to_date.strftime("%b. %-d %Y") %>
+              </div>
+              <div id="designer-dashboard__sales-dates-display-mobile">
+                <%= @start_date.to_date.strftime("%d/%m/%y") %> - <%= @end_date.to_date.strftime("%d/%m/%y") %>
               </div>
               <div id="designer-dashboard__sales-pen">
                 <i class="fas fa-pen"></i>
@@ -50,7 +55,15 @@
           <% end %>
         </div>
       </div>
-      <%= render "sold_items" %>
+      <div class="designer-dashboard__sales-desktop">
+        <%= render "sold_items_desktop" %>
+      </div>
+      <div class="designer-dashboard__sales-mobile">
+        <%= render "sold_items_mobile" %>
+      </div>
+      <div class="designer-dashboard__sales-xs">
+        <%= render "sold_items_xs" %>
+      </div>
     <% end %>
   </div>
 </div>

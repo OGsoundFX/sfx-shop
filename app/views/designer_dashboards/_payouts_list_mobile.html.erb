@@ -1,0 +1,42 @@
+<div class="designer-dashboard__payouts-grid">
+  <div class="ms-3">Date</div>
+  <div class="designer-dashboard__payouts-desktop-paypal text-center">Paypal</div>
+  <div class="designer-dashboard__payouts-desktop text-center">Amount paid</div>
+  <div class="designer-dashboard__payouts-desktop text-center">Items sold</div>
+  <div class="designer-dashboard__payouts-mobile text-center">Amount</div>
+  <div class="designer-dashboard__payouts-mobile text-center">Items</div>
+</div>
+<% if @payouts.empty? %>
+  <div class="designer-dashboard__no-payout">
+    <h4>No payouts for the year <%= @year %></h4>
+  </div>
+<% end %>
+<% @payouts.each do |payout| %>
+  <div class="designer-dashboard__payouts-grid">
+    <div class="payouts-card-date">
+      <div class="submission-day"><%= payout.created_at.strftime("%b") %> <%= payout.created_at.strftime("%d") %></div>
+      <div class="submission-day"><%= payout.created_at.strftime("%Y") %></div>
+    </div>
+    <div class="designer-dashboard__payouts-desktop-paypal text-center">
+      <div><%= payout.paypal_account %></div>
+    </div>
+    <div class="designer-dashboard__payout-amount">
+      <div class="submission-date"><%= number_to_currency(payout.amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(payout.currency)} ", separator: ",", precision: 2) %></div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center items-sold__section" data-controller="items-sold">
+      <div class="btn btn-secondary designer-dashboard__payout-show-list-desktop" data-action="click->items-sold#modal">Show list</div>
+      <div class="btn btn-secondary designer-dashboard__payout-show-list-mobile" data-action="click->items-sold#modal">List</div>
+      <div class="items-sold__modal d-none" data-items-sold-target="soldItems">
+        <div>
+          <% payout.sold_items.each do |item| %>
+            <span class="items-sold__list-title">• <%= item.sfx_pack.title %> (<%= item.created_at.strftime("%b-%y") %>)</span>
+            <br>
+          <% end %>
+        </div>
+        <div class="btn btn-secondary mt-3" data-action="click->items-sold#close">
+          Close
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -147,6 +147,10 @@
   }
 }
 
+.designer-dashboard__label.payout-info {
+  display: block;
+}
+
 .designer-dashboard__info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
@@ -255,5 +259,9 @@
     .designer-dashboard__pack-image {
       width: 120px;
     }
+  }
+
+  .designer-dashboard__label.payout-info {
+    display: none;
   }
 }

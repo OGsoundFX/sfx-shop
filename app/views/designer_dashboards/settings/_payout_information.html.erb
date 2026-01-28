@@ -2,7 +2,7 @@
   <div class="designer-dashboard__user-profile">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
-        <p class="designer-dashboard__label me-3">Payout Information</p>
+        <p class="designer-dashboard__label me-3 payout-info">Payout Information</p>
         <% if @paypal.active? %>
           <div class="designer-dashboard__label">
             <i class="fas fa-check-circle approved-icon"></i>
@@ -25,11 +25,13 @@
     <% if @paypal.paypal_account.present? %>
       <div data-update-info-target="data">
         <div class="designer-dashboard__settings-grid mb-2">
-          <span>Paypal Account:</span>
+          <span class="payment-info-desktop">Paypal Account:</span>
+          <span class="payment-info-mobile">Paypal:</span>
           <em><span class="info-color"><%= @paypal.paypal_account %></span></em>
         </div>
         <div class="designer-dashboard__settings-grid">
-          <span>Preferred Currency:</span>
+          <span class="payment-info-desktop">Preferred Currency:</span>
+          <span class="payment-info-mobile">Currency:</span>
           <span class="designer-dashboard__preferred-currency btn btn-admin"><%= @paypal.preferred_currency.upcase %></span>
         </div>
       </div>

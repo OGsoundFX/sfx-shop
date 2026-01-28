@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between">
       <div class="d-flex me-3">
         <div>
-          <p class="designer-dashboard__label me-3">Legal Information</p>
+          <p class="designer-dashboard__label me-3 payout-info">Legal Information</p>
         </div>
         <% if @legal_entity.accepted? %>
           <div class="designer-dashboard__label">
@@ -29,7 +29,8 @@
 
     <div data-update-info-target="data">
       <div class="designer-dashboard__settings-grid mb-2">
-        <span>Full legal name:</span>
+        <span class="payment-info-desktop">Full legal name:</span>
+        <span class="payment-info-mobile">Full name:</span>
         <em><span class="info-color"><%= @legal_entity.legal_name %></span></em>
       </div>
 
