@@ -1,3 +1,23 @@
+.designer-dashboard__payouts-grid {
+  align-items: center;
+  padding: 8px 20px;
+  background-color: $dark-card-background;
+  border-radius: 6px;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: -4px;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 1.5fr 1.5fr;
+}
+
+.designer-dashboard__payouts-desktop {
+  display: inherit;
+}
+
+.designer-dashboard__payouts-mobile {
+  display: none;
+}
+
 .payout-card-titles-price {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -9,6 +29,14 @@
   margin-right: 28px;
   border-right: 1px solid #888;
   padding-right: 20px;
+}
+
+.designer-dashboard__payout-show-list-desktop {
+  display: inherit;
+}
+
+.designer-dashboard__payout-show-list-mobile {
+  display: none;
 }
 
 .items-sold__section {
@@ -69,4 +97,45 @@
   color: white;
   text-align: center;
   margin-top: 24px;
+}
+
+@media (max-width: 991px) {
+  .designer-dashboard__payouts-desktop {
+    display: none;
+  }
+
+  .designer-dashboard__payouts-mobile {
+    display: inherit;
+  }
+}
+
+@media (max-width: 768px) {
+  .submission-date {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 634px) {
+  .submission-date {
+    font-size: 0.8rem;
+  }
+  .designer-dashboard__payouts-grid {
+    font-size: 0.8rem;
+  }
+  .designer-dashboard__payout-show-list-desktop {
+    display: none;
+  }
+
+  .designer-dashboard__payout-show-list-mobile {
+    display: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  .designer-dashboard__payouts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .designer-dashboard__payouts-desktop-paypal {
+    display: none;
+  }
 }

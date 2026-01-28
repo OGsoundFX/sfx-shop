@@ -39,7 +39,12 @@
         <div class="btn btn-secondary"><%= @year %></div>
       <% end %>
     </div>
-    <%= render "payouts_list" %>
+    <div class="designer-dashboard__payouts-desktop">
+      <%= render "payouts_list_desktop" %>
+    </div>
+    <div class="designer-dashboard__payouts-mobile">
+      <%= render "payouts_list_mobile" %>
+    </div>
     <% end %>
   </div>
 </div>
