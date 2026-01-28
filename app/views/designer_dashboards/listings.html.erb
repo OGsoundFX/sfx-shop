@@ -37,8 +37,8 @@
               data-status="<%= pack.status %>">
             <div class="designer-dashboard__user-profile">
               <div class="d-flex justify-content-between">
-                <div>
-                  <%= pack.title %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
+                <div class="d-flex">
+                  <span class="designer-dashboard__pick-title-ellipsis"><%= pack.title %></span><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
                 </div>
                 <div>
                   <%= link_to sfx_pack_path(pack), target: "_blank" do %>
