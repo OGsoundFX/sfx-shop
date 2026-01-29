@@ -109,13 +109,12 @@
   }
 
   .designer-dashboard__sales-grid {
-    grid-template-columns: 0.4fr 2fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr;
   }
 
   .submission-card-date {
-    text-align: start;
-    margin-right: 8px;
-    padding-right: 0;
+    margin-right: 12px;
+    padding-right: 12px;
   }
 
   .designer-dashboard_next-payout {
@@ -123,7 +122,7 @@
   }
 
   .designer-dashboard__sales-dates, #designer-dashboard__sales-clear {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   #designer-dashboard__sales-dates-display-desktop {

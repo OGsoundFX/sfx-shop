@@ -1,7 +1,7 @@
 <div class="designer-dashboard__sales-grid">
   <div>Date</div>
-  <div class="ms-5">Listing</div>
-  <div>Price</div>
+  <div class="text-center">Listing</div>
+  <div class="text-end">Price</div>
 </div>
 <% @sold_items.each do |item| %>
   <%= render "sold_item_card_xs", item: item %>

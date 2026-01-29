@@ -25,8 +25,8 @@
 
 #sale-show {
   position: absolute;
-  top: 40px;
-  right: 125px;
+  top: 0;
+  left: 0;
   height: 130px;
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
@@ -37,84 +37,57 @@
   color: white;
   font-weight: bold;
   font-size: 43px;
-  top: 72px;
-  right: 147px;
+  top: 1.5vw;
+  left: 1.5vw;
   line-height: 80%;
 }
-
-#sale-show-super-duper-small {
-  display: none;
-}
-
-#sale-percentage-show-super-duper-small {
-  display: none;
-}
-
-
-// $breakpoint-tablet: 768px;
-// $breakpoint-laptop: 992px;
-
-// $breakpoint-extra-small: 430px;
-// $breakpoint-mobile: 575.98px;
-// $breakpoint-tablet: 767.98px;
-// $breakpoint-laptop: 991.98px;
-// $breakpoint-large: 1199.98px;
-// $breakpoint-super-large: 1399.98px;  // 1400
-// $breakpoint-extra-large: 1599.98px;
-
-// $breakpoint-laptop: 992px;
-// $breakpoint-tablet: 768px;
-// $breakpoint-mobile: 576px;
-// $breakpoint-small: 490px;
-// $breakpoint-extra-small: 440px;
-// $breakpoint-super-duper-small: 375px;
-// $breakpoint-evenmore-super-duper-small: 316px;
 
 $breakpoint-super-duper-small: 375px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-large: 1200px;
 $breakpoint-super-large: 1400px;
+$breakpoint-hyper-large: 1600px;
+
+@media (max-width: $breakpoint-hyper-large) {
+  #sale-percentage-show {
+    top: 2vw;
+    left: 2vw;
+  }
+}
 
 @media (min-width: $breakpoint-large) and (max-width: $breakpoint-super-large) {
   #sale {
-    // top: 3.5vh;
-    // right: 10.5vh;
     height: 80px;
   }
 
   #sale-percentage {
     font-size: 23px;
-    // top: 6.4vh;
-    // right: 12.6vh;
   }
 }
 
 @media (max-width: $breakpoint-large) {
   #sale {
-    // top: 4.5vh;
-    // right: 14.5vh;
     height: 100px;
   }
 
   #sale-percentage {
     font-size: 31px;
-    // top: 8.2vh;
-    // right: 17.3vh;
+  }
+
+  #sale-percentage-show {
+    top: 3vw;
+    left: 2.5vw;
   }
 }
 
 @media (max-width: $breakpoint-laptop) {
   #sale {
-    // top: 5vh;
-    // right: 15vh;
     height: 110px;
   }
 
   #sale-percentage {
     font-size: 35px;
-    // top: 8.4vh;
-    // right: 17.4vh;
   }
 
   #sale-show {
@@ -133,35 +106,14 @@ $breakpoint-super-large: 1400px;
 @media (max-width: $breakpoint-tablet) {
   #sale-show {
     top: 15px;
-    left: 50px;
-    height: 90px;
+    left: 72vw;
+    height: 20vw;
   }
 
   #sale-percentage-show {
-    font-size: 30px;
-    top: 39px;
-    left: 65px;
-  }
-}
-
-@media (max-width: $breakpoint-super-duper-small) {
-  #sale-show-super-duper-small {
-    position: relative;
-    text-align: center;
-    display: initial;
-    height: 100px;
-    -webkit-filter: drop-shadow(5px 5px 5px #222);
-    filter: drop-shadow(5px 5px 5px #222);
-  }
-
-  #sale-percentage-show-super-duper-small {
-    position: absolute;
-    display: initial;
-    color: white;
-    font-weight: bold;
-    font-size: 32px;
-    top: 85px;
-    margin-left: -28px;
-    line-height: 80%;
+    width: 100%;
+    font-size: 6vw;
+    top: 8vw;
+    left: 77vw;
   }
 }
