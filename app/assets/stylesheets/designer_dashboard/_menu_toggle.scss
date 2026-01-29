@@ -51,6 +51,14 @@
 }
 
 @media (max-width: 380px) {
+  .designer-menu__xs-display {
+    justify-content: space-between;
+    gap: 8px;
+    a {
+      margin: 0 !important;
+      width: 100%;
+    }
+  }
   .designer-menu__mobile-settings-tab {
     display: none;
   }

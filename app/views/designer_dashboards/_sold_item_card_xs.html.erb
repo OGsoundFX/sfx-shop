@@ -1,15 +1,15 @@
 <div class="designer-dashboard__sales-grid">
-  <div class="submission-card-date">
+  <div class="submission-card-date text-center">
     <div><%= item.created_at.strftime("%b") %></div>
     <div><%= item.created_at.strftime("%d") %></div>
   </div>
-  <div class="submission-card-content d-flex align-items-center">
+  <div class="submission-card-content d-flex align-items-center text-center">
     <div class="sound-designer-dashboard__sales-image">
       <%= image_tag item.sfx_pack.photos.first, width: 42, height: 42 %>
     </div>
     <div><%= item.sfx_pack.title %></div>
   </div>
-  <div>
+  <div class="text-end">
     <% if item.order.amount_paid_currency.downcase == item.sfx_pack.currency %>
       <div><%= number_to_currency(item.amount_cents / 100.0, unit: "#{CurrencySymbolService.lookup(item.sfx_pack.currency)} ", separator: ",", precision: 2) %></div>
     <% else %>
