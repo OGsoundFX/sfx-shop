@@ -105,15 +105,14 @@ $breakpoint-hyper-large: 1600px;
 
 @media (max-width: $breakpoint-tablet) {
   #sale-show {
-    top: 15px;
-    left: 72vw;
-    height: 20vw;
+    top: 2vw;
+    left: 3vw;
+    height: 90px;
   }
 
   #sale-percentage-show {
-    width: 100%;
-    font-size: 6vw;
+    font-size: 30px;
     top: 8vw;
-    left: 77vw;
+    left: 7vw;
   }
 }
