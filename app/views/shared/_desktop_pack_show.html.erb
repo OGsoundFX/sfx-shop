@@ -4,6 +4,11 @@
       <!-- Cover Image -->
       <div class="col-md-5 sfx_card__image">
         <%= image_tag @pack.photos.first, alt: "Weather Effects Cover", class: "img-fluid sfx_card__cover" %>
+        <% if @discount%>
+          <div><%= image_tag asset_path('Promo_orange.png'), id: "sale-show" %>
+          </div>
+          <p id="sale-percentage-show"><%= @discount %>%<br>OFF</p>
+        <% end %>
       </div>
 
       <!-- Text Content -->
