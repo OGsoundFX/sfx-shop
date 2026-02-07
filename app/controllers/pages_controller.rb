@@ -61,5 +61,6 @@ class PagesController < ApplicationController
 
   def modal_closed
     session[:modal_closed] = true
+    redirect_to root_path
   end
 end
