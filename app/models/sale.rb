@@ -1,5 +1,5 @@
 class Sale < ApplicationRecord
   def amount_earned
-    Order.pluck(:sales, :amount_cents).select { |order| order[0] != {}}.select { |sale| sale[0].values[0][self.title] }.sum { |sale| sale[1] }
+    Order.where("created_at >= ? AND created_at <= ?", self.start_date, self.end_date).where(status: "paid").sum(&:amount_cents).to_f
   end
 end
