@@ -81,11 +81,16 @@
               <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
               <%= form_tag cart_order_path do %>
                 <%= hidden_field_tag 'pack_id', pack.id %>
-                <% if pack.sku.include?("FS") %>
-                  <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
+                <% if user_signed_in? && pack.sound_designer == current_user.sound_designer %>
+                    <%= link_to "Dashboard", designer_listings_path, class: "btn btn-orange text-white btn-sm ml-2" %>
                 <% else %>
-                  <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover" %>
+                  <% if pack.sku.include?("FS") %>
+                    <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
+                  <% else %>
+                    <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover" %>
+                  <% end %>
                 <% end %>
+
               <% end %>
             </div>
           </div>
