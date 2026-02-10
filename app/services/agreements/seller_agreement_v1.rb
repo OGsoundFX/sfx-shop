@@ -49,8 +49,27 @@ module Agreements
         <li>&nbsp &nbsp• Content must meet the Platform’s quality, technical, and editorial standards;</li>
         <li>&nbsp &nbsp• Seller agrees not to upload Content that is unlawful, infringing, misleading, defamatory, offensive, or otherwise harmful;</li>
         <li>&nbsp &nbsp• BamSFX may remove Content or suspend Seller accounts immediately in case of suspected violations.</li>
-      </ul>
+        <li>&nbsp &nbsp•
+          The Seller represents and warrants that all submitted Content is
+          <strong>entirely original, human-created sound design</strong> and that
+          <strong>no part of the Content has been generated, synthesized, trained, enhanced,
+          transformed, or derived from artificial intelligence, machine learning models,
+          or automated content generation tools</strong>, whether in whole or in part.
+        </li>
 
+        <li>&nbsp &nbsp•
+          The Seller further warrants that no artificial intelligence tools were used at any
+          stage of the creative process, including but not limited to sound generation,
+          dataset training, style transfer, reconstruction, upscaling, or automated editing.
+        </li>
+
+        <li>&nbsp &nbsp• 
+          Any breach of this warranty constitutes a <strong>material violation</strong> of this
+          Agreement and may result in immediate removal of the affected Content, suspension
+          or termination of the Seller’s account, forfeiture of unpaid balances, and any other
+          remedies available to BamSFX under applicable law.
+        </li>
+      </ul>
       <br>
       <br>
       <h2>4. Rights &amp; Ownership</h2>
