@@ -70,6 +70,7 @@ class DesignerDashboardsController < ApplicationController
 
   def update_pack_form
     @designer = @sfx_pack.sound_designer
+    @accept_ai = true
     redirect_to designer_listings_path, notice: "You do not have authorisation to access this page" if current_user != @designer.user && !current_user.admin?
   end
 
