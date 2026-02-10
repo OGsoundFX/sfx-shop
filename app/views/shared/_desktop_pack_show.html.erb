@@ -102,9 +102,13 @@
                     <%= hidden_field_tag 'pack_id', @pack.id %>
                     <%= submit_tag 'Buy now', class: "btn btn-outline-secondary btn-sm" %>
                   <% end %>
-                  <%= form_tag cart_order_path do %>
-                    <%= hidden_field_tag 'pack_id', @pack.id %>
-                    <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2 add-to-cart-hover" %>
+                  <% if user_signed_in? && @pack.sound_designer == current_user.sound_designer %>
+                      <%= link_to "Dashboard", designer_listings_path, class: "btn btn-orange text-white btn-sm ml-2" %>
+                  <% else %>
+                    <%= form_tag cart_order_path do %>
+                      <%= hidden_field_tag 'pack_id', @pack.id %>
+                      <%= submit_tag 'Add to Cart', class: "btn text-white btn-sm ml-2 add-to-cart-hover" %>
+                    <% end %>
                   <% end %>
                 <% end %>
               </div>
