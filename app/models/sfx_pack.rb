@@ -1,4 +1,6 @@
 class SfxPack < ApplicationRecord
+  attr_accessor :accept_ai
+
   TAGS = [
     "fantasy", "guns", "explosions", "natural", "disasters", "horror", "nature", "atmospheres",
     "catastrophe", "volcano", "eruption", "earthquake", "landslide", "avalanche", "scary", "monster",
@@ -33,7 +35,9 @@ class SfxPack < ApplicationRecord
     CURRENCY_SYMBOLS[currency]
   end
 
-  validates :title, :size_mb, :description, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
+  validates :title, :description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
+  validates :description, length: { minimum: 20 }
+  validates :description, length: { minimum: 5 }
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
@@ -42,6 +46,7 @@ class SfxPack < ApplicationRecord
   validates :bit_depth, inclusion: { in: [16, 24, 32]}
 
   validate :photo_presence, :categories_max, :tags_max
+  validates :accept_ai, inclusion: { in: %w(1) }
 
   def to_param
     "#{id} #{title}".parameterize

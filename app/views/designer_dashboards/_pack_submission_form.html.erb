@@ -2,7 +2,7 @@
   <div class="mb-3">
     <div class="pack-submission-form__photo-upload-wrapper">
       <div class="d-flex flex-column" data-controller="submission-image-preview">
-        <% if @sfx_pack.photos.attached? %>
+        <% if @sfx_pack.photos.first&.persisted? %>
           <%= image_tag @sfx_pack.photos.first, class: "pack-submission-form__image-placeholder", data: {submission_image_preview_target: "preview"} %>
         <% else %>
           <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1753797330/sfx_shop/placeholder_dbrvpk.png" alt="image placeholder" class="pack-submission-form__image-placeholder" data-submission-image-preview-target="preview">
@@ -104,6 +104,7 @@
     </div>
   </div>
   <hr>
+  <%= f.input :accept_ai, as: :boolean, label: "I guarantee that no part of the Content has been generated, synthesized, trained, enhanced, transformed, or derived from artificial intelligence.", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" }, checked: @accept_ai } %>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
