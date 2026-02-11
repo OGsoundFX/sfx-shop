@@ -72,9 +72,6 @@
             <% else %>
               <div class="d-flex align-items-end">
                 <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></strong>
-                <% if pack.currency_symbol != session[:currency] %>
-                  <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(pack.price, symbol: pack.currency_symbol) %>)</em>
-                <% end %>
               </div>
             <% end %>
             <div class="d-flex">
