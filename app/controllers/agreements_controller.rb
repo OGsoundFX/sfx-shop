@@ -1,5 +1,5 @@
 class AgreementsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
   before_action :allow_access, only: :seller_agreement
 
   def show
