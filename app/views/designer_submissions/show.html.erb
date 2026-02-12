@@ -1,5 +1,16 @@
 <div class="dark-background">
   <div class="submission-form__container" data-controller="designer-submission-form">
+    <% if @designer_submission.submission_links.count > 0 %>
+      <%= link_to thank_you_path(id: @designer_submission.id) do %>
+        <div class="submission-form__conditions-banner-designer submission-form__conditions-banner-designer-submit-btn text-center">
+          Click Here To Complete Your Submission
+        </div>
+      <% end %>
+    <% else %>
+      <div class="submission-form__conditions-banner-designer text-center">
+        To finalise your submission, please add some links to your work.
+      </div>
+    <% end %>
     <div class="submission-form__box mb-3">
       <h5 class="text-center mb-4"><strong>Share links to your work</strong></h5>
       <hr style="border-color: white">
@@ -20,9 +31,6 @@
           <%= render "designer_submissions/link_form", designer: @designer_submission, link: @submission_link %>
         <% end %>
       </div>
-      <% if @designer_submission.submission_links.count > 0 %>
-        <%= link_to "Complete Submission", thank_you_path(id: @designer_submission.id), class: "submission-form__submit btn btn-dark w-100 mt-3" %>
-      <% end %>
     </div>
     <div class="submission-form__box">
       <h5 class="text-center">Your Contact Information</h5>

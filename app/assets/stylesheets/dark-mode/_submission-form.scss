@@ -22,13 +22,20 @@ padding-top: 80px;
   margin: auto auto 8px auto
 }
 
-.submission-form__conditions-banner {
+.submission-form__conditions-banner, .submission-form__conditions-banner-designer {
   background-color: rgb(247, 198, 107);
   color: black;
-  width: 60%;
   padding: 8px 12px;
   border-radius: 8px;
   margin: 12px auto;
+}
+
+.submission-form__conditions-banner {
+  width: 60%;
+}
+
+.submission-form__conditions-banner-designer {
+  width: 40%;
 }
 
 .submission-form__about-applying {
@@ -47,6 +54,10 @@ padding-top: 80px;
 .submission-form__submit, .submission-form__edit, .submission-form__add-link {
   box-sizing: border-box;
   width: 100%;
+}
+
+.submission-form__conditions-banner-designer-submit-btn {
+  color: white !important;
 }
 
 .submission-form__add-link {
@@ -140,7 +151,7 @@ padding-top: 80px;
     margin: auto auto 8px 38px;
   }
 
-  .submission-form__conditions-banner {
+  .submission-form__conditions-banner, .submission-form__conditions-banner-designer {
     width: 90%;
   }
 
