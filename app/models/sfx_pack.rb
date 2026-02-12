@@ -1,6 +1,4 @@
 class SfxPack < ApplicationRecord
-  attr_accessor :accept_ai
-
   TAGS = [
     "fantasy", "guns", "explosions", "natural", "disasters", "horror", "nature", "atmospheres",
     "catastrophe", "volcano", "eruption", "earthquake", "landslide", "avalanche", "scary", "monster",
@@ -44,9 +42,9 @@ class SfxPack < ApplicationRecord
   }
   validates :sample_rate, inclusion: { in: [44100, 48000]}
   validates :bit_depth, inclusion: { in: [16, 24, 32]}
+  validates :accept_conditions, acceptance: true
 
   validate :photo_presence, :categories_max, :tags_max
-  validates :accept_ai, inclusion: { in: %w(1) }
 
   def to_param
     "#{id} #{title}".parameterize

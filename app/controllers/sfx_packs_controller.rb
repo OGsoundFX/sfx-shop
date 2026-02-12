@@ -92,7 +92,7 @@ class SfxPacksController < ApplicationController
 
     # Apply currency
     @sfx_pack.currency = @designer.user.legal_entity.payment_infos.last.preferred_currency.downcase
-    if @sfx_pack.save && sfx_pack_params[:accept_ai] == "1"
+    if @sfx_pack.save
       redirect_to designer_listings_path
     else
       render "designer_dashboards/pack_form", status: :unprocessable_entity
@@ -112,7 +112,7 @@ class SfxPacksController < ApplicationController
 
     @sfx_pack.update(sfx_pack_params)
     @sfx_pack.submitted! if @sfx_pack.removed?
-    if @sfx_pack.save && sfx_pack_params[:accept_ai] == "1"
+    if @sfx_pack.save
       redirect_to designer_listings_path
     else
       render "designer_dashboards/update_pack_form", status: :unprocessable_entity
@@ -125,6 +125,6 @@ class SfxPacksController < ApplicationController
   private
 
   def sfx_pack_params
-    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_ai)
+    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_conditions)
   end
 end

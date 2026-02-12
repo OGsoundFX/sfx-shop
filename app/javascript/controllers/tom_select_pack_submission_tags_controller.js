@@ -12,6 +12,12 @@ export default class extends Controller {
       placeholder: displayPlaceholder,
       maxItems: 10
     })
+
+    // clears the input field after select
+    this.tomSelect.on('item_add', () => {
+      this.tomSelect.setTextboxValue('')
+    })
+
     this.tomSelect.settings.placeholder = ""
   }
 }

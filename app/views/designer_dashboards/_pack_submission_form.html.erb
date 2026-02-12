@@ -30,7 +30,7 @@
   <%= f.input :category,
               collection: SfxPack.categories,
               selected: @sfx_pack.category.present? ? @sfx_pack.category.split(", ") : "",
-              multiple: true, label: "Category (Max. 3)",
+              multiple: true, label: "Categories (Max. 3)",
               input_html: {data: {controller: "tom-select-pack-submission-category", tom_select_pack_submission_category_placeholder_value: @sfx_pack.category.present? ? "false" : "true"},
               class: "pack-submission-form__tom-select-input"} %>
   <hr>
@@ -104,7 +104,7 @@
     </div>
   </div>
   <hr>
-  <%= f.input :accept_ai, as: :boolean, label: "I guarantee that no part of the Content has been generated, synthesized, trained, enhanced, transformed, or derived from artificial intelligence.", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" }, checked: @accept_ai } %>
+  <%= f.input :accept_conditions, as: :boolean, label: "I guarantee that no part of the Content has been generated, synthesized, trained, enhanced, transformed, or derived from artificial intelligence.", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" } } %>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
