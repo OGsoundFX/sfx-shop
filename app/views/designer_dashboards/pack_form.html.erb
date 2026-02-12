@@ -1,10 +1,12 @@
-<%= render "shared/left_pannel_mobile"%>
 <div class="dark-background">
   <div class="submission-form__container">
-    <div style="width: 60%; margin: auto auto 8px auto">
-      <%= link_to :back, class: "submission-form__back-button" do %>
+    <div class="submission-form__back-button-position">
+      <%= link_to designer_listings_path, class: "submission-form__back-button" do %>
         <i class="fas fa-arrow-left"></i>
       <% end %>
+    </div>
+    <div class="submission-form__conditions-banner">
+      Reminder: By submitting your sound effects, you guarantee that the sound effects submitted comply to the <strong>Content Submission Rules</strong> stated in the <strong><%= link_to "signed agreement", seller_agreement_path(@designer), target: "_blank" %></strong>.
     </div>
     <div class="pack-submission-form__box">
       <div class="text-center">

@@ -17,6 +17,20 @@ padding-top: 80px;
   }
 }
 
+.submission-form__back-button-position {
+  width: 60%;
+  margin: auto auto 8px auto
+}
+
+.submission-form__conditions-banner {
+  background-color: rgb(247, 198, 107);
+  color: black;
+  width: 60%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 12px auto;
+}
+
 .submission-form__about-applying {
   color: black !important;
   box-sizing: border-box;
@@ -121,6 +135,15 @@ padding-top: 80px;
 }
 
 @media (max-width: 768px) {
+  .submission-form__back-button-position {
+    width: 0;
+    margin: auto auto 8px 38px;
+  }
+
+  .submission-form__conditions-banner {
+    width: 90%;
+  }
+
   .submission-form__container {
     h3 {
       font-size: 1.4rem;
