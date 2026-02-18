@@ -7,6 +7,11 @@
     <div class="designer-menu__mobile">
       <%= render "designer_menu_mobile" %>
     </div>
+    <% if current_user.designer_submission.present? && current_user.valid_password?(current_user.designer_submission.access_token) %>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Don't forget to reset your password <%= link_to "Click here", edit_user_password_path, class: "btn btn-orange ms-4" %></h4>
+      </div>
+    <% end %>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
         <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
@@ -22,38 +27,40 @@
         <div class="designer-dashboard_next-payout">
           Next payout: <%= humanized_money(@payout_amount, symbol: "#{@currency_symbol} ") %>
         </div>
-        <div data-controller="display-calendar-designer-sales" >
-          <div class="d-flex">
-            <div class="designer-dashboard__sales-dates d-flex" data-display-calendar-designer-sales-target="dates" data-action="click->display-calendar-designer-sales#calendar">
-              <div id="designer-dashboard__sales-dates-display-desktop">
-                Sales from <%= @start_date.to_date.strftime("%b. %-d %Y") %> to <%= @end_date.to_date.strftime("%b. %-d %Y") %>
+        <% if @start_date && @end_date %>          
+          <div data-controller="display-calendar-designer-sales" >
+            <div class="d-flex">
+              <div class="designer-dashboard__sales-dates d-flex" data-display-calendar-designer-sales-target="dates" data-action="click->display-calendar-designer-sales#calendar">
+                <div id="designer-dashboard__sales-dates-display-desktop">
+                  Sales from <%= @start_date.to_date.strftime("%b. %-d %Y") %> to <%= @end_date.to_date.strftime("%b. %-d %Y") %>
+                </div>
+                <div id="designer-dashboard__sales-dates-display-mobile">
+                  <%= @start_date.to_date.strftime("%d/%m/%y") %> - <%= @end_date.to_date.strftime("%d/%m/%y") %>
+                </div>
+                <div id="designer-dashboard__sales-pen">
+                  <i class="fas fa-pen"></i>
+                </div>
               </div>
-              <div id="designer-dashboard__sales-dates-display-mobile">
-                <%= @start_date.to_date.strftime("%d/%m/%y") %> - <%= @end_date.to_date.strftime("%d/%m/%y") %>
-              </div>
-              <div id="designer-dashboard__sales-pen">
-                <i class="fas fa-pen"></i>
-              </div>
+              <%= link_to designer_sales_path do %>
+                <div id="designer-dashboard__sales-clear" data-display-calendar-designer-sales-target="reset">
+                  <i class="fas fa-times-circle"></i>
+                </div>
+              <% end %>
             </div>
-            <%= link_to designer_sales_path do %>
-              <div id="designer-dashboard__sales-clear" data-display-calendar-designer-sales-target="reset">
-                <i class="fas fa-times-circle"></i>
+            <%= simple_form_for :filters, url: designer_sales_path, method: :get, html: {class: "designer-dashboard__payout-form d-none", data: { display_calendar_designer_sales_target: "calendar"}} do |f| %>
+              <div class="d-flex justify-content-end">
+                <%= f.input :range_date,
+                            as: :string,
+                            label: false,
+                            placeholder: "Select Date Range",
+                            required: false,
+                            wrapper_input_html: { class: "designer-dashboard__payout-year-select" },
+                            input_html: { data: { controller: "date-picker-designer-sales" } } %>
+                <%= f.button :submit, "GO", class: "btn btn-secondary"%>
               </div>
             <% end %>
           </div>
-          <%= simple_form_for :filters, url: designer_sales_path, method: :get, html: {class: "designer-dashboard__payout-form d-none", data: { display_calendar_designer_sales_target: "calendar"}} do |f| %>
-            <div class="d-flex justify-content-end">
-              <%= f.input :range_date,
-                          as: :string,
-                          label: false,
-                          placeholder: "Select Date Range",
-                          required: false,
-                          wrapper_input_html: { class: "designer-dashboard__payout-year-select" },
-                          input_html: { data: { controller: "date-picker-designer-sales" } } %>
-              <%= f.button :submit, "GO", class: "btn btn-secondary"%>
-            </div>
-          <% end %>
-        </div>
+        <% end %>
       </div>
       <div class="designer-dashboard__sales-desktop">
         <%= render "sold_items_desktop" %>

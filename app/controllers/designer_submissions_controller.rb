@@ -2,15 +2,16 @@ class DesignerSubmissionsController < ApplicationController
   before_action :find_designer_submission, only: [:show, :update]
 
   def new
-    redirect_to designer_submission_path(current_user.designer_submission.access_token) if current_user.designer_submission.present?
+    redirect_to designer_submission_path(current_user.designer_submission.access_token) if user_signed_in? && current_user.designer_submission.present?
     @designer_submission = DesignerSubmission.new
     @designer_submission.submission_links.build
   end
 
   def create
     @designer_submission = DesignerSubmission.new(designer_submission_params)
-    @designer_submission.email = current_user.email
-    @designer_submission.user = current_user
+    # @designer_submission.email = current_user.email
+    # @designer_submission.user = current_user
+    @designer_submission.user = User.find_by_email("olivier@bamsfx.com") if Rails.env.development?
     @designer_submission.profile_created!
     if @designer_submission.save
       redirect_to designer_submission_url(access_token: @designer_submission.access_token), notice: "Information successfully submitted"
@@ -20,7 +21,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def show
-    redirect_to designer_listings_path if current_user.sound_designer.present?
+    # redirect_to designer_listings_path if current_user.sound_designer.present?
     @submission_link = SubmissionLink.new
   end
 
@@ -30,7 +31,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def thank_you
-    current_user.send_confirmation_instructions unless current_user.confirmed?
+    # current_user.send_confirmation_instructions unless current_user.confirmed?
     @designer_submission = DesignerSubmission.find(params[:id])
     @designer_submission.submited!
   end
@@ -43,7 +44,7 @@ class DesignerSubmissionsController < ApplicationController
   private
 
   def designer_submission_params
-    params.require(:designer_submission).permit(:first_name, :last_name, :location, :individual_tracks)
+    params.require(:designer_submission).permit(:email, :first_name, :last_name, :location, :individual_tracks)
   end
 
   def find_designer_submission

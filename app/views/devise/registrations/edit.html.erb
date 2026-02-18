@@ -17,17 +17,22 @@
                   required: false,
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :current_password,
-                  hint: "we need your current password to confirm your changes",
+                  hint: if current_user.designer_submission.present? && current_user.valid_password?(current_user.designer_submission.access_token)
+                    ""
+                  else
+                    "we need your current password to confirm your changes"
+                  end,
                   required: true,
                   input_html: { autocomplete: "current-password" } %>
-      <%= f.input :username,
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "username" }%>
-      <%= f.input :location,
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "location" }%>
+      <% if current_user.designer_submission.present? && current_user.valid_password?(current_user.designer_submission.access_token) %>
+        <small class="mt-3">Click (copy) and paste token bellow to current password: </small>
+        <p><strong class="btn btn-orange"
+                   data-controller="copy-token-to-clipboard"
+                   data-copy-token-to-clipboard-token-value="<%= current_user.designer_submission.access_token %>"
+                   data-action="click->copy-token-to-clipboard#copyToken">
+                   <%= current_user.designer_submission.access_token %>
+        </strong></p>
+      <% end %>
     </div>
 
     <div class="form-actions">
@@ -35,12 +40,4 @@
     </div>
   <% end %>
   <br>
-
-  <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-  <div class="mb-4">
-    <%= link_to "Back", :back %>
-  </div>
 </div>
