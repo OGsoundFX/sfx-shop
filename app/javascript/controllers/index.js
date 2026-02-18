@@ -22,6 +22,9 @@ application.register("collection-checkout-modal", CollectionCheckoutModalControl
 import CollectionNameController from "./collection_name_controller"
 application.register("collection-name", CollectionNameController)
 
+import CopyTokenToClipboardController from "./copy_token_to_clipboard_controller"
+application.register("copy-token-to-clipboard", CopyTokenToClipboardController)
+
 import DatePickerDesignerSalesController from "./date_picker_designer_sales_controller"
 application.register("date-picker-designer-sales", DatePickerDesignerSalesController)
 

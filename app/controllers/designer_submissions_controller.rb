@@ -21,7 +21,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def show
-    redirect_to designer_listings_path if current_user.sound_designer.present?
+    # redirect_to designer_listings_path if current_user.sound_designer.present?
     @submission_link = SubmissionLink.new
   end
 
@@ -31,7 +31,7 @@ class DesignerSubmissionsController < ApplicationController
   end
 
   def thank_you
-    current_user.send_confirmation_instructions unless current_user.confirmed?
+    # current_user.send_confirmation_instructions unless current_user.confirmed?
     @designer_submission = DesignerSubmission.find(params[:id])
     @designer_submission.submited!
   end

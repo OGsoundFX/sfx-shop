@@ -1,17 +1,21 @@
 <h1>Hello <%= @designer.first_name %></h1>
-<h3>Subject: Your submission to BamSFX.com has been approved 🎉</h3>
+<h2>Your submission to BamSFX.com has been approved 🎉</h2>
 
 <p>Hello there,</p>
 
 <p>This is great news! We are happy to welcome you to the <strong><a href="https://www.bamsfx.com">BamSFX</a></strong> platform 👋</p>
-<p>Only one step to go before you can start selling your SOund Effects! 🚀</p>
-<p>To move forward, please follow the process described bellow:</p>
-
-<p>1️⃣ Create your <strong>👉 <%= link_to "Sound Designer profile", new_sound_designer_url %> 👈</strong></p>
-<em><small>Note: you will first need to login with your email address: <%= @designer.user.email %></small></em>
-<p>2️⃣ You will be automatically redirected to your Designer Dashboard 🎧</p>
-<p>3️⃣ Complete your Seller Profile 🧑‍🏫</p>
-<p>4️⃣ Read and Sign the Seller Agreement 📑</p>
+<p>Only one step to go before you can start selling your Sound Effects! 🚀</p>
+<h3>To move forward, please follow the process described bellow:</h3>
+<p>1️⃣ A user account was created for you, with the following credentials:</p>
+<ul>
+  <li>Email address: <%= @designer.user.email %></li>
+  <li>Temporary password: <%= @designer.access_token %></li>
+</ul>
+<h4><strong>👉 <%= link_to "Sign in here, and reset your password", new_user_session_url %> 👈</strong></h4>
+<p>2️⃣ Create your <strong>👉 <%= link_to "Sound Designer profile", new_sound_designer_url %> 👈</strong></p>
+<p>3️⃣ You will be automatically redirected to your Designer Dashboard 🎧</p>
+<p>4️⃣ Complete your Seller Profile 🧑‍🏫</p>
+<p>5️⃣ Read and Sign the Seller Agreement 📑</p>
 
 <p>If you have any questions, feel free to reply to this email. We are looking forward to hearing your work!</p>
 

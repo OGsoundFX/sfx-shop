@@ -7,13 +7,18 @@
     <div class="designer-menu__mobile">
       <%= render "designer_menu_mobile" %>
     </div>
+    <% if current_user.designer_submission.present? && current_user.valid_password?(current_user.designer_submission.access_token) %>
+      <div class="designer-dashboard__no-payout">
+        <h4 class="designer-dashboard__info-banner"> Don't forget to reset your password <%= link_to "Click here", edit_user_registration_path, class: "btn btn-secondary ms-4" %></h4>
+      </div>
+    <% end %>
     <% if @designer.invalid?%>
       <div class="designer-dashboard__no-payout">
-        <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-reject" %></h4>
+        <h4 class="designer-dashboard__info-banner"> Please complete your profile to continue <%= link_to "Click here", designer_main_dashboard_path(@designer), class: "btn btn-secondary ms-4" %></h4>
       </div>
     <% elsif !@agreement_signed && @designer.valid? %>
       <div class="designer-dashboard__no-payout">
-        <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-orange ms-4"%></h4>
+        <h4 class="designer-dashboard__info-banner"> Please review the Seller Agreement to proceed <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-secondary ms-4"%></h4>
       </div>
     <% elsif !current_user.legal_entity.accepted? && !current_user.admin?%>
       <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss">Your submission is pending approval</div>
