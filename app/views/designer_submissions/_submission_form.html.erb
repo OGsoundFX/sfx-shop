@@ -1,6 +1,7 @@
 <h5 class="text-center mb-4"><strong>Contact Information</strong></h5>
 <hr>
 <%= simple_form_for designer_submission, data: {designer_submission_form_target: "mainForm"} do |f| %>
+  <%= f.input :email %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :location %>

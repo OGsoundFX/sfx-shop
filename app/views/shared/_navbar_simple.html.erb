@@ -30,7 +30,7 @@
       <% unless user_signed_in? && current_user.admin? %>
         <% if !user_signed_in? || (!current_user.designer_submission.present? && !current_user.sound_designer.present?) %>
           <li class="nav-item dropdown">
-            <%= link_to "Become a Seller", new_sound_designer_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
+            <%= link_to "Become a Seller", new_designer_submission_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
           </li>
         <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.submited? %>
           <li class="nav-item dropdown">
@@ -116,7 +116,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Become a Seller", new_sound_designer_path, class: "nav-link text-white" %>
+          <%= link_to "Become a Seller", new_designer_submission_path, class: "nav-link text-white" %>
         </li>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>

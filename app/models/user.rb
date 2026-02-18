@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one :legal_entity, dependent: :destroy
   has_many :payment_infos, through: :legal_entity
   has_one :cart, dependent: :destroy
-  has_one :designer_submission, dependent: :destroy
+  # has_one :designer_submission, dependent: :destroy
   has_one :sound_designer, dependent: :destroy
 
   def send_confirmation_notification?
