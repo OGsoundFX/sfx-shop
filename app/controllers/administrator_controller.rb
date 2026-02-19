@@ -112,7 +112,6 @@ class AdministratorController < ApplicationController
   def submission_accepted
     submission = DesignerSubmission.find(params[:id])
     submission.accepted!
-    DesignerMailer.submission_accepted(submission).deliver_later
     if User.find_by(email: submission.email)
       user = User.find_by(email: submission.email)
     else
@@ -121,6 +120,7 @@ class AdministratorController < ApplicationController
     user.designer = true
     user.save
     submission.update(user: user)
+    DesignerMailer.submission_accepted(submission).deliver_later
     redirect_to submissions_path
   end
 
