@@ -22,11 +22,13 @@ class ApplicationController < ActionController::Base
       # for testing locally
       session[:currency] = '€'
       # session[:currency] = '$'
+      session[:location] = "DE"
     else
       location = Geocoder.search(request.remote_ip).first
       country = location&.country_code
       eurozone_countries = %w[AT BE CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES]
       session[:currency] = eurozone_countries.include?(country) ? '€' : '$'
+      session[:location] = country || "US"
     end
   end
 end

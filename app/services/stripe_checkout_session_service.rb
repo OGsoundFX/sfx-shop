@@ -32,11 +32,13 @@ class StripeCheckoutSessionService
         if item.payout_currency != item.currency
           # fetch exchange rate:
           exchange_rate = CurrencyRate.where(base: item.payout_currency.upcase).order(created_at: :desc).first.rate.to_f
-          payout_amount = ((item.amount_cents * 0.9344) - fees) * 0.7
+          # payout_amount = ((item.amount_cents * 0.9344) - fees) * 0.7
+          payout_amount = PayoutCalculatorService.call(item.amount_cents)
           item.payout_amount_cents = payout_amount / exchange_rate
           item.stripe_fees_cents = fees / exchange_rate
         else
-          payout_amount = ((item.amount_cents * 0.9344) - fees) * 0.7
+          # payout_amount = ((item.amount_cents * 0.9344) - fees) * 0.7
+          payout_amount = PayoutCalculatorService.call(item.amount_cents)
           item.payout_amount_cents = payout_amount
           item.stripe_fees_cents = fees
         end
