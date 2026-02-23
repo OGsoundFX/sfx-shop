@@ -161,7 +161,10 @@ class CartsController < ApplicationController
       # @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
       @tracks = SingleTrack.where(id: [@items.sinlge_tracks])
     end
-    @vat = VatCalculatorService.vat_amount(@sum) if @sum != nil
+    vat_rate = PayoutCalculatorService.vat_rate_for_location(session[:location])
+    @vat = VatCalculatorService.vat_amount(@sum, vat_rate) if @sum != nil
+    @vat_rate = PayoutCalculatorService.vat_rate_for_location(session[:location]) * 100
+    @vat_rate = @vat_rate.to_i if @vat_rate.to_i == @vat_rate
   end
 
   def delete_item

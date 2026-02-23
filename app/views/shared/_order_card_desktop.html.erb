@@ -1,4 +1,7 @@
 <% @orders.each do |order| %>
+  <% vat_rate = (PayoutCalculatorService.vat_rate_for_location(order.location) * 100).round(2) %>
+  <% vat_rate = vat_rate.to_i if vat_rate.to_i == vat_rate %>
+  <% vat_amount = PayoutCalculatorService.vat_amount(order.amount_cents, order.location) %>
   <% collection = Collection.find(order.collections.first) if order.collections != [] %>
   <% @tracks = order.tracks %>
   <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
@@ -41,7 +44,7 @@
       <div class="total-dashboard" >
         <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money(order.amount_cents.to_f / 100, symbol: session[:currency]) %></strong></p>
         <div class="d-flex justify-content-between dashboard-vat-display">
-          <div>VAT (19% inclusive)</div><div><%= humanized_money(VatCalculatorService.vat_amount(order.amount_cents.to_f / 100), symbol: session[:currency]) %></div>
+          <div>VAT (<%= vat_rate %>% inclusive)</div><div><%= humanized_money(vat_amount / 100.0, symbol: session[:currency]) %></div>
         </div>
         <% if order.coupon %>
           <p>Total amount paid: <strong><%= humanized_money(order.amount_paid_cents.to_f / 100, symbol: session[:currency]) %></strong> </p>

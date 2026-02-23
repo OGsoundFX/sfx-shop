@@ -57,12 +57,23 @@ class PayoutCalculatorService
   "SA": 0.15,
   "AE": 0.05,
   "QA": 0.00,
-  "IL": 0.17
-}
-  def self.call(amount)
-    vat_rate = VAT_RATES[session[:location]] || 0.20 # default to 20% if location not found
+  "IL": 0.17,
+  "default": 0.19
+  }
+  def self.call(amount, location)
+    vat_rate = VAT_RATES[location&.to_sym] || VAT_RATES[:default]
+    p vat_rate
     payout_rate = 0.8
     net = amount / (1 + vat_rate)
     (net * payout_rate).round(2)
+  end
+
+  def self.vat_rate_for_location(location)
+    VAT_RATES[location&.to_sym] || VAT_RATES[:default]
+  end
+
+  def self.vat_amount(amount, location)
+    vat_rate = vat_rate_for_location(location)
+    (amount - (amount / (1 + vat_rate))).round(2)
   end
 end

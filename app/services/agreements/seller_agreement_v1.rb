@@ -63,7 +63,7 @@ module Agreements
           dataset training, style transfer, reconstruction, upscaling, or automated editing.
         </li>
 
-        <li>&nbsp &nbsp• 
+        <li>&nbsp &nbsp•
           Any breach of this warranty constitutes a <strong>material violation</strong> of this
           Agreement and may result in immediate removal of the affected Content, suspension
           or termination of the Seller’s account, forfeiture of unpaid balances, and any other
@@ -110,8 +110,8 @@ module Agreements
       <br>
       <h4>7.1 Commission</h4>
       <ul>
-        <li>&nbsp &nbsp• BamSFX retains <strong>30%</strong> of the Net Revenue from each sale made through the Platform.</li>
-        <li>&nbsp &nbsp• The Seller receives the remaining <strong>70%</strong> of the Net Revenue.</li>
+        <li>&nbsp &nbsp• BamSFX retains <strong>20%</strong> of the Net Revenue from each sale made through the Platform.</li>
+        <li>&nbsp &nbsp• The Seller receives the remaining <strong>80%</strong> of the Net Revenue.</li>
       </ul>
 
       <br>
@@ -148,14 +148,17 @@ module Agreements
       </p>
 
       <ul>
-        <li>&nbsp &nbsp• Example sale price: <strong>€50.00</strong></li>
-        <li>&nbsp &nbsp• VAT (19%, collected and remitted by BamSFX): <strong>€7.98</strong></li>
-        <li>&nbsp &nbsp• Net after VAT: <strong>€42.02</strong></li>
-        <li>&nbsp &nbsp• Stripe processing and currency conversion fees (example): <strong>€2.00</strong></li>
-        <li>&nbsp &nbsp• Net Revenue: <strong>€40.02</strong></li>
-        <li>&nbsp &nbsp• BamSFX commission (30%): <strong>€12.01</strong></li>
-        <li>&nbsp &nbsp• Seller share (70%): <strong>€28.01</strong></li>
+        <li>Example sale price: <strong>€50.00</strong></li>
+        <li>VAT (19%, collected and remitted by BamSFX): <strong>€7.98</strong></li>
+        <li>Net after VAT: <strong>€42.02</strong></li>
+        <li>BamSFX commission (20%): <strong>€8.40</strong></li>
+        <li>Seller share (80%): <strong>€33.62</strong></li>
       </ul>
+
+      <p>
+        Payment processing fees, currency conversion fees, and PayPal payout fees may apply
+        separately and are borne by the Seller.
+      </p>
 
       <br>
       <p>
