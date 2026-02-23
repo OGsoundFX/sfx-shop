@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
   def set_currency
     if Rails.env.development?
       # for testing locally
-      session[:currency] = '€'
+      session[:currency] = '$'
       # session[:currency] = '$'
-      session[:location] = "CH"
+      session[:location] = "DE"
     else
       location = Geocoder.search(request.remote_ip).first
       country = location&.country_code

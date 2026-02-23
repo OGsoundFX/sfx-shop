@@ -24,7 +24,7 @@ class StripeCheckoutSessionService
         # if payment currency != euros make sure conversion is taken in account
         if order.amount_paid_currency != "EUR"
           # recalculating fees in the initial payment currency, because stripe automatically converts them in euros
-           fees = ((total_fees/ balance_tx.exchange_rate.to_f) / order.amount_cents) * item.amount_cents
+          fees = ((total_fees/ balance_tx.exchange_rate.to_f) / order.amount_cents) * item.amount_cents
         else
           fees = (total_fees / order.amount_cents.to_f) * item.amount_cents
         end
