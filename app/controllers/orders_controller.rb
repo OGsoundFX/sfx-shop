@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
         sfx_pack_price = sfx_pack.price
       end
       order = Order.create!(
+        location: session[:location],
         product_link: sfx_pack.product_link,
         sfx_pack: sfx_pack, amount: sfx_pack_price,
         amount_paid_currency: CurrencySymbolService.lookup(params[:currency]).upcase,
@@ -35,7 +36,7 @@ class OrdersController < ApplicationController
           amount: (sfx_pack_price.to_i * 100),
           currency: CurrencySymbolService.lookup(params[:currency]),
           quantity: 1,
-          tax_rates: [ENV['STRIPE_TAX_RATE']]
+          # tax_rates: [ENV['STRIPE_TAX_RATE']]
         }],
         metadata: {
           order_id: order.id
@@ -56,7 +57,7 @@ class OrdersController < ApplicationController
         amount_cents: order.amount,
         currency: order.amount_paid_currency.downcase,
         payout_amount_cents: 0,
-        payout_currency: session[:currency],
+        payout_currency: sfx_pack.currency,
         status: 'pending',
         discount: @discount ? true : false,
         discount_type: @discount ? 'sale' : 'none',
@@ -195,10 +196,11 @@ class OrdersController < ApplicationController
     if current_user
       # adding the VAT on all items
       line_items.each do |item|
-        item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
+        # item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
       end
       # creating order instance
       order = Order.create!(
+        location: session[:location],
         product_link: "",
         sfx_pack: sfx_pack,
         amount: total_amount,
@@ -260,7 +262,8 @@ class OrdersController < ApplicationController
           amount_cents: item[:amount],
           currency: order.amount_paid_currency.downcase,
           payout_amount_cents: 0,
-          payout_currency: session[:currency],
+          # payout_currency: session[:currency],
+          payout_currency: pack.currency,
           status: 'pending',
           discount: discount,
           discount_type: discount_type,

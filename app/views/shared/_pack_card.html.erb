@@ -75,7 +75,6 @@
               </div>
             <% end %>
             <div class="d-flex">
-              <%= link_to "Details", sfx_pack_path(pack), class: "btn btn-outline-secondary btn-sm" %>
               <%= form_tag cart_order_path do %>
                 <%= hidden_field_tag 'pack_id', pack.id %>
                 <% if user_signed_in? && pack.sound_designer == current_user.sound_designer %>
