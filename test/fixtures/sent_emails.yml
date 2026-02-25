@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prospect: one
+  date: 2026-02-25
+  email_sequence: MyString
+  responded: false
+  response_type: 1
+  response: MyText
+
+two:
+  prospect: two
+  date: 2026-02-25
+  email_sequence: MyString
+  responded: false
+  response_type: 1
+  response: MyText

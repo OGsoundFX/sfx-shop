@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_22_140225) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_25_163554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -230,6 +230,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_22_140225) do
     t.index ["legal_entity_id"], name: "index_payouts_on_legal_entity_id"
   end
 
+  create_table "prospects", force: :cascade do |t|
+    t.string "email"
+    t.string "artist_name"
+    t.string "comment"
+    t.string "source"
+    t.string "link"
+    t.boolean "onboard"
+    t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "content"
@@ -252,6 +264,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_22_140225) do
     t.integer "packs", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sent_emails", force: :cascade do |t|
+    t.bigint "prospect_id", null: false
+    t.date "date"
+    t.string "email_sequence"
+    t.boolean "responded"
+    t.integer "response_type"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prospect_id"], name: "index_sent_emails_on_prospect_id"
   end
 
   create_table "sfx_packs", force: :cascade do |t|
@@ -504,6 +528,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_22_140225) do
   add_foreign_key "payouts", "legal_entities"
   add_foreign_key "reviews", "sfx_packs"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sent_emails", "prospects"
   add_foreign_key "sfx_packs", "sound_designers"
   add_foreign_key "single_tracks", "sound_designers"
   add_foreign_key "sold_items", "orders"
