@@ -3,6 +3,8 @@ class Prospect < ApplicationRecord
   has_many :sent_emails, dependent: :destroy
   enum priority: { low: 0, medium: 1, high: 2 }
 
+  validates :email, presence: true, uniqueness: true
+
   private
 
   def default_onboard
