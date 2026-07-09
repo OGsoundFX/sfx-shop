@@ -16,9 +16,5 @@ FactoryBot.define do
     accept_conditions { true }
 
     association :sound_designer
-
-    after(:build) do |pack|
-      pack.photos.attach(io: File.open(Rails.root.join('spec/fixtures/files/sample.jpg')), filename: 'sample.jpg', content_type: 'image/jpeg')
-    end
   end
 end
