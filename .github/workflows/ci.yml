@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master", "specs/*", "CI/*", "FE/*" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Define services needed for your tests (Database, Redis, etc.)
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version # Reads version from your .ruby-version file
+          bundler-cache: true         # Runs 'bundle install' and caches gems
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpq-dev
+
+      - name: Create Database
+        run: bin/rails db:create
+
+      - name: Run Migrations
+        run: bin/rails db:migrate
+
+      # - name: Run Linters (Rubocop)
+      #   run: bundle exec rubocop --format progress --format github
+
+      # - name: Run Security Scanner (Brakeman)
+      #   run: bundle exec brakeman
+
+      - name: Run Tests (RSpec)
+        run: bundle exec rspec

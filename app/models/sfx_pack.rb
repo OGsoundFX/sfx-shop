@@ -19,6 +19,8 @@ class SfxPack < ApplicationRecord
   monetize :price_cents
   has_many :sold_items, dependent: :nullify
 
+  validate :price_presence
+
   # enum for status
   enum status: { draft: 0, submitted: 1, live: 2, declined:3, removed: 4 }
 
@@ -35,7 +37,7 @@ class SfxPack < ApplicationRecord
 
   validates :title, :description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
   validates :description, length: { minimum: 20 }
-  validates :description, length: { minimum: 5 }
+  # validates :description, length: { minimum: 5 }
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
@@ -45,6 +47,13 @@ class SfxPack < ApplicationRecord
   validates :accept_conditions, acceptance: true
 
   validate :photo_presence, :categories_max, :tags_max
+
+  def price_presence
+    if price_cents.to_i <= 0
+      errors.add(:price, "can't be blank")
+      errors.add(:price_cents, "can't be blank")
+    end
+  end
 
   def to_param
     "#{id} #{title}".parameterize
@@ -63,12 +72,16 @@ class SfxPack < ApplicationRecord
   end
 
   def categories_max
+    return if category.blank?
+
     if category.split(", ").size > 3
       errors.add(:category, ": You can only select 3 categories maximum")
     end
   end
 
   def tags_max
+    return if category.blank?
+
     if tags.split(", ").size > 10
       errors.add(:tags, ": You can only select 10 tags maximum")
     end
