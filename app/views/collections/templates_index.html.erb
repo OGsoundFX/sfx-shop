@@ -1,3 +1,12 @@
+<% if session[:currency] != "$" %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
+<% if user_signed_in? && Collection.where(user: current_user).where(purchased: false).present? %>
+  <% custom_collection =  Collection.where(user: current_user).where(purchased: false).last %>
+<% end %>
+
 <div class="content">
   <div class="banner">
     <h1 class="padding-navbar font-permanent-marker">Build your own Sound Pack!!!</h1>
@@ -24,10 +33,15 @@
           </div>
         -->
           <div class="">
-            <%= render 'shared/collection_card' %>
+            <%= render 'shared/collection_card', custom_collection: custom_collection, conversion_rate: conversion_rate %>
           </div>
         <% else %>
-          <h3>No collections at this time</h3>
+          <% if custom_collection %>
+            <h3>Continue building your custom pack!</h3>
+          <% else %>
+            <h3>Create your first custom pack!</h3>
+          <% end %>
+          <%= render 'shared/create_card', custom_collection: custom_collection, conversion_rate: conversion_rate %>
         <% end %>
       </div>
     </div>
