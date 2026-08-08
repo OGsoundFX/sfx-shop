@@ -1,6 +1,6 @@
 class Collection < ApplicationRecord
   belongs_to :user
-  belongs_to :template_collection
+  belongs_to :template_collection, optional: true
   has_many :download_links, dependent: :destroy
 
   monetize :price_cents
