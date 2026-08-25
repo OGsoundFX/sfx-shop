@@ -13,7 +13,7 @@ gem 'rails', '~> 7.1.2' # or the latest 7.1.x
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 7.0'
 # Use SCSS for stylesheets
 # /note/👇 removed for rails 7 upgrade
 # gem 'sass-rails', '>= 6'
@@ -109,7 +109,7 @@ gem 'cssbundling-rails'  # for CSS (tailwind/sass/postcss)
 gem 'stimulus-rails'     # if using Stimulus
 
 # Backgroud jobs
-gem 'solid_queue'
+gem 'solid_queue', '0.3.1'
 gem "mission_control-jobs"
 
 # updating rake
