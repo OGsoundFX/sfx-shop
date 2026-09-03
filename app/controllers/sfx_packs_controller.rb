@@ -93,6 +93,7 @@ class SfxPacksController < ApplicationController
     # Apply currency
     @sfx_pack.currency = @designer.user.legal_entity.payment_infos.last.preferred_currency.downcase
     if @sfx_pack.save
+      AdminMailer.new_pack_submission(@sfx_pack).deliver_later
       redirect_to designer_listings_path
     else
       render "designer_dashboards/pack_form", status: :unprocessable_entity

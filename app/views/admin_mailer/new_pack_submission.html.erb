@@ -1,0 +1,14 @@
+<h1>New Pack Submission</h1>
+<p>A new pack has been submitted for review: <%= @pack_submission.title %></p>
+<ul>
+  <li>Designer: <%= @pack_submission.sound_designer.artist_name %></li>
+  <li>Email: <%= @pack_submission.sound_designer.user.email %></li>
+  <li>Pack Description: <%= @pack_submission.description %></li>
+  <li>Pack Price: <%= number_to_currency(@pack_submission.price, unit: @pack_submission.currency.upcase) %></li>
+  <li><%= humanized_money(@pack_submission.price, symbol: @pack_submission.currency.upcase) %></li>
+  <li>Size (MB): <%= @pack_submission.size_mb %></li>
+  <li>Duration: <%= @pack_submission.duration %> mn</li>
+  <li>Pack Category: <%= @pack_submission.category %></li>
+</ul>
+<%= link_to "View Submission", sfx_pack_path(@pack_submission) %>
+
