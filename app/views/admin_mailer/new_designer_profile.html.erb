@@ -1,0 +1,8 @@
+<h1>New Designer Profile Submitted</h1>
+<p>A new designer profile has been submitted: <%= @designer.artist_name %></p>
+<ul>
+  <li>Email: <%= @designer.user.email %></li>
+  <li>Location: <%= @designer.location %></li>
+  <li>Bio: <%= @designer.bio %></li>
+</ul>
+<%= link_to "View Profile", sound_designer_url(@designer) %>

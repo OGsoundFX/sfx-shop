@@ -5,6 +5,12 @@ class AdminMailer < ApplicationMailer
     mail(to: emails, subject: "New seller submission to BamSFX!")
   end
 
+  def new_designer_profile(designer)
+    emails = User.where(admin: true).pluck(:email)
+    @designer = designer
+    mail(to: emails, subject: "New Designer Profile Submitted")
+  end
+
   def new_pack_submission(pack)
     emails = User.where(admin: true).pluck(:email)
     @pack_submission = pack
