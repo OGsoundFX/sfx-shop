@@ -102,7 +102,7 @@
             </div>
           <% else %>
             <%= link_to "Re-send Confirmation", resend_confirmation_path(@legal_entity.user), class: "btn btn-reject ms-3", data: { turbo_method: "POST" } %>
-            <span class="ms-3"><small><em>(last sent:<%= @legal_entity.user.confirmation_sent_at.strftime("%B %d, %Y") %>)</em></small></span>
+            <span class="ms-3"><small><em>(last sent: <%= @legal_entity.user.confirmation_sent_at.strftime("%B %d, %Y") %> at <%= @legal_entity.user.confirmation_sent_at.in_time_zone("Europe/Berlin").strftime("%I:%M %p") %>)</em></small></span>
           <% end %>
         </div>
       </div>
