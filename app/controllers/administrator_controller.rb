@@ -132,6 +132,7 @@ class AdministratorController < ApplicationController
   def resend_confirmation
     user = User.find(params[:user_id])
     user.send_confirmation_instructions
+    user.update_column(:confirmation_sent_at, Time.current)
     redirect_to legal_entity_path(user.legal_entity)
   end
 
