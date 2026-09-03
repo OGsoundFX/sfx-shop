@@ -13,6 +13,7 @@ class LegalEntitiesController < ApplicationController
     @legal_entity.pending!
     if @legal_entity.save
       DesignerMailer.submission_completed(@legal_entity).deliver_later
+      AdminMailer.new_designer_profile(@legal_entity.sound_designer).deliver_later
       redirect_to designer_listings_path, notice: "Legal entity created successfully."
     else
       render :new, status: :unprocessable_entity
