@@ -15,6 +15,7 @@ class DesignerSubmissionsController < ApplicationController
     @designer_submission.profile_created!
     if @designer_submission.save
       AdminMailer.new_designer_submission(@designer_submission).deliver_later
+      DesignerMailer.submission_received(@designer_submission).deliver_later
       redirect_to designer_submission_url(access_token: @designer_submission.access_token), notice: "Information successfully submitted"
     else
       render :new, status: :unprocessable_entity
