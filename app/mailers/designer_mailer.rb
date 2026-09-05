@@ -1,4 +1,10 @@
 class DesignerMailer < ApplicationMailer
+  def submission_received(designer_submission)
+    email = designer_submission.email
+    @designer = designer_submission
+    mail(to: email, subject: "Your Seller Profile is under review!")
+  end
+
   def incomplete_submission(submission)
     email = submission.email
     @designer = submission
