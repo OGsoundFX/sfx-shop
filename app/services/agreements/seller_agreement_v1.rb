@@ -156,13 +156,7 @@ module Agreements
       </ul>
 
       <p>
-        Payment processing fees, currency conversion fees, and PayPal payout fees may apply
-        separately and are borne by the Seller.
-      </p>
-
-      <br>
-      <p>
-        Additional PayPal payout fees may apply and are borne by the Seller.
+        Extra processing fees, such as payment system fees (Paypal, Stripe...), currency conversion fees, and other applicable fees will not be charged to the Seller and are borne by BamSFX.
       </p>
 
       <br>

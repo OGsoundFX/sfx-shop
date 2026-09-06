@@ -62,7 +62,6 @@ class PayoutCalculatorService
   }
   def self.call(amount, location)
     vat_rate = VAT_RATES[location&.to_sym] || VAT_RATES[:default]
-    p vat_rate
     payout_rate = 0.8
     net = amount / (1 + vat_rate)
     (net * payout_rate).round(2)
