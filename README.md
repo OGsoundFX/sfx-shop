@@ -156,8 +156,8 @@ Waveform [methods](http://wavesurfer-js.org/docs/methods.html)
 HTML
 ```
 <div class="wave" id="id<%= track.id %>" data-link="<%= track.link %>"></div>
-<i class="far fa-play-circle" id="playid<%= track.id %>"></i>
-<i class="far fa-pause-circle" id="stopid<%= track.id %>" style="display: none"></i>
+<i class="fas fa-play-circle" id="playid<%= track.id %>"></i>
+<i class="fas fa-pause-circle" id="stopid<%= track.id %>" style="display: none"></i>
 ```
 
 javascript
