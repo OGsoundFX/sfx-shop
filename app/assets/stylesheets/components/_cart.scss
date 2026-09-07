@@ -23,7 +23,7 @@
 }
 
 #instead {
-  margin: 6px 0px 0px 8px;
+  margin: 1px 0px 0px 8px;
   color: $orange-main;
 }
 
@@ -93,11 +93,21 @@ button {
   font-size: 1.2em;
 }
 
+.sub-total-collection {
+  background-color: $whitesmoke;
+  margin: 12px 34px 16px 16px;
+  padding: 12px;
+  gap: 12px;
+  font-size: 1.2em;
+}
+
 .item-attributes {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  margin: 25px 0px;
-  margin-left: 24px;
+  margin: 12px 0 12px 42px;
+  h3 {
+    font-size: 1.25em;
+  }
 }
 
 .item-attributes-small {
