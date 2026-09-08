@@ -1,8 +1,8 @@
-<div class="top-links">
+<div class="top-links d-flex justify-content-between">
   <%= link_to 'Back', url_for(:back), class: "btn btn-secondary" %>
   <% if !@pack.live? %>
-    <div class="btn btn-warning">
-      <%= @pack.status %>
+    <div class="btn btn-warning w-100 ms-2" style="pointer-events: none;">
+      <%= @pack.submitted? ? 'This Pack is Under Review' : @pack.status %>
     </div>
   <% end %>
 </div>
