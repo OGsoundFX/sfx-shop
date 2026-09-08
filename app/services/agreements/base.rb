@@ -62,7 +62,6 @@ module Agreements
                 page-break-after: avoid;
               }
             </style>
-            #{@html.gsub(/&nbsp\s*(?:•|-)\s*/, "")}
             #{agreement.body.to_s
               .gsub("{{legal_name}}", acceptance.legal_name_snapshot)
               .gsub("{{artist_name}}", designer.artist_name)
