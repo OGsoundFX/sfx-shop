@@ -42,7 +42,7 @@ class SfxPack < ApplicationRecord
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
   }
-  validates :sample_rate, inclusion: { in: [44100, 48000]}
+  validates :sample_rate, inclusion: { in: [44100, 48000, 96000]}
   validates :bit_depth, inclusion: { in: [16, 24, 32]}
   validates :accept_conditions, acceptance: true
 
