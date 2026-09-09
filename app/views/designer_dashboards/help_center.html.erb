@@ -1,0 +1,25 @@
+<div class="padding-navbar content admin-min-height bg-dark">
+  <%= render "welcome_banner" %>
+  <div class="container" data-controller="designer-pack-filter" data-designer-pack-filter-pack-count-value="<%= @pack_count.to_json %>">
+    <div class="designer-menu__desktop">
+      <%= render "designer_menu" %>
+    </div>
+    <div class="designer-menu__mobile">
+      <%= render "designer_menu_mobile" %>
+    </div>
+    <div class="submissions-live__grid">
+      <div>
+        <p style="margin-top: 10px; color: white; border-radius: 5px; text-align: center; border: 1px solid #6c757d; padding: 2px 0;">How to create your designer profile</p>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+          <iframe src="https://www.loom.com/embed/6f6ca1d38f8347039373b39e8f7a44c3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      </div>
+      <div>
+        <p style="margin-top: 10px; color: white; border-radius: 5px; text-align: center; border: 1px solid #6c757d; padding: 2px 0;">How to submit your packs</p>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+          <iframe src="https://www.loom.com/embed/b7d0d73f4a224f6590d813200aa76af7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

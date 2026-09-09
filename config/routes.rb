@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   get "sales", to: "designer_dashboards#sales", as: :designer_sales
   get "payouts", to: "designer_dashboards#payouts", as: :designer_payouts
   get "settings", to: "designer_dashboards#settings", as: :settings
+  get "help_center", to: "designer_dashboards#help_center", as: :help_center
   get "add_new_pack", to: "designer_dashboards#pack_form", as: :add_new_pack
   get "update_pack/:id", to: "designer_dashboards#update_pack_form", as: :update_pack
   delete "remove_pack/:id", to: "designer_dashboards#remove_pack", as: :remove_pack

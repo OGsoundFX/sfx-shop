@@ -5,6 +5,7 @@
     <%= link_to "Payouts", designer_payouts_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "payouts"}" %>
     <%= link_to "Profile", designer_main_dashboard_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "main"}" %>
     <%= link_to "Settings", settings_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "settings"}" %>
+    <%= link_to "Help center", help_center_path, class: "btn btn-secondary me-2 btn-admin #{'btn-admin-active' if controller_name == "designer_dashboards" && action_name == "help_center"}" %>
   </div>
   <div class="mt-4 mb-2">
     <a href="mailto: support@bamsfx.com" target="blank" class="btn btn-secondary btn-admin ">Contact Support</a>

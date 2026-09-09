@@ -63,6 +63,10 @@ class DesignerDashboardsController < ApplicationController
     @legal_entity = current_user.legal_entity
   end
 
+  def help_center
+    redirect_to :root_path, notice: "You are not allowed to access this page" unless user_signed_in? && current_user.sound_designer.present?
+  end
+
   def pack_form
     @designer = current_user.sound_designer
     @sfx_pack = SfxPack.new
