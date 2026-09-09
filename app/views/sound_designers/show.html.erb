@@ -1,4 +1,4 @@
-<div class="designer-show__banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('<%= cl_image_path(@designer.banner.key) if @designer.banner.attached? %>')">
+<div class="designer-show__banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('<%= url_for(@designer.banner) if @designer.banner.attached? %>')">        
         
   <div class="designer-banner__photo-display">
     <% if @designer.photo.attached? %>
