@@ -205,14 +205,11 @@ class CartsController < ApplicationController
       redirect_to list_path(page: params[:page])
     else
       redirect_to cart_path
-      #what is going on?
     end
   end
 
   def destroy_cart
     order = current_user.orders.last
-    order.update(status: "paid")
-    order.update(amount_paid_cents: order.amount_cents)
     session.delete(:pending_checkout_order_id)
     cart = Cart.where(user_id: current_user.id).first
     if cart.collections != []
