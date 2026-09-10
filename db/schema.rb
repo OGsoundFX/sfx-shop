@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_08_135709) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_10_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -349,6 +349,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_08_135709) do
     t.integer "stripe_fees_cents", default: 0, null: false
     t.integer "discount_percentage"
     t.string "discount_name"
+    t.datetime "payout_processed_at", precision: nil
     t.index ["order_id"], name: "index_sold_items_on_order_id"
     t.index ["payout_id"], name: "index_sold_items_on_payout_id"
     t.index ["sfx_pack_id"], name: "index_sold_items_on_sfx_pack_id"

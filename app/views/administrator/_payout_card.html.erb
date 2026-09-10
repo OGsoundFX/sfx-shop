@@ -1,8 +1,12 @@
 <div class="designer-dashboard__sales-grid">
   <div class="d-flex align-items-center">
     <div class="payouts-card-date">
-      <div class="submission-day"><%= payout[:due_date].strftime("%b") %> <%= payout[:due_date].strftime("%d") %></div>
-      <div class="submission-day"><%= payout[:due_date].strftime("%Y") %></div>
+      <% if payout[:due_date].present? %>
+        <div class="submission-day"><%= payout[:due_date].strftime("%b") %> <%= payout[:due_date].strftime("%d") %></div>
+        <div class="submission-day"><%= payout[:due_date].strftime("%Y") %></div>
+      <% else %>
+        No date
+      <% end %>
     </div>
     <div class="submission-card-content d-flex align-items-center">
       <div><%= payout[:paypal_account] %></div>

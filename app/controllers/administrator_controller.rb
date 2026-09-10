@@ -214,8 +214,6 @@ class AdministratorController < ApplicationController
         month = Date.today.month == 12 ? 1 : Date.today.month + 1
         year = Date.today.month == 12 ? Date.today.year + 1 : Date.today.year
         due_date = Date.new(year, month, 01)
-      else
-        "payment threshold not reached"
       end
 
       {
