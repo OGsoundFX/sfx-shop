@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
         },
         allow_promotion_codes: true,
         customer_email: current_user.email,
-        success_url: update_order_status_url,
+        success_url: dashboard_url,
         cancel_url: destroy_order_url
       )
 
@@ -305,14 +305,14 @@ class OrdersController < ApplicationController
     redirect_to cart_path
   end
 
-  def update_order_status
-    order = current_user.orders.last
-    order.update(
-      status: "paid",
-      amount_paid_cents: order.amount_cents
-    )
-    redirect_to dashboard_path
-  end
+  # def update_order_status
+  #   order = current_user.orders.last
+  #   order.update(
+  #     status: "paid",
+  #     amount_paid_cents: order.amount_cents
+  #   )
+  #   redirect_to dashboard_path
+  # end
 
   def destroy_from_dashboard
     # no use at this point

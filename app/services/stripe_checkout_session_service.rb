@@ -8,6 +8,7 @@ class StripeCheckoutSessionService
       session = event.data.object
       order = Order.find_by(checkout_session_id: session.id)
       order.status = "paid"
+      order.amount_paid_cents = order.amount_cents
       order.payment_intent_id = session.payment_intent
       order.save
     when 'charge.succeeded'
@@ -45,9 +46,6 @@ class StripeCheckoutSessionService
         item.save
         DesignerMailer.you_made_a_sale(item).deliver_later
       end
-    when 'payment_intent.succeeded'
-    else
-      Rails.logger.info "Unhandled Stripe event: #{event.type}"
     end
   end
 end
