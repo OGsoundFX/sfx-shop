@@ -213,6 +213,7 @@ class CartsController < ApplicationController
     order = current_user.orders.last
     order.update(status: "paid")
     order.update(amount_paid_cents: order.amount_cents)
+    session.delete(:pending_checkout_order_id)
     cart = Cart.where(user_id: current_user.id).first
     if cart.collections != []
       collection = Collection.find(cart.collections.last)

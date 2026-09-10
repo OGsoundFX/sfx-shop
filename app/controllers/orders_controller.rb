@@ -196,8 +196,19 @@ class OrdersController < ApplicationController
     total_amount += tracks_sum += collection_sum
 
     if current_user
-      # creating order instance
-      order = Order.create!(
+      cart.with_lock do
+        existing_order = current_user.orders
+          .where(id: session[:pending_checkout_order_id], status: "pending")
+          .where(packs: ordered_list, tracks: cart.sinlge_tracks, collections: collection)
+          .where.not(checkout_session_id: nil)
+          .first
+
+        if existing_order
+          return redirect_to new_order_payment_path(existing_order)
+        end
+
+        # creating order instance
+        order = Order.create!(
         location: session[:location],
         product_link: "",
         sfx_pack: sfx_pack,
@@ -210,9 +221,10 @@ class OrdersController < ApplicationController
         tracks: cart.sinlge_tracks,
         sales: @sale_orders,
         collections: collection
-      )
+        )
+        session[:pending_checkout_order_id] = order.id
 
-      session = Stripe::Checkout::Session.create(
+        session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         mode: 'payment',
         line_items: line_items,
@@ -223,59 +235,60 @@ class OrdersController < ApplicationController
         customer_email: current_user.email,
         success_url: destroy_cart_url,
         cancel_url: destroy_order_url,
-      )
-      order.update(checkout_session_id: session.id)
-
-      # checking sales
-      current_sales = Sale.where("end_date > ?", Date.current)
-
-      # creating sold_item instances
-      pack_line_items.each_with_index do |pack_line_item, index|
-        pack = pack_line_item[:pack]
-
-        # Determine discount logic
-        @discount = false
-        current_sales.each do |sale|
-          if sale.packs.include?(pack.id)
-            @discount = sale.percentage
-            break
-          end
-        end
-
-        if @discount
-          discount = true
-          discount_type = 'sale'
-          discount_percentage = order.sales.first[1].values.first if order.sales.first&.[](1)
-          discount_name = order.sales.first[1].keys.first if order.sales.first&.[](1)
-        elsif index > 0
-          discount = true
-          discount_type = 'additional'
-          discount_percentage = 20
-          discount_name = "Multiple Purchase"
-        else
-          discount = false
-          discount_type = 'no_discount'
-          discount_percentage = 0
-          discount_name = nil
-        end
-
-        SoldItem.create!(
-          sound_designer: pack.sound_designer,
-          order: order,
-          sfx_pack: pack,
-          amount_cents: pack_line_item[:amount_cents],
-          currency: order.amount_paid_currency.downcase,
-          payout_amount_cents: 0,
-          payout_currency: pack.currency,
-          status: 'pending',
-          discount: discount,
-          discount_type: discount_type,
-          discount_percentage: discount_percentage || 0,
-          discount_name: discount_name
         )
-      end
+        order.update!(checkout_session_id: session.id)
 
-      redirect_to new_order_payment_path(order)
+        # checking sales
+        current_sales = Sale.where("end_date > ?", Date.current)
+
+        # creating sold_item instances
+        pack_line_items.each_with_index do |pack_line_item, index|
+          pack = pack_line_item[:pack]
+
+          # Determine discount logic
+          @discount = false
+          current_sales.each do |sale|
+            if sale.packs.include?(pack.id)
+              @discount = sale.percentage
+              break
+            end
+          end
+
+          if @discount
+            discount = true
+            discount_type = 'sale'
+            discount_percentage = order.sales.first[1].values.first if order.sales.first&.[](1)
+            discount_name = order.sales.first[1].keys.first if order.sales.first&.[](1)
+          elsif index > 0
+            discount = true
+            discount_type = 'additional'
+            discount_percentage = 20
+            discount_name = "Multiple Purchase"
+          else
+            discount = false
+            discount_type = 'no_discount'
+            discount_percentage = 0
+            discount_name = nil
+          end
+
+          SoldItem.create!(
+            sound_designer: pack.sound_designer,
+            order: order,
+            sfx_pack: pack,
+            amount_cents: pack_line_item[:amount_cents],
+            currency: order.amount_paid_currency.downcase,
+            payout_amount_cents: 0,
+            payout_currency: pack.currency,
+            status: 'pending',
+            discount: discount,
+            discount_type: discount_type,
+            discount_percentage: discount_percentage || 0,
+            discount_name: discount_name
+          )
+        end
+
+        redirect_to new_order_payment_path(order)
+      end
     else
       redirect_to(new_user_session_path)
     end
@@ -288,6 +301,7 @@ class OrdersController < ApplicationController
 
   def destroy
     Order.where(user_id: current_user.id).last.destroy
+    session.delete(:pending_checkout_order_id)
     redirect_to cart_path
   end
 
