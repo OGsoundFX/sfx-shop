@@ -27,16 +27,22 @@ class OrdersController < ApplicationController
         status: 'pending',
         user: current_user,
         sales: @sale_orders,
-        collections: [])
+        collections: []
+      )
+
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
+        mode: 'payment',
         line_items: [{
-          name: sfx_pack.title,
-          images: [sfx_pack.photos[0]],
-          amount: (sfx_pack_price.to_i * 100),
-          currency: CurrencySymbolService.lookup(params[:currency]),
-          quantity: 1,
-          # tax_rates: [ENV['STRIPE_TAX_RATE']]
+          price_data: {
+            currency: CurrencySymbolService.lookup(params[:currency]),
+            unit_amount: (sfx_pack_price.to_i * 100),
+            product_data: {
+              name: sfx_pack.title,
+              images: [sfx_pack.photos[0].url] # Ensure this returns a full http(s) URL
+            }
+          },
+          quantity: 1
         }],
         metadata: {
           order_id: order.id
@@ -84,9 +90,7 @@ class OrdersController < ApplicationController
       ordered_list << SfxPack.find(item)
     end
     ordered_list.sort_by!(&:price_cents).reverse!
-    ordered_list.map! do |item|
-      item.id
-    end
+    ordered_list.map! { it.id }
 
     current_sales = Sale.where("end_date > ?", Date.current)
     current_sales_list = {}
@@ -97,9 +101,11 @@ class OrdersController < ApplicationController
     end
 
     line_items = []
+    pack_line_items = []
     total_amount = 0
-    ordered_list.each_with_index do |item, index|
-      pack = SfxPack.find(item)
+
+    ordered_list.each_with_index do |item_id, index|
+      pack = SfxPack.find(item_id)
 
       # calculating conversion rate
       if pack.currency_symbol != params[:currency]
@@ -108,96 +114,88 @@ class OrdersController < ApplicationController
         conversion_rate = 1
       end
 
-      line_item = {}
-      line_item[:name] = pack.title
-      line_item[:images] = [pack.photos[0]]
+      # Calculate final amount based on sales/discounts
+      calculated_amount = if current_sales.count > 0 && current_sales_list[pack.id]
+                            ((pack.price_cents * conversion_rate) * (100 - current_sales_list[pack.id]) / 100.0).to_i
+                          elsif index.positive?
+                            ((pack.price_cents * conversion_rate) * 0.8).to_i
+                          else
+                            (pack.price_cents * conversion_rate).to_i
+                          end
+      # Ensure image is a URL string, not an ActiveStorage object
+      image_url = pack.photos.attached? ? pack.photos[0].url : nil
 
-      if current_sales.count > 0
-        if current_sales_list[pack.id]
-          line_item[:amount] = ((pack.price_cents * conversion_rate) * (100 - current_sales_list[pack.id]) / 100.to_f).to_i
-        else
-          line_item[:amount] = (pack.price_cents * conversion_rate).to_i
-        end
-      else
-        if index.positive?
-          line_item[:amount] = ((pack.price_cents * conversion_rate) * 0.8).to_i
-        else
-          line_item[:amount] = (pack.price_cents * conversion_rate).to_i
-        end
-      end
-      line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
-      line_item[:quantity] = 1
+      # Construct the NEW Stripe line_item structure
+      product_data = { name: pack.title }
+      product_data[:images] = [image_url] if image_url.present?
+
+      line_item = {
+        price_data: {
+          currency: CurrencySymbolService.lookup(params[:currency]),
+          unit_amount: calculated_amount,
+          product_data: product_data
+        },
+        quantity: 1
+      }
+
       line_items << line_item
-      total_amount += (line_item[:amount] / 100.to_f)
+      pack_line_items << { pack: pack, amount_cents: calculated_amount }
+      total_amount += (calculated_amount / 100.0)
     end
 
-    if cart.items != []
-      sfx_pack = SfxPack.find(cart.items.first)
-    else
-      sfx_pack = SfxPack.find(100)
-    end
+    # Fallback for order creation if cart is empty
+    sfx_pack = cart.items.present? ? SfxPack.find(cart.items.first) : SfxPack.find(100)
 
     # List Single Tracks
-    tracks_list = []
-    cart.sinlge_tracks.each do |track|
-      tracks_list << SingleTrack.find(track)
-    end
+    tracks_list = cart.sinlge_tracks.map { SingleTrack.find(it) }
 
     # Calculating conversion rate for single tracks
-    if "$" != params[:currency]
-      single_tracks_conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
-    else
-      single_tracks_conversion_rate = 1
-    end
+    single_tracks_conversion_rate = ("$" != params[:currency]) ? CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f : 1
 
     # Total amount of Single Tracks
-    tracks_sum = 0
-    tracks_list.each do |track|
-      tracks_sum += ((track.price_cents * single_tracks_conversion_rate) / 100.to_f)
-    end
+    tracks_sum = tracks_list.sum { (it.price_cents * single_tracks_conversion_rate) / 100.to_f }
 
     # creating line_item for single tracks as one track if any
-    if tracks_list != []
-      single_line_item = {}
-      single_line_item[:name] = 'Individual tracks'
-      # single_line_item[:image]
-      single_line_item[:amount] = (tracks_sum * 100).to_i
-      single_line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
-      single_line_item[:quantity] = 1
+    if tracks_list.present?
+      single_line_item = {
+        price_data: {
+          currency: CurrencySymbolService.lookup(params[:currency]),
+          unit_amount: (tracks_sum * 100).to_i,
+          product_data: {
+            name: 'Individual tracks'
+          }
+        },
+        quantity: 1
+      }
       line_items << single_line_item
     end
 
     # Adding collection to order
+    collection_sum = 0
+    collection = []
+
     if params[:collection_id]
-      if "$" != params[:currency]
-        conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
-      else
-        conversion_rate = 1
-      end
-      collection = []
+      conversion_rate = ("$" != params[:currency]) ? CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f : 1
       collection << params[:collection_id].to_i
       collection_sum = ((Collection.find(params[:collection_id]).price_cents * conversion_rate) / 100.to_f)
 
-      # creating line_item for collection
-      collection_line_item = {}
-      collection_line_item[:name] = 'Collection'
-      collection_line_item[:amount] = (collection_sum * 100).to_i
-      collection_line_item[:currency] = CurrencySymbolService.lookup(params[:currency])
-      collection_line_item[:quantity] = 1
+      collection_line_item = {
+        price_data: {
+          currency: CurrencySymbolService.lookup(params[:currency]),
+          unit_amount: (collection_sum * 100).to_i,
+          product_data: {
+            name: 'Collection'
+          }
+        },
+        quantity: 1
+      }
       line_items << collection_line_item
-    else
-      collection = []
-      collection_sum = 0
     end
 
     # Adding sum of SFX packs, single tracks & collection for the order
     total_amount += tracks_sum += collection_sum
 
     if current_user
-      # adding the VAT on all items
-      line_items.each do |item|
-        # item[:tax_rates] =  [ENV['STRIPE_TAX_RATE']]
-      end
       # creating order instance
       order = Order.create!(
         location: session[:location],
@@ -211,9 +209,12 @@ class OrdersController < ApplicationController
         packs: ordered_list,
         tracks: cart.sinlge_tracks,
         sales: @sale_orders,
-        collections: collection)
+        collections: collection
+      )
+
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
+        mode: 'payment',
         line_items: line_items,
         metadata: {
           order_id: order.id
@@ -229,45 +230,47 @@ class OrdersController < ApplicationController
       current_sales = Sale.where("end_date > ?", Date.current)
 
       # creating sold_item instances
-      line_items_pack = line_items.select {|item| item[:images].present?}
-      line_items_pack.each_with_index do |item, index|
-        sfx_pack = SfxPack.find_by_title(item[:name])
+      pack_line_items.each_with_index do |pack_line_item, index|
+        pack = pack_line_item[:pack]
+
+        # Determine discount logic
+        @discount = false
         current_sales.each do |sale|
-          sale.packs.each do |pack_id|
-            @discount = sale.percentage if sfx_pack.id == pack_id
-          end
-        end
-        if @discount
-          discount = true
-          discount_type = 'sale'
-          discount_percentage = order.sales.first[1].values.first
-          discount_name = order.sales.first[1].keys.first
-        else
-          if index > 0
-            discount = true
-            discount_type = 'additional'
-            discount_percentage = 20
-            discount_name = "Multiple Purchase"
-          else
-            discount = false
-            discount_type = 'no_discount'
+          if sale.packs.include?(pack.id)
+            @discount = sale.percentage
+            break
           end
         end
 
-        pack = SfxPack.find(item[:images].first[:record_id])
+        if @discount
+          discount = true
+          discount_type = 'sale'
+          discount_percentage = order.sales.first[1].values.first if order.sales.first&.[](1)
+          discount_name = order.sales.first[1].keys.first if order.sales.first&.[](1)
+        elsif index > 0
+          discount = true
+          discount_type = 'additional'
+          discount_percentage = 20
+          discount_name = "Multiple Purchase"
+        else
+          discount = false
+          discount_type = 'no_discount'
+          discount_percentage = 0
+          discount_name = nil
+        end
+
         SoldItem.create!(
           sound_designer: pack.sound_designer,
           order: order,
           sfx_pack: pack,
-          amount_cents: item[:amount],
+          amount_cents: pack_line_item[:amount_cents],
           currency: order.amount_paid_currency.downcase,
           payout_amount_cents: 0,
-          # payout_currency: session[:currency],
           payout_currency: pack.currency,
           status: 'pending',
           discount: discount,
           discount_type: discount_type,
-          discount_percentage: discount_percentage,
+          discount_percentage: discount_percentage || 0,
           discount_name: discount_name
         )
       end

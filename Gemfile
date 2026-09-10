@@ -77,9 +77,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'simple_form'
 gem 'devise'
 gem 'money-rails', '~>1.12'
-gem 'stripe'
+gem 'stripe', '~> 19.5.0'
 # stripe webhooks
-gem 'stripe_event'
+gem 'stripe_event', '~> 2.15'
 
 gem "bootstrap", "~> 5.2"
 gem 'font-awesome-rails'
