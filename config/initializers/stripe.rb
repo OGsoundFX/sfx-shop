@@ -14,7 +14,7 @@ StripeEvent.configure do |events|
     StripeCheckoutSessionService.new.call(event)
   end
   events.subscribe 'charge.succeeded' do |event|
-    StripeCheckoutSessionService.new.call(event)
+      StripeChargeProcessingJob.perform_later(event.data.object.payment_intent)
   end
 end
 
