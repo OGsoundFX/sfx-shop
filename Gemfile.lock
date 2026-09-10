@@ -552,8 +552,8 @@ DEPENDENCIES
   sitemap_generator
   solid_queue (= 0.3.1)
   stimulus-rails
-  stripe
-  stripe_event
+  stripe (~> 19.5.0)
+  stripe_event (~> 2.15)
   turbo-rails
   tzinfo-data
   web-console (>= 3.3.0)
