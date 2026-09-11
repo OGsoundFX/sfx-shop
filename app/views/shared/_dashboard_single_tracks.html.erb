@@ -47,7 +47,7 @@
               data-action="click->collection-checkout-modal#modalClose">&times;
         </span>
       </div>
-      <hr>
+      <hr class="my-3" style="width: 100%;">
       <% order.tracks.each do |track| %>
         <% displayed_track = SingleTrack.find(track) %>
         <div class="grid-display-list">
