@@ -35,7 +35,7 @@
 
         <div>
           <div class="submission-card-actions">
-            <a href="mailto:<%= submission.email %>" target="blank"><span class="icon">✉️</span></a>
+            <%= link_to "Incomplete", complete_submission_path(submission.id), class: "btn btn-orange" %>
             <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
               <%= button_to submission_accepted_path(submission.id), method: "patch", class: "submission-card_btn-group submission-card__confirm-accept" do %>
                 <div >

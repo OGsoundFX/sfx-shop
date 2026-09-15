@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   post "admin/reject_designer/:designer_id", to: "administrator#reject_designer", as: :reject_designer
   patch "admin/paypal_accept/:id", to: "administrator#paypal_accept", as: :paypal_accept
   patch "admin/paypal_reject/:id", to: "administrator#paypal_reject", as: :paypal_reject
+  get "admin/complete_submission/:id", to: "administrator#complete_submission", as: :complete_submission
   resources :payouts, only: [:new, :create]
 
   # sound designer dashboard routes

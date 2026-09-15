@@ -129,6 +129,12 @@ class AdministratorController < ApplicationController
     redirect_to submissions_path
   end
 
+  def complete_submission
+    @submission = DesignerSubmission.find(params[:id])
+    DesignerMailer.incomplete_submission(@submission).deliver_later
+    redirect_to submissions_path
+  end
+
   def resend_confirmation
     user = User.find(params[:user_id])
     user.send_confirmation_instructions
