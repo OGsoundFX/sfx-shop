@@ -18,7 +18,9 @@ gem 'puma', '~> 7.0'
 # /note/👇 removed for rails 7 upgrade
 # gem 'sass-rails', '>= 6'
 # ! 👇upgrading to rails 7
-gem 'sassc-rails'
+# gem 'sassc-rails'
+# ! 👇upgrading to new css syntax such as clamp(min, optimal, max)
+gem 'dartsass-rails'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'psych', '< 4'
