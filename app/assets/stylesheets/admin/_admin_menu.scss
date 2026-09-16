@@ -1,9 +1,11 @@
+.btn-admin {
+  &:hover {
+    background-color: $new-green;
+  }
+}
+
 .btn-admin-active {
   background-color: $new-green;
-  &:hover {
-    background-color: $light-grey;
-    color: white;
-  }
 }
 
 .btn-rejected {

@@ -1,11 +1,19 @@
 <%= render "designer_submissions_menu" %>
-<div class="submission-container text-center">
+<div class="submission-container text-center" data-controller="designer-submission-filter">
   <div style="width: 100vw">
-    <div class="text-start text-white ml-5">
-      <h6>Applications count: <%= @submissions.count %></h6>
+    <div class="text-start text-white ml-5 d-flex justify-content-between align-items-center">
+      <div>
+        <h6>Applications count: <span data-designer-submission-filter-target="count"></span> / <%= @submissions.count %></h6>
+      </div>
+      <div>
+        <div class="btn btn-secondary me-2 btn-admin btn-admin-active" data-action="click->designer-submission-filter#filter" data-designer-submission-filter-target="tab" data-status="pending">Pending</div>
+        <div class="btn btn-secondary me-2 btn-admin" data-action="click->designer-submission-filter#filter" data-designer-submission-filter-target="tab" data-status="profile_created">Incomplete</div>
+        <div class="btn btn-secondary me-2 btn-admin" data-action="click->designer-submission-filter#filter" data-designer-submission-filter-target="tab" data-status="accepted">Accepted</div>
+        <div class="btn btn-secondary me-2 btn-admin" data-action="click->designer-submission-filter#filter" data-designer-submission-filter-target="tab" data-status="rejected">Rejected</div>
+      </div>
     </div>
     <% @submissions.each do |submission| %>
-      <div class="submission-card d-flex justify-content-between">
+      <div class="submission-card d-flex justify-content-between" data-designer-submission-filter-target="submission" data-status="<%= submission.status %>">
         <div class="d-flex align-items-center">
           <div class="submission-card-date">
             <div class="submission-day"><%= submission.created_at.strftime("%b %y") %></div>
