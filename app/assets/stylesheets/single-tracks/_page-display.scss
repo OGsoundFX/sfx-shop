@@ -58,7 +58,7 @@
     padding-left: 10px;
     border: solid 1px $border-grey;
     height: 40px;
-    width: 48vw;
+    width: 52vw;
     max-width: 980px;
   }
   input::placeholder {
@@ -413,6 +413,12 @@ ul {
   .info-icon {
     margin-right: 10px;
   }
+
+  .search-form {
+    input {
+      width: 48vw;
+    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -430,5 +436,13 @@ ul {
 
   .max-width {
     max-width: 100px;
+  }
+}
+
+@media (min-width: 1180px) {
+  .search-form {
+    input {
+      width: 56vw;
+    }
   }
 }
