@@ -8,13 +8,11 @@ export default class extends Controller {
   }
   
   connect() {
-    console.log(this.packCountValue)
     this.statusValues = ["all", "live", "submitted", "declined", "drafts", "removed"]
   }
 
   filter(event) {
     // update the count number
-    console.log(event.currentTarget.innerText)
     this.countTarget.innerText = `Count: ${this.packCountValue[event.currentTarget.innerText]}`
 
     // apply the active class to selected tab
