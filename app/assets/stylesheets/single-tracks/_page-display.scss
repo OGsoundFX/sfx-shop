@@ -18,10 +18,12 @@
     color: #b8b8b8;
   }
   input {
-    color: #4E4E4E;
-    padding-left: 10px;
-    border: solid 1px $border-grey;
+    color: white;
+    padding: 0 10px;
+    border: none;
     height: 40px;
+    background-color: $new-green;
+    border-radius: 4px;
   }
 }
 

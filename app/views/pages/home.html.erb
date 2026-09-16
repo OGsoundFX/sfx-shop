@@ -9,14 +9,18 @@
         <section id="next-section">
           <div>
             <% if !@announcement.nil? %>
-              <h1 id="annoucement-content"><%= @announcement.content %></h1>
+              <h1 id="annoucement-content" class="catalogue-status"><%= @announcement.content %></h1>
             <% elsif @current_sales_list != {} %>
               <div id="sale-banner">
                 <h1 id="front-title-sale"><span style="font-size: 1.2em"><%= @sale_title %></span> !!!  Save up to <span style="font-size: 1.2em"> <%= @sale_percentage %>% </span> !!!</h1>
               </div>
             <% else %>
-              <div>
-                <h1 id="front-title-home">Browse our SFX Packs</h1>
+              <div class="catalogue-heading">
+                <div>
+                  <p class="catalogue-eyebrow">Sound effects library</p>
+                  <h1 id="front-title-home">Browse our SFX Packs</h1>
+                </div>
+                <span class="catalogue-count"><%= @sfx_packs.size %> packs</span>
               </div>
             <% end %>
 
@@ -39,8 +43,8 @@
                           <option value="free" data-category-target="free">Free</option>
                         </select>
                       </div>
-                      <div>
-                        <input type="submit" value="GO">
+                      <div class="ms-1">
+                        <input type="submit" value="Apply">
                       </div>
                     </div>
                   </form>
