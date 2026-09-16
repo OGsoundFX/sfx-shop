@@ -21,6 +21,7 @@ gem 'puma', '~> 7.0'
 # gem 'sassc-rails'
 # ! 👇upgrading to new css syntax such as clamp(min, optimal, max)
 gem 'dartsass-rails'
+gem 'sprockets-rails'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'psych', '< 4'
