@@ -10,10 +10,10 @@ export default class extends Controller {
     const icon = event.currentTarget.querySelector("i")
     if (icon.classList.contains("fa-ban")) {
       icon.classList.remove("fa-ban")
-      icon.classList.add("fa-layer-group")
+      icon.classList.add("fa-box-open")
       icon.style = "color: #4e4e4e"
-    } else if (icon.classList.contains("fa-layer-group")) {
-      icon.classList.remove("fa-layer-group")
+    } else if (icon.classList.contains("fa-box-open")) {
+      icon.classList.remove("fa-box-open")
       icon.classList.add("fa-ban")
       icon.style = "color: #FFA500"
     }
