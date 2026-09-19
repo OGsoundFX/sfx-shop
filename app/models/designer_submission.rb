@@ -1,10 +1,12 @@
 class DesignerSubmission < ApplicationRecord
-  before_create :generate_password, :generate_access_token
+  before_create :generate_password, :generate_access_token, :destroy_prior_submission
   has_many :submission_links, dependent: :destroy
   belongs_to :user, optional: true
 
   validates :first_name, :last_name, :email, presence: true
+  validates :email, uniqueness: true
   validate :links_count
+  validate :completed_submission_exists
 
   enum status: [:profile_created, :submited, :accepted, :rejected]
 
@@ -26,5 +28,18 @@ class DesignerSubmission < ApplicationRecord
 
   def generate_access_token
     self.access_token = SecureRandom.hex(20)
+  end
+
+  def destroy_prior_submission
+    submission = DesignerSubmission.find_by(email: self.email)
+    submission.destroy if submission && !submission.completed
+  end
+
+  def completed_submission_exists
+    submission = DesignerSubmission.find_by(email: self.email)
+    return unless submission&.completed?
+
+    errors.add(:base, "A submission with this email already exists and is completed.
+      \n Please refer to the confirmation email that was sent to you to access your profile.")
   end
 end
