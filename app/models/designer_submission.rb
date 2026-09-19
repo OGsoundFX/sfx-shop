@@ -4,7 +4,6 @@ class DesignerSubmission < ApplicationRecord
   belongs_to :user, optional: true
 
   validates :first_name, :last_name, :email, presence: true
-  validates :email, uniqueness: true
   validate :links_count
   validate :completed_submission_exists
 
