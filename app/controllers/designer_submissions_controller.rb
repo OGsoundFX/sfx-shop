@@ -9,11 +9,9 @@ class DesignerSubmissionsController < ApplicationController
 
   def create
     @designer_submission = DesignerSubmission.new(designer_submission_params)
-    # @designer_submission.email = current_user.email
-    # @designer_submission.user = current_user
     @designer_submission.user = User.find_by_email("olivier@bamsfx.com") if Rails.env.development?
-    @designer_submission.profile_created!
     if @designer_submission.save
+      @designer_submission.profile_created!
       AdminMailer.new_designer_submission(@designer_submission).deliver_later
       DesignerMailer.submission_received(@designer_submission).deliver_later
       redirect_to designer_submission_url(access_token: @designer_submission.access_token), notice: "Information successfully submitted"

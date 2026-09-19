@@ -59,7 +59,11 @@
                   </div>
                 <% end %>
               <% else %>
+                
                 <% if submission.status == "accepted" %>
+                  <div class="align-items-center d-flex justify-content-center me-3">
+                    <small><em><%= submission.user.sound_designer.present? ? 'Designer profile created' : 'Waiting for designer profile' %></em></small>
+                  </div>
                   <%= button_to submission_rejected_path(submission.id), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-warning" do %>
                     Cancel
                   <% end %>

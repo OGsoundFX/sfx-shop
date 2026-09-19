@@ -2,7 +2,7 @@
   <div class="submission-form__container">
     <div class="d-flex justify-content-center" data-controller="application-modal">
       <button class="submission-form__about-applying btn btn-light mb-3" data-action="click->application-modal#show"><i class="fas fa-info-circle"></i> About Applying</button>
-      <%= render "designer_submissions/application_modal" %>
+      <%= render "designer_submissions/application_modal" unless @designer_submission.errors.any? %>
     </div>
     <div class="submission-form__box">
       <%= render "submission_form", designer_submission: @designer_submission  %>

@@ -1,5 +1,10 @@
 <h5 class="text-center mb-4"><strong>Contact Information</strong></h5>
 <hr>
+<% if designer_submission.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <%= designer_submission.errors.full_messages.to_sentence %>
+  </div>
+<% end %>
 <%= simple_form_for designer_submission, data: {designer_submission_form_target: "mainForm"} do |f| %>
   <%= f.input :email %>
   <%= f.input :first_name %>

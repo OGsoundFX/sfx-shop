@@ -12,6 +12,7 @@ class LegalEntitiesController < ApplicationController
     @legal_entity.user = current_user
     @legal_entity.pending!
     if @legal_entity.save
+      current_user.designer_submission.update(completed: true) if current_user.designer_submission.present?
       DesignerMailer.submission_completed(@legal_entity).deliver_later
       AdminMailer.new_designer_profile(@legal_entity.sound_designer).deliver_later
       redirect_to designer_listings_path, notice: "Legal entity created successfully."

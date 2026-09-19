@@ -23,7 +23,7 @@ class AdministratorController < ApplicationController
 
   def designer_submissions
     @tab = 'applications'
-    @submissions = DesignerSubmission.all.order(created_at: :desc).order(:status)
+    @submissions = DesignerSubmission.where(completed: false).order(created_at: :desc).order(:status)
   end
 
   def designer_legal_entities
@@ -125,7 +125,8 @@ class AdministratorController < ApplicationController
   end
 
   def submission_rejected
-    DesignerSubmission.find(params[:id]).rejected!
+    submission = DesignerSubmission.find(params[:id]).rejected!
+    submission.update(completed: true)
     redirect_to submissions_path
   end
 
