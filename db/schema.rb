@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_09_10_170000) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_19_120338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,6 +143,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_10_170000) do
     t.datetime "updated_at", null: false
     t.string "access_token"
     t.bigint "user_id", null: false
+    t.boolean "completed", default: false
     t.index ["access_token"], name: "index_designer_submissions_on_access_token", unique: true
     t.index ["user_id"], name: "index_designer_submissions_on_user_id"
   end
