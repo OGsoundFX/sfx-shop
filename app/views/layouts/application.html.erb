@@ -50,6 +50,15 @@
     <meta name="twitter:creator" content="@OGmusik">
     <meta name="twitter:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url('https://res.cloudinary.com/dk9a86uhu/image/upload/v1771950782/screenshots/bamsfx_r8ntwu.png') %>">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R22X98P6SQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-R22X98P6SQ');
+    </script>
 
     <%= favicon_link_tag asset_path('logo/logo_BAM_3.png') %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
