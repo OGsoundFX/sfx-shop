@@ -12,22 +12,10 @@
         <% embed_link = "https://w.soundcloud.com/player/?url=#{@pack.link}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true" %>
         <iframe width="640" height="360" scrolling="no" frameborder="no" allow="autoplay" src="<%= embed_link %>"></iframe>
       <% else %>
-        <% cut_link = @pack.link.split('/').last %>
+        <% cut_link = @pack.youtube_video_id %>
         <% embed_link = "https://www.youtube.com/embed/#{cut_link}" %>
         <iframe width="640" height="360" src="<%= embed_link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <% end %>
-    </div>
-    <div id="preview-text">
-      <p>You can listen to the preview and find more information on the content of this pack in the different tabs.</p>
-      <p>You can also find these Sound effect packs on platforms such as <a href="https://assetstore.unity.com/publishers/39771">Unity Asset Store</a> or the <a href="https://www.unrealengine.com/marketplace/en-US/profile/OlivierGirardot">Unreal Market Place</a>.</p>
-      <p>Contact me at <a href="mailto:olivier@bamsfx.com">olivier@bamsfx.com</a></p>
-      <div id="preview-footer">
-        <div class="footer-links d-flex justify-content-center">
-          <a href="https://assetstore.unity.com/publishers/39771" target="_blank"><%= image_tag asset_path('logo/unity_rev.png'), id: "unity-icon-size" %></a>
-          <a href="https://www.unrealengine.com/marketplace/en-US/profile/OlivierGirardot" target="_blank"><%= image_tag asset_path('logo/unreal_rev.png'), id: "unreal-icon-size" %></a>
-          <a href="https://www.youtube.com/ogsoundfx" target="_blank"><%= image_tag asset_path('logo/youtube.png'), id: "youtube-preview" %></a>
-        </div>
-      </div>
     </div>
   </div>
 </div>

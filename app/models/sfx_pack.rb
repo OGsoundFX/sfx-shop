@@ -63,6 +63,10 @@ class SfxPack < ApplicationRecord
     (reviews.sum { |review| review.rating } / reviews.count.to_f).ceil(1) if reviews.present?
   end
 
+  def youtube_video_id
+    link[/youtu\.?be(?:\.com)?\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)?([A-Za-z0-9_-]{11})/, 1]
+  end
+
   private
 
   def photo_presence
