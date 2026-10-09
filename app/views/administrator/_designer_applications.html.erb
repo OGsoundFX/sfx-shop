@@ -46,9 +46,21 @@
 
         <div>
           <div class="submission-card-actions">
-            <% if !["accepted", "rejected"].include?(submission.status)  %>
-              <%= link_to "Incomplete", complete_submission_path(submission.id), class: "btn btn-orange" %>
-            <% end %>
+            <div class="dropdown dropstart">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Action
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <% if !["accepted", "rejected"].include?(submission.status)  %>
+                    <%= link_to "Send completion request", complete_submission_path(submission.id), class: "dropdown-item" %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to "Remove", designer_submission_path(submission.id), class: "dropdown-item", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                </li>
+              </ul>
+            </div>
             <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
               <% if !["accepted", "rejected"].include?(submission.status) %>
                 <%= button_to submission_accepted_path(submission.id), method: "patch", class: "submission-card_btn-group submission-card__confirm-accept" do %>
@@ -77,7 +89,6 @@
                 <% end %>
               <% end %>
             </div>
-            <%= link_to "Remove", designer_submission_path(submission.id), class: "btn btn-reject", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
           </div>
         </div>
       </div>
