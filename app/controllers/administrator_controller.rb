@@ -132,7 +132,7 @@ class AdministratorController < ApplicationController
 
   def complete_submission
     @submission = DesignerSubmission.find(params[:id])
-    @submission.incomplete!
+    @submission.completion_request_sent!
     DesignerMailer.incomplete_submission(@submission).deliver_later
     redirect_to submissions_path
   end
