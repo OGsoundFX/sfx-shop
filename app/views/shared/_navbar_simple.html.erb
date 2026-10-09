@@ -32,7 +32,7 @@
           <li class="nav-item dropdown">
             <%= link_to "Become a Seller", new_designer_submission_path, class: "btn btn-secondary", id: "nav-item-become-seller" %>
           </li>
-        <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.submited? %>
+        <% elsif user_signed_in? && current_user.designer_submission.present? && current_user.designer_submission.submitted? %>
           <li class="nav-item dropdown">
             <div class="btn btn-secondary seller-submission-pending">Seller submission Pending</div>
           </li>

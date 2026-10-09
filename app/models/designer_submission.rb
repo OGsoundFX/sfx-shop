@@ -7,7 +7,8 @@ class DesignerSubmission < ApplicationRecord
   validate :links_count
   validate :completed_submission_exists
 
-  enum status: [:profile_created, :submited, :accepted, :rejected]
+  # /note/ that 'incomplete' means that the status moved from profile_created to incomplete when admin sent a reminder email
+  enum status: [:profile_created, :incomplete, :submitted, :accepted, :rejected]
 
   def to_param
     access_token
