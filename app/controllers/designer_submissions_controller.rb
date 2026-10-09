@@ -33,7 +33,7 @@ class DesignerSubmissionsController < ApplicationController
   def thank_you
     # current_user.send_confirmation_instructions unless current_user.confirmed?
     @designer_submission = DesignerSubmission.find(params[:id])
-    @designer_submission.submited!
+    @designer_submission.submitted!
   end
 
   def destroy
