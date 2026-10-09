@@ -22,6 +22,9 @@ application.register("collection-checkout-modal", CollectionCheckoutModalControl
 import CollectionNameController from "./collection_name_controller"
 application.register("collection-name", CollectionNameController)
 
+import CopyEmailToClipboardController from "./copy_email_to_clipboard_controller"
+application.register("copy-email-to-clipboard", CopyEmailToClipboardController)
+
 import CopyTokenToClipboardController from "./copy_token_to_clipboard_controller"
 application.register("copy-token-to-clipboard", CopyTokenToClipboardController)
 

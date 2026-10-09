@@ -19,8 +19,11 @@
             <div class="submission-day"><%= submission.created_at.strftime("%b %y") %></div>
             <div class="submission-date"><%= submission.created_at.strftime("%d") %></div>
           </div>
-          <div class="submission-card-content">
-            <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status"><%= "(#{submission.status})" unless submission.status == "accepted" %></span></div>
+          <div class="submission-card-content" data-controller="copy-email-to-clipboard" data-copy-email-to-clipboard-email-value="<%= submission.email %>">
+            <div class="d-flex flex-column align-items-start">
+              <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status"><%= "(#{submission.status})" unless submission.status == "accepted" %></span></div>
+              <div><small><em><%= submission.email %></small></em><i class="far fa-copy ms-2" data-action="click->copy-email-to-clipboard#copy" data-copy-email-to-clipboard-target="icon"></i><span data-copy-email-to-clipboard-target="copyMessage" class="ms-2 d-none">Copied</span></div>
+            </div>
           </div>
           <% if submission.status == "accepted" %>            
             <div class="designer-dashboard__label mt-2">
