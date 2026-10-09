@@ -8,7 +8,7 @@ export default class extends Controller {
     let count = 0
     this.submissionTargets.forEach((submission) => {
       count ++
-      if (submission.dataset.status === "accepted" || submission.dataset.status === "rejected" || submission.dataset.status === "incomplete") {
+      if (submission.dataset.status === "accepted" || submission.dataset.status === "rejected" || submission.dataset.status === "completion_request_sent") {
         submission.classList.add("d-none")
         count --
       }
@@ -28,7 +28,7 @@ export default class extends Controller {
     let count = 0
     this.submissionTargets.forEach((submission) => {
       const isDisplayed = selectedStatus === "pending"
-        ? submission.dataset.status !== "accepted" && submission.dataset.status !== "rejected" && submission.dataset.status !== "incomplete"
+        ? submission.dataset.status !== "accepted" && submission.dataset.status !== "rejected" && submission.dataset.status !== "completion_request_sent"
         : submission.dataset.status === selectedStatus
 
       submission.classList.toggle("d-none", !isDisplayed)
