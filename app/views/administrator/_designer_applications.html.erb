@@ -21,15 +21,17 @@
           </div>
           <div class="submission-card-content" data-controller="copy-email-to-clipboard" data-copy-email-to-clipboard-email-value="<%= submission.email %>">
             <div class="d-flex flex-column align-items-start">
-              <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status"><%= "(#{submission.status})" unless submission.status == "accepted" %></span></div>
+              <div class="d-flex">
+                <div class="title"><%= submission.first_name %> <%= submission.last_name %> <span class="status"><%= "(#{submission.status})" unless submission.status == "accepted" %></span></div>
+                <% if submission.status == "accepted" %>            
+                  <div class="designer-dashboard__label">
+                    <i class="fas fa-check-circle approved-icon"></i>
+                  </div>
+                <% end %>
+              </div>
               <div><small><em><%= submission.email %></small></em><i class="far fa-copy ms-2" data-action="click->copy-email-to-clipboard#copy" data-copy-email-to-clipboard-target="icon"></i><span data-copy-email-to-clipboard-target="copyMessage" class="ms-2 d-none">Copied</span></div>
             </div>
           </div>
-          <% if submission.status == "accepted" %>            
-            <div class="designer-dashboard__label mt-2">
-              <i class="fas fa-check-circle approved-icon"></i>
-            </div>
-          <% end %>
         </div>
 
         <div class="d-flex flex-column">
@@ -44,13 +46,18 @@
           <% end %>
         </div>
 
-        <div>
+        <div class="d-flex">
+          <% if submission.status == "accepted" %>
+            <div class="align-items-center d-flex justify-content-center me-3">
+              <small><em><%= submission.user.sound_designer.present? ? 'Designer profile created' : 'Waiting for designer profile' %></em></small>
+            </div>
+          <% end %>
           <div class="submission-card-actions">
-            <div class="dropdown dropstart">
+            <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Action
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                   <% if !["accepted", "rejected"].include?(submission.status)  %>
                     <%= link_to "Send completion request", complete_submission_path(submission.id), class: "dropdown-item" %>
@@ -59,6 +66,19 @@
                 <li>
                   <%= link_to "Remove", designer_submission_path(submission.id), class: "dropdown-item", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
                 </li>
+                <% if submission.status == "accepted" %>
+                  <li>
+                    <%= button_to submission_rejected_path(submission.id), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "dropdown-item" do %>
+                      Cancel
+                    <% end %>
+                  </li>
+                <% elsif submission.status == "rejected" %>
+                <li>
+                  <%= button_to submission_accepted_path(submission.id), method: "patch", class: "dropdown-item" do %>
+                    Accept
+                  <% end %>
+                </li>
+                <% end %>
               </ul>
             </div>
             <div class="btn-group btn-group--lg bookings__info-fa" role="group" aria-label="Basic example">
@@ -72,20 +92,6 @@
                   <div>
                     <i class="fas fa-ban"></i>
                   </div>
-                <% end %>
-              <% else %>
-                
-                <% if submission.status == "accepted" %>
-                  <div class="align-items-center d-flex justify-content-center me-3">
-                    <small><em><%= submission.user.sound_designer.present? ? 'Designer profile created' : 'Waiting for designer profile' %></em></small>
-                  </div>
-                  <%= button_to submission_rejected_path(submission.id), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-warning" do %>
-                    Cancel
-                  <% end %>
-                <% else %>
-                  <%= button_to submission_accepted_path(submission.id), method: "patch", class: "btn btn-admin-active" do %>
-                    Accept
-                  <% end %>
                 <% end %>
               <% end %>
             </div>
