@@ -69,12 +69,7 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sound_designer = @designer
     @sfx_pack.display_order = 100
 
-    # taking care of the category and tags fields
-    params[:sfx_pack][:category].shift
-    params[:sfx_pack][:tags].shift
-
-    @sfx_pack.category = params[:sfx_pack][:category].join(", ")
-    @sfx_pack.tags = params[:sfx_pack][:tags].join(", ")
+    tags_and_categories
 
     @sfx_pack.status = "submitted"
     # creating the SKU
@@ -113,6 +108,9 @@ class SfxPacksController < ApplicationController
 
     @sfx_pack.update(sfx_pack_params)
     @sfx_pack.submitted! if @sfx_pack.removed?
+
+    tags_and_categories
+
     if @sfx_pack.save
       redirect_to designer_listings_path
     else
@@ -127,5 +125,14 @@ class SfxPacksController < ApplicationController
 
   def sfx_pack_params
     params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_conditions)
+  end
+
+  def tags_and_categories
+    # taking care of the category and tags fields
+    params[:sfx_pack][:category].shift
+    params[:sfx_pack][:tags].shift
+
+    @sfx_pack.category = params[:sfx_pack][:category].join(", ")
+    @sfx_pack.tags = params[:sfx_pack][:tags].join(", ")
   end
 end
