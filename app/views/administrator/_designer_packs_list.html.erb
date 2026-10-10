@@ -27,6 +27,9 @@
             <%= pack.title %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
           </div>
           <div>
+            <%= link_to sound_designer_path(pack.sound_designer), target: "_blank", class: "designer-dashboard__hover-effect" do %>
+              <i class="fas fa-headphones me-2" style="font-size: 1.1rem; margin-top: 3px"></i>
+            <% end %>
             <%= link_to sfx_pack_path(pack), target: "_blank", class: "designer-dashboard__hover-effect" do %>
               <i class="fas fa-eye me-2" style="font-size: 1.1rem; margin-top: 3px"></i>
             <% end %>
