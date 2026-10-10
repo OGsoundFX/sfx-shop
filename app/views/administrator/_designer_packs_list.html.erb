@@ -55,8 +55,8 @@
               <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
               <p class="mb-0">• Format: WAV</p>
             </div>
-            <div class="designer-dashboard__pills designer-dashboard__pills pills-desktop">
-              <div class="flex flex-wrap gap-2 pb-2">
+            <div class="designer-dashboard__pills pills-desktop">
+              <div class="flex flex-wrap gap-2 pb-2" id="designer-dashboard__pills__pills-width">
                 <% pack.category.split(", ").each do |tag| %>
                   <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill designer-dashboard__pills-color"><%= tag %></span>
                 <% end %>

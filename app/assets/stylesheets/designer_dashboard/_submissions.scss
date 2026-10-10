@@ -64,6 +64,10 @@
   display: flex
 }
 
+#designer-dashboard__pills__pills-width {
+  width: clamp(0.5rem, 8rem, 150px)
+}
+
 .designer-dashboard__pills.pills-mobile {
   display: none
 }
