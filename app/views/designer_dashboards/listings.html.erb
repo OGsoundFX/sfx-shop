@@ -42,8 +42,18 @@
               data-status="<%= pack.status %>">
             <div class="designer-dashboard__user-profile">
               <div class="d-flex justify-content-between">
+
+
+
+
                 <div class="d-flex">
-                  <span class="designer-dashboard__pick-title-ellipsis"><%= pack.title %></span><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
+                  <div class="tooltip-title">
+                    <p class="card-title fw-bold truncate-title"><%= pack.title %></p>
+                    <% if pack.title.length > 20 %>
+                      <span class="tooltiptext-title"><%= pack.title %></span>
+                    <% end %>
+                  </div>
+                  <span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
                 </div>
                 <div>
                   <%= link_to sfx_pack_path(pack), class: "designer-dashboard__icon-white", target: "_blank" do %>

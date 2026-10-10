@@ -31,7 +31,9 @@
               <div class="d-flex justify-content-between">
                 <div class="tooltip-title">
                   <h5 class="card-title fw-bold mb-1 truncate-title"><%= pack.title %></h5>
-                  <span class="tooltiptext-title"><%= pack.title %></span>
+                  <% if pack.title.length > 20 %>
+                    <span class="tooltiptext-title"><%= pack.title %></span>
+                  <% end %>
                 </div>
                 <div>
                   <% if pack.average_rating %>
