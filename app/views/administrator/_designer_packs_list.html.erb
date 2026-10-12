@@ -23,8 +23,14 @@
           data-status="<%= pack.status %>">
       <div class="designer-dashboard__user-profile">
         <div class="d-flex justify-content-between">
-          <div>
-            <%= pack.title %><span class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></span>
+          <div class="d-flex">
+            <div class="tooltip-title">
+              <p class="card-title fw-bold truncate-title"><%= pack.title %></p>
+              <% if pack.title.length > 20 %>
+                <span class="tooltiptext-title"><%= pack.title %></span>
+              <% end %>
+            </div>
+            <p class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></p>
           </div>
           <div>
             <%= link_to sound_designer_path(pack.sound_designer), target: "_blank", class: "designer-dashboard__hover-effect" do %>
