@@ -124,7 +124,7 @@ class SfxPacksController < ApplicationController
   private
 
   def sfx_pack_params
-    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_conditions)
+    params.require("sfx_pack").permit(:title, :size_mb, :description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_conditions, :includes_ai)
   end
 
   def tags_and_categories

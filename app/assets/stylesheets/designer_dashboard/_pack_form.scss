@@ -153,12 +153,15 @@
   background-color: #bfbfbf;
 }
 
+#includes-ai-label {
+  color: $orange-main;
+}
+
 @media (max-width: 768px) {
   .pack-submission-form__box {
     padding: 12px;
     width: 90%;
   }
-
 }
 
 @media (max-width: 1200px) {
