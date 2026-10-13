@@ -23,7 +23,6 @@
                   </div>
                 <% end %>
               <% end %>
-              <div class="pop-up">See Pack Details</div>
             <% end %>
           </div>
           <div>
@@ -36,15 +35,18 @@
                   <% end %>
                 </div>
                 <div>
-                  <% if pack.average_rating %>
-                    <%= pack.average_rating %> <i class="fas fa-star"></i>
-                  <% else %>
-                    <small><em>No rating</em></small>
-                  <% end %>
+                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
-              <p class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</p>
+              <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
+              <div>
+                <% if pack.average_rating %>
+                  <%= pack.average_rating %> <i class="fas fa-star"></i>
+                <% else %>
+                  <small><em>No rating</em></small>
+                <% end %>
+              </div>
             </div>
           </div>
 
@@ -80,7 +82,7 @@
               <%= form_tag cart_order_path do %>
                 <%= hidden_field_tag 'pack_id', pack.id %>
                 <% if user_signed_in? && pack.sound_designer == current_user.sound_designer %>
-                    <%= link_to "Dashboard", designer_listings_path, class: "btn btn-orange text-white btn-sm ml-2" %>
+                    <%= link_to "Dashboard", designer_listings_path, class: "btn btn-secondary text-white btn-sm ml-2" %>
                 <% else %>
                   <% if pack.sku.include?("FS") %>
                     <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
@@ -97,5 +99,4 @@
     <% end %>
   <% end %>
 </div>
-
 

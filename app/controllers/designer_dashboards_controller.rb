@@ -185,10 +185,14 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def agreement_signed
-    @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
+    @agreement_signed = @designer.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
 
     # this shows the agreement template. we nee to generate the custom agreement for the designer
-    @agreement_acceptance = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).last if @agreement_signed
+    @agreement_acceptance = @designer.legal_entity.agreement_acceptances
+      .joins(:agreement)
+      .where(agreement: { active: true })
+      .order(accepted_at: :desc)
+      .first
     @agreement = Agreement.find(@agreement_acceptance.agreement_id) if @agreement_acceptance
   end
 end

@@ -104,7 +104,9 @@
     </div>
   </div>
   <hr>
-  <%= f.input :accept_conditions, as: :boolean, label: "I guarantee that no part of the Content has been generated, synthesized, trained, enhanced, transformed, or derived from artificial intelligence.", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" } } %>
+  <%= f.input :includes_ai, as: :boolean, label: "Check this box if any part of your asset was created or modified with AI assistance ⚠️", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" } }, label_html: { id: "includes-ai-label" } %>
+  <%= f.input :accept_conditions, as: :boolean, label: "I warrant that this asset complies with the terms of the agreement I signed on #{@agreement_acceptance.accepted_at.strftime("%b %d, %Y")}", input_html: { class: "seller-agreement__acceptance-section__checkbox", data: { action: "change->agreement-acceptance-form#toggle" } }, label_html: { id: "accept-conditions-label" } %>
+  <%= link_to "See agreement", seller_agreement_path(@designer), target: "_blank", class: "btn btn-secondary mt-2" %>
   <div class="text-center mt-4">
     <%= f.submit "Submit Pack", class: "btn btn-dark w-100", style: "height: 40px; border-radius: 8px; font-size: 1rem" %>
   </div>
