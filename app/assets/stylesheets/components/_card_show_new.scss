@@ -30,6 +30,16 @@
   background-color: $blue-light;
 }
 
+.sfx-card__ai-pills-color {
+  background-color: $flash-pink;
+  // background-image: linear-gradient(to right, $flash-pink, rgb(128, 0, 188));
+}
+
+.sfx-card__no-ai-pills-color {
+  background-color: $new-green;
+  // background-image: linear-gradient(to right, $new-green, $new-pink);
+}
+
 @media (max-width: 768px) {
   .sfx_card__cover {
     padding-top: 8px;
