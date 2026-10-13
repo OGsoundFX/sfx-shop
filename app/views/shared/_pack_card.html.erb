@@ -35,16 +35,18 @@
                   <% end %>
                 </div>
                 <div>
-                  <% if pack.average_rating %>
-                    <%= pack.average_rating %> <i class="fas fa-star"></i>
-                  <% else %>
-                    <small><em>No rating</em></small>
-                  <% end %>
+                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
               <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
-              <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+              <div>
+                <% if pack.average_rating %>
+                  <%= pack.average_rating %> <i class="fas fa-star"></i>
+                <% else %>
+                  <small><em>No rating</em></small>
+                <% end %>
+              </div>
             </div>
           </div>
 
