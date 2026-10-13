@@ -23,7 +23,6 @@
                   </div>
                 <% end %>
               <% end %>
-              <div class="pop-up">See Pack Details</div>
             <% end %>
           </div>
           <div>
@@ -45,6 +44,7 @@
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
               <p class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</p>
+              <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill sfx-card__pills-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
             </div>
           </div>
 
@@ -97,5 +97,4 @@
     <% end %>
   <% end %>
 </div>
-
 
