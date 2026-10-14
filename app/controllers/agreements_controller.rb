@@ -42,6 +42,6 @@ class AgreementsController < ApplicationController
 
   def allow_access
     @designer = SoundDesigner.find(params[:id])
-    redirect_to settings_path, alert: "You don't have permission to access this page." if @designer != current_user.sound_designer
+    redirect_to settings_path, alert: "You don't have permission to access this page." if @designer != current_user.sound_designer && !current_user.admin?
   end
 end
