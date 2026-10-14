@@ -1,0 +1,3 @@
+<% if !current_user.legal_entity.accepted? && !current_user.admin? %>
+  <div class="d-flex justify-content-center btn btn-orange btn-hover-dismiss mt-2">Your submission to become a seller is pending approval</div>
+<% end %>
