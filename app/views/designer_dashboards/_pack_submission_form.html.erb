@@ -26,6 +26,10 @@
   </div>
   <%= f.input :title %>
   <%= f.input :description %>
+
+  <div class="field">
+    <%= f.rich_text_area :description %>
+  </div>
   <hr>
   <%= f.input :category,
               collection: SfxPack.categories,
