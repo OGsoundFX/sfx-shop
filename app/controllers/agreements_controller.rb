@@ -7,7 +7,9 @@ class AgreementsController < ApplicationController
   end
 
   def seller_agreement
-    @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
+    # checking if there is a new agreement that the designer has not signed yet
+    @latest_agreement = Agreement.where(active: true).order(created_at: :desc).first
+    @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists? && @designer.legal_entity.agreement_acceptances.joins(:agreement).where(agreement: { active: true }).pluck(:agreement_id).include?(@latest_agreement&.id)
     if @agreement_signed
       @agreement_acceptance = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).last
       agreement_version = "V" + @designer.legal_entity.agreement_acceptances.last.agreement.version[0]

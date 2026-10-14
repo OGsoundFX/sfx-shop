@@ -6,11 +6,6 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def listings
-    # @live_packs = @designer.sfx_packs.live.order(updated_at: :desc)
-    # @pending_packs = @designer.sfx_packs.pending.order(updated_at: :desc)
-    # @under_review_packs = @designer.sfx_packs.under_review.order(updated_at: :desc)
-    # @declined_packs = @designer.sfx_packs.declined.order(updated_at: :desc)
-
     @packs = @designer.sfx_packs.where.not(id: 100).order(:status)
     @pack_count = {
       all: @packs.count,
@@ -84,7 +79,6 @@ class DesignerDashboardsController < ApplicationController
 
   def paypal_account
     @paypal.update(payment_params)
-    raise
     # ! this is where we need to re-organise everything
     @paypal.user = @designer.user
     @paypal.preferred_currency = params[:payment_info][:preferred_currency].downcase
@@ -186,6 +180,10 @@ class DesignerDashboardsController < ApplicationController
 
   def agreement_signed
     @agreement_signed = @designer.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
+
+    # checking if there is a new agreement that the designer has not signed yet
+    @latest_agreement = Agreement.where(active: true).order(created_at: :desc).first
+    @is_latest_agreement_signed = @designer.legal_entity.agreement_acceptances.joins(:agreement).where(agreement: { active: true }).pluck(:agreement_id).include?(@latest_agreement&.id) || @designer.legal_entity.agreement_acceptances.empty?
 
     # this shows the agreement template. we nee to generate the custom agreement for the designer
     @agreement_acceptance = @designer.legal_entity.agreement_acceptances
