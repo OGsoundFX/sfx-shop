@@ -7,7 +7,11 @@ class AgreementsController < ApplicationController
   end
 
   def seller_agreement
-    @agreement = Agreements::SellerAgreementV1.new.generate_seller_agreement(@designer, request)
+    # process to get the agreement version and inject it in the name of the service class to generate the agreement
+    agreement_version = "V" + @designer.legal_entity.agreement_acceptances.last.agreement.version[0]
+    constantized_agreement_class = "Agreements::SellerAgreement#{agreement_version}".constantize
+    @agreement = constantized_agreement_class.new.generate_seller_agreement(@designer, request)
+
     @agreement_signed = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).exists?
     if @agreement_signed
       @agreement_acceptance = @designer.user.legal_entity.agreement_acceptances.where(agreement: Agreement.where(active: true)).last
@@ -38,6 +42,6 @@ class AgreementsController < ApplicationController
 
   def allow_access
     @designer = SoundDesigner.find(params[:id])
-    redirect_to settings_path, alert: "You don't have permission to access this page." if @designer != current_user.sound_designer
+    redirect_to settings_path, alert: "You don't have permission to access this page." if @designer != current_user.sound_designer && !current_user.admin?
   end
 end
