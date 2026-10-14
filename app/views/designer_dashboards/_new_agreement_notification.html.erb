@@ -1,0 +1,5 @@
+<% if !@is_latest_agreement_signed %>
+  <div class="designer-dashboard__no-payout">
+    <p class="designer-dashboard__info-banner">A new agreement is available for review <%= link_to "Click here", seller_agreement_path(@designer), class: "btn btn-secondary ms-4" %></p>
+  </div>
+<% end %>
