@@ -51,7 +51,7 @@ class SfxPack < ApplicationRecord
 
   validate :photo_presence, :categories_max, :tags_max
 
-  has_rich_text :description
+  has_rich_text :rich_description
 
   def price_presence
     if price_cents.to_i < 0
