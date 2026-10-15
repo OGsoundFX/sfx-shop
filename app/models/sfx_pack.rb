@@ -69,6 +69,10 @@ class SfxPack < ApplicationRecord
     link[/youtu\.?be(?:\.com)?\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)?([A-Za-z0-9_-]{11})/, 1]
   end
 
+  def generate_summary_task
+    generate_summary
+  end
+
   private
 
   def photo_presence
