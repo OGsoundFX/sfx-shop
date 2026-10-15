@@ -27,9 +27,9 @@
   <%= f.input :title %>
   <%= f.input :summary %>
   <small><em>(max 200 chars.)</em></small>
-  <%= f.input :description %>
-  <div class="field">
-    <%= f.rich_text_area :description %>
+  <div class="field mt-2">
+    <%= f.label :description %>
+    <%= f.rich_text_area :description, as: :text_area %>
   </div>
   <small><em>(min 20 chars.)</em></small>
 
