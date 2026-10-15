@@ -1,4 +1,6 @@
 class SfxPack < ApplicationRecord
+  before_commit :generate_summary
+
   TAGS = [
     "fantasy", "guns", "explosions", "natural", "disasters", "horror", "nature", "atmospheres",
     "catastrophe", "volcano", "eruption", "earthquake", "landslide", "avalanche", "scary", "monster",
@@ -49,9 +51,9 @@ class SfxPack < ApplicationRecord
   validate :photo_presence, :categories_max, :tags_max
 
   def price_presence
-    if price_cents.to_i <= 0
-      errors.add(:price, "can't be blank")
-      errors.add(:price_cents, "can't be blank")
+    if price_cents.to_i < 0
+      errors.add(:price, "can't be negative")
+      errors.add(:price_cents, "can't be negative")
     end
   end
 
@@ -98,5 +100,21 @@ class SfxPack < ApplicationRecord
 
   def self.categories
     ["action", "medieval", "outdoor", "underground", "scary", "monsters", "disasters", "weather", "miscellaneous", "footsteps", "magic", "scifi"]
+  end
+
+  def generate_summary
+    if summary.blank? && description.present?
+      if description.length <= 200
+        self.summary = description
+      else
+        # count chars until last punctuation mark before 200 chars
+        last_punctuation_index = description[0..199].rindex(/[.!?]/)
+        if last_punctuation_index.present?
+          self.summary = description[0..last_punctuation_index]
+        else
+          self.summary = description.truncate(200, separator: ' ')
+        end
+      end
+    end
   end
 end
