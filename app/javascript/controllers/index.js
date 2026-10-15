@@ -70,6 +70,9 @@ application.register("order-by", OrderByController)
 import PhotoUploadController from "./photo_upload_controller"
 application.register("photo-upload", PhotoUploadController)
 
+import RichTextController from "./rich_text_controller"
+application.register("rich-text", RichTextController)
+
 import SelectController from "./select_controller"
 application.register("select", SelectController)
 
