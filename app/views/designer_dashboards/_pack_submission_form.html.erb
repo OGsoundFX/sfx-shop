@@ -28,11 +28,11 @@
   <%= f.input :summary %>
   <small><em>(max 200 chars.)</em></small>
   <%= f.input :description %>
-  <small><em>(min 20 chars.)</em></small>
-
   <div class="field">
     <%= f.rich_text_area :description %>
   </div>
+  <small><em>(min 20 chars.)</em></small>
+
   <hr>
   <%= f.input :category,
               collection: SfxPack.categories,
