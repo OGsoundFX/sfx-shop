@@ -27,8 +27,12 @@
   <%= f.input :title %>
   <%= f.input :summary %>
   <small><em>(max 200 chars.)</em></small>
-  <%= f.input :description %>
+  <div class="field mt-2" data-controller="rich-text">
+    <%= f.label :description %>
+    <%= f.rich_text_area :rich_description %>
+  </div>
   <small><em>(min 20 chars.)</em></small>
+
   <hr>
   <%= f.input :category,
               collection: SfxPack.categories,

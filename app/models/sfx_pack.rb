@@ -38,8 +38,9 @@ class SfxPack < ApplicationRecord
   end
 
   validates :title, :summary, :description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
-  validates :description, length: { minimum: 20 }
+  validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
+  validates :description, length: { minimum: 20 }
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
@@ -49,6 +50,8 @@ class SfxPack < ApplicationRecord
   validates :accept_conditions, acceptance: true
 
   validate :photo_presence, :categories_max, :tags_max
+
+  has_rich_text :rich_description
 
   def price_presence
     if price_cents.to_i < 0
