@@ -23,6 +23,9 @@ class SfxPack < ApplicationRecord
 
   validate :price_presence
 
+  # enum for asset_type
+  enum asset_type: { sfx: 0, music: 1}
+
   # enum for status
   enum status: { draft: 0, submitted: 1, live: 2, declined:3, removed: 4 }
 
