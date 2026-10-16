@@ -69,11 +69,7 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sound_designer = @designer
     @sfx_pack.display_order = 100
 
-    @agreement_acceptance = @designer.legal_entity.agreement_acceptances
-      .joins(:agreement)
-      .where(agreement: { active: true })
-      .order(accepted_at: :desc)
-      .first
+    load_agreement_acceptance
 
     tags_and_categories
 
@@ -104,11 +100,7 @@ class SfxPacksController < ApplicationController
   def update
     @sfx_pack = SfxPack.find(params[:id])
     @designer = @sfx_pack.sound_designer
-    @agreement_acceptance = @designer.legal_entity.agreement_acceptances
-      .joins(:agreement)
-      .where(agreement: { active: true })
-      .order(accepted_at: :desc)
-      .first
+    load_agreement_acceptance
 
     # be careful, only execute the following lines if a new photo or pdf is added
     @sfx_pack.sound_list.purge if @sfx_pack.sound_list.present? && sfx_pack_params[:sound_list].present?
@@ -133,6 +125,14 @@ class SfxPacksController < ApplicationController
   end
 
   private
+
+  def load_agreement_acceptance
+    @agreement_acceptance = @designer.legal_entity.agreement_acceptances
+      .joins(:agreement)
+      .where(agreement: { active: true })
+      .order(accepted_at: :desc)
+      .first
+  end
 
   def sfx_pack_params
     params.require("sfx_pack").permit(:title, :size_mb, :summary, :description, :rich_description, :photos, :price, :number_of_tracks, :duration, :link, :product_link, :sound_list, :sample_rate, :bit_depth, :accept_conditions, :includes_ai)
