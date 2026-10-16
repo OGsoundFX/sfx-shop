@@ -15,11 +15,16 @@ RSpec.describe SfxPack, type: :model do
       expect(sfx_pack.errors[:category]).to include("can't be blank")
       expect(sfx_pack.errors[:tags]).to include("can't be blank")
       expect(sfx_pack.errors[:number_of_tracks]).to include("can't be blank")
-      expect(sfx_pack.errors[:price_cents]).to include("can't be blank")
       expect(sfx_pack.errors[:link]).to include("can't be blank")
       expect(sfx_pack.errors[:product_link]).to include("can't be blank")
       expect(sfx_pack.errors[:sample_rate]).to include("can't be blank")
       expect(sfx_pack.errors[:bit_depth]).to include("can't be blank")
+    end
+
+    it 'adds errors when price_cents is negative' do
+      sfx_pack.price_cents = -100
+      sfx_pack.valid?
+      expect(sfx_pack.errors[:price_cents]).to include("can't be negative")
     end
 
     it 'validates price to be a money object' do
