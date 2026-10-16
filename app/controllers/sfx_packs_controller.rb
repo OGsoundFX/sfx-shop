@@ -69,6 +69,12 @@ class SfxPacksController < ApplicationController
     @sfx_pack.sound_designer = @designer
     @sfx_pack.display_order = 100
 
+    @agreement_acceptance = @designer.legal_entity.agreement_acceptances
+      .joins(:agreement)
+      .where(agreement: { active: true })
+      .order(accepted_at: :desc)
+      .first
+
     tags_and_categories
 
     @sfx_pack.status = "submitted"

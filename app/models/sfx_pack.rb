@@ -40,10 +40,10 @@ class SfxPack < ApplicationRecord
     CURRENCY_SYMBOLS[currency]
   end
 
-  validates :title, :summary, :description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
+  validates :title, :summary, :rich_description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
   validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
-  validates :description, length: { minimum: 20 }
+  validates :rich_description, length: { minimum: 20 }
   validates :link, :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
@@ -113,16 +113,16 @@ class SfxPack < ApplicationRecord
   end
 
   def generate_summary
-    if summary.blank? && description.present?
-      if description.length <= 200
-        self.summary = description
+    if summary.blank? && rich_description.present?
+      if rich_description.length <= 200
+        self.summary = rich_description
       else
         # count chars until last punctuation mark before 200 chars
-        last_punctuation_index = description[0..199].rindex(/[.!?]/)
+        last_punctuation_index = rich_description[0..199].rindex(/[.!?]/)
         if last_punctuation_index.present?
-          self.summary = description[0..last_punctuation_index]
+          self.summary = rich_description[0..last_punctuation_index]
         else
-          self.summary = description.truncate(200, separator: ' ')
+          self.summary = rich_description.truncate(200, separator: ' ')
         end
       end
     end
