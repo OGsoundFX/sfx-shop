@@ -22,6 +22,10 @@
               <form action="/sfx_packs" data-controller="category">
                 <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
                 <input type="hidden" name="filters" value="" data-filters-target="dropdown">
+                <input type="hidden" name="search" value="<%= params[:search] %>">
+                <input type="hidden" name="includes_ai" value="<%= params[:includes_ai] %>">
+                <input type="hidden" name="asset_type" value="<%= params[:asset_type] %>">
+                <input type="hidden" name="free" value="<%= params[:free] %>">
                 <div class="d-flex justify-content-start">
                   <div>
                     <select type="text" name="dropdown" placeholder="category">
@@ -44,10 +48,29 @@
             <div class="search-form-or"><strong>OR</strong></div>
             <div class="search-form">
               <form action="/sfx_packs">
+                <input type="hidden" name="dropdown" value="<%= params[:dropdown] %>">
+                <input type="hidden" name="includes_ai" value="<%= params[:includes_ai] %>">
+                <input type="hidden" name="asset_type" value="<%= params[:asset_type] %>">
+                <input type="hidden" name="free" value="<%= params[:free] %>">
                 <input type="text" name="search" placeholder="<%= @search.present? ? @search : 'Search by keyword' %>">
                 <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
               </form>
             </div>
+          </div>
+
+          <div class="sfx-pack-filters mb-3" aria-label="Filter sound packs">
+            <%= link_to "AI-assisted",
+                        sfx_packs_path(request.query_parameters.merge(includes_ai: @includes_ai == "true" ? nil : "true")),
+                        class: "sfx-pack-filter-pill #{"is-selected" if @includes_ai == "true"}" %>
+            <%= link_to "Music",
+                        sfx_packs_path(request.query_parameters.merge(asset_type: @asset_type == "music" ? nil : "music")),
+                        class: "sfx-pack-filter-pill #{"is-selected" if @asset_type == "music"}" %>
+            <%= link_to "SFX",
+                        sfx_packs_path(request.query_parameters.merge(asset_type: @asset_type == "sfx" ? nil : "sfx")),
+                        class: "sfx-pack-filter-pill #{"is-selected" if @asset_type == "sfx"}" %>
+            <%= link_to "Free",
+                        sfx_packs_path(request.query_parameters.merge(free: @free ? nil : "1")),
+                        class: "sfx-pack-filter-pill #{"is-selected" if @free}" %>
           </div>
 
           <hr id="search-hr">

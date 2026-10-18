@@ -19,20 +19,35 @@ class SfxPacksController < ApplicationController
     @categories = SfxPack.categories
     @designers = SoundDesigner.all
 
-    # Order packs by display_order
-    # @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
-    # order packs randomly
-    @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).shuffle
+    packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob)
 
-    # search resutls
     if params[:dropdown] && params[:dropdown] != "all"
-      @sfx_packs = SfxPack.where(status: "live").where("title ilike :query OR category ilike :query OR tags ilike :query", query: "%#{params[:dropdown]}%").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
+      packs = packs.where("title ilike :query OR category ilike :query OR tags ilike :query", query: "%#{params[:dropdown]}%")
       @category = params[:dropdown]
     end
 
     if params[:search]
-      @sfx_packs = SfxPack.where(status: "live").where("title ilike :query OR category ilike :query OR tags ilike :query OR description ilike :query", query: "%#{params[:search]}%").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
+      packs = packs.where("title ilike :query OR category ilike :query OR tags ilike :query OR description ilike :query", query: "%#{params[:search]}%")
       @search = params[:search]
+    end
+
+    if %w[true false].include?(params[:includes_ai])
+      @includes_ai = params[:includes_ai]
+      packs = packs.where(includes_ai: @includes_ai == "true")
+    end
+
+    if SfxPack.asset_types.key?(params[:asset_type])
+      @asset_type = params[:asset_type]
+      packs = packs.where(asset_type: @asset_type)
+    end
+
+    @free = params[:free] == "1"
+    packs = packs.where(price_cents: 0) if @free
+
+    @sfx_packs = if @category || @search
+      packs.sort_by(&:display_order)
+    else
+      packs.shuffle
     end
 
     # annoucements

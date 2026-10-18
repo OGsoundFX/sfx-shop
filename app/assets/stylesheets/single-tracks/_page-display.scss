@@ -3,6 +3,27 @@
   justify-content: space-between;
 }
 
+.sfx-pack-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sfx-pack-filter-pill {
+  background-color: white;
+  border: 1px solid $border-grey;
+  border-radius: 20px;
+  color: #4E4E4E;
+  padding: 6px 14px;
+  text-decoration: none;
+
+  &.is-selected {
+    background-color: $new-green;
+    border-color: $new-green;
+    color: white;
+  }
+}
+
 .drop-down{
   margin: 20px 0;
   select {
