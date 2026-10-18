@@ -31,12 +31,26 @@
 }
 
 .sfx-card__ai-pills-color {
-  background-color: $flash-pink;
+  background-color: $indian-red;
   // background-image: linear-gradient(to right, $flash-pink, rgb(128, 0, 188));
 }
 
 .sfx-card__no-ai-pills-color {
   background-color: $new-green;
+  // background-image: linear-gradient(to right, $new-green, $new-pink);
+}
+
+.sfx-card__music-color {
+  // background-color: $flash-pink;
+  // background-color: $indian-red;
+  background-color: $blue-annoucement;
+  // background-color: $light-card-background;
+  // background-image: linear-gradient(to right, $flash-pink, rgb(128, 0, 188));
+}
+
+.sfx-card__sfx-color {
+  background-color: $new-green;
+  // background-color: $blue-annoucement;
   // background-image: linear-gradient(to right, $new-green, $new-pink);
 }
 
