@@ -35,7 +35,7 @@
                   <% end %>
                 </div>
                 <div>
-                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.music? ? 'sfx-card__music-color' : 'sfx-card__sfx-color' %>"><%= pack.music? ? "Music" : "SFX" %></span>
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>

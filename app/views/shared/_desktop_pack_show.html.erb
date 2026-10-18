@@ -26,7 +26,7 @@
               <div class="mb-2">
                 <div class="d-flex justify-content-between align-items-center">
                   <h3 class="card-title mb-1"><%= @pack.title %></h3>
-                  <span style="font-size: 0.9rem" class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= @pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= @pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+                  <span style="font-size: 0.9rem" class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= @pack.music? ? 'sfx-card__music-color' : 'sfx-card__sfx-color' %>"><%= @pack.music? ? "Music" : "SFX" %></span>
                 </div>
                 <% if @pack.average_rating.present? %>                  
                   <p class="text-warning mb-2">
