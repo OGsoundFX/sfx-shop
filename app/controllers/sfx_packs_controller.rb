@@ -19,8 +19,10 @@ class SfxPacksController < ApplicationController
     @categories = SfxPack.categories
     @designers = SoundDesigner.all
 
-    # Retrieving packs
-    @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).all.sort_by(&:display_order)
+    # Order packs by display_order
+    # @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
+    # order packs randomly
+    @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).shuffle
 
     # search resutls
     if params[:dropdown] && params[:dropdown] != "all"
