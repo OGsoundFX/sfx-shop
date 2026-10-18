@@ -15,8 +15,11 @@ class SfxPack < ApplicationRecord
   belongs_to :sound_designer
   has_many :orders, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many_attached :photos, dependent: :destroy
-  has_one_attached :banner
+  has_many_attached :photos, service: Rails.env.production? ? :aws_s3_pack_covers : :cloudinary, dependent: :destroy
+  # has_many_attached :photos, service: :aws_s3_pack_covers, dependent: :destroy
+
+  # The banner is not used in the app. When decided to implement, please use AWS S3 for attachment
+  # has_one_attached :banner
   has_one_attached :sound_list
   monetize :price_cents
   has_many :sold_items, dependent: :nullify
