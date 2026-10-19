@@ -23,11 +23,17 @@ padding-top: 80px;
 }
 
 .submission-form__conditions-banner, .submission-form__conditions-banner-designer {
-  background-color: $orange-main;
-  color: black;
+  background-color: $blue-annoucement;
+  color: white;
   padding: 8px 12px;
   border-radius: 8px;
   margin: 12px auto;
+  a {
+    color: $font-grey;
+    &:hover {
+      color: grey;
+    }
+  }
 }
 
 .submission-form__conditions-banner {
