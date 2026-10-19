@@ -113,10 +113,20 @@
         
         <hr>
         <% if pack.live? %>
-            <div><%= button_to "Cancel", sfx_pack_rejected_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-reject" %></div>
+            <div class="d-flex">
+              <%= button_to "Cancel", sfx_pack_rejected_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-reject" %>
+              <%= link_to update_pack_path(pack), target: "_blank" do %>
+                <i class="fas fa-edit mt-1 ms-2" style="color: white"></i>
+              <% end %>
+            </div>
         <% else %>          
           <div class="d-flex justify-content-between">
-            <div><%= button_to "Accept", sfx_pack_accepted_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-admin-active", style: "width: 100%" %></div>
+            <div>
+              <%= button_to "Accept", sfx_pack_accepted_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-admin-active", style: "width: 100%" %>
+              <%= link_to update_pack_path(pack), target: "_blank" do %>
+                <i class="fas fa-edit mt-1 ms-2" style="color: white"></i>
+              <% end %>
+            </div>
             <div><%= button_to "Reject", sfx_pack_rejected_path(pack), method: "patch", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-warning" %></div>
           </div>
         <% end %>
