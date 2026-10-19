@@ -7,7 +7,9 @@ class PagesController < ApplicationController
     # sorted by display_order
     # @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)
     # random display
-    @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).shuffle
+    # @sfx_packs = SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).shuffle
+    @sfx_packs = Kaminari.paginate_array(SfxPack.where(status: "live").includes(:sound_designer).includes(photos_attachments: :blob).sort_by(&:display_order)).page(params[:page]).per(24)
+
     if Date.today < Annoucement.last.end_date && Date.today >= Annoucement.last.start_date
       @announcement = Annoucement.last
     end

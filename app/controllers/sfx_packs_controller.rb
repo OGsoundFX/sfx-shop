@@ -45,9 +45,9 @@ class SfxPacksController < ApplicationController
     packs = packs.where(price_cents: 0) if @free
 
     @sfx_packs = if @category || @search
-      packs.sort_by(&:display_order)
+      Kaminari.paginate_array(packs.sort_by(&:display_order)).page(params[:page]).per(24)
     else
-      packs.shuffle
+      Kaminari.paginate_array(packs.sort_by(&:display_order)).page(params[:page]).per(24)
     end
 
     # annoucements
