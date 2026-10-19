@@ -30,6 +30,8 @@
                 <span class="tooltiptext-title"><%= pack.title %></span>
               <% end %>
             </div>
+          </div>
+          <div>
             <p class="badge rounded-pill text-bg-light ms-3 <%= pill_color_class %>"><%= pack.status %></p>
           </div>
           <div>
@@ -49,7 +51,7 @@
             <% end %>
           </div>
         </div>
-        <hr>
+        <hr style="margin-top: 0">
         <div class="d-flex submissions__pack-description">
           <div class="me-4">
             <% if pack.photos.present? %>
@@ -58,6 +60,11 @@
           </div>
           <div class="text-muted small d-flex flex-column justify-content-between">
             <div>
+              <p class="mb-1"><%= link_to pack.sound_designer.artist_name, sound_designer_path(pack.sound_designer), target: "_blank" %></p>
+              <div class="mb-2">
+                <span style="font-size: 0.7rem" class="text-white text-xs font-medium px-2 py-1 badge rounded-pill sfx-card__music-color"><%= pack.music? ? "Music" : "SFX" %></span>
+                <span style="font-size: 0.7rem" class="text-white px-2 py-1 badge rounded-pill sfx-card__ai-pills-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+              </div>
               <p class="mb-1">• <%= pack.sample_rate == 44100 ? pack.sample_rate / 1000.0 : pack.sample_rate / 1000 %>kHz / <%= pack.bit_depth %>bit High Def Audio</p>
               <% if pack.size_mb > 1000 %>
                 <p class="mb-1">• <%= (pack.size_mb / 1000.to_f).ceil(1) %> GB</p>
@@ -66,6 +73,7 @@
               <% end %>
               <p class="mb-1">• <%= pack.number_of_tracks %> Sounds</p>
               <p class="mb-0">• Format: WAV</p>
+
             </div>
             <div class="designer-dashboard__pills pills-desktop">
               <div class="flex flex-wrap gap-2 pb-2" id="designer-dashboard__pills__pills-width">
