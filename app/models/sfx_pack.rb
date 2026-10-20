@@ -43,7 +43,7 @@ class SfxPack < ApplicationRecord
     CURRENCY_SYMBOLS[currency]
   end
 
-  validates :title, :summary, :rich_description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, presence: true
+  validates :title, :summary, :rich_description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, :asset_type, presence: true
   validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
   validates :rich_description, length: { minimum: 20 }
