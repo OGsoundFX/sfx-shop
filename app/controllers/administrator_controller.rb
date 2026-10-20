@@ -107,6 +107,7 @@ class AdministratorController < ApplicationController
       drafts: @packs.draft.count,
       removed: @packs.removed.count
     }
+    @packs = @packs.sort_by(&:display_order)
   end
 
   def submission_accepted
@@ -161,9 +162,9 @@ class AdministratorController < ApplicationController
     redirect_to admin_path, notice: 'USD-EUR exchange rate has been updated'
   end
 
-  def re_order_packs
+  def reorder_packs
     PackOrderJob.perform_now
-    redirect_to admin_path, notice: 'Packs have been re-shuffled'
+    redirect_to pack_submissions_path, notice: 'Packs have been re-shuffled'
   end
 
   def stats
