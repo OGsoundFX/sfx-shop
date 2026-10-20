@@ -158,7 +158,12 @@ class AdministratorController < ApplicationController
 
   def calculate_exchange_rate
     RateConversionJob.perform_now
-    redirect_to admin_path
+    redirect_to admin_path, notice: 'USD-EUR exchange rate has been updated'
+  end
+
+  def re_order_packs
+    PackOrderJob.perform_now
+    redirect_to admin_path, notice: 'Packs have been re-shuffled'
   end
 
   def stats
