@@ -20,7 +20,7 @@
                   <p class="catalogue-eyebrow">Sound effects library</p>
                   <h1 id="front-title-home">Browse our SFX Packs</h1>
                 </div>
-                <span class="catalogue-count"><%= @sfx_packs.size %> packs</span>
+                <span class="catalogue-count"><%= @sfx_packs.total_count %> packs</span>
               </div>
             <% end %>
 
@@ -59,7 +59,9 @@
               </div>
 
               <hr id="search-hr">
+              <%= paginate @sfx_packs %>
               <%= render 'shared/pack_card' %>
+              <%= paginate @sfx_packs %>
             </div>
           </div>
         </section>
