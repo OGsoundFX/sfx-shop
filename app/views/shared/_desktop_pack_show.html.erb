@@ -52,7 +52,10 @@
                 <% end %>
                 <p class="mb-1">• <%= @pack.number_of_tracks %> Sounds</p>
                 <p class="mb-1">• Format: WAV</p>
-                <p>• <span style="font-size: 0.9rem" class="text-white px-2 py-1 badge rounded-pill <%= @pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= @pack.includes_ai? ? "AI-assisted" : "No AI" %></span></p>
+                <p class="mb-0">• <span style="font-size: 0.9rem" class="text-white px-2 py-1 badge rounded-pill <%= @pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__no-ai-pills-color' %>"><%= @pack.includes_ai? ? "AI-assisted" : "No AI" %></span></p>
+                <% if @pack.includes_ai? %>
+                  <small><em>(All or part of this asset was created or modified with the assistance of AI)</em></small>
+                <% end %>
               </div>
             </div>
 
