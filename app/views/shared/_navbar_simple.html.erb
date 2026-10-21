@@ -45,19 +45,24 @@
         <% end %>
       <% end %>
       <% if current_user %>
+        <li class="nav-item ms-5 me-1 mt-1" id="navbar__cart<%= '-empty' if current_user.cart.nil? %>">
+          <%= link_to cart_path, class: "dropdown-item" do %>
+            <i class="fas fa-shopping-cart"></i> <small><%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %></small>
+          <% end %>
+        </li>
         <li class="nav-item dropdown">
-          <%= image_tag asset_path("logo/avatar.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", "data-bs-toggle": "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <button type="button" class="p-0 border-0 bg-transparent" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="accountMenu" aria-label="Account menu">
+            <%= image_tag asset_path("logo/avatar.png"), class: "avatar", alt: "" %>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" id="accountMenu" aria-labelledby="navbarDropdown">
             <% if current_user.sound_designer.present? %>
               <%= link_to "Seller Dashboard", designer_listings_path, class: "dropdown-item seller" %>
             <% elsif current_user.designer && current_user.designer_submission&.accepted? %>
               <%= link_to "Create Seller Profile", new_sound_designer_path, class: "dropdown-item seller" %>
             <% end %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
-            <%= link_to cart_path do %>
-              <div class="dropdown-item">
-                Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
-              </div>
+            <%= link_to cart_path, class: "dropdown-item" do %>
+              Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
             <% end %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item log-out" %>
           </div>
@@ -103,9 +108,8 @@
           <%= link_to "Dashboard", dashboard_path, class: "nav-link text-white" %>
         </li>
         <li class="nav-item d-flex justify-content-center align-items-center">
-          <%= link_to "Your Cart", cart_path, class: "nav-link text-white" %>
-          <% if current_user.cart %>
-            <%= link_to "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})", cart_path, class: "nav-link text-white", id:"cart-count"%>
+          <%= link_to cart_path, class: "nav-link text-white" do %>
+            Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
           <% end %>
         </li>
         <li class="nav-item">

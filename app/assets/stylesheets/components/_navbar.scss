@@ -51,6 +51,26 @@
   color: white !important;
 }
 
+#navbar__cart-empty, #navbar__cart {
+    font-size: 1.2rem;
+
+  small {
+    margin-left: -4px;
+    font-size: 0.8rem;
+  }
+}
+
+#navbar__cart {
+  color: white;
+  &:hover {
+    color: $light-grey;
+  }
+}
+
+#navbar__cart-empty {
+  color: $light-grey;
+}
+
 #text-logo {
   padding: 1px 0px 0px 3px;
   color: $orange-main;
