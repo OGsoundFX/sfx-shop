@@ -12,7 +12,7 @@
             <%= link_to sfx_pack_path(pack) do %>
               <% if pack.announcement %>
                 <div id="triangle"></div>
-                <div id="announcement"> <%= pack.announcement %> </div>
+                <div id="announcement" class="announcement__<%= pack.announcement.gsub("!", "").strip.downcase %>"> <%= pack.announcement %> </div>
               <% end %>
               <div class="pack_pic_wrapper"><%= image_tag pack.photos.first, class: 'pack_pic' %></div>
 
