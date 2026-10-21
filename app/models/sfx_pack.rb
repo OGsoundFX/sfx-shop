@@ -54,7 +54,7 @@ class SfxPack < ApplicationRecord
   validates :sample_rate, inclusion: { in: [44100, 48000, 96000]}
   validates :bit_depth, inclusion: { in: [16, 24, 32]}
   validates :accept_conditions, acceptance: true
-  validates :announcement, inclusion: { in: ['NEW !!!', 'UPGRADE', 'POPULAR'], message: "%{value} is not included in the list ['NEW !!!', 'UPGRADE', 'POPULAR']" }
+  validates :announcement, inclusion: { in: [nil, 'NEW !!!', 'UPGRADE', 'POPULAR'], message: "%{value} is not included in the list ['NEW !!!', 'UPGRADE', 'POPULAR']" }
 
   validate :photo_presence, :categories_max, :tags_max
 
