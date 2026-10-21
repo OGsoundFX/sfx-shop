@@ -91,13 +91,22 @@
 #announcement {
   z-index: 100;
   transform:rotate(-45deg);
-  top: 54px;
-  left: 4px;
+  top: 24px;
   font-weight: 700;
   color: white;
   position: absolute;
-  width: 0;
-  height: 0;
+}
+
+.announcement__new {
+  left: 14px;
+}
+
+.announcement__upgrade {
+  left: 2px;
+}
+
+.announcement__popular {
+  left: 3px;
 }
 
 .pack_pic_cart {

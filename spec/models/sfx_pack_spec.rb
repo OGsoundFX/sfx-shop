@@ -35,6 +35,15 @@ RSpec.describe SfxPack, type: :model do
       expect(sfx_pack.valid?).to be_falsey
       expect(sfx_pack.errors[:rich_description]).to include('is too short (minimum is 20 characters)')
     end
+
+    it 'includes the invalid announcement value in the validation message' do
+      sfx_pack.announcement = 'INVALID'
+      sfx_pack.valid?
+
+      expect(sfx_pack.errors[:announcement]).to include(
+        "INVALID is not included in the list ['NEW !!!', 'UPGRADE', 'POPULAR']"
+      )
+    end
   end
 
   context 'callbacks' do
