@@ -78,14 +78,14 @@
                 <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></strong>
               </div>
             <% end %>
-            <div class="d-flex">
-              <% if user_signed_in? && current_user.cart && current_user.cart.items.include?(pack.id) %>
-                <%= link_to "In your cart", cart_path, class: "btn btn-secondary" %>
-              <% else %>
+            <% if user_signed_in? && current_user.cart && current_user.cart.items.include?(pack.id) %>
+              <%= render "shared/in-your-cart", pack: pack %>
+            <% else %>
+              <div id="pack-cart-status-<%= pack.id %>" class="d-flex">
                 <%= form_tag cart_order_path do %>
                   <%= hidden_field_tag 'pack_id', pack.id %>
                   <% if user_signed_in? && pack.sound_designer == current_user.sound_designer %>
-                      <%= link_to "Dashboard", designer_listings_path, class: "btn btn-secondary text-white btn-sm ml-2" %>
+                    <%= link_to "Dashboard", designer_listings_path, class: "btn btn-secondary text-white btn-sm ml-2" %>
                   <% else %>
                     <% if pack.sku.include?("FS") %>
                       <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
@@ -94,8 +94,8 @@
                     <% end %>
                   <% end %>
                 <% end %>
+              </div>
             <% end %>
-            </div>
           </div>
         </div>
       </div>

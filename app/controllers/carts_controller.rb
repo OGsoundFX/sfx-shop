@@ -3,20 +3,41 @@ class CartsController < ApplicationController
 
   # despite the terrible naming choice, cart_order is the action for "adding SfxPacks to the cart"
   def cart_order
+    @pack = SfxPack.find(params[:pack_id])
+
     if Cart.where(user_id: current_user.id).count == 1
       @items = Cart.where(user_id: current_user.id).first
-      @items.items << SfxPack.find(params[:pack_id]).id.to_i
+      @items.items << @pack.id
       @items.items.uniq!
+      @items.save
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: [
+            turbo_stream.replace("navbar__cart", partial: "shared/navbar_cart"),
+            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack })
+          ]
+        }
+        format.html { redirect_to root_path(anchor: "front-title") } # fallback
+      end
     else
       # check which of the 2 lines bellow is correct
       # @items = Cart.create(user_id: current_user.id).first
       @items = Cart.create(user_id: current_user.id)
       @items.items = []
       @items.sinlge_tracks = []
-      @items.items << SfxPack.find(params[:pack_id]).id.to_i
+      @items.items << @pack.id
+      @items.save
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: [
+            turbo_stream.replace("navbar__cart-empty", partial: "shared/navbar_cart"),
+            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack })
+          ]
+        }
+        format.html { redirect_to root_path(anchor: "front-title") } # fallback
+      end
     end
-    @items.save
-    redirect_to root_path(anchor: "front-title")
+    # redirect_to root_path(anchor: "front-title")
   end
 
   # adding single tracks to Cart
