@@ -117,8 +117,10 @@ class OrdersController < ApplicationController
       # Calculate final amount based on sales/discounts
       calculated_amount = if current_sales.count > 0 && current_sales_list[pack.id]
                             ((pack.price_cents * conversion_rate) * (100 - current_sales_list[pack.id]) / 100.0).to_i
-                          elsif index.positive?
-                            ((pack.price_cents * conversion_rate) * 0.8).to_i
+
+                          # legacy 20% off second pack and all following
+                          # elsif index.positive?
+                          #   ((pack.price_cents * conversion_rate) * 0.8).to_i
                           else
                             (pack.price_cents * conversion_rate).to_i
                           end

@@ -36,12 +36,7 @@
             <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
           <% end %>
         <% else %>
-          <% if index.positive? %>
-            <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price * 0.8, symbol: session[:currency]) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) </i> </span> </h5>
-            <h5 id="instead-under"> <i>(instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>)</i> </h5>
-          <% else %>
-            <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
-          <% end %>
+          <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
         <% end %>
 
       </div>
