@@ -123,7 +123,10 @@ class CartsController < ApplicationController
             conversion_rate = 1
           end
           @total_value += ((pack.price_cents * conversion_rate) / 100)
-          index.positive? ? @sum += (((pack.price_cents * conversion_rate) / 100) * 0.8) : @sum += ((pack.price_cents * conversion_rate) / 100)
+          # Legacy: 20% off second and all following packs
+          # index.positive? ? @sum += (((pack.price_cents * conversion_rate) / 100) * 0.8) : @sum += ((pack.price_cents * conversion_rate) / 100)
+
+          @sum += ((pack.price_cents * conversion_rate) / 100)
         end
       end
       @total_pack_sum = @sum

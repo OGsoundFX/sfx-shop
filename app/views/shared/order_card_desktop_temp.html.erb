@@ -16,16 +16,13 @@
         </div>
         <div>
           <h4 id="title-pack"> <%= pack.title %> </h4>
-
           <% if order.sales != {} && order.sales[pack.id.to_s] %>
             <h5 id="price-pack">Price:  <strong> <%= humanized_money(pack.price * (1 - order.sales[pack.id.to_s][order.sales[pack.id.to_s].keys.first] / 100.to_f), symbol: session[:currency]) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= order.sales[pack.id.to_s][order.sales[pack.id.to_s].keys.first] %> % OFF </i> </span> </h5>
             <h5 id="instead-under"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) - <%= order.sales[pack.id.to_s][order.sales[pack.id.to_s].keys.first] %> % OFF </i> </h5>
           <% else %>
             <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
           <% end %>
-
         </div>
-
         <div id="download-buttons-next">
           <% if pack.product_link.split(',').count == 1 %>
             <div id="download-pack">
@@ -93,12 +90,7 @@
                 <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
               <% end %>
             <% else %>
-              <% if index.positive? %>
-                <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price * 0.8, symbol: session[:currency]) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>) </i> </span> </h5>
-                <h5 id="instead-under"> <i>(instead of <%= humanized_money(pack.price, symbol: session[:currency]) %>)</i> </h5>
-              <% else %>
-                <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
-              <% end %>
+              <h5 id="price-pack">Price: <strong> <%= humanized_money(pack.price, symbol: session[:currency]) %> </strong> </h5>
             <% end %>
           </div>
 
