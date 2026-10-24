@@ -1,4 +1,4 @@
-<li class="nav-item ms-5 me-1 mt-1" id="navbar__cart<%= '-empty' if current_user.cart.nil? %>">
+<li class="nav-item ms-3 me-3 mt-1" id="navbar__cart<%= '-empty' if current_user.cart.nil? %>">
   <%= link_to cart_path, class: "dropdown-item" do %>
     <i class="fas fa-shopping-cart"></i> <small><%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %></small>
   <% end %>

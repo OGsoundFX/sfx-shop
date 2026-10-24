@@ -19,6 +19,7 @@
   background-color: $light-card-background;
   .designer-dashboard__pack-image {
     width: 180px;
+    object-fit: cover;
     aspect-ratio: 1;
     border-radius: 8px
   }
