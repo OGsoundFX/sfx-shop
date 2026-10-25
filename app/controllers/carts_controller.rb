@@ -14,7 +14,9 @@ class CartsController < ApplicationController
         format.turbo_stream {
           render turbo_stream: [
             turbo_stream.replace("navbar__cart", partial: "shared/navbar_cart"),
-            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack })
+            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack }),
+            turbo_stream.replace("navbar-menu-cart-desktop", partial: "shared/cart/navbar_menu_cart", locals: { id: "navbar-menu-cart-desktop" }),
+            turbo_stream.replace("navbar-menu-cart-mobile", partial: "shared/cart/navbar_menu_cart", locals: { id: "navbar-menu-cart-mobile" })
           ]
         }
         format.html { redirect_to root_path(anchor: "front-title") } # fallback
@@ -31,7 +33,9 @@ class CartsController < ApplicationController
         format.turbo_stream {
           render turbo_stream: [
             turbo_stream.replace("navbar__cart-empty", partial: "shared/navbar_cart"),
-            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack })
+            turbo_stream.replace("pack-cart-status-#{@pack.id}", partial: "shared/in-your-cart", locals: { pack: @pack }),
+            turbo_stream.replace("navbar-menu-cart-desktop", partial: "shared/cart/navbar_menu_cart", locals: { id: "navbar-menu-cart-desktop" }),
+            turbo_stream.replace("navbar-menu-cart-mobile", partial: "shared/cart/navbar_menu_cart", locals: { id: "navbar-menu-cart-mobile" })
           ]
         }
         format.html { redirect_to root_path(anchor: "front-title") } # fallback
