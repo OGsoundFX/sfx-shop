@@ -6,7 +6,7 @@
 <div data-controller="collection-checkout-modal">
   <div class="">
     <div class="d-flex">
-      <i class="fas fa-compact-disc checkout-icon-adjust"></i>
+      <i class="fas fa-layer-group checkout-icon-adjust"></i>
       <div class="d-flex flex-column justify-content-center">
         <div class="payment-mobile-collection-text">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %>
         </div>

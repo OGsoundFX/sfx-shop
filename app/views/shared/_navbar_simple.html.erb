@@ -58,7 +58,7 @@
             <% end %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
             <%= link_to cart_path, class: "dropdown-item" do %>
-              Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
+              <%= render "shared/cart/navbar_menu_cart", id: "navbar-menu-cart-desktop" %>
             <% end %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item log-out" %>
           </div>
@@ -105,7 +105,7 @@
         </li>
         <li class="nav-item d-flex justify-content-center align-items-center">
           <%= link_to cart_path, class: "nav-link text-white" do %>
-            Your Cart <%= "(#{current_user.cart.items.count + current_user.cart.sinlge_tracks.count + current_user.cart.collections.count})" if current_user.cart %>
+            <%= render "shared/cart/navbar_menu_cart", id: "navbar-menu-cart-mobile" %>
           <% end %>
         </li>
         <li class="nav-item">

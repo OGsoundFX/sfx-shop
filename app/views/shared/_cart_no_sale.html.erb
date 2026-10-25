@@ -2,7 +2,7 @@
   <div class="packs-display d-none" data-unwrap-cart-target="packsUnwrapped">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
-        <i class="fas fa-box-open cart-icon-adjust"></i>
+        <i class="fas fa-box cart-icon-adjust"></i>
         <div class="dflex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
           <h5>SUB-TOTAL <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %></h5>
@@ -74,7 +74,7 @@
   <div class="packs-display packs-display-closed" data-unwrap-cart-target="packsWrapped">
     <div class="d-flex justify-content-between">
       <div class="d-flex">
-        <i class="fas fa-box-open cart-icon-adjust"></i>
+        <i class="fas fa-box cart-icon-adjust"></i>
         <div class="d-flex flex-column">
           <h3 class="cart-sfx-packs-title"> <strong>SFX PACKS</strong> </h3>
           <h5>SUB-TOTAL <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %></h5>
