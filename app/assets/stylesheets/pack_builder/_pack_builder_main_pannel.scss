@@ -289,6 +289,7 @@
   align-self: stretch;
   width: 100%;
   background-color: #2b2d30;
+  z-index: 0;
 }
 
 .sound-catalog .results {
@@ -1017,6 +1018,125 @@
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
+}
+
+// info modal
+
+.info-icon-template-pack-builder {
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.pack-builder-track-info-modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  overflow-y: auto;
+  padding: 12vh 16px 24px;
+  background-color: rgba(10, 11, 13, 0.72);
+}
+
+.pack-builder-track-info-content {
+  width: min(440px, 100%);
+  max-height: 76vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 20px;
+  color: #f2f2f2;
+  background-color: #232529;
+  border: 1px solid #45474a;
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.pack-builder-track-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #45474a;
+}
+
+.pack-builder-track-info-heading {
+  margin: 0;
+  color: #f2f2f2;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.pack-builder-track-info-close {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #969ba3;
+  font-size: 22px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    color: #f2f2f2;
+    background-color: #34363a;
+  }
+}
+
+.pack-builder-track-info-details {
+  display: grid;
+  gap: 0;
+  padding-top: 8px;
+}
+
+.pack-builder-track-info-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(69, 71, 74, 0.65);
+}
+
+.pack-builder-track-info-label {
+  flex: 0 0 auto;
+  color: #969ba3;
+  font-size: 12px;
+}
+
+.pack-builder-track-info-value {
+  min-width: 0;
+  color: #f2f2f2;
+  font-size: 12px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.pack-builder-track-info-loop-icon {
+  margin-left: 6px;
+  color: #2f80ed;
+}
+
+.pack-builder-track-info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 16px;
+}
+
+.pack-builder-track-info-tag {
+  padding: 5px 8px;
+  color: #bec1c6;
+  font-size: 11px;
+  line-height: 1.2;
+  background-color: #2b2d30;
+  border: 1px solid #45474a;
+  border-radius: 5px;
 }
 
 // single tracks display for pack builder
