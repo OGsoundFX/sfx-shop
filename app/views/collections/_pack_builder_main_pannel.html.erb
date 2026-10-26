@@ -83,11 +83,6 @@
       <div class="sound" >
         <div class="playing-indicator" ></div>
         <div class="sound-identity" >
-          <div class="preview-action" >
-            <div class="vector-wrapper" >
-              <img class="vector-6" src="img/vector-29.svg" />
-            </div>
-          </div>
           <div class="sound-artwork" >
             <div class="audio-lines" >
               <img class="vector-7" src="img/vector-6.svg" />
@@ -99,7 +94,7 @@
           </div>
         </div>
 
-        <div class="d-flex wave-section justify-content-between elements-position">
+        <div class="d-flex wave-section-pack-builder justify-content-between elements-position">
           <% if controller_name == 'carts' && action_name == 'cart'%>
             <div class="wave collection-wave wave-cart" id="id<%= "#{track.id}" %>" data-link="<%= track.preview_link %>">
               <div id="loading_flag<%= "#{track.id}" %>" class="loading-countdown"></div>
@@ -109,14 +104,20 @@
               <div id="loading_flag<%= "#{track.id}" %>" class="loading-countdown"></div>
             </div>
           <% end %>
-          <p class="info-font pad-top-cart" id="trackDurationid<%= "#{track.id}" %>"></p>
-          <i class="fas fa-play-circle pad-top-cart play-icon-margin cursor" id="playid<%= "#{track.id}"%>"></i>
+          <span class="info-font-pack-builder" id="trackDurationid<%= "#{track.id}" %>"></span>
+          <i class="fas fa-play-circle play-icon-margin-pack-builder cursor" id="playid<%= "#{track.id}"%>"></i>
           <i class="fas fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= "#{track.id}" %>" style="display: none"></i>
         </div>
 
         <div class="tempo" ><span class="info-icon-template-pack-builder template-max-width-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span></div>
-        <div class="key" >F min</div>
-        <div class="price" >$2.50</div>
+        <div class="key" ><%= track.points %></div>
+        <div class="price" >
+          <% if humanized_money(track.price, symbol: '$').include?(".") %>
+            <%= humanized_money(track.price, symbol: '$') %>
+          <% else %>
+            <%= humanized_money(track.price, symbol: '$') %>.00
+          <% end %>
+        </div>
         <div class="pack-action" >
           <div class="img-wrapper" >
             <img class="vector-8" src="img/vector-11.svg" />

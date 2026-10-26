@@ -1142,18 +1142,21 @@
 // single tracks display for pack builder
 
 .wave-index-pack-builder {
-  width: 18vw;
+  width: clamp(8rem, 18vw, 16rem);
   position: relative;
 }
 
-@media (max-width: 742px) {
-  .wave-index-pack-builder {
-    width: 12vw !important;
-  }
+.wave-section-pack-builder {
+  margin-right: 2vh;
 }
 
-@media (max-width: 894px) {
-  .wave-index-pack-builder {
-    width: 8vw;
-  }
+.info-font-pack-builder {
+  margin: auto auto auto 1rem;
+  color: #999999;
+  font-size: 0.6em;
+  width: 3rem;
+}
+
+.play-icon-margin-pack-builder {
+  margin: auto auto auto 1rem;
 }
