@@ -1,6 +1,9 @@
 class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
+  def pack_builder
+  end
+
   def create
     # this action is not only to create a collection from scratch but add tracks to collection
     user_collection = Collection.where("user_id = #{current_user.id} and purchased = false").last

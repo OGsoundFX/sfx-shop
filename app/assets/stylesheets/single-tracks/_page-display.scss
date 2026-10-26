@@ -95,17 +95,29 @@
     color: #a3a3a3;
   }
 }
-.banner {
+.banner, .pack-builder-banner {
   background-image: url(https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg);
+}
+
+.pack-builder-banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-size: 150%;
+  h1 {
+    font-size: 2rem;
+    margin: 0 16px;
+  }
 }
 
 .banner, .designer-show__banner {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  // height: 280px;
   width: 100%;
-  // font-family: $title-font;
   color: white;
   text-align: center;
   padding-top: 50px;

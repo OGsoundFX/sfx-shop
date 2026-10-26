@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
-  get 'collections/create'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "pages#home"
@@ -57,6 +56,10 @@ Rails.application.routes.draw do
 
   # user add template to cart and convert into collection
   get "add_template_to_cart", to: "collections#add_template_to_cart"
+
+  # collection / pack-builder
+  get 'collections/create'
+  get "pack_builder", to: "collections#pack_builder", as: :pack_builder
 
   # Sound Designer Submission
   resources :designer_submissions, param: :access_token, only: %i(new create show update) do

@@ -1,0 +1,33 @@
+<div class="desktop-only">
+  <div class="left-pannel-dark d-flex justify-content-center">
+    <div class="d-flex flex-column text-center">
+      <%= link_to sfx_packs_path do %>
+        <div class="left-pannel-dark-icon <%= request.path == '/sfx_packs' ? 'dark-pannel-active' :  'dark-pannel-links' %>">
+          <i class="fas fa-box"></i>
+          <p>PACKS</p>
+        </div>
+      <% end %>
+      <%= link_to list_path do %>
+        <div class="left-pannel-dark-icon <%= request.path == '/list' ? 'dark-pannel-active' :  'dark-pannel-links' %>">
+          <i class="fas fa-volume-up"></i>
+          <p style="margin-left: -3px">TRACKS</p>
+        </div>
+      <% end %>
+      <%= link_to collection_templates_path do %>
+        <div style="position: relative;" class="left-pannel-dark-icon <%= request.path == '/collection_templates' ? 'dark-pannel-active' :  'dark-pannel-links' %>">
+          <i class="fas fa-layer-group"></i>
+          <p style="line-height: 1rem">BUILDER</p>
+            <%= image_tag asset_path("New_orange_transp_small.png"), style: "position: absolute; height: 32px; top:-14px; left: -14px; transform: rotate(-60deg)" %>
+        </div>
+      <% end %>
+      <%= link_to the_quest_path do %>
+        <div class="dark-pannel-links">
+          <div style="position: relative" class="left-pannel-dark-icon-the-quest ">
+            <%= image_tag("the-quest-fav.png") %>
+          </div>
+          <p style="font-size: 0.6rem; color: #1dbb1e">THE GAME</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
