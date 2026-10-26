@@ -2,6 +2,8 @@ class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def pack_builder
+    @sfx_tracks = SingleTrack.all
+    @total_sounds = @sfx_tracks.count
   end
 
   def create

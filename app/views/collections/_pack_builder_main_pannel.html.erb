@@ -3,7 +3,7 @@
     <div class="catalog-heading" >
       <div class="catalog-title" >
         <div class="title" >Explore sounds</div>
-        <div class="text-wrapper" >24,810 sounds</div>
+        <div class="text-wrapper" ><%= @total_sounds %> sounds</div>
       </div>
       <div class="preview-preference" >
         <div class="vector-wrapper" >
@@ -65,10 +65,10 @@
     </div>
   </div>
   <div class="navbar" >
-    <div class="results" >248 RESULTS</div>
+    <div class="results" ><%= @sfx_tracks.count %> RESULTS</div>
     <div class="waveform-column" >PREVIEW</div>
-    <div class="tempo-column" >BPM</div>
-    <div class="key-column" >KEY</div>
+    <div class="tempo-column" >INFO</div>
+    <div class="key-column" >POINTS</div>
     <div class="price-column" >PRICE</div>
     <div class="sort" >
       <div class="text-wrapper-3" >Relevant</div>
@@ -78,85 +78,97 @@
     </div>
   </div>
   <div class="scrollable-results" >
-    <div class="sound" >
-      <div class="playing-indicator" ></div>
-      <div class="sound-identity" >
-        <div class="preview-action" >
-          <div class="vector-wrapper" >
-            <img class="vector-6" src="img/vector-29.svg" />
+
+    <% @sfx_tracks.each do |track| %>
+      <div class="sound" >
+        <div class="playing-indicator" ></div>
+        <div class="sound-identity" >
+          <div class="preview-action" >
+            <div class="vector-wrapper" >
+              <img class="vector-6" src="img/vector-29.svg" />
+            </div>
+          </div>
+          <div class="sound-artwork" >
+            <div class="audio-lines" >
+              <img class="vector-7" src="img/vector-6.svg" />
+            </div>
+          </div>
+          <div class="sound-details" >
+            <div class="sound-title" ><%= track.title %></div>
+            <p class="sound-source" ><%= track.category.capitalize %> · <%= track.loop? ? 'loop' : 'no-loop' %></p>
           </div>
         </div>
-        <div class="sound-artwork" >
-          <div class="audio-lines" >
-            <img class="vector-7" src="img/vector-6.svg" />
+
+        <div class="d-flex wave-section justify-content-between elements-position">
+          <% if controller_name == 'carts' && action_name == 'cart'%>
+            <div class="wave collection-wave wave-cart" id="id<%= "#{track.id}" %>" data-link="<%= track.preview_link %>">
+              <div id="loading_flag<%= "#{track.id}" %>" class="loading-countdown"></div>
+            </div>
+          <% else %>
+            <div class="wave collection-wave wave-index-pack-builder" id="id<%= track.id %>" data-link="<%= track.preview_link %>">
+              <div id="loading_flag<%= "#{track.id}" %>" class="loading-countdown"></div>
+            </div>
+          <% end %>
+          <p class="info-font pad-top-cart" id="trackDurationid<%= "#{track.id}" %>"></p>
+          <i class="fas fa-play-circle pad-top-cart play-icon-margin cursor" id="playid<%= "#{track.id}"%>"></i>
+          <i class="fas fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= "#{track.id}" %>" style="display: none"></i>
+        </div>
+
+        <div class="tempo" ><span class="info-icon-template template-max-width-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span></div>
+        <div class="key" >F min</div>
+        <div class="price" >$2.50</div>
+        <div class="pack-action" >
+          <div class="img-wrapper" >
+            <img class="vector-8" src="img/vector-11.svg" />
           </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Glass Horizon</div>
-          <p class="sound-source" >Ambient Forms · Synth loop</p>
+          <div class="action-label" >Added</div>
         </div>
       </div>
-      <div class="preview-waveform" >
-        <div class="audio-waveform" >
-          <div class="amplitude" ></div>
-          <div class="amplitude-2" ></div>
-          <div class="amplitude" ></div>
-          <div class="amplitude-3" ></div>
-          <div class="amplitude-4" ></div>
-          <div class="amplitude-5" ></div>
-          <div class="amplitude-6" ></div>
-          <div class="amplitude-4" ></div>
-          <div class="amplitude-7" ></div>
-          <div class="amplitude-8" ></div>
-          <div class="amplitude-7" ></div>
-          <div class="amplitude-9" ></div>
-          <div class="amplitude-9" ></div>
-          <div class="amplitude-10" ></div>
-          <div class="amplitude-11" ></div>
-          <div class="amplitude-12" ></div>
-          <div class="amplitude-12" ></div>
-          <div class="amplitude-13" ></div>
-          <div class="amplitude-11" ></div>
-          <div class="amplitude-14" ></div>
-          <div class="amplitude-15" ></div>
-          <div class="amplitude-16" ></div>
-          <div class="amplitude-13" ></div>
-          <div class="amplitude-17" ></div>
-          <div class="amplitude-17" ></div>
-          <div class="amplitude-12" ></div>
-          <div class="amplitude-11" ></div>
-          <div class="amplitude-18" ></div>
-          <div class="amplitude-19" ></div>
-          <div class="amplitude-20" ></div>
-          <div class="amplitude-21" ></div>
-        </div>
-        <div class="duration" >0:24</div>
-      </div>
-      <div class="tempo" >90</div>
-      <div class="key" >F min</div>
-      <div class="price" >$2.50</div>
-      <div class="pack-action" >
-        <div class="img-wrapper" >
-          <img class="vector-8" src="img/vector-11.svg" />
-        </div>
-        <div class="action-label" >Added</div>
-      </div>
-    </div>
+
+                      <!-- The Track Info Modal -->
+                <div id="trackInfo" class="track-info-modal" data-modalTrackId="<%= track.id %>">
+                  <!-- Modal content -->
+                  <div id="trackContentInfo" style="text-align: start" class="track-info-modal-content" data-modalTrackContentId="<%= track.id %>">
+                    <div class="d-flex justify-content-between">
+                      <div class="track-info-modal-content-text">
+                        <p><u>Points:</u> <span class="modal-orange-text" ><%= track.points %></span></p>
+                        <p><u>Title:</u> <span class="modal-orange-text" ><%= track.title %></span></p>
+                        <p><u>Loop:</u> <span class="modal-orange-text"><%= track.loop ? "Yes" : "No" %></span><i style="margin-left: 12px" class="fas fa-repeat <%= 'd-none' if !track.loop %>"></i></p>
+                        <p><u>Category:</u> <span class="modal-orange-text" ><%= track.category.capitalize %></span></p>
+                        <p><u>Size:</u> <span class="modal-orange-text" ><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span></p>
+                        <p><u>Duration:</u> <span class="modal-orange-text" id="trackDurationModalid<%= track.id %>"></span></p>
+                        <% if !track.sfx_pack_id.nil? %>
+                          <p><u>Sound Effect Pack:</u> <span class="modal-orange-text" ><%= SfxPack.find(track.sfx_pack_id).title %></span></p>
+                        <% end %>
+                        <p><u>Bitrate:</u> <span class="modal-orange-text" ><%= track.bitrate %> bits</span></p>
+                        <p><u>Sample rate:</u> <span class="modal-orange-text" ><%= (track.sample_rate.to_i / 1_000) %> kHz</span></p>
+                        <% track.tags.first(8).each do |tag| %>
+                          <span class="badge badge-secondary" style="font-size: 12px; margin-bottom: 4px"><%= tag %></span>
+                        <% end %>
+                      </div>
+                      <div>
+                        <span class="close" data-modalTrackCloseId="<%= track.id %>">&times;</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+    <% end %>
     <div class="sound-2" >
       <div class="sound-identity" >
         <div class="play-wrapper" >
           <div class="vector-wrapper" >
-            <img class="vector-6" src="img/vector-17.svg" />
+            <img class="vector-6" src="img/vector-27.svg" />
           </div>
         </div>
-        <div class="audio-lines-wrapper" >
+        <div class="sound-artwork-2" >
           <div class="audio-lines" >
-            <img class="vector-7" src="img/vector-2.svg" />
+            <img class="vector-7" src="img/vector-24.svg" />
           </div>
         </div>
         <div class="sound-details" >
-          <div class="sound-title-2" >Dusty Rhodes</div>
-          <p class="sound-source" >After Hours · Keys loop</p>
+          <div class="sound-title-2" >Tape Drift</div>
+          <p class="sound-source" >Analog Memories · Pad loop</p>
         </div>
       </div>
       <div class="preview-waveform" >
@@ -193,79 +205,145 @@
           <div class="amplitude-20" ></div>
           <div class="amplitude-21" ></div>
         </div>
-        <div class="duration" >0:16</div>
+        <div class="duration" >0:21</div>
       </div>
-      <div class="tempo" >85</div>
-      <div class="key" >D min</div>
+      <div class="tempo" >90</div>
+      <div class="key" >F min</div>
       <div class="price" >$2.50</div>
       <div class="pack-action-2" >
         <div class="img-wrapper" >
-          <img class="vector-9" src="img/vector-23.svg" />
+          <img class="vector-9" src="img/vector-12.svg" />
         </div>
         <div class="action-label-2" >Add</div>
       </div>
     </div>
+
+
     <div class="sound-2" >
       <div class="sound-identity" >
         <div class="play-wrapper" >
           <div class="vector-wrapper" >
-            <img class="vector-6" src="img/vector-14.svg" />
+            <img class="vector-6" src="img/vector-27.svg" />
           </div>
         </div>
-        <div class="div-wrapper" >
+        <div class="sound-artwork-2" >
           <div class="audio-lines" >
-            <img class="vector-7" src="img/vector-21.svg" />
+            <img class="vector-7" src="img/vector-24.svg" />
           </div>
         </div>
         <div class="sound-details" >
-          <div class="sound-title-2" >Soft Current</div>
-          <div class="sound-source" >Ambient Forms · Texture</div>
+          <div class="sound-title-2" >Tape Drift</div>
+          <p class="sound-source" >Analog Memories · Pad loop</p>
         </div>
       </div>
       <div class="preview-waveform" >
         <div class="audio-waveform" >
+          <div class="amplitude-22" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-22" ></div>
+          <div class="amplitude-23" ></div>
+          <div class="amplitude-18" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-24" ></div>
+          <div class="amplitude-18" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-25" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-26" ></div>
+          <div class="amplitude-26" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-12" ></div>
+          <div class="amplitude-12" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-15" ></div>
+          <div class="amplitude-16" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-12" ></div>
           <div class="amplitude-11" ></div>
           <div class="amplitude-18" ></div>
-          <div class="amplitude-17" ></div>
-          <div class="amplitude-27" ></div>
-          <div class="amplitude-28" ></div>
-          <div class="amplitude-13" ></div>
-          <div class="amplitude-29" ></div>
-          <div class="amplitude-16" ></div>
-          <div class="amplitude-22" ></div>
-          <div class="amplitude-13" ></div>
-          <div class="amplitude-18" ></div>
-          <div class="amplitude-12" ></div>
-          <div class="amplitude-18" ></div>
-          <div class="amplitude-15" ></div>
-          <div class="amplitude-22" ></div>
-          <div class="amplitude-29" ></div>
-          <div class="amplitude-29" ></div>
-          <div class="amplitude-24" ></div>
+          <div class="amplitude-19" ></div>
+          <div class="amplitude-20" ></div>
           <div class="amplitude-21" ></div>
-          <div class="amplitude-27" ></div>
-          <div class="amplitude-24" ></div>
-          <div class="amplitude-18" ></div>
-          <div class="amplitude-18" ></div>
-          <div class="amplitude-12" ></div>
-          <div class="amplitude-15" ></div>
-          <div class="amplitude-15" ></div>
-          <div class="amplitude-13" ></div>
-          <div class="amplitude-21" ></div>
-          <div class="amplitude-22" ></div>
-          <div class="amplitude-14" ></div>
-          <div class="amplitude-12" ></div>
         </div>
-        <div class="duration" >0:32</div>
+        <div class="duration" >0:21</div>
       </div>
-      <div class="tempo" >—</div>
-      <div class="key" >C maj</div>
-      <div class="price" >$1.50</div>
-      <div class="pack-action" >
+      <div class="tempo" >90</div>
+      <div class="key" >F min</div>
+      <div class="price" >$2.50</div>
+      <div class="pack-action-2" >
         <div class="img-wrapper" >
-          <img class="vector-8" src="img/vector.svg" />
+          <img class="vector-9" src="img/vector-12.svg" />
         </div>
-        <div class="action-label" >Added</div>
+        <div class="action-label-2" >Add</div>
+      </div>
+    </div>
+
+    <div class="sound-2" >
+      <div class="sound-identity" >
+        <div class="play-wrapper" >
+          <div class="vector-wrapper" >
+            <img class="vector-6" src="img/vector-27.svg" />
+          </div>
+        </div>
+        <div class="sound-artwork-2" >
+          <div class="audio-lines" >
+            <img class="vector-7" src="img/vector-24.svg" />
+          </div>
+        </div>
+        <div class="sound-details" >
+          <div class="sound-title-2" >Tape Drift</div>
+          <p class="sound-source" >Analog Memories · Pad loop</p>
+        </div>
+      </div>
+      <div class="preview-waveform" >
+        <div class="audio-waveform" >
+          <div class="amplitude-22" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-22" ></div>
+          <div class="amplitude-23" ></div>
+          <div class="amplitude-18" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-24" ></div>
+          <div class="amplitude-18" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-25" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-26" ></div>
+          <div class="amplitude-26" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-12" ></div>
+          <div class="amplitude-12" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-14" ></div>
+          <div class="amplitude-15" ></div>
+          <div class="amplitude-16" ></div>
+          <div class="amplitude-13" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-17" ></div>
+          <div class="amplitude-12" ></div>
+          <div class="amplitude-11" ></div>
+          <div class="amplitude-18" ></div>
+          <div class="amplitude-19" ></div>
+          <div class="amplitude-20" ></div>
+          <div class="amplitude-21" ></div>
+        </div>
+        <div class="duration" >0:21</div>
+      </div>
+      <div class="tempo" >90</div>
+      <div class="key" >F min</div>
+      <div class="price" >$2.50</div>
+      <div class="pack-action-2" >
+        <div class="img-wrapper" >
+          <img class="vector-9" src="img/vector-12.svg" />
+        </div>
+        <div class="action-label-2" >Add</div>
       </div>
     </div>
     <div class="sound-2" >
@@ -331,6 +409,9 @@
         <div class="action-label-2" >Add</div>
       </div>
     </div>
+
+
+
     <div class="sound-2" >
       <div class="sound-identity" >
         <div class="play-wrapper" >
@@ -588,7 +669,7 @@
     </div>
   </div>
   <div class="results-footer" >
-    <p class="text-wrapper" >Showing 1–8 of 248 · Scroll to explore more</p>
+    <p class="text-wrapper" >Showing 1-8 of 248 · Scroll to explore more</p>
     <div class="keyboard-hint" >
       <div class="text-wrapper-3" >SPACE</div>
       <div class="shortcut-description" >play / pause</div>

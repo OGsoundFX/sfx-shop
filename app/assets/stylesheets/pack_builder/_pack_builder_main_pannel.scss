@@ -1,13 +1,11 @@
 .sound-catalog {
-  margin: 12px 0 0 12px;
+  margin: 12px 0 12px 12px;
   display: flex;
   flex-direction: column;
-  height: 728px;
   align-items: flex-start;
   position: relative;
   background-color: var(--gray-1);
   border-radius: 10px;
-  overflow: hidden;
   border: 1px solid;
   border-color: #45474a;
 }
@@ -46,8 +44,7 @@
   position: relative;
   width: fit-content;
   margin-top: -1px;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-weight: 600;
+  font-family: "Inter-Medium", Helvetica;
   color: #f2f2f2;
   font-size: 15px;
   letter-spacing: 0;
@@ -390,7 +387,6 @@
 .sound-catalog .scrollable-results {
   display: flex;
   flex-direction: column;
-  height: 480px;
   align-items: flex-start;
   position: relative;
   align-self: stretch;
@@ -492,8 +488,7 @@
   position: relative;
   align-self: stretch;
   margin-top: -1px;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-weight: 600;
+  font-family: "Inter-Medium", Helvetica;
   color: #f2f2f2;
   font-size: 13px;
   letter-spacing: 0;
@@ -1022,4 +1017,23 @@
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
+}
+
+// single tracks display for pack builder
+
+.wave-index-pack-builder {
+  width: 18vw;
+  position: relative;
+}
+
+@media (max-width: 742px) {
+  .wave-index-pack-builder {
+    width: 12vw !important;
+  }
+}
+
+@media (max-width: 894px) {
+  .wave-index-pack-builder {
+    width: 8vw;
+  }
 }
