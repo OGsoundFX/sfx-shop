@@ -1,0 +1,99 @@
+.left-pannel-dark {
+  height: 100vh;
+  min-width: 90px !important;
+  background-color: $dark-background;
+  border: solid 1px $dark-background;
+  position: sticky !important;
+  top: 56px;
+  font-size: 1.8rem;
+  .left-pannel-dark-icon {
+    padding: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: $dark-card-background;
+    border-radius: 50%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: $whitesmoke;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.left-pannel-dark-mobile {
+  padding: 0 12px;
+  background-color: $whiter-smoke;
+  border: solid 1px $whitesmoke;
+  position: fixed;
+  bottom: 0;
+  z-index: 200;
+  width: 100vw;
+  font-size: 1.8rem;
+  text-align: center;
+  .left-pannel-dark-icon {
+    padding: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: $whitesmoke;
+    border-radius: 50%;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+  p {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #aaaaaa;
+  }
+}
+
+.dark-pannel-active {
+  color: $whitesmoke;
+  background-color: $font-grey !important;
+  p {
+    color: $font-grey;
+  }
+}
+
+.dark-pannel-links {
+  color: $whitesmoke;
+  &:hover {
+    color: $blue-light;
+  }
+}
+
+.left-pannel-dark-icon-the-quest {
+  border-radius: 50%;
+  margin-top: 40px;
+  background-color: black;
+  filter: grayscale(0.2);
+  opacity: 0.8;
+  img {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+  }
+  &:hover {
+    opacity: 0.65;
+  }
+}
+
+.left-pannel-dark-icon-the-quest-mobile {
+  border-radius: 50%;
+  margin-top: 16px;
+  background-color: black;
+  filter: grayscale(0.2);
+  opacity: 0.8;
+  img {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+  }
+  &:hover {
+    opacity: 0.65;
+  }
+}
