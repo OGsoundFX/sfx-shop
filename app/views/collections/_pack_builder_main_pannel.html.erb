@@ -84,7 +84,6 @@
     </div>
   </div>
   <div class="scrollable-results" >
-    <%= paginate @sfx_tracks %>
     <% @sfx_tracks.each do |track| %>
       <div class="sound" >
         <div class="playing-indicator" ></div>
@@ -189,7 +188,9 @@
         </div>
       </div>
     <% end %>
-    <%= paginate @sfx_tracks %>
+    <div class="pack-builder-pagination">
+      <%= paginate @sfx_tracks %>
+    </div>
     <div class="scroll-track" >
       <div class="scroll-thumb" ></div>
     </div>

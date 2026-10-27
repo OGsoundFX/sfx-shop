@@ -394,6 +394,61 @@
   width: 100%;
 }
 
+.sound-catalog .pack-builder-pagination .pagination {
+  margin: 4px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.sound-catalog .pack-builder-pagination .pagination > span {
+  display: inline-flex;
+  min-width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #969ba3;
+}
+
+.sound-catalog .pack-builder-pagination .pagination a {
+  display: inline-flex;
+  min-width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border-radius: 6px;
+  color: #bec1c6;
+  text-decoration: none;
+  background-color: #30343b;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.sound-catalog .pack-builder-pagination .pagination a:hover,
+.sound-catalog .pack-builder-pagination .pagination a:focus-visible {
+  background-color: #30343b;
+  color: #fff;
+}
+
+.sound-catalog .pack-builder-pagination .pagination > span.current {
+  background-color: var(--blue-1);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sound-catalog .pack-builder-pagination .pagination > span.gap {
+  min-width: 18px;
+}
+
+.sound-catalog .pack-builder-pagination .pagination > span.first,
+.sound-catalog .pack-builder-pagination .pagination > span.prev,
+.sound-catalog .pack-builder-pagination .pagination > span.next,
+.sound-catalog .pack-builder-pagination .pagination > span.last {
+  color: #636a74;
+}
+
 .sound-catalog .sound {
   display: flex;
   height: 60px;
