@@ -7,8 +7,13 @@
   align-items: flex-start;
 }
 
+.pack-builder-layout > .desktop-only {
+  align-self: stretch;
+}
+
 .pack-builder-layout .left-pannel-dark {
   left: 0;
+  top: 0;
 }
 
 .pack-builder-grid {
