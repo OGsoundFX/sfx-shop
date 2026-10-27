@@ -1,3 +1,9 @@
+<% pack = SfxPack.find(100) %>
+<% if pack.currency_symbol != session[:currency] %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", pack.currency.upcase, "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
 <div class="sound-catalog" >
   <div class="search-and-filters" >
     <div class="catalog-heading" >
@@ -83,11 +89,11 @@
       <div class="sound" >
         <div class="playing-indicator" ></div>
         <div class="sound-identity" >
-          <div class="sound-artwork" >
-            <div class="audio-lines" >
-              <img class="vector-7" src="img/vector-6.svg" />
-            </div>
-          </div>
+
+
+              <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
+
+ 
           <div class="sound-details" >
             <div class="sound-title" ><%= track.title %></div>
             <p class="sound-source" ><%= track.category.capitalize %> · <%= track.loop? ? 'loop' : 'no-loop' %></p>
@@ -112,10 +118,10 @@
         <div class="tempo" ><span class="info-icon-template-pack-builder template-max-width-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span></div>
         <div class="key" ><%= track.points %></div>
         <div class="price" >
-          <% if humanized_money(track.price, symbol: '$').include?(".") %>
-            <%= humanized_money(track.price, symbol: '$') %>
+          <% if humanized_money(track.price * conversion_rate, symbol: session[:currency]).include?(".") %>
+            <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>
           <% else %>
-            <%= humanized_money(track.price, symbol: '$') %>.00
+            <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>.00
           <% end %>
         </div>
         <div class="pack-action" >
