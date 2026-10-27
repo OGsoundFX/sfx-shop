@@ -9,8 +9,12 @@
     </div>
     <%= render "shared/left_pannel_mobile"%>
     <div class="template-display-desktop">
-      <div class="d-flex">
+      <div class="pack-builder-layout">
         <%= render "shared/left_pannel_desktop_dark"%>
+        <div class="pack-builder-grid">
+          <%= render 'pack_builder_main_pannel' %>
+          <%= render 'pack_builder_right_pannel' %>
+        </div>
       </div>
     </div>
   </div>

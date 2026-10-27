@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def set_currency
     if Rails.env.development?
       # for testing locally
-      session[:currency] = '$'
+      session[:currency] = '€'
       # session[:currency] = '$'
       session[:location] = "DE"
     else

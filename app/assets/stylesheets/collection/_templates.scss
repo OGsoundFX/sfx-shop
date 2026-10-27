@@ -2,6 +2,28 @@
   display: none;
 }
 
+.pack-builder-layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+.pack-builder-layout > .desktop-only {
+  align-self: stretch;
+}
+
+.pack-builder-layout .left-pannel-dark {
+  left: 0;
+  top: 0;
+}
+
+.pack-builder-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
 .template-section {
   margin: 24px auto 0 auto;
   width: 80vw;
