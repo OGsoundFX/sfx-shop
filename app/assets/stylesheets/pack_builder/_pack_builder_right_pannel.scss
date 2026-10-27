@@ -117,7 +117,7 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid;
@@ -341,7 +341,7 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 6px;
   overflow: hidden;
 }

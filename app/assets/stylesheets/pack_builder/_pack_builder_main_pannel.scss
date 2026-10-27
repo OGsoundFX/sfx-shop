@@ -129,7 +129,7 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid;
@@ -198,7 +198,7 @@
   gap: 10px;
   padding: 0px 10px;
   flex: 0 0 auto;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid;
@@ -288,7 +288,7 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   z-index: 0;
 }
 
@@ -872,7 +872,7 @@
   justify-content: center;
   gap: 5px;
   position: relative;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid;
@@ -974,7 +974,7 @@
   position: absolute;
   top: 5px;
   right: 3px;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -1133,7 +1133,7 @@
   color: #bec1c6;
   font-size: 11px;
   line-height: 1.2;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   border: 1px solid #45474a;
   border-radius: 5px;
 }
@@ -1144,11 +1144,10 @@
   height: 35px;
   width: 35px;
   border-radius: 50%;
-  background-color: #2b2d30;
+  background-color: $pack-builder-dark-background;
   color: white;
-  margin: 7px 20px 0 20px;
   text-align: center;
-  padding: 2px 0;
+  padding: 4px 0;
 }
 
 .wave-index-pack-builder {
