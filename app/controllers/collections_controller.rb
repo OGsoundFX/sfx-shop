@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def pack_builder
-    @sfx_tracks = SingleTrack.all
+    @sfx_tracks = SingleTrack.all.page(params[:page]).per(20)
     @total_sounds = @sfx_tracks.count
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
