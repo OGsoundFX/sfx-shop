@@ -394,9 +394,14 @@
   width: 100%;
 }
 
+.sound-catalog .pack-builder-pagination {
+  align-self: stretch;
+}
+
 .sound-catalog .pack-builder-pagination .pagination {
   margin: 4px 0;
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   font-size: 12px;
@@ -410,6 +415,10 @@
   justify-content: center;
   border-radius: 6px;
   color: #969ba3;
+}
+
+.sound-catalog .pack-builder-pagination .count-customize {
+  margin-top: 0;
 }
 
 .sound-catalog .pack-builder-pagination .pagination a {
