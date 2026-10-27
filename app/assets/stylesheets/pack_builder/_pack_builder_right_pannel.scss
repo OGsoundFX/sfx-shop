@@ -9,11 +9,11 @@
   padding: 20px;
   position: sticky;
   top: 12px;
-  background-color: var(--gray-1);
+  background-color: $dark-card-background;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid;
-  border-color: #45474a;
+  border-color: $medium-card-background;
 }
 
 .pack-builder .collection {
@@ -90,7 +90,7 @@
   padding: 3px 7px;
   position: relative;
   flex: 0 0 auto;
-  background-color: var(--gray-2);
+  background-color: $medium-card-background;
   border-radius: 4px;
   overflow: hidden;
 }

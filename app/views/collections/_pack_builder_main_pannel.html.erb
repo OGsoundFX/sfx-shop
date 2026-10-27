@@ -89,11 +89,7 @@
       <div class="sound" >
         <div class="playing-indicator" ></div>
         <div class="sound-identity" >
-
-
-              <span class="icon-adjust"><%= sanitize @icons[track.category.to_sym] %></span>
-
- 
+          <span class="icon-adjust-pack-builder"><%= sanitize @icons[track.category.to_sym] %></span>
           <div class="sound-details" >
             <div class="sound-title" ><%= track.title %></div>
             <p class="sound-source" ><%= track.category.capitalize %> · <%= track.loop? ? 'loop' : 'no-loop' %></p>

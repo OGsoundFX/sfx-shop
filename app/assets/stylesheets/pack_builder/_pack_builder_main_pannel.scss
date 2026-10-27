@@ -4,10 +4,10 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  background-color: var(--gray-1);
+  background-color: $dark-card-background;
   border-radius: 10px;
   border: 1px solid;
-  border-color: #45474a;
+  border-color: $medium-card-background;
 }
 
 .sound-catalog .search-and-filters {
@@ -403,7 +403,6 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: #2f80ed1c;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-color: #45474a;
@@ -507,190 +506,190 @@
   line-height: normal;
 }
 
-.sound-catalog .preview-waveform {
-  display: flex;
-  width: 168px;
-  gap: 10px;
-  align-items: center;
-  position: relative;
-}
+// .sound-catalog .preview-waveform {
+//   display: flex;
+//   width: 168px;
+//   gap: 10px;
+//   align-items: center;
+//   position: relative;
+// }
 
-.sound-catalog .audio-waveform {
-  display: flex;
-  width: 124px;
-  height: 24px;
-  align-items: center;
-  gap: 2px;
-  position: relative;
-}
+// .sound-catalog .audio-waveform {
+//   display: flex;
+//   width: 124px;
+//   height: 24px;
+//   align-items: center;
+//   gap: 2px;
+//   position: relative;
+// }
 
-.sound-catalog .amplitude {
-  position: relative;
-  width: 2px;
-  height: 11px;
-  background-color: #2f80ed;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude {
+//   position: relative;
+//   width: 2px;
+//   height: 11px;
+//   background-color: #2f80ed;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-2 {
-  height: 16px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-2 {
+//   height: 16px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-3 {
-  height: 7px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-3 {
+//   height: 7px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-4 {
-  height: 4px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-4 {
+//   height: 4px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-5 {
-  height: 6px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-5 {
+//   height: 6px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-6 {
-  height: 15px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-6 {
+//   height: 15px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-7 {
-  height: 22px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-7 {
+//   height: 22px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-8 {
-  height: 10px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-8 {
+//   height: 10px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-9 {
-  height: 14px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-9 {
+//   height: 14px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-10 {
-  height: 12px;
-  background-color: #2f80ed;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-10 {
+//   height: 12px;
+//   background-color: #2f80ed;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-11 {
-  height: 6px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-11 {
+//   height: 6px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-12 {
-  height: 5px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-12 {
+//   height: 5px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-13 {
-  height: 16px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-13 {
+//   height: 16px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-14 {
-  height: 22px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-14 {
+//   height: 22px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-15 {
-  height: 13px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-15 {
+//   height: 13px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-16 {
-  height: 20px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-16 {
+//   height: 20px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-17 {
-  height: 12px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-17 {
+//   height: 12px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-18 {
-  height: 4px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-18 {
+//   height: 4px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-19 {
-  height: 17px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-19 {
+//   height: 17px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-20 {
-  height: 9px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-20 {
+//   height: 9px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
-.sound-catalog .amplitude-21 {
-  height: 21px;
-  background-color: #747a83;
-  position: relative;
-  width: 2px;
-  border-radius: 1px;
-}
+// .sound-catalog .amplitude-21 {
+//   height: 21px;
+//   background-color: #747a83;
+//   position: relative;
+//   width: 2px;
+//   border-radius: 1px;
+// }
 
 .sound-catalog .duration {
   position: relative;
@@ -1140,6 +1139,17 @@
 }
 
 // single tracks display for pack builder
+
+.icon-adjust-pack-builder {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #2b2d30;
+  color: white;
+  margin: 7px 20px 0 20px;
+  text-align: center;
+  padding: 2px 0;
+}
 
 .wave-index-pack-builder {
   width: clamp(8rem, 18vw, 16rem);
