@@ -1,0 +1,30 @@
+<div data-controller="filters">
+  <div class="forms">
+    <div class="drop-down">
+      <form action="/pack_builder" data-controller="category">
+        <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
+        <input type="hidden" name="filters" value="" data-filters-target="dropdown">
+        <div class="d-flex justify-content-start">
+          <div>
+            <select type="text" name="dropdown" placeholder="category">
+              <option value="" selected disabled hidden>Pick a category</option>
+              <% @categories.each do |cat| %>
+                <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>"><%= cat.to_s.capitalize %></option>
+              <% end %>
+            </select>
+          </div>
+          <div>
+            <input type="submit" value="GO">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div style="margin-top: 30px; font-size: 12px"><strong>OR</strong></div>
+    <div class="search-form">
+      <form action="/pack_builder">
+        <input type="text" name="search" placeholder="<%= @search ? @search : 'Search by keyword' %>">
+        <button type="submit" class="submit-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+</div>
