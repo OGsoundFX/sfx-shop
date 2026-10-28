@@ -57,12 +57,15 @@
                   </form>
                 </div>
               </div>
+<%= render 'shared/pack_filters' %>
+
 
               <hr id="search-hr">
               <%= paginate @sfx_packs %>
               <%= render 'shared/pack_card' %>
               <%= paginate @sfx_packs %>
             </div>
+
           </div>
         </section>
       </div>
