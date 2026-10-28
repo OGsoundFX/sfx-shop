@@ -35,13 +35,13 @@
                   <% end %>
                 </div>
                 <div>
-                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.music? ? 'sfx-card__music-color' : 'sfx-card__sfx-color' %>"><%= pack.music? ? "Music" : "SFX" %></span>
+                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.music? ? 'sfx-card__sfx-color' : 'sfx-card__sfx-color' %>"><%= pack.music? ? "Music" : "SFX" %></span>
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
               <div class="d-flex flex-wrap justify-content-between align-items-center gap-1">
                 <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
-                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill bg-secondary"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill sfx-card__music-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
               </div>
               <div>
                 <% if pack.average_rating %>
@@ -91,7 +91,7 @@
                     <%= link_to "Dashboard", designer_listings_path, class: "btn btn-secondary text-white btn-sm ml-2" %>
                   <% else %>
                     <% if pack.sku.include?("FS") %>
-                      <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 bg-color-pink" %>
+                      <%= button_to "Download", pack.product_link, method: :get, class: "btn text-white btn-sm ml-2 btn-secondary free-add-to-cart-hover" %>
                     <% else %>
                       <%= submit_tag 'Add to Cart', class: "btn btn-teal btn-sm text-white add-to-cart-hover" %>
                     <% end %>
