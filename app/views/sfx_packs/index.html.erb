@@ -58,20 +58,7 @@
             </div>
           </div>
 
-          <div class="sfx-pack-filters mb-3" aria-label="Filter sound packs">
-            <%= link_to "AI-assisted",
-                        sfx_packs_path(request.query_parameters.except("page").merge(includes_ai: @includes_ai == "true" ? nil : "true")),
-                        class: "sfx-pack-filter-pill #{"is-selected" if @includes_ai == "true"}" %>
-            <%= link_to "Music",
-                        sfx_packs_path(request.query_parameters.except("page").merge(asset_type: @asset_type == "music" ? nil : "music")),
-                        class: "sfx-pack-filter-pill #{"is-selected" if @asset_type == "music"}" %>
-            <%= link_to "SFX",
-                        sfx_packs_path(request.query_parameters.except("page").merge(asset_type: @asset_type == "sfx" ? nil : "sfx")),
-                        class: "sfx-pack-filter-pill #{"is-selected" if @asset_type == "sfx"}" %>
-            <%= link_to "Free",
-                        sfx_packs_path(request.query_parameters.except("page").merge(free: @free ? nil : "1")),
-                        class: "sfx-pack-filter-pill #{"is-selected" if @free}" %>
-          </div>
+          <%= render 'shared/pack_filters' %>
 
           <hr id="search-hr">
           <% if @sfx_packs.empty? %>
