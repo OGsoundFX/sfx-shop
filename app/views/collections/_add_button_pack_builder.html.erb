@@ -1,0 +1,14 @@
+<div id="pack-builder-add-button-<%= track.id %>">
+  <% if collection.tracks.include?(track.id) %>
+    <div class="pack-action" >
+      <i class="fas fa-check"></i>
+      <div class="action-label" >Added</div>
+    </div>
+  <% else %>
+    <%= link_to add_builder_track_path(collection: collection, track: track), method: :patch do %>
+      <div class="pack-action-add" >
+        <div class="action-label-add" >Add</div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -36,4 +36,10 @@ class Collection < ApplicationRecord
       5000 # unlimited
     end
   end
+
+  def recalculate_collection_values
+    self.total_points = tracks.sum { SingleTrack.find(it).points }
+    self.price_cents = collection_categories(total_points)
+    self.save
+  end
 end

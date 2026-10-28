@@ -1,6 +1,7 @@
 class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
+  # ! Pack builder section 👇
   def pack_builder
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     @search = params[:search].presence if params[:search].is_a?(String)
@@ -37,6 +38,37 @@ class CollectionsController < ApplicationController
     @total_sounds = tracks.count
     @sfx_tracks = tracks.page(params[:page]).per(20)
   end
+
+  def create_builder_pack
+    track = SingleTrack.find params[:track]
+    collection = Collection.create(user_id: current_user.id, tracks: [track.id], total_points: track.points, price_cents: 500)
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection})
+      }
+      format.html { redirect_to pack_builder_path }
+    end
+  end
+
+  def add_builder_track
+    track = SingleTrack.find params[:track]
+    collection = Collection.find params[:collection]
+    collection.tracks << track.id
+    collection.total_points += track.points
+    collection.price_cents = collection_categories(collection.total_points)
+    collection.save
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection})
+      }
+      format.html { redirect_to pack_builder_path }
+    end
+  end
+
+  def remove_builder_track
+  end
+
+  # ! Pack builder section 👆
 
   def create
     # this action is not only to create a collection from scratch but add tracks to collection

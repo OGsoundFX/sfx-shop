@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   # collection / pack-builder
   get 'collections/create'
   get "pack_builder", to: "collections#pack_builder", as: :pack_builder
+  post "create_builder_pack", to: "collections#create_builder_pack", as: :create_builder_pack
+  patch "add_builder_track", to: "collections#add_builder_track", as: :add_builder_track
+  delete "remove_builder_track", to: "collections#remove_builder_track", as: :remove_builder_track
 
   # Sound Designer Submission
   resources :designer_submissions, param: :access_token, only: %i(new create show update) do
