@@ -39,7 +39,10 @@
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
-              <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-1">
+                <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
+                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill bg-secondary"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+              </div>
               <div>
                 <% if pack.average_rating %>
                   <%= pack.average_rating %> <i class="fas fa-star"></i>
