@@ -14,41 +14,26 @@
     </div>
     <%= render 'track_search_pack_builder' %>
     <div class="filters" >
-      <div class="catalog-filter" >
-        <div class="text-wrapper-2" >Type</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-26.svg" />
-        </div>
-      </div>
-      <div class="catalog-filter-2" >
-        <div class="filter-label" >Genre · Ambient</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-22.svg" />
-        </div>
-      </div>
-      <div class="catalog-filter" >
-        <div class="text-wrapper-2" >BPM</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-9.svg" />
-        </div>
-      </div>
-      <div class="catalog-filter" >
-        <div class="text-wrapper-2" >Key</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-7.svg" />
-        </div>
-      </div>
-      <div class="catalog-filter" >
-        <div class="text-wrapper-2" >Price</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-20.svg" />
-        </div>
-      </div>
-      <div class="clear-filters" >Reset</div>
-      <div class="vector-wrapper" >
-        <img class="vector-4" src="img/vector-8.svg" />
-      </div>
-      <div class="text-wrapper-2" >All filters</div>
+      <%= link_to "No AI",
+                  pack_builder_path(request.query_parameters.except("page").merge(includes_ai: @includes_ai == "false" ? nil : "false")),
+                  class: "catalog-filter #{"is-selected" if @includes_ai == "false"}",
+                  aria: { pressed: @includes_ai == "false" } %>
+      <%= link_to "AI-assisted",
+                  pack_builder_path(request.query_parameters.except("page").merge(includes_ai: @includes_ai == "true" ? nil : "true")),
+                  class: "catalog-filter #{"is-selected" if @includes_ai == "true"}",
+                  aria: { pressed: @includes_ai == "true" } %>
+      <%= link_to "Music",
+                  pack_builder_path(request.query_parameters.except("page").merge(asset_type: @asset_type == "music" ? nil : "music")),
+                  class: "catalog-filter #{"is-selected" if @asset_type == "music"}",
+                  aria: { pressed: @asset_type == "music" } %>
+      <%= link_to "SFX",
+                  pack_builder_path(request.query_parameters.except("page").merge(asset_type: @asset_type == "sfx" ? nil : "sfx")),
+                  class: "catalog-filter #{"is-selected" if @asset_type == "sfx"}",
+                  aria: { pressed: @asset_type == "sfx" } %>
+      <%= link_to "Reset",
+                  pack_builder_path,
+                  class: "clear-filters",
+                  aria: { label: "Reset AI and type filters" } %>
     </div>
   </div>
   <div class="navbar" >
@@ -58,9 +43,8 @@
     <div class="key-column" >POINTS</div>
     <div class="price-column" >PRICE</div>
     <div class="sort" >
-      <div class="text-wrapper-3" >Relevant</div>
+      <div class="text-wrapper-3" ></div>
       <div class="chevron-down" >
-        <img class="vector-5" src="img/vector-25.svg" />
       </div>
     </div>
   </div>
@@ -172,15 +156,14 @@
     <div class="pack-builder-pagination">
       <%= paginate @sfx_tracks %>
     </div>
-    <div class="scroll-track" >
-      <div class="scroll-thumb" ></div>
-    </div>
   </div>
   <div class="results-footer" >
-    <p class="text-wrapper" >Showing 1-8 of 248 · Scroll to explore more</p>
-    <div class="keyboard-hint" >
-      <div class="text-wrapper-3" >SPACE</div>
-      <div class="shortcut-description" >play / pause</div>
-    </div>
+    <p class="text-wrapper" >
+      <% if @total_sounds.zero? %>
+        Showing 0 of 0
+      <% else %>
+        Showing <%= @sfx_tracks.offset_value + 1 %>-<%= @sfx_tracks.offset_value + @sfx_tracks.length %> of <%= @total_sounds %> · Got to next page to explore more
+      <% end %>
+    </p>
   </div>
 </div>

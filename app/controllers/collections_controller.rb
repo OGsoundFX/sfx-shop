@@ -2,8 +2,11 @@ class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def pack_builder
-    # defining variables
-    @search ||= params[:search]
+    @search = params[:search].presence if params[:search].is_a?(String)
+    @dropdown = params[:dropdown].presence if params[:dropdown].is_a?(String)
+    @includes_ai = params[:includes_ai] if %w[true false].include?(params[:includes_ai])
+    @asset_type = params[:asset_type] if SingleTrack.asset_types.key?(params[:asset_type])
+
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-bomb"></i>',
@@ -24,18 +27,14 @@ class CollectionsController < ApplicationController
     @categories = SfxPack.categories
     @categories.unshift('All')
 
-    if (params[:dropdown] == nil || params[:dropdown] == 'All') && params[:search] == nil
-      @total_sounds = SingleTrack.count
-      @sfx_tracks = SingleTrack.all.page(params[:page]).per(20)
-    end
-    if params[:search]
-      @total_sounds = SingleTrack.search_single_tracks(params[:search]).count
-      @sfx_tracks = SingleTrack.search_single_tracks(params[:search]).page(params[:page]).per(20)
-    end
-    if params[:dropdown] && params[:dropdown] != 'All'
-      @total_sounds = SingleTrack.where(category: params[:dropdown].downcase).count
-      @sfx_tracks = SingleTrack.where(category: params[:dropdown].downcase).page(params[:page]).per(20)
-    end
+    tracks = SingleTrack.all
+    tracks = tracks.where(category: @dropdown.downcase) if @dropdown.present? && @dropdown.downcase != "all"
+    tracks = tracks.search_single_tracks(@search) if @search.present?
+    tracks = tracks.where(includes_ai: @includes_ai == "true") if @includes_ai.present?
+    tracks = tracks.where(asset_type: @asset_type) if @asset_type.present?
+
+    @total_sounds = tracks.count
+    @sfx_tracks = tracks.page(params[:page]).per(20)
   end
 
   def create

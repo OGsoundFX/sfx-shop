@@ -13,7 +13,7 @@
 .sound-catalog .search-and-filters {
   display: flex;
   flex-direction: column;
-  height: 176px;
+  min-height: 176px;
   align-items: flex-start;
   gap: 16px;
   padding: 20px;
@@ -184,8 +184,9 @@
 
 .sound-catalog .filters {
   display: flex;
-  height: 30px;
+  min-height: 30px;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   position: relative;
   align-self: stretch;
@@ -205,6 +206,19 @@
   border-color: #45474a;
   align-items: center;
   position: relative;
+  color: #bec1c6;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 11px;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sound-catalog .catalog-filter:hover,
+.sound-catalog .catalog-filter.is-selected {
+  background-color: #2f80ed1c;
+  border-color: #2f80ed;
+  color: #f2f2f2;
 }
 
 .sound-catalog .text-wrapper-2 {
@@ -262,21 +276,20 @@
 
 .sound-catalog .clear-filters {
   position: relative;
-  flex: 1;
+  flex: 0 0 auto;
+  margin-left: auto;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #969ba3;
   font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.sound-catalog .vector-4 {
-  position: absolute;
-  width: 93.57%;
-  height: 93.57%;
-  top: 6.43%;
-  left: 6.43%;
+.sound-catalog .clear-filters:hover {
+  color: #f2f2f2;
 }
 
 .sound-catalog .navbar {
