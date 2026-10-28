@@ -1,0 +1,23 @@
+<div class="pack-builder-track-search" data-controller="filters">
+  <form class="pack-builder-category-search" action="/pack_builder" data-controller="category">
+    <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
+    <input type="hidden" name="filters" value="" data-filters-target="dropdown">
+    <select name="dropdown" aria-label="Pick a category">
+      <option value="" selected disabled hidden>Pick a category</option>
+      <% @categories.each do |cat| %>
+        <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>"><%= cat.to_s.capitalize %></option>
+      <% end %>
+    </select>
+    <button type="submit">GO</button>
+  </form>
+
+  <div class="pack-builder-search-or" aria-hidden="true">OR</div>
+
+  <form class="pack-builder-keyword-search" action="/pack_builder">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input type="text" name="search" aria-label="Search by keyword" placeholder="<%= @search ? @search : 'Search by keyword' %>">
+    <button type="submit" aria-label="Search">
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </button>
+  </form>
+</div>

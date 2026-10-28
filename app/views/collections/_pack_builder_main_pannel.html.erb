@@ -21,17 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="search-field" >
-      <div class="search" >
-        <img class="img" src="img/vector-33.svg" />
-      </div>
-      <div class="search-query" >ambient</div>
-      <div class="x" >
-        <img class="vector-2" src="img/vector-18.svg" />
-      </div>
-      <div class="divider" ></div>
-      <div class="text-wrapper" >⌘ K</div>
-    </div>
+    <%= render 'track_search_pack_builder' %>
     <div class="filters" >
       <div class="catalog-filter" >
         <div class="text-wrapper-2" >Type</div>
@@ -71,7 +61,7 @@
     </div>
   </div>
   <div class="navbar" >
-    <div class="results" ><%= @sfx_tracks.count %> RESULTS</div>
+    <div class="results" ><%= @total_sounds %> RESULTS</div>
     <div class="waveform-column" >PREVIEW</div>
     <div class="tempo-column" >INFO</div>
     <div class="key-column" >POINTS</div>

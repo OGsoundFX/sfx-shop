@@ -2,8 +2,8 @@ class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def pack_builder
-    @sfx_tracks = SingleTrack.all.page(params[:page]).per(20)
-    @total_sounds = @sfx_tracks.count
+    # defining variables
+    @search ||= params[:search]
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-bomb"></i>',
@@ -20,6 +20,22 @@ class CollectionsController < ApplicationController
       "scifi": '<i class="fas fa-rocket"></i>',
       "default": '<i class="fas fa-volume-up"></i>'
     }
+
+    @categories = SfxPack.categories
+    @categories.unshift('All')
+
+    if (params[:dropdown] == nil || params[:dropdown] == 'All') && params[:search] == nil
+      @total_sounds = SingleTrack.count
+      @sfx_tracks = SingleTrack.all.page(params[:page]).per(20)
+    end
+    if params[:search]
+      @total_sounds = SingleTrack.search_single_tracks(params[:search]).count
+      @sfx_tracks = SingleTrack.search_single_tracks(params[:search]).page(params[:page]).per(20)
+    end
+    if params[:dropdown] && params[:dropdown] != 'All'
+      @total_sounds = SingleTrack.where(category: params[:dropdown].downcase).count
+      @sfx_tracks = SingleTrack.where(category: params[:dropdown].downcase).page(params[:page]).per(20)
+    end
   end
 
   def create

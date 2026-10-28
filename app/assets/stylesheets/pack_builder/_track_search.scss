@@ -1,0 +1,109 @@
+.sound-catalog .pack-builder-track-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.4fr);
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.sound-catalog .pack-builder-category-search,
+.sound-catalog .pack-builder-keyword-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  min-width: 0;
+  padding: 0 12px;
+  background-color: $pack-builder-dark-background;
+  border: 1px solid #45474a;
+  border-radius: 6px;
+}
+
+.sound-catalog .pack-builder-category-search select,
+.sound-catalog .pack-builder-keyword-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  color: #f2f2f2;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 13px;
+  line-height: normal;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.sound-catalog .pack-builder-category-search select {
+  height: 100%;
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.sound-catalog .pack-builder-keyword-search input::placeholder {
+  color: #969ba3;
+  opacity: 1;
+}
+
+.sound-catalog .pack-builder-category-search button,
+.sound-catalog .pack-builder-keyword-search button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #bec1c6;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.sound-catalog .pack-builder-category-search button {
+  height: 28px;
+  padding: 0 10px;
+  color: #f2f2f2;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 11px;
+  background-color: #2f80ed;
+  border-radius: 4px;
+}
+
+.sound-catalog .pack-builder-keyword-search > i {
+  flex: 0 0 auto;
+  color: #969ba3;
+  font-size: 13px;
+}
+
+.sound-catalog .pack-builder-keyword-search button {
+  width: 24px;
+  height: 24px;
+  color: #969ba3;
+}
+
+.sound-catalog .pack-builder-search-or {
+  color: #969ba3;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.sound-catalog .pack-builder-category-search:focus-within,
+.sound-catalog .pack-builder-keyword-search:focus-within {
+  border-color: #2f80ed;
+}
+
+@media (max-width: 768px) {
+  .sound-catalog .search-and-filters {
+    height: auto;
+  }
+
+  .sound-catalog .pack-builder-track-search {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .sound-catalog .pack-builder-search-or {
+    text-align: center;
+  }
+}
