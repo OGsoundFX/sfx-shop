@@ -84,12 +84,16 @@
             <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>.00
           <% end %>
         </div>
-        <div class="pack-action" >
-          <div class="img-wrapper" >
-            <img class="vector-8" src="img/vector-11.svg" />
+        <% if @collection.tracks.include?(track.id) %>         
+          <div class="pack-action" >
+            <i class="fas fa-check"></i>
+            <div class="action-label" >Added</div>
           </div>
-          <div class="action-label" >Added</div>
-        </div>
+        <% else %>
+          <div class="pack-action-add" >
+            <div class="action-label-add" >Add</div>
+          </div>
+        <% end %>
       </div>
 
       <div id="trackInfo" class="pack-builder-track-info-modal" data-modalTrackId="<%= track.id %>">

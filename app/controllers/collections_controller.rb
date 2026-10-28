@@ -2,6 +2,7 @@ class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
   def pack_builder
+    @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     @search = params[:search].presence if params[:search].is_a?(String)
     @dropdown = params[:dropdown].presence if params[:dropdown].is_a?(String)
     @includes_ai = params[:includes_ai] if %w[true false].include?(params[:includes_ai])

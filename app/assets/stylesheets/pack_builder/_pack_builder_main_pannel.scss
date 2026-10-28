@@ -827,6 +827,20 @@
   overflow: hidden;
 }
 
+.sound-catalog .pack-action-add {
+  display: flex;
+  width: 76px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  background-color: $pack-builder-dark-background;
+  color: whitesmoke;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .sound-catalog .vector-8 {
   position: absolute;
   width: 89.87%;
@@ -840,11 +854,28 @@
   width: fit-content;
   font-family: "Inter-Medium", Helvetica;
   font-weight: 500;
-  color: #79d6a0;
+  color: $new-green;
   font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
+}
+
+.sound-catalog .action-label-add {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: whitesmoke;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.pack-action i {
+  font-size: 11px;
+  color: $new-green;
 }
 
 .sound-catalog .sound-2 {
