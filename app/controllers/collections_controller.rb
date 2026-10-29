@@ -55,6 +55,11 @@ class CollectionsController < ApplicationController
   def remove_builder_track
   end
 
+  def remove_builder_collection
+    Collection.find(params[:collection_id]).destroy
+    redirect_to pack_builder_path
+  end
+
   # ! Pack builder section 👆
 
   def create

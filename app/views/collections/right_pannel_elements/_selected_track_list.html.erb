@@ -108,5 +108,14 @@
         <% end %>
       <% end %>
     </div>
+    <% if collection %>
+      <div class="div-2 mt-3" >
+        <div class="saved-state" >
+        </div>
+        <%= link_to remove_builder_collection_path(collection_id: collection&.id), method: :delete do %>
+          <div class="clear-collection" >Clear all</div>
+        <% end %>
+      </div>
+    <% end %>
   </details>
 </div>
