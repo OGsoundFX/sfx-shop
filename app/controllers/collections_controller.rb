@@ -41,84 +41,15 @@ class CollectionsController < ApplicationController
 
   def create_builder_pack
     track = SingleTrack.find params[:track]
-    collection = Collection.create(user_id: current_user.id, tracks: [track.id], total_points: track.points, price_cents: 500)
-
-    if "$" != session[:currency]
-      conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
-    else
-      conversion_rate = 1
-    end
-    collection_track_ids = collection&.tracks || []
-    collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id)
-
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: [
-          turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
-          turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
-          turbo_stream.replace("selected-track-list",
-            partial: "collections/right_pannel_elements/selected_track_list",
-            locals: {
-              collection: collection,
-              collection_track_ids: collection_track_ids,
-              collection_tracks: collection_tracks,
-              conversion_rate: conversion_rate
-            }
-          )
-        ]
-      }
-      format.html { redirect_to pack_builder_path }
-    end
+    collection = current_user.collections.where(purchased: false).last ||
+      current_user.collections.new(tracks: [], total_points: 0, price_cents: 0)
+    add_track_to_builder_collection(collection, track)
   end
 
   def add_builder_track
     track = SingleTrack.find params[:track]
-    collection = Collection.find params[:collection]
-    collection.tracks << track.id
-    collection.total_points += track.points
-    collection.price_cents = collection_categories(collection.total_points)
-
-    if collection.save
-      if "$" != session[:currency]
-        conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
-      else
-        conversion_rate = 1
-      end
-      collection_track_ids = collection&.tracks || []
-      collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id)
-      individual_value = collection_tracks.values.sum(&:price_cents) / 100.0
-      collection_savings = individual_value - (collection&.price&.to_f || 0)
-
-      respond_to do |format|
-        format.turbo_stream {
-          render turbo_stream: [
-            turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
-            turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
-            turbo_stream.replace("selected-track-list",
-              partial: "collections/right_pannel_elements/selected_track_list",
-              locals: {
-                collection: collection,
-                collection_track_ids: collection_track_ids,
-                collection_tracks: collection_tracks,
-                conversion_rate: conversion_rate
-              }
-            ),
-            turbo_stream.replace("total_price_recap",
-              partial: "collections/right_pannel_elements/total_price_recap",
-              locals: {
-                collection: collection,
-                conversion_rate: conversion_rate,
-                collection_savings: collection_savings,
-                individual_value: individual_value
-              }
-            )
-          ]
-        }
-        format.html { redirect_to pack_builder_path }
-      end
-    else
-      redirect_to pack_builder_path, notice: 'Unable to perform action'
-    end
+    collection = current_user.collections.where(purchased: false).find(params[:collection])
+    add_track_to_builder_collection(collection, track)
   end
 
   def remove_builder_track
@@ -442,6 +373,56 @@ class CollectionsController < ApplicationController
   end
 
   private
+
+  def add_track_to_builder_collection(collection, track)
+    collection_track_ids = (collection.tracks || []).map(&:to_i)
+    collection_track_ids << track.id unless collection_track_ids.include?(track.id)
+    collection.tracks = collection_track_ids
+    collection.total_points = points(collection_track_ids)
+    collection.price_cents = collection_categories(collection.total_points)
+
+    unless collection.save
+      redirect_to pack_builder_path, alert: "Unable to add this sound to your collection."
+      return
+    end
+
+    if "$" != session[:currency]
+      conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
+    else
+      conversion_rate = 1
+    end
+    collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id)
+    individual_value = collection_tracks.values.sum(&:price_cents) / 100.0
+    collection_savings = individual_value - collection.price.to_f
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
+          turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
+          turbo_stream.replace("selected-track-list",
+            partial: "collections/right_pannel_elements/selected_track_list",
+            locals: {
+              collection: collection,
+              collection_track_ids: collection_track_ids,
+              collection_tracks: collection_tracks,
+              conversion_rate: conversion_rate
+            }
+          ),
+          turbo_stream.replace("total_price_recap",
+            partial: "collections/right_pannel_elements/total_price_recap",
+            locals: {
+              collection: collection,
+              conversion_rate: conversion_rate,
+              collection_savings: collection_savings,
+              individual_value: individual_value
+            }
+          )
+        ]
+      end
+      format.html { redirect_to pack_builder_path }
+    end
+  end
 
   def points(tracks)
     if tracks == []
