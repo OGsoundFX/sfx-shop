@@ -165,6 +165,12 @@
   width: 100%;
 }
 
+.pack-builder #selected-track-list {
+  align-self: stretch;
+  min-width: 0;
+  width: 100%;
+}
+
 .pack-builder .selected-sounds-toggle {
   color: #bec1c6;
   cursor: pointer;

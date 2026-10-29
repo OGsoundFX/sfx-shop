@@ -57,6 +57,13 @@ class CollectionsController < ApplicationController
 
   def remove_builder_collection
     Collection.find(params[:collection_id]).destroy
+    cart = current_user.cart
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
+    else
+      cart.collections = []
+      cart.save
+    end
     redirect_to pack_builder_path
   end
 
