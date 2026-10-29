@@ -386,6 +386,8 @@ class CollectionsController < ApplicationController
       return
     end
 
+    cart_create_update
+
     if "$" != session[:currency]
       conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
     else
