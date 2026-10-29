@@ -25,7 +25,7 @@
           <i class="fas fa-edit"></i>
         </div>
       </div>
-    </div>
+    </div>    
     <%= render "collections/right_pannel_elements/selected_track_list",
         collection: @collection,
         collection_track_ids: collection_track_ids,
@@ -48,24 +48,14 @@
         <p class="text-wrapper" >WAV · 24-bit · 44.1 kHz</p>
       </div>
     </div>
-    <div class="pricing" >
-      <div class="subtotal" >
-        <p class="text-wrapper-2" >Individual value · <%= @collection&.tracks&.count || 0 %> sounds</p>
-        <div class="text-wrapper-2" ><%= humanized_money(individual_value * conversion_rate, symbol: session[:currency]) %></div>
-      </div>
-      <% if @collection && collection_savings.positive? %>
-        <div class="pack-builder-savings">
-          You save <strong><%= humanized_money(collection_savings * conversion_rate, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
-        </div>
-      <% end %>
-      <div class="pricing-divider" ></div>
-      <div class="div-2" >
-        <div class="total-label" >Collection price</div>
-        <div class="total-amount" >
-          <div class="price" ><%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %></div>
-        </div>
-      </div>
-    </div>
+
+    <%= render "collections/right_pannel_elements/total_price_recap",
+        collection: @collection,
+        conversion_rate: conversion_rate,
+        collection_savings: collection_savings,
+        individual_value: individual_value
+      %>
+
     <%= link_to cart_path, class: 'w-100' do %>
       <div class="add-pack-to-cart" >
         <i class="fas fa-shopping-cart"></i>

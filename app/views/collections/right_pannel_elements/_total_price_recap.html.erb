@@ -1,0 +1,22 @@
+<div class="pricing" id="total_price_recap">
+  <div class="subtotal" >
+    <p class="text-wrapper-2" >Individual value · <%= collection&.tracks&.count || 0 %> sounds</p>
+    <div class="text-wrapper-2" ><%= humanized_money(individual_value * conversion_rate, symbol: session[:currency]) %></div>
+  </div>
+  <% if collection && collection_savings.positive? %>
+    <div class="pack-builder-savings">
+      You save <strong><%= humanized_money(collection_savings * conversion_rate, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
+    </div>
+  <% end %>
+  <div class="pricing-divider" ></div>
+  <div class="div-2" >
+    <div class="total-label" >Collection price</div>
+    <div class="total-amount" >
+      <% if collection %>
+        <div class="price" ><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></div>
+      <% else %>
+        <div class="price" ><%= humanized_money(0, symbol: session[:currency]) %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
