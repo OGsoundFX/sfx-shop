@@ -56,12 +56,36 @@ class CollectionsController < ApplicationController
     collection.tracks << track.id
     collection.total_points += track.points
     collection.price_cents = collection_categories(collection.total_points)
-    collection.save
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection})
-      }
-      format.html { redirect_to pack_builder_path }
+
+    if collection.save
+      if "$" != session[:currency]
+        conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
+      else
+        conversion_rate = 1
+      end
+      collection_track_ids = collection&.tracks || []
+      collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id)
+
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: [
+            turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
+            turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
+            turbo_stream.replace("selected-track-list",
+              partial: "collections/right_pannel_elements/selected_track_list",
+              locals: {
+                collection: collection,
+                collection_track_ids: collection_track_ids,
+                collection_tracks: collection_tracks,
+                conversion_rate: conversion_rate
+              }
+            )
+          ]
+        }
+        format.html { redirect_to pack_builder_path }
+      end
+    else
+      redirect_to pack_builder_path, notice: 'Unable to perform action'
     end
   end
 

@@ -3,12 +3,6 @@
 <% else %>
   <% conversion_rate = 1 %>
 <% end %>
-<% sample_sounds = [
-  { title: "Glass Horizon", metadata: "Synth loop · 90 BPM", price: 2.50 },
-  { title: "Soft Current", metadata: "Texture · C maj", price: 1.50 },
-  { title: "Night Drive", metadata: "Drum loop · 100 BPM", price: 3.00 },
-  { title: "Vinyl Air", metadata: "Texture · 0:30", price: 2.00 }
-] %>
 <% collection_track_ids = @collection&.tracks || [] %>
 <% collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id) %>
 <% individual_value = collection_tracks.values.sum(&:price_cents) / 100.0 %>
@@ -23,65 +17,23 @@
           </div>
           <div class="title" >Pack builder</div>
         </div>
-        <div class="item-count" >
-          <% count = @collection ? @collection.tracks.count : 0 %>
-          <div class="count" ><%= count %> <%= 'sound'.pluralize(count) %></div>
-        </div>
+        <%= render 'collections/right_pannel_elements/top_track_count', collection: @collection %>
       </div>
       <div class="project-name" >
-        <div class="pack-name" >Late night sketches</div>
+        <div class="pack-name" >Name your pack</div>
         <div id="pack-builder-name-edit" >
           <i class="fas fa-edit"></i>
         </div>
       </div>
     </div>
-    <details class="selected-sounds">
-      <summary class="selected-sounds-toggle">View sounds (<%= collection_track_ids.length %>)</summary>
-      <div class="selected-sounds-list">
-        <% collection_track_ids.each do |track_id| %>
-          <% track = collection_tracks[track_id] %>
-          <% if track %>
-            <% player_id = "pack-builder-preview-#{track.id}" %>
-            <div class="selected-sound">
-              <button
-                type="button"
-                class="pack-builder-preview-button"
-                data-pack-builder-preview
-                data-preview-url="<%= track.preview_link %>"
-                data-waveform-id="<%= player_id %>"
-                aria-label="Play preview for <%= track.title %>"
-                <%= "disabled" unless track.preview_link.present? %>>
-                <i class="fas fa-play-circle" aria-hidden="true"></i>
-              </button>
-              <div class="sound-details">
-                <div class="sound-title"><%= track.title %></div>
-                <p class="sound-metadata"><%= track.category.capitalize %><%= " · #{track.points} points" if track.points.present? %></p>
-                <div id="<%= player_id %>" class="pack-builder-preview-waveform" aria-hidden="true"></div>
-              </div>
-              <div class="sound-price"><%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %></div>
-            </div>
-          <% end %>
-        <% end %>
-        <details class="sample-sounds">
-          <summary class="selected-sounds-toggle">Show sample display</summary>
-          <% sample_sounds.each do |sound| %>
-            <div class="selected-sound sample-sound">
-              <div class="sound-details">
-                <div class="sound-title"><%= sound[:title] %></div>
-                <p class="sound-metadata"><%= sound[:metadata] %></p>
-              </div>
-              <div class="sound-price"><%= humanized_money(sound[:price] * conversion_rate, symbol: session[:currency]) %></div>
-            </div>
-          <% end %>
-        </details>
-      </div>
-    </details>
+    <%= render "collections/right_pannel_elements/selected_track_list",
+        collection: @collection,
+        collection_track_ids: collection_track_ids,
+        collection_tracks: collection_tracks,
+        conversion_rate: conversion_rate
+      %>
     <div class="div-2" >
       <div class="saved-state" >
-        <div class="cloud-check" >
-          <img class="vector-4" src="img/vector-11.svg" />
-        </div>
-        <div class="save-status" >Selection saved</div>
       </div>
       <div class="clear-collection" >Clear all</div>
     </div>

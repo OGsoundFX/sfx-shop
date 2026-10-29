@@ -193,7 +193,80 @@
 .pack-builder .selected-sounds-list .selected-sound {
   min-height: 68px;
   height: auto;
+  gap: 8px;
   padding: 8px 0;
+  align-items: center;
+}
+
+.pack-builder .pack-builder-track-indicators {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.pack-builder .pack-builder-track-points {
+  padding: 4px 7px;
+  color: #f2f2f2;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: #344957;
+  border: 1px solid #4d6678;
+  border-radius: 5px;
+}
+
+.pack-builder .pack-builder-track-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #969ba3;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.pack-builder .pack-builder-track-price span {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.pack-builder .pack-builder-track-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pack-builder .pack-builder-track-info-button,
+.pack-builder .pack-builder-track-delete-button {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #bec1c6;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pack-builder .pack-builder-track-info-button:hover {
+  color: #f2f2f2;
+  background-color: #34363a;
+}
+
+.pack-builder .pack-builder-track-delete-button {
+  color: #777c83;
+  cursor: not-allowed;
+}
+
+.pack-builder .pack-builder-track-info-button:focus-visible {
+  outline: 2px solid #2f80ed;
+  outline-offset: 2px;
 }
 
 .pack-builder .pack-builder-preview-button {
@@ -281,11 +354,20 @@
 .pack-builder .sound-details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 5px;
   position: relative;
   flex: 1;
   flex-grow: 1;
+}
+
+.pack-builder .selected-sounds-list .sound-title {
+  margin-top: 0;
+}
+
+.pack-builder .selected-sounds-list .sound-metadata {
+  margin: 0;
 }
 
 .pack-builder .sound-title {
