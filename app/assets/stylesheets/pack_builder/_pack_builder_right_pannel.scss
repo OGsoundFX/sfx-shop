@@ -516,6 +516,46 @@
   overflow: hidden;
 }
 
+.pack-builder .collection-progress {
+  align-items: flex-start;
+}
+
+.pack-builder .collection-progress-icon {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #2f80ed;
+}
+
+.pack-builder .collection-progress .license-details {
+  min-width: 0;
+  gap: 5px;
+}
+
+.pack-builder .collection-progress-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.pack-builder .collection-progress-points {
+  color: #f2f2f2;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.pack-builder .collection-progress .license-title {
+  white-space: normal;
+}
+
+.pack-builder .collection-progress .text-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+  white-space: normal;
+  line-height: 1.4;
+}
+
 .pack-builder .vector-5 {
   position: absolute;
   width: 88.64%;

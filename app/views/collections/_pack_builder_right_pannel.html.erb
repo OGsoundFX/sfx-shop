@@ -7,6 +7,9 @@
 <% collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id) %>
 <% individual_value = collection_tracks.values.sum(&:price_cents) / 100.0 %>
 <% collection_savings = individual_value - (@collection&.price&.to_f || 0) %>
+<% collection_points_total = @collection&.total_points || 0 %>
+<% current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first %>
+<% next_collection_level = current_collection_level && CollectionCategory.where("points > ?", current_collection_level.points).order(:points).first %>
 <div class="pack-builder" >
   <div class="collection" >
     <div class="div" >
@@ -34,13 +37,26 @@
       %>
   </div>
   <div class="div" >
-    <div class="license" >
-      <div class="img-wrapper" >
-        <img class="vector-5" src="img/vector-5.svg" />
-      </div>
-      <div class="license-details" >
-        <div class="license-title" >Royalty-free license included</div>
-        <p class="text-wrapper" >WAV · 24-bit · 44.1 kHz</p>
+    <div class="license collection-progress" >
+      <i class="fas fa-chart-line collection-progress-icon" aria-hidden="true"></i>
+      <div class="license-details">
+        <% if current_collection_level %>
+          <div class="collection-progress-heading">
+            <div class="license-title">Collection progress</div>
+            <strong class="collection-progress-points"><%= collection_points_total %>/<%= current_collection_level.points %> points</strong>
+          </div>
+          <p class="text-wrapper">
+            <% if next_collection_level %>
+              · <%= next_collection_level.points - collection_points_total %> points to next level
+              (<%= next_collection_level.points %> points / <%= humanized_money(next_collection_level.price * conversion_rate, symbol: session[:currency]) %>)
+            <% else %>
+              · Highest collection level
+            <% end %>
+          </p>
+        <% else %>
+          <div class="license-title">Collection progress</div>
+          <p class="text-wrapper">No collection levels are currently available.</p>
+        <% end %>
       </div>
     </div>
 

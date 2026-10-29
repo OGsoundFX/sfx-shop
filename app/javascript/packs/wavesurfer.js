@@ -464,7 +464,7 @@ window.addEventListener('turbo:load', () => {
   })
 
   const packBuilderPreviewPlayers = new Set();
-  const packBuilderSoundsPanel = document.querySelector('.pack-builder > .collection > .selected-sounds');
+  const packBuilderSoundsPanel = document.querySelector('.pack-builder #selected-track-list > .selected-sounds');
 
   if (packBuilderSoundsPanel) {
     packBuilderSoundsPanel.addEventListener('toggle', () => {
