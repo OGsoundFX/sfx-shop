@@ -16,6 +16,11 @@
   border-color: $medium-card-background;
 }
 
+#pack-builder-name-edit {
+  color: whitesmoke;
+  font-size: 0.8rem;
+}
+
 .pack-builder .collection {
   display: flex;
   flex-direction: column;
@@ -470,9 +475,12 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: var(--blue-1);
+  background-color: #2f80ed;
   border-radius: 6px;
   overflow: hidden;
+  i {
+    color: whitesmoke;
+  }
 }
 
 .pack-builder .vector-6 {

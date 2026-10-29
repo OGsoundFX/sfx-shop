@@ -1,3 +1,8 @@
+<% if "$" != session[:currency] %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
 <div class="pack-builder" >
   <div class="collection" >
     <div class="div" >
@@ -9,13 +14,14 @@
           <div class="title" >Pack builder</div>
         </div>
         <div class="item-count" >
-          <div class="count" >4 sounds</div>
+          <% count = @collection ? @collection.tracks.count : 0 %>
+          <div class="count" ><%= count %> <%= 'sound'.pluralize(count) %></div>
         </div>
       </div>
       <div class="project-name" >
         <div class="pack-name" >Late night sketches</div>
-        <div class="pencil" >
-          <img class="img" src="img/vector-6.svg" />
+        <div id="pack-builder-name-edit" >
+          <i class="fas fa-edit"></i>
         </div>
       </div>
     </div>
@@ -110,20 +116,17 @@
       <div class="div-2" >
         <div class="total-label" >Pack total</div>
         <div class="total-amount" >
-          <div class="text-wrapper" >USD</div>
-          <div class="price" >$9.00</div>
+          <div class="price" ><%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %></div>
         </div>
       </div>
     </div>
-    <div class="add-pack-to-cart" >
-      <div class="vector-wrapper" >
-        <img class="vector-6" src="img/vector-3.svg" />
+    <%= link_to cart_path, class: 'w-100' do %>
+      <div class="add-pack-to-cart" >
+        <i class="fas fa-shopping-cart"></i>
+        <div class="action-label" >Add pack to cart</div>
+        <i class="fas fa-arrow-right"></i>
       </div>
-      <div class="action-label" >Add pack to cart</div>
-      <div class="img-wrapper" >
-        <img class="vector-7" src="img/vector-8.svg" />
-      </div>
-    </div>
-    <p class="purchase-note" >No subscription · Tax calculated at checkout</p>
+    <% end %>
+    <p class="purchase-note" >No subscription · Tax included</p>
   </div>
 </div>
