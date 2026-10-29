@@ -155,17 +155,91 @@
 }
 
 .pack-builder .selected-sounds {
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 0 0 auto;
-  display: flex;
+  display: block;
+  min-height: 0;
   position: relative;
   align-self: stretch;
   width: 100%;
 }
 
+.pack-builder .selected-sounds-toggle {
+  color: #bec1c6;
+  cursor: pointer;
+  font-size: 11px;
+  list-style: none;
+  padding: 8px 0;
+}
+
+.pack-builder .selected-sounds-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.pack-builder .selected-sounds-toggle::before {
+  content: "＋";
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.pack-builder .selected-sounds[open] .selected-sounds-toggle::before {
+  content: "−";
+}
+
+.pack-builder .selected-sounds-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.pack-builder .selected-sounds-list .selected-sound {
+  min-height: 68px;
+  height: auto;
+  padding: 8px 0;
+}
+
+.pack-builder .pack-builder-preview-button {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f2f2f2;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.pack-builder .pack-builder-preview-button:disabled {
+  color: #646970;
+  cursor: not-allowed;
+}
+
+.pack-builder .pack-builder-preview-waveform {
+  width: 100%;
+  min-height: 0;
+}
+
+.pack-builder .pack-builder-preview-waveform:not(:empty) {
+  height: 24px;
+  margin-top: 3px;
+}
+
+.pack-builder .pack-builder-preview-waveform.is-hidden {
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.pack-builder .selected-sounds-toggle:focus-visible,
+.pack-builder .pack-builder-preview-button:focus-visible {
+  outline: 2px solid #2f80ed;
+  outline-offset: 3px;
+}
+
+.pack-builder .sample-sounds {
+  border-top: 1px solid #45474a;
+}
+
 .pack-builder .selected-sound {
-  height: 68px;
   align-items: center;
   gap: 10px;
   border-bottom-width: 1px;
@@ -425,6 +499,12 @@
   font-size: 12px;
   letter-spacing: 0;
   line-height: normal;
+}
+
+.pack-builder .pack-builder-savings {
+  align-self: flex-end;
+  color: #8bd5a5;
+  font-size: 11px;
 }
 
 .pack-builder .pricing-divider {

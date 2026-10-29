@@ -3,6 +3,16 @@
 <% else %>
   <% conversion_rate = 1 %>
 <% end %>
+<% sample_sounds = [
+  { title: "Glass Horizon", metadata: "Synth loop · 90 BPM", price: 2.50 },
+  { title: "Soft Current", metadata: "Texture · C maj", price: 1.50 },
+  { title: "Night Drive", metadata: "Drum loop · 100 BPM", price: 3.00 },
+  { title: "Vinyl Air", metadata: "Texture · 0:30", price: 2.00 }
+] %>
+<% collection_track_ids = @collection&.tracks || [] %>
+<% collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id) %>
+<% individual_value = collection_tracks.values.sum(&:price_cents) / 100.0 %>
+<% collection_savings = individual_value - (@collection&.price&.to_f || 0) %>
 <div class="pack-builder" >
   <div class="collection" >
     <div class="div" >
@@ -25,68 +35,47 @@
         </div>
       </div>
     </div>
-    <div class="selected-sounds" >
-      <div class="selected-sound" >
-        <div class="sound-artwork" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-13.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Glass Horizon</div>
-          <p class="sound-metadata" >Synth loop · 90 BPM</p>
-        </div>
-        <div class="sound-price" >$2.50</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector.svg" />
-        </div>
+    <details class="selected-sounds">
+      <summary class="selected-sounds-toggle">View sounds (<%= collection_track_ids.length %>)</summary>
+      <div class="selected-sounds-list">
+        <% collection_track_ids.each do |track_id| %>
+          <% track = collection_tracks[track_id] %>
+          <% if track %>
+            <% player_id = "pack-builder-preview-#{track.id}" %>
+            <div class="selected-sound">
+              <button
+                type="button"
+                class="pack-builder-preview-button"
+                data-pack-builder-preview
+                data-preview-url="<%= track.preview_link %>"
+                data-waveform-id="<%= player_id %>"
+                aria-label="Play preview for <%= track.title %>"
+                <%= "disabled" unless track.preview_link.present? %>>
+                <i class="fas fa-play-circle" aria-hidden="true"></i>
+              </button>
+              <div class="sound-details">
+                <div class="sound-title"><%= track.title %></div>
+                <p class="sound-metadata"><%= track.category.capitalize %><%= " · #{track.points} points" if track.points.present? %></p>
+                <div id="<%= player_id %>" class="pack-builder-preview-waveform" aria-hidden="true"></div>
+              </div>
+              <div class="sound-price"><%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %></div>
+            </div>
+          <% end %>
+        <% end %>
+        <details class="sample-sounds">
+          <summary class="selected-sounds-toggle">Show sample display</summary>
+          <% sample_sounds.each do |sound| %>
+            <div class="selected-sound sample-sound">
+              <div class="sound-details">
+                <div class="sound-title"><%= sound[:title] %></div>
+                <p class="sound-metadata"><%= sound[:metadata] %></p>
+              </div>
+              <div class="sound-price"><%= humanized_money(sound[:price] * conversion_rate, symbol: session[:currency]) %></div>
+            </div>
+          <% end %>
+        </details>
       </div>
-      <div class="selected-sound" >
-        <div class="audio-lines-wrapper" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-9.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Soft Current</div>
-          <div class="sound-metadata" >Texture · C maj</div>
-        </div>
-        <div class="sound-price" >$1.50</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/image.svg" />
-        </div>
-      </div>
-      <div class="selected-sound" >
-        <div class="sound-artwork" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-7.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Night Drive</div>
-          <p class="sound-metadata" >Drum loop · 100 BPM</p>
-        </div>
-        <div class="sound-price" >$3.00</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-4.svg" />
-        </div>
-      </div>
-      <div class="selected-sound" >
-        <div class="div-wrapper" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-2.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Vinyl Air</div>
-          <div class="sound-metadata" >Texture · 0:30</div>
-        </div>
-        <div class="sound-price" >$2.00</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-10.svg" />
-        </div>
-      </div>
-    </div>
+    </details>
     <div class="div-2" >
       <div class="saved-state" >
         <div class="cloud-check" >
@@ -109,12 +98,17 @@
     </div>
     <div class="pricing" >
       <div class="subtotal" >
-        <p class="text-wrapper-2" >4 sounds × individual prices</p>
-        <div class="text-wrapper-2" >$9.00</div>
+        <p class="text-wrapper-2" >Individual value · <%= @collection&.tracks&.count || 0 %> sounds</p>
+        <div class="text-wrapper-2" ><%= humanized_money(individual_value * conversion_rate, symbol: session[:currency]) %></div>
       </div>
+      <% if @collection && collection_savings.positive? %>
+        <div class="pack-builder-savings">
+          You save <strong><%= humanized_money(collection_savings * conversion_rate, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
+        </div>
+      <% end %>
       <div class="pricing-divider" ></div>
       <div class="div-2" >
-        <div class="total-label" >Pack total</div>
+        <div class="total-label" >Collection price</div>
         <div class="total-amount" >
           <div class="price" ><%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %></div>
         </div>
