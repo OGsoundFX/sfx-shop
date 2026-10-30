@@ -15,7 +15,7 @@
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex template-info">
-          <h5><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+          <h5><%= humanized_money(collection.price, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total">
       <div>PRICE</div>
-      <div><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></div>
+      <div><%= humanized_money(collection.price, symbol: session[:currency]) %></div>
     </div>
   </div>
   
@@ -109,7 +109,7 @@
           <h3 class="template-title"> <strong><%= collection.title %></strong> </h3>
         </div>
         <div class="d-flex template-info">
-          <h5><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
+          <h5><%= humanized_money(collection.price, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= collection.tracks.count %> tracks</h5>
         </div>
       </div>
     </div>

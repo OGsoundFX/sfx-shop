@@ -177,7 +177,8 @@ class OrdersController < ApplicationController
     collection = []
 
     if params[:collection_id]
-      conversion_rate = ("$" != params[:currency]) ? CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f : 1
+      # conversion_rate = ("$" != params[:currency]) ? CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f : 1
+      conversion_rate = 1
       collection << params[:collection_id].to_i
       collection_sum = ((Collection.find(params[:collection_id]).price_cents * conversion_rate) / 100.to_f)
 

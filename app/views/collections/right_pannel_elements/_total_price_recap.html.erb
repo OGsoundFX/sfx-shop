@@ -5,7 +5,7 @@
   </div>
   <% if collection && collection_savings.positive? %>
     <div class="pack-builder-savings">
-      You save <strong><%= humanized_money(collection_savings * conversion_rate, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
+      You save <strong><%= humanized_money(collection_savings, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
     </div>
   <% end %>
   <div class="pricing-divider" ></div>
@@ -13,7 +13,7 @@
     <div class="total-label" >Collection price</div>
     <div class="total-amount" >
       <% if collection %>
-        <div class="price" ><%= humanized_money(collection.price * conversion_rate, symbol: session[:currency]) %></div>
+        <div class="price" ><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</div>
       <% else %>
         <div class="price" ><%= humanized_money(0, symbol: session[:currency]) %></div>
       <% end %>

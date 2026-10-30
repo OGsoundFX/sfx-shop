@@ -6,11 +6,10 @@
 <% collection_track_ids = @collection&.tracks || [] %>
 <% collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id) %>
 <% individual_value = collection_tracks.values.sum(&:price_cents) / 100.0 %>
-<% collection_savings = individual_value - (@collection&.price&.to_f || 0) %>
+<% collection_savings = (individual_value  * conversion_rate )- (@collection&.price&.to_f || 0) %>
 <% collection_points_total = @collection&.total_points || 0 %>
 <% current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first %>
 <% next_collection_level = current_collection_level && CollectionCategory.where("points > ?", current_collection_level.points).order(:points).first %>
-
 <% collection_points = CollectionCategory.where("points >= #{@collection&.total_points || 0}").first.points %>
 <% next_collection = CollectionCategory.where("points >= #{@collection&.total_points || 0}").second %>
 <div class="pack-builder" >

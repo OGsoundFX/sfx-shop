@@ -8,7 +8,7 @@
     <div class="d-flex">
       <i class="fas fa-layer-group checkout-icon-adjust"></i>
       <div class="d-flex flex-column justify-content-center">
-        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price * conversion_rate, symbol: session[:currency]) %>
+        <div style="font-weight: 500">Collection of <%= @collection.tracks.count %> tracks for <%= humanized_money(@collection.price, symbol: session[:currency]) %>
         </div>
       </div>
     </div>
