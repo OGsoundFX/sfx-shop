@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action :authenticate_user!, except: [:templates_index, :templates_show]
+  before_action :authenticate_user!, except: [:templates_index, :templates_show, :pack_builder]
 
   # ! Pack builder section 👇
   def pack_builder
