@@ -174,7 +174,7 @@
 .pack-builder .selected-sounds-toggle {
   color: #bec1c6;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   list-style: none;
   padding: 8px 0;
 }
@@ -522,8 +522,7 @@
 
 .pack-builder .collection-progress-icon {
   flex: 0 0 auto;
-  margin-top: 2px;
-  color: #2f80ed;
+  color: $new-green;
 }
 
 .pack-builder .collection-progress .license-details {
@@ -541,7 +540,7 @@
 
 .pack-builder .collection-progress-points {
   color: #f2f2f2;
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
@@ -581,7 +580,7 @@
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #bec1c6;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
@@ -593,7 +592,7 @@
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #969ba3;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
@@ -692,6 +691,16 @@
   i {
     color: whitesmoke;
   }
+}
+
+.pack-builder .add-pack-to-cart-empty {
+  display: flex;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: grey;
+  border-radius: 6px;
 }
 
 .pack-builder .vector-6 {

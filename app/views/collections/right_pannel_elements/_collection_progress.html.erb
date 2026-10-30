@@ -1,0 +1,21 @@
+<div class="license collection-progress" id="collection-progress">
+  <div class="license-details">
+    <% if current_collection_level %>
+      <div class="collection-progress-heading">
+        <div class="license-title"><i class="fas fa-chart-line collection-progress-icon" aria-hidden="true"></i> Collection progress</div>
+        <strong class="collection-progress-points"><%= collection_points_total %>/<%= current_collection_level.points %> points</strong>
+      </div>
+      <p class="text-wrapper">
+        <% if next_collection %>
+          <span class="points-left-display"><%= collection_points - (collection&.total_points || 0) %></span>
+          <span style="font-weight:300"><%= "Point".pluralize(collection_points - (collection&.total_points || 0)) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money(next_collection.price, symbol: session[:currency]) %>)</span>
+        <% else %>
+          Highest collection level
+        <% end %>
+      </p>
+    <% else %>
+      <div class="license-title">Collection progress</div>
+      <p class="text-wrapper">No collection levels are currently available.</p>
+    <% end %>
+  </div>
+</div>

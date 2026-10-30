@@ -409,6 +409,11 @@ class CollectionsController < ApplicationController
     individual_value = collection_tracks.values.sum(&:price_cents) / 100.0
     collection_savings = individual_value - collection.price.to_f
 
+    collection_points_total = collection&.total_points || 0
+    current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first
+    collection_points = CollectionCategory.where("points >= #{collection&.total_points || 0}").first.points
+    next_collection = CollectionCategory.where("points >= #{collection&.total_points || 0}").second
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
@@ -430,6 +435,16 @@ class CollectionsController < ApplicationController
               conversion_rate: conversion_rate,
               collection_savings: collection_savings,
               individual_value: individual_value
+            }
+          ),
+          turbo_stream.replace("collection-progress",
+            partial: "collections/right_pannel_elements/collection_progress",
+            locals: {
+              collection: collection,
+              current_collection_level: current_collection_level,
+              collection_points_total: collection_points_total,
+              collection_points: collection_points,
+              next_collection: next_collection
             }
           )
         ]

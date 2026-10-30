@@ -10,6 +10,9 @@
 <% collection_points_total = @collection&.total_points || 0 %>
 <% current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first %>
 <% next_collection_level = current_collection_level && CollectionCategory.where("points > ?", current_collection_level.points).order(:points).first %>
+
+<% collection_points = CollectionCategory.where("points >= #{@collection&.total_points || 0}").first.points %>
+<% next_collection = CollectionCategory.where("points >= #{@collection&.total_points || 0}").second %>
 <div class="pack-builder" >
   <div class="collection" >
     <div class="div" >
@@ -37,43 +40,20 @@
       %>
   </div>
   <div class="div" >
-    <div class="license collection-progress" >
-      <i class="fas fa-chart-line collection-progress-icon" aria-hidden="true"></i>
-      <div class="license-details">
-        <% if current_collection_level %>
-          <div class="collection-progress-heading">
-            <div class="license-title">Collection progress</div>
-            <strong class="collection-progress-points"><%= collection_points_total %>/<%= current_collection_level.points %> points</strong>
-          </div>
-          <p class="text-wrapper">
-            <% if next_collection_level %>
-              · <%= next_collection_level.points - collection_points_total %> points to next level
-              (<%= next_collection_level.points %> points / <%= humanized_money(next_collection_level.price * conversion_rate, symbol: session[:currency]) %>)
-            <% else %>
-              · Highest collection level
-            <% end %>
-          </p>
-        <% else %>
-          <div class="license-title">Collection progress</div>
-          <p class="text-wrapper">No collection levels are currently available.</p>
-        <% end %>
-      </div>
-    </div>
+    <%= render "collections/right_pannel_elements/collection_progress",
+        collection: @collection,
+        current_collection_level: current_collection_level,
+        collection_points_total: collection_points_total,
+        collection_points: collection_points,
+        next_collection: next_collection
+    %>
 
     <%= render "collections/right_pannel_elements/total_price_recap",
-        collection: @collection,
-        conversion_rate: conversion_rate,
-        collection_savings: collection_savings,
-        individual_value: individual_value
-      %>
-
-    <%= link_to cart_path, class: 'w-100' do %>
-      <div class="add-pack-to-cart" >
-        <i class="fas fa-shopping-cart"></i>
-        <div class="action-label" >Add pack to cart</div>
-        <i class="fas fa-arrow-right"></i>
-      </div>
-    <% end %>
+      collection: @collection,
+      conversion_rate: conversion_rate,
+      collection_savings: collection_savings,
+      individual_value: individual_value
+    %>
     <p class="purchase-note" >No subscription · Tax included</p>
   </div>
 </div>
