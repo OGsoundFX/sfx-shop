@@ -21,19 +21,26 @@ class Collection < ApplicationRecord
   end
 
   def collection_categories(points)
-    case
-    when points == 0
-      0
-    when points <= 20
-      500
-    when points <= 50
-      1000
-    when points <= 120
-      2000
-    when points <= 300
-      4000
-    else
-      5000 # unlimited
+    currencies = {
+      "€" => [0, 500, 1000, 2000, 4000, 5000],
+      "$" => [0, 500, 1000, 2000, 4000, 5000],
+    }
+
+    index = case points
+    when 0 then 0
+    when 1..20 then 1
+    when 21..50 then 2
+    when 51..120 then 3
+    when 121..300 then 4
+    else 5
     end
+
+    currencies.fetch(session[:currency], "$")[index]
+  end
+
+  def recalculate_collection_values
+    self.total_points = tracks.sum { SingleTrack.find(it).points }
+    self.price_cents = collection_categories(total_points)
+    self.save
   end
 end

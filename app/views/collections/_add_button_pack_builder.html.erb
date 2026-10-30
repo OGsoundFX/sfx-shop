@@ -1,0 +1,20 @@
+<div id="pack-builder-add-button-<%= track.id %>">
+  <% if !collection.nil? && collection.tracks.include?(track.id) %>
+    <div class="pack-action" >
+      <i class="fas fa-check"></i>
+      <div class="action-label" >Added</div>
+    </div>
+  <% elsif collection.nil? %>
+    <%= link_to create_builder_pack_path(collection: collection, track: track), method: :post do %>
+      <div class="pack-action-add" >
+        <div class="action-label-add" >Add</div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= link_to add_builder_track_path(collection: collection, track: track), method: :patch do %>
+      <div class="pack-action-add" >
+        <div class="action-label-add" >Add</div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -35,7 +35,7 @@
         <% if custom_collection %>
           <div class="d-flex align-items-end">
             <% custom_collection =  Collection.where(user: current_user).where(purchased: false).last %>
-            <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(custom_collection.price * conversion_rate, symbol: session[:currency]) %></strong>
+            <strong class="fw-semibold mb-0" style="font-size: 1.4rem"><%= humanized_money(custom_collection.price, symbol: session[:currency]) %></strong>
             <% if "$" != session[:currency] %>
               <em style="font-size: 0.8rem; margin-bottom: 4px; margin-left: 4px">(<%= humanized_money(custom_collection.price, symbol: "$") %>)</em>
             <% end %>

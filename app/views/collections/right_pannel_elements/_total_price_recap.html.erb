@@ -1,0 +1,35 @@
+<div class="pricing" id="total_price_recap">
+  <div class="subtotal" >
+    <p class="text-wrapper-2" >Individual value · <%= collection&.tracks&.count || 0 %> sounds</p>
+    <div class="text-wrapper-2" ><%= humanized_money(individual_value * conversion_rate, symbol: session[:currency]) %></div>
+  </div>
+  <% if collection && collection_savings.positive? %>
+    <div class="pack-builder-savings">
+      You save <strong><%= humanized_money(collection_savings, symbol: session[:currency]) %> (<%= (collection_savings / individual_value * 100).round %>%)</strong>
+    </div>
+  <% end %>
+  <div class="pricing-divider" ></div>
+  <div class="div-2" >
+    <div class="total-label" >Collection price</div>
+    <div class="total-amount" >
+      <% if collection %>
+        <div class="price" ><%= humanized_money(collection.price, symbol: session[:currency]) %>.00</div>
+      <% else %>
+        <div class="price" ><%= humanized_money(0, symbol: session[:currency]) %></div>
+      <% end %>
+    </div>
+  </div>
+  <% if collection %>
+    <%= link_to cart_path, class: 'w-100' do %>
+      <div class="add-pack-to-cart" >
+        <i class="fas fa-shopping-cart"></i>
+        <div class="action-label" >Add pack to cart</div>
+        <i class="fas fa-arrow-right"></i>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="add-pack-to-cart-empty" >
+      <div class="action-label" >Add tracks to pack to continue</div>
+    </div>
+  <% end %>
+</div>

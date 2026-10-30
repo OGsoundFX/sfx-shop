@@ -13,10 +13,9 @@
 .sound-catalog .search-and-filters {
   display: flex;
   flex-direction: column;
-  height: 176px;
   align-items: flex-start;
-  gap: 16px;
-  padding: 20px;
+  gap: 12px;
+  padding: 12px 16px;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -184,8 +183,9 @@
 
 .sound-catalog .filters {
   display: flex;
-  height: 30px;
+  min-height: 30px;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   position: relative;
   align-self: stretch;
@@ -205,6 +205,19 @@
   border-color: #45474a;
   align-items: center;
   position: relative;
+  color: #bec1c6;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 11px;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sound-catalog .catalog-filter:hover,
+.sound-catalog .catalog-filter.is-selected {
+  background-color: #2f80ed1c;
+  border-color: #2f80ed;
+  color: #f2f2f2;
 }
 
 .sound-catalog .text-wrapper-2 {
@@ -262,21 +275,20 @@
 
 .sound-catalog .clear-filters {
   position: relative;
-  flex: 1;
+  flex: 0 0 auto;
+  margin-left: auto;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #969ba3;
   font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.sound-catalog .vector-4 {
-  position: absolute;
-  width: 93.57%;
-  height: 93.57%;
-  top: 6.43%;
-  left: 6.43%;
+.sound-catalog .clear-filters:hover {
+  color: #f2f2f2;
 }
 
 .sound-catalog .navbar {
@@ -305,7 +317,7 @@
 
 .sound-catalog .waveform-column {
   position: relative;
-  width: 168px;
+  width: 28%;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #969ba3;
@@ -783,8 +795,8 @@
   width: 42px;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
-  color: #bec1c6;
-  font-size: 11px;
+  color: $new-green;
+  font-size: 13px;
   text-align: center;
   letter-spacing: 0;
   line-height: normal;
@@ -796,7 +808,7 @@
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #f2f2f2;
-  font-size: 12px;
+  font-size: 11px;
   text-align: right;
   letter-spacing: 0;
   line-height: normal;
@@ -815,6 +827,20 @@
   overflow: hidden;
 }
 
+.sound-catalog .pack-action-add {
+  display: flex;
+  width: 76px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  background-color: $pack-builder-dark-background;
+  color: whitesmoke;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .sound-catalog .vector-8 {
   position: absolute;
   width: 89.87%;
@@ -828,11 +854,28 @@
   width: fit-content;
   font-family: "Inter-Medium", Helvetica;
   font-weight: 500;
-  color: #79d6a0;
+  color: $new-green;
   font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
+}
+
+.sound-catalog .action-label-add {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: whitesmoke;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.pack-action i {
+  font-size: 11px;
+  color: $new-green;
 }
 
 .sound-catalog .sound-2 {
@@ -1231,5 +1274,6 @@
 }
 
 .play-icon-margin-pack-builder {
+  color: whitesmoke;
   margin: auto auto auto 1rem;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_10_16_093641) do
+ActiveRecord::Schema[7.1].define(version: 2026_10_28_140750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -333,6 +333,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_16_093641) do
     t.boolean "loop", default: false
     t.integer "original_points", default: 0
     t.boolean "fantasy", default: false
+    t.integer "asset_type", default: 0
+    t.boolean "includes_ai", default: false, null: false
     t.index ["sound_designer_id"], name: "index_single_tracks_on_sound_designer_id"
   end
 
@@ -471,6 +473,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_16_093641) do
     t.bigint "user_id"
     t.string "artist_name"
     t.boolean "rejected", default: false
+    t.string "slug"
+    t.index ["slug"], name: "index_sound_designers_on_slug", unique: true
     t.index ["user_id"], name: "index_sound_designers_on_user_id"
   end
 

@@ -2,10 +2,14 @@
   <form class="pack-builder-category-search" action="/pack_builder" data-controller="category">
     <input type="hidden" name="category" value="<%= @dropdown %>" data-category-target="dropdown">
     <input type="hidden" name="filters" value="" data-filters-target="dropdown">
+    <input type="hidden" name="search" value="<%= @search %>">
+    <input type="hidden" name="includes_ai" value="<%= @includes_ai %>">
+    <input type="hidden" name="asset_type" value="<%= @asset_type %>">
     <select name="dropdown" aria-label="Pick a category">
-      <option value="" selected disabled hidden>Pick a category</option>
+      <option value="" <%= "selected" if @dropdown.blank? %> disabled hidden>Pick a category</option>
       <% @categories.each do |cat| %>
-        <option value="<%= cat.to_s %>" data-category-target="<%= cat.to_s.split("-").join %>"><%= cat.to_s.capitalize %></option>
+        <% category_value = cat.to_s %>
+        <option value="<%= category_value %>" data-category-target="<%= category_value.split("-").join %>" <%= "selected" if @dropdown&.casecmp(category_value)&.zero? %>><%= category_value.capitalize %></option>
       <% end %>
     </select>
     <button type="submit">GO</button>
@@ -14,6 +18,9 @@
   <div class="pack-builder-search-or" aria-hidden="true">OR</div>
 
   <form class="pack-builder-keyword-search" action="/pack_builder">
+    <input type="hidden" name="dropdown" value="<%= @dropdown %>">
+    <input type="hidden" name="includes_ai" value="<%= @includes_ai %>">
+    <input type="hidden" name="asset_type" value="<%= @asset_type %>">
     <i class="fas fa-search" aria-hidden="true"></i>
     <input type="text" name="search" aria-label="Search by keyword" placeholder="<%= @search ? @search : 'Search by keyword' %>">
     <button type="submit" aria-label="Search">

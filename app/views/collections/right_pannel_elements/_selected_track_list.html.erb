@@ -1,0 +1,121 @@
+<div id="selected-track-list">
+  <details class="selected-sounds">
+    <summary class="selected-sounds-toggle">View sounds (<%= collection_track_ids.length %>)</summary>
+    <div class="selected-sounds-list">
+      <% collection_track_ids.each do |track_id| %>
+        <% track = collection_tracks[track_id] %>
+        <% if track %>
+          <% player_id = "pack-builder-preview-#{track.id}" %>
+          <% info_id = "pack-builder-right-track-#{track.id}" %>
+          <div class="selected-sound">
+            <button
+              type="button"
+              class="pack-builder-preview-button"
+              data-pack-builder-preview
+              data-preview-url="<%= track.preview_link %>"
+              data-waveform-id="<%= player_id %>"
+              aria-label="Play preview for <%= track.title %>"
+              <%= "disabled" unless track.preview_link.present? %>>
+              <i class="fas fa-play-circle" aria-hidden="true"></i>
+            </button>
+            <div class="sound-details">
+              <div class="sound-title"><%= track.title %></div>
+              <p class="sound-metadata"><%= track.category.capitalize %></p>
+              <div id="<%= player_id %>" class="pack-builder-preview-waveform" aria-hidden="true"></div>
+            </div>
+            <div class="pack-builder-track-indicators">
+              <span class="pack-builder-track-points"><%= track.points %> <%= 'point'.pluralize(track.points) %></span>
+              <span class="pack-builder-track-price">
+                <span>Initial Price</span>
+                <%= humanized_money(track.price * conversion_rate, symbol: session[:currency]) %>
+              </span>
+            </div>
+            <div class="pack-builder-track-actions">
+              <button
+                type="button"
+                class="pack-builder-track-info-button"
+                id="trackInfoBtn"
+                data-trackId="<%= info_id %>"
+                aria-label="View details for <%= track.title %>">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+              </button>
+              <button
+                type="button"
+                class="pack-builder-track-delete-button"
+                disabled
+                aria-label="Remove <%= track.title %> (not available yet)"
+                title="Remove track (not available yet)">
+                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div id="trackInfo" class="pack-builder-track-info-modal pack-builder-right-track-info-modal" data-modalTrackId="<%= info_id %>">
+            <div id="trackContentInfo" class="pack-builder-track-info-content" data-modalTrackContentId="<%= info_id %>">
+              <div class="pack-builder-track-info-header">
+                <h2 class="pack-builder-track-info-heading">Sound details</h2>
+                <button type="button" class="pack-builder-track-info-close" aria-label="Close" data-modalTrackCloseId="<%= info_id %>">&times;</button>
+              </div>
+              <div class="pack-builder-track-info-details">
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Points</span>
+                  <span class="pack-builder-track-info-value"><%= track.points %></span>
+                </div>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Title</span>
+                  <span class="pack-builder-track-info-value"><%= track.title %></span>
+                </div>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Loop</span>
+                  <span class="pack-builder-track-info-value">
+                    <%= track.loop ? "Yes" : "No" %>
+                    <% if track.loop %>
+                      <i class="fas fa-repeat pack-builder-track-info-loop-icon" aria-hidden="true"></i>
+                    <% end %>
+                  </span>
+                </div>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Category</span>
+                  <span class="pack-builder-track-info-value"><%= track.category.capitalize %></span>
+                </div>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Size</span>
+                  <span class="pack-builder-track-info-value"><%= track.size.to_i > 1_000_000 ? "#{track.size.to_i / 1_000_000} MB" : "#{track.size.to_i / 1_000} KB" %></span>
+                </div>
+                <% if track.sfx_pack_id.present? %>
+                  <div class="pack-builder-track-info-row">
+                    <span class="pack-builder-track-info-label">Sound Effect Pack</span>
+                    <span class="pack-builder-track-info-value"><%= SfxPack.find(track.sfx_pack_id).title %></span>
+                  </div>
+                <% end %>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Bitrate</span>
+                  <span class="pack-builder-track-info-value"><%= track.bitrate %> bits</span>
+                </div>
+                <div class="pack-builder-track-info-row">
+                  <span class="pack-builder-track-info-label">Sample rate</span>
+                  <span class="pack-builder-track-info-value"><%= track.sample_rate.to_i / 1_000 %> kHz</span>
+                </div>
+              </div>
+              <% if track.tags.any? %>
+                <div class="pack-builder-track-info-tags">
+                  <% track.tags.first(8).each do |tag| %>
+                    <span class="pack-builder-track-info-tag"><%= tag %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <% if collection %>
+      <div class="div-2 mt-3" >
+        <div class="saved-state" >
+        </div>
+        <%= link_to remove_builder_collection_path(collection_id: collection&.id), method: :delete do %>
+          <div class="clear-collection" >Clear all</div>
+        <% end %>
+      </div>
+    <% end %>
+  </details>
+</div>

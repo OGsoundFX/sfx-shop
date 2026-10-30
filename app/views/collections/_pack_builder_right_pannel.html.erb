@@ -1,3 +1,17 @@
+<% if "$" != session[:currency] %>
+  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+<% else %>
+  <% conversion_rate = 1 %>
+<% end %>
+<% collection_track_ids = @collection&.tracks || [] %>
+<% collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id) %>
+<% individual_value = collection_tracks.values.sum(&:price_cents) / 100.0 %>
+<% collection_savings = (individual_value  * conversion_rate )- (@collection&.price&.to_f || 0) %>
+<% collection_points_total = @collection&.total_points || 0 %>
+<% current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first %>
+<% next_collection_level = current_collection_level && CollectionCategory.where("points > ?", current_collection_level.points).order(:points).first %>
+<% collection_points = CollectionCategory.where("points >= #{@collection&.total_points || 0}").first.points %>
+<% next_collection = CollectionCategory.where("points >= #{@collection&.total_points || 0}").second %>
 <div class="pack-builder" >
   <div class="collection" >
     <div class="div" >
@@ -8,122 +22,37 @@
           </div>
           <div class="title" >Pack builder</div>
         </div>
-        <div class="item-count" >
-          <div class="count" >4 sounds</div>
-        </div>
+        <%= render 'collections/right_pannel_elements/top_track_count', collection: @collection %>
       </div>
       <div class="project-name" >
-        <div class="pack-name" >Late night sketches</div>
-        <div class="pencil" >
-          <img class="img" src="img/vector-6.svg" />
+        <div class="pack-name" >Name your pack</div>
+        <div id="pack-builder-name-edit" >
+          <i class="fas fa-edit"></i>
         </div>
       </div>
-    </div>
-    <div class="selected-sounds" >
-      <div class="selected-sound" >
-        <div class="sound-artwork" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-13.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Glass Horizon</div>
-          <p class="sound-metadata" >Synth loop · 90 BPM</p>
-        </div>
-        <div class="sound-price" >$2.50</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector.svg" />
-        </div>
-      </div>
-      <div class="selected-sound" >
-        <div class="audio-lines-wrapper" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-9.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Soft Current</div>
-          <div class="sound-metadata" >Texture · C maj</div>
-        </div>
-        <div class="sound-price" >$1.50</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/image.svg" />
-        </div>
-      </div>
-      <div class="selected-sound" >
-        <div class="sound-artwork" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-7.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Night Drive</div>
-          <p class="sound-metadata" >Drum loop · 100 BPM</p>
-        </div>
-        <div class="sound-price" >$3.00</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-4.svg" />
-        </div>
-      </div>
-      <div class="selected-sound" >
-        <div class="div-wrapper" >
-          <div class="audio-lines" >
-            <img class="vector-2" src="img/vector-2.svg" />
-          </div>
-        </div>
-        <div class="sound-details" >
-          <div class="sound-title" >Vinyl Air</div>
-          <div class="sound-metadata" >Texture · 0:30</div>
-        </div>
-        <div class="sound-price" >$2.00</div>
-        <div class="img-wrapper" >
-          <img class="vector-3" src="img/vector-10.svg" />
-        </div>
-      </div>
-    </div>
-    <div class="div-2" >
-      <div class="saved-state" >
-        <div class="cloud-check" >
-          <img class="vector-4" src="img/vector-11.svg" />
-        </div>
-        <div class="save-status" >Selection saved</div>
-      </div>
-      <div class="clear-collection" >Clear all</div>
-    </div>
+    </div>    
+    <%= render "collections/right_pannel_elements/selected_track_list",
+        collection: @collection,
+        collection_track_ids: collection_track_ids,
+        collection_tracks: collection_tracks,
+        conversion_rate: conversion_rate
+      %>
   </div>
   <div class="div" >
-    <div class="license" >
-      <div class="img-wrapper" >
-        <img class="vector-5" src="img/vector-5.svg" />
-      </div>
-      <div class="license-details" >
-        <div class="license-title" >Royalty-free license included</div>
-        <p class="text-wrapper" >WAV · 24-bit · 44.1 kHz</p>
-      </div>
-    </div>
-    <div class="pricing" >
-      <div class="subtotal" >
-        <p class="text-wrapper-2" >4 sounds × individual prices</p>
-        <div class="text-wrapper-2" >$9.00</div>
-      </div>
-      <div class="pricing-divider" ></div>
-      <div class="div-2" >
-        <div class="total-label" >Pack total</div>
-        <div class="total-amount" >
-          <div class="text-wrapper" >USD</div>
-          <div class="price" >$9.00</div>
-        </div>
-      </div>
-    </div>
-    <div class="add-pack-to-cart" >
-      <div class="vector-wrapper" >
-        <img class="vector-6" src="img/vector-3.svg" />
-      </div>
-      <div class="action-label" >Add pack to cart</div>
-      <div class="img-wrapper" >
-        <img class="vector-7" src="img/vector-8.svg" />
-      </div>
-    </div>
-    <p class="purchase-note" >No subscription · Tax calculated at checkout</p>
+    <%= render "collections/right_pannel_elements/collection_progress",
+        collection: @collection,
+        current_collection_level: current_collection_level,
+        collection_points_total: collection_points_total,
+        collection_points: collection_points,
+        next_collection: next_collection
+    %>
+
+    <%= render "collections/right_pannel_elements/total_price_recap",
+      collection: @collection,
+      conversion_rate: conversion_rate,
+      collection_savings: collection_savings,
+      individual_value: individual_value
+    %>
+    <p class="purchase-note" >No subscription · Tax included</p>
   </div>
 </div>

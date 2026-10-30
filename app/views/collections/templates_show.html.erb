@@ -27,14 +27,14 @@
             </div>
             <div class="template-price-desktop">
               <div class="d-flex">
-                <h5><%= humanized_money(@template_collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= @template_collection.tracks.count %> tracks</h5>
+                <h5><%= humanized_money(@template_collection.price, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= @template_collection.tracks.count %> tracks</h5>
               </div>
             </div>
           </div>
         </div>
         <div class="template-price-mobile">
           <div class="d-flex">
-            <h5><%= humanized_money(@template_collection.price * conversion_rate, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= @template_collection.tracks.count %> tracks</h5>
+            <h5><%= humanized_money(@template_collection.price, symbol: session[:currency]) %></h5><span class="template-track-count">/</span><h5><%= @template_collection.tracks.count %> tracks</h5>
           </div>
         </div>
         <div id="add-button">

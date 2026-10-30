@@ -157,7 +157,8 @@ class CartsController < ApplicationController
       if @current_collections.last
         single_tracks = SfxPack.find(100)
         if single_tracks.currency_symbol != session[:currency]
-          conversion_rate = CurrencyRate.where("base = ? AND target = ?", single_tracks.currency.upcase, "EUR").order(created_at: :desc).first.rate.to_f
+          # conversion_rate = CurrencyRate.where("base = ? AND target = ?", single_tracks.currency.upcase, "EUR").order(created_at: :desc).first.rate.to_f
+          conversion_rate = 1
         else
           conversion_rate = 1
         end
@@ -167,7 +168,8 @@ class CartsController < ApplicationController
       # @total_value += @current_collections.last.price_cents / 100
       @single_tracks_price = 0
       if @current_collections.last
-        @current_collections.last.tracks.each { |track| @single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) }
+        conversion_rate = CurrencyRate.where("base = ? AND target = ?", single_tracks.currency.upcase, "EUR").order(created_at: :desc).first.rate.to_f
+        @current_collections.last.tracks.each { |track| @single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) * conversion_rate }
       end
       @total_value += @single_tracks_price
       @icons = {

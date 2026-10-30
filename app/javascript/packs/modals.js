@@ -50,6 +50,9 @@ window.addEventListener('turbo:load', () => {
   btn.forEach(icon => {
     icon.onclick = function(event) {
       const modal = document.querySelector(`[data-modalTrackId="${icon.dataset.trackid}"]`)
+      if (modal.classList.contains("pack-builder-right-track-info-modal")) {
+        document.body.appendChild(modal);
+      }
       modal.style.display = "block";
       // var y = event.clientY;
       const modalContent = document.querySelector(`[data-modalTrackContentId="${icon.dataset.trackid}"]`)

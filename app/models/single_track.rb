@@ -6,6 +6,9 @@ class SingleTrack < ApplicationRecord
 
   enum announcement: [:standard, :new_release, :popular, :deal]
 
+  # enum for asset_type
+  enum asset_type: { sfx: 0, music: 1}
+
   include PgSearch::Model
   pg_search_scope :search_single_tracks,
     against: [ :title, :category, :tags ],

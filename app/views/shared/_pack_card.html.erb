@@ -35,13 +35,13 @@
                   <% end %>
                 </div>
                 <div>
-                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.music? ? 'sfx-card__sfx-color' : 'sfx-card__sfx-color' %>"><%= pack.music? ? "Music" : "SFX" %></span>
+                  <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill bg-secondary"><%= pack.music? ? "Music" : "SFX" %></span>
                 </div>
               </div>
               <% size = pack.size_mb > 1000 ? "#{(pack.size_mb / 1000.to_f).ceil(1)} GB" : "#{pack.size_mb} MB" %>
               <div class="d-flex flex-wrap justify-content-between align-items-center gap-1">
                 <span class="card-text text-muted" style="font-size: 0.9rem"><%= size %> • <%= pack.number_of_tracks %> Sounds</span>
-                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill sfx-card__music-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+                <span class="text-white text-xs font-medium px-2 py-1 badge rounded-pill <%= pack.includes_ai? ? 'sfx-card__ai-pills-color' : 'sfx-card__ai-pills-color' %>"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
               </div>
               <div>
                 <% if pack.average_rating %>

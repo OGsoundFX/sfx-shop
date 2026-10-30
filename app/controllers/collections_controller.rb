@@ -1,9 +1,14 @@
 class CollectionsController < ApplicationController
   before_action :authenticate_user!, except: [:templates_index, :templates_show]
 
+  # ! Pack builder section 👇
   def pack_builder
-    # defining variables
-    @search ||= params[:search]
+    @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
+    @search = params[:search].presence if params[:search].is_a?(String)
+    @dropdown = params[:dropdown].presence if params[:dropdown].is_a?(String)
+    @includes_ai = params[:includes_ai] if %w[true false].include?(params[:includes_ai])
+    @asset_type = params[:asset_type] if SingleTrack.asset_types.key?(params[:asset_type])
+
     @icons = {
       "all": '<i class="fas fa-volume-up"></i>',
       "action": '<i class="fas fa-bomb"></i>',
@@ -24,19 +29,45 @@ class CollectionsController < ApplicationController
     @categories = SfxPack.categories
     @categories.unshift('All')
 
-    if (params[:dropdown] == nil || params[:dropdown] == 'All') && params[:search] == nil
-      @total_sounds = SingleTrack.count
-      @sfx_tracks = SingleTrack.all.page(params[:page]).per(20)
-    end
-    if params[:search]
-      @total_sounds = SingleTrack.search_single_tracks(params[:search]).count
-      @sfx_tracks = SingleTrack.search_single_tracks(params[:search]).page(params[:page]).per(20)
-    end
-    if params[:dropdown] && params[:dropdown] != 'All'
-      @total_sounds = SingleTrack.where(category: params[:dropdown].downcase).count
-      @sfx_tracks = SingleTrack.where(category: params[:dropdown].downcase).page(params[:page]).per(20)
-    end
+    tracks = SingleTrack.all
+    tracks = tracks.where(category: @dropdown.downcase) if @dropdown.present? && @dropdown.downcase != "all"
+    tracks = tracks.search_single_tracks(@search) if @search.present?
+    tracks = tracks.where(includes_ai: @includes_ai == "true") if @includes_ai.present?
+    tracks = tracks.where(asset_type: @asset_type) if @asset_type.present?
+
+    @total_sounds = tracks.count
+    @sfx_tracks = tracks.page(params[:page]).per(20)
   end
+
+  def create_builder_pack
+    track = SingleTrack.find params[:track]
+    collection = current_user.collections.where(purchased: false).last ||
+      current_user.collections.new(tracks: [], total_points: 0, price_cents: 0)
+    add_track_to_builder_collection(collection, track)
+  end
+
+  def add_builder_track
+    track = SingleTrack.find params[:track]
+    collection = current_user.collections.where(purchased: false).find(params[:collection])
+    add_track_to_builder_collection(collection, track)
+  end
+
+  def remove_builder_track
+  end
+
+  def remove_builder_collection
+    Collection.find(params[:collection_id]).destroy
+    cart = current_user.cart
+    if cart.items == [] && cart.sinlge_tracks == []
+      cart.destroy
+    else
+      cart.collections = []
+      cart.save
+    end
+    redirect_to pack_builder_path
+  end
+
+  # ! Pack builder section 👆
 
   def create
     # this action is not only to create a collection from scratch but add tracks to collection
@@ -354,6 +385,73 @@ class CollectionsController < ApplicationController
   end
 
   private
+
+  def add_track_to_builder_collection(collection, track)
+    collection_track_ids = (collection.tracks || []).map(&:to_i)
+    collection_track_ids << track.id unless collection_track_ids.include?(track.id)
+    collection.tracks = collection_track_ids
+    collection.total_points = points(collection_track_ids)
+    collection.price_cents = collection_categories(collection.total_points)
+
+    unless collection.save
+      redirect_to pack_builder_path, alert: "Unable to add this sound to your collection."
+      return
+    end
+
+    cart_create_update
+
+    if "$" != session[:currency]
+      conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
+    else
+      conversion_rate = 1
+    end
+    collection_tracks = SingleTrack.where(id: collection_track_ids).index_by(&:id)
+    individual_value = collection_tracks.values.sum(&:price_cents) / 100.0
+    collection_savings = individual_value - collection.price.to_f
+
+    collection_points_total = collection&.total_points || 0
+    current_collection_level = CollectionCategory.where("points >= ?", collection_points_total).order(:points).first
+    collection_points = CollectionCategory.where("points >= #{collection&.total_points || 0}").first.points
+    next_collection = CollectionCategory.where("points >= #{collection&.total_points || 0}").second
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
+          turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
+          turbo_stream.replace("selected-track-list",
+            partial: "collections/right_pannel_elements/selected_track_list",
+            locals: {
+              collection: collection,
+              collection_track_ids: collection_track_ids,
+              collection_tracks: collection_tracks,
+              conversion_rate: conversion_rate
+            }
+          ),
+          turbo_stream.replace("total_price_recap",
+            partial: "collections/right_pannel_elements/total_price_recap",
+            locals: {
+              collection: collection,
+              conversion_rate: conversion_rate,
+              collection_savings: collection_savings,
+              individual_value: individual_value
+            }
+          ),
+          turbo_stream.replace("collection-progress",
+            partial: "collections/right_pannel_elements/collection_progress",
+            locals: {
+              collection: collection,
+              current_collection_level: current_collection_level,
+              collection_points_total: collection_points_total,
+              collection_points: collection_points,
+              next_collection: next_collection
+            }
+          )
+        ]
+      end
+      format.html { redirect_to pack_builder_path }
+    end
+  end
 
   def points(tracks)
     if tracks == []

@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 360px;
-  height: 728px;
   align-items: flex-start;
+  align-self: start;
   gap: 20px;
   padding: 20px;
   position: sticky;
@@ -16,16 +16,24 @@
   border-color: $medium-card-background;
 }
 
+#pack-builder-name-edit {
+  color: whitesmoke;
+  font-size: 0.8rem;
+}
+
+.pack-builder-right-track-info-modal {
+  z-index: 1100;
+}
+
 .pack-builder .collection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
   position: relative;
-  flex: 1;
+  flex: 0 0 auto;
   align-self: stretch;
   width: 100%;
-  flex-grow: 1;
 }
 
 .pack-builder .div {
@@ -150,17 +158,170 @@
 }
 
 .pack-builder .selected-sounds {
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 0 0 auto;
-  display: flex;
+  display: block;
+  min-height: 0;
   position: relative;
   align-self: stretch;
   width: 100%;
 }
 
+.pack-builder #selected-track-list {
+  align-self: stretch;
+  min-width: 0;
+  width: 100%;
+}
+
+.pack-builder .selected-sounds-toggle {
+  color: #bec1c6;
+  cursor: pointer;
+  font-size: 12px;
+  list-style: none;
+  padding: 8px 0;
+}
+
+.pack-builder .selected-sounds-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.pack-builder .selected-sounds-toggle::before {
+  content: "＋";
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.pack-builder .selected-sounds[open] .selected-sounds-toggle::before {
+  content: "−";
+}
+
+.pack-builder .selected-sounds-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.pack-builder .selected-sounds-list .selected-sound {
+  min-height: 68px;
+  height: auto;
+  gap: 8px;
+  padding: 8px 0;
+  align-items: center;
+}
+
+.pack-builder .pack-builder-track-indicators {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.pack-builder .pack-builder-track-points {
+  padding: 4px 7px;
+  color: #f2f2f2;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: #344957;
+  border: 1px solid #4d6678;
+  border-radius: 5px;
+}
+
+.pack-builder .pack-builder-track-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #969ba3;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.pack-builder .pack-builder-track-price span {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.pack-builder .pack-builder-track-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pack-builder .pack-builder-track-info-button,
+.pack-builder .pack-builder-track-delete-button {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #bec1c6;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pack-builder .pack-builder-track-info-button:hover {
+  color: #f2f2f2;
+  background-color: #34363a;
+}
+
+.pack-builder .pack-builder-track-delete-button {
+  color: #777c83;
+  cursor: not-allowed;
+}
+
+.pack-builder .pack-builder-track-info-button:focus-visible {
+  outline: 2px solid #2f80ed;
+  outline-offset: 2px;
+}
+
+.pack-builder .pack-builder-preview-button {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f2f2f2;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.pack-builder .pack-builder-preview-button:disabled {
+  color: #646970;
+  cursor: not-allowed;
+}
+
+.pack-builder .pack-builder-preview-waveform {
+  width: 100%;
+  min-height: 0;
+}
+
+.pack-builder .pack-builder-preview-waveform:not(:empty) {
+  height: 24px;
+  margin-top: 3px;
+}
+
+.pack-builder .pack-builder-preview-waveform.is-hidden {
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.pack-builder .selected-sounds-toggle:focus-visible,
+.pack-builder .pack-builder-preview-button:focus-visible {
+  outline: 2px solid #2f80ed;
+  outline-offset: 3px;
+}
+
+.pack-builder .sample-sounds {
+  border-top: 1px solid #45474a;
+}
+
 .pack-builder .selected-sound {
-  height: 68px;
   align-items: center;
   gap: 10px;
   border-bottom-width: 1px;
@@ -202,11 +363,20 @@
 .pack-builder .sound-details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 5px;
   position: relative;
   flex: 1;
   flex-grow: 1;
+}
+
+.pack-builder .selected-sounds-list .sound-title {
+  margin-top: 0;
+}
+
+.pack-builder .selected-sounds-list .sound-metadata {
+  margin: 0;
 }
 
 .pack-builder .sound-title {
@@ -346,6 +516,45 @@
   overflow: hidden;
 }
 
+.pack-builder .collection-progress {
+  align-items: flex-start;
+}
+
+.pack-builder .collection-progress-icon {
+  flex: 0 0 auto;
+  color: $new-green;
+}
+
+.pack-builder .collection-progress .license-details {
+  min-width: 0;
+  gap: 5px;
+}
+
+.pack-builder .collection-progress-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.pack-builder .collection-progress-points {
+  color: #f2f2f2;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.pack-builder .collection-progress .license-title {
+  white-space: normal;
+}
+
+.pack-builder .collection-progress .text-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+  white-space: normal;
+  line-height: 1.4;
+}
+
 .pack-builder .vector-5 {
   position: absolute;
   width: 88.64%;
@@ -371,7 +580,7 @@
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #bec1c6;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
@@ -383,7 +592,7 @@
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #969ba3;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
@@ -420,6 +629,12 @@
   font-size: 12px;
   letter-spacing: 0;
   line-height: normal;
+}
+
+.pack-builder .pack-builder-savings {
+  align-self: flex-end;
+  color: #8bd5a5;
+  font-size: 11px;
 }
 
 .pack-builder .pricing-divider {
@@ -470,9 +685,22 @@
   position: relative;
   align-self: stretch;
   width: 100%;
-  background-color: var(--blue-1);
+  background-color: #2f80ed;
   border-radius: 6px;
   overflow: hidden;
+  i {
+    color: whitesmoke;
+  }
+}
+
+.pack-builder .add-pack-to-cart-empty {
+  display: flex;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: grey;
+  border-radius: 6px;
 }
 
 .pack-builder .vector-6 {

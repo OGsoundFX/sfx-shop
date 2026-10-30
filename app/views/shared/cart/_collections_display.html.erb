@@ -16,8 +16,8 @@
           <% end %>
         </div>
         <div class="d-flex">
-          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %></h5>
-          <p class="d-none" data-unwrap-cart-target="youSpare"  style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money((@single_tracks_price - @current_collections.first.price_cents / 100) * conversion_rate, symbol: session[:currency]) %>)</p>
+          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></h5>
+          <p class="d-none" data-unwrap-cart-target="youSpare"  style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money((@single_tracks_price - @current_collections.first.price_cents / 100), symbol: session[:currency]) %>)</p>
         </div>
       </div>
     </div>
@@ -231,7 +231,7 @@
   <div class="d-flex justify-content-end">
     <div class="d-flex sub-total-collection">
       <div>SUB-TOTAL</div>
-      <div><%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %></div>
+      <div><%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></div>
     </div>
   </div>
   <div data-controller="template-form">
@@ -271,8 +271,8 @@
           <% end %>
         </div>
         <div class="d-flex">
-          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price * conversion_rate, symbol: session[:currency]) %></h5>
-          <p class="d-none" data-unwrap-cart-target="youSpare" style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money((@single_tracks_price - @current_collections.first.price_cents / 100) * conversion_rate, symbol: session[:currency]) %>)</p>
+          <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></h5>
+          <p class="d-none" data-unwrap-cart-target="youSpare" style="font-size: 0.8em; font-style: italic; margin: 3px 0 0 5px">(You spare <%= humanized_money(((@single_tracks_price * conversion_rate) - @current_collections.first.price_cents / 100), symbol: session[:currency]) %>)</p>
         </div>
       </div>
     </div>
