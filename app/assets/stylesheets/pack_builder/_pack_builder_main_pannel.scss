@@ -1260,6 +1260,7 @@
 .wave-index-pack-builder {
   width: clamp(8rem, 18vw, 16rem);
   position: relative;
+  flex: 0 0 clamp(8rem, 18vw, 16rem);
 }
 
 .wave-section-pack-builder {
@@ -1276,4 +1277,21 @@
 .play-icon-margin-pack-builder {
   color: whitesmoke;
   margin: auto auto auto 1rem;
+}
+
+.sound-catalog .play-icon-margin-pack-builder,
+.sound-catalog .play-icon-margin {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 1.25rem;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto auto 1rem;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sound-catalog .info-font-pack-builder {
+  flex: 0 0 3rem;
 }
