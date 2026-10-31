@@ -53,6 +53,10 @@ class CollectionsController < ApplicationController
   end
 
   def remove_builder_track
+    collection = current_user.collections.where(purchased: false).find(params[:collection_id])
+    track = SingleTrack.find(params[:track_id])
+    collection_track_ids = (collection.tracks || []).map(&:to_i) - [track.id]
+    update_builder_collection(collection, collection_track_ids, track)
   end
 
   def remove_builder_collection
@@ -375,7 +379,6 @@ class CollectionsController < ApplicationController
     }
     @template_collection = TemplateCollection.find(params[:id])
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
-    # @tracks = SingleTrack.all.reorder(created_at: :desc).page params[:page]
     @tracks = SingleTrack.where(id: @template_collection.tracks).reorder(created_at: :desc).page params[:page]
   end
 
@@ -389,12 +392,16 @@ class CollectionsController < ApplicationController
   def add_track_to_builder_collection(collection, track)
     collection_track_ids = (collection.tracks || []).map(&:to_i)
     collection_track_ids << track.id unless collection_track_ids.include?(track.id)
+    update_builder_collection(collection, collection_track_ids, track)
+  end
+
+  def update_builder_collection(collection, collection_track_ids, changed_track)
     collection.tracks = collection_track_ids
     collection.total_points = points(collection_track_ids)
     collection.price_cents = collection_categories(collection.total_points)
 
     unless collection.save
-      redirect_to pack_builder_path, alert: "Unable to add this sound to your collection."
+      redirect_to pack_builder_path, alert: "Unable to update your collection."
       return
     end
 
@@ -417,7 +424,7 @@ class CollectionsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace("pack-builder-add-button-#{track.id}", partial: "add_button_pack_builder", locals: {track: track, collection: collection}),
+          turbo_stream.replace("pack-builder-add-button-#{changed_track.id}", partial: "add_button_pack_builder", locals: {track: changed_track, collection: collection}),
           turbo_stream.replace("right-pannel-top-track-count", partial: "collections/right_pannel_elements/top_track_count", locals: {collection: collection}),
           turbo_stream.replace("selected-track-list",
             partial: "collections/right_pannel_elements/selected_track_list",

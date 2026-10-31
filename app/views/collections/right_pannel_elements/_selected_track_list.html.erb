@@ -31,22 +31,9 @@
               </span>
             </div>
             <div class="pack-builder-track-actions">
-              <button
-                type="button"
-                class="pack-builder-track-info-button"
-                id="trackInfoBtn"
-                data-trackId="<%= info_id %>"
-                aria-label="View details for <%= track.title %>">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-              </button>
-              <button
-                type="button"
-                class="pack-builder-track-delete-button"
-                disabled
-                aria-label="Remove <%= track.title %> (not available yet)"
-                title="Remove track (not available yet)">
+              <%= link_to remove_builder_track_path(collection.id, track.id), method: :delete, class: "pack-builder-track-delete-button" do %>
                 <i class="fas fa-trash-alt" aria-hidden="true"></i>
-              </button>
+              <% end %>
             </div>
           </div>
           <div id="trackInfo" class="pack-builder-track-info-modal pack-builder-right-track-info-modal" data-modalTrackId="<%= info_id %>">
