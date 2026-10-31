@@ -246,6 +246,14 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  i {
+    color: whitesmoke;
+  }
+  a:hover {
+    i {
+      color: $light-card-background;
+    }
+  }
 }
 
 .pack-builder .pack-builder-track-info-button,
@@ -270,7 +278,6 @@
 
 .pack-builder .pack-builder-track-delete-button {
   color: #777c83;
-  cursor: not-allowed;
 }
 
 .pack-builder .pack-builder-track-info-button:focus-visible {

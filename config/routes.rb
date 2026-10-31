@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   get "pack_builder", to: "collections#pack_builder", as: :pack_builder
   post "create_builder_pack", to: "collections#create_builder_pack", as: :create_builder_pack
   patch "add_builder_track", to: "collections#add_builder_track", as: :add_builder_track
-  delete "remove_builder_track", to: "collections#remove_builder_track", as: :remove_builder_track
+  delete "remove_builder_track/:collection_id/:track_id", to: "collections#remove_builder_track", as: :remove_builder_track
   delete "remove_builder_collection", to: "collections#remove_builder_collection", as: :remove_builder_collection
 
   # Sound Designer Submission

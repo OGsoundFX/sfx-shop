@@ -53,6 +53,10 @@ class CollectionsController < ApplicationController
   end
 
   def remove_builder_track
+    collection = Collection.find(params[:collection_id])
+    collection.tracks.delete(params[:track_id])
+    collection.save
+    
   end
 
   def remove_builder_collection
@@ -375,7 +379,6 @@ class CollectionsController < ApplicationController
     }
     @template_collection = TemplateCollection.find(params[:id])
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
-    # @tracks = SingleTrack.all.reorder(created_at: :desc).page params[:page]
     @tracks = SingleTrack.where(id: @template_collection.tracks).reorder(created_at: :desc).page params[:page]
   end
 
