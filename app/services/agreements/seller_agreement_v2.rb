@@ -155,13 +155,16 @@ module Agreements
       <br>
       <h4>7.3 Discounts &amp; Promotions</h4>
       <ul>
-        <li>&nbsp &nbsp• The Seller agrees to participate in site-wide sales, discounts, and promotional campaigns
-          defined by BamSFX.</li>
+        <li>&nbsp &nbsp• Participation in site-wide sales, discounts, and promotional campaigns defined by BamSFX
+          is optional. The Seller is under no obligation to take part in any campaign.</li>
 
-        <li>&nbsp &nbsp• When a Customer purchases more than one SFX pack in a single transaction:</li>
-        <ul>
-          <li>&nbsp &nbsp &nbsp &nbsp- The second SFX pack and each subsequent pack receive a <strong>20%</strong> discount.</li>
-        </ul>
+        <li>&nbsp &nbsp• To participate in a campaign, the Seller shall submit the specific Content items they wish
+          to include.
+          The discount percentage is set by BamSFX for each campaign, the Seller may be asked to select the
+          applicable rate from the discount tiers offered by BamSFX for their own Content (for example 30%, 50%, or 70%).</li>
+
+        <li>&nbsp &nbsp• Content not submitted by the Seller for a given campaign remains excluded from it and is
+          sold at its standard price.</li>
       </ul>
 
       <br>
@@ -255,6 +258,8 @@ module Agreements
       <br>
       <h2>11. Content Removal &amp; Termination</h2>
 
+      <br>
+      <h4>11.1 Termination by BamSFX for Cause</h4>
       <p>
         BamSFX reserves the right to immediately remove Content or terminate Seller accounts
         without prior notice in case of:
@@ -264,14 +269,51 @@ module Agreements
         <li>&nbsp &nbsp• Violation of this Agreement;</li>
         <li>&nbsp &nbsp• Infringement of third-party rights;</li>
         <li>&nbsp &nbsp• Unlawful, defamatory, or harmful Content;</li>
+        <li>&nbsp &nbsp• Fraudulent activity or misrepresentation of Seller identity or Content origin;</li>
       </ul>
+
+      <br>
+      <h4>11.2 Termination by BamSFX for Convenience</h4>
       <p>
-        Seller may request removal of Content, subject to reasonable processing time.
+        BamSFX may terminate this Agreement without cause upon thirty (30) days' written notice
+        to the Seller. During this notice period, Seller may download all Content and associated
+        metadata from the Platform.
       </p>
 
+      <br>
+      <h4>11.3 Termination by Seller</h4>
       <p>
-        Termination does not affect outstanding payment obligations.
+        Seller may terminate this Agreement at any time by providing thirty (30) days' written
+        notice to BamSFX. Upon termination:
       </p>
+
+      <ul>
+        <li>&nbsp &nbsp• All Content will be removed from the Platform within the notice period;</li>
+        <li>&nbsp &nbsp• Seller may download all Content and associated metadata prior to removal;</li>
+        <li>&nbsp &nbsp• Any accrued balance, regardless of the minimum payout threshold, will be
+        paid out within the next regular payout cycle following the effective termination date.</li>
+      </ul>
+
+      <br>
+      <h4>11.4 Content Removal Without Termination</h4>
+      <p>
+        Both Seller and BamSFX may request removal of individual Content items without terminating this Agreement,
+        subject to reasonable processing time.
+      </p>
+
+      <br>
+      <h4>11.5 Effect of Termination</h4>
+      <p>
+        Termination of this Agreement, regardless of the initiating party, does not affect:
+      </p>
+
+      <ul>
+        <li>&nbsp &nbsp• Outstanding payment obligations, which remain due and payable;</li>
+        <li>&nbsp &nbsp• Licenses already granted to Customers, which survive termination in
+        accordance with the end-user license terms in effect at the time of purchase;</li>
+        <li>&nbsp &nbsp• Indemnification obligations under Section 12;</li>
+        <li>&nbsp &nbsp• Any provision that by its nature is intended to survive termination.</li>
+      </ul>
 
       <br>
       <br>
