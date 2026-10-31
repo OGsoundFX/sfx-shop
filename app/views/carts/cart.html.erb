@@ -1,7 +1,9 @@
 <div class="content admin-min-height bg-dark cart-builder-page">
   <%= render "shared/left_pannel_mobile" %>
   <div class="cart-builder-layout">
-    <%= render "shared/left_pannel_desktop_dark" %>
+    <div style="margin-top: 56px">
+      <%= render "shared/left_pannel_desktop_dark" %>
+    </div>
     <main class="cart-builder-content" id="cart-container">
       <% if Cart.where(user: current_user).empty? %>
         <section class="cart-empty-state">
