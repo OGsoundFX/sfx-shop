@@ -1,116 +1,113 @@
-<%= render "shared/left_pannel_mobile"%>
-<div class="d-flex">
-  <div style="margin-top: 56px">
-    <%= render "shared/left_pannel_desktop"%>
-  </div>
-  <% if Cart.where(user: current_user).empty? %>
-    <div class="padding-navbar content cart-margins cart-font" id="cart-container">
-      <h3>Your cart is empty</h3>
-      <%= link_to "Go Shopping", root_path %>
-    </div>
-  <% else %>
-    <div class="padding-navbar content cart-margins cart-font" id="cart-container">
-      <div class="pannel-grid" data-controller="unwrap-cart">
-        <div class="cart-pannel">
-          <% if Sale.where("end_date > ?", Date.current).count > 0 %>
-            <%= render 'shared/cart_sale' %>
-          <% else %>
-            <%= render 'shared/cart_no_sale' %>
-          <% end %>
-        </div>
+<div class="content admin-min-height bg-dark cart-builder-page">
+  <%= render "shared/left_pannel_mobile" %>
+  <div class="cart-builder-layout">
+    <%= render "shared/left_pannel_desktop_dark" %>
+    <main class="cart-builder-content" id="cart-container">
+      <% if Cart.where(user: current_user).empty? %>
+        <section class="cart-empty-state">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <h2>Your cart is empty</h2>
+          <p>Find the sounds you need and they’ll show up here.</p>
+          <%= link_to "Go Shopping", root_path, class: "cart-builder-button" %>
+        </section>
+      <% else %>
+        <div class="pannel-grid" data-controller="unwrap-cart">
+          <div class="cart-pannel">
+            <% if Sale.where("end_date > ?", Date.current).count > 0 %>
+              <%= render "shared/cart_sale" %>
+            <% else %>
+              <%= render "shared/cart_no_sale" %>
+            <% end %>
+          </div>
 
-        <!-- Checkout pannel -->
-        <div class="checkout-pannel">
-          <div class="total">
-            <div class="container-cart-total">
-              <strong><h4 style="text-align: start; margin-top: 8px">TOTAL</h4></strong>
-              <hr>
+          <aside class="checkout-pannel">
+            <div class="total">
+              <div class="container-cart-total">
+                <strong><h4 class="cart-builder-section-title">ORDER SUMMARY</h4></strong>
+                <hr>
 
-              <% if @total_pack_sum != 0 %>
-                <div class="d-flex justify-content-between">
-                  <h6>Packs</h6>
+                <% if @total_pack_sum != 0 %>
+                  <div class="d-flex justify-content-between">
+                    <h6>Packs</h6>
+                    <span>
+                      <% if @sum.class == Float %>
+                        <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>
+                      <% else %>
+                        <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>.00
+                      <% end %>
+                    </span>
+                  </div>
+                <% end %>
+
+                <% if @current_collections.first %>
+                  <% if "$" != session[:currency] %>
+                    <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+                  <% else %>
+                    <% conversion_rate = 1 %>
+                  <% end %>
+                  <div class="d-flex justify-content-between">
+                    <h6>Collection</h6>
+                    <span>
+                      <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00
+                    </span>
+                  </div>
+                <% end %>
+
+                <% if @single_tracks_value != 0 %>
+                  <% if "$" != session[:currency] %>
+                    <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
+                  <% else %>
+                    <% conversion_rate = 1 %>
+                  <% end %>
+                  <div class="d-flex justify-content-between">
+                    <h6>Single-Tracks</h6>
+                    <span>
+                      <% if @single_tracks_value == @single_tracks_value.to_i %>
+                        <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>.00
+                      <% else %>
+                        <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>
+                      <% end %>
+                    </span>
+                  </div>
+                <% end %>
+
+                <hr>
+                <div class="d-flex justify-content-between cart-builder-total-row">
+                  <h6>Total</h6>
                   <span>
                     <% if @sum.class == Float %>
-                      <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>
+                      <%= humanized_money(@sum, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money(@total_pack_sum, symbol: session[:currency]) %>.00
+                      <%= humanized_money(@sum, symbol: session[:currency]) %>.00
                     <% end %>
                   </span>
                 </div>
-              <% end %>
-
-              <% if @current_collections.first %>
-                <% if "$" != session[:currency] %>
-                  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
-                <% else %>
-                  <% conversion_rate = 1 %>
-                <% end %>
-                <div class="d-flex justify-content-between">
-                  <h6>Collection</h6>
+                <div class="d-flex justify-content-between cart-vat-display">
+                  <span>VAT (<%= @vat_rate %>% inclusive)</span>
                   <span>
-                    <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %>.00
-                  </span>
-                </div>
-              <% end %>
-
-              <% if @single_tracks_value != 0 %>
-                <% if "$" != session[:currency] %>
-                  <% conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f %>
-                <% else %>
-                  <% conversion_rate = 1 %>
-                <% end %>
-                <div class="d-flex justify-content-between">
-                  <h6>Single-Tracks</h6>
-                  <span>
-                    <% if @single_tracks_value == @single_tracks_value.to_i %>
-                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>.00
+                    <% if @vat.class == Float %>
+                      <%= humanized_money(@vat, symbol: session[:currency]) %>
                     <% else %>
-                      <%= humanized_money(@single_tracks_value, symbol: session[:currency]) %>
+                      <%= humanized_money(@vat, symbol: session[:currency]) %>,00
                     <% end %>
                   </span>
                 </div>
-              <% end %>
-
-              <hr>
-              <div class="d-flex justify-content-between">
-                <h6>Total</h6>
-                <span>
-                  <% if @sum.class == Float %>
-                    <%= humanized_money(@sum, symbol: session[:currency]) %>
-                  <% else %>
-                    <%= humanized_money(@sum, symbol: session[:currency]) %>.00
-                  <% end %>
-                </span>
-              </div>
-              <div class="d-flex justify-content-between cart-vat-display">
-                <span>VAT (<%= @vat_rate %>% inclusive)</span>
-                <span>
-                  <% if @vat.class == Float %>
-                    <%= humanized_money(@vat, symbol: session[:currency]) %>
-                  <% else %>
-                    <%= humanized_money(@vat, symbol: session[:currency]) %>,00
-                  <% end %>
-                </span>
-              </div>
-              <% if (@total_value - @sum) > 0 %>
-                <p style="text-align: end; font-size: 0.8em; font-style: italic">(You spare <%= humanized_money(@total_value - @sum, symbol: session[:currency]) %>)</p>
-              <% else %>
-                <div style="height: 10px;"></div>
-              <% end %>
-              <div class="d-flex justify-content-between">
+                <% if (@total_value - @sum) > 0 %>
+                  <p class="cart-builder-savings">(You save <%= humanized_money(@total_value - @sum, symbol: session[:currency]) %>)</p>
+                <% else %>
+                  <div class="cart-builder-savings-spacer"></div>
+                <% end %>
+                <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first, currency: session[:currency]) do %>
+                  <%= submit_tag "Checkout", id: "btn-cart", class: "cart-builder-button", data: { disable_with: "Processing..." } %>
+                <% end %>
                 <div id="continue-shopping">
                   <%= link_to "Continue shopping", root_path %>
                 </div>
-                <div>
-                  <%= form_tag checkout_path(cart_id: @items.id, collection_id: @current_collections.first, currency: session[:currency]) do %>
-                    <%= submit_tag 'Checkout', id: 'btn-cart', data: { disable_with: 'Processing...' } %>
-                  <% end %>
-                </div>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
-      </div>
-    </div>
-  <% end %>
+      <% end %>
+    </main>
+  </div>
 </div>
