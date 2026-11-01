@@ -9,15 +9,22 @@
 
 .cart-builder-layout {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
 
-  > .desktop-only {
+  .cart-builder-sidebar {
     align-self: stretch;
+    margin-top: 56px;
+
+    > .desktop-only {
+      height: 100%;
+    }
   }
 
   .left-pannel-dark {
     left: 0;
     top: 0;
+    height: 100%;
+    min-height: calc(100vh - 56px);
   }
 }
 
