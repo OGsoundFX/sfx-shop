@@ -45,13 +45,15 @@
   }
 
   .packs-display > .d-flex:first-child {
-    padding: 0 16px 12px;
+    min-height: 72px;
+    padding: 12px 16px;
+    align-items: center;
   }
 
   .packs-display .fa-angle-down,
   .packs-display .fa-angle-up {
     font-size: 28px;
-    margin: 22px 12px 0;
+    margin: 0 12px;
   }
 
   .cart-icon-adjust {
@@ -59,12 +61,13 @@
     width: 40px;
     height: 40px;
     padding: 8px 0;
-    margin: 20px 14px 0 0;
-    background-color: $medium-card-background;
+    margin: 0 14px 0 0;
+    border-radius: 6px;
+    background-color: #344957;
   }
 
   .cart-sfx-packs-title {
-    margin: 22px 0 4px;
+    margin: 0 0 4px;
     font-size: 1rem;
     letter-spacing: 0.04em;
   }
@@ -106,6 +109,11 @@
     &:hover {
       color: #f2f2f2;
     }
+  }
+
+  .collection-destroy-button {
+    margin: 0 0 0 10px;
+    font-size: 1rem;
   }
 
   .sub-total {
@@ -257,64 +265,14 @@
 }
 
 .cart-builder-content {
-  .cart-collection-panel-heading,
-  .cart-collection-panel-title,
-  .cart-collection-panel-actions {
-    display: flex;
-    align-items: center;
-  }
+  .cart-collection-panel .collection-destroy-button,
+  .cart-collection-panel-closed .collection-destroy-button {
+    margin: 0 0 0 10px;
+    color: #969ba3;
+    font-size: 1rem;
 
-  .cart-collection-panel-heading {
-    justify-content: space-between;
-    gap: 12px;
-    padding: 16px;
-  }
-
-  .cart-collection-panel-title {
-    gap: 12px;
-
-    > i {
-      display: inline-flex;
-      width: 36px;
-      height: 36px;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 36px;
-      border-radius: 6px;
-      background-color: #344957;
+    &:hover {
       color: #f2f2f2;
-    }
-
-    h3 {
-      margin: 0 0 4px;
-      color: #f2f2f2;
-      font-family: "Inter-SemiBold", Helvetica, sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-    }
-
-    span {
-      color: #969ba3;
-      font-size: 0.75rem;
-    }
-
-    .cart-collection-inline-savings {
-      margin: 3px 0 0;
-      color: $blue-light;
-      font-size: 0.7rem;
-    }
-  }
-
-  .cart-collection-panel-actions {
-    gap: 14px;
-
-    .collection-destroy-button,
-    .fa-angle-down,
-    .fa-angle-up {
-      margin: 0;
-      color: #969ba3;
-      font-size: 1.15rem;
-      cursor: pointer;
     }
   }
 

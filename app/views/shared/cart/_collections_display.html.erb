@@ -5,18 +5,20 @@
 <% end %>
 
 <div class="packs-display cart-collection-panel" id="collection-display" style="visibility: hidden" data-unwrap-cart-target="collectionUnwrapped">
-  <div class="cart-collection-panel-heading">
-    <div class="cart-collection-panel-title">
-      <i class="fas fa-layer-group" aria-hidden="true"></i>
-      <div>
-        <h3>COLLECTION</h3>
-        <span>Collection total · <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></span>
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-layer-group cart-icon-adjust"></i>
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center">
+          <h3 class="cart-sfx-packs-title"><strong>COLLECTION</strong></h3>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", aria: { label: "Remove collection" }, data: { confirm: "Are you sure?" } do %>
+            <i class="fas fa-times" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></h5>
       </div>
     </div>
-    <div class="cart-collection-panel-actions">
-      <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", aria: { label: "Remove collection" }, data: { confirm: "Are you sure?" } do %>
-        <i class="fas fa-times" aria-hidden="true"></i>
-      <% end %>
+    <div>
       <i class="fas fa-angle-up" data-action="click->unwrap-cart#wrap" id="collection-arrow" aria-label="Collapse collection"></i>
     </div>
   </div>
@@ -134,27 +136,21 @@
 </div>
 
 <% wrapped_collection = @current_collections.first %>
-<% wrapped_tracks_value = SingleTrack.where(id: wrapped_collection.tracks).sum(:price_cents) / 100.0 %>
-<% wrapped_savings = (wrapped_tracks_value * conversion_rate) - wrapped_collection.price.to_f %>
-
 <div class="packs-display packs-display-closed d-none cart-collection-panel-closed" id="wrapped-collection-display" data-unwrap-cart-target="collectionWrapped">
-  <div class="cart-collection-panel-heading">
-    <div class="cart-collection-panel-title">
-      <i class="fas fa-layer-group" aria-hidden="true"></i>
-      <div>
-        <h3>COLLECTION</h3>
-        <span>Collection total · <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></span>
-        <% if wrapped_savings.positive? %>
-          <p class="cart-collection-inline-savings d-none" data-unwrap-cart-target="youSpare">You save <%= humanized_money(wrapped_savings, symbol: session[:currency]) %></p>
-        <% else %>
-          <p class="cart-collection-inline-savings d-none" data-unwrap-cart-target="youSpare"></p>
-        <% end %>
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <i class="fas fa-layer-group cart-icon-adjust"></i>
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center">
+          <h3 class="cart-sfx-packs-title"><strong>COLLECTION</strong></h3>
+          <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", aria: { label: "Remove collection" }, data: { confirm: "Are you sure?" } do %>
+            <i class="fas fa-times" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <h5>SUB-TOTAL <%= humanized_money(@current_collections.first.price, symbol: session[:currency]) %></h5>
       </div>
     </div>
-    <div class="cart-collection-panel-actions">
-      <%= link_to destroy_collection_path(collection: @current_collections.first), method: :delete, class: "collection-destroy-button", aria: { label: "Remove collection" }, data: { confirm: "Are you sure?" } do %>
-        <i class="fas fa-times" aria-hidden="true"></i>
-      <% end %>
+    <div>
       <i class="fas fa-angle-down" data-action="click->unwrap-cart#wrap" id="collection-arrow" aria-label="Expand collection"></i>
     </div>
   </div>

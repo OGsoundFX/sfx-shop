@@ -79,6 +79,9 @@
     </div>
     <% if collection_savings.positive? %>
       <p class="cart-collection-savings">You save <strong><%= humanized_money(collection_savings, symbol: session[:currency]) %> (<%= (collection_savings / (individual_value * conversion_rate) * 100).round %>%)</strong></p>
+      <p class="d-none" data-unwrap-cart-target="youSpare"></p>
+    <% else %>
+      <p class="d-none" data-unwrap-cart-target="youSpare"></p>
     <% end %>
     <div class="cart-collection-price-total">
       <span>Collection price</span>
