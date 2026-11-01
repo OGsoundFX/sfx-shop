@@ -4,7 +4,7 @@
   <% conversion_rate = 1 %>
 <% end %>
 
-<div class="packs-display cart-collection-panel" id="collection-display" style="visibility: hidden" data-unwrap-cart-target="collectionUnwrapped">
+<div class="packs-display cart-collection-panel d-none" id="collection-display" data-unwrap-cart-target="collectionUnwrapped">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-layer-group cart-icon-adjust"></i>
@@ -136,7 +136,7 @@
 </div>
 
 <% wrapped_collection = @current_collections.first %>
-<div class="packs-display packs-display-closed d-none cart-collection-panel-closed" id="wrapped-collection-display" data-unwrap-cart-target="collectionWrapped">
+<div class="packs-display packs-display-closed cart-collection-panel-closed" id="wrapped-collection-display" data-unwrap-cart-target="collectionWrapped">
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <i class="fas fa-layer-group cart-icon-adjust"></i>

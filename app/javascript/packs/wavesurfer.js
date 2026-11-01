@@ -13,20 +13,6 @@ const timeConverter = (time) => {
 // multiple track display
 window.addEventListener('turbo:load', () => {
   setTimeout(() => {
-    // for loading the waveforms of collections display section in cart
-    if (!!document.getElementById("collection-display")) {
-      document.getElementById("collection-display").classList.add('d-none')
-      document.getElementById("collection-display").style.visibility = ""
-      document.getElementById("wrapped-collection-display").classList.remove('d-none')
-    }
-
-    // for loading the waveforms of single tracks display section in cart
-    if (!!document.getElementById("single-display")) {
-      document.getElementById("single-display").classList.add('d-none')
-      document.getElementById("single-display").style.visibility = ""
-      document.getElementById("wrapped-single-display").classList.remove('d-none')
-    }
-
     // for loading templates in collection templates index
     if (!!document.querySelector(".template-display")) {
       document.querySelectorAll(".template-display").forEach((template) => {
