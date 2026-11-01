@@ -186,10 +186,17 @@
     }
 
     .checkout-icon-adjust {
+      display: inline-flex;
       flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
       margin-right: 14px;
-      color: $blue-light;
-      font-size: 1.5rem;
+      border-radius: 6px;
+      background-color: #344957;
+      color: #f2f2f2;
+      font-size: 1.25rem;
     }
 
     .collection-payment-checkout > div[data-controller="collection-checkout-modal"] > .d-flex {
@@ -387,10 +394,6 @@
 
       .payment_collection_tracks_mobile_view {
         display: block;
-      }
-
-      .checkout-icon-adjust {
-        font-size: 1.4rem;
       }
 
       .payment-mobile-collection-text {
