@@ -205,9 +205,10 @@
     display: block;
     width: 100%;
     padding: 12px 16px;
-    border: 0;
+    // border: 0;
     border-radius: 6px;
     background-color: $blue-light;
+    border: 2px solid $blue-light;
     color: #202020;
     font-size: 1rem;
     font-weight: 700;
@@ -225,7 +226,6 @@
   #btn-cart {
     width: 100%;
     height: auto;
-    border: 0;
     box-shadow: none;
   }
 
