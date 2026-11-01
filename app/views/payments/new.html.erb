@@ -91,10 +91,10 @@
           </p>
 
           <div class="payment-checkout-actions">
-            <button id="pay" class="btn btn-primary btn-pay-checkout">
+            <div id="pay" class="btn btn-primary btn-pay-checkout">
               <i class="fas fa-lock" aria-hidden="true"></i>
               Pay <%= humanized_money(@order.amount, symbol: session[:currency]) %>
-            </button>
+            </div>
             <%= link_to "Cancel order", destroy_order_path, class: "btn btn-cancel-checkout" %>
           </div>
           <p class="payment-summary-secure-note">Payments are securely processed by Stripe.</p>
