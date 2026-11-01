@@ -1,75 +1,88 @@
 <% collection_points = CollectionCategory.where("points >= #{collection.total_points}").first.points %>
 <% next_collection = CollectionCategory.where("points >= #{collection.total_points}").second %>
-<div class="container">
-  <div class="points-banner">
-    <div class="d-flex justify-content-between">
-      <div class="d-flex justify-content-between" data-controller="collection-name">
-        <div>
-          <% if !collection.title.nil? && collection.title != "" %>
-            <div class="d-flex collection-name">
-              <p data-collection-name-target="collectionName"><span id="collection-name-label">Collection name:</span>
-                <span style="color: #69aa97"
-                      data-action="click->collection-name#nameChange"
-                      id="collection-name"
-                      class="hover-effect"
-                      data-collection-name-target="replacedCollectionName">
-                    <%= collection.title %>
-                </span>
-              </p>
-              <div class="collection-name-form">
-                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
-                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <%= hidden_field_tag :collection, collection.id %>
-                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
-                </form>
-              </div>
-            </div>
-          <% elsif collection.title.nil? || collection.title == "" %>
-            <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
-              <p><span id="collection-name-label">Collection name: </span><span style="color: #69aa97"
-                                      data-action="click->collection-name#name"
-                                      id="collection-no-name"
-                                      class="hover-effect"
-                                      data-collection-name-target="choseName">
-                                      add a collection name
-                                </span>
-                                <span style="color: #69aa97"
-                                      data-action="click->collection-name#name"
-                                      id="collection-no-name"
-                                      class="hover-effect"
-                                      data-collection-name-target="newCollectionName">
-                                </span>
-              </p>
-              <div class="collection-name-form">
-                <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
-                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <%= hidden_field_tag :collection, collection.id %>
-                  <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
-                  <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
-                </form>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+<div class="cart-collection-summary">
+  <div class="cart-collection-summary-heading">
+    <div class="cart-collection-name" data-controller="collection-name">
       <div>
-        <p><%= collection.tracks.size %> tracks</p>
+        <% if !collection.title.nil? && collection.title != "" %>
+          <div class="d-flex collection-name">
+            <p data-collection-name-target="collectionName"><span id="collection-name-label">Collection name:</span>
+              <span style="color: #69aa97"
+                    data-action="click->collection-name#nameChange"
+                    id="collection-name"
+                    class="hover-effect"
+                    data-collection-name-target="replacedCollectionName">
+                  <%= collection.title %>
+              </span>
+            </p>
+            <div class="collection-name-form">
+              <form action="/name_update" method="POST" id="collection-name" data-identifier="name-exists" data-collection-name-target="nameChangeForm" class="d-none">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <%= hidden_field_tag :collection, collection.id %>
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                <input type="submit" data-action="click->collection-name#nameInput" class="submit-button d-none">
+              </form>
+            </div>
+          </div>
+        <% elsif collection.title.nil? || collection.title == "" %>
+          <div class="d-flex collection-name" data-collection-name-target="collectionNoName">
+            <p><span id="collection-name-label">Collection name: </span><span style="color: #69aa97"
+                                    data-action="click->collection-name#name"
+                                    id="collection-no-name"
+                                    class="hover-effect"
+                                    data-collection-name-target="choseName">
+                                    add a collection name
+                              </span>
+                              <span style="color: #69aa97"
+                                    data-action="click->collection-name#name"
+                                    id="collection-no-name"
+                                    class="hover-effect"
+                                    data-collection-name-target="newCollectionName">
+                              </span>
+            </p>
+            <div class="collection-name-form">
+              <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-collection-name-target="nameForm" class="d-none">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <%= hidden_field_tag :collection, collection.id %>
+                <input type="text" placeholder="type name" name="input-name" data-collection-name-target="nameInputField" maxlength="20">
+                <input type="submit" data-action="click->collection-name#newNameInput" class="submit-button d-none">
+              </form>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
+    <span class="cart-collection-track-count"><%= collection.tracks.size %> sounds</span>
+  </div>
 
-    <div class="d-flex justify-content-between">
-      <div class="d-flex flex-column justify-content-center">  
-        <div>
-          <span class="points-left-display"><%= collection_points - collection.total_points %></span>
-          <span style="font-weight:300"><%= "Point".pluralize(collection_points - collection.total_points) %> left before next collection level!</span> <span style="font-style:italic; font-weight:200; font-size:0.8em">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money(next_collection.price, symbol: session[:currency]) %>)</span>
-        </div>
-      </div>
-      <div class="d-flex flex-column justify-content-center">
-        <div class="d-flex justify-content-end">
-          <span class="collection-points"><%= collection.total_points %>/<%= collection_points %></span>
-        </div>
-      </div>
+  <div class="cart-collection-progress">
+    <div class="cart-collection-progress-heading">
+      <span><i class="fas fa-chart-line" aria-hidden="true"></i> Collection progress</span>
+      <strong><%= collection.total_points %>/<%= collection_points %> points</strong>
+    </div>
+    <p>
+      <% if next_collection %>
+        <% points_remaining = collection_points - collection.total_points %>
+        <span class="points-left-display"><%= points_remaining %></span>
+        <%= "Point".pluralize(points_remaining) %> left before next collection level
+        <span class="cart-collection-next-level">(<%= next_collection.price_cents == 5000 ? "Unlimited" : next_collection.points %> points / <%= humanized_money(next_collection.price, symbol: session[:currency]) %>)</span>
+      <% else %>
+        Highest collection level
+      <% end %>
+    </p>
+  </div>
+
+  <div class="cart-collection-price-summary">
+    <div class="cart-collection-individual-value">
+      <span>Individual value · <%= collection.tracks.size %> sounds</span>
+      <strong><%= humanized_money(individual_value * conversion_rate, symbol: session[:currency]) %></strong>
+    </div>
+    <% if collection_savings.positive? %>
+      <p class="cart-collection-savings">You save <strong><%= humanized_money(collection_savings, symbol: session[:currency]) %> (<%= (collection_savings / (individual_value * conversion_rate) * 100).round %>%)</strong></p>
+    <% end %>
+    <div class="cart-collection-price-total">
+      <span>Collection price</span>
+      <strong><%= humanized_money(collection.price, symbol: session[:currency]) %></strong>
     </div>
   </div>
 </div>
