@@ -1,66 +1,105 @@
-<div class="container padding-navbar content">
-  <div class="checkout checkout-font">
+<% payment_item_count = @order.packs.size + @order.tracks.size + (@collection ? 1 : 0) + (@order.multiple == false ? 1 : 0) %>
 
-    <div class="d-flex justify-content-between">
-      <h1 style="margin-bottom: 20px">Checkout summary</h1>
-      <div class="sub-total" style="margin-right:0">
-        Total amount: <span style="color: #69aa97; font-weight: 500"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span>
+<div class="content payment-checkout-page">
+  <main class="payment-checkout-shell">
+    <header class="payment-checkout-header">
+      <div>
+        <p class="payment-checkout-eyebrow">SECURE CHECKOUT</p>
+        <h1>Review your order</h1>
+        <p class="payment-checkout-description">Check your items and total before completing your purchase.</p>
       </div>
-    </div>
+      <div class="payment-checkout-secure-badge">
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        Secure payment
+      </div>
+    </header>
 
-    <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
+    <div class="payment-checkout-layout">
+      <section class="payment-order-column" aria-labelledby="payment-order-title">
+        <div class="payment-checkout-card payment-order-card">
+          <div class="payment-checkout-card-heading">
+            <div class="payment-checkout-card-title">
+              <span class="payment-checkout-heading-icon"><i class="fas fa-receipt" aria-hidden="true"></i></span>
+              <div>
+                <h2 id="payment-order-title">Order details</h2>
+                <p>Your selected sounds and packs</p>
+              </div>
+            </div>
+            <span class="payment-checkout-item-count">
+              <%= pluralize(payment_item_count, "item") %>
+            </span>
+          </div>
 
-      <% if @order.packs == [] && @order.collections == [] && @order.tracks == [] %>
-        <div class="pack-payment-checkout">
-          <%= render 'shared/payment_single_pack' %>
+          <div class="payment-order-items">
+            <% if @order.packs == [] && @order.collections == [] && @order.tracks == [] %>
+              <div class="pack-payment-checkout">
+                <%= render "shared/payment_single_pack" %>
+              </div>
+            <% end %>
+
+            <% if @order.packs != [] %>
+              <div class="pack-payment-checkout">
+                <%= render "shared/payment_packs" %>
+              </div>
+            <% end %>
+
+            <% if !@collection.nil? %>
+              <div class="collection-payment-checkout">
+                <div class="payment_collection_tracks_desktop_view">
+                  <%= render "shared/payment_collection_tracks" %>
+                </div>
+                <div class="payment_collection_tracks_mobile_view">
+                  <%= render "shared/payment_collection_tracks_mobile" %>
+                </div>
+              </div>
+            <% end %>
+
+            <% if @order.tracks != [] %>
+              <div class="tracks-payment-checkout">
+                <div class="payment_collection_tracks_desktop_view">
+                  <%= render "shared/payment_single_tracks" %>
+                </div>
+                <div class="payment_collection_tracks_mobile_view">
+                  <%= render "shared/payment_single_tracks_mobile" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </section>
 
-      <% if @order.packs != [] %>
-        <div class="pack-payment-checkout">
-          <%= render 'shared/payment_packs' %>
-          <%# Sub-total is in the rendered shared file %>
+      <aside class="payment-summary-column" aria-labelledby="payment-summary-title">
+        <div class="payment-checkout-card payment-summary-card">
+          <div class="payment-checkout-card-heading">
+            <div class="payment-checkout-card-title">
+              <span class="payment-checkout-heading-icon"><i class="fas fa-shopping-bag" aria-hidden="true"></i></span>
+              <div>
+                <h2 id="payment-summary-title">Payment summary</h2>
+                <p>VAT included in the total</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-summary-total">
+            <span>Total amount</span>
+            <strong><%= humanized_money(@order.amount, symbol: session[:currency]) %></strong>
+          </div>
+
+          <p class="payment-summary-tax-note">
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            VAT included · One-time payment
+          </p>
+
+          <div class="payment-checkout-actions">
+            <div id="pay" class="btn btn-primary btn-pay-checkout">
+              <i class="fas fa-lock" aria-hidden="true"></i>
+              Pay <%= humanized_money(@order.amount, symbol: session[:currency]) %>
+            </div>
+            <%= link_to "Cancel order", destroy_order_path, class: "btn btn-cancel-checkout" %>
+          </div>
+          <p class="payment-summary-secure-note">Payments are securely processed by Stripe.</p>
         </div>
-      <% end %>
-
-      <div class="collection-payment-checkout">
-        <% if !@collection.nil? %>
-          <div class="payment_collection_tracks_desktop_view">
-            <%= render 'shared/payment_collection_tracks' %>
-          </div>
-          <div class="payment_collection_tracks_mobile_view">
-            <%= render 'shared/payment_collection_tracks_mobile' %>
-          </div>
-          <hr class="my-3" style="width: 100%;">
-        <% end %>
-      </div>
-
-      <div class="tracks-payment-checkout">
-        <% if @order.tracks != [] %>
-          <div class="payment_collection_tracks_desktop_view">
-            <%= render 'shared/payment_single_tracks' %>
-          </div>
-          <div class="payment_collection_tracks_mobile_view">
-            <%= render 'shared/payment_single_tracks_mobile' %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="total-checkout packs-display">
-      <div class="payment-total-desktop">
-        <h3>For a total amount of <span style="color: #69aa97"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span> <em style="font-size: 1rem">(VAT included)</em> </h3>
-      </div>
-      <div class="payment-total-mobile">
-        <h3 id="payment-total-h3-mobile">For a total amount of:</h3>
-        <div id="payment-total-amount-mobile">
-          <span style="color: #69aa97"><%= humanized_money(@order.amount, symbol: session[:currency]) %></span> <em style="font-size: 1rem">(VAT included)</em> 
-        </div>
-      </div>
-      <div class="payment-buttons-mobile">
-        <button id="pay" class="btn btn-primary btn-pay-checkout">Pay</button>
-        <%= link_to "cancel", destroy_order_path, class: "btn btn-primary btn-cancel-checkout" %>
-      </div>
+      </aside>
     </div>
 
     <script src="https://js.stripe.com/v3/"></script>
@@ -73,6 +112,5 @@
         });
       });
     </script>
-
-  </div>
+  </main>
 </div>
