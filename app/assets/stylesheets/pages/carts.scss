@@ -528,16 +528,62 @@
   }
 
   .cart-collection-track-info-button,
-  .cart-collection-track-remove {
+  .cart-collection-track-remove,
+  .cart-collection-track-action {
     padding: 0;
     border: 0;
     background: transparent;
     color: #969ba3;
     font-size: 0.9rem;
+    text-decoration: none;
 
     &:hover {
       color: $blue-light;
     }
+  }
+
+  .cart-single-tracks-content {
+    padding: 0 16px;
+
+    .points-banner {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid $medium-card-background;
+      border-radius: 6px;
+      background-color: $pack-builder-dark-background;
+      color: #bec1c6;
+      font-size: 0.8rem;
+    }
+
+    .container {
+      padding: 0;
+    }
+
+    #btn-cart-collection-full-width {
+      display: block;
+      margin: 12px 0;
+      padding: 10px 12px;
+      border: 1px solid #45474a;
+      border-radius: 6px;
+      background-color: $pack-builder-dark-background;
+      box-shadow: none;
+      color: #bec1c6;
+      font-size: 0.8rem;
+      text-decoration: none;
+
+      &:hover {
+        border-color: $blue-light;
+        color: #f2f2f2;
+      }
+    }
+  }
+
+  .cart-single-track-list {
+    margin-bottom: 0;
+  }
+
+  .cart-single-track {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 1.4fr) auto;
   }
 }
 

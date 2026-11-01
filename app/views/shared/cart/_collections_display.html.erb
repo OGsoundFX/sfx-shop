@@ -109,12 +109,12 @@
       </ul>
 
       <div data-controller="template-form">
-        <% if current_user.email == "olivier@bamsfx.com" %>
+        <% if current_user.admin? %>
           <div class="plus-icon d-flex">
             <i class="fas fa-plus-circle" data-action="mouseover->template-form#hover mouseout->template-form#mouseout click->template-form#toggleForm"></i>
             <div class="d-flex">
               <div class="invisible-icon d-none" data-template-form-target="leftBorder"></div>
-              <p class="template-form-text d-none" data-template-form-target="text">make this collection a template</p>
+              <p class="template-form-text d-none mb-0" data-template-form-target="text">make this collection a template</p>
             </div>
           </div>
 
