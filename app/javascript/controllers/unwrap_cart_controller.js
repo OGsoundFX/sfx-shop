@@ -13,10 +13,18 @@ export default class extends Controller {
     } else if (event.target.id === "single-arrow") {
       this.singleUnwrappedTarget.classList.toggle("d-none")
       this.singleWrappedTarget.classList.toggle("d-none")
+      this.refreshWaveformsWhenVisible(this.singleUnwrappedTarget)
     } else if (event.target.id === "collection-arrow") {
       this.youSpareTarget.classList.toggle("d-none")
       this.collectionUnwrappedTarget.classList.toggle("d-none")
       this.collectionWrappedTarget.classList.toggle("d-none")
+      this.refreshWaveformsWhenVisible(this.collectionUnwrappedTarget)
+    }
+  }
+
+  refreshWaveformsWhenVisible(panel) {
+    if (!panel.classList.contains("d-none")) {
+      requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))
     }
   }
 
