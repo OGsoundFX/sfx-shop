@@ -16,7 +16,7 @@
       
       <div class="d-flex">
         <div class="dashboard-pack-image"><%= image_tag sfx_pack.photos[0], alt: sfx_pack.title %></div>
-        <div class="d-flex flex-column justify-content-center pack-details" style="text-align: left">
+        <div class="d-flex flex-column justify-content-center pack-details ms-3" style="text-align: left">
         <h5><%= sfx_pack.title %></h5>
           <% if order.sales != {} && order.sales[pack.to_s] %>
             <h5 id="price-pack">Price:  <strong> <%= humanized_money((SfxPack.find(pack).price * conversion_rate) * (1 - order.sales[pack.to_s][order.sales[pack.to_s].keys.first] / 100.to_f), symbol: session[:currency]) %> </strong> <span id="instead-dashboard"> <i> (instead of <%= humanized_money(SfxPack.find(pack).price * conversion_rate, symbol: session[:currency]) %>) - <%= order.sales[pack.to_s][order.sales[pack.to_s].keys.first] %> % OFF </i> </span> </h5>

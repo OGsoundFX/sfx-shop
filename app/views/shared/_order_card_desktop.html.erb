@@ -46,8 +46,9 @@
     <footer class="dashboard-order-footer">
       <div class="total-dashboard">
         <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money(order.amount_cents.to_f / 100, symbol: session[:currency]) %></strong></p>
-        <div class="d-flex justify-content-between dashboard-vat-display">
-          <div>VAT (<%= vat_rate %>% inclusive)</div><div><%= humanized_money(vat_amount / 100.0, symbol: session[:currency]) %></div>
+        <div class="d-flex dashboard-vat-display">
+          <div>VAT (<%= vat_rate %>% inclusive)</div>
+          <div class="ms-1"> - <%= humanized_money(vat_amount / 100.0, symbol: session[:currency]) %></div>
         </div>
         <% if order.coupon %>
           <p>Total amount paid: <strong><%= humanized_money(order.amount_paid_cents.to_f / 100, symbol: session[:currency]) %></strong> </p>
