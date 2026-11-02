@@ -327,6 +327,45 @@ class CollectionsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def download_link_status
+    order = current_user.orders.find_by(id: params[:order_id])
+    return head :not_found unless order
+
+    case params[:download_type]
+    when "collection"
+      collection = current_user.collections.find_by(id: Array(order.collections).first)
+      return head :not_found unless collection
+
+      download_link = collection.download_links
+        .where(order: order, collection_download: true)
+        .order(created_at: :desc)
+        .first
+      return head :no_content unless download_link && !download_link.expired?
+
+      render turbo_stream: turbo_stream.replace(
+        "dashboard-collection-download-button-#{order.id}",
+        partial: "shared/dashboard_collection_download_button",
+        locals: { collection: collection, order: order }
+      )
+    when "single_tracks"
+      return head :not_found if Array(order.tracks).empty?
+
+      download_link = order.download_links
+        .where(collection_download: false)
+        .order(created_at: :desc)
+        .first
+      return head :no_content unless download_link && !download_link.expired?
+
+      render turbo_stream: turbo_stream.replace(
+        "dashboard-tracks-download-button-#{order.id}",
+        partial: "shared/dashboard_tracks_download_button",
+        locals: { order: order }
+      )
+    else
+      head :bad_request
+    end
+  end
+
   def create_template
     collection = Collection.find(params[:template][:collection])
     title = params[:template][:title]

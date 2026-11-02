@@ -1,4 +1,5 @@
-<div data-controller="collection-checkout-modal">
+<div data-controller="collection-checkout-modal"
+     data-collection-checkout-modal-status-url-value="<%= download_link_status_path(order_id: order.id, download_type: 'collection') %>">
   <div class="dashboard-collection-grid">
     <div class="d-flex">
       <i class="fas fa-layer-group checkout-icon-adjust"></i>
@@ -14,25 +15,8 @@
         List of tracks
       </button>
     </div>
-    <div class="d-flex flex-column justify-content-center">
-      <div class="d-flex justify-content-end">
-        <% if SolidQueue::Job.where(class_name: "ZipCollectionJob").any? { |job| job.arguments["arguments"][0]["collection"].present? && job.arguments["arguments"][0]["order"].to_i == order.id } && (!collection.download_links.present? || collection.download_links.last.expired?) %>
-          <div class="loader"></div>
-        <% elsif collection.download_links.present? && !collection.download_links.last.expired? %>
-          <a href="<%= collection.download_links.last.url %>"
-             id="btn-download-collection"
-             data-controller="delete-job"
-             data-action="click->delete-job#delete"
-             data-delete-job-job-id-value="<%= collection.download_links.last.job_id %>">
-            Click to download
-          </a>
-        <% else %>
-          <%= link_to "Get Download Link", create_zip_collection_path(collection: collection, order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>
-        <% end %>
-      </div>
-    </div>
+    <%= render 'shared/dashboard_collection_download_button', collection: collection, order: order %>
   </div>
-
 
   <!-- Collection List Modal -->
   <div id="collectionModal" class="track-list-modal" data-collection-checkout-modal-target="collectionModal">

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get 'download_single', to: 'single_tracks#download_single'
   get 'create_zip', to: 'single_tracks#create_zip'
   get 'create_zip_collection', to: 'collections#create_zip_collection'
+  get 'download_link_status', to: 'collections#download_link_status', as: :download_link_status
 
   resources :collections, only: [:create, :update, :show]
   post "name_update", to: "collections#name_update"
