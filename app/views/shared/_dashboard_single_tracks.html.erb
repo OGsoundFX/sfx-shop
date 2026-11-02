@@ -1,7 +1,8 @@
 <% total_tracks_price = 0 %>
 <% order.tracks.each { |track| total_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) } %>
 
-<div data-controller="collection-checkout-modal">
+<div data-controller="collection-checkout-modal"
+     data-collection-checkout-modal-status-url-value="<%= download_link_status_path(order_id: order.id, download_type: 'single_tracks') %>">
   <div class="dashboard-tracks-grid">
     <div class="d-flex">
       <i class="fas fa-headphones checkout-icon-adjust"></i>
@@ -17,23 +18,7 @@
         List of tracks
       </button>
     </div>
-    <div class="d-flex flex-column justify-content-center">
-      <div class="d-flex justify-content-end">
-        <% if SolidQueue::Job.where(class_name: "ZipCollectionJob").any? { |job| job.arguments["arguments"][0]["type"] == "single_tracks" && job.arguments["arguments"][0]["order"].to_i == order.id } && (!order.download_links.where(collection_download: false).present? || order.download_links.where(collection_download: false).last.expired?) %>
-          <div class="loader"></div>
-        <% elsif order.download_links.where(collection_download: false).present? && !order.download_links.where(collection_download: false).last.expired? %>
-          <a href="<%= order.download_links.where(collection_download: false).last.url %>"
-             id="btn-download-collection"
-             data-controller="delete-job"
-             data-action="click->delete-job#delete"
-             data-delete-job-job-id-value="<%= order.download_links.where(collection_download: false).last.job_id %>">
-            Click to download
-          </a>
-        <% else %>
-          <%= link_to "Get Download Link", create_zip_collection_path(tracks: order.tracks, type: "single_tracks", order: order), id: "btn-download-get-link", data: { action: "click->collection-checkout-modal#download"} %>
-        <% end %>
-      </div>
-    </div>
+    <%= render 'shared/dashboard_tracks_download_button', order: order %>
   </div>
 
   <!-- Collection List Modal -->
