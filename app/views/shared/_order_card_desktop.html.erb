@@ -3,11 +3,21 @@
   <% vat_rate = vat_rate.to_i if vat_rate.to_i == vat_rate %>
   <% vat_amount = PayoutCalculatorService.vat_amount(order.amount_cents, order.location) %>
   <% collection = Collection.find(order.collections.first) if order.collections != [] %>
-  <% @tracks = order.tracks %>
-  <div class="packs-display" style="margin-bottom: 16px; padding: 20px 0">
-    <h3 id="order-space-under-title">Order from <%= order.created_at.strftime("%B #{order.created_at.day.ordinalize} %Y") %> </h3>
-    <div>
-      <hr class="mb-3">
+  <% purchase_item_count = order.packs.size + order.tracks.size + (collection ? 1 : 0) %>
+  <% purchase_item_count = 1 if purchase_item_count.zero? %>
+  <article class="payment-checkout-card dashboard-order-card">
+    <header class="payment-checkout-card-heading">
+      <div class="payment-checkout-card-title">
+        <span class="payment-checkout-heading-icon"><i class="fas fa-receipt" aria-hidden="true"></i></span>
+        <div>
+          <h2>Order from <%= order.created_at.strftime("%B #{order.created_at.day.ordinalize} %Y") %></h2>
+          <p>Your purchased sounds and packs</p>
+        </div>
+      </div>
+      <span class="payment-checkout-item-count"><%= pluralize(purchase_item_count, "item") %></span>
+    </header>
+
+    <div class="payment-order-items dashboard-order-items">
       <% if order.packs == [] && order.collections == [] && order.tracks == [] %>
         <div class="pack-payment-checkout">
           <%= render 'shared/dashboard_single_pack', order: order %>
@@ -20,31 +30,25 @@
         </div>
       <% end %>
 
-      <div class="collection-payment-checkout">
-        <% if !collection.nil? %>
-          <% if order.packs != [] %>
-            <hr>
-          <% end %>
+      <% if !collection.nil? %>
+        <div class="collection-payment-checkout">
           <%= render 'shared/dashboard_collection_tracks', collection: collection, order: order %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
-      <div class="tracks-payment-checkout">
-        <% if order.tracks != [] %>
-          <% if !collection.nil? || order.packs != [] %>
-            <hr>
-          <% end %>
+      <% if order.tracks != [] %>
+        <div class="tracks-payment-checkout">
           <%= render 'shared/dashboard_single_tracks', order: order %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
 
-    <hr>
-    <div class="d-flex justify-content-start mt-4" style="padding: 0 42px">
-      <div class="total-dashboard" >
+    <footer class="dashboard-order-footer">
+      <div class="total-dashboard">
         <p style="margin-bottom: 0">Total order value: <strong><%= humanized_money(order.amount_cents.to_f / 100, symbol: session[:currency]) %></strong></p>
-        <div class="d-flex justify-content-between dashboard-vat-display">
-          <div>VAT (<%= vat_rate %>% inclusive)</div><div><%= humanized_money(vat_amount / 100.0, symbol: session[:currency]) %></div>
+        <div class="d-flex dashboard-vat-display">
+          <div>VAT (<%= vat_rate %>% inclusive)</div>
+          <div class="ms-1"> - <%= humanized_money(vat_amount / 100.0, symbol: session[:currency]) %></div>
         </div>
         <% if order.coupon %>
           <p>Total amount paid: <strong><%= humanized_money(order.amount_paid_cents.to_f / 100, symbol: session[:currency]) %></strong> </p>
@@ -57,6 +61,6 @@
           <p>Coupon code: <strong> <%= coupon_array[0].upcase %> </strong>(<%= coupon_value %>)</p>
         <% end %>
       </div>
-    </div>
-  </div>
+    </footer>
+  </article>
 <% end %>
