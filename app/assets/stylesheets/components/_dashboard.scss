@@ -41,6 +41,76 @@
   font-size: 0.8rem;
 }
 
+.dashboard-page {
+  .dashboard-title {
+    width: auto;
+    margin: 0 0 18px;
+    padding: 0 0 14px;
+    border: 0;
+    border-bottom: 1px solid #45474a;
+    border-radius: 0;
+    color: #f2f2f2;
+    font-family: "Inter-SemiBold", Helvetica, sans-serif;
+    font-size: 1.6rem;
+    text-align: left;
+  }
+
+  #newsletter-info-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border: 1px solid $medium-card-background;
+    border-radius: 8px;
+    background-color: $dark-card-background;
+    box-shadow: none;
+    color: #bec1c6;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    .fa-info-circle {
+      flex: 0 0 auto;
+      margin-top: 3px;
+      color: $blue-light;
+    }
+
+    a {
+      color: $blue-light;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        color: #f2f2f2;
+      }
+    }
+  }
+
+  #order-space-under-title,
+  #order-space-under-title-mobile {
+    color: #f2f2f2;
+    font-family: "Inter-SemiBold", Helvetica, sans-serif;
+    font-size: 1rem;
+  }
+
+  .total-dashboard {
+    width: 100%;
+    border-radius: 6px;
+    background-color: $pack-builder-dark-background;
+    color: #f2f2f2;
+    font-size: 0.9rem;
+  }
+
+  .dashboard-vat-display {
+    color: #969ba3;
+  }
+
+  .dashboard-empty-state {
+    margin: 32px auto;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-title {
     width: inherit;
