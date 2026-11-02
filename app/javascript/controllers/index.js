@@ -67,6 +67,9 @@ application.register("open-subscribe-modal", OpenSubscribeModalController)
 import OrderByController from "./order_by_controller"
 application.register("order-by", OrderByController)
 
+import PaymentCheckoutController from "./payment_checkout_controller"
+application.register("payment-checkout", PaymentCheckoutController)
+
 import PhotoUploadController from "./photo_upload_controller"
 application.register("photo-upload", PhotoUploadController)
 
