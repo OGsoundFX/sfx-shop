@@ -25,12 +25,8 @@
           <%= link_to "Explore sounds", root_path, class: "cart-builder-button" %>
         </section>
       <% else %>
-        <div id="order-card-desktop">
+        <div id="order-card-desktop" class="dashboard-order-list">
           <%= render 'shared/order_card_desktop' %>
-        </div>
-
-        <div id="order-card-mobile">
-          <%= render 'shared/order_card_mobile' %>
         </div>
       <% end %>
     </main>
