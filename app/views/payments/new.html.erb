@@ -91,7 +91,13 @@
           </p>
 
           <div class="payment-checkout-actions">
-            <button id="pay" class="btn btn-primary btn-pay-checkout">
+            <button
+              id="pay"
+              class="btn btn-primary btn-pay-checkout"
+              data-controller="payment-checkout"
+              data-payment-checkout-publishable-key-value="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-payment-checkout-session-id-value="<%= @order.checkout_session_id %>"
+              data-action="click->payment-checkout#redirect">
               <i class="fas fa-lock" aria-hidden="true"></i>
               Pay <%= humanized_money(@order.amount, symbol: session[:currency]) %>
             </button>
@@ -101,16 +107,6 @@
         </div>
       </aside>
     </div>
-
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-      const paymentButton = document.getElementById('pay');
-      paymentButton.addEventListener('click', () => {
-        const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-        stripe.redirectToCheckout({
-          sessionId: '<%= @order.checkout_session_id %>'
-        });
-      });
-    </script>
   </main>
 </div>
