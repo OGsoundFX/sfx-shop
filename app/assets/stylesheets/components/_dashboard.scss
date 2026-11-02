@@ -281,12 +281,12 @@
   #btn-download-collection {
     border-color: $blue-light;
     background-color: $blue-light;
-    color: #202020;
+    color: whitesmoke;
     font-weight: 600;
 
     &:hover {
       background-color: lighten($blue-light, 7%);
-      color: #202020;
+      color: whitesmoke;
     }
   }
 
@@ -301,6 +301,32 @@
       background-color: $pack-builder-dark-background;
       color: #f2f2f2;
     }
+  }
+
+  .loader {
+    display: inline-flex;
+    width: auto;
+    min-width: 132px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border: 1px solid #45474a;
+    border-radius: 5px;
+    background: transparent;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .loader::before {
+    color: whitesmoke;
+    filter: none;
+  }
+
+  .loader::after {
+    color: #bec1c6;
   }
 
   .dashboard-collection-grid,
@@ -497,6 +523,10 @@
       > .d-flex:nth-child(2) #list-tracks-modal-button,
       > .d-flex:nth-child(3) #btn-download-collection,
       > .d-flex:nth-child(3) #btn-download-get-link {
+        width: 100%;
+      }
+
+      > .d-flex:nth-child(3) .loader {
         width: 100%;
       }
     }
