@@ -277,7 +277,8 @@
     }
   }
 
-  #btn-download-get-link {
+  .dashboard-download-button,
+  #btn-download-collection {
     border-color: $blue-light;
     background-color: $blue-light;
     color: #202020;
@@ -286,6 +287,19 @@
     &:hover {
       background-color: lighten($blue-light, 7%);
       color: #202020;
+    }
+  }
+
+  #btn-download-get-link {
+    border-color: #45474a;
+    background-color: transparent;
+    color: #bec1c6;
+    font-weight: 400;
+
+    &:hover {
+      border-color: $blue-light;
+      background-color: $pack-builder-dark-background;
+      color: #f2f2f2;
     }
   }
 
