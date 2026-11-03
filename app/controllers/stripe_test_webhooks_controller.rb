@@ -11,7 +11,11 @@ class StripeTestWebhooksController < ApplicationController
 
     return head :bad_request if event.livemode
 
-    # Handle test events separately; don't mark real orders paid or trigger payouts.
+    StripeCheckoutSessionService.new.call(
+      event,
+      enqueue_charge_processing: false,
+      admin_orders_only: true
+    )
     Rails.logger.info("Received verified Stripe test event: #{event.type}")
     head :ok
   rescue JSON::ParserError, Stripe::SignatureVerificationError
