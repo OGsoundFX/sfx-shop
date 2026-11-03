@@ -3,10 +3,14 @@ Rails.configuration.stripe = {
   publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
   secret_key:      ENV['STRIPE_SECRET_KEY'],
   signing_secret:  ENV['STRIPE_WEBHOOK_SECRET_KEY'],
-  tax_rate:        ENV['STRIPE_TAX_RATE']
+  tax_rate:        ENV['STRIPE_TAX_RATE'],
+  test_publishable_key: ENV['TEST_STRIPE_PUBLISHABLE_KEY'],
+  test_secret_key:      ENV['TEST_STRIPE_SECRET_KEY'],
+  test_signing_secret:  ENV['TEST_STRIPE_WEBHOOK_SECRET_KEY'],
+  test_tax_rate:        ENV['TEST_STRIPE_TAX_RATE']
 }
 
-Stripe.api_key = Rails.configuration.stripe[:secret_key]
+# Stripe.api_key = Rails.configuration.stripe[:secret_key]
 StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]
 
 StripeEvent.configure do |events|

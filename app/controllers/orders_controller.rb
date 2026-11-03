@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :sale_orders, only: [:create, :checkout]
+  before_action :sale_orders, :test_mode?, only: [:create, :checkout]
 
   # action to purchase pack directly
   def create
@@ -31,26 +31,29 @@ class OrdersController < ApplicationController
       )
 
       session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        mode: 'payment',
-        line_items: [{
-          price_data: {
-            currency: CurrencySymbolService.lookup(params[:currency]),
-            unit_amount: (sfx_pack_price.to_i * 100),
-            product_data: {
-              name: sfx_pack.title,
-              images: [sfx_pack.photos[0].url] # Ensure this returns a full http(s) URL
-            }
+        {
+          payment_method_types: ['card'],
+          mode: 'payment',
+          line_items: [{
+            price_data: {
+              currency: CurrencySymbolService.lookup(params[:currency]),
+              unit_amount: (sfx_pack_price.to_i * 100),
+              product_data: {
+                name: sfx_pack.title,
+                images: [sfx_pack.photos[0].url] # Ensure this returns a full http(s) URL
+              }
+            },
+            quantity: 1
+          }],
+          metadata: {
+            order_id: order.id
           },
-          quantity: 1
-        }],
-        metadata: {
-          order_id: order.id
+          allow_promotion_codes: true,
+          customer_email: current_user.email,
+          success_url: dashboard_url,
+          cancel_url: destroy_order_url
         },
-        allow_promotion_codes: true,
-        customer_email: current_user.email,
-        success_url: dashboard_url,
-        cancel_url: destroy_order_url
+        { api_key: StripeClientService.new(test_mode: test_mode?).api_key }
       )
 
       order.update(checkout_session_id: session.id)
@@ -228,16 +231,19 @@ class OrdersController < ApplicationController
         session[:pending_checkout_order_id] = order.id
 
         session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        mode: 'payment',
-        line_items: line_items,
-        metadata: {
-          order_id: order.id
-        },
-        allow_promotion_codes: true,
-        customer_email: current_user.email,
-        success_url: destroy_cart_url,
-        cancel_url: destroy_order_url,
+          {
+            payment_method_types: ['card'],
+            mode: 'payment',
+            line_items: line_items,
+            metadata: {
+              order_id: order.id
+            },
+            allow_promotion_codes: true,
+            customer_email: current_user.email,
+            success_url: destroy_cart_url,
+            cancel_url: destroy_order_url,
+          },
+          { api_key: StripeClientService.new(test_mode: test_mode?).api_key }
         )
         order.update!(checkout_session_id: session.id)
 
@@ -334,6 +340,11 @@ class OrdersController < ApplicationController
         @sale_orders[pack_id][sale.title] = sale.percentage
       end
     end
+  end
+
+  def test_mode?
+    Rails.env.production? && current_user.admin?
+    # current_user.admin?
   end
 
   def check_sales
