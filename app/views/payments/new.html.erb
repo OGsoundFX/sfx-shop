@@ -95,7 +95,7 @@
               id="pay"
               class="btn btn-primary btn-pay-checkout"
               data-controller="payment-checkout"
-              data-payment-checkout-publishable-key-value="<%= current_user.admin? ? Rails.configuration.stripe[:test_publishable_key] : Rails.configuration.stripe[:publishable_key] %>"
+              data-payment-checkout-publishable-key-value="<%= Rails.env.production? && current_user&.admin? ? Rails.configuration.stripe[:test_publishable_key] : Rails.configuration.stripe[:publishable_key] %>"
               data-payment-checkout-session-id-value="<%= @order.checkout_session_id %>"
               data-action="click->payment-checkout#redirect">
               <i class="fas fa-lock" aria-hidden="true"></i>

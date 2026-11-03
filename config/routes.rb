@@ -147,6 +147,7 @@ Rails.application.routes.draw do
   # jobs routes
   delete "jobs/:job_id", to: "jobs#destroy", as: :job
 
+  post "/stripe-webhooks/test", to: "stripe_test_webhooks#receive"
   mount StripeEvent::Engine, at: '/stripe-webhooks'
   # post "/webhooks/stripe", to: "stripe_webhook#receive"
 end

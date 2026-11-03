@@ -343,7 +343,7 @@ class OrdersController < ApplicationController
   end
 
   def test_mode?
-    Rails.env.production? && current_user.admin?
+    Rails.env.production? && current_user&.admin?
     # current_user.admin?
   end
 
