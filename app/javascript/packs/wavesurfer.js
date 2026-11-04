@@ -178,7 +178,11 @@ window.addEventListener('turbo:load', () => {
       });
     })
   } else {
-    document.querySelectorAll('.wave').forEach((el, loopId) => {
+    const waveElements = Array.from(document.querySelectorAll('.wave')).filter((el) =>
+      !(window.innerWidth <= 1024 && el.classList.contains('wave-index-pack-builder'))
+    );
+
+    waveElements.forEach((el, loopId) => {
 
       // console.log(getComputedStyle(el))
       let height = 50
@@ -538,6 +542,10 @@ window.addEventListener('turbo:load', () => {
               waveform.classList.toggle('is-hidden', !isCurrentWaveform);
               waveform.setAttribute('aria-hidden', String(!isCurrentWaveform));
             });
+            document.querySelectorAll('.sound-catalog .pack-builder-catalog-preview-waveform').forEach((waveform) => {
+              waveform.classList.remove('is-visible');
+              waveform.setAttribute('aria-hidden', 'true');
+            });
             watermark.play();
 
             let secondsSinceWatermark = 0;
@@ -573,6 +581,103 @@ window.addEventListener('turbo:load', () => {
       });
     });
   };
+
+  document.querySelectorAll('[data-pack-builder-catalog-preview]').forEach((button) => {
+    const waveformId = button.dataset.waveformId;
+    const previewUrl = button.dataset.previewUrl;
+    const waveform = document.getElementById(waveformId);
+    let player;
+    let watermarkInterval;
+
+    button.addEventListener('click', () => {
+      if (player && player.isPlaying()) {
+        player.pause();
+        return;
+      }
+
+      watermark.pause();
+      if (audioPlaying && audioPlaying !== player) {
+        audioPlaying.stop();
+      }
+
+      document.querySelectorAll('.sound-catalog .pack-builder-catalog-preview-waveform').forEach((otherWaveform) => {
+        otherWaveform.classList.remove('is-visible');
+        otherWaveform.setAttribute('aria-hidden', 'true');
+      });
+
+      if (!player) {
+        waveform.classList.add('is-visible');
+        waveform.setAttribute('aria-hidden', 'false');
+        player = WaveSurfer.create({
+          container: waveform,
+          barWidth: 2,
+          barHeight: 1,
+          barGap: null,
+          waveColor: '#CCCCCC',
+          progressColor: '#FFA500',
+          height: 28,
+          cursorColor: '#FFA500',
+          responsive: true
+        });
+
+        player.on('ready', () => {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+          player.play();
+        });
+
+        player.on('error', (error) => {
+          console.error('Unable to load pack-builder catalog preview:', error);
+          button.disabled = true;
+          button.removeAttribute('aria-busy');
+          button.title = 'Preview unavailable';
+          waveform.textContent = 'Preview unavailable';
+          waveform.classList.add('is-visible');
+          waveform.setAttribute('aria-hidden', 'false');
+        });
+
+        player.on('play', () => {
+          button.innerHTML = '<i class="fas fa-pause-circle" aria-hidden="true"></i>';
+          audioPlaying = player;
+          waveform.classList.add('is-visible');
+          waveform.setAttribute('aria-hidden', 'false');
+          document.querySelectorAll('.pack-builder .pack-builder-preview-waveform').forEach((otherWaveform) => {
+            otherWaveform.classList.add('is-hidden');
+            otherWaveform.setAttribute('aria-hidden', 'true');
+          });
+          watermark.play();
+
+          let secondsSinceWatermark = 0;
+          const watermarkDelay = player.getDuration() < 15 ? 3 : 7;
+          watermarkInterval = setInterval(() => {
+            if (!player.isPlaying()) {
+              clearInterval(watermarkInterval);
+              return;
+            }
+
+            secondsSinceWatermark += 1;
+            if (secondsSinceWatermark >= watermarkDelay) {
+              watermark.play();
+              secondsSinceWatermark = 0;
+            }
+          }, 1000);
+        });
+
+        player.on('pause', () => {
+          button.innerHTML = '<i class="fas fa-play-circle" aria-hidden="true"></i>';
+          watermark.pause();
+          clearInterval(watermarkInterval);
+        });
+
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+        player.load(previewUrl);
+        return;
+      }
+
+      player.play();
+    });
+  });
 
   const packBuilderCollection = document.querySelector('.pack-builder > .collection');
   if (packBuilderCollection) {

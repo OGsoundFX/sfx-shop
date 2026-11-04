@@ -24,6 +24,17 @@
   min-width: 0;
 }
 
+@media (max-width: 1024px) {
+  .pack-builder-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pack-builder-grid > .sound-catalog {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
 .template-section {
   margin: 24px auto 0 auto;
   width: 80vw;
