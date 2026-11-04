@@ -73,7 +73,18 @@
           <span class="info-font-pack-builder" id="trackDurationid<%= "#{track.id}" %>"></span>
           <i class="fas fa-play-circle play-icon-margin-pack-builder cursor" id="playid<%= "#{track.id}"%>"></i>
           <i class="fas fa-pause-circle pad-top-cart play-icon-margin cursor" id="stopid<%= "#{track.id}" %>" style="display: none"></i>
+          <button
+            type="button"
+            class="pack-builder-catalog-preview-button"
+            data-pack-builder-catalog-preview
+            data-preview-url="<%= track.preview_link %>"
+            data-waveform-id="pack-builder-catalog-preview-<%= track.id %>"
+            aria-label="Play preview for <%= track.title %>"
+            <%= "disabled" unless track.preview_link.present? %>>
+            <i class="fas fa-play-circle" aria-hidden="true"></i>
+          </button>
         </div>
+        <div id="pack-builder-catalog-preview-<%= track.id %>" class="pack-builder-catalog-preview-waveform" aria-hidden="true"></div>
 
         <div class="tempo" ><span class="info-icon-template-pack-builder template-max-width-icon" id="trackInfoBtn" data-trackId="<%= track.id %>"><i class="fas fa-info-circle"></i></span></div>
         <div class="key" ><%= track.points %></div>

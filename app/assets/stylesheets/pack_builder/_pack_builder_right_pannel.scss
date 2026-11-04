@@ -409,6 +409,22 @@
   line-height: normal;
 }
 
+@media (max-width: 1024px) {
+  .pack-builder {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    top: auto;
+    width: auto;
+    margin: 18px 0 0;
+    align-self: stretch;
+  }
+
+  .pack-builder .selected-sounds-list {
+    max-height: 320px;
+  }
+}
+
 .pack-builder .sound-price {
   position: relative;
   width: fit-content;

@@ -1295,3 +1295,108 @@
 .sound-catalog .info-font-pack-builder {
   flex: 0 0 3rem;
 }
+
+.sound-catalog .pack-builder-catalog-preview-button {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sound-catalog {
+    width: auto;
+    margin: 12px 0;
+  }
+
+  .sound-catalog .navbar {
+    display: none;
+  }
+
+  .sound-catalog .sound {
+    display: grid;
+    height: auto;
+    grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+    grid-template-areas:
+      "identity identity identity identity identity"
+      "preview info points price add"
+      "waveform waveform waveform waveform waveform";
+    gap: 10px;
+    padding: 12px 10px;
+  }
+
+  .sound-catalog .sound-identity {
+    grid-area: identity;
+    min-width: 0;
+  }
+
+  .sound-catalog .sound-title {
+    overflow-wrap: anywhere;
+  }
+
+  .sound-catalog .wave-section-pack-builder {
+    grid-area: preview;
+    width: auto;
+    margin: 0;
+  }
+
+  .sound-catalog .wave-index-pack-builder,
+  .sound-catalog .wave-section-pack-builder > .info-font-pack-builder,
+  .sound-catalog .wave-section-pack-builder > .play-icon-margin-pack-builder,
+  .sound-catalog .wave-section-pack-builder > .play-icon-margin {
+    display: none !important;
+  }
+
+  .sound-catalog .pack-builder-catalog-preview-button {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #f2f2f2;
+    font-size: 22px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .sound-catalog .pack-builder-catalog-preview-button:disabled {
+    color: #646970;
+    cursor: not-allowed;
+  }
+
+  .sound-catalog .pack-builder-catalog-preview-button:focus-visible {
+    outline: 2px solid #2f80ed;
+    outline-offset: 3px;
+  }
+
+  .sound-catalog .tempo {
+    grid-area: info;
+    width: auto;
+  }
+
+  .sound-catalog .key {
+    grid-area: points;
+    width: auto;
+  }
+
+  .sound-catalog .price {
+    grid-area: price;
+    width: auto;
+    text-align: right;
+  }
+
+  .sound-catalog .sound > [id^="pack-builder-add-button-"] {
+    grid-area: add;
+  }
+
+  .sound-catalog .pack-builder-catalog-preview-waveform {
+    display: none;
+    grid-area: waveform;
+    width: 100%;
+    min-width: 0;
+    height: 28px;
+  }
+
+  .sound-catalog .pack-builder-catalog-preview-waveform.is-visible {
+    display: block;
+  }
+}
