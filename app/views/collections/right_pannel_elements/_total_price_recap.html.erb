@@ -19,7 +19,11 @@
       <% end %>
     </div>
   </div>
-  <% if collection %>
+  <% if !user_signed_in? %>
+    <div class="add-pack-to-cart-empty" >
+      <div class="action-label" >Log in to add pack to cart</div>
+    </div>
+  <% elsif collection %>
     <%= link_to cart_path, class: 'w-100' do %>
       <div class="add-pack-to-cart" >
         <i class="fas fa-shopping-cart"></i>

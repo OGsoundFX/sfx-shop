@@ -1,9 +1,17 @@
 class CollectionsController < ApplicationController
-  before_action :authenticate_user!, except: [:templates_index, :templates_show, :pack_builder]
+  before_action :authenticate_user!, except: [
+    :templates_index,
+    :templates_show,
+    :pack_builder,
+    :create_builder_pack,
+    :add_builder_track,
+    :remove_builder_track,
+    :remove_builder_collection
+  ]
 
   # ! Pack builder section 👇
   def pack_builder
-    @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
+    @collection = pack_builder_user&.collections&.where(purchased: false)&.last
     @search = params[:search].presence if params[:search].is_a?(String)
     @dropdown = params[:dropdown].presence if params[:dropdown].is_a?(String)
     @includes_ai = params[:includes_ai] if %w[true false].include?(params[:includes_ai])
@@ -41,32 +49,45 @@ class CollectionsController < ApplicationController
 
   def create_builder_pack
     track = SingleTrack.find params[:track]
-    collection = current_user.collections.where(purchased: false).last ||
-      current_user.collections.new(tracks: [], total_points: 0, price_cents: 0)
+    user = pack_builder_user(create: true)
+    collection = user.collections.where(purchased: false).last ||
+      user.collections.new(tracks: [], total_points: 0, price_cents: 0)
     add_track_to_builder_collection(collection, track)
   end
 
   def add_builder_track
     track = SingleTrack.find params[:track]
-    collection = current_user.collections.where(purchased: false).find(params[:collection])
+    user = pack_builder_user
+    return head :not_found unless user
+
+    collection = user.collections.where(purchased: false).find(params[:collection])
     add_track_to_builder_collection(collection, track)
   end
 
   def remove_builder_track
-    collection = current_user.collections.where(purchased: false).find(params[:collection_id])
+    user = pack_builder_user
+    return head :not_found unless user
+
+    collection = user.collections.where(purchased: false).find(params[:collection_id])
     track = SingleTrack.find(params[:track_id])
     collection_track_ids = (collection.tracks || []).map(&:to_i) - [track.id]
     update_builder_collection(collection, collection_track_ids, track)
   end
 
   def remove_builder_collection
-    Collection.find(params[:collection_id]).destroy
-    cart = current_user.cart
-    if cart.items == [] && cart.sinlge_tracks == []
-      cart.destroy
-    else
-      cart.collections = []
-      cart.save
+    user = pack_builder_user
+    return head :not_found unless user
+
+    collection = user.collections.where(purchased: false).find(params[:collection_id])
+    collection.destroy
+
+    if (cart = user.cart)
+      cart.collections = user.collections.where(purchased: false).pluck(:id)
+      if cart.items.blank? && cart.sinlge_tracks.blank? && cart.collections.blank?
+        cart.destroy
+      else
+        cart.save
+      end
     end
     redirect_to pack_builder_path
   end
@@ -444,7 +465,7 @@ class CollectionsController < ApplicationController
       return
     end
 
-    cart_create_update
+    cart_create_update if user_signed_in?
 
     if "$" != session[:currency]
       conversion_rate = CurrencyRate.where("base = ? AND target = ?", "USD", "EUR").order(created_at: :desc).first.rate.to_f
@@ -549,6 +570,21 @@ class CollectionsController < ApplicationController
 
   def name_params
     params.permit("input-name")
+  end
+
+  def pack_builder_user(create: false)
+    return current_user if user_signed_in?
+
+    guest_user = User.find_by(id: session[:pack_builder_guest_user_id])
+    return guest_user if guest_user
+    return unless create
+
+    guest_user = User.create!(
+      email: "guest_#{SecureRandom.hex(10)}@example.com",
+      password: SecureRandom.hex(10)
+    )
+    session[:pack_builder_guest_user_id] = guest_user.id
+    guest_user
   end
 
   def convert_template_to_collection(id)
