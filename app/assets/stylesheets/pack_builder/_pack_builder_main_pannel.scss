@@ -791,8 +791,16 @@
 }
 
 .sound-catalog .key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 42px;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 50%;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: $new-green;

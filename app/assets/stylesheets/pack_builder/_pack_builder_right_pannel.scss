@@ -216,14 +216,17 @@
 }
 
 .pack-builder .pack-builder-track-points {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 4px 7px;
-  color: #f2f2f2;
+  color: $new-green;
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
-  background-color: #344957;
-  border: 1px solid #4d6678;
-  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  border-radius: 999px;
 }
 
 .pack-builder .pack-builder-track-price {
