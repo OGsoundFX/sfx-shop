@@ -31,28 +31,22 @@
     <a href="#next-section"><span></span></a>
   </section>
 
-  <div>
-    <div class="slideshow-images carousel slide" style="opacity: 1">
-      <div class="home-page__carousel-slides">
-        <div>
-          <div class="collection-banner-content">
-            <div class="collection-banner-text">
-              <div id="create-your-collection">Every great story</div>
-              <div id="create-your-collection">deserves the right sound</div>
-            </div>
-          </div>
-          <div>
-            <% if @current_sales_list != {} %>
-              <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
-              <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
-            <% else %>
-              <%= image_tag asset_path('Promo20_2.png'), id: "promo20", class: "d-none" %>
-              <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
-            <% end %>
-          </div>
-          <img src="https://res.cloudinary.com/dk9a86uhu/image/upload/v1631081625/carousel/forest-931706_1920_hywbfq.jpg" class="d-block w-100" alt="Browse our packs and save 20% off the second pack and all following packs">
-        </div>
+  <div class="home-banner">
+    <video class="home-banner__video" autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
+      <source src="https://bamsfx-general-content.s3.eu-central-1.amazonaws.com/homepage_banner.mp4" type="video/mp4">
+    </video>
+    <div class="collection-banner-content">
+      <div class="collection-banner-text">
+        <div id="create-your-collection">Every great story</div>
+        <div id="create-your-collection">deserves the right sound</div>
       </div>
     </div>
+    <% if @current_sales_list != {} %>
+      <%= image_tag asset_path('Promo_sale.png'), id: "promo20" %>
+      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+    <% else %>
+      <%= image_tag asset_path('Promo20_2.png'), id: "promo20", class: "d-none" %>
+      <%= image_tag asset_path('x-mas.png'), id: "seasonal-promo", class: "d-none" %>
+    <% end %>
   </div>
 </div>
