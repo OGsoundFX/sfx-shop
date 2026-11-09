@@ -319,6 +319,14 @@ ul {
   margin: 0 10px;
 }
 
+.purchase-action-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
 .icon-click-hover {
   color: #4e4e4e;
   &:hover {
