@@ -6,6 +6,13 @@
     <div class="d-flex">
       <%= render "shared/left_pannel_desktop" %>
       <div class="mx-auto">
+        <section class="home-pack-builder-callout" aria-labelledby="home-pack-builder-title">
+          <div class="home-pack-builder-callout__copy">
+            <h2 id="home-pack-builder-title">Want to build your own pack?</h2>
+            <p>Pick the sounds you need and create a collection that fits your project.</p>
+          </div>
+          <%= link_to "Build your pack", pack_builder_path, class: "home-pack-builder-callout__button" %>
+        </section>
         <section id="next-section">
           <div>
             <% if !@announcement.nil? %>
