@@ -1,11 +1,26 @@
 <div class="content admin-min-height bg-dark">
-  <div class="content">
+  <div class="content" data-controller="video-modal" data-action="keydown@window->video-modal#closeOnEscape">
     <div class="pack-builder-banner">
       <video autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
         <source src="https://bamsfx-general-content.s3.eu-central-1.amazonaws.com/1080_original_size.mp4" type="video/mp4">
       </video>
       <h1 class="padding-navbar-pack-builder font-permanent-marker">Build your Pack</h1>
       <small style="font-size: 1.2rem"><em>Find your sounds, make your own pack!</em></small>
+      <button type="button" class="pack-builder-demo-button" data-video-modal-target="button" data-action="click->video-modal#openModal">
+        Watch the demo
+      </button>
+    </div>
+    <div class="pack-builder-demo-modal" data-video-modal-target="videoModal" data-action="click->video-modal#closeOnOutsideClick" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pack-builder-demo-title">
+      <div class="pack-builder-demo-modal__content">
+        <div class="pack-builder-demo-modal__header">
+          <h2 id="pack-builder-demo-title">Pack Builder demo</h2>
+          <button type="button" class="pack-builder-demo-modal__close" data-video-modal-target="close" data-action="click->video-modal#closeModal" aria-label="Close video">&times;</button>
+        </div>
+        <video controls playsinline preload="none" data-video-modal-target="video">
+          <source src="https://bamsfx-general-content.s3.eu-central-1.amazonaws.com/pack_builder_presentation.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
     </div>
     <%= render "shared/left_pannel_mobile"%>
     <div class="template-display-desktop">

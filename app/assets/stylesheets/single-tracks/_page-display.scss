@@ -100,7 +100,7 @@
 }
 
 .pack-builder-banner {
-  height: 240px;
+  height: 280px;
   position: relative;
   overflow: hidden;
   background-size: cover;
@@ -124,10 +124,76 @@
     z-index: 1;
   }
 
+  small {
+    display: block;
+  }
+
   h1 {
     font-size: 2rem;
     margin: 0 16px;
   }
+}
+
+.pack-builder-demo-button {
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  padding: 8px 18px;
+  background-color: $new-green;
+  border-radius: 4px;
+  color: whitesmoke;
+  transition: background-color 0.2s ease;
+  &:hover,
+  &:focus {
+    transition: background-color 0.2s ease;
+    background-color: $light-grey;
+  }
+}
+
+.pack-builder-demo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.pack-builder-demo-modal__content {
+  width: min(100%, 960px);
+  color: white;
+
+  video {
+    display: block;
+    width: 100%;
+    max-height: calc(100vh - 120px);
+    background: black;
+  }
+}
+
+.pack-builder-demo-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+}
+
+.pack-builder-demo-modal__close {
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .banner, .designer-show__banner {
