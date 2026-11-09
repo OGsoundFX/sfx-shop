@@ -154,7 +154,9 @@ class AdministratorController < ApplicationController
 
   def pack_rejected
     # probably need a form for rejection reasons
-    raise
+    @pack = SfxPack.find(params[:id])
+    @pack.declined!
+    redirect_to pack_submissions_path
   end
 
   def calculate_exchange_rate
