@@ -1,5 +1,21 @@
 import WaveSurfer from 'wavesurfer.js';
 
+const activeWaveSurfers = new Set();
+const createWaveSurfer = (options) => {
+  const player = WaveSurfer.create(options);
+  activeWaveSurfers.add(player);
+  player.on('destroy', () => activeWaveSurfers.delete(player));
+  return player;
+};
+
+const destroyWaveSurfers = () => {
+  activeWaveSurfers.forEach((player) => player.destroy());
+};
+
+window.addEventListener('turbo:before-visit', destroyWaveSurfers);
+window.addEventListener('turbo:before-cache', destroyWaveSurfers);
+window.addEventListener('pagehide', destroyWaveSurfers);
+
 // time converter function
 
 const timeConverter = (time) => {
@@ -49,7 +65,7 @@ window.addEventListener('turbo:load', () => {
       ids[loopId] = id
       wavesurfers.push(id);
       let link = el.dataset.link;
-      wavesurfers[loopId] = WaveSurfer.create({
+      wavesurfers[loopId] = createWaveSurfer({
         container: `#${id}`,
         barWidth: 2,
         barHeight: 1,
@@ -195,7 +211,7 @@ window.addEventListener('turbo:load', () => {
       ids[loopId] = id
       wavesurfers.push(id);
       let link = el.dataset.link;
-      wavesurfers[loopId] = WaveSurfer.create({
+      wavesurfers[loopId] = createWaveSurfer({
         container: `#${id}`,
         barWidth: 2,
         barHeight: 1,
@@ -331,7 +347,7 @@ window.addEventListener('turbo:load', () => {
     ids[loopId] = id
     wavesurfers.push(id);
     let link = el.dataset.link;
-    wavesurfers[loopId] = WaveSurfer.create({
+    wavesurfers[loopId] = createWaveSurfer({
       container: `#${id}`,
       barWidth: 2,
       barHeight: 1,
@@ -506,7 +522,7 @@ window.addEventListener('turbo:load', () => {
 
         if (!player) {
           const waveform = document.getElementById(waveformId);
-          player = WaveSurfer.create({
+          player = createWaveSurfer({
             container: waveform,
             barWidth: 2,
             barHeight: 1,
@@ -608,7 +624,7 @@ window.addEventListener('turbo:load', () => {
       if (!player) {
         waveform.classList.add('is-visible');
         waveform.setAttribute('aria-hidden', 'false');
-        player = WaveSurfer.create({
+        player = createWaveSurfer({
           container: waveform,
           barWidth: 2,
           barHeight: 1,
@@ -710,10 +726,4 @@ window.addEventListener('turbo:load', () => {
 
   setupPackBuilderPreviewControls();
 
-  
-  // stop audio playing before leaving page
-  window.addEventListener('beforeunload', (event) => {
-    // event.preventDefault(); // uncommented to prevent the alert from showing on safari and internet explorer
-    audioPlaying.stop();
-  });
 });
