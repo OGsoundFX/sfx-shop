@@ -57,7 +57,7 @@
         <div><h3 class="price-color"><%= humanized_money(pack.price * conversion_rate, symbol: session[:currency]) %></h3></div>
         <%= form_tag remove_item_path do %>
           <%= hidden_field_tag 'pack_id', pack.id %>
-          <%= submit_tag 'Remove', id: 'btn-remove' %>
+          <%= submit_tag 'Remove', class:"btn btn-secondary" %>
         <% end %>
         <div style="height: 20px;"></div>
         <hr>
