@@ -54,6 +54,10 @@ class SoundDesigner < ApplicationRecord
   def payout_due
   end
 
+  def email
+    self.user.email
+  end
+
   private
 
   def update_user
