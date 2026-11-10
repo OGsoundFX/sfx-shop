@@ -1,15 +1,19 @@
-<div id="collection-name-<%= collection.id %>" class="project-name" data-controller="pack-builder-title" data-pack-builder-title-collection-id-value="<%= collection&.id %>">
-  <div class="pack-name" data-pack-builder-title-target="nameDisplay"><%= collection&.title.present? ? collection.title : 'Name your pack' %></div>
-  <div id="pack-builder-name-edit" data-action="click->pack-builder-title#displayInput">
-    <i class="fas fa-edit hover-effect" data-pack-builder-title-target="editIcon"></i>
-    <div class="collection-name-form">
-      <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-pack-builder-title-target="nameForm" class="d-none">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= hidden_field_tag :collection, collection&.id %>
-        <input value="<%= collection&.title.present? ? collection.title : 'Name your pack' %>" name="input-name" maxlength="20" id="collection-name-input" data-pack-builder-title-target="nameInputField">
-        <input type="submit" class="submit-button d-none">
-      </form>
+<div id="collection-name-<%= collection&.id %>" class="project-name" data-controller="pack-builder-title" data-pack-builder-title-collection-id-value="<%= collection&.id %>">
+  <% if collection.nil? %>
+    <div class="pack-name d-flex justify-content-center" id="start-building">Start building your pack</div>
+  <% else %>
+    <div class="pack-name" data-pack-builder-title-target="nameDisplay"><%= collection&.title.present? ? collection.title : 'Name your pack' %></div>
+    <div id="pack-builder-name-edit" data-action="click->pack-builder-title#displayInput">
+      <i class="fas fa-edit hover-effect" data-pack-builder-title-target="editIcon"></i>
+      <div class="collection-name-form">
+        <form action="/name_update" method="POST" id="collection-name" data-identifier="name-does-not-exist" data-pack-builder-title-target="nameForm" class="d-none">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <%= hidden_field_tag :collection, collection&.id %>
+          <input value="<%= collection&.title.present? ? collection.title : 'Name your pack' %>" name="input-name" maxlength="20" id="collection-name-input" data-pack-builder-title-target="nameInputField">
+          <input type="submit" class="submit-button d-none">
+        </form>
+      </div>
     </div>
-  </div>
-  <span data-pack-builder-title-target="pressEnter" class="d-none" id="press-enter-to-save">press enter to save</span>
+    <span data-pack-builder-title-target="pressEnter" class="d-none" id="press-enter-to-save">press enter to save</span>
+  <% end %>
 </div>
