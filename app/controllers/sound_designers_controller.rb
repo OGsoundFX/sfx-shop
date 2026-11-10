@@ -23,8 +23,8 @@ class SoundDesignersController < ApplicationController
       end
     end
 
+    @sfx_packs = Kaminari.paginate_array(@sfx_packs).page(params[:page]).per(20)
     @categories = SfxPack.categories
-
   end
 
   def new
