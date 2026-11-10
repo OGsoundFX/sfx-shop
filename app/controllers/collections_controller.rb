@@ -205,6 +205,10 @@ class CollectionsController < ApplicationController
     collection = Collection.find(params[:collection])
     collection.title = name
     collection.save
+    respond_to do |format|
+      format.turbo_stream {render turbo_stream: turbo_stream.replace("collection-name-#{collection.id}", partial: "collections/right_pannel_elements/collection_name", locals: {collection: collection})}
+      format.html { request.referer }
+    end
   end
 
   # /note/👇 old way for zipping files, using asset folder for local storage
