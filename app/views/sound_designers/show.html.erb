@@ -60,7 +60,9 @@
             <% elsif @sfx_packs.empty? %>
               <h3>No packs from this Designer</h3>
             <% end %>
+            <%= paginate @sfx_packs %>
             <%= render 'shared/pack_card' %>
+            <%= paginate @sfx_packs %>
           </div>
         </div>
       </div>

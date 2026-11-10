@@ -44,11 +44,7 @@ class SfxPacksController < ApplicationController
     @free = params[:free] == "1"
     packs = packs.where(price_cents: 0) if @free
 
-    @sfx_packs = if @category || @search
-      Kaminari.paginate_array(packs.sort_by(&:display_order)).page(params[:page]).per(24)
-    else
-      Kaminari.paginate_array(packs.sort_by(&:display_order)).page(params[:page]).per(24)
-    end
+    @sfx_packs = Kaminari.paginate_array(packs.sort_by(&:display_order)).page(params[:page]).per(20)
 
     # annoucements
     if Date.today < Annoucement.last.end_date && Date.today >= Annoucement.last.start_date
