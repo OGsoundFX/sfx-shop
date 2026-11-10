@@ -24,12 +24,7 @@
         </div>
         <%= render 'collections/right_pannel_elements/top_track_count', collection: @collection %>
       </div>
-      <div class="project-name" >
-        <div class="pack-name" >Name your pack</div>
-        <div id="pack-builder-name-edit" >
-          <i class="fas fa-edit"></i>
-        </div>
-      </div>
+      <%= render "collections/right_pannel_elements/collection_name", collection: @collection %>
     </div>    
     <%= render "collections/right_pannel_elements/selected_track_list",
         collection: @collection,
