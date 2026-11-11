@@ -6,6 +6,9 @@
 
 .btn-admin-active {
   background-color: $new-green;
+  &:hover {
+    background: opacify($color: grey, $amount: 0);
+  }
 }
 
 .btn-rejected {
@@ -16,7 +19,7 @@
 .btn-reject {
   background-color: $indian-red;
   &:hover {
-    background: opacify($color: grey, $amount: 0) ;
+    background: opacify($color: grey, $amount: 0);
   }
 }
 

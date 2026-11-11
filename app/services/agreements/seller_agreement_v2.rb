@@ -25,7 +25,7 @@ module Agreements
         <li>&nbsp &nbsp• <strong>“Seller”</strong>: The individual or legal entity providing sound effects for sale.</li>
         <li>&nbsp &nbsp• <strong>“Content”</strong>: digital sound effect packages (“SFX packs”) uploaded by Seller, including audio files, metadata, descriptions, and cover images.</li>
         <li>&nbsp &nbsp• <strong>“Customers”</strong>: End users purchasing Content via the Platform.</li>
-        <li>&nbsp &nbsp• <strong>“Net Revenue”</strong>: Gross sales amount minus applicable taxes (including VAT), payment processing fees, currency conversion fees, refunds, chargebacks, and discounts.</li>
+        <li>&nbsp &nbsp• <strong>“Net Revenue”</strong>: Gross sales amount minus applicable taxes (including VAT), refunds, chargebacks, and discounts.</li>
       </ul>
 
       <br>
@@ -130,7 +130,7 @@ module Agreements
       </ul>
       <br>
       <br>
-      <h2>7. Payment &amp; Commission</h2>
+      <h2>7. Pricing, Commission &amp; Promotions</h2>
       <br>
       <h4>7.1 Commission</h4>
       <ul>
@@ -168,35 +168,6 @@ module Agreements
       </ul>
 
       <br>
-      <h4>7.4 Example Payout Calculation</h4>
-
-      <p>
-        The following example is provided for illustrative purposes only:
-      </p>
-
-      <ul>
-        <li>Example sale price: <strong>€50.00</strong></li>
-        <li>VAT (19%, collected and remitted by BamSFX): <strong>€7.98</strong></li>
-        <li>Net after VAT: <strong>€42.02</strong></li>
-        <li>BamSFX commission (20%): <strong>€8.40</strong></li>
-        <li>Seller share (80%): <strong>€33.62</strong></li>
-      </ul>
-
-      <p>
-        Extra processing fees, such as payment system fees (Paypal, Stripe...), currency conversion fees, and other applicable fees will not be charged to the Seller and are borne by BamSFX.
-      </p>
-
-      <br>
-      <h4>7.5 Payouts</h4>
-
-      <ul>
-        <li>&nbsp &nbsp• Payouts are processed on a monthly basis;</li>
-        <li>&nbsp &nbsp• Payouts are made only if the Seller’s balance reaches at least <strong>€50</strong> or <strong>$50</strong>;</li>
-        <li>&nbsp &nbsp• Payments are made via <strong>PayPal</strong>;</li>
-        <li>&nbsp &nbsp• PayPal may apply additional fees, which are borne by the Seller;</li>
-        <li>&nbsp &nbsp• Payouts are made in the Seller’s selected currency (EUR or USD).</li>
-      </ul>
-
       <br>
       <br>
       <h2>8. Taxes &amp; VAT Handling</h2>
@@ -234,32 +205,44 @@ module Agreements
 
       <br>
       <br>
-      <h2>9. Currency, Pricing &amp; Promotions</h2>
+      <h2>9. Payouts</h2>
+
+      <br>
+      <h4>9.1 Payout Calculation</h4>
+
+      <p>The following example is provided for illustrative purposes only:</p>
 
       <ul>
-        <li>&nbsp &nbsp• Sellers may choose EUR or USD as their preferred payout currency;</li>
-        <li>&nbsp &nbsp• Prices are displayed in EUR within the Eurozone and USD elsewhere;</li>
-        <li>&nbsp &nbsp• Customers purchasing more than one pack receive a 20% discount on the second and subsequent packs;</li>
-        <li>&nbsp &nbsp• Sellers agree to participate in site-wide promotions and sales defined by BamSFX.</li>
+        <li>Example sale price: <strong>€50.00</strong></li>
+        <li>VAT (19%, collected and remitted by BamSFX): <strong>€7.98</strong></li>
+        <li>Net after VAT: <strong>€42.02</strong></li>
+        <li>BamSFX commission (20%): <strong>€8.40</strong></li>
+        <li>Seller share (80%): <strong>€33.62</strong></li>
       </ul>
 
+      <p>
+        Fees charged by Stripe to process Customer purchases, including any applicable payment
+        processing or currency conversion fees, are borne by BamSFX and are not deducted from
+        the Seller’s share.
+      </p>
+
       <br>
-      <br>
-      <h2>10. Payments</h2>
+      <h4>9.2 Payout Schedule &amp; Method</h4>
 
       <ul>
         <li>&nbsp &nbsp• Payouts are processed monthly;</li>
-        <li>&nbsp &nbsp• Minimum payout threshold is €50 or $50;</li>
-        <li>&nbsp &nbsp• Payments are made via PayPal;</li>
-        <li>&nbsp &nbsp• PayPal fees may apply and are borne by the Seller.</li>
+        <li>&nbsp &nbsp• Payouts are made when the Seller’s balance reaches at least <strong>€50</strong> or <strong>$50</strong>;</li>
+        <li>&nbsp &nbsp• Payments are made via <strong>PayPal</strong>;</li>
+        <li>&nbsp &nbsp• Any fees PayPal applies to a payout are borne by the Seller;</li>
+        <li>&nbsp &nbsp• Sellers may choose EUR or USD as their preferred payout currency, and payouts are made in that currency.</li>
       </ul>
 
       <br>
       <br>
-      <h2>11. Content Removal &amp; Termination</h2>
+      <h2>10. Content Removal &amp; Termination</h2>
 
       <br>
-      <h4>11.1 Termination by BamSFX for Cause</h4>
+      <h4>10.1 Termination by BamSFX for Cause</h4>
       <p>
         BamSFX reserves the right to immediately remove Content or terminate Seller accounts
         without prior notice in case of:
@@ -273,7 +256,7 @@ module Agreements
       </ul>
 
       <br>
-      <h4>11.2 Termination by BamSFX for Convenience</h4>
+      <h4>10.2 Termination by BamSFX for Convenience</h4>
       <p>
         BamSFX may terminate this Agreement without cause upon thirty (30) days' written notice
         to the Seller. During this notice period, Seller may download all Content and associated
@@ -281,7 +264,7 @@ module Agreements
       </p>
 
       <br>
-      <h4>11.3 Termination by Seller</h4>
+      <h4>10.3 Termination by Seller</h4>
       <p>
         Seller may terminate this Agreement at any time by providing thirty (30) days' written
         notice to BamSFX. Upon termination:
@@ -295,14 +278,14 @@ module Agreements
       </ul>
 
       <br>
-      <h4>11.4 Content Removal Without Termination</h4>
+      <h4>10.4 Content Removal Without Termination</h4>
       <p>
         Both Seller and BamSFX may request removal of individual Content items without terminating this Agreement,
         subject to reasonable processing time.
       </p>
 
       <br>
-      <h4>11.5 Effect of Termination</h4>
+      <h4>10.5 Effect of Termination</h4>
       <p>
         Termination of this Agreement, regardless of the initiating party, does not affect:
       </p>
@@ -311,13 +294,13 @@ module Agreements
         <li>&nbsp &nbsp• Outstanding payment obligations, which remain due and payable;</li>
         <li>&nbsp &nbsp• Licenses already granted to Customers, which survive termination in
         accordance with the end-user license terms in effect at the time of purchase;</li>
-        <li>&nbsp &nbsp• Indemnification obligations under Section 12;</li>
+        <li>&nbsp &nbsp• Indemnification obligations under Section 11;</li>
         <li>&nbsp &nbsp• Any provision that by its nature is intended to survive termination.</li>
       </ul>
 
       <br>
       <br>
-      <h2>12. Indemnification &amp; Liability</h2>
+      <h2>11. Indemnification &amp; Liability</h2>
 
       <p>
         The Seller agrees to indemnify and hold harmless BamSFX against any claims,
@@ -330,7 +313,7 @@ module Agreements
 
       <br>
       <br>
-      <h2>13. Governing Law &amp; Jurisdiction</h2>
+      <h2>12. Governing Law &amp; Jurisdiction</h2>
 
       <p>
         This Agreement shall be governed by and construed in accordance with the laws
@@ -340,7 +323,7 @@ module Agreements
 
       <br>
       <br>
-      <h2>14. Acceptance</h2>
+      <h2>13. Acceptance</h2>
 
       <p>
         By accepting this Agreement, the Seller acknowledges that they have read,
