@@ -47,6 +47,8 @@ class SoundDesignersController < ApplicationController
   def create
     @sound_designer = SoundDesigner.new(sound_designer_params)
     if @sound_designer.save
+      prospect = Prospect.find_by_email(current_user.email)
+      prospect.destroy if prospect
       redirect_to designer_listings_path, notice: "Sound Designer profile created successfully."
     else
       render :new, status: :unprocessable_entity
