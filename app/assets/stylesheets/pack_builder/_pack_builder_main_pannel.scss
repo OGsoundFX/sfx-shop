@@ -1416,7 +1416,9 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   .sound-catalog .sound {
     grid-template-columns: minmax(0, 1fr) 28px 24px 34px max-content 76px;
-    grid-template-areas: "identity preview info points price add";
+    grid-template-areas:
+      "identity preview info points price add"
+      "waveform waveform waveform waveform waveform waveform";
     gap: 8px;
   }
 
