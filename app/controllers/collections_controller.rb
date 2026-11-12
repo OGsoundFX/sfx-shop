@@ -44,6 +44,7 @@ class CollectionsController < ApplicationController
     tracks = tracks.where(asset_type: @asset_type) if @asset_type.present?
 
     @total_sounds = tracks.count
+    tracks = tracks.order('RANDOM()')
     @sfx_tracks = tracks.page(params[:page]).per(20)
   end
 
