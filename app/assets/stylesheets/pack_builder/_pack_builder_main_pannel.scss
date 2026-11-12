@@ -1308,10 +1308,9 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1288px) {
   .sound-catalog {
     width: auto;
-    margin: 12px 0;
   }
 
   .sound-catalog .navbar {
@@ -1413,7 +1412,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1288px) {
   .sound-catalog .sound {
     grid-template-columns: minmax(0, 1fr) 28px 24px 34px max-content 76px;
     grid-template-areas:

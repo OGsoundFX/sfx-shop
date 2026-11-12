@@ -18,15 +18,22 @@
 
 .pack-builder-grid {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(360px, 36%));
   gap: 18px;
   flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-right: 18px;
+}
+
+.pack-builder-grid > .sound-catalog {
   min-width: 0;
 }
 
 @media (max-width: 1024px) {
   .pack-builder-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 0;
   }
 
   .pack-builder-grid > .sound-catalog {
