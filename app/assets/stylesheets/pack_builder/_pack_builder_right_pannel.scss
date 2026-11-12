@@ -1,8 +1,10 @@
 .pack-builder {
-  margin: 18px 18px 18px 0;
+  margin: 18px 0;
   display: flex;
   flex-direction: column;
-  width: 360px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   align-items: flex-start;
   align-self: start;
   gap: 20px;
@@ -457,7 +459,7 @@
     position: relative;
     top: auto;
     width: auto;
-    margin: 18px 0 0;
+    margin: 18px 0 0 18px;
     align-self: stretch;
   }
 

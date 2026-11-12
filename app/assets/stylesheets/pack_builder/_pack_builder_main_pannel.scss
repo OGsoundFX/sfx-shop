@@ -1308,10 +1308,9 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1288px) {
   .sound-catalog {
     width: auto;
-    margin: 12px 0;
   }
 
   .sound-catalog .navbar {
@@ -1383,7 +1382,11 @@
 
   .sound-catalog .key {
     grid-area: points;
-    width: auto;
+    flex: 0 0 34px;
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    justify-self: center;
   }
 
   .sound-catalog .price {
@@ -1406,5 +1409,29 @@
 
   .sound-catalog .pack-builder-catalog-preview-waveform.is-visible {
     display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1288px) {
+  .sound-catalog .sound {
+    grid-template-columns: minmax(0, 1fr) 28px 24px 34px max-content 76px;
+    grid-template-areas:
+      "identity preview info points price add"
+      "waveform waveform waveform waveform waveform waveform";
+    gap: 8px;
+  }
+
+  .sound-catalog .wave-section-pack-builder {
+    width: 28px;
+    height: 28px;
+  }
+
+  .sound-catalog .tempo {
+    width: 24px;
+  }
+
+  .sound-catalog .price {
+    width: max-content;
+    white-space: nowrap;
   }
 }
