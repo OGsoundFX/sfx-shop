@@ -138,6 +138,9 @@ Rails.application.routes.draw do
     resources :agreement_acceptances, only: :create
   end
 
+  # google merchant dynamic feed route
+  get "/feeds/google", to: "feeds#google"
+
   # data protection path
   get "data_protection", to: "pages#data_protection"
 
