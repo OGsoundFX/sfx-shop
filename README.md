@@ -1,4 +1,4 @@
-# BAM Sound Effects
+# BsmSFX
 
 BAM Sound Effects (BAMSFX) is an online marketplace for production-ready sound effects. Customers can discover individual sounds and curated packs, audition audio in the browser, and build custom collections to suit their projects.
 
