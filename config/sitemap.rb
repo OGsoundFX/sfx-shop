@@ -4,6 +4,7 @@ SitemapGenerator::Sitemap.default_host = "https://www.bamsfx.com"
 SitemapGenerator::Sitemap.public_path = "public/"
 SitemapGenerator::Sitemap.sitemaps_host = "https://www.bamsfx.com"
 SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
+SitemapGenerator::Sitemap.compress = false
 
 SitemapGenerator::Sitemap.create do
   add root_path, priority: 1.0, changefreq: 'daily'
