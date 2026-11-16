@@ -216,7 +216,8 @@ class CollectionsController < ApplicationController
         .where(order: order, collection_download: true)
         .order(created_at: :desc)
         .first
-      return head :no_content unless download_link && !download_link.expired?
+      return head :no_content if (download_link.nil? || download_link.expired?) &&
+        ZipCollectionJob.in_progress?(order: order, collection: collection)
 
       render turbo_stream: turbo_stream.replace(
         "dashboard-collection-download-button-#{order.id}",
@@ -230,7 +231,8 @@ class CollectionsController < ApplicationController
         .where(collection_download: false)
         .order(created_at: :desc)
         .first
-      return head :no_content unless download_link && !download_link.expired?
+      return head :no_content if (download_link.nil? || download_link.expired?) &&
+        ZipCollectionJob.in_progress?(order: order)
 
       render turbo_stream: turbo_stream.replace(
         "dashboard-tracks-download-button-#{order.id}",
