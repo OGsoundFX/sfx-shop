@@ -1,6 +1,21 @@
 class ZipCollectionJob < ApplicationJob
   queue_as :default
 
+  def self.in_progress?(order:, collection: nil)
+    SolidQueue::Job.where(class_name: name, finished_at: nil).any? do |job|
+      arguments = job.arguments&.dig("arguments", 0)
+      next false unless arguments
+
+      matches_download = if collection
+        arguments["collection"].to_i == collection.id
+      else
+        arguments["type"] == "single_tracks"
+      end
+
+      arguments["order"].to_i == order.id && matches_download
+    end
+  end
+
   require 'zip'
   require 'open-uri'
   require 'aws-sdk-s3'

@@ -110,9 +110,6 @@ class CollectionsController < ApplicationController
     collection.price_cents = collection_categories(collection.total_points)
     collection.save
 
-    # re-adjust price if applies
-
-
     # destroy collection if doesn't contain tracks
     if collection.tracks == []
       cart_remove_collection(collection, cart)
@@ -136,8 +133,6 @@ class CollectionsController < ApplicationController
       end
       user_collection.save
     else
-      # track_points = params[:tracks].map { |track| track = SingleTrack.find(track).price}
-      # sum_points = track_points.sum
       price = CollectionCategory.where("points > #{params[:points]}").first.price * 100
       Collection.create(user_id: current_user.id, tracks: params[:tracks], total_points: params[:points], price_cents: price)
     end
@@ -197,76 +192,6 @@ class CollectionsController < ApplicationController
     end
   end
 
-  # /note/👇 old way for zipping files, using asset folder for local storage
-  # def create_zip_collection
-  #   Aws.config.update({
-  #     region: 'eu-central-1',
-  #     access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-  #     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-  #   })
-  #   s3 = Aws::S3::Resource.new
-  #   bucket = s3.bucket('single-track-list')
-  #   files = []
-  #   collection = Collection.find(params[:collection]).title
-  #   tracks = Collection.find(params[:collection]).tracks
-  #   tracks.each do |track|
-  #     name = SingleTrack.find(track).link.split('.com').last[1..-1]
-  #     files << name
-  #   end
-  #   time = Time.now.to_i
-  #   folder = "#{current_user.username}_#{collection}_#{time}"
-  #   Dir.mkdir(Rails.root.join('app', 'assets', 'uploads', folder))
-  #   files.each do |file_name|
-  #     file_obj = bucket.object(file_name)
-  #     file_obj.get(response_target: Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last))
-  #   end
-  #   require 'zip'
-  #   require 'fileutils'
-  #   Zip::File.open(Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), Zip::File::CREATE) do |zipfile|
-  #     files.each do |file_name|
-  #      # Add the file to the zip
-  #       zipfile.add(file_name, File.join(Rails.root.join('app', 'assets', 'uploads', folder, file_name.split('/').last)))
-  #     end
-  #   end
-  #   send_file Rails.root.join('app', 'assets', 'uploads', folder, "#{folder}.zip"), disposition: 'attachment'
-  #   # redirect_to dashboard_path, notice: "Your pack was successfully downloaded"
-  # end
-
-  # /note/👇 new way for zipping files, using AWS S3 to stream. Problem files larger then 500mb crash on Heroku
-  # require 'zip'
-  # require 'stringio'
-  # require 'open-uri'
-
-  # def create_zip_collection
-  #   collection = Collection.find(params[:collection])
-  #   tracks = collection.tracks
-  #   time = Time.now.to_i
-  #   zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
-
-  #   # Set up in-memory zip
-  #   compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-  #     tracks.each do |track_id|
-  #       track = SingleTrack.find(track_id)
-  #       s3_key = track.link.split('.com').last[1..-1]
-  #       filename = File.basename(s3_key)
-
-  #       # Get the file stream from S3 (public or presigned)
-  #       s3_url = "https://single-track-list.s3.eu-central-1.amazonaws.com/#{s3_key}"
-  #       file_stream = URI.open(s3_url)
-
-  #       # Add it to the zip stream
-  #       zos.put_next_entry(filename)
-  #       IO.copy_stream(file_stream, zos)
-  #     end
-  #   end
-
-  #   compressed_filestream.rewind
-
-  #   send_data compressed_filestream.read,
-  #             filename: zip_filename,
-  #             type: 'application/zip'
-  # end
-
   # /note/👇 this approach creates the zipfile and stores it on AWS
   def create_zip_collection
     if params[:type] == "single_tracks"
@@ -275,66 +200,6 @@ class CollectionsController < ApplicationController
       params_object = {order: params[:order], collection: params[:collection]}
     end
     ZipCollectionJob.perform_later(params_object, current_user.id)
-    # ZipCollectionJob.perform_now(params_object, current_user.id)
-    # Aws.config.update({
-    #   region: 'eu-central-1',
-    #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-    #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-    # })
-    # time = Time.now.to_i
-    # order = Order.find(params[:order])
-
-    # if params[:type] == "single_tracks"
-    #   collection_download = false
-    #   tracks = params[:tracks]
-    #   zip_filename = "#{current_user.username}_tracks_#{time}.zip"
-    # else
-    #   collection_download = true
-    #   collection = Collection.find(params[:collection])
-    #   tracks = collection.tracks
-    #   zip_filename = "#{current_user.username}_#{collection.title}_#{time}.zip"
-    # end
-
-    # # Create a temp file on disk
-    # tempfile = Tempfile.new([zip_filename, '.zip'], binmode: true)
-
-    # Zip::OutputStream.open(tempfile) do |zos|
-    #   tracks.each do |track_id|
-    #     track = SingleTrack.find(track_id)
-    #     s3_key = track.link.split('.com').last[1..-1]
-    #     filename = File.basename(s3_key)
-
-    #     # Stream from S3
-    #     s3_url = "https://single-track-list.s3.eu-central-1.amazonaws.com/#{s3_key}"
-    #     URI.open(s3_url) do |file_stream|
-    #       zos.put_next_entry(filename)
-    #       IO.copy_stream(file_stream, zos)
-    #     end
-    #   end
-    # end
-
-    # tempfile.rewind
-
-    # # Upload to S3 using aws-sdk-s3
-    # s3 = Aws::S3::Resource.new(region: 'eu-central-1')
-    # obj = s3.bucket('bamsfx-temp-zip-files').object("zips/#{zip_filename}")
-    # obj.upload_file(tempfile.path, acl: 'private')
-
-    # # Generate a presigned URL (expires in 1 day)
-    # url = obj.presigned_url(:get, expires_in: 86400)
-
-    # # Clean up temp file
-    # tempfile.close
-    # tempfile.unlink
-
-    # # create a download_link and redirect
-    # if collection_download
-    #   DownloadLink.create(url: url, collection: collection, collection_download: true, order: order, validity_duration: Time.at(1.hour))
-    # else
-    #   DownloadLink.create(url: url, collection_download: false, order: order, validity_duration: Time.at(1.hour))
-    # end
-    # # Return the URL to the user (e.g., as JSON)
-    # # render json: { download_url: url }
     redirect_to dashboard_path
   end
 
@@ -351,7 +216,8 @@ class CollectionsController < ApplicationController
         .where(order: order, collection_download: true)
         .order(created_at: :desc)
         .first
-      return head :no_content unless download_link && !download_link.expired?
+      return head :no_content if (download_link.nil? || download_link.expired?) &&
+        ZipCollectionJob.in_progress?(order: order, collection: collection)
 
       render turbo_stream: turbo_stream.replace(
         "dashboard-collection-download-button-#{order.id}",
@@ -365,7 +231,8 @@ class CollectionsController < ApplicationController
         .where(collection_download: false)
         .order(created_at: :desc)
         .first
-      return head :no_content unless download_link && !download_link.expired?
+      return head :no_content if (download_link.nil? || download_link.expired?) &&
+        ZipCollectionJob.in_progress?(order: order)
 
       render turbo_stream: turbo_stream.replace(
         "dashboard-tracks-download-button-#{order.id}",
@@ -382,7 +249,6 @@ class CollectionsController < ApplicationController
     title = params[:template][:title]
     categories = params[:template][:categories].split(", " || "")
     template = TemplateCollection.new(title: title, total_points: collection.total_points, price: collection.price, tracks: collection.tracks, categories: categories)
-    # template.photo = params[:template][:photo]
     if template.save
       redirect_to cart_path
     else
@@ -510,7 +376,6 @@ class CollectionsController < ApplicationController
 
   def cart_create_update
     if Cart.where(user_id: current_user.id).last.nil?
-      # user_collections = current_user.collections.map {|coll| coll.id}
       Cart.create(collections: current_user_collections, user_id: current_user.id)
     else
       cart = Cart.where(user_id: current_user.id).last
