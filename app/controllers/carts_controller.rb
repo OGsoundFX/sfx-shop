@@ -172,22 +172,7 @@ class CartsController < ApplicationController
         @current_collections.last.tracks.each { |track| @single_tracks_price += (SingleTrack.find(track).price_cents / 100.to_f) * conversion_rate }
       end
       @total_value += @single_tracks_price
-      @icons = {
-        "all": '<i class="fas fa-volume-up"></i>',
-        "action": '<i class="fas fa-bomb"></i>',
-        "medieval": '<i class="fab fa-fort-awesome"></i>',
-        "outdoor":	'<i class="fas fa-tree"></i>',
-        "underground": '<i class="fas fa-dungeon"></i>',
-        "scary":	'<i class="fas fa-ghost"></i>',
-        "monsters":	'<i class="fas fa-dragon"></i>',
-        "disasters": '<i class="fas fa-mountain"></i>',
-        "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
-        "miscellaneous": '<i class="fas fa-volume-up"></i>',
-        "footsteps": '<i class="fas fa-shoe-prints"></i>',
-        "magic": '<i class="fas fa-hat-wizard"></i>',
-        "scifi": '<i class="fas fa-rocket"></i>',
-        "default": '<i class="fas fa-volume-up"></i>'
-      }
+      @icons = CategoryIcons.all
       # @tracks = SingleTrack.where(id: [@items.sinlge_tracks]).page params[:page]
       @tracks = SingleTrack.where(id: [@items.sinlge_tracks])
     end

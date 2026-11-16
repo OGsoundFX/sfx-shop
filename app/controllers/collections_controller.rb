@@ -17,22 +17,7 @@ class CollectionsController < ApplicationController
     @includes_ai = params[:includes_ai] if %w[true false].include?(params[:includes_ai])
     @asset_type = params[:asset_type] if SingleTrack.asset_types.key?(params[:asset_type])
 
-    @icons = {
-      "all": '<i class="fas fa-volume-up"></i>',
-      "action": '<i class="fas fa-bomb"></i>',
-      "medieval": '<i class="fab fa-fort-awesome"></i>',
-      "outdoor":	'<i class="fas fa-tree"></i>',
-      "underground": '<i class="fas fa-dungeon"></i>',
-      "scary":	'<i class="fas fa-ghost"></i>',
-      "monsters":	'<i class="fas fa-dragon"></i>',
-      "disasters": '<i class="fas fa-mountain"></i>',
-      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
-      "miscellaneous": '<i class="fas fa-volume-up"></i>',
-      "footsteps": '<i class="fas fa-shoe-prints"></i>',
-      "magic": '<i class="fas fa-hat-wizard"></i>',
-      "scifi": '<i class="fas fa-rocket"></i>',
-      "default": '<i class="fas fa-volume-up"></i>'
-    }
+    @icons = CategoryIcons.all
 
     @categories = SfxPack.categories
     @categories.unshift('All')
@@ -407,41 +392,11 @@ class CollectionsController < ApplicationController
 
   def templates_index
     @templates = TemplateCollection.where(active: true)
-    @icons = {
-      "all": '<i class="fas fa-volume-up"></i>',
-      "action": '<i class="fas fa-bomb"></i>',
-      "medieval": '<i class="fab fa-fort-awesome"></i>',
-      "outdoor":	'<i class="fas fa-tree"></i>',
-      "underground": '<i class="fas fa-dungeon"></i>',
-      "scary":	'<i class="fas fa-ghost"></i>',
-      "monsters":	'<i class="fas fa-dragon"></i>',
-      "disasters": '<i class="fas fa-mountain"></i>',
-      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
-      "miscellaneous": '<i class="fas fa-volume-up"></i>',
-      "footsteps": '<i class="fas fa-shoe-prints"></i>',
-      "magic": '<i class="fas fa-hat-wizard"></i>',
-      "scifi": '<i class="fas fa-rocket"></i>',
-      "default": '<i class="fas fa-volume-up"></i>'
-    }
+    @icons = CategoryIcons.all
   end
 
   def templates_show
-    @icons = {
-      "all": '<i class="fas fa-volume-up"></i>',
-      "action": '<i class="fas fa-bomb"></i>',
-      "medieval": '<i class="fab fa-fort-awesome"></i>',
-      "outdoor":	'<i class="fas fa-tree"></i>',
-      "underground": '<i class="fas fa-dungeon"></i>',
-      "scary":	'<i class="fas fa-ghost"></i>',
-      "monsters":	'<i class="fas fa-dragon"></i>',
-      "disasters": '<i class="fas fa-mountain"></i>',
-      "weather": '<i class="fas fa-cloud-showers-heavy"></i>',
-      "miscellaneous": '<i class="fas fa-volume-up"></i>',
-      "footsteps": '<i class="fas fa-shoe-prints"></i>',
-      "magic": '<i class="fas fa-hat-wizard"></i>',
-      "scifi": '<i class="fas fa-rocket"></i>',
-      "default": '<i class="fas fa-volume-up"></i>'
-    }
+    @icons = CategoryIcons.all
     @template_collection = TemplateCollection.find(params[:id])
     @collection = Collection.where("user_id = #{current_user.id} and purchased = false").last if current_user
     @tracks = SingleTrack.where(id: @template_collection.tracks).reorder(created_at: :desc).page params[:page]
