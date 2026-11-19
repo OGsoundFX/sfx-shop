@@ -21,10 +21,12 @@ class Collection < ApplicationRecord
   end
 
   def collection_categories(points)
-    currencies = {
-      "€" => [0, 500, 1000, 2000, 4000, 5000],
-      "$" => [0, 500, 1000, 2000, 4000, 5000],
-    }
+    # currencies = {
+    #   "€" => [0, 500, 1000, 2000, 4000, 5000],
+    #   "$" => [0, 500, 1000, 2000, 4000, 5000],
+    # }
+
+    price = [0, 500, 1000, 2000, 4000, 5000, 10000]
 
     index = case points
     when 0 then 0
@@ -32,10 +34,12 @@ class Collection < ApplicationRecord
     when 21..50 then 2
     when 51..120 then 3
     when 121..300 then 4
-    else 5
+    when 301..500 then 5
+    else 6
     end
 
-    currencies.fetch(session[:currency], "$")[index]
+    # currencies.fetch(session[:currency], "$")[index]
+    price[index]
   end
 
   def recalculate_collection_values
