@@ -24,7 +24,7 @@ BAM Sound Effects (BAMSFX) is an online marketplace for production-ready sound e
 
 ## Run locally
 
-Prerequisites: Ruby 3.4.8, Node.js 22, Yarn, and PostgreSQL.
+Prerequisites: Ruby 3.4.13, Node.js 22, Yarn, and PostgreSQL.
 
 ```sh
 bundle install
