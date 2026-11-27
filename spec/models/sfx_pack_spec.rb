@@ -72,4 +72,22 @@ RSpec.describe SfxPack, type: :model do
 
   context 'callbacks' do
   end
+
+  describe '#youtube_video_id' do
+    {
+      'https://www.youtube.com/watch?list=playlist&v=abcdefghijk' => 'abcdefghijk',
+      'https://youtu.be/abcdefghijk?si=share-token' => 'abcdefghijk',
+      'https://www.youtube.com/embed/abcdefghijk' => 'abcdefghijk',
+      'https://www.youtube.com/shorts/abcdefghijk' => 'abcdefghijk',
+      'https://www.youtube.com/live/abcdefghijk' => 'abcdefghijk'
+    }.each do |url, video_id|
+      it "extracts the video ID from #{url}" do
+        expect(described_class.new(link: url).youtube_video_id).to eq(video_id)
+      end
+    end
+
+    it 'returns nil when the link does not contain a video ID' do
+      expect(described_class.new(link: 'https://www.youtube.com/playlist?list=abcdefghijk').youtube_video_id).to be_nil
+    end
+  end
 end

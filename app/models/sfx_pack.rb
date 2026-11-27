@@ -80,7 +80,22 @@ class SfxPack < ApplicationRecord
   end
 
   def youtube_video_id
-    link[/youtu\.?be(?:\.com)?\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)?([A-Za-z0-9_-]{11})/, 1]
+    uri = URI.parse(link)
+    host = uri.host&.downcase
+    return unless host && (host == "youtu.be" || host.end_with?(".youtu.be") ||
+                           host == "youtube.com" || host.end_with?(".youtube.com"))
+
+    video_id = if host == "youtu.be" || host.end_with?(".youtu.be")
+      uri.path.split("/")[1]
+    elsif uri.path == "/watch"
+      URI.decode_www_form(uri.query.to_s).assoc("v")&.last
+    else
+      uri.path.match(%r{\A/(?:embed|v|shorts|live)/([^/]+)})&.captures&.first
+    end
+
+    video_id if video_id&.match?(/\A[A-Za-z0-9_-]{11}\z/)
+  rescue URI::InvalidURIError, ArgumentError
+    nil
   end
 
   def generate_summary_task
