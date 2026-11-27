@@ -63,7 +63,7 @@
               <p class="mb-1"><%= link_to pack.sound_designer.artist_name, sound_designer_path(pack.sound_designer), target: "_blank" %></p>
               <div class="mb-2">
                 <span style="font-size: 0.7rem" class="text-white text-xs font-medium px-2 py-1 badge rounded-pill sfx-card__music-color"><%= pack.music? ? "Music" : "SFX" %></span>
-                <span style="font-size: 0.7rem" class="text-white px-2 py-1 badge rounded-pill sfx-card__ai-pills-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
+                <span style="font-size: 0.7rem" class="text-white px-2 py-1 badge rounded-pill sfx-card__<%= 'no-' if !pack.includes_ai? %>ai-pills-color"><%= pack.includes_ai? ? "AI-assisted" : "No AI" %></span>
               </div>
               <p class="mb-1">• <%= pack.sample_rate == 44100 ? pack.sample_rate / 1000.0 : pack.sample_rate / 1000 %>kHz / <%= pack.bit_depth %>bit High Def Audio</p>
               <% if pack.size_mb > 1000 %>
