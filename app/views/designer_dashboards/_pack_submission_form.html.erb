@@ -87,9 +87,14 @@
     <small><em>Note: Leave 0 for free packs.</em></small>
   </div>
   <hr>
-  <%= f.input :link, label: "Share your demo link" %>
+  <%= f.input :link, label: "Share your demo link (SoundCloud or YouTube)", error: false %>
+  <% if @sfx_pack.errors[:link].any? %>
+    <div class="text-danger" role="alert"><%= @sfx_pack.errors[:link].to_sentence %></div>
+  <% end %>
   <div class="submission-form__note mt-2">
     <small><em>Note: Share a link to your work that accurately illustrates this pack, for potential buyers.</em></small>
+    <br>
+    <small><em>⚠️ Only SoundCloud or YouTube links are accepted ⚠️</em></small>
   </div>
   <hr>
   <%= f.input :product_link, label: "Share the url to your pack (WeTransfer, Google Drive ...)" %>

@@ -9,7 +9,7 @@ FactoryBot.define do
     number_of_tracks { 10 }
     price_cents { 999 }
     currency { "usd" }
-    link { "https://example.com/sfx_pack" }
+    link { "https://soundcloud.com/sfx_pack" }
     product_link { "https://example.com/product" }
     sample_rate { 44100 }
     bit_depth { 16 }

@@ -47,7 +47,11 @@ class SfxPack < ApplicationRecord
   validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
   validates :rich_description, length: { minimum: 20 }
-  validates :link, :product_link, format: {
+  validates :link, format: {
+    with: /\Ahttps?:\/\/(?:[\w-]+\.)*(?:soundcloud\.com|youtube\.com|youtu\.be)(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
+    message: 'must be a valid SoundCloud or YouTube URL'
+  }
+  validates :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
   }

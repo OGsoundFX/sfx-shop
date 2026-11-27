@@ -36,6 +36,30 @@ RSpec.describe SfxPack, type: :model do
       expect(sfx_pack.errors[:rich_description]).to include('is too short (minimum is 20 characters)')
     end
 
+    it 'accepts SoundCloud and YouTube links' do
+      ['https://soundcloud.com/artist/track', 'https://www.youtube.com/watch?v=abcdefghijk',
+       'https://youtu.be/abcdefghijk'].each do |url|
+        pack = described_class.new(link: url)
+        pack.valid?
+
+        expect(pack.errors[:link]).to be_empty
+      end
+    end
+
+    it 'rejects links that are not from SoundCloud or YouTube' do
+      pack = described_class.new(link: 'https://example.com/sfx_pack')
+      pack.valid?
+
+      expect(pack.errors[:link]).to include('must be a valid SoundCloud or YouTube URL')
+    end
+
+    it 'keeps product_link validation independent of the supported link platforms' do
+      pack = described_class.new(product_link: 'https://example.com/product')
+      pack.valid?
+
+      expect(pack.errors[:product_link]).to be_empty
+    end
+
     it 'includes the invalid announcement value in the validation message' do
       sfx_pack.announcement = 'INVALID'
       sfx_pack.valid?
