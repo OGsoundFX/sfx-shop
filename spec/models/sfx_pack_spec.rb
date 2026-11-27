@@ -36,6 +36,20 @@ RSpec.describe SfxPack, type: :model do
       expect(sfx_pack.errors[:rich_description]).to include('is too short (minimum is 20 characters)')
     end
 
+    it 'counts only plain text toward the rich description minimum length' do
+      pack = described_class.new(rich_description: '<p><strong>Short text</strong></p>')
+      pack.valid?
+
+      expect(pack.errors[:rich_description]).to include('is too short (minimum is 20 characters)')
+    end
+
+    it 'accepts a rich description with at least 20 plain-text characters' do
+      pack = described_class.new(rich_description: '<p><strong>Exactly twenty chars</strong></p>')
+      pack.valid?
+
+      expect(pack.errors[:rich_description]).to be_empty
+    end
+
     it 'accepts SoundCloud and YouTube links' do
       ['https://soundcloud.com/artist/track', 'https://www.youtube.com/watch?v=abcdefghijk',
        'https://youtu.be/abcdefghijk'].each do |url|

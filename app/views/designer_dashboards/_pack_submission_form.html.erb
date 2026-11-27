@@ -1,4 +1,9 @@
 <%= simple_form_for [@designer, @sfx_pack], html: { id: "pack_submission_form" } do |f| %>
+  <% if @sfx_pack.errors.any? %>
+    <div class="alert alert-danger">
+      Some fields are invalid. Please check the form and try again.
+    </div>
+  <% end %>
   <div class="mb-3">
     <div class="pack-submission-form__photo-upload-wrapper">
       <div class="d-flex flex-column" data-controller="submission-image-preview">
@@ -35,7 +40,9 @@
     <%= f.rich_text_area :rich_description %>
   </div>
   <small><em>(min 20 chars.)</em></small>
-
+  <% if @sfx_pack.errors.messages[:rich_description].present? %>
+        <div class="text-danger" role="alert"><%= @sfx_pack.errors.messages[:rich_description].to_sentence %></div>
+  <% end %>
   <hr>
   <%= f.input :category,
               collection: SfxPack.categories,

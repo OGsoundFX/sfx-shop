@@ -46,7 +46,7 @@ class SfxPack < ApplicationRecord
   validates :title, :summary, :rich_description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, :asset_type, presence: true
   validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
-  validates :rich_description, length: { minimum: 20 }
+  validate :rich_description_minimum_length
   validates :link, format: {
     with: /\Ahttps?:\/\/(?:[\w-]+\.)*(?:soundcloud\.com|youtube\.com|youtu\.be)(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid SoundCloud or YouTube URL'
@@ -108,6 +108,12 @@ class SfxPack < ApplicationRecord
     if photos.blank? || photos.none?
       errors.add(:photos, "must be attached")
     end
+  end
+
+  def rich_description_minimum_length
+    return if rich_description.to_plain_text.length >= 20
+
+    errors.add(:rich_description, :too_short, count: 20)
   end
 
   def categories_max
