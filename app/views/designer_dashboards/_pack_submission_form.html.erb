@@ -1,4 +1,4 @@
-<%= simple_form_for [@designer, @sfx_pack], html: { id: "pack_submission_form" } do |f| %>
+<%= simple_form_for [@designer, @sfx_pack], html: { id: "pack_submission_form", novalidate: true } do |f| %>
   <% if @sfx_pack.errors.any? %>
     <div class="alert alert-danger">
       Some fields are invalid. Please check the form and try again.
