@@ -46,8 +46,12 @@ class SfxPack < ApplicationRecord
   validates :title, :summary, :rich_description, :size_mb, :category, :tags, :number_of_tracks, :price, :currency, :link, :product_link, :sample_rate, :bit_depth, :asset_type, presence: true
   validates :title, length: { minimum: 3, maximum: 60 }
   validates :summary, length: { minimum: 10, maximum: 200 }
-  validates :rich_description, length: { minimum: 20 }
-  validates :link, :product_link, format: {
+  validate :rich_description_minimum_length
+  validates :link, format: {
+    with: /\Ahttps?:\/\/(?:[\w-]+\.)*(?:soundcloud\.com|youtube\.com|youtu\.be)(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
+    message: 'must be a valid SoundCloud or YouTube URL'
+  }
+  validates :product_link, format: {
     with: /\Ahttps?:\/\/[\w\-.]+(\.[a-z]{2,})(\/[\w\-\.~:\/\?\#\[\]@!\$&'\(\)\*\+,;=]*)?\z/i,
     message: 'must be a valid URL'
   }
@@ -76,7 +80,22 @@ class SfxPack < ApplicationRecord
   end
 
   def youtube_video_id
-    link[/youtu\.?be(?:\.com)?\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)?([A-Za-z0-9_-]{11})/, 1]
+    uri = URI.parse(link)
+    host = uri.host&.downcase
+    return unless host && (host == "youtu.be" || host.end_with?(".youtu.be") ||
+                           host == "youtube.com" || host.end_with?(".youtube.com"))
+
+    video_id = if host == "youtu.be" || host.end_with?(".youtu.be")
+      uri.path.split("/")[1]
+    elsif uri.path == "/watch"
+      URI.decode_www_form(uri.query.to_s).assoc("v")&.last
+    else
+      uri.path.match(%r{\A/(?:embed|v|shorts|live)/([^/]+)})&.captures&.first
+    end
+
+    video_id if video_id&.match?(/\A[A-Za-z0-9_-]{11}\z/)
+  rescue URI::InvalidURIError, ArgumentError
+    nil
   end
 
   def generate_summary_task
@@ -89,6 +108,12 @@ class SfxPack < ApplicationRecord
     if photos.blank? || photos.none?
       errors.add(:photos, "must be attached")
     end
+  end
+
+  def rich_description_minimum_length
+    return if rich_description.to_plain_text.length >= 20
+
+    errors.add(:rich_description, :too_short, count: 20)
   end
 
   def categories_max

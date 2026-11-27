@@ -106,7 +106,7 @@ class SfxPacksController < ApplicationController
       AdminMailer.new_pack_submission(@sfx_pack).deliver_later
       redirect_to designer_listings_path
     else
-      render "designer_dashboards/pack_form", status: :unprocessable_entity
+      render_pack_submission_form("designer_dashboards/pack_form")
     end
   end
 
@@ -115,22 +115,17 @@ class SfxPacksController < ApplicationController
     @designer = @sfx_pack.sound_designer
     load_agreement_acceptance
 
-    # be careful, only execute the following lines if a new photo or pdf is added
-    @sfx_pack.sound_list.purge if @sfx_pack.sound_list.present? && sfx_pack_params[:sound_list].present?
-    @sfx_pack.photos.purge if @sfx_pack.photos.present? && sfx_pack_params[:photos].present?
-
     # Applying currency
     @sfx_pack.currency = @designer.user.legal_entity.payment_infos.last.preferred_currency.downcase
 
-    @sfx_pack.update(sfx_pack_params)
-    @sfx_pack.submitted! if @sfx_pack.removed?
-
+    @sfx_pack.assign_attributes(sfx_pack_params)
+    @sfx_pack.status = :submitted if @sfx_pack.removed?
     tags_and_categories
 
     if @sfx_pack.save
       redirect_to designer_listings_path
     else
-      render "designer_dashboards/update_pack_form", status: :unprocessable_entity
+      render_pack_submission_form("designer_dashboards/update_pack_form")
     end
   end
 
@@ -152,11 +147,20 @@ class SfxPacksController < ApplicationController
   end
 
   def tags_and_categories
-    # taking care of the category and tags fields
-    params[:sfx_pack][:category].shift
-    params[:sfx_pack][:tags].shift
+    pack_params = params.require(:sfx_pack)
+    @sfx_pack.category = Array(pack_params[:category]).reject(&:blank?).join(", ")
+    @sfx_pack.tags = Array(pack_params[:tags]).reject(&:blank?).join(", ")
+  end
 
-    @sfx_pack.category = params[:sfx_pack][:category].join(", ")
-    @sfx_pack.tags = params[:sfx_pack][:tags].join(", ")
+  def render_pack_submission_form(template)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "pack_submission_form",
+          partial: "designer_dashboards/pack_submission_form"
+        ), status: :unprocessable_entity
+      end
+      format.html { render template, status: :unprocessable_entity }
+    end
   end
 end
