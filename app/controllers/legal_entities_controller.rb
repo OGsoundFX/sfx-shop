@@ -10,14 +10,13 @@ class LegalEntitiesController < ApplicationController
   def create
     @legal_entity = LegalEntity.new(legal_entity_params)
     @legal_entity.user = current_user
-    @legal_entity.pending!
     if @legal_entity.save
       current_user.designer_submission.update(completed: true) if current_user.designer_submission.present?
       DesignerMailer.submission_completed(@legal_entity).deliver_later
       AdminMailer.new_designer_profile(@legal_entity.sound_designer).deliver_later
       redirect_to designer_listings_path, notice: "Legal entity created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render_legal_entity_errors(:new)
     end
   end
 
@@ -32,7 +31,7 @@ class LegalEntitiesController < ApplicationController
       @legal_entity.pending!
       redirect_to settings_path, notice: "Legal entity updated successfully. Waiting Approval."
     else
-      render "designer_dashboards/settings", status: :unprocessable_entity
+      render_legal_entity_errors(:new)
     end
   end
 
@@ -40,5 +39,17 @@ class LegalEntitiesController < ApplicationController
 
   def legal_entity_params
     params.require(:legal_entity).permit(:first_name, :last_name, :company_name, :street_name, :street_number, :address_line_2, :city, :postal_code, :country, :state, payment_infos_attributes: [:paypal_account, :preferred_currency, :_destroy])
+  end
+
+  def render_legal_entity_errors(html_template)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "legal_entity_form",
+          partial: "legal_entities/legal_entity_form"
+        ), status: :unprocessable_entity
+      end
+      format.html { render html_template, status: :unprocessable_entity }
+    end
   end
 end

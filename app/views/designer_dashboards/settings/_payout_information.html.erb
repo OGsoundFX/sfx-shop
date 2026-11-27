@@ -41,8 +41,8 @@
         <div data-action="click->update-info#toggleEdit"><button class="btn btn-secondary btn-admin-active">ADD</button></div>
       </div>
     <% end %>
-    <div class="d-none" data-update-info-target="form">
-      <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post do |f| %>
+    <div class="<%= @paypal.errors.any? ? '' : 'd-none' %>" data-update-info-target="form">
+      <%= simple_form_for @paypal, url: paypal_account_path(@designer), method: :post, html: { data: { turbo: false } } do |f| %>
         <%= f.input :paypal_account, label: "Please enter your Paypal account", placeholder: @paypal ? @paypal.paypal_account : "Enter your PayPal account" %>
         <%= f.input :preferred_currency, label: "Please enter your Preferred Currency", collection: ["EUR", "USD"], selected: @paypal.preferred_currency.present? ? @paypal.preferred_currency.upcase : "USD" %>
         <%= f.submit "Submit", class: "btn designer-dashboard__btn-form w-100 mt-3" %>
