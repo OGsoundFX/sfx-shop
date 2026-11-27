@@ -1,4 +1,4 @@
-<%= simple_form_for @legal_entity do |f| %>
+<%= simple_form_for @legal_entity, html: { id: "legal_entity_form", novalidate: true } do |f| %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :company_name %>
@@ -28,7 +28,7 @@
       <%= f.input :state %>
     </div>
   </div>
-  <% if controller_name == "legal_entities" && action_name == "new" %>
+  <% if controller_name == "legal_entities" && %w[new create].include?(action_name) %>
     <hr>
     <h3>Payment Information</h3>
     <%= f.simple_fields_for :payment_infos do |pf| %>

@@ -78,12 +78,18 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def paypal_account
-    @paypal.update(payment_params)
-    # ! this is where we need to re-organise everything
-    @paypal.user = @designer.user
-    @paypal.preferred_currency = params[:payment_info][:preferred_currency].downcase
-    @paypal.save
-    redirect_to designer_main_dashboard_path, notice: "Paypal account updated"
+    attributes = payment_params
+    @paypal.assign_attributes(attributes)
+    if attributes[:preferred_currency].present?
+      @paypal.preferred_currency = attributes[:preferred_currency].downcase
+    end
+
+    if @paypal.save
+      redirect_to designer_main_dashboard_path, notice: "Paypal account updated"
+    else
+      @legal_entity = current_user.legal_entity
+      render :settings, status: :unprocessable_entity
+    end
   end
 
   def update_designer_info
@@ -163,7 +169,7 @@ class DesignerDashboardsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment_info).permit(:paypal_account)
+    params.require(:payment_info).permit(:paypal_account, :preferred_currency)
   end
 
   def designer_params

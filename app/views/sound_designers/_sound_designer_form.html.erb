@@ -1,13 +1,8 @@
-<%= simple_form_for [@sound_designer] do |f| %>
+<%= simple_form_for [@sound_designer], html: { id: "sound_designer_form", novalidate: true } do |f| %>
 
   <% if @sound_designer.errors.any? %>
     <div class="alert alert-danger">
-      <h5><%= pluralize(@sound_designer.errors.count, "error") %> need to be corrected:</h5>
-      <ul>
-        <% @sound_designer.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      Some fields are invalid. Please check the form and try again.
     </div>
   <% end %>
 

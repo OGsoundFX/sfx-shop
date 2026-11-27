@@ -51,7 +51,15 @@ class SoundDesignersController < ApplicationController
       prospect.destroy if prospect
       redirect_to designer_listings_path, notice: "Sound Designer profile created successfully."
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "sound_designer_form",
+            partial: "sound_designers/sound_designer_form"
+          ), status: :unprocessable_entity
+        end
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
