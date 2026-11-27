@@ -1,4 +1,4 @@
-<%= simple_form_for [@designer, @sfx_pack] do |f| %>
+<%= simple_form_for [@designer, @sfx_pack], html: { id: "pack_submission_form" } do |f| %>
   <div class="mb-3">
     <div class="pack-submission-form__photo-upload-wrapper">
       <div class="d-flex flex-column" data-controller="submission-image-preview">
