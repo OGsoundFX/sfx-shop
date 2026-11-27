@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style>
-  .center {
-    text-align: center;
-    margin-top: 200px;
-  }
-
-  #big {
-    font-size: 120px;
-  }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101412">
+  <title>Something went wrong (500) | BAMSFX</title>
+  <link rel="stylesheet" href="/error-pages.css">
 </head>
 
-<body >
-  <div class="center">
-    <h1 id="big">5 &#128561; &#128561; </h1>
-    <h3>We're sorry, but something went wrong.</h3>
-     <a href="mailto:support@bamsfx.com">Contact support</a> or <a href="https://www.bamsfx.com/">bring me back home!</a>
-  </div>
+<body>
+  <video class="error-background" autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
+    <source src="https://bamsfx-general-content.s3.eu-central-1.amazonaws.com/1080_original_size.mp4" type="video/mp4">
+  </video>
+  <div class="error-backdrop" aria-hidden="true"></div>
+  <main class="error-page">
+    <section class="error-panel" aria-labelledby="error-title">
+      <a class="brand" href="https://www.bamsfx.com/" aria-label="BAMSFX home">BAMSFX<span>.</span></a>
+      <p class="error-label"><span class="status-dot"></span> System error</p>
+      <p class="error-code" aria-hidden="true">500</p>
+      <h1 id="error-title">We hit a technical problem.</h1>
+      <p class="error-message">Something went wrong on our end. Please try again in a moment, or let us know if the problem continues.</p>
+      <div class="error-actions">
+        <a class="error-action" href="https://www.bamsfx.com/">Back to BAMSFX <span aria-hidden="true">↗</span></a>
+        <a class="error-support" href="mailto:support@bamsfx.com">Contact support</a>
+      </div>
+    </section>
+    <p class="error-footer">Sound for every story.</p>
+  </main>
 </body>
 </html>

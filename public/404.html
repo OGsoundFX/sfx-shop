@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style>
-  .center {
-    text-align: center;
-    margin-top: 200px;
-  }
-
-  #big {
-    font-size: 120px;
-  }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101412">
+  <title>Page not found (404) | BAMSFX</title>
+  <link rel="stylesheet" href="/error-pages.css">
 </head>
 
-<body >
-  <div class="center">
-    <h1 id="big">4 &#128561; 4</h1>
-    <h3>The page you are looking for doesn't exist.</h3>
-    <a href="https://www.bamsfx.com/">Bring me back home!</a>
-  </div>
+<body>
+  <video class="error-background" autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
+    <source src="https://bamsfx-general-content.s3.eu-central-1.amazonaws.com/1080_original_size.mp4" type="video/mp4">
+  </video>
+  <div class="error-backdrop" aria-hidden="true"></div>
+  <main class="error-page">
+    <section class="error-panel" aria-labelledby="error-title">
+      <a class="brand" href="https://www.bamsfx.com/" aria-label="BAMSFX home">BAMSFX<span>.</span></a>
+      <p class="error-label"><span class="status-dot"></span> Signal lost</p>
+      <p class="error-code" aria-hidden="true">404</p>
+      <h1 id="error-title">Lost in the mix?</h1>
+      <p class="error-message">We couldn't find the page you were looking for. It may have moved or the link may be out of date.</p>
+      <a class="error-action" href="https://www.bamsfx.com/">Back to BAMSFX <span aria-hidden="true">↗</span></a>
+    </section>
+    <p class="error-footer">Sound for every story.</p>
+  </main>
 </body>
 </html>
