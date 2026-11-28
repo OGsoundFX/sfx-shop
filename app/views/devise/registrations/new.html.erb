@@ -1,7 +1,7 @@
 <div class="container submit-form padding-navbar content">
   <h2 class="header">Sign up</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { novalidate: true, data: { turbo: false } }) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
